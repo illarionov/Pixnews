@@ -1,5 +1,6 @@
 rootProject.name = "PixRadar"
-include(":app")
+
+includeBuild("includedBuild/dependencies")
 
 dependencyResolutionManagement {
     repositories {
@@ -7,3 +8,6 @@ dependencyResolutionManagement {
         jcenter()
     }
 }
+
+
+include(":app")

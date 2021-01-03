@@ -1,5 +1,8 @@
+import ru.x0xdc.pixradar.dependencies.Deps
+
 plugins {
     id("com.android.application")
+    id("dependencies")
     kotlin("android")
 }
 
@@ -38,15 +41,15 @@ android {
 }
 
 dependencies {
-//    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.3.0-beta01")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0-alpha2")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.2")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.2")
+//    implementation(Deps.kotlin.stdlib)
+    implementation(Deps.android.androidx.core)
+    implementation(Deps.android.androidx.appcompat)
+    implementation(Deps.android.material)
+    implementation(Deps.android.androidx.constraintLayout)
+    implementation(Deps.android.androidx.navigation.fragment)
+    implementation(Deps.android.androidx.navigation.ui)
 
-    testImplementation("junit:junit:4.13.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    testImplementation(Deps.junit)
+    androidTestImplementation(Deps.android.androidx.test.ext_junit)
+    androidTestImplementation(Deps.android.androidx.test.espresso_core)
 }

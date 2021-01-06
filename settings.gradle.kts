@@ -1,6 +1,12 @@
 rootProject.name = "PixRadar"
 
-includeBuild("includedBuild/dependencies")
+pluginManagement {
+    repositories {
+        google()
+        jcenter()
+        gradlePluginPortal()
+    }
+}
 
 dependencyResolutionManagement {
     repositories {
@@ -9,5 +15,7 @@ dependencyResolutionManagement {
     }
 }
 
+includeBuild("build-logic/versions/libraries")
+includeBuild("build-logic")
 
 include(":app")

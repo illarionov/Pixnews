@@ -5,5 +5,5 @@ plugins {
 group = "ru.x0xdc.pixradar.buildlogic.versions"
 
 repositories {
-    jcenter()
+    mavenCentral()
 }

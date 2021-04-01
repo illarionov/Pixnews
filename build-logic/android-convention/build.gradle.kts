@@ -14,6 +14,6 @@ dependencies {
 
 repositories {
     google()
-    jcenter()
+    mavenCentral()
     gradlePluginPortal()
 }

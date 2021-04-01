@@ -6,8 +6,3 @@ tasks.register<Delete>("clean") {
         delete(File(it.projectDir, "/build"))
     }
 }
-
-tasks.wrapper {
-    //noinspection UnnecessaryQualifiedReference
-    distributionType = Wrapper.DistributionType.ALL
-}

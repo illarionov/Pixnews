@@ -15,15 +15,15 @@ android {
 }
 
 dependencies {
-    implementation(libs.android.androidx.core)
-    implementation(libs.android.androidx.appcompat)
-    implementation(libs.android.material)
-    implementation(libs.android.androidx.constraintLayout)
-    implementation(libs.android.androidx.navigation.fragment)
-    implementation(libs.android.androidx.navigation.ui)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("androidx.appcompat:appcompat")
+    implementation("com.google.android.material:material")
+    implementation("androidx.constraintlayout:constraintlayout")
+    implementation("androidx.navigation:navigation-fragment-ktx")
+    implementation("androidx.navigation:navigation-ui-ktx")
 
-    testImplementation(libs.junit)
+    testImplementation("junit:junit")
 
-    androidTestImplementation(libs.android.androidx.test.ext_junit)
-    androidTestImplementation(libs.android.androidx.test.espresso_core)
+    androidTestImplementation("androidx.test.ext:junit")
+    androidTestImplementation("androidx.test.espresso:espresso-core")
 }

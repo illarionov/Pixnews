@@ -1,6 +1,5 @@
 plugins {
     `java-platform`
-    id("ru.x0xdc.pixradar.libraries")
 }
 
 javaPlatform.allowDependencies()
@@ -17,30 +16,30 @@ val espressoVersion = "3.3.0"
 val androidxJunitVersion = "1.1.2"
 
 dependencies {
-    api(platform("${libs.kotlin.coroutines.bom}:1.4.2"))
+    api(platform("org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.4.2"))
 
     constraints {
-        api("${libs.junit}:4.13.1")
+        api("junit:junit:4.13.1")
 
-        api("${libs.android.material}:1.3.0-beta01")
-        api("${libs.android.androidx.activity}:1.2.0-rc01")
-        api("${libs.android.androidx.appcompat}:$appCompatVersion")
-        api("${libs.android.androidx.core}:1.3.2")
-        api("${libs.android.androidx.constraintLayout}:$constraintLayoutVersion")
+        api("com.google.android.material:material:1.3.0-beta01")
+        api("androidx.activity:activity-ktx:1.2.0-rc01")
+        api("androidx.appcompat:appcompat:$appCompatVersion")
+        api("androidx.core:core-ktx:1.3.2")
+        api("androidx.constraintlayout:constraintlayout:$constraintLayoutVersion")
 
-        api("${libs.android.androidx.navigation.fragment}:$navigationVersion")
-        api("${libs.android.androidx.navigation.ui}:$navigationVersion")
+        api("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+        api("androidx.navigation:navigation-ui-ktx:$navigationVersion")
 
-        api("${libs.android.androidx.test.ext_junit}:$androidxJunitVersion")
-        api("${libs.android.androidx.test.espresso_core}:$espressoVersion")
-        api("${libs.android.androidx.test.arch_core_testing}:$coreTestingVersion")
+        api("androidx.test.ext:junit:$androidxJunitVersion")
+        api("androidx.test.espresso:espresso-core:$espressoVersion")
+        api("androidx.arch.core:core-testing:$coreTestingVersion")
 
-        api("${libs.android.androidx.room}:$roomVersion")
-        api("${libs.android.androidx.room.compiler}:$roomVersion")
-        api("${libs.android.androidx.room.testing}:$roomVersion")
+        api("androidx.room:room-ktx:$roomVersion")
+        api("androidx.room:room-compiler:$roomVersion")
+        api("androidx.room:room-testing:$roomVersion")
 
-        api("${libs.android.androidx.lifecycle.viewmodel}:$lifecycleVersion")
-        api("${libs.android.androidx.lifecycle.livedata}:$lifecycleVersion")
-        api("${libs.android.androidx.lifecycle.common_java8}:$lifecycleVersion")
+        api("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+        api("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+        api("androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion")
     }
 }

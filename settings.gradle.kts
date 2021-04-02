@@ -21,7 +21,6 @@ dependencyResolutionManagement {
     }
 }
 
-includeBuild("build-logic/versions/libraries")
 includeBuild("build-logic")
 
 include(":app")

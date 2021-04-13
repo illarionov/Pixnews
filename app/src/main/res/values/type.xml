@@ -1,0 +1,90 @@
+<resources>
+
+    <!--Typography-->
+
+    <style name="TextAppearance.Pixradar.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/rubik_light</item>
+        <item name="android:textSize">96sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <style name="TextAppearance.Pixradar.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:textSize">61sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
+    <style name="TextAppearance.Pixradar.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:textSize">49sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.Pixradar.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="TextAppearance.Pixradar.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="TextAppearance.Pixradar.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0.01</item>
+<!--        <item name="android:translationY">0.15sp</item>-->
+    </style>
+
+    <style name="TextAppearance.Pixradar.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/rubik</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.01</item>
+<!--        <item name="android:translationY">2.52sp</item>-->
+    </style>
+
+    <style name="TextAppearance.Pixradar.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.01</item>
+<!--        <item name="android:translationY">3.71sp</item>-->
+    </style>
+
+    <style name="TextAppearance.Pixradar.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.03</item>
+<!--        <item name="android:translationY">1.11sp</item>-->
+    </style>
+
+    <style name="TextAppearance.Pixradar.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.02</item>
+<!--        <item name="android:translationY">0.47sp</item>-->
+    </style>
+
+    <style name="TextAppearance.Pixradar.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.09</item>
+    </style>
+
+    <style name="TextAppearance.Pixradar.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.03</item>
+    </style>
+
+    <style name="TextAppearance.Pixradar.Overline" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:letterSpacing">0.15</item>
+<!--        <item name="android:translationY">1.19sp</item>-->
+    </style>
+
+</resources>

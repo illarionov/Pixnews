@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Color palette-->
+
+    <color name="blue_900">#18227C</color>
+    <color name="blue_800">#263491</color>
+    <color name="blue_700">#2E3E9D</color>
+    <color name="blue_600">#3748A9</color>
+    <color name="blue_500">#3D50B3</color>
+    <color name="blue_400">#5B6ABE</color>
+    <color name="blue_300">#7885C9</color>
+    <color name="blue_200">#9EA7D9</color>
+    <color name="blue_100">#C4C9E8</color>
+    <color name="blue_050">#E8EAF6</color>
+
+    <color name="yellow_900">#7C7218</color>
+    <color name="yellow_800">#989824</color>
+    <color name="yellow_700">#A9AF2B</color>
+    <color name="yellow_600">#BAC433</color>
+    <color name="yellow_500">#C6D638</color>
+    <color name="yellow_400">#CEDC56</color>
+    <color name="yellow_300">#D7E274</color>
+    <color name="yellow_200">#E2EB9B</color>
+    <color name="yellow_100">#EEF2C2</color>
+    <color name="yellow_050">#F8FAE7</color>
+
+
+    <color name="red_600">#b00020</color> <!--Color error (light)-->
+
+    <!--Color surface (light), color on error (light), -->
+    <!--color on surface (dark), color on surface (dark)-->
+    <color name="white_50">#ffffff</color>
+
+    <!--Color on secondary (light), color on background (light),-->
+    <!--color on surface (light)-->
+    <color name="black_900">#000000</color>
+
+</resources>

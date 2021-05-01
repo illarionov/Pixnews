@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--Color palette-->
 
-    <color name="blue_900">#18227C</color>
-    <color name="blue_800">#263491</color>
-    <color name="blue_700">#2E3E9D</color>
-    <color name="blue_600">#3748A9</color>
-    <color name="blue_500">#3D50B3</color>
-    <color name="blue_400">#5B6ABE</color>
-    <color name="blue_300">#7885C9</color>
-    <color name="blue_200">#9EA7D9</color>
-    <color name="blue_100">#C4C9E8</color>
-    <color name="blue_050">#E8EAF6</color>
+    <color name="blue_900" tools:ignore="UnusedResources">#18227C</color>
+    <color name="blue_800" tools:ignore="UnusedResources">#263491</color>
+    <color name="blue_700" tools:ignore="UnusedResources">#2E3E9D</color>
+    <color name="blue_600" tools:ignore="UnusedResources">#3748A9</color>
+    <color name="blue_500" tools:ignore="UnusedResources">#3D50B3</color>
+    <color name="blue_400" tools:ignore="UnusedResources">#5B6ABE</color>
+    <color name="blue_300" tools:ignore="UnusedResources">#7885C9</color>
+    <color name="blue_200" tools:ignore="UnusedResources">#9EA7D9</color>
+    <color name="blue_100" tools:ignore="UnusedResources">#C4C9E8</color>
+    <color name="blue_050" tools:ignore="UnusedResources">#E8EAF6</color>
 
-    <color name="yellow_900">#7C7218</color>
-    <color name="yellow_800">#989824</color>
-    <color name="yellow_700">#A9AF2B</color>
-    <color name="yellow_600">#BAC433</color>
-    <color name="yellow_500">#C6D638</color>
-    <color name="yellow_400">#CEDC56</color>
-    <color name="yellow_300">#D7E274</color>
-    <color name="yellow_200">#E2EB9B</color>
-    <color name="yellow_100">#EEF2C2</color>
-    <color name="yellow_050">#F8FAE7</color>
+    <color name="yellow_900" tools:ignore="UnusedResources">#7C7218</color>
+    <color name="yellow_800" tools:ignore="UnusedResources">#989824</color>
+    <color name="yellow_700" tools:ignore="UnusedResources">#A9AF2B</color>
+    <color name="yellow_600" tools:ignore="UnusedResources">#BAC433</color>
+    <color name="yellow_500" tools:ignore="UnusedResources">#C6D638</color>
+    <color name="yellow_400" tools:ignore="UnusedResources">#CEDC56</color>
+    <color name="yellow_300" tools:ignore="UnusedResources">#D7E274</color>
+    <color name="yellow_200" tools:ignore="UnusedResources">#E2EB9B</color>
+    <color name="yellow_100" tools:ignore="UnusedResources">#EEF2C2</color>
+    <color name="yellow_050" tools:ignore="UnusedResources">#F8FAE7</color>
 
 
     <color name="red_600">#b00020</color> <!--Color error (light)-->

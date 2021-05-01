@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<resources>
-    <dimen name="keyline_0">2dp</dimen>
-    <dimen name="keyline_1">4dp</dimen>
-    <dimen name="keyline_2">8dp</dimen>
-    <dimen name="keyline_4">16dp</dimen>
-    <dimen name="keyline_5">24dp</dimen>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="keyline_0" tools:ignore="UnusedResources">2dp</dimen>
+    <dimen name="keyline_1" tools:ignore="UnusedResources">4dp</dimen>
+    <dimen name="keyline_2" tools:ignore="UnusedResources">8dp</dimen>
+    <dimen name="keyline_4" tools:ignore="UnusedResources">16dp</dimen>
+    <dimen name="keyline_5" tools:ignore="UnusedResources">24dp</dimen>
 
 </resources>

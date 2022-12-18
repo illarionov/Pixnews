@@ -1,5 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
+val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -34,8 +36,11 @@ android {
 
     dependencies {
         implementation(kotlin("stdlib"))
-        implementation(platform("ru.x0xdc.pixradar.buildlogic.versions:platform"))
-        testImplementation(platform("ru.x0xdc.pixradar.buildlogic.versions:platform"))
-        androidTestImplementation(platform("ru.x0xdc.pixradar.buildlogic.versions:platform"))
+        versionCatalog.findLibrary("kotlinx.coroutines.bom").orElseThrow().also {
+            implementation(platform(it))
+            testImplementation(platform(it))
+            androidTestImplementation(platform(it))
+        }
+
     }
 }

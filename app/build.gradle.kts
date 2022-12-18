@@ -15,15 +15,15 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
-    implementation("androidx.appcompat:appcompat")
-    implementation("com.google.android.material:material")
-    implementation("androidx.constraintlayout:constraintlayout")
-    implementation("androidx.navigation:navigation-fragment-ktx")
-    implementation("androidx.navigation:navigation-ui-ktx")
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.android.material)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
 
-    testImplementation("junit:junit")
+    testImplementation(libs.junit4)
 
-    androidTestImplementation("androidx.test.ext:junit")
-    androidTestImplementation("androidx.test.espresso:espresso-core")
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.espresso)
 }

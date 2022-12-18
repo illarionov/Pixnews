@@ -4,15 +4,12 @@ plugins {
 
 group = "ru.x0xdc.pixradar.buildlogic"
 
-dependencies {
-    implementation(platform("ru.x0xdc.pixradar.buildlogic.versions:platform-plugins"))
-
-    implementation("com.android.tools.build:gradle")
-    implementation("org.jetbrains.kotlin.android:org.jetbrains.kotlin.android.gradle.plugin")
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
-repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
+dependencies {
+    implementation(libs.agp.plugin)
+    implementation(libs.kotlin.jvm.plugin)
 }

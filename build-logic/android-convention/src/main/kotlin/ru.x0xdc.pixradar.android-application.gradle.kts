@@ -7,6 +7,7 @@ plugins {
 
 android {
     compileSdk = 30
+    namespace = "ru.x0xdc.pixradar"
 
     defaultConfig {
         minSdk = 23
@@ -29,7 +30,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "11"
-        useIR = true
     }
 
     dependencies {

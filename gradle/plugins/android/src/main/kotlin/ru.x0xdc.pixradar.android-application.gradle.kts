@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 plugins {

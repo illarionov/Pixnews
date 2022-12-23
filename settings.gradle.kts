@@ -1,7 +1,8 @@
 rootProject.name = "PixRadar"
 
 pluginManagement {
-    includeBuild("build-logic")
+    includeBuild("gradle/meta-plugins")
+    includeBuild("gradle/plugins")
     repositories {
         google()
         mavenCentral()

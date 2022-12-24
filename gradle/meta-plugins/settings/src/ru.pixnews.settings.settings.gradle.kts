@@ -4,6 +4,6 @@
  *
  */
 plugins {
-    id("ru.x0xdc.pixradar.repositories")
-    id("ru.x0xdc.pixradar.gradle-enterprise")
+    id("ru.pixnews.repositories")
+    id("ru.pixnews.gradle-enterprise")
 }

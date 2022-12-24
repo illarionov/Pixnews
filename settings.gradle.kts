@@ -3,7 +3,7 @@ pluginManagement {
 }
 
 plugins {
-    id("ru.x0xdc.pixradar.settings")
+    id("ru.pixnews.settings")
 }
 
 rootProject.name = "PixRadar"

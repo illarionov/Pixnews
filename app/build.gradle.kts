@@ -1,10 +1,10 @@
 plugins {
-    id("ru.x0xdc.pixradar.android-application")
+    id("ru.pixnews.android-application")
 }
 
 android {
     defaultConfig {
-        applicationId = "ru.x0xdc.pixradar"
+        applicationId = "ru.pixnews"
         versionCode = 1
         versionName = "1.0"
     }

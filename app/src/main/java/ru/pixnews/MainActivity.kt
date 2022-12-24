@@ -1,8 +1,8 @@
-package ru.x0xdc.pixradar
+package ru.pixnews
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import ru.x0xdc.pixradar.databinding.ActivityMainBinding
+import ru.pixnews.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

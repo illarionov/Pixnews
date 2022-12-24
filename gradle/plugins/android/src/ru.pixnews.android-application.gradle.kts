@@ -7,7 +7,7 @@ plugins {
 
 android {
     compileSdk = 30
-    namespace = "ru.x0xdc.pixradar"
+    namespace = "ru.pixnews"
 
     defaultConfig {
         minSdk = 23

@@ -19,6 +19,5 @@ sourceSets {
 apply(plugin = "org.gradle.kotlin.kotlin-dsl")
 
 dependencies {
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
+    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.12.1")
 }

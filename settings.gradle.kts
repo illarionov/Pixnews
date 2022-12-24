@@ -1,20 +1,11 @@
-rootProject.name = "PixRadar"
-
 pluginManagement {
     includeBuild("gradle/meta-plugins")
-    includeBuild("gradle/plugins")
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
 }
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-    }
+plugins {
+    id("ru.x0xdc.pixradar.settings")
 }
+
+rootProject.name = "PixRadar"
 
 include(":app")

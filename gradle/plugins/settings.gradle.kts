@@ -1,18 +1,13 @@
+
 pluginManagement {
     includeBuild("../meta-plugins")
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+}
+
+plugins {
+    id("ru.x0xdc.pixradar.settings")
 }
 
 dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
     versionCatalogs {
         create("libs") {
             from(files("../libs.versions.toml"))

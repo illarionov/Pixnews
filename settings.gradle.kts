@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("gradle/base-kotlin-dsl-plugin")
     includeBuild("gradle/meta-plugins")
 }
 

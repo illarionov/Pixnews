@@ -2,7 +2,6 @@
  * Convention plugin that adds additional directory to the gradle-dsl source directory list
  * Workaround for https://github.com/gradle/gradle/issues/21052
  */
-
 plugins {
     `java-gradle-plugin`
 }

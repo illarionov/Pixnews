@@ -1,3 +1,6 @@
+/**
+ * Convention plugin plugin that configures android application
+ */
 val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 plugins {

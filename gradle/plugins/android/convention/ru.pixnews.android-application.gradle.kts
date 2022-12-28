@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = 33
     namespace = "ru.pixnews"
 
     defaultConfig {
-        minSdk = 23
-        targetSdk = 30
+        minSdk = 24
+        targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

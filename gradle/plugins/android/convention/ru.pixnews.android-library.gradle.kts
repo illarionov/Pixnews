@@ -1,18 +1,16 @@
+import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import ru.pixnews.configureCommonAndroid
 
 /**
- * Convention plugin plugin that configures android application
+ * Convention plugin for use in android lbirary modules
  */
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
 }
 
 android {
     configureCommonAndroid(this)
-    defaultConfig {
-        targetSdk = 33
-    }
 
     buildTypes {
         getByName("release") {
@@ -22,13 +20,19 @@ android {
     }
 }
 
+kotlin {
+    explicitApi = ExplicitApiMode.Warning
+}
+
 internal val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 dependencies {
-    implementation(kotlin("stdlib"))
     versionCatalog.findLibrary("kotlinx.coroutines.bom").orElseThrow().also {
         implementation(platform(it))
         testImplementation(platform(it))
         androidTestImplementation(platform(it))
     }
+
+    androidTestImplementation(kotlin("test"))
+    testImplementation(kotlin("test"))
 }

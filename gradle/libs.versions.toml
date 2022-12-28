@@ -3,6 +3,7 @@ agp = "8.0.0-alpha10"
 kotlin = "1.8.0-RC"
 ksp = "1.7.21-1.0.8"
 hilt = "2.44.2"
+bmversions = "0.44.0"
 
 androidx-activity = "1.2.0-rc01" # 1.6.1
 androidx-appcompat = "1.2.0"
@@ -54,3 +55,4 @@ android-test = { id = "com.android.test", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ben-manes-versions = { id = "com.github.ben-manes.versions", version.ref="bmversions" }

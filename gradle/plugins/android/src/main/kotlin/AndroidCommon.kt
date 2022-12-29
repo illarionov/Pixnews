@@ -37,13 +37,15 @@ internal fun Project.configureCommonAndroid(
             .configureEach {
                 compilerOptions {
                     jvmTarget.set(JvmTarget.JVM_11)
-                    useK2.set(true)
+                    // There are some plugins incompatible with K2 compiler:
+                    // androidx.compose.compiler.plugins.kotlin.ComposeComponentRegistrar
+                    //useK2.set(true)
                     freeCompilerArgs.addAll(listOf(
                         "-opt-in=kotlin.RequiresOptIn",
                         "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
                         "-opt-in=kotlinx.coroutines.FlowPreview",
                         "-opt-in=kotlin.Experimental",
-                        ))
+                    ))
                 }
             }
 

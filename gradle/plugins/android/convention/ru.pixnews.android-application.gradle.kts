@@ -2,6 +2,7 @@
  * Convention plugin that configures android application
  */
 import ru.pixnews.configureCommonAndroid
+import ru.pixnews.configureCompose
 import java.io.StringReader
 import java.util.Properties
 
@@ -76,6 +77,7 @@ android {
         "META-INF/NOTICE",
         "META-INF/NOTICE.txt",
     )
+    configureCompose(this)
 }
 
 internal val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")

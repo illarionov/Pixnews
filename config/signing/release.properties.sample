@@ -1,0 +1,4 @@
+storeFile=config/signing/release.jks
+keyAlias=pixnews
+storePassword=<password>
+keyPassword=<password>

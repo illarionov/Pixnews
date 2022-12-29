@@ -31,13 +31,26 @@ internal fun Project.configureCommonAndroid(
             isCoreLibraryDesugaringEnabled = true
         }
 
+
         tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()
             .configureEach {
                 compilerOptions {
                     jvmTarget.set(JvmTarget.JVM_11)
                     useK2.set(true)
+                    freeCompilerArgs.addAll(listOf(
+                        "-opt-in=kotlin.RequiresOptIn",
+                        "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                        "-opt-in=kotlinx.coroutines.FlowPreview",
+                        "-opt-in=kotlin.Experimental",
+                        ))
                 }
             }
+
+        testOptions {
+            unitTests {
+                isIncludeAndroidResources = true
+            }
+        }
     }
 
     dependencies {

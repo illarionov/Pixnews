@@ -1,9 +1,9 @@
+/**
+ * Convention plugin for use in android library modules
+ */
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import ru.pixnews.configureCommonAndroid
 
-/**
- * Convention plugin for use in android lbirary modules
- */
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -12,9 +12,14 @@ plugins {
 android {
     configureCommonAndroid(this)
 
+    defaultConfig {
+        consumerProguardFiles("lib-proguard-rules.pro")
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }

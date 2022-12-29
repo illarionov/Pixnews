@@ -17,4 +17,5 @@ dependencyResolutionManagement {
 }
 
 include("android")
+include("kotlin")
 

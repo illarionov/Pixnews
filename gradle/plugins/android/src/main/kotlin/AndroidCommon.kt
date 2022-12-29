@@ -23,6 +23,8 @@ internal fun Project.configureCommonAndroid(
         defaultConfig {
             minSdk = 24
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+            resourceConfigurations.addAll(listOf("en", "ru"))
         }
 
         compileOptions {
@@ -30,7 +32,6 @@ internal fun Project.configureCommonAndroid(
             targetCompatibility = JavaVersion.VERSION_11
             isCoreLibraryDesugaringEnabled = true
         }
-
 
         tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()
             .configureEach {
@@ -47,9 +48,19 @@ internal fun Project.configureCommonAndroid(
             }
 
         testOptions {
+            animationsDisabled = true
             unitTests {
                 isIncludeAndroidResources = true
             }
+        }
+
+        lint {
+            quiet = false
+            ignoreWarnings = false
+            htmlReport = true
+            xmlReport = true
+            checkDependencies = true
+            ignoreTestSources = true
         }
     }
 

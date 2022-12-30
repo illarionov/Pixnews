@@ -9,6 +9,7 @@ plugins {
 }
 
 dependencyResolutionManagement {
+    includeBuild("../meta-plugins") // for 'build-parameters'
     versionCatalogs {
         create("libs") {
             from(files("../libs.versions.toml"))

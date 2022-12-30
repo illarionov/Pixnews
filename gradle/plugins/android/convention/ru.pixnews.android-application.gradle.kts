@@ -9,6 +9,7 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("ru.pixnews.build-parameters")
 }
 
 android {
@@ -17,12 +18,12 @@ android {
         targetSdk = 33
     }
 
-    val releaseKeystorePropertiesFilePath = providers.gradleProperty("PIXNEWS_RELEASE_KEYSTORE_PROPERTIES_FILE")
-        .orElse("config/signing/release.properties")
+    val releaseKeystorePropertiesFilePath = buildParameters.signing.release_keystore_properties_file
     val releaseKeystorePropertiesContent = providers.fileContents(
         rootProject.layout.projectDirectory.file(releaseKeystorePropertiesFilePath)
     ).asText
-    val useReleaseKeystore = releaseKeystorePropertiesContent.isPresent
+    val useReleaseKeystore = releaseKeystorePropertiesContent.isPresent &&
+            !buildParameters.signing.sign_with_debug_keys
 
     signingConfigs {
         getByName("debug") {

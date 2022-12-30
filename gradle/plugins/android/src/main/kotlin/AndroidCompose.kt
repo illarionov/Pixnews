@@ -1,6 +1,7 @@
 package ru.pixnews
 
 import com.android.build.api.dsl.CommonExtension
+import gradle.kotlin.dsl.accessors._c82ff6998eca14d52430c6ee9eb79469.buildParameters
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
@@ -55,8 +56,7 @@ private fun Project.configureComposeMetrics() {
 
 private fun Project.buildComposeMetricsParameters(): List<String> {
     val metricParameters = mutableListOf<String>()
-    val enableMetricsProvider = project.providers.gradleProperty("enableComposeCompilerMetrics")
-    val enableMetrics = (enableMetricsProvider.orNull == "true")
+    val enableMetrics = project.buildParameters.compose.enable_compose_compiler_metrics
     if (enableMetrics) {
         val metricsFolder = project.layout.buildDirectory.dir("compose-metrics").get().asFile
         metricParameters += listOf(
@@ -65,8 +65,7 @@ private fun Project.buildComposeMetricsParameters(): List<String> {
         )
     }
 
-    val enableReportsProvider = project.providers.gradleProperty("enableComposeCompilerReports")
-    val enableReports = (enableReportsProvider.orNull == "true")
+    val enableReports = project.buildParameters.compose.enable_compose_compiler_reports
     if (enableReports) {
         val reportsFolder = project.layout.buildDirectory.dir("compose-reports").get().asFile
         metricParameters += listOf(

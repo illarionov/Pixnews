@@ -1,5 +1,5 @@
 plugins {
-    id("ru.pixelnews.kotlindsl")
+    id("ru.pixnews.kotlindsl")
 }
 
 dependencies {

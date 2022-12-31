@@ -3,6 +3,7 @@
  */
 import ru.pixnews.configureCommonAndroid
 import ru.pixnews.configureCompose
+import ru.pixnews.configureTestManagedDevices
 import java.io.StringReader
 import java.util.Properties
 
@@ -14,6 +15,7 @@ plugins {
 
 android {
     configureCommonAndroid(this)
+
     defaultConfig {
         targetSdk = 33
     }
@@ -79,6 +81,7 @@ android {
         "META-INF/NOTICE.txt",
     )
     configureCompose(this)
+    configureTestManagedDevices(this)
 }
 
 internal val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")

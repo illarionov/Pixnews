@@ -160,7 +160,6 @@ jobs:
             -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
             phoneGroupDebugAndroidTest
             --continue
-            --info
 
       - name: Publish instrumented test results
         uses: EnricoMi/publish-unit-test-result-action@v2

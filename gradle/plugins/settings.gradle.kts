@@ -19,4 +19,4 @@ dependencyResolutionManagement {
 
 include("android")
 include("kotlin")
-
+include("lint")

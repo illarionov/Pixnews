@@ -1,7 +1,7 @@
 package ru.pixnews
 
+import buildparameters.BuildParametersExtension
 import com.android.build.api.dsl.CommonExtension
-import gradle.kotlin.dsl.accessors._c82ff6998eca14d52430c6ee9eb79469.buildParameters
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
@@ -76,3 +76,4 @@ private fun Project.buildComposeMetricsParameters(): List<String> {
     return metricParameters
 }
 
+private val Project.buildParameters: BuildParametersExtension get() = extensions.getByType()

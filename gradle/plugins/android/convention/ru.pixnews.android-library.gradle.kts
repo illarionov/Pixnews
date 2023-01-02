@@ -1,6 +1,7 @@
 /**
  * Convention plugin for use in android library modules
  */
+
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import ru.pixnews.configureCommonAndroid
 

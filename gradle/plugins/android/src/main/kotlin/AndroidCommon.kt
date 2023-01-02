@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package ru.pixnews
 
 import com.android.build.api.dsl.CommonExtension
@@ -39,13 +41,13 @@ internal fun Project.configureCommonAndroid(
                     jvmTarget.set(JvmTarget.JVM_11)
                     // There are some plugins incompatible with K2 compiler:
                     // androidx.compose.compiler.plugins.kotlin.ComposeComponentRegistrar
-                    //useK2.set(true)
-                    freeCompilerArgs.addAll(listOf(
+                    // useK2.set(true)
+                    freeCompilerArgs.addAll(
                         "-opt-in=kotlin.RequiresOptIn",
                         "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
                         "-opt-in=kotlinx.coroutines.FlowPreview",
                         "-opt-in=kotlin.Experimental",
-                    ))
+                    )
                 }
             }
 
@@ -70,7 +72,7 @@ internal fun Project.configureCommonAndroid(
         add("implementation", kotlin("stdlib"))
         add(
             "coreLibraryDesugaring",
-            versionCatalog.findLibrary("android.desugar.jdk.libs").orElseThrow()
+            versionCatalog.findLibrary("android.desugar.jdk.libs").orElseThrow(),
         )
     }
 }

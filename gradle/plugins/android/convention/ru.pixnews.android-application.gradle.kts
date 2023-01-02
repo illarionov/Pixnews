@@ -1,6 +1,7 @@
 /**
  * Convention plugin that configures android application
  */
+
 import ru.pixnews.configureCommonAndroid
 import ru.pixnews.configureCompose
 import ru.pixnews.configureTestManagedDevices
@@ -22,7 +23,7 @@ android {
 
     val releaseKeystorePropertiesFilePath = buildParameters.signing.release_keystore_properties_file
     val releaseKeystorePropertiesContent = providers.fileContents(
-        rootProject.layout.projectDirectory.file(releaseKeystorePropertiesFilePath)
+        rootProject.layout.projectDirectory.file(releaseKeystorePropertiesFilePath),
     ).asText
     val useReleaseKeystore = releaseKeystorePropertiesContent.isPresent &&
             !buildParameters.signing.sign_with_debug_keys
@@ -41,7 +42,7 @@ android {
             create("release") {
                 storeFile = rootProject.file(releaseProperties["storeFile"] as String)
                 keyAlias = releaseProperties["keyAlias"] as String
-                storePassword =  releaseProperties["storePassword"] as String
+                storePassword = releaseProperties["storePassword"] as String
                 keyPassword = releaseProperties["keyPassword"] as String
             }
         } else {

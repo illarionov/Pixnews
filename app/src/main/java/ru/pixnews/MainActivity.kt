@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import ru.pixnews.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

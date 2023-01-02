@@ -9,6 +9,8 @@ import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 
+private val Project.buildParameters: BuildParametersExtension get() = extensions.getByType()
+
 internal fun Project.configureCompose(
     commonExtension: CommonExtension<*, *, *, *>,
 ) {
@@ -26,16 +28,15 @@ internal fun Project.configureCompose(
             val bom = versionCatalog.findLibrary("androidx-compose-bom").orElseThrow()
             add("implementation", platform(bom))
             add("androidTestImplementation", platform(bom))
-
         }
     }
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()
         .configureEach {
             compilerOptions {
-                freeCompilerArgs.addAll(listOf(
+                freeCompilerArgs.addAll(
                     "-P",
-                    "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.8.0"
-                ))
+                    "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.8.0",
+                )
             }
         }
 
@@ -55,13 +56,13 @@ private fun Project.configureComposeMetrics() {
 }
 
 private fun Project.buildComposeMetricsParameters(): List<String> {
-    val metricParameters = mutableListOf<String>()
+    val metricParameters: MutableList<String> = mutableListOf()
     val enableMetrics = project.buildParameters.compose.enable_compose_compiler_metrics
     if (enableMetrics) {
         val metricsFolder = project.layout.buildDirectory.dir("compose-metrics").get().asFile
         metricParameters += listOf(
             "-P",
-            "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${metricsFolder.absolutePath}"
+            "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${metricsFolder.absolutePath}",
         )
     }
 
@@ -70,10 +71,8 @@ private fun Project.buildComposeMetricsParameters(): List<String> {
         val reportsFolder = project.layout.buildDirectory.dir("compose-reports").get().asFile
         metricParameters += listOf(
             "-P",
-            "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${reportsFolder.absolutePath}"
+            "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${reportsFolder.absolutePath}",
         )
     }
     return metricParameters
 }
-
-private val Project.buildParameters: BuildParametersExtension get() = extensions.getByType()

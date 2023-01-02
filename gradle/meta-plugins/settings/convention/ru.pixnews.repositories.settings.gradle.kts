@@ -65,12 +65,12 @@ fun RepositoryHandler.googleExclusiveContent(): Unit = exclusiveContent {
             "com.google.testing.platform",
             "io.fabric.sdk.android",
             "tools.base.build-system.debug",
-            "zipflinger"
+            "zipflinger",
         ).map(::includeGroup)
 
         includeModuleByRegex(
             """org\.jetbrains\.kotlin""",
-            """kotlin-ksp|kotlin-symbol-processing-api"""
+            """kotlin-ksp|kotlin-symbol-processing-api""",
         )
     }
 }

@@ -19,4 +19,3 @@ sourceSets {
 
 // apply kotlin-dsl plugin last, because it erroneously fetches source dirs eagerly.
 apply(plugin = "org.gradle.kotlin.kotlin-dsl")
-

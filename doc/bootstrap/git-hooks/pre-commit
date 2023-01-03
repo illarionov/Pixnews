@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -Euo pipefail
+trap cleanup SIGINT SIGTERM EXIT
+
+echo "Running style check..."
+OUTPUT=$(mktemp "/tmp/stylecheck-XXXX")
+
+cleanup() {
+  trap - SIGINT SIGTERM ERR EXIT
+  rm "$OUTPUT"
+}
+
+./gradlew styleCheck >> "$OUTPUT" 2>&1
+EXIT_CODE=$?
+if [ $EXIT_CODE -ne 0 ]; then
+  cat "$OUTPUT"
+  echo "***********************************************"
+  echo "              Style check failed               "
+  echo " Please fix the above issues before committing "
+  echo "***********************************************"
+  exit $EXIT_CODE
+fi

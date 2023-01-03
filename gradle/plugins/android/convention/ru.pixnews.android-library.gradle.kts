@@ -39,6 +39,10 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
+    lint {
+        checkDependencies = false
+    }
 }
 
 androidComponents {

@@ -55,3 +55,5 @@
   configuration:
     maxParametersInOneLine: 2
     maxCallsInOneLine: 3
+- name: WRONG_NEWLINES_AROUND_KDOC
+  enabled: false

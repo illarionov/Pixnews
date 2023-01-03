@@ -1,14 +1,13 @@
 /**
  * Convention plugin that creates and configures task designated to run Detekt static code analyzer
  */
+
 import io.gitlab.arturbosch.detekt.Detekt
-import org.gradle.language.base.plugins.LifecycleBasePlugin
+import ru.pixnews.configRootDir
 
 plugins {
     id("io.gitlab.arturbosch.detekt")
 }
-
-internal val configRootDir = rootProject.layout.projectDirectory.dir("config")
 
 val detektCheck = tasks.register("detektCheck", Detekt::class) {
     description = "Custom detekt for to check all modules"
@@ -36,10 +35,6 @@ val detektCheck = tasks.register("detektCheck", Detekt::class) {
         txt.outputLocation.set(file("build/reports/detekt/report.txt"))
         sarif.outputLocation.set(file("build/reports/detekt/report.sarif"))
     }
-}
-
-tasks.matching { it.name == LifecycleBasePlugin.CHECK_TASK_NAME }.configureEach {
-    dependsOn(detektCheck)
 }
 
 // https://github.com/gradle/gradle/issues/22468

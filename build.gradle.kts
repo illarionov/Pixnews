@@ -4,18 +4,27 @@ plugins {
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.ben.manes.versions)
     id("ru.pixnews.detekt")
+    id("ru.pixnews.spotless")
 }
 
-tasks.register<Delete>("clean") {
-    group = "build"
-    delete(rootProject.buildDir)
-    gradle.includedBuilds.forEach {
-        delete(File(it.projectDir, "/build"))
+interface InjectedFileSystemOperations {
+    @get:Inject val fs: FileSystemOperations
+}
+tasks.named("clean").configure {
+    val fsOps: InjectedFileSystemOperations = project.objects.newInstance()
+    val includedBuildsBuildDirs = gradle.includedBuilds.map { File(it.projectDir, "/build") }
+
+    doLast {
+        fsOps.fs.delete { delete(includedBuildsBuildDirs) }
     }
 }
 
-tasks.register("styleCheck") {
+val styleCheck = tasks.register("styleCheck") {
     group = "Verification"
     description = "Runs code style checking tools (excluding tests and Android Lint)"
-    dependsOn(tasks.named("detektCheck"))
+    dependsOn(tasks.named("detektCheck"), tasks.named("spotlessCheck"))
+}
+
+tasks.matching { it.name == LifecycleBasePlugin.CHECK_TASK_NAME }.configureEach {
+    dependsOn(styleCheck)
 }

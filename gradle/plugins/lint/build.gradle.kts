@@ -5,4 +5,5 @@ plugins {
 dependencies {
     implementation(libs.agp.plugin)
     implementation(libs.detekt.plugin)
+    implementation(libs.spotless.plugin)
 }

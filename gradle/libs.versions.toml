@@ -5,6 +5,7 @@ ksp = "1.7.21-1.0.8"
 hilt = "2.44.2"
 bmversions = "0.44.0"
 detekt = "1.22.0"
+spotless = "6.12.1"
 
 androidx-activity = "1.6.1"
 androidx-appcompat = "1.6.0-rc01"
@@ -68,6 +69,7 @@ agp-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-jvm-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name="detekt-gradle-plugin", version.ref = "detekt" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name="detekt-formatting", version.ref = "detekt" }
+spotless-plugin = { group = "com.diffplug.spotless", name="spotless-plugin-gradle", version.ref = "spotless" }
 
 [plugins]
 agp = { id = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -79,3 +81,4 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ben-manes-versions = { id = "com.github.ben-manes.versions", version.ref="bmversions" }
+spotless = { id = "com.diffplug.spotless", version.ref="spotless" }

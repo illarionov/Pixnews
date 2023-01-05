@@ -28,6 +28,21 @@ plugins {
 
 kotlin {
     explicitApi = ExplicitApiMode.Warning
+    sourceSets {
+        main {
+            kotlin.setSrcDirs(listOf("main"))
+            resources.setSrcDirs(listOf("main_resources"))
+        }
+        test {
+            kotlin.setSrcDirs(listOf("test"))
+            resources.setSrcDirs(listOf("test_resources"))
+        }
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()

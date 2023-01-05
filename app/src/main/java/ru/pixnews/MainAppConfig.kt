@@ -13,21 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
-}
+package ru.pixnews
 
-plugins {
-    id("ru.pixnews.settings")
-}
+import android.os.Build
+import ru.pixnews.appconfig.AppConfig
+import kotlin.LazyThreadSafetyMode.NONE
 
-rootProject.name = "PixRadar"
-
-include(":app")
-
-listOf(
-    "appconfig",
-).forEach {
-    include(":foundation:$it")
+internal class MainAppConfig : AppConfig {
+    override val isDebug: Boolean = BuildConfig.DEBUG
+    override val applicationId: String = BuildConfig.APPLICATION_ID
+    override val buildType: String = BuildConfig.BUILD_TYPE
+    override val versionName: String = BuildConfig.VERSION_NAME
+    override val versionCode: Int = BuildConfig.VERSION_CODE
+    override val timestamp: String by lazy(NONE) { "TODO" }
+    override val sdkInt: Int = Build.VERSION.SDK_INT
 }

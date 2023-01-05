@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import com.diffplug.gradle.spotless.SpotlessTask
 import com.diffplug.spotless.FormatterStep
 import com.diffplug.spotless.generic.LicenseHeaderStep
 import ru.pixnews.configRootDir
@@ -117,4 +118,8 @@ spotless {
 
         endWithNewline()
     }
+}
+
+tasks.withType<SpotlessTask>().configureEach {
+    notCompatibleWithConfigurationCache("https://github.com/diffplug/spotless/issues/987")
 }

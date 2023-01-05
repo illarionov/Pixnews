@@ -27,6 +27,9 @@ trim_trailing_whitespace = false
 [{*.yaml,*.yml}]
 indent_size = 2
 
+[*.xml]
+ij_continuation_indent_size = 4
+
 [{*.bash,*.sh,*.zsh}]
 indent_size = 2
 tab_width = 2

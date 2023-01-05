@@ -27,10 +27,13 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
 dependencies {
+    implementation(project(":foundation:appconfig"))
+
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.android.material)

@@ -13,21 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
-}
-
 plugins {
-    id("ru.pixnews.settings")
-}
-
-rootProject.name = "PixRadar"
-
-include(":app")
-
-listOf(
-    "appconfig",
-).forEach {
-    include(":foundation:$it")
+    id("ru.pixnews.kotlin-jvm-library")
 }

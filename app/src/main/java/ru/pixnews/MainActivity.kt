@@ -18,8 +18,10 @@ package ru.pixnews
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.pixnews.databinding.ActivityMainBinding
+import kotlin.LazyThreadSafetyMode.NONE
 
 class MainActivity : AppCompatActivity() {
+    private val appConfig by lazy(NONE) { MainAppConfig() }
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,5 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+
+        binding.contentMain.textView.text = "Build timestamp: ${appConfig.timestamp}"
     }
 }

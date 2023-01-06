@@ -71,6 +71,7 @@ agp-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-jvm-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name="detekt-gradle-plugin", version.ref = "detekt" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name="detekt-formatting", version.ref = "detekt" }
+detekt-compose-rules = { group = "com.twitter.compose.rules", name="detekt", version = "0.0.26" }
 spotless-plugin = { group = "com.diffplug.spotless", name="spotless-plugin-gradle", version.ref = "spotless" }
 
 [plugins]

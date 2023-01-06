@@ -58,5 +58,6 @@ if (project.name != "gradle-kotlin-dsl-accessors") {
 
     dependencies {
         detektPlugins(versionCatalog.findLibrary("detekt.formatting").get())
+        detektPlugins(versionCatalog.findLibrary("detekt.compose.rules").get())
     }
 }

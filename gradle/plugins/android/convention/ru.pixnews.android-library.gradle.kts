@@ -60,7 +60,9 @@ androidComponents {
         pixnews.applyTo(project, it)
     }
     beforeVariants(selector().withBuildType("debug")) { builder ->
-        builder.enable = false
+        if (!pixnews.managedDevices.get()) {
+            builder.enable = false
+        }
     }
 }
 

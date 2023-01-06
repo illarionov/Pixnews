@@ -16,6 +16,7 @@
 package ru.pixnews.ui.theme
 
 import android.os.Build
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -27,7 +28,8 @@ import androidx.compose.ui.platform.LocalContext
 import ru.pixnews.appconfig.AppConfig
 import ru.pixnews.appconfig.DefaultAppConfig
 
-private val LightColors = lightColorScheme(
+@VisibleForTesting
+internal val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
     primaryContainer = md_theme_light_primaryContainer,
@@ -59,7 +61,8 @@ private val LightColors = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
-private val DarkColors = darkColorScheme(
+@VisibleForTesting
+internal val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
     primaryContainer = md_theme_dark_primaryContainer,
@@ -93,7 +96,7 @@ private val DarkColors = darkColorScheme(
 
 @Suppress("NewApi")
 @Composable
-public fun AppTheme(
+public fun PixnewsTheme(
     appConfig: AppConfig = object : DefaultAppConfig() {
         override val sdkInt: Int get() = Build.VERSION.SDK_INT
     },

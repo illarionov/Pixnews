@@ -13,22 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
-}
-
 plugins {
-    id("ru.pixnews.settings")
+    id("ru.pixnews.android-library")
 }
 
-rootProject.name = "PixRadar"
+pixnews {
+    compose.set(true)
+}
 
-include(":app")
+android {
+    namespace = "ru.pixnews.ui.theme"
+}
 
-listOf(
-    "appconfig",
-    "ui-theme",
-).forEach {
-    include(":foundation:$it")
+dependencies {
+    api(project(":foundation:appconfig"))
+
+    api(libs.androidx.compose.ui.graphics)
+    api(libs.androidx.compose.material3)
+
+    implementation(libs.androidx.compose.ui.text.google.fonts)
 }

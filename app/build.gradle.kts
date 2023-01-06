@@ -38,6 +38,7 @@ android {
 
 dependencies {
     implementation(project(":foundation:appconfig"))
+    implementation(project(":foundation:ui-theme"))
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.appcompat)

@@ -18,6 +18,11 @@ plugins {
     id("ru.pixnews.android-application")
 }
 
+pixnews {
+    compose.set(true)
+    managedDevices.set(true)
+}
+
 android {
     defaultConfig {
         applicationId = "ru.pixnews"

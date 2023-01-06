@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import ru.pixnews.configureCommonAndroid
+import ru.pixnews.createPixnewsExtension
+import ru.pixnews.pixnews
 
 /**
  * Convention plugin for use in android library modules
@@ -23,7 +24,10 @@ import ru.pixnews.configureCommonAndroid
 plugins {
     id("com.android.library")
     kotlin("android")
+    id("ru.pixnews.build-parameters")
 }
+
+createPixnewsExtension()
 
 android {
     configureCommonAndroid(this)
@@ -34,8 +38,8 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -43,16 +47,21 @@ android {
     lint {
         checkDependencies = false
     }
-}
 
-androidComponents {
-    beforeVariants(selector().withBuildType("debug")) { builder ->
-        builder.enable = false
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<*>>().configureEach {
+        compilerOptions {
+            freeCompilerArgs.addAll("-Xexplicit-api=warning")
+        }
     }
 }
 
-kotlin {
-    explicitApi = ExplicitApiMode.Warning
+androidComponents {
+    finalizeDsl {
+        pixnews.applyTo(project, it)
+    }
+    beforeVariants(selector().withBuildType("debug")) { builder ->
+        builder.enable = false
+    }
 }
 
 internal val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")

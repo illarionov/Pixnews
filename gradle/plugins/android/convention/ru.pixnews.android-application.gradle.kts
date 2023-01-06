@@ -15,8 +15,9 @@
  */
 
 import ru.pixnews.configureCommonAndroid
-import ru.pixnews.configureCompose
-import ru.pixnews.configureTestManagedDevices
+import ru.pixnews.createPixnewsExtension
+import ru.pixnews.pixnews
+import ru.pixnews.versionCatalog
 import java.io.StringReader
 import java.util.Properties
 
@@ -27,6 +28,11 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("ru.pixnews.build-parameters")
+}
+
+createPixnewsExtension().apply {
+    compose.convention(true)
+    managedDevices.convention(true)
 }
 
 android {
@@ -96,11 +102,16 @@ android {
         "META-INF/NOTICE",
         "META-INF/NOTICE.txt",
     )
-    configureCompose(this)
-    configureTestManagedDevices(this)
 }
 
-internal val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
+androidComponents {
+    finalizeDsl {
+        pixnews.applyTo(project, it)
+    }
+    beforeVariants(selector().withBuildType("debug")) { builder ->
+        builder.enable = false
+    }
+}
 
 dependencies {
     implementation(kotlin("stdlib"))

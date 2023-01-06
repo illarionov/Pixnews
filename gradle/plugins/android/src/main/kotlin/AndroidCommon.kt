@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("MagicNumber")
+@file:Suppress("MagicNumber", "LONG_LINE")
 
 package ru.pixnews
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.kotlin
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -31,8 +29,6 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 internal fun Project.configureCommonAndroid(
     commonExtension: CommonExtension<*, *, *, *>,
 ) {
-    val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
-
     commonExtension.apply {
         compileSdk = 33
         namespace = "ru.pixnews"
@@ -62,6 +58,8 @@ internal fun Project.configureCommonAndroid(
                         "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
                         "-opt-in=kotlinx.coroutines.FlowPreview",
                         "-opt-in=kotlin.Experimental",
+                        // https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/
+                        "-Xjvm-default=all",
                     )
                 }
             }

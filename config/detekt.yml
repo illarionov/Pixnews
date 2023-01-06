@@ -23,6 +23,9 @@ comments:
 
 complexity:
   active: true
+  LongParameterList:
+    functionThreshold: 10
+    ignoreDefaultParameters: true
 
 coroutines:
   active: true
@@ -41,12 +44,18 @@ naming:
     active: true
     allowedPattern: '^(is|has|are)'
     ignoreOverridden: true
+  FunctionNaming:
+    active: true
+    ignoreAnnotated: ['Composable']
   NoNameShadowing:
     active: false
   InvalidPackageDeclaration:
     active: true
     rootPackage: "ru.pixnews"
     requireRootInDeclaration: false
+  TopLevelPropertyNaming:
+    active: true
+    constantPattern: '[A-Z][A-Za-z0-9]*'
 
 performance:
   active: true
@@ -64,6 +73,8 @@ style:
         value: 'kotlin.io.print'
       - reason: 'println does not allow you to configure the output stream. Use a logger instead.'
         value: 'kotlin.io.println'
+  MagicNumber:
+    ignorePropertyDeclaration: true
   MaxLineLength:
     active: true
     maxLineLength: 120
@@ -93,6 +104,8 @@ formatting:
   android: true
   autoCorrect: true
 
+  AnnotationOnSeparateLine:
+    active: false
   ArgumentListWrapping:
     active: true
     autoCorrect: true

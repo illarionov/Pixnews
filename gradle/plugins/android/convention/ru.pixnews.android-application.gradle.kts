@@ -88,6 +88,7 @@ android {
     packagingOptions.resources.excludes += listOf(
         "**/*.properties",
         "*.properties",
+        "DebugProbesKt.bin",
         "kotlin/**",
         "LICENSE.txt",
         "LICENSE_OFL",
@@ -96,7 +97,6 @@ android {
         "META-INF/*.version",
         "META-INF/androidx.*",
         "META-INF/CHANGES",
-        "META-INF/com.uber.crumb/**",
         "META-INF/LICENSE",
         "META-INF/LICENSE.txt",
         "META-INF/NOTICE",

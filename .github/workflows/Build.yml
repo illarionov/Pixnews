@@ -128,16 +128,19 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          junit_files: '*/build/test-results/**/*.xml'
+          junit_files: '**/build/test-results/**/*.xml'
+          check_name: "Unit test results"
 
       - name: Bundle the build report
-        run: find . -type d -name 'reports' | zip -@ -r build-reports.zip
+        run: >
+          find . -type d \( -name 'reports' -o -name 'compose-*' \) -print0
+          | xargs -0 tar -c -I 'zstd -19 -T0' -f build-reports.tar.zst
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
-          name: test-results
-          path: build-reports.zip
+          name: test-reports
+          path: build-reports.tar.zst
 
   instrumented-tests:
     name: Instrumented tests
@@ -172,11 +175,20 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          junit_files: '*/build/reports/androidTests/**/*.xml'
+          junit_files: '**/build/outputs/androidTest-results/**/*.xml'
+          check_name: "Instrumented test results"
+
+      - name: Bundle the instrumented tests report
+        run: >-
+          find . -type d \( -path '*/build/compose-*'
+          -o -path '*/build/outputs/androidTest-results'
+          -o -path '*/build/outputs/managed_*'
+          -o -path '*/build/reports/androidTests' \) -print0
+          |  xargs -0 tar -c -I 'zstd -19 -T0' -f instrumented-tests.tar.zst
 
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: test-reports-${{ matrix.api-level }}
-          path: '*/build/reports/androidTests'
+          name: instrumented-test-reports
+          path: instrumented-tests.tar.zst

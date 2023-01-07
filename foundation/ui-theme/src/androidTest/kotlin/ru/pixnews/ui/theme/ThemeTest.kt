@@ -60,7 +60,7 @@ public class ThemeTest {
             val expectedColorScheme: @Composable () -> ColorScheme,
         ) {
             override fun toString(): String {
-                return "useDark/useDynamic: $useDarkTheme/$useDynamicColor)"
+                return "useDark|useDynamic: $useDarkTheme|$useDynamicColor)"
             }
         }
 

@@ -68,9 +68,9 @@ androidx-test-runner = { group = "androidx.test", name = "runner", version.ref =
 androidx-test-uiauthomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "androidx-test-uiauthomator" }
 android-desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugar-jdk-libs" }
 
-dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger"}
-dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger"}
-inject = { group = "javax.inject", name = "javax.inject", version = "1"}
+dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
+dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
+inject = { group = "javax.inject", name = "javax.inject", version = "1" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlinx-coroutines-bom = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-bom", version.ref = "kotlinx-coroutines" }
@@ -80,22 +80,22 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 agp-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 anvil-plugin = { group = "com.squareup.anvil", name = "gradle-plugin", version.ref = "anvil" }
 kotlin-jvm-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
-detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name="detekt-gradle-plugin", version.ref = "detekt" }
-detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name="detekt-formatting", version.ref = "detekt" }
-detekt-compose-rules = { group = "com.twitter.compose.rules", name="detekt", version = "0.0.26" }
-spotless-plugin = { group = "com.diffplug.spotless", name="spotless-plugin-gradle", version.ref = "spotless" }
+detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
+detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
+detekt-compose-rules = { group = "com.twitter.compose.rules", name = "detekt", version = "0.0.26" }
+spotless-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 
 [bundles]
-instrumented-test-dependencies = [ 'androidx-test-core', 'androidx-test-ext-junit', 'androidx-test-espresso' ]
+instrumented-test-dependencies = ['androidx-test-core', 'androidx-test-ext-junit', 'androidx-test-espresso']
 
 [plugins]
 agp = { id = "com.android.tools.build:gradle", version.ref = "agp" }
-anvil = { id = "com.squareup.anvil", version.ref="anvil" }
+anvil = { id = "com.squareup.anvil", version.ref = "anvil" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-ben-manes-versions = { id = "com.github.ben-manes.versions", version.ref="bmversions" }
-spotless = { id = "com.diffplug.spotless", version.ref="spotless" }
+ben-manes-versions = { id = "com.github.ben-manes.versions", version.ref = "bmversions" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

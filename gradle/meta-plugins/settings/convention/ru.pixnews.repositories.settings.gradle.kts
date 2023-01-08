@@ -61,7 +61,6 @@ fun RepositoryHandler.googleExclusiveContent(): Unit = exclusiveContent {
             "com.google.camerax.effects",
             "com.google.chromeos",
             "com.google.d2c",
-            "com.google.devtools.ksp",
             "com.google.fhir",
             "com.google.firebase",
             "com.google.firebase.appdistribution",

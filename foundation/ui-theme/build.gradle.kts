@@ -15,6 +15,7 @@
  */
 plugins {
     id("ru.pixnews.android-library")
+    id("ru.pixnews.di-anvil-factories")
 }
 
 pixnews {

@@ -98,6 +98,8 @@ style:
     active: true
   UnusedImports:
     active: true
+  UnnecessaryAbstractClass:
+    active: false
 
 formatting:
   active: true

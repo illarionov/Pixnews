@@ -20,6 +20,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
+import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
 
 internal fun Project.configureCompose(
     commonExtension: CommonExtension<*, *, *, *>,
@@ -39,6 +40,7 @@ internal fun Project.configureCompose(
         }
     }
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()
+        .matching { it !is KaptGenerateStubsTask }
         .configureEach {
             compilerOptions {
                 freeCompilerArgs.addAll(
@@ -55,6 +57,7 @@ private fun Project.configureComposeMetrics() {
     val metricsParams = buildComposeMetricsParameters()
     if (metricsParams.isNotEmpty()) {
         tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()
+            .matching { it !is KaptGenerateStubsTask }
             .configureEach {
                 compilerOptions {
                     freeCompilerArgs.addAll(metricsParams)

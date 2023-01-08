@@ -13,12 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import ru.pixnews.versionCatalog
+
+/**
+ * Convention plugin that configures anvil with kapt
+ */
 plugins {
-    id("ru.pixnews.kotlindsl")
+    kotlin("kapt")
+    id("com.squareup.anvil")
 }
 
 dependencies {
-    implementation(project(":base"))
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
+    add("api", versionCatalog.findLibrary("dagger").orElseThrow())
+    add("kapt", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
 }

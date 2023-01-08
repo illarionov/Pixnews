@@ -13,12 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("ru.pixnews.kotlindsl")
-}
+package ru.pixnews.app
 
-dependencies {
-    implementation(project(":base"))
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
+import android.app.Application
+
+class PixnewsAndroidApplication : Application() {
+    private lateinit var appComponent: PixnewsAppComponent
+
+    override fun onCreate() {
+        super.onCreate()
+        appComponent = DaggerPixnewsAppComponent.factory().create(this).apply {
+            inject(this@PixnewsAndroidApplication)
+        }
+    }
 }

@@ -17,11 +17,12 @@ package ru.pixnews
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import ru.pixnews.app.AppConfig
 import ru.pixnews.databinding.ActivityMainBinding
 import kotlin.LazyThreadSafetyMode.NONE
 
 class MainActivity : AppCompatActivity() {
-    private val appConfig by lazy(NONE) { MainAppConfig() }
+    private val appConfig by lazy(NONE) { AppConfig() }
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

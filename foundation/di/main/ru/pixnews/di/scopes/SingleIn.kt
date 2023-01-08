@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("ru.pixnews.kotlindsl")
-}
+package ru.pixnews.di.scopes
 
-dependencies {
-    implementation(project(":base"))
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
-}
+import javax.inject.Scope
+import kotlin.reflect.KClass
+
+/**
+ * @property clazz
+ */
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+public annotation class SingleIn(val clazz: KClass<*>)

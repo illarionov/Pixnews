@@ -13,12 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("ru.pixnews.kotlindsl")
-}
+package ru.pixnews.app
 
-dependencies {
-    implementation(project(":base"))
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
+import android.app.Application
+import android.content.Context
+import com.squareup.anvil.annotations.ContributesTo
+import dagger.Binds
+import dagger.Module
+import ru.pixnews.di.qualifiers.ApplicationContext
+import ru.pixnews.di.scopes.AppScope
+import ru.pixnews.di.scopes.SingleIn
+
+@ContributesTo(AppScope::class)
+@Module
+abstract class PixnewsAppModule {
+    @Binds
+    @ApplicationContext
+    @SingleIn(AppScope::class)
+    abstract fun Application.provideApplicationContext(): Context
 }

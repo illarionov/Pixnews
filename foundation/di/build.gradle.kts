@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
-    id("ru.pixnews.kotlindsl")
+    id("ru.pixnews.kotlin-jvm-library")
 }
 
 dependencies {
-    implementation(project(":base"))
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
+    api(libs.inject)
 }

@@ -15,17 +15,14 @@
  */
 package ru.pixnews
 
-import buildparameters.BuildParametersExtension
+import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalog
-import org.gradle.api.artifacts.VersionCatalogsExtension
-import org.gradle.kotlin.dsl.getByType
 
-internal val Project.pixnews: PixnewsExtension
-    get() = extensions.getByType()
-
-internal val Project.versionCatalog: VersionCatalog
-    get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
-
-internal val Project.buildParameters: BuildParametersExtension
-    get() = project.extensions.getByType()
+internal fun PixnewsExtension.applyTo(project: Project, commonExtension: CommonExtension<*, *, *, *>) {
+    if (compose.get()) {
+        project.configureCompose(commonExtension)
+    }
+    if (managedDevices.get()) {
+        project.configureTestManagedDevices(commonExtension)
+    }
+}

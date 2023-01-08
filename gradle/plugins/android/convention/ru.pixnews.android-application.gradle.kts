@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import ru.pixnews.applyTo
 import ru.pixnews.configureCommonAndroid
 import ru.pixnews.createPixnewsExtension
 import ru.pixnews.pixnews
@@ -106,10 +107,7 @@ android {
 
 androidComponents {
     finalizeDsl {
-        pixnews.applyTo(project, it)
-    }
-    beforeVariants(selector().withBuildType("debug")) { builder ->
-        builder.enable = false
+        project.pixnews.applyTo(project, it)
     }
 }
 

@@ -15,7 +15,6 @@
  */
 package ru.pixnews
 
-import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
@@ -30,17 +29,8 @@ constructor(
 ) {
     val compose: Property<Boolean> = objects.property<Boolean>().convention(false)
     val managedDevices: Property<Boolean> = objects.property<Boolean>().convention(false)
-
-    internal fun applyTo(project: Project, commonExtension: CommonExtension<*, *, *, *>) {
-        if (compose.get()) {
-            project.configureCompose(commonExtension)
-        }
-        if (managedDevices.get()) {
-            project.configureTestManagedDevices(commonExtension)
-        }
-    }
 }
 
-internal fun Project.createPixnewsExtension(): PixnewsExtension {
+public fun Project.createPixnewsExtension(): PixnewsExtension {
     return extensions.create("pixnews")
 }

@@ -16,6 +16,7 @@
 
 import io.gitlab.arturbosch.detekt.Detekt
 import ru.pixnews.configRootDir
+import ru.pixnews.versionCatalog
 
 /**
  * Convention plugin that creates and configures task designated to run Detekt static code analyzer
@@ -54,10 +55,8 @@ val detektCheck = tasks.register("detektCheck", Detekt::class) {
 
 // https://github.com/gradle/gradle/issues/22468
 if (project.name != "gradle-kotlin-dsl-accessors") {
-    val versionCatalog = rootProject.extensions.getByType<VersionCatalogsExtension>().named("libs")
-
     dependencies {
-        detektPlugins(versionCatalog.findLibrary("detekt.formatting").get())
+        detektPlugins(project.versionCatalog.findLibrary("detekt.formatting").get())
         detektPlugins(versionCatalog.findLibrary("detekt.compose.rules").get())
     }
 }

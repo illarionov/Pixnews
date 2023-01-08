@@ -13,12 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("ru.pixnews.kotlindsl")
-}
+package ru.pixnews
 
-dependencies {
-    implementation(project(":base"))
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
-}
+import buildparameters.BuildParametersExtension
+import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalog
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.kotlin.dsl.getByType
+
+public val Project.pixnews: PixnewsExtension
+    get() = extensions.getByType()
+
+public val Project.versionCatalog: VersionCatalog
+    get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
+
+public val Project.buildParameters: BuildParametersExtension
+    get() = project.extensions.getByType()

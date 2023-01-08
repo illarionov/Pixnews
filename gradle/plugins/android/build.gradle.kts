@@ -18,6 +18,9 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":base"))
+    implementation(project(":di"))
+
     implementation(libs.agp.plugin)
     implementation(libs.kotlin.jvm.plugin)
     implementation("ru.pixnews:build-parameters")

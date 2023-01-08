@@ -29,6 +29,7 @@ include(":app")
 listOf(
     "appconfig",
     "ui-theme",
+    "di",
 ).forEach {
     include(":foundation:$it")
 }

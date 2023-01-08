@@ -17,9 +17,10 @@
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
+import ru.pixnews.versionCatalog
 
 /**
- * Convention plugin for use kotlin only modules
+ * Convention plugin for use in kotlin only modules
  */
 plugins {
     kotlin("jvm")
@@ -60,8 +61,6 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvm
             )
         }
     }
-
-internal val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 dependencies {
     add("implementation", kotlin("stdlib"))

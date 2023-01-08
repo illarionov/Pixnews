@@ -31,6 +31,8 @@ dependencyResolutionManagement {
     }
 }
 
+include("base")
 include("android")
+include("di")
 include("kotlin")
 include("lint")

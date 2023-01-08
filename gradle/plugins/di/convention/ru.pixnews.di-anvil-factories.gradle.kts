@@ -13,12 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import ru.pixnews.versionCatalog
+
+/**
+ * Convention plugin that configures anvil with generateDaggerFactories turned on
+ */
 plugins {
-    id("ru.pixnews.kotlindsl")
+    id("com.squareup.anvil")
+}
+
+anvil {
+    generateDaggerFactories.set(true)
 }
 
 dependencies {
-    implementation(project(":base"))
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
+    add("api", versionCatalog.findLibrary("dagger").orElseThrow())
 }

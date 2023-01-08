@@ -13,12 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("ru.pixnews.kotlindsl")
-}
+package ru.pixnews.di.scopes
 
-dependencies {
-    implementation(project(":base"))
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
-}
+public abstract class AppScope private constructor()

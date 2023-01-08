@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
+import ru.pixnews.applyTo
 import ru.pixnews.configureCommonAndroid
 import ru.pixnews.createPixnewsExtension
 import ru.pixnews.pixnews
+import ru.pixnews.versionCatalog
 
 /**
  * Convention plugin for use in android library modules
@@ -57,16 +59,14 @@ android {
 
 androidComponents {
     finalizeDsl {
-        pixnews.applyTo(project, it)
+        project.pixnews.applyTo(project, it)
     }
     beforeVariants(selector().withBuildType("debug")) { builder ->
-        if (!pixnews.managedDevices.get()) {
+        if (!project.pixnews.managedDevices.get()) {
             builder.enable = false
         }
     }
 }
-
-internal val versionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 dependencies {
     versionCatalog.findLibrary("kotlinx.coroutines.bom").orElseThrow().also {

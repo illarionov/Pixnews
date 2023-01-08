@@ -19,6 +19,6 @@ plugins {
 
 dependencies {
     implementation(project(":base"))
-    implementation(libs.agp.plugin)
+    implementation(libs.anvil.plugin)
     implementation(libs.kotlin.jvm.plugin)
 }

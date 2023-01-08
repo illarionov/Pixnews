@@ -13,13 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews
+package ru.pixnews.app
 
 import android.os.Build
+import ru.pixnews.BuildConfig
 import ru.pixnews.appconfig.AppConfig
+import ru.pixnews.di.scopes.AppScope
+import ru.pixnews.di.scopes.SingleIn
+import javax.inject.Inject
 import kotlin.LazyThreadSafetyMode.NONE
 
-internal class MainAppConfig : AppConfig {
+@SingleIn(AppScope::class)
+internal class AppConfig @Inject constructor() : AppConfig {
     override val isDebug: Boolean = BuildConfig.DEBUG
     override val applicationId: String = BuildConfig.APPLICATION_ID
     override val buildType: String = BuildConfig.BUILD_TYPE

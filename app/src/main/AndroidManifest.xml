@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.Pixradar"
-        android:fullBackupContent="@xml/backup_rules">
+        android:fullBackupContent="@xml/backup_rules"
+        android:name="ru.pixnews.app.PixnewsAndroidApplication">
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.Pixradar"

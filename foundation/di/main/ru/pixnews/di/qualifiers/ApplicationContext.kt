@@ -13,12 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("ru.pixnews.kotlindsl")
-}
+package ru.pixnews.di.qualifiers
 
-dependencies {
-    implementation(project(":base"))
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
-}
+import javax.inject.Qualifier
+
+@Qualifier
+public annotation class ApplicationContext

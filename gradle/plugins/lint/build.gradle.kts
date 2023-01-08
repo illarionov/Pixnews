@@ -19,6 +19,7 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":base"))
     implementation(libs.agp.plugin)
     implementation(libs.detekt.plugin)
     implementation(libs.spotless.plugin)

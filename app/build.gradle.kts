@@ -16,6 +16,7 @@
 
 plugins {
     id("ru.pixnews.android-application")
+    id("ru.pixnews.di-anvil-kapt")
 }
 
 pixnews {
@@ -38,6 +39,7 @@ android {
 
 dependencies {
     implementation(project(":foundation:appconfig"))
+    implementation(project(":foundation:di"))
     implementation(project(":foundation:ui-theme"))
 
     implementation(libs.kotlinx.coroutines.core)
@@ -54,4 +56,6 @@ dependencies {
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso)
+
+    kaptAndroidTest(libs.dagger.compiler)
 }

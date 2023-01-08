@@ -81,6 +81,14 @@ spotless {
         endWithNewline()
         indentWithSpaces(2)
     }
+    format("toml") {
+        target("*.toml")
+        targetExclude("**/build/**/*.toml", "config/copyright/**")
+
+        trimTrailingWhitespace()
+        endWithNewline()
+        indentWithSpaces(2)
+    }
     format("markdown") {
         target("**/*.md", "**/*.markdown")
         targetExclude("**/build/**/*.md", "**/build/**/*.markdown", "config/copyright/**")

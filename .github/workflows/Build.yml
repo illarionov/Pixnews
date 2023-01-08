@@ -70,6 +70,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install dprint
+        shell: bash
+        run: |
+          [ ! -e ~/.dprint/bin/dprint ] &&  curl -fsSL https://dprint.dev/install.sh | sh > /dev/null 2>&1
+          echo "$HOME/.dprint/bin" >> $GITHUB_PATH
+
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
 
@@ -83,6 +89,9 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: styleCheck --continue
+
+      - name: Run dprint
+        run: dprint check
 
       - name: Run Android Lint
         uses: gradle/gradle-build-action@v2

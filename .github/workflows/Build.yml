@@ -16,7 +16,7 @@ env:
   CI: true
   TERM: dumb
   GRADLE_OPTS: >
-    -Dorg.gradle.jvmargs="-Xmx1g -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError -XX:+UseG1GC"
+    -Dorg.gradle.jvmargs="-Xmx768M -XX:+HeapDumpOnOutOfMemoryError -XX:+UseG1GC"
     -Dorg.gradle.parallel=true
     -Dorg.gradle.workers.max=2
     -Dorg.gradle.vfs.watch=false

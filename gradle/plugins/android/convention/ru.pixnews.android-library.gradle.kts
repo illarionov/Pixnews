@@ -74,7 +74,4 @@ dependencies {
         testImplementation(platform(it))
         androidTestImplementation(platform(it))
     }
-
-    androidTestImplementation(kotlin("test"))
-    testImplementation(kotlin("test"))
 }

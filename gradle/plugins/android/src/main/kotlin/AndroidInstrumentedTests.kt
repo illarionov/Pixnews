@@ -22,7 +22,6 @@ import com.android.build.api.dsl.ManagedVirtualDevice
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.invoke
-import org.gradle.kotlin.dsl.kotlin
 import org.gradle.kotlin.dsl.maybeCreate
 
 internal fun Project.configureTestManagedDevices(
@@ -51,9 +50,8 @@ internal fun Project.configureTestManagedDevices(
 
         dependencies {
             val deps = versionCatalog.findBundle("instrumented-test-dependencies").orElseThrow()
-            add("androidTestImplementation", kotlin("test"))
-            add("androidTestImplementation", deps)
             add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
+            add("androidTestImplementation", deps)
         }
     }
 }

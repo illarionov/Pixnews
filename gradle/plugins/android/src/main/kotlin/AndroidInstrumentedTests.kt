@@ -28,6 +28,10 @@ internal fun Project.configureTestManagedDevices(
     commonExtension: CommonExtension<*, *, *, *>,
 ) {
     commonExtension.apply {
+        defaultConfig {
+            testInstrumentationRunner = "ru.pixnews.testing.instrumented.PixnewsTestRunner"
+        }
+
         testOptions {
             managedDevices {
                 val pixel5api33 = devices.maybeCreate<ManagedVirtualDevice>("pixel5api33").apply {
@@ -49,9 +53,9 @@ internal fun Project.configureTestManagedDevices(
         }
 
         dependencies {
-            val deps = versionCatalog.findBundle("instrumented-test-dependencies").orElseThrow()
+            add("debugImplementation", versionCatalog.findLibrary("androidx-compose-ui-testManifest").orElseThrow())
             add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
-            add("androidTestImplementation", deps)
+            add("androidTestImplementation", project(":foundation:instrumented-testing"))
         }
     }
 }

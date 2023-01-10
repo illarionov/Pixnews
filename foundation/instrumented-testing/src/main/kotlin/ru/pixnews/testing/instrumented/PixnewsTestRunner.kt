@@ -13,24 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
-}
+package ru.pixnews.testing.instrumented
 
-plugins {
-    id("ru.pixnews.settings")
-}
+import android.app.Application
+import android.content.Context
+import androidx.test.runner.AndroidJUnitRunner
 
-rootProject.name = "PixRadar"
-
-include(":app")
-
-listOf(
-    "appconfig",
-    "ui-theme",
-    "di",
-    "instrumented-testing",
-).forEach {
-    include(":foundation:$it")
+public class PixnewsTestRunner : AndroidJUnitRunner() {
+    override fun newApplication(
+        cl: ClassLoader,
+        className: String,
+        context: Context,
+    ): Application {
+        return super.newApplication(cl, PixnewsTestApplication::class.java.name, context)
+    }
 }

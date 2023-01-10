@@ -49,7 +49,7 @@ androidx-compose-runtime-livedata = { group = "androidx.compose.runtime", name =
 androidx-compose-runtime-tracing = { group = "androidx.compose.runtime", name = "runtime-tracing", version.ref = "androidx-compose-runtime-tracing" }
 androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-compose-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts" }
-androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-ui-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
@@ -86,9 +86,6 @@ detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-p
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 detekt-compose-rules = { group = "com.twitter.compose.rules", name = "detekt", version = "0.0.26" }
 spotless-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
-
-[bundles]
-instrumented-test-dependencies = ['androidx-test-core', 'androidx-test-ext-junit']
 
 [plugins]
 agp = { id = "com.android.tools.build:gradle", version.ref = "agp" }

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import ru.pixnews.PixnewsExtension
 import ru.pixnews.versionCatalog
 
 /**
@@ -27,4 +28,10 @@ plugins {
 dependencies {
     add("api", versionCatalog.findLibrary("dagger").orElseThrow())
     add("kapt", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
+}
+
+afterEvaluate {
+    if (extensions.findByType<PixnewsExtension>()?.managedDevices?.get() == true) {
+        dependencies.add("kaptAndroidTest", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
+    }
 }

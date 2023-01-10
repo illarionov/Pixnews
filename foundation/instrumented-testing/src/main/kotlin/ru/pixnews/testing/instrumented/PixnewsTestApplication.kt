@@ -13,24 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
-}
+package ru.pixnews.testing.instrumented
 
-plugins {
-    id("ru.pixnews.settings")
-}
+import android.app.Application
 
-rootProject.name = "PixRadar"
+public class PixnewsTestApplication : Application() {
+    private lateinit var appComponent: TestPixnewsAppComponent
 
-include(":app")
-
-listOf(
-    "appconfig",
-    "ui-theme",
-    "di",
-    "instrumented-testing",
-).forEach {
-    include(":foundation:$it")
+    override fun onCreate() {
+        super.onCreate()
+        appComponent = DaggerTestPixnewsAppComponent.factory().create(this).apply {
+            inject(this@PixnewsTestApplication)
+        }
+    }
 }

@@ -13,24 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
-}
-
 plugins {
-    id("ru.pixnews.settings")
+    id("ru.pixnews.android-library")
+    id("ru.pixnews.di-anvil-kapt")
 }
 
-rootProject.name = "PixRadar"
+pixnews {
+    compose.set(true)
+    managedDevices.set(false)
+}
 
-include(":app")
+android {
+    namespace = "ru.pixnews.testing.instrumented"
+}
 
-listOf(
-    "appconfig",
-    "ui-theme",
-    "di",
-    "instrumented-testing",
-).forEach {
-    include(":foundation:$it")
+dependencies {
+    api(project(":foundation:di"))
+    api(project(":foundation:appconfig"))
+
+    implementation(libs.androidx.test.runner)
+
+    api(libs.androidx.test.core)
+    api(libs.androidx.test.ext.junit)
+
+    api(libs.androidx.compose.ui.test.junit4)
 }

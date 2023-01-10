@@ -53,9 +53,4 @@ dependencies {
     implementation(libs.androidx.compose.runtime.tracing)
 
     testImplementation(libs.junit4)
-
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.androidx.test.espresso)
-
-    kaptAndroidTest(libs.dagger.compiler)
 }

@@ -34,4 +34,6 @@ dependencies {
     api(libs.androidx.compose.material3)
 
     implementation(libs.androidx.compose.ui.text.google.fonts)
+
+    androidTestImplementation(libs.androidx.test.rules)
 }

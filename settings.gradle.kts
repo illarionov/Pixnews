@@ -34,3 +34,11 @@ listOf(
 ).forEach {
     include(":foundation:$it")
 }
+
+listOf(
+    "functional",
+    "coroutines",
+    "kotlin-utils",
+).forEach {
+    include(":libraries:$it")
+}

@@ -24,7 +24,7 @@ pixnews {
 }
 
 android {
-    namespace = "ru.pixnews.testing.instrumented"
+    namespace = "ru.pixnews.foundation.testing.instrumented"
 }
 
 dependencies {

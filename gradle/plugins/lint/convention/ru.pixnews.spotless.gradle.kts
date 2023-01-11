@@ -28,23 +28,24 @@ plugins {
 
 spotless {
     isEnforceCheck = false
+    val commonExcludes = listOf("**/build/**", "**/.gradle/**", "config/copyright/**")
     kotlin {
         target("**/*.kt")
-        targetExclude("**/build/**/*.kt", "config/copyright/**")
+        targetExclude(commonExcludes)
 
         diktat().configFile(configRootDir.file("diktat.yml"))
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"))
     }
     kotlinGradle {
         target("**/*.gradle.kts")
-        targetExclude("**/build/**/*.gradle.kts", "config/copyright/**")
+        targetExclude(commonExcludes)
 
         diktat().configFile(configRootDir.file("diktat.yml"))
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"), "(^(?![\\/ ]\\*).*$)")
     }
     java {
         target("**/*.java")
-        targetExclude("**/build/**/*.java", "config/copyright/**")
+        targetExclude(commonExcludes)
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"))
 
         importOrder("", "javax", "java", "\\#")
@@ -56,7 +57,7 @@ spotless {
     }
     groovy {
         target("**/*.groovy")
-        targetExclude("**/build/**/*.groovy", "config/copyright/**")
+        targetExclude(commonExcludes)
         importOrder("", "javax", "java", "\\#")
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"))
 
@@ -66,7 +67,7 @@ spotless {
     }
     groovyGradle {
         target("*.gradle")
-        targetExclude("**/build/**/*.gradle", "config/copyright/**")
+        targetExclude(commonExcludes)
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"), "(^(?![\\/ ]\\*).*$)")
 
         indentWithSpaces()
@@ -75,7 +76,7 @@ spotless {
     }
     format("yaml") {
         target("*.yml")
-        targetExclude("**/build/**/*.yml", "config/copyright/**")
+        targetExclude(commonExcludes)
 
         trimTrailingWhitespace()
         endWithNewline()
@@ -83,7 +84,7 @@ spotless {
     }
     format("toml") {
         target("*.toml")
-        targetExclude("**/build/**/*.toml", "config/copyright/**")
+        targetExclude(commonExcludes)
 
         trimTrailingWhitespace()
         endWithNewline()
@@ -91,20 +92,20 @@ spotless {
     }
     format("markdown") {
         target("**/*.md", "**/*.markdown")
-        targetExclude("**/build/**/*.md", "**/build/**/*.markdown", "config/copyright/**")
+        targetExclude(commonExcludes)
 
         endWithNewline()
     }
     format("protobuf") {
         target("**/*.proto")
-        targetExclude("**/build/**/*.proto")
+        targetExclude(commonExcludes)
 
         clangFormat().style("LLVM")
         endWithNewline()
     }
     format("xml") {
         target("**/*.xml")
-        targetExclude("**/build/**/*.xml", ".idea/**/*.xml", "config/**", "gradle/verification-metadata.xml")
+        targetExclude(commonExcludes + listOf(".idea/**/*.xml", "gradle/verification-metadata.xml"))
 
         val deactivatableLicenseStep: FormatterStep = run {
             val licenseHeaderFile = configRootDir.file("copyright/copyright.xml")

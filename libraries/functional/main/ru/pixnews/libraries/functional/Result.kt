@@ -13,22 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app
+package ru.pixnews.functional
 
-import android.app.Application
-import android.content.Context
-import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
-import dagger.Module
-import ru.pixnews.foundation.di.qualifiers.ApplicationContext
-import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
+import arrow.core.Either
 
-@ContributesTo(AppScope::class)
-@Module
-abstract class PixnewsAppModule {
-    @Binds
-    @ApplicationContext
-    @SingleIn(AppScope::class)
-    abstract fun Application.provideApplicationContext(): Context
-}
+public typealias Result<T> = Either<Throwable, T>
+
+public inline fun <T : Any> Result<T>.onSuccess(action: (left: T) -> Unit): Result<T> = this.onRight(action)
+
+public inline fun <T : Any> Result<T>.onError(action: (throwable: Throwable) -> Unit): Result<T> =
+    this.onLeft(action)

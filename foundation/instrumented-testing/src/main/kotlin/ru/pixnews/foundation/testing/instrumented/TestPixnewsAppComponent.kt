@@ -13,22 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app
+package ru.pixnews.foundation.testing.instrumented
 
 import android.app.Application
-import android.content.Context
-import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
-import dagger.Module
-import ru.pixnews.foundation.di.qualifiers.ApplicationContext
+import com.squareup.anvil.annotations.MergeComponent
+import dagger.BindsInstance
+import dagger.Component
 import ru.pixnews.foundation.di.scopes.AppScope
 import ru.pixnews.foundation.di.scopes.SingleIn
 
-@ContributesTo(AppScope::class)
-@Module
-abstract class PixnewsAppModule {
-    @Binds
-    @ApplicationContext
-    @SingleIn(AppScope::class)
-    abstract fun Application.provideApplicationContext(): Context
+@MergeComponent(AppScope::class)
+@SingleIn(AppScope::class)
+public interface TestPixnewsAppComponent {
+    public fun inject(app: PixnewsTestApplication)
+
+    @Component.Factory
+    @Suppress("WRONG_MULTIPLE_MODIFIERS_ORDER") // https://github.com/saveourtool/diktat/issues/1598
+    public fun interface Factory {
+        public fun create(@BindsInstance application: Application): TestPixnewsAppComponent
+    }
 }

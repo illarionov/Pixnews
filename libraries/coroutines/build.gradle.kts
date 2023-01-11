@@ -13,22 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app
+plugins {
+    id("ru.pixnews.kotlin-jvm-library")
+}
 
-import android.app.Application
-import android.content.Context
-import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
-import dagger.Module
-import ru.pixnews.foundation.di.qualifiers.ApplicationContext
-import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
+group = "ru.pixnews.libraries.coroutines"
 
-@ContributesTo(AppScope::class)
-@Module
-abstract class PixnewsAppModule {
-    @Binds
-    @ApplicationContext
-    @SingleIn(AppScope::class)
-    abstract fun Application.provideApplicationContext(): Context
+dependencies {
+    api(project(":libraries:functional"))
+    implementation(platform(libs.kotlinx.coroutines.bom))
+    api(libs.kotlinx.coroutines.core)
 }

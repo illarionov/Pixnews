@@ -24,7 +24,6 @@ import ru.pixnews.versionCatalog
  */
 plugins {
     kotlin("jvm")
-    id("com.android.lint")
 }
 
 kotlin {

@@ -29,7 +29,7 @@ internal fun Project.configureTestManagedDevices(
 ) {
     commonExtension.apply {
         defaultConfig {
-            testInstrumentationRunner = "ru.pixnews.testing.instrumented.PixnewsTestRunner"
+            testInstrumentationRunner = "ru.pixnews.foundation.testing.instrumented.PixnewsTestRunner"
         }
 
         testOptions {

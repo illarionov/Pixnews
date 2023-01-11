@@ -57,7 +57,6 @@ internal fun Project.configureCommonAndroid(
                         "-opt-in=kotlin.RequiresOptIn",
                         "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
                         "-opt-in=kotlinx.coroutines.FlowPreview",
-                        "-opt-in=kotlin.Experimental",
                         // https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/
                         "-Xjvm-default=all",
                     )

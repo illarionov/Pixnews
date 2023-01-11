@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app
+package ru.pixnews.foundation.testing.instrumented
 
 import android.app.Application
 import android.content.Context
-import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
-import dagger.Module
-import ru.pixnews.foundation.di.qualifiers.ApplicationContext
-import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
+import androidx.test.runner.AndroidJUnitRunner
 
-@ContributesTo(AppScope::class)
-@Module
-abstract class PixnewsAppModule {
-    @Binds
-    @ApplicationContext
-    @SingleIn(AppScope::class)
-    abstract fun Application.provideApplicationContext(): Context
+public class PixnewsTestRunner : AndroidJUnitRunner() {
+    override fun newApplication(
+        cl: ClassLoader,
+        className: String,
+        context: Context,
+    ): Application {
+        return super.newApplication(cl, PixnewsTestApplication::class.java.name, context)
+    }
 }

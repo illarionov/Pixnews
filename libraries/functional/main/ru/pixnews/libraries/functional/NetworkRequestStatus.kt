@@ -13,22 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app
+package ru.pixnews.libraries.functional
 
-import android.app.Application
-import android.content.Context
-import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
-import dagger.Module
-import ru.pixnews.foundation.di.qualifiers.ApplicationContext
-import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
+public sealed interface NetworkRequestStatus<out T> {
+    public object Loading : NetworkRequestStatus<Nothing> {
+        override fun toString(): String = "Loading"
+    }
 
-@ContributesTo(AppScope::class)
-@Module
-abstract class PixnewsAppModule {
-    @Binds
-    @ApplicationContext
-    @SingleIn(AppScope::class)
-    abstract fun Application.provideApplicationContext(): Context
+    /**
+     * @property result
+     */
+    public data class Complete<T>(val result: Result<T>) : NetworkRequestStatus<T>
+
+    public companion object {
+        public fun <T> success(result: T): Complete<T> = Complete(Result.success(result))
+        public fun <T> failure(throwable: Throwable): Complete<T> = Complete(Result.failure(throwable))
+    }
 }

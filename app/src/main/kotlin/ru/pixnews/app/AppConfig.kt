@@ -17,9 +17,9 @@ package ru.pixnews.app
 
 import android.os.Build
 import ru.pixnews.BuildConfig
-import ru.pixnews.appconfig.AppConfig
-import ru.pixnews.di.scopes.AppScope
-import ru.pixnews.di.scopes.SingleIn
+import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.di.scopes.AppScope
+import ru.pixnews.foundation.di.scopes.SingleIn
 import javax.inject.Inject
 import kotlin.LazyThreadSafetyMode.NONE
 

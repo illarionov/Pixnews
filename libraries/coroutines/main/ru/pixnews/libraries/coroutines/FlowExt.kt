@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app
+package ru.pixnews.libraries.coroutines
 
-import android.app.Application
-import android.content.Context
-import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
-import dagger.Module
-import ru.pixnews.foundation.di.qualifiers.ApplicationContext
-import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
+import ru.pixnews.libraries.functional.NetworkRequestStatus
+import ru.pixnews.libraries.functional.NetworkRequestStatus.Companion
 
-@ContributesTo(AppScope::class)
-@Module
-abstract class PixnewsAppModule {
-    @Binds
-    @ApplicationContext
-    @SingleIn(AppScope::class)
-    abstract fun Application.provideApplicationContext(): Context
+public fun <T> Flow<T>.asNetworkRequestStatus(): Flow<NetworkRequestStatus<T>> {
+    return this
+        .map<T, NetworkRequestStatus<T>>(Companion::success)
+        .onStart { emit(NetworkRequestStatus.Loading) }
+        .catch { emit(NetworkRequestStatus.failure(it)) }
 }

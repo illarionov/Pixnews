@@ -18,6 +18,8 @@ plugins {
     id("ru.pixnews.kotlin-jvm-library")
 }
 
+group = "ru.pixnews.foundation.di"
+
 dependencies {
     api(libs.inject)
 }

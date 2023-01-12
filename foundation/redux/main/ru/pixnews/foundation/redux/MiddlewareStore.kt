@@ -1,0 +1,56 @@
+/*
+ * Copyright 2023 Alexey Illarionov
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package ru.pixnews.foundation.redux
+
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.channels.BufferOverflow.SUSPEND
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+
+internal class MiddlewareStore<S : State>(
+    initialState: S,
+    reducer: Reducer<S>,
+    middlewares: List<Middleware<S>> = emptyList(),
+    scope: CoroutineScope = MainScope(),
+) : Store<S> {
+    private val _state: MutableStateFlow<S> = MutableStateFlow(initialState)
+    private val actions: MutableSharedFlow<Action> = MutableSharedFlow(
+        replay = 0,
+        extraBufferCapacity = 0,
+        onBufferOverflow = SUSPEND,
+    )
+    override val state: StateFlow<S> = _state.asStateFlow()
+
+    init {
+        suspend fun reduceAndEmit(action: Action) {
+            val newState = reducer(state.value, action)
+            _state.emit(newState)
+        }
+        var dispatch: Dispatch = ::reduceAndEmit
+        for (middleware in middlewares) {
+            dispatch = middleware.interfere(this, dispatch)
+        }
+
+        actions.onEach(dispatch).launchIn(scope)
+    }
+
+    override suspend fun dispatch(action: Action) = actions.emit(action)
+}

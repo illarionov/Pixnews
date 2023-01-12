@@ -71,3 +71,5 @@
     maxCallsInOneLine: 3
 - name: WRONG_NEWLINES_AROUND_KDOC
   enabled: false
+- name: WRONG_MULTIPLE_MODIFIERS_ORDER
+  enabled: false # https://github.com/saveourtool/diktat/issues/1598

@@ -13,33 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
-}
+package ru.pixnews.foundation.redux.util
 
-plugins {
-    id("ru.pixnews.settings")
-}
+import ru.pixnews.foundation.redux.Action
+import ru.pixnews.foundation.redux.Dispatch
+import ru.pixnews.foundation.redux.Middleware
+import ru.pixnews.foundation.redux.MiddlewareApi
+import ru.pixnews.foundation.redux.State
 
-rootProject.name = "PixRadar"
+public abstract class SimpleMiddleware<S : State> : Middleware<S> {
+    override fun invoke(api: MiddlewareApi<S>): (next: Dispatch) -> Dispatch = { next ->
+        { action ->
+            interfere(api, next, action)
+        }
+    }
 
-include(":app")
-
-listOf(
-    "appconfig",
-    "di",
-    "instrumented-testing",
-    "redux",
-    "ui-theme",
-).forEach {
-    include(":foundation:$it")
-}
-
-listOf(
-    "functional",
-    "coroutines",
-    "kotlin-utils",
-).forEach {
-    include(":libraries:$it")
+    public abstract suspend fun interfere(api: MiddlewareApi<S>, next: Dispatch, action: Action)
 }

@@ -13,33 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
-}
+@file:Suppress("FILE_NAME_MATCH_CLASS")
 
-plugins {
-    id("ru.pixnews.settings")
-}
+package ru.pixnews.foundation.redux
 
-rootProject.name = "PixRadar"
+public typealias Dispatch = suspend ((action: Action) -> Unit)
 
-include(":app")
+public typealias Middleware<State> = (api: MiddlewareApi<State>) -> (next: Dispatch) -> Dispatch
 
-listOf(
-    "appconfig",
-    "di",
-    "instrumented-testing",
-    "redux",
-    "ui-theme",
-).forEach {
-    include(":foundation:$it")
-}
-
-listOf(
-    "functional",
-    "coroutines",
-    "kotlin-utils",
-).forEach {
-    include(":libraries:$it")
+public interface MiddlewareApi<out S : State> {
+    public val state: S
+    public suspend fun dispatch(action: Action)
 }

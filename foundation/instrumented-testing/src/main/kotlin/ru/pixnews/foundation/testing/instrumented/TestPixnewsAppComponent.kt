@@ -28,7 +28,6 @@ public interface TestPixnewsAppComponent {
     public fun inject(app: PixnewsTestApplication)
 
     @Component.Factory
-    @Suppress("WRONG_MULTIPLE_MODIFIERS_ORDER") // https://github.com/saveourtool/diktat/issues/1598
     public fun interface Factory {
         public fun create(@BindsInstance application: Application): TestPixnewsAppComponent
     }

@@ -13,33 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
+package ru.pixnews.foundation.redux.epic
+
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.merge
+import ru.pixnews.foundation.redux.Action
+
+public typealias Epic<S> = (actions: Flow<Action>, states: Flow<S>) -> Flow<Action>
+
+public fun <S> Iterable<Epic<S>>.merge(): Epic<S> = { actions, states ->
+    this
+        .map { epic -> epic(actions, states) }
+        .merge()
 }
 
-plugins {
-    id("ru.pixnews.settings")
-}
-
-rootProject.name = "PixRadar"
-
-include(":app")
-
-listOf(
-    "appconfig",
-    "di",
-    "instrumented-testing",
-    "redux",
-    "ui-theme",
-).forEach {
-    include(":foundation:$it")
-}
-
-listOf(
-    "functional",
-    "coroutines",
-    "kotlin-utils",
-).forEach {
-    include(":libraries:$it")
-}
+public fun <S> combineEpics(vararg epics: Epic<S>): Epic<S> = epics.asIterable().merge()

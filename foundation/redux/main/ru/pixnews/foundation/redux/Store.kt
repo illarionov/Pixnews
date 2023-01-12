@@ -13,31 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:Suppress("TOP_LEVEL_ORDER")
+
 package ru.pixnews.foundation.redux
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.StateFlow
-
-public typealias State = Any
+import ru.pixnews.foundation.redux.impl.MiddlewareStore
 
 public typealias Reducer<S> = S.(action: Action) -> S
 
-public typealias Dispatch = suspend ((action: Action) -> Unit)
-
-public interface Action {
-    public val type: String
-        get() = toString()
-}
-
-public fun interface Middleware<S : State> {
-    public fun interfere(store: Store<S>, next: Dispatch): Dispatch
-}
-
-public interface Store<S : State> {
+public interface Store<out S : State> {
     public val state: StateFlow<S>
     public suspend fun dispatch(action: Action)
 }
+
+public val <S : State> Store<S>.currentState: S
+    get() = state.value
 
 @Suppress("FunctionName")
 public fun <S : State> Store(

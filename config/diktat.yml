@@ -57,7 +57,7 @@
     typeParameter: true
     destructuringDeclaration: true
 - name: TYPE_ALIAS
-  enabled: true
+  enabled: false
   configuration:
     typeReferenceLength: '35'
 - name: VARIABLE_NAME_INCORRECT_FORMAT

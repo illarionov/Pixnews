@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.redux
+package ru.pixnews.foundation.redux.impl
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -24,8 +24,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import ru.pixnews.foundation.redux.Action
+import ru.pixnews.foundation.redux.Dispatch
+import ru.pixnews.foundation.redux.Middleware
+import ru.pixnews.foundation.redux.MiddlewareApi
+import ru.pixnews.foundation.redux.Reducer
+import ru.pixnews.foundation.redux.State
+import ru.pixnews.foundation.redux.Store
 
-internal class MiddlewareStore<S : State>(
+internal open class MiddlewareStore<S : State>(
     initialState: S,
     reducer: Reducer<S>,
     middlewares: List<Middleware<S>> = emptyList(),
@@ -44,9 +51,13 @@ internal class MiddlewareStore<S : State>(
             val newState = reducer(state.value, action)
             _state.emit(newState)
         }
+        val middlewareApi = object : MiddlewareApi<S> {
+            override val state: S get() = _state.value
+            override suspend fun dispatch(action: Action) = this@MiddlewareStore.dispatch(action)
+        }
         var dispatch: Dispatch = ::reduceAndEmit
         for (middleware in middlewares) {
-            dispatch = middleware.interfere(this, dispatch)
+            dispatch = middleware(middlewareApi)(dispatch)
         }
 
         actions.onEach(dispatch).launchIn(scope)

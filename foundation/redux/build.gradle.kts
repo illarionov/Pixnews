@@ -23,4 +23,5 @@ dependencies {
     api(project(":libraries:coroutines"))
     api(project(":libraries:functional"))
     implementation(project(":libraries:kotlin-utils"))
+    implementation(libs.kermit)
 }

@@ -13,24 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app
+package ru.pixnews
 
-import android.app.Application
-import ru.pixnews.logging.GlobalLoggerInitializer
-import javax.inject.Inject
+import com.squareup.anvil.annotations.MergeSubcomponent
+import dagger.BindsInstance
+import dagger.Subcomponent
+import ru.pixnews.foundation.di.scopes.ActivityScope
+import ru.pixnews.foundation.di.scopes.SingleIn
 
-class PixnewsAndroidApplication : Application() {
-    lateinit var appComponent: PixnewsAppComponent
+@SingleIn(ActivityScope::class)
+@MergeSubcomponent(scope = ActivityScope::class)
+interface MainActivityComponent {
+    fun inject(activity: MainActivity)
 
-    @Inject
-    internal fun initLogger(initializer: GlobalLoggerInitializer) {
-        initializer.init()
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        appComponent = DaggerPixnewsAppComponent.factory().create(this).apply {
-            inject(this@PixnewsAndroidApplication)
-        }
+    @Subcomponent.Factory
+    fun interface Factory {
+        fun create(@BindsInstance activity: MainActivity): MainActivityComponent
     }
 }

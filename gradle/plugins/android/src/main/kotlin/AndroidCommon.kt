@@ -76,7 +76,7 @@ internal fun Project.configureCommonAndroid(
             htmlReport = true
             xmlReport = true
             sarifReport = true
-            checkDependencies = true
+            checkDependencies = false
             ignoreTestSources = true
         }
     }

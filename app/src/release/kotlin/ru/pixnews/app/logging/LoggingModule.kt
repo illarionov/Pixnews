@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app
+package ru.pixnews.app.logging
 
-import android.app.Application
-import com.squareup.anvil.annotations.MergeComponent
-import dagger.BindsInstance
-import dagger.Component
-import ru.pixnews.MainActivityComponent
+import co.touchlab.kermit.Logger
+import co.touchlab.kermit.Severity.Error
+import co.touchlab.kermit.StaticConfig
+import com.squareup.anvil.annotations.ContributesTo
+import dagger.Module
+import dagger.Provides
 import ru.pixnews.foundation.di.scopes.AppScope
 import ru.pixnews.foundation.di.scopes.SingleIn
 
-@MergeComponent(AppScope::class)
-@SingleIn(AppScope::class)
-interface PixnewsAppComponent {
-    fun inject(app: PixnewsAndroidApplication)
-
-    fun mainActivityComponentFactory(): MainActivityComponent.Factory
-
-    @Component.Factory
-    fun interface Factory {
-        fun create(@BindsInstance application: Application): PixnewsAppComponent
+@ContributesTo(AppScope::class)
+@Module
+object LoggingModule {
+    @Provides
+    @SingleIn(AppScope::class)
+    fun provideLogger(): Logger {
+        val config = StaticConfig(
+            minSeverity = Error,
+            logWriterList = listOf(),
+        )
+        return Logger(config).withTag("PixnewsDBG")
     }
 }

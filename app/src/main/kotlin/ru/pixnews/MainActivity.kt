@@ -17,16 +17,27 @@ package ru.pixnews
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import co.touchlab.kermit.Logger
 import ru.pixnews.app.AppConfig
+import ru.pixnews.app.PixnewsAndroidApplication
 import ru.pixnews.databinding.ActivityMainBinding
-import kotlin.LazyThreadSafetyMode.NONE
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    private val appConfig by lazy(NONE) { AppConfig() }
     private lateinit var binding: ActivityMainBinding
+
+    @Inject
+    internal lateinit var appConfig: AppConfig
+
+    @Inject
+    internal lateinit var logger: Logger
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (application as PixnewsAndroidApplication).appComponent
+            .mainActivityComponentFactory()
+            .create(this)
+            .inject(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -32,10 +32,10 @@ public class ThunkMiddleware<S : State>(
             override val state: S get() = api.state
             override suspend fun dispatch(action: Action) = api.dispatch(action)
         }
-        return ThunkDispatchMapper(thunkApi, scope)
+        return ThunkDispatchDecorator(thunkApi, scope)
     }
 
-    private class ThunkDispatchMapper<S : State>(
+    private class ThunkDispatchDecorator<S : State>(
         private val api: ThunkApi<S>,
         private val coroutineScope: CoroutineScope,
     ) : (Dispatch) -> Dispatch {

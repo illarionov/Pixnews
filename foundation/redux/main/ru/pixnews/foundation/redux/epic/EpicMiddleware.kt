@@ -39,7 +39,7 @@ public class EpicMiddleware<S : State>(
     private val rootEpicSubject: MutableSharedFlow<Epic<S>> = MutableSharedFlow(1, 2, SUSPEND)
 
     override fun invoke(api: MiddlewareApi<S>): (next: Dispatch) -> Dispatch {
-        return EpicDispatchMapper(api, rootEpicSubject.distinctUntilChanged(), scope)
+        return EpicDispatchDecorator(api, rootEpicSubject.distinctUntilChanged(), scope)
     }
 
     public fun run(rootEpic: Epic<S>) {
@@ -53,7 +53,7 @@ public class EpicMiddleware<S : State>(
         public constructor(message: String?) : super(message)
     }
 
-    private class EpicDispatchMapper<S : State>(
+    private class EpicDispatchDecorator<S : State>(
         private val api: MiddlewareApi<S>,
         rootEpicSubject: Flow<Epic<S>>,
         scope: CoroutineScope,

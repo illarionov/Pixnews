@@ -20,7 +20,7 @@ package ru.pixnews.foundation.redux
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.StateFlow
-import ru.pixnews.foundation.redux.impl.MiddlewareStore
+import ru.pixnews.foundation.redux.store.MiddlewareStore
 
 public typealias Reducer<S> = S.(action: Action) -> S
 

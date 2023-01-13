@@ -19,3 +19,29 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-assumenosideeffects class android.util.Log {
+  static int d(...);
+  static int v(...);
+  static int i(...);
+#  static int w(...);
+#  static int e(...);
+  static int println(...);
+  static boolean isLoggable(...);
+}
+
+-assumenosideeffects class co.touchlab.kermit.Logger$Companion {
+  public a(...);
+  public v(...);
+  public d(...);
+  public i(...);
+  public w(...);
+  public e(...);
+}
+
+-assumenosideeffects class co.touchlab.kermit.Logger {
+  public a(...);
+  public v(...);
+  public d(...);
+  public i(...);
+}

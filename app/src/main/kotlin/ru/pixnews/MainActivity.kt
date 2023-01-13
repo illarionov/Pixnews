@@ -17,16 +17,26 @@ package ru.pixnews
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import co.touchlab.kermit.Logger
 import ru.pixnews.app.AppConfig
+import ru.pixnews.app.PixnewsAndroidApplication
 import ru.pixnews.databinding.ActivityMainBinding
+import javax.inject.Inject
 import kotlin.LazyThreadSafetyMode.NONE
 
 class MainActivity : AppCompatActivity() {
     private val appConfig by lazy(NONE) { AppConfig() }
     private lateinit var binding: ActivityMainBinding
 
+    @Inject
+    lateinit var logger: Logger
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (application as PixnewsAndroidApplication).appComponent
+            .mainActivityComponentFactory()
+            .create(this)
+            .inject(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -34,5 +44,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         binding.contentMain.textView.text = "Build timestamp: ${appConfig.timestamp}"
+
+        logger.i { "Test" }
     }
 }

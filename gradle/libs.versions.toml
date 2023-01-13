@@ -27,6 +27,7 @@ androidx-test-runner = "1.5.2"
 androidx-test-rules = "1.5.0"
 androidx-test-uiauthomator = "2.3.0-alpha01"
 arrow = "1.1.5-alpha.4"
+kermit = "1.2.2"
 material = "1.7.0"
 
 junit4 = "4.13.2"
@@ -82,10 +83,12 @@ kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", v
 kotlinx-coroutines-bom = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-bom", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android" }
+kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 
 # Dependencies of the included build-logic
 agp-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 anvil-plugin = { group = "com.squareup.anvil", name = "gradle-plugin", version.ref = "anvil" }
+kermit-plugin = { group = "co.touchlab", name = "kermit-gradle-plugin", version.ref = "kermit" }
 kotlin-jvm-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
@@ -99,6 +102,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+kermit = { id = "co.touchlab.kermit", version.ref = "kermit" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ben-manes-versions = { id = "com.github.ben-manes.versions", version.ref = "bmversions" }

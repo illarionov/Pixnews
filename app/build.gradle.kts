@@ -35,6 +35,10 @@ android {
         viewBinding = true
         buildConfig = true
     }
+
+    lint {
+        checkDependencies = true
+    }
 }
 
 dependencies {
@@ -44,6 +48,8 @@ dependencies {
     implementation(project(":libraries:coroutines"))
     implementation(project(":libraries:functional"))
     implementation(project(":libraries:kotlin-utils"))
+
+    implementation(libs.kermit)
 
     implementation(libs.android.material)
     implementation(libs.androidx.appcompat)

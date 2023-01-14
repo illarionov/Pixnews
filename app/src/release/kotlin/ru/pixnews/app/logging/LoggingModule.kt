@@ -15,25 +15,30 @@
  */
 package ru.pixnews.app.logging
 
+import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.Logger
-import co.touchlab.kermit.Severity.Error
-import co.touchlab.kermit.StaticConfig
+import co.touchlab.kermit.LoggerConfig
+import co.touchlab.kermit.Severity
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
 
 @ContributesTo(AppScope::class)
 @Module
 object LoggingModule {
     @Provides
-    @SingleIn(AppScope::class)
+    @Reusable
     fun provideLogger(): Logger {
-        val config = StaticConfig(
-            minSeverity = Error,
-            logWriterList = listOf(),
-        )
-        return Logger(config).withTag("PixnewsDBG")
+        val config = object : LoggerConfig {
+            override val logWriterList: List<LogWriter> = listOf(
+                object : LogWriter() {
+                    override fun log(severity: Severity, message: String, tag: String, throwable: Throwable?) = Unit
+                },
+            )
+            override val minSeverity: Severity = Severity.Error
+        }
+        return Logger(config)
     }
 }

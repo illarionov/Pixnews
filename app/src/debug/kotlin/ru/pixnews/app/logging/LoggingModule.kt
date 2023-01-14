@@ -22,14 +22,14 @@ import co.touchlab.kermit.StaticConfig
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
 
 @ContributesTo(AppScope::class)
 @Module
 object LoggingModule {
     @Provides
-    @SingleIn(AppScope::class)
+    @Reusable
     fun provideLogger(): Logger {
         val config = StaticConfig(
             minSeverity = Verbose,

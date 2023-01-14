@@ -1,0 +1,143 @@
+#!/bin/sh
+# com.android.tools.r8.logging.Log.CLASS_FILTER ;
+#	-Dcom.android.tools.r8.logging.Log.CLASS_FILTER='' \
+# 	-Dcom.android.tools.r8.logging.Log.ENABLED=true \
+#       -Dcom.android.tools.r8.dumpinputtofile=2.zip
+	#--classfile \
+	# --no-minification \
+find /home/work/Pixradar/PixRadar/app/build/tmp/kotlin-classes/release /home/work/Pixradar/PixRadar/app/build/tmp/kapt3/classes/release /home/work/Pixradar/PixRadar/app/build/intermediates/javac/release/classes -type f -iname '*.class' | xargs \
+java \
+	-Dcom.android.tools.r8.experimental.enablewhyareyounotinlining=true \
+	-Dcom.android.tools.r8.deterministicdebugging=true \
+	-cp ~/samples_soft/r8/build/libs/r8.jar com.android.tools.r8.R8 \
+	--pg-conf configuration.txt \
+	--output 1.zip \
+	--min-api 24 \
+	--no-desugaring \
+	--no-tree-shaking \
+	--map-diagnostics none error \
+	--pg-map-output pg_map_outout.txt \
+	--pg-conf-output pg_conf_output.txt \
+	--desugared-lib-pg-conf-output desugared-lib-pg-conf-output.txt \
+	--lib /home/work/Android/Sdk/platforms/android-33/android.jar \
+	--lib /home/work/Android/Sdk/platforms/android-33/optional/org.apache.http.legacy.jar \
+	--lib /home/work/Android/Sdk/platforms/android-33/optional/android.car.jar \
+	--lib /home/work/Android/Sdk/platforms/android-33/optional/android.test.mock.jar \
+	--lib /home/work/Android/Sdk/platforms/android-33/optional/android.test.base.jar \
+	--lib /home/work/Android/Sdk/platforms/android-33/optional/android.test.runner.jar \
+	--lib /home/work/Android/Sdk/platforms/android-33/core-for-system-modules.jar \
+	/home/work/Pixradar/PixRadar/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/release/R.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.44.2/5c4265ab0e8e6beca4391afd9cf7c432df6d5243/dagger-2.44.2.jar \
+	/home/work/.gradle/caches/transforms-3/9d551b13f32fcbff6ae326fc9075da2b/transformed/viewbinding-8.0.0-alpha11-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/f6dfd804901fb25fd3e57248f521e60a/transformed/navigation-ui-ktx-2.5.3-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/dba06ad4f7946aa9db469bf5579fd0cc/transformed/navigation-ui-2.5.3-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/9bda47c47b6b7ad1abb9c0b6268174fe/transformed/material-1.7.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/ddcebbd60210e2b48dcff03760f3c7fd/transformed/constraintlayout-2.1.4-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/eac1748a56be690b74caacb8db8b40cb/transformed/appcompat-resources-1.6.0-rc01-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/24ede54d317d6d8aa607c3f32253f68a/transformed/appcompat-1.6.0-rc01-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/d306c58f4b5b24724f231c91f34bf524/transformed/runtime-tracing-1.0.0-alpha01-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/61882d87bfbc4f10eab14a33430ed9fb/transformed/viewpager2-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/532ad755647886b187e04a4fbde421ba/transformed/navigation-fragment-ktx-2.5.3-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/7fd994d958f369d3af9ca017c621622c/transformed/navigation-fragment-2.5.3-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/ea4a7f925cb4ec521c960e6c2fc2a49a/transformed/fragment-ktx-1.5.4-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/df30a107c2996916582f0d404fff0b6f/transformed/fragment-1.5.4-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/a48d13865e4c61c903cbc1c5c0944075/transformed/navigation-runtime-ktx-2.5.3-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/ab74f69f0d55dfaf42129c11f64c3e00/transformed/navigation-runtime-2.5.3-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/95e652df9a2bf27de436de76b91f2770/transformed/material3-1.0.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/5c7725262f36f82ea042b9cfd5c5a523/transformed/material-ripple-1.3.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/5867fbe562e3e7c6e382af54cac70f69/transformed/foundation-1.3.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/e9f786b36d67556c310d0da0b1a313e6/transformed/animation-1.3.2-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/eebbfbe41cbce79aa6a7fd7d1a0eaf48/transformed/foundation-layout-1.3.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/b5ff348ac0d9d17d27493e6b6d4f2003/transformed/animation-core-1.3.2-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/a1ff407196dcbd8455aaa3e980b8d3b0/transformed/material-icons-core-1.3.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/d5d658e8f3b763a53d88b15331c38797/transformed/ui-1.3.2-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/61e7cb763783085e728affc0ffffd8c2/transformed/activity-ktx-1.6.0-rc02-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/7ebee39462c3bdd69175081029dc969b/transformed/activity-1.6.0-rc02-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/efad56cf01d3c70f5d23dd7f2165e519/transformed/dynamicanimation-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/c29eef1bbf096fa95f66f9837e79de3f/transformed/legacy-support-core-utils-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/9e429485413ad7a36ba1280956bc0fec/transformed/loader-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/dd08c0b9b505061962166efb5d568c64/transformed/navigation-common-ktx-2.5.3-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/ed8430318e9d0ce0a4992d1e38f15586/transformed/navigation-common-2.5.3-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/03744980bf0ac21890f59bccfaec0c7a/transformed/lifecycle-viewmodel-savedstate-2.5.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/8de1c3e73fe84837e781120aa8f53593/transformed/lifecycle-viewmodel-ktx-2.5.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/0af8a904f8aca101cc090162b26976d7/transformed/lifecycle-viewmodel-2.5.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/b710b15f3a9c3eae4c1df4e1c89b5b54/transformed/savedstate-ktx-1.2.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/880e3e4a25e51b0f5d2b4c950a15db63/transformed/savedstate-1.2.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/b448febad271274e35fa5b796195a892/transformed/tracing-perfetto-1.0.0-alpha03-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/296a7a7f9612a4ea5177191137c37627/transformed/ui-text-google-fonts-1.3.2-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/bfd9637b32c99a12d9571d8ce202147d/transformed/ui-text-1.3.2-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/90d3966f5482a4874fe97b9c7b14b5d4/transformed/ui-graphics-1.3.2-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/e5bd78e0a177f6d918fca146240e465a/transformed/ui-unit-1.3.2-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/f5fcc3ee5cbe26898763647e2df9ac78/transformed/runtime-saveable-1.3.2-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/8289cbc1d39ac88c69ec1c8460e14efa/transformed/ui-geometry-1.3.2-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/6b937f6104d0ca3c1228265293e4187e/transformed/runtime-1.3.2-runtime.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/com.squareup.anvil/annotations/2.4.3-1-8-0-RC/aa2695d59b9664d4c5d724200160c2c90fde42ec/annotations-2.4.3-1-8-0-RC.jar \
+	/home/work/.gradle/caches/transforms-3/4fdcf6e7a3e74ea887a9cad112200811/transformed/kermit-release-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/847843b95a42b3717ee1de21ae0942dd/transformed/lifecycle-runtime-ktx-2.5.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/8b8278b913e47a8212444cc3fa6423ac/transformed/slidingpanelayout-1.2.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/9b4e7e3901c46530985d21f7c81904e4/transformed/window-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.6.4/f955fc8b2ad196e2f4429598440e15f7492eeb2b/kotlinx-coroutines-android-1.6.4.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.6.4/2c997cd1c0ef33f3e751d3831929aeff1390cb30/kotlinx-coroutines-core-jvm-1.6.4.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/io.arrow-kt/arrow-core-jvm/1.1.5-alpha.4/3a68562134a7f7d9ac51342757fd48ec4dde2f44/arrow-core-jvm-1.1.5-alpha.4.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/io.arrow-kt/arrow-continuations-jvm/1.1.5-alpha.4/24d2c4d3d64201579e02ab3f1229301ef79f3988/arrow-continuations-jvm-1.1.5-alpha.4.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/io.arrow-kt/arrow-annotations-jvm/1.1.5-alpha.4/6e45cca708862a364b0df4ac8b7296d187ec551f/arrow-annotations-jvm-1.1.5-alpha.4.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.8.0/ed04f49e186a116753ad70d34f0ac2925d1d8020/kotlin-stdlib-jdk8-1.8.0.jar \
+	/home/work/.gradle/caches/transforms-3/8a77940e22286b6747fe0a6fa90855fc/transformed/coordinatorlayout-1.1.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/1e237f23ce9b19baf8ce4bd2ba002bab/transformed/drawerlayout-1.1.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/4a542381799914e3f6c6eee68627576c/transformed/vectordrawable-animated-1.1.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/7e25ec858461b98668fd75fecbe557b6/transformed/vectordrawable-1.1.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/c08276c10abc74378a91454f6b3462ae/transformed/emoji2-views-helper-1.2.0-rc01-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/fc617e455d7ba782c725a221d7e09d16/transformed/emoji2-1.2.0-rc01-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/15d73219dc29fe1c5037a1ea628793cb/transformed/recyclerview-1.1.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/3fa471648de17f9ddf22f5292fbfcca1/transformed/viewpager-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/a0e101bf7905d6360e7e862946059bef/transformed/customview-1.1.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/5d5267530070576e5929d40691f8fa2e/transformed/customview-poolingcontainer-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/a94b665472e8b93f34f1243ff211f7dd/transformed/core-ktx-1.9.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/9c35ee01a3fefbcdb5e482586ad79756/transformed/transition-1.4.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/658bd79870d9f5657a0d10e9a6944c4d/transformed/autofill-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/afe025eb924946db2be46946f502397e/transformed/core-1.9.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/e3382c1f5f08119d80b96e3161c82409/transformed/annotation-experimental-1.3.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/78fb40b687737cb8e15b9a47ce864c83/transformed/ui-util-1.3.2-runtime.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.8.0/3c91271347f678c239607abb676d4032a7898427/kotlin-stdlib-jdk7-1.8.0.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/androidx.collection/collection-ktx/1.1.0/f807b2f366f7b75142a67d2f3c10031065b5168/collection-ktx-1.1.0.jar \
+	/home/work/.gradle/caches/transforms-3/cdfa40a2366fb4e258ce95aa9dcf7a0b/transformed/lifecycle-livedata-core-ktx-2.5.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/5b3efea61e349f112f75eea7a5cd961b/transformed/cardview-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/bb089ab6502b5069514d97dd2d86202e/transformed/lifecycle-process-2.4.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/1757490d3a27f7bcdef1748b33d8ba7a/transformed/lifecycle-runtime-2.5.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/949e42c6ef1834eea5ac0813dca588c3/transformed/cursoradapter-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/androidx.resourceinspection/resourceinspection-annotation/1.0.1/8c21f8ff5d96d5d52c948707f7e4d6ca6773feef/resourceinspection-annotation-1.0.1.jar \
+	/home/work/.gradle/caches/transforms-3/783ab09260df006389acf2cf19285c0a/transformed/profileinstaller-1.2.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/fc0c282c2f996be5a7bf887ddd3b6c22/transformed/startup-runtime-1.1.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/46e35f530fe122f37261b83add7b0582/transformed/versionedparcelable-1.1.1-runtime.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/androidx.collection/collection/1.1.0/1f27220b47669781457de0d600849a5de0e89909/collection-1.1.0.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/androidx.concurrent/concurrent-futures/1.0.0/c1e77e3ee6f4643b77496a1ddf7a2eef1aefdaa1/concurrent-futures-1.0.0.jar \
+	/home/work/.gradle/caches/transforms-3/664c165f016a32fff89ccdad511cc36b/transformed/lifecycle-livedata-2.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/26a06004fa8d5a3d5afd95b13fde7976/transformed/lifecycle-livedata-core-2.5.1-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/7365592922ea22798de966e1d4f290cf/transformed/core-runtime-2.1.0-runtime.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.1.0/b3152fc64428c9354344bd89848ecddc09b6f07e/core-common-2.1.0.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.5.1/5b8f86fea035328fc9e8c660773037a3401ce25f/lifecycle-common-java8-2.5.1.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.5.1/1fdb7349701e9cf2f0a69fc10642b6fef6bb3e12/lifecycle-common-2.5.1.jar \
+	/home/work/.gradle/caches/transforms-3/2bd0b0ddb61979f062c0e7848efb104f/transformed/tracing-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/androidx.tracing/tracing-perfetto-common/1.0.0-alpha03/a5af2c0f5b9a16f8a765323f11cee73efd0b95cd/tracing-perfetto-common-1.0.0-alpha03.jar \
+	/home/work/.gradle/caches/transforms-3/b968cf7685175cb05722fc411b549b67/transformed/documentfile-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/9e4bd6352a0edc4f22c4fcdd8262c280/transformed/localbroadcastmanager-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/e991d8557533a0f6cfdcd560a5d175e2/transformed/print-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/transforms-3/521f18ecad410084981248a2ed8ad721/transformed/interpolator-1.0.0-runtime.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.5.0/857678d6b4ca7b28571ef7935c668bdb57e15027/annotation-1.5.0.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.8.0/1796921c7a3e2e2665a83e6c8d33399336cd39bc/kotlin-stdlib-1.8.0.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.8.0/f7197e7cc76453ac59f8b0f8d5137cc600becd36/kotlin-stdlib-common-1.8.0.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/androidx.constraintlayout/constraintlayout-core/1.0.4/29cdbe03ded6b0980f63fa5da2579a430e911c40/constraintlayout-core-1.0.4.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/1.0/c949a840a6acbc5268d088e47b04177bf90b3cad/listenablefuture-1.0.jar \
+	/home/work/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.21/419a9acd297cb6fe6f91b982d909f2c20e9fa5c0/animal-sniffer-annotations-1.21.jar \
+	/home/work/Pixradar/PixRadar/foundation/ui-theme/build/intermediates/runtime_library_classes_jar/release/classes.jar \
+	/home/work/Pixradar/PixRadar/foundation/appconfig/build/libs/appconfig.jar \
+	/home/work/Pixradar/PixRadar/foundation/di/build/libs/di.jar \
+	/home/work/Pixradar/PixRadar/libraries/coroutines/build/libs/coroutines.jar \
+	/home/work/Pixradar/PixRadar/libraries/functional/build/libs/functional.jar \
+	/home/work/Pixradar/PixRadar/libraries/kotlin-utils/build/libs/kotlin-utils.jar
+#	/home/work/Pixradar/PixRadar/app/build/tmp/kotlin-classes/release \
+#	/home/work/Pixradar/PixRadar/app/build/tmp/kapt3/classes/release \
+#	/home/work/Pixradar/PixRadar/app/build/intermediates/javac/release/classes \
+

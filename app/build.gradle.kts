@@ -17,6 +17,7 @@
 plugins {
     id("ru.pixnews.android-application")
     id("ru.pixnews.di-anvil-kapt")
+    // id("ru.pixnews.android-proguard")
 }
 
 pixnews {

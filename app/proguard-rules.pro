@@ -20,28 +20,34 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--assumenosideeffects class android.util.Log {
-  static int d(...);
-  static int v(...);
-  static int i(...);
-#  static int w(...);
-#  static int e(...);
-  static int println(...);
-  static boolean isLoggable(...);
-}
+#-assumenosideeffects class android.util.Log {
+#  static int d(...);
+#  static int v(...);
+#  static int i(...);
+##  static int w(...);
+##  static int e(...);
+#  static int println(...);
+#  static boolean isLoggable(...);
+#}
+
+-dontobfuscate
+-optimizationpasses 20
 
 -assumenosideeffects class co.touchlab.kermit.Logger$Companion {
-  public a(...);
-  public v(...);
-  public d(...);
-  public i(...);
-  public w(...);
-  public e(...);
+  public void a(...);
+  public void v(...);
+  public void d(...);
+  public void i(...);
+  public void w(...);
+  public void e(...);
 }
 
 -assumenosideeffects class co.touchlab.kermit.Logger {
-  public a(...);
-  public v(...);
-  public d(...);
-  public i(...);
+  public void a(...);
+  public void v(...);
+  public void d(...);
+  public void i(...);
 }
+
+-dontwarn com.google.android.material.shadow.ShadowDrawableWrapper
+-dontwarn kotlinx.coroutines.internal.ClassValueCtorCache

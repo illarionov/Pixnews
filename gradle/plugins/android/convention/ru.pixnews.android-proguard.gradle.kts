@@ -13,17 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
-    id("ru.pixnews.kotlindsl")
+    id("com.android.application")
+    id("ru.pixnews.build-parameters")
+    id("com.guardsquare.proguard")
 }
 
-dependencies {
-    implementation(project(":base"))
-    implementation(project(":di"))
+android {
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            isShrinkResources = false
+        }
+    }
+}
 
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
-    implementation(libs.r8)
-    implementation(libs.proguard)
-    implementation("ru.pixnews:build-parameters")
+proguard {
+    configurations {
+        register("release") {
+            defaultConfiguration("proguard-android-optimize.txt")
+            configuration("proguard-rules.pro")
+        }
+    }
 }

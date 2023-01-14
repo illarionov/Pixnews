@@ -1,5 +1,5 @@
 [versions]
-agp = "8.0.0-alpha11"
+agp = "7.4.0"
 anvil = "2.4.3-1-8-0-RC"
 bmversions = "0.44.0"
 detekt = "1.22.0"
@@ -7,6 +7,8 @@ dagger = "2.44.2"
 kotlin = "1.8.0"
 ksp = "1.8.0-1.0.7"
 spotless = "6.12.1"
+proguard = "7.3.0"
+r8 = "4.0.48"
 
 androidx-activity = "1.6.1"
 androidx-appcompat = "1.6.0-rc01"
@@ -93,6 +95,8 @@ kotlin-jvm-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jv
 detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 detekt-compose-rules = { group = "com.twitter.compose.rules", name = "detekt", version = "0.0.26" }
+r8 = { group = "com.android.tools", name = "r8", version.ref = "r8" }
+proguard = { group = "com.guardsquare", name = "proguard-gradle", version.ref = "proguard" }
 spotless-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 
 [plugins]
@@ -107,3 +111,4 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ben-manes-versions = { id = "com.github.ben-manes.versions", version.ref = "bmversions" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+proguard = { id = "com.guardsquare.proguard", version.ref = "proguard" }

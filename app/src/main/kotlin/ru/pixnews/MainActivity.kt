@@ -17,19 +17,29 @@ package ru.pixnews
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.Logger
+import co.touchlab.kermit.LoggerConfig
+import co.touchlab.kermit.Severity
 import ru.pixnews.app.AppConfig
 import ru.pixnews.app.PixnewsAndroidApplication
 import ru.pixnews.databinding.ActivityMainBinding
-import javax.inject.Inject
 import kotlin.LazyThreadSafetyMode.NONE
 
 class MainActivity : AppCompatActivity() {
+    private val logger: Logger = run {
+        val config = object : LoggerConfig {
+            override val logWriterList: List<LogWriter> = listOf(
+                object : LogWriter() {
+                    override fun log(severity: Severity, message: String, tag: String, throwable: Throwable?) = Unit
+                },
+            )
+            override val minSeverity: Severity = Severity.Error
+        }
+        Logger(config)
+    }
     private val appConfig by lazy(NONE) { AppConfig() }
     private lateinit var binding: ActivityMainBinding
-
-    @Inject
-    lateinit var logger: Logger
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,5 +56,7 @@ class MainActivity : AppCompatActivity() {
         binding.contentMain.textView.text = "Build timestamp: ${appConfig.timestamp}"
 
         logger.i { "Test" }
+        logger.i { "Test2" }
+        logger.i { "Test3" }
     }
 }

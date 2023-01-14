@@ -21,6 +21,18 @@ pluginManagement {
     repositories {
         googleExclusiveContent()
         gradlePluginPortal()
+        mavenCentral() {
+            content {
+                includeGroupByRegex("""com\.guardsquare.*""")
+            }
+        }
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.namespace == "com.guardsquare") {
+                useModule("com.guardsquare:proguard-gradle:7.3.0")
+            }
+        }
     }
 
     // Get our own convention plugins from 'gradle/plugins'

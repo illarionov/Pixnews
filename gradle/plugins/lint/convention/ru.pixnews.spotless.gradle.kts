@@ -28,7 +28,7 @@ plugins {
 
 spotless {
     isEnforceCheck = false
-    val commonExcludes = listOf("**/build/**", "**/.gradle/**", "config/copyright/**")
+    val commonExcludes = listOf("**/build/**", "**/.gradle/**", "vendor/**", "config/copyright/**")
     kotlin {
         target("**/*.kt")
         targetExclude(commonExcludes)

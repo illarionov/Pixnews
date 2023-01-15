@@ -9,7 +9,8 @@
   "excludes": [
     "**/node_modules",
     "**/build/",
-    "**/*-lock.json"
+    "**/*-lock.json",
+    "vendor/"
   ],
   "plugins": [
     "https://plugins.dprint.dev/markdown-0.15.1.wasm",

@@ -38,7 +38,7 @@ val detektCheck = tasks.register("detektCheck", Detekt::class) {
     allRules = true
 
     include("**/*.kt", "**/*.kts")
-    exclude("**/resources/**", "**/build/**", "**/generated/**", "config/copyright/**")
+    exclude("**/resources/**", "**/build/**", "**/generated/**", "vendor/**", "config/copyright/**")
 
     reports {
         html.required.set(true)

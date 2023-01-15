@@ -43,3 +43,9 @@ listOf(
 ).forEach {
     include(":libraries:$it")
 }
+
+includeBuild("vendor/Kermit") {
+    dependencySubstitution {
+        substitute(module("co.touchlab:kermit")).using(project(":kermit"))
+    }
+}

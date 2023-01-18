@@ -1,12 +1,17 @@
-name: CI
+name: CI on push to main
 
 on:
   pull_request:
     paths-ignore:
       - '**/*.md'
+    branches:
+      - main
   push:
     paths-ignore:
       - '**/*.md'
+    branches:
+      - main
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.ref }}
@@ -26,7 +31,7 @@ env:
 
 jobs:
   assemble:
-    name: Assemble debug, run tests
+    name: Assemble release
     runs-on: self-hosted
     timeout-minutes: 60
     if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
@@ -52,10 +57,10 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
 
-      - name: Assemble debug build, run tests
+      - name: Assemble release build, run static-analysis, build release
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: assembleDebug test --stacktrace
+          arguments: lintRelease assembleRelease --stacktrace
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
@@ -63,14 +68,7 @@ jobs:
           name: build-outputs
           path: app/build/outputs
 
-      - name: Publish test results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          junit_files: '**/build/test-results/**/*.xml'
-          check_name: "Unit test results"
-
-      - name: Bundle the build report
+      - name: Bundle the build report and lint outputs
         run: >
           find . -type d \( -name 'reports' -o -name 'compose-*' \) -print0
           | xargs -0 tar -c -I 'zstd -19 -T0' -f build-reports.tar.zst
@@ -81,8 +79,8 @@ jobs:
           name: test-reports
           path: build-reports.tar.zst
 
-  static-analysis:
-    name: Style check
+  instrumented-tests:
+    name: Instrumented tests
     runs-on: self-hosted
     timeout-minutes: 60
     if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
@@ -99,12 +97,6 @@ jobs:
           clean: false
           fetch-depth: 0
 
-      - name: Install dprint
-        shell: bash
-        run: |
-          [ ! -e ~/.dprint/bin/dprint ] &&  curl -fsSL https://dprint.dev/install.sh | sh > /dev/null 2>&1
-          echo "$HOME/.dprint/bin" >> $GITHUB_PATH
-
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
 
@@ -114,19 +106,32 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
 
-      - name: Run dprint
-        run: dprint check
-
-      - name: Run static code analyzers
+      - name: Run instrumented tests
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: styleCheck --continue
+          arguments: |
+            -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
+            phoneGroupDebugAndroidTest
+            --continue
 
-      - name: Upload lint outputs
+      - name: Publish instrumented test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          junit_files: '**/build/outputs/androidTest-results/**/*.xml'
+          check_name: "Instrumented test results"
+
+      - name: Bundle the instrumented tests report
+        run: >-
+          find . -type d \( -path '*/build/compose-*'
+          -o -path '*/build/outputs/androidTest-results'
+          -o -path '*/build/outputs/managed_*'
+          -o -path '*/build/reports/androidTests' \) -print0
+          |  xargs -0 tar -c -I 'zstd -19 -T0' -f instrumented-tests.tar.zst
+
+      - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: lint-outputs
-          path: |
-            app/build/reports
-            build/reports
+          name: instrumented-test-reports
+          path: instrumented-tests.tar.zst

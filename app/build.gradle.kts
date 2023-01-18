@@ -41,6 +41,7 @@ dependencies {
     implementation(project(":foundation:appconfig"))
     implementation(project(":foundation:di"))
     implementation(project(":foundation:ui-theme"))
+    implementation(project(":foundation:dispatchers"))
     implementation(project(":libraries:coroutines"))
     implementation(project(":libraries:functional"))
     implementation(project(":libraries:kotlin-utils"))
@@ -51,6 +52,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
     implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.runtime.tracing)

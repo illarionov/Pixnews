@@ -37,9 +37,15 @@ jobs:
     if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
 
     steps:
+      - name: Clean the repository
+        run: |
+          /usr/bin/git clean -ffd || true
+          /usr/bin/git reset --hard HEAD || true
+
       - name: Checkout sources
         uses: actions/checkout@v3
         with:
+          clean: false
           fetch-depth: 0
 
       - name: Validate Gradle wrapper
@@ -80,9 +86,15 @@ jobs:
     if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
 
     steps:
+      - name: Clean the repository
+        run: |
+          /usr/bin/git clean -ffd || true
+          /usr/bin/git reset --hard HEAD || true
+
       - name: Checkout sources
         uses: actions/checkout@v3
         with:
+          clean: false
           fetch-depth: 0
 
       - name: Validate Gradle wrapper

@@ -39,16 +39,6 @@ internal fun Project.configureCompose(
             add("androidTestImplementation", platform(bom))
         }
     }
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()
-        .matching { it !is KaptGenerateStubsTask }
-        .configureEach {
-            compilerOptions {
-                freeCompilerArgs.addAll(
-                    "-P",
-                    "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.8.0",
-                )
-            }
-        }
 
     configureComposeMetrics()
 }

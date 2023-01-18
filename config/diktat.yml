@@ -41,6 +41,8 @@
   enabled: false
 - name: MISSING_KDOC_TOP_LEVEL
   enabled: false
+- name: PACKAGE_NAME_INCORRECT_PATH
+  enabled: false
 - name: RUN_IN_SCRIPT
   enabled: false
 - name: TOO_LONG_FUNCTION

@@ -13,24 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app
+package ru.pixnews.logging
 
-import android.app.Application
-import ru.pixnews.logging.GlobalLoggerInitializer
+import co.touchlab.kermit.Logger
 import javax.inject.Inject
 
-class PixnewsAndroidApplication : Application() {
-    lateinit var appComponent: PixnewsAppComponent
-
-    @Inject
-    internal fun initLogger(initializer: GlobalLoggerInitializer) {
-        initializer.init()
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        appComponent = DaggerPixnewsAppComponent.factory().create(this).apply {
-            inject(this@PixnewsAndroidApplication)
-        }
+internal class GlobalLoggerInitializer @Inject constructor(private val localLogger: Logger) {
+    fun init() {
+        Logger.setLogWriters(localLogger.config.logWriterList)
+        Logger.setMinSeverity(localLogger.config.minSeverity)
+        Logger.setTag(localLogger.tag)
     }
 }

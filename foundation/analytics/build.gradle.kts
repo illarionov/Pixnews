@@ -13,35 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
-}
-
 plugins {
-    id("ru.pixnews.settings")
+    id("ru.pixnews.kotlin-jvm-library")
 }
 
-rootProject.name = "PixRadar"
-
-include(":app")
-
-listOf(
-    "analytics",
-    "appconfig",
-    "di",
-    "dispatchers",
-    "instrumented-testing",
-    "redux",
-    "ui-theme",
-).forEach {
-    include(":foundation:$it")
-}
-
-listOf(
-    "functional",
-    "coroutines",
-    "kotlin-utils",
-).forEach {
-    include(":libraries:$it")
-}
+group = "ru.pixnews.foundation.analytics"

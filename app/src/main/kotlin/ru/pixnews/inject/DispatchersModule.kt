@@ -18,9 +18,9 @@ package ru.pixnews.inject
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import kotlinx.coroutines.Dispatchers
 import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
 import ru.pixnews.foundation.dispatchers.ComputationCoroutineDispatcherProvider
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.dispatchers.MainCoroutineDispatcherProvider
@@ -29,16 +29,16 @@ import ru.pixnews.foundation.dispatchers.MainCoroutineDispatcherProvider
 @Module
 object DispatchersModule {
     @Provides
-    @SingleIn(AppScope::class)
+    @Reusable
     fun provideMainDispatcherProvider(): MainCoroutineDispatcherProvider =
         MainCoroutineDispatcherProvider(Dispatchers::Main)
 
     @Provides
-    @SingleIn(AppScope::class)
+    @Reusable
     fun provideIoDispatcherProvider(): IoCoroutineDispatcherProvider = IoCoroutineDispatcherProvider(Dispatchers::IO)
 
     @Provides
-    @SingleIn(AppScope::class)
+    @Reusable
     fun provideComputationDispatcherProvider(): ComputationCoroutineDispatcherProvider =
         ComputationCoroutineDispatcherProvider(Dispatchers::Default)
 }

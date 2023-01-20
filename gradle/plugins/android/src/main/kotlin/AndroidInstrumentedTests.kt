@@ -53,7 +53,9 @@ internal fun Project.configureTestManagedDevices(
         }
 
         dependencies {
-            add("debugImplementation", versionCatalog.findLibrary("androidx-compose-ui-testManifest").orElseThrow())
+            if (pixnews.compose.get()) {
+                add("debugImplementation", versionCatalog.findLibrary("androidx-compose-ui-testManifest").orElseThrow())
+            }
             add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
             add("androidTestImplementation", project(":foundation:instrumented-testing"))
         }

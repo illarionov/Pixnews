@@ -19,7 +19,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import co.touchlab.kermit.Logger
 import ru.pixnews.app.AppConfig
-import ru.pixnews.app.PixnewsAndroidApplication
+import ru.pixnews.app.PixnewsAppComponentHolder
 import ru.pixnews.databinding.ActivityMainBinding
 import javax.inject.Inject
 
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (application as PixnewsAndroidApplication).appComponent
+        PixnewsAppComponentHolder.getOrCreateAppComponent(applicationContext)
             .mainActivityComponentFactory()
             .create(this)
             .inject(this)

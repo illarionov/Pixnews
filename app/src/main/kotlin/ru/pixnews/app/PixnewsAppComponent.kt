@@ -15,23 +15,28 @@
  */
 package ru.pixnews.app
 
-import android.app.Application
+import android.content.Context
+import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.MergeComponent
 import dagger.BindsInstance
 import dagger.Component
 import ru.pixnews.MainActivityComponent
+import ru.pixnews.foundation.di.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.scopes.AppScope
 import ru.pixnews.foundation.di.scopes.SingleIn
+import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 
 @MergeComponent(AppScope::class)
 @SingleIn(AppScope::class)
 interface PixnewsAppComponent {
-    fun inject(app: PixnewsAndroidApplication)
-
     fun mainActivityComponentFactory(): MainActivityComponent.Factory
+
+    fun getIoDispatcherProvider(): IoCoroutineDispatcherProvider
+
+    fun getLogger(): Logger
 
     @Component.Factory
     fun interface Factory {
-        fun create(@BindsInstance application: Application): PixnewsAppComponent
+        fun create(@BindsInstance @ApplicationContext context: Context): PixnewsAppComponent
     }
 }

@@ -13,19 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.logging
+package ru.pixnews.initializer
 
-import co.touchlab.kermit.Logger
-import com.squareup.anvil.annotations.ContributesMultibinding
-import ru.pixnews.foundation.initializers.Initializer
+import com.squareup.anvil.annotations.MergeComponent
+import dagger.Component
+import ru.pixnews.app.PixnewsAppComponent
+import ru.pixnews.foundation.di.scopes.SingleIn
 import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
-import javax.inject.Inject
 
-@ContributesMultibinding(AppInitializersScope::class)
-class GlobalLoggerInitializer @Inject constructor(private val localLogger: Logger) : Initializer {
-    override fun init() {
-        Logger.setLogWriters(localLogger.config.logWriterList)
-        Logger.setMinSeverity(localLogger.config.minSeverity)
-        Logger.setTag(localLogger.tag)
+@SingleIn(AppInitializersScope::class)
+@MergeComponent(
+    scope = AppInitializersScope::class,
+    dependencies = [PixnewsAppComponent::class],
+)
+interface PixnewsAppInitializerComponent {
+    fun inject(initializer: PixnewsAppInitializer)
+
+    @Component.Factory
+    fun interface Factory {
+        fun create(appComponent: PixnewsAppComponent): PixnewsAppInitializerComponent
     }
 }

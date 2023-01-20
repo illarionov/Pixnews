@@ -15,22 +15,17 @@
  */
 package ru.pixnews.app
 
-import android.app.Application
-import ru.pixnews.logging.GlobalLoggerInitializer
-import javax.inject.Inject
+import android.content.Context
 
-class PixnewsAndroidApplication : Application() {
-    lateinit var appComponent: PixnewsAppComponent
+object PixnewsAppComponentHolder {
+    private var appComponent: PixnewsAppComponent? = null
 
-    @Inject
-    internal fun initLogger(initializer: GlobalLoggerInitializer) {
-        initializer.init()
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        appComponent = DaggerPixnewsAppComponent.factory().create(this).apply {
-            inject(this@PixnewsAndroidApplication)
+    fun getOrCreateAppComponent(context: Context): PixnewsAppComponent =
+        synchronized(PixnewsAppComponentHolder::class) {
+            return appComponent ?: run {
+                DaggerPixnewsAppComponent.factory().create(context.applicationContext).also {
+                    appComponent = it
+                }
+            }
         }
-    }
 }

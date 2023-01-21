@@ -69,12 +69,14 @@ jobs:
           path: app/build/outputs
 
       - name: Bundle the build report and lint outputs
+        if: ${{ always() }}
         run: >
           find . -type d \( -name 'reports' -o -name 'compose-*' \) -print0
           | xargs -0 tar -c -I 'zstd -19 -T0' -f build-reports.tar.zst
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
+        if: ${{ always() }}
         with:
           name: test-reports
           path: build-reports.tar.zst
@@ -106,22 +108,34 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
 
-      - name: Run instrumented tests
+      - name: Clean unused managed devices
         uses: gradle/gradle-build-action@v2
         with:
           arguments: |
             -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
+            -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
+            cleanManagedDevices --unused-only
+            --continue
+
+      - name: Run instrumented tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: |
+            -Dorg.gradle.workers.max=1
+            -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
+            -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
             phoneGroupDebugAndroidTest
             --continue
 
       - name: Publish instrumented test results
         uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
+        if: ${{ always() }}
         with:
           junit_files: '**/build/outputs/androidTest-results/**/*.xml'
           check_name: "Instrumented test results"
 
       - name: Bundle the instrumented tests report
+        if: ${{ failure() }}
         run: >-
           find . -type d \( -path '*/build/compose-*'
           -o -path '*/build/outputs/androidTest-results'
@@ -130,7 +144,7 @@ jobs:
           |  xargs -0 tar -c -I 'zstd -19 -T0' -f instrumented-tests.tar.zst
 
       - name: Upload test reports
-        if: always()
+        if: ${{ failure() }}
         uses: actions/upload-artifact@v3
         with:
           name: instrumented-test-reports

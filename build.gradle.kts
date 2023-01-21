@@ -40,7 +40,3 @@ val styleCheck = tasks.register("styleCheck") {
     description = "Runs code style checking tools (excluding tests and Android Lint)"
     dependsOn(tasks.named("detektCheck"), tasks.named("spotlessCheck"))
 }
-
-tasks.matching { it.name == LifecycleBasePlugin.CHECK_TASK_NAME }.configureEach {
-    dependsOn(styleCheck)
-}

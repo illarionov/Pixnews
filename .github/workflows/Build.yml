@@ -59,24 +59,27 @@ jobs:
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
         with:
           name: build-outputs
           path: app/build/outputs
 
       - name: Publish test results
         uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
+        if: ${{ always() }}
         with:
           junit_files: '**/build/test-results/**/*.xml'
           check_name: "Unit test results"
 
       - name: Bundle the build report
+        if: ${{ failure() }}
         run: >
           find . -type d \( -name 'reports' -o -name 'compose-*' \) -print0
           | xargs -0 tar -c -I 'zstd -19 -T0' -f build-reports.tar.zst
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
         with:
           name: test-reports
           path: build-reports.tar.zst
@@ -122,11 +125,14 @@ jobs:
         with:
           arguments: styleCheck --continue
 
+      - name: Bundle the build report and lint outputs
+        if: ${{ always() }}
+        run: >
+          tar -c -I 'zstd -19 -T0' -f build-reports.tar.zst app/build/reports build/reports
+
       - name: Upload lint outputs
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: lint-outputs
-          path: |
-            app/build/reports
-            build/reports
+          path: build-reports.tar.zst

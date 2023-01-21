@@ -13,35 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
-}
+package ru.pixnews.inject
 
-plugins {
-    id("ru.pixnews.settings")
-}
+import com.squareup.anvil.annotations.ContributesTo
+import dagger.Module
+import dagger.Provides
+import dagger.Reusable
+import ru.pixnews.foundation.analytics.Analytics
+import ru.pixnews.foundation.analytics.NoOpAnalytics
+import ru.pixnews.foundation.di.scopes.AppScope
 
-rootProject.name = "PixRadar"
-
-include(":app")
-
-listOf(
-    "analytics",
-    "appconfig",
-    "di",
-    "dispatchers",
-    "instrumented-testing",
-    "redux",
-    "ui-theme",
-).forEach {
-    include(":foundation:$it")
-}
-
-listOf(
-    "functional",
-    "coroutines",
-    "kotlin-utils",
-).forEach {
-    include(":libraries:$it")
+@ContributesTo(AppScope::class)
+@Module
+object AnalyticsModule {
+    @Provides
+    @Reusable
+    fun provideAnalytics(): Analytics = NoOpAnalytics()
 }

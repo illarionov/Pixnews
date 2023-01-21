@@ -43,6 +43,7 @@ android {
 
 dependencies {
     implementation(project(":foundation:appconfig"))
+    implementation(project(":foundation:analytics"))
     implementation(project(":foundation:di"))
     implementation(project(":foundation:ui-theme"))
     implementation(project(":foundation:dispatchers"))

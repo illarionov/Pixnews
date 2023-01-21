@@ -1,3 +1,3 @@
-# di
+# dispatchers
 
 Диспатчеры

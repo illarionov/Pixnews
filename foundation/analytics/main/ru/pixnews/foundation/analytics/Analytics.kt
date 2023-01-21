@@ -13,35 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
-    includeBuild("gradle/meta-plugins")
-}
+package ru.pixnews.foundation.analytics
 
-plugins {
-    id("ru.pixnews.settings")
-}
+public interface Analytics {
+    public fun setCurrentScreenName(screenName: String, screenClass: String)
 
-rootProject.name = "PixRadar"
+    public fun setEnableAnalytics(enable: Boolean)
 
-include(":app")
+    public fun setUserId(userId: String?)
 
-listOf(
-    "analytics",
-    "appconfig",
-    "di",
-    "dispatchers",
-    "instrumented-testing",
-    "redux",
-    "ui-theme",
-).forEach {
-    include(":foundation:$it")
-}
+    public fun setUserProperty(name: String, value: String)
 
-listOf(
-    "functional",
-    "coroutines",
-    "kotlin-utils",
-).forEach {
-    include(":libraries:$it")
+    public fun logEvent(name: String, params: Map<String, *>? = null)
 }

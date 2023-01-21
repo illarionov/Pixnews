@@ -125,11 +125,14 @@ jobs:
         with:
           arguments: styleCheck --continue
 
+      - name: Bundle the build report and lint outputs
+        if: ${{ always() }}
+        run: >
+          tar -c -I 'zstd -19 -T0' -f build-reports.tar.zst app/build/reports build/reports
+
       - name: Upload lint outputs
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: lint-outputs
-          path: |
-            app/build/reports
-            build/reports
+          path: build-reports.tar.zst

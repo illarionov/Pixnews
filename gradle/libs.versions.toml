@@ -17,6 +17,7 @@ androidx-compose-runtime-tracing = "1.0.0-alpha01"
 androidx-constraintlayout = "2.1.4"
 androidx-core = "1.9.0"
 android-desugar-jdk-libs = "2.0.0"
+androidx-fragment = "1.6.0-alpha04"
 androidx-lifecycle = "2.5.1"
 androidx-navigation = "2.5.3"
 androidx-room = "2.4.3"
@@ -58,6 +59,7 @@ androidx-compose-ui-testManifest = { group = "androidx.compose.ui", name = "ui-t
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
+androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "androidx-fragment" }
 androidx-lifecycle-common-java8 = { group = "androidx.lifecycle", name = "lifecycle-common-java8", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }

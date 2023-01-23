@@ -21,12 +21,18 @@ import com.squareup.anvil.annotations.MergeComponent
 import dagger.BindsInstance
 import dagger.Component
 import ru.pixnews.MainActivityComponent
+import ru.pixnews.experiments.ExperimentsComponent
+import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.scopes.AppScope
 import ru.pixnews.foundation.di.scopes.SingleIn
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
+import ru.pixnews.foundation.featuretoggles.pub.FeatureManager
 
-@MergeComponent(AppScope::class)
+@MergeComponent(
+    scope = AppScope::class,
+    dependencies = [ExperimentsComponent::class],
+)
 @SingleIn(AppScope::class)
 interface PixnewsAppComponent {
     fun mainActivityComponentFactory(): MainActivityComponent.Factory
@@ -35,8 +41,22 @@ interface PixnewsAppComponent {
 
     fun getLogger(): Logger
 
+    fun getFeatureManager(): FeatureManager
+
+    fun getAppConfig(): AppConfig
+
     @Component.Factory
     fun interface Factory {
-        fun create(@BindsInstance @ApplicationContext context: Context): PixnewsAppComponent
+        fun create(
+            @BindsInstance @ApplicationContext context: Context,
+            experimentsComponent: ExperimentsComponent,
+        ): PixnewsAppComponent
+    }
+
+    public companion object {
+        public operator fun invoke(
+            @ApplicationContext context: Context,
+            experimentsComponent: ExperimentsComponent,
+        ): PixnewsAppComponent = DaggerPixnewsAppComponent.factory().create(context, experimentsComponent)
     }
 }

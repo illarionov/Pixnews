@@ -15,20 +15,17 @@
  */
 package ru.pixnews.app
 
-import android.app.Application
-import android.content.Context
 import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
 import dagger.Module
-import ru.pixnews.foundation.di.qualifiers.ApplicationContext
+import dagger.Provides
+import dagger.Reusable
+import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
 
 @ContributesTo(AppScope::class)
 @Module
-abstract class PixnewsAppModule {
-    @Binds
-    @ApplicationContext
-    @SingleIn(AppScope::class)
-    abstract fun Application.provideApplicationContext(): Context
+public object PixnewsAppModule {
+    @Provides
+    @Reusable
+    fun provideAppConfig(): AppConfig = PixnewsAppConfig
 }

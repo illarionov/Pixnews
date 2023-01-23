@@ -17,10 +17,17 @@ package ru.pixnews
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle.State.STARTED
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import co.touchlab.kermit.Logger
-import ru.pixnews.app.AppConfig
+import kotlinx.coroutines.launch
 import ru.pixnews.app.PixnewsAppComponentHolder
 import ru.pixnews.databinding.ActivityMainBinding
+import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
+import ru.pixnews.foundation.featuretoggles.pub.FeatureToggle
+import ru.pixnews.foundation.ui.experiments.DarkModeExperiment
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +38,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     internal lateinit var logger: Logger
+
+    @Inject
+    internal lateinit var darkModeToggle: FeatureToggle<DarkModeExperiment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,5 +55,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         binding.contentMain.textView.text = "Build timestamp: ${appConfig.timestamp}"
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(STARTED) {
+                val variant: ExperimentVariant = darkModeToggle.getVariant<ExperimentVariant>()
+                logger.w { "Dark mode variant: $variant" }
+            }
+        }
     }
 }

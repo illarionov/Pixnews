@@ -16,6 +16,7 @@
 package ru.pixnews.app
 
 import android.content.Context
+import ru.pixnews.experiments.ExperimentsComponent
 
 object PixnewsAppComponentHolder {
     private var appComponent: PixnewsAppComponent? = null
@@ -23,7 +24,7 @@ object PixnewsAppComponentHolder {
     fun getOrCreateAppComponent(context: Context): PixnewsAppComponent =
         synchronized(PixnewsAppComponentHolder::class) {
             return appComponent ?: run {
-                DaggerPixnewsAppComponent.factory().create(context.applicationContext).also {
+                PixnewsAppComponent(context.applicationContext, ExperimentsComponent()).also {
                     appComponent = it
                 }
             }

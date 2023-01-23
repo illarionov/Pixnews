@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.functional
+package ru.pixnews.libraries.functional
 
 import arrow.core.Either
 
-public typealias Result<T> = Either<Throwable, T>
+public typealias Result<E, T> = Either<E, T>
 
-public inline fun <T : Any> Result<T>.onSuccess(action: (left: T) -> Unit): Result<T> = this.onRight(action)
+public inline fun <E : Any, T : Any> Result<E, T>.onSuccess(action: (left: T) -> Unit): Result<E, T> =
+    this.onRight(action)
 
-public inline fun <T : Any> Result<T>.onError(action: (throwable: Throwable) -> Unit): Result<T> =
+public inline fun <E : Any, T : Any> Result<E, T>.onError(action: (error: E) -> Unit): Result<E, T> =
     this.onLeft(action)

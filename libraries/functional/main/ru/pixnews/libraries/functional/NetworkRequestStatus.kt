@@ -15,18 +15,20 @@
  */
 package ru.pixnews.libraries.functional
 
-public sealed interface NetworkRequestStatus<out T> {
-    public object Loading : NetworkRequestStatus<Nothing> {
-        override fun toString(): String = "Loading"
+import arrow.core.left
+import arrow.core.right
+
+public sealed interface NetworkRequestStatus<out E, out T> {
+    public object Loading : NetworkRequestStatus<Nothing, Nothing> {
+        override fun toString(): String {
+            return "Loading"
+        }
     }
 
-    /**
-     * @property result
-     */
-    public data class Complete<T>(val result: Result<T>) : NetworkRequestStatus<T>
+    public data class Complete<E, T>(val result: Result<E, T>) : NetworkRequestStatus<E, T>
 
     public companion object {
-        public fun <T> success(result: T): Complete<T> = Complete(Result.success(result))
-        public fun <T> failure(throwable: Throwable): Complete<T> = Complete(Result.failure(throwable))
+        public fun <T> success(result: T): Complete<Nothing, T> = Complete(result.right())
+        public fun <E> failure(error: E): Complete<E, Nothing> = Complete(error.left())
     }
 }

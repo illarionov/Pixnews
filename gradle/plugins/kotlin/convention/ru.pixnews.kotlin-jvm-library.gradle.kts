@@ -49,7 +49,9 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvm
     .configureEach {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
-            useK2.set(true)
+            // Class 'Experiment' is compiled by the new Kotlin compiler frontend and cannot be loaded by the
+            // old compiler
+            useK2.set(false)
             freeCompilerArgs.addAll(
                 "-opt-in=kotlin.RequiresOptIn",
                 "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",

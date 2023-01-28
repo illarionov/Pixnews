@@ -57,10 +57,22 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
 
+      - name: Unpack sign keys and secrets
+        env:
+          SIGN_KEYS_AND_SECRETS: ${{ secrets.SIGN_KEYS_AND_SECRETS }}
+        run: echo "$SIGN_KEYS_AND_SECRETS" | base64 -d | zstd -d | tar -xf -
+
       - name: Assemble release build, run static-analysis, build release
         uses: gradle/gradle-build-action@v2
         with:
           arguments: lintRelease assembleRelease --stacktrace
+
+      - name: Cleanup secrets
+        if: ${{ always() }}
+        run: |
+          rm -f config/signing/release.jks
+          rm -f config/signing/release.properties
+          rm -f app/src/google-services.json
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
@@ -108,6 +120,11 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
 
+      - name: Unpack google-services.json
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo "$GOOGLE_SERVICES_JSON" | base64 -d | zstd -d  -o app/src/google-services.json
+
       - name: Clean unused managed devices
         uses: gradle/gradle-build-action@v2
         with:
@@ -126,6 +143,10 @@ jobs:
             -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
             phoneGroupDebugAndroidTest
             --continue
+
+      - name: Cleanup secrets
+        if: ${{ always() }}
+        run: rm -f app/src/google-services.json
 
       - name: Publish instrumented test results
         uses: EnricoMi/publish-unit-test-result-action@v2

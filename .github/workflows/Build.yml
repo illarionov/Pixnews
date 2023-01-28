@@ -52,10 +52,19 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
 
+      - name: Unpack google-services.json
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo "$GOOGLE_SERVICES_JSON" | base64 -d | zstd -d  -o app/src/google-services.json
+
       - name: Assemble debug build, run tests
         uses: gradle/gradle-build-action@v2
         with:
           arguments: assembleDebug test --stacktrace
+
+      - name: Cleanup secrets
+        if: ${{ always() }}
+        run: rm -f app/src/google-services.json
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
@@ -120,10 +129,19 @@ jobs:
       - name: Run dprint
         run: dprint check
 
+      - name: Unpack google-services.json
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo "$GOOGLE_SERVICES_JSON" | base64 -d | zstd -d  -o app/src/google-services.json
+
       - name: Run static code analyzers
         uses: gradle/gradle-build-action@v2
         with:
           arguments: styleCheck --continue
+
+      - name: Cleanup secrets
+        if: ${{ always() }}
+        run: rm -f app/src/google-services.json
 
       - name: Bundle the build report and lint outputs
         if: ${{ always() }}

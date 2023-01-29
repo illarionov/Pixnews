@@ -16,7 +16,6 @@
 package ru.pixnews.foundation.dispatchers
 
 import kotlinx.coroutines.CoroutineDispatcher
+import javax.inject.Provider
 
-public fun interface ComputationCoroutineDispatcherProvider {
-    public fun get(): CoroutineDispatcher
-}
+public fun interface ComputationCoroutineDispatcherProvider : Provider<CoroutineDispatcher>

@@ -6,11 +6,15 @@
     disabledChapters: ""
     kotlinVersion: 1.8
     srcDirectories: "main"
+- name: AVOID_NULL_CHECKS
+  enabled: false
 - name: COMMENTED_BY_KDOC
   enabled: false
 - name: CLASS_SHOULD_NOT_BE_ABSTRACT
   enabled: false
 - name: CUSTOM_GETTERS_SETTERS
+  enabled: false
+- name: EXTENSION_FUNCTION_WITH_CLASS
   enabled: false
 - name: FILE_NO_BLANK_LINE_BETWEEN_BLOCKS
   enabled: true
@@ -29,6 +33,10 @@
     copyrightText: ''
 - name: HEADER_WRONG_FORMAT
   enabled: false
+- name: KDOC_NO_CONSTRUCTOR_PROPERTY
+  enabled: false
+- name: LONG_LINE
+  enabled: false
 - name: LONG_NUMERICAL_VALUES_SEPARATED
   enabled: true
   configuration:
@@ -40,6 +48,8 @@
 - name: MISSING_KDOC_ON_FUNCTION
   enabled: false
 - name: MISSING_KDOC_TOP_LEVEL
+  enabled: false
+- name: NESTED_BLOCK
   enabled: false
 - name: PACKAGE_NAME_INCORRECT_PATH
   enabled: false
@@ -62,7 +72,11 @@
   enabled: false
   configuration:
     typeReferenceLength: '35'
+- name: USE_DATA_CLASS
+  enabled: false
 - name: VARIABLE_NAME_INCORRECT_FORMAT
+  enabled: false
+- name: WHEN_WITHOUT_ELSE
   enabled: false
 - name: WRONG_INDENTATION
   enabled: true

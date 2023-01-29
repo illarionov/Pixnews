@@ -100,12 +100,19 @@ spotless {
         target("**/*.proto")
         targetExclude(commonExcludes)
 
-        clangFormat().style("LLVM")
+        // Disabled until https://github.com/diffplug/spotless/issues/673 is fixed
+        // clangFormat("14.0.0-1ubuntu1").style("LLVM")
         endWithNewline()
     }
     format("xml") {
         target("**/*.xml")
-        targetExclude(commonExcludes + listOf(".idea/**/*.xml", "gradle/verification-metadata.xml"))
+        targetExclude(
+            commonExcludes + listOf(
+                ".idea/**/*.xml",
+                "gradle/verification-metadata.xml",
+                "**/res/xml/remote_config_defaults.xml",
+            ),
+        )
 
         val deactivatableLicenseStep: FormatterStep = run {
             val licenseHeaderFile = configRootDir.file("copyright/copyright.xml")

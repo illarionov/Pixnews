@@ -18,13 +18,9 @@ package ru.pixnews.app
 import android.os.Build
 import ru.pixnews.BuildConfig
 import ru.pixnews.foundation.appconfig.AppConfig
-import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
-import javax.inject.Inject
 import kotlin.LazyThreadSafetyMode.NONE
 
-@SingleIn(AppScope::class)
-internal class AppConfig @Inject constructor() : AppConfig {
+public object PixnewsAppConfig : AppConfig {
     override val isDebug: Boolean = BuildConfig.DEBUG
     override val applicationId: String = BuildConfig.APPLICATION_ID
     override val buildType: String = BuildConfig.BUILD_TYPE

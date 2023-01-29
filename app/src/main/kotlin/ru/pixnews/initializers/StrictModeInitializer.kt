@@ -39,7 +39,7 @@ class StrictModeInitializer @Inject constructor(logger: Logger) : Initializer {
                 .also { builder ->
                     if (Build.VERSION.SDK_INT >= 28) {
                         builder.penaltyListener(threadExecutor) { violation ->
-                            logger.e(violation) { violation.toString() }
+                            logger.e(violation) { "ThreadPolicy violation" }
                         }
                     } else {
                         builder.penaltyLog()
@@ -53,7 +53,7 @@ class StrictModeInitializer @Inject constructor(logger: Logger) : Initializer {
                 .also { builder ->
                     if (Build.VERSION.SDK_INT >= 28) {
                         builder.penaltyListener(threadExecutor) { violation ->
-                            logger.e(violation) { violation.toString() }
+                            logger.e(violation) { "VmPolicy violation" }
                         }
                     } else {
                         builder.penaltyLog()
@@ -71,7 +71,7 @@ class StrictModeInitializer @Inject constructor(logger: Logger) : Initializer {
             .detectWrongFragmentContainer()
             .detectWrongNestedHierarchy()
             .penaltyListener { violation ->
-                logger.e(violation) { violation.toString() }
+                logger.e(violation) { "FragmentStrictMode violation" }
             }
             .build()
     }

@@ -55,7 +55,7 @@ naming:
     requireRootInDeclaration: false
   TopLevelPropertyNaming:
     active: true
-    constantPattern: '[A-Z][A-Za-z0-9]*'
+    constantPattern: '[A-Z][_A-Z\d]*'
 
 performance:
   active: true
@@ -129,9 +129,7 @@ formatting:
   Indentation:
     active: false
   MaximumLineLength:
-    active: true
-    maxLineLength: 120
-    ignoreBackTickedIdentifier: false
+    active: false
   TrailingCommaOnCallSite:
     active: true
     autoCorrect: true

@@ -22,9 +22,9 @@ import kotlinx.coroutines.flow.onStart
 import ru.pixnews.libraries.functional.NetworkRequestStatus
 import ru.pixnews.libraries.functional.NetworkRequestStatus.Companion
 
-public fun <T> Flow<T>.asNetworkRequestStatus(): Flow<NetworkRequestStatus<T>> {
+public fun <T> Flow<T>.asNetworkRequestStatus(): Flow<NetworkRequestStatus<Throwable, T>> {
     return this
-        .map<T, NetworkRequestStatus<T>>(Companion::success)
+        .map<T, NetworkRequestStatus<Throwable, T>>(Companion::success)
         .onStart { emit(NetworkRequestStatus.Loading) }
         .catch { emit(NetworkRequestStatus.failure(it)) }
 }

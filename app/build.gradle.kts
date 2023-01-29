@@ -17,6 +17,7 @@
 plugins {
     id("ru.pixnews.android-application")
     id("ru.pixnews.di-anvil-kapt")
+    alias(libs.plugins.google.services)
 }
 
 pixnews {
@@ -48,6 +49,10 @@ dependencies {
     implementation(project(":foundation:ui-theme"))
     implementation(project(":foundation:dispatchers"))
     implementation(project(":foundation:initializers"))
+    implementation(project(":foundation:featuretoggles:pub"))
+    implementation(project(":foundation:featuretoggles:internal"))
+    implementation(project(":foundation:featuretoggles:datasource-firebase"))
+    implementation(project(":foundation:featuretoggles:datasource-overrides"))
     implementation(project(":libraries:coroutines"))
     implementation(project(":libraries:functional"))
     implementation(project(":libraries:kotlin-utils"))

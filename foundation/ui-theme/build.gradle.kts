@@ -25,6 +25,9 @@ pixnews {
 
 android {
     namespace = "ru.pixnews.foundation.ui.theme"
+    buildFeatures {
+        androidResources = true
+    }
 }
 
 dependencies {

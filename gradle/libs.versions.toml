@@ -22,6 +22,7 @@ androidx-fragment = "1.6.0-alpha04"
 androidx-lifecycle = "2.5.1"
 androidx-navigation = "2.5.3"
 androidx-room = "2.4.3"
+androidx-splashscreen = "1.0.0"
 androidx-startup = "1.1.1"
 androidx-test-core = "1.5.0"
 androidx-test-espresso = "3.5.0"
@@ -75,6 +76,7 @@ androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-
 androidx-room = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
 androidx-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "androidx-room" }
+androidx-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidx-splashscreen" }
 androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidx-startup" }
 androidx-test-core = { group = "androidx.test", name = "core-ktx", version.ref = "androidx-test-core" }
 androidx-test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-test-espresso" }

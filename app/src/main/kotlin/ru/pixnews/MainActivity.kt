@@ -17,12 +17,14 @@ package ru.pixnews
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle.State.STARTED
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.launch
 import ru.pixnews.app.PixnewsAppComponentHolder
+import ru.pixnews.apploading.AppLoadingStatus
 import ru.pixnews.databinding.ActivityMainBinding
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
@@ -42,12 +44,16 @@ class MainActivity : AppCompatActivity() {
     @Inject
     internal lateinit var darkModeToggle: FeatureToggle<DarkModeExperiment>
 
+    @Inject
+    internal lateinit var appLoadingStatus: AppLoadingStatus
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         PixnewsAppComponentHolder.getOrCreateAppComponent(applicationContext)
             .mainActivityComponentFactory()
             .create(this)
             .inject(this)
+        setupSplashScreen()
+        super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -58,9 +64,16 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(STARTED) {
-                val variant: ExperimentVariant = darkModeToggle.getVariant<ExperimentVariant>()
+                val variant: ExperimentVariant = darkModeToggle.getVariant()
                 logger.w { "Dark mode variant: $variant" }
             }
+        }
+    }
+
+    private fun setupSplashScreen() {
+        val splashScreen = installSplashScreen()
+        splashScreen.setKeepOnScreenCondition {
+            !appLoadingStatus.loadingComplete
         }
     }
 }

@@ -15,6 +15,15 @@
     limitations under the License.
 -->
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Pixnews.Splash" parent="NightAdjusted.Theme.Pixnews.Splash">
+        <item name="postSplashScreenTheme">@style/Theme.Pixradar</item>
+    </style>
+
+    <style name="NightAdjusted.Theme.Pixnews.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+
     <style name="Theme.Pixradar" parent="Base.Theme.Pixradar"/>
 
     <style name="Base.Theme.Pixradar" parent="Base.Theme.MaterialThemeBuilder">

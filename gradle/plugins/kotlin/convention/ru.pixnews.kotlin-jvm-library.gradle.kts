@@ -17,6 +17,10 @@
 import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
+import ru.pixnews.configureCommonUnitTesting
+import ru.pixnews.configureCommonUnitTestingOptions
+import ru.pixnews.createPixnewsExtension
+import ru.pixnews.pixnews
 import ru.pixnews.versionCatalog
 
 /**
@@ -24,7 +28,10 @@ import ru.pixnews.versionCatalog
  */
 plugins {
     kotlin("jvm")
+    id("ru.pixnews.build-parameters")
 }
+
+createPixnewsExtension()
 
 kotlin {
     explicitApi = ExplicitApiMode.Warning
@@ -37,6 +44,13 @@ kotlin {
             kotlin.setSrcDirs(listOf("test"))
             resources.setSrcDirs(listOf("test_resources"))
         }
+    }
+}
+
+plugins.withId("java-test-fixtures") {
+    kotlin.sourceSets.getByName("testFixtures") {
+        kotlin.setSrcDirs(listOf("testFixtures"))
+        resources.setSrcDirs(listOf("testFixtures_resources"))
     }
 }
 
@@ -68,5 +82,12 @@ dependencies {
         implementation(platform(it))
         testImplementation(platform(it))
     }
-    testImplementation(kotlin("test"))
+}
+
+afterEvaluate {
+    val unitTestEngine = project.pixnews.unitTestEngine.get()
+    configureCommonUnitTesting(unitTestEngine)
+    tasks.withType<Test>().configureEach {
+        configureCommonUnitTestingOptions(unitTestEngine)
+    }
 }

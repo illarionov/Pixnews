@@ -20,6 +20,7 @@ plugins {
 dependencies {
     implementation(project(":base"))
     implementation(project(":di"))
+    implementation(project(":testing"))
 
     implementation(libs.agp.plugin)
     implementation(libs.kotlin.jvm.plugin)

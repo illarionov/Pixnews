@@ -46,6 +46,7 @@ dependencies {
     implementation(project(":foundation:appconfig"))
     implementation(project(":foundation:analytics"))
     implementation(project(":foundation:di"))
+    implementation(project(":foundation:di-root"))
     implementation(project(":foundation:ui-theme"))
     implementation(project(":foundation:dispatchers"))
     implementation(project(":foundation:initializers"))
@@ -56,6 +57,7 @@ dependencies {
     implementation(project(":libraries:coroutines"))
     implementation(project(":libraries:functional"))
     implementation(project(":libraries:kotlin-utils"))
+    debugImplementation(project(":features:featuretoggles"))
 
     implementation(libs.kermit)
 

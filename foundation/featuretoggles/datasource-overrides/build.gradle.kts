@@ -23,6 +23,7 @@ plugins {
 pixnews {
     compose.set(false)
     managedDevices.set(false)
+    unitTestEngine.set(ru.pixnews.UnitTestEngine.JUNIT5)
 }
 
 android {
@@ -33,7 +34,12 @@ dependencies {
     api(project(":foundation:dispatchers"))
     api(project(":foundation:featuretoggles:pub"))
     api(project(":foundation:featuretoggles:internal"))
+    api(project(":libraries:coroutines"))
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.datastore)
+
+    testImplementation(project(":libraries:testing"))
+    testImplementation(testFixtures(project(":foundation:featuretoggles:pub")))
+    testImplementation(libs.turbine)
 }

@@ -16,6 +16,7 @@
 package ru.pixnews
 
 import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
@@ -26,6 +27,11 @@ internal fun Project.configureCompose(
     commonExtension: CommonExtension<*, *, *, *>,
 ) {
     commonExtension.apply {
+        @Suppress("MagicNumber")
+        if (this is LibraryExtension) {
+            // https://issuetracker.google.com/u/1/issues/267458965
+            defaultConfig.targetSdk = 33
+        }
         buildFeatures {
             compose = true
         }
@@ -39,6 +45,16 @@ internal fun Project.configureCompose(
             add("androidTestImplementation", platform(bom))
         }
     }
+
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()
+        .matching { it !is KaptGenerateStubsTask }
+        .configureEach {
+            compilerOptions {
+                freeCompilerArgs.addAll(
+                    "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+                )
+            }
+        }
 
     configureComposeMetrics()
 }

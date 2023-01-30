@@ -40,7 +40,7 @@ public abstract class ExperimentsModule {
         @Reusable
         public fun provideAppExperimentVariantSerializers(
             serializers: Map<@JvmSuppressWildcards String, @JvmSuppressWildcards ExperimentVariantSerializer>,
-        ): Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards(false) ExperimentVariantSerializer> {
+        ): Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer> {
             return serializers
                 .mapKeys { (k, _) -> ExperimentKey(k) }
         }

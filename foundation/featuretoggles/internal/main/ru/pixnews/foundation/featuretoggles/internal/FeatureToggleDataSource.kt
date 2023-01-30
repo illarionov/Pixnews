@@ -19,9 +19,9 @@ import kotlinx.coroutines.flow.Flow
 import ru.pixnews.foundation.featuretoggles.pub.Experiment
 import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
-import ru.pixnews.libraries.functional.NetworkRequestStatus
+import ru.pixnews.libraries.functional.RequestStatus
 
-public typealias DataSourceResult<V> = NetworkRequestStatus<FeatureToggleDataSourceError, V>
+public typealias DataSourceResult<V> = RequestStatus<FeatureToggleDataSourceError, V>
 
 public interface FeatureToggleDataSource {
     public fun getAssignedVariant(experimentKey: ExperimentKey): Flow<DataSourceResult<ExperimentVariant>>

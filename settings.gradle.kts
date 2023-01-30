@@ -30,6 +30,7 @@ listOf(
     "analytics",
     "appconfig",
     "di",
+    "di-root",
     "dispatchers",
     "featuretoggles:pub",
     "featuretoggles:internal",
@@ -44,9 +45,19 @@ listOf(
 }
 
 listOf(
-    "functional",
+    "android-utils",
+    "compose-utils",
     "coroutines",
+    "functional",
     "kotlin-utils",
+    "ui-tooling",
+    "testing",
 ).forEach {
     include(":libraries:$it")
+}
+
+listOf(
+    "featuretoggles",
+).forEach {
+    include(":features:$it")
 }

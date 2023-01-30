@@ -40,7 +40,7 @@ import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.pub.FeatureToggleException
-import ru.pixnews.libraries.functional.NetworkRequestStatus.Loading
+import ru.pixnews.libraries.functional.RequestStatus.Loading
 import kotlin.time.Duration.Companion.seconds
 
 @Suppress("TooGenericExceptionCaught")
@@ -100,13 +100,13 @@ public class FirebaseDataSource(
                 val serialized = value.asString()
                 val activeVariant = serializers[experimentKey]?.fromString(experimentKey, serialized)
                     ?: throw FeatureToggleException("No serializer for experiment `$experimentKey` found")
-                emit(DataSourceResult.success(activeVariant))
+                emit(DataSourceResult.completeSuccess(activeVariant))
             } else {
                 log.w { "No remote config value for experiment $experimentKey" }
-                emit(DataSourceResult.failure<FeatureToggleDataSourceError>(ExperimentNotFound))
+                emit(DataSourceResult.completeFailure<FeatureToggleDataSourceError>(ExperimentNotFound))
             }
         }
-            .catch { error -> emit(DataSourceResult.failure(DataSourceError(error))) }
+            .catch { error -> emit(DataSourceResult.completeFailure(DataSourceError(error))) }
     }
 
     override suspend fun awaitUntilInitialized() {

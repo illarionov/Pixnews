@@ -29,6 +29,7 @@ constructor(
 ) {
     val compose: Property<Boolean> = objects.property<Boolean>().convention(false)
     val managedDevices: Property<Boolean> = objects.property<Boolean>().convention(false)
+    val unitTestEngine: Property<UnitTestEngine> = objects.property<UnitTestEngine>().convention(UnitTestEngine.JUNIT5)
 }
 
 public fun Project.createPixnewsExtension(): PixnewsExtension {

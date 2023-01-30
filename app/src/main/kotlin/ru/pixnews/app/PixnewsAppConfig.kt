@@ -16,10 +16,13 @@
 package ru.pixnews.app
 
 import android.os.Build
+import com.squareup.anvil.annotations.ContributesBinding
 import ru.pixnews.BuildConfig
 import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.di.scopes.AppScope
 import kotlin.LazyThreadSafetyMode.NONE
 
+@ContributesBinding(AppScope::class)
 public object PixnewsAppConfig : AppConfig {
     override val isDebug: Boolean = BuildConfig.DEBUG
     override val applicationId: String = BuildConfig.APPLICATION_ID

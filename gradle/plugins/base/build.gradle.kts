@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 plugins {
-    id("ru.pixnews.kotlindsl")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 dependencies {
+    implementation(gradleKotlinDsl())
     implementation("ru.pixnews:build-parameters")
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
 }

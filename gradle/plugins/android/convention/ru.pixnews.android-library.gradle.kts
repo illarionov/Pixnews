@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
 import ru.pixnews.applyTo
 import ru.pixnews.configureCommonAndroid
 import ru.pixnews.createPixnewsExtension
@@ -53,11 +54,15 @@ android {
         checkDependencies = false
     }
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<*>>().configureEach {
-        compilerOptions {
-            freeCompilerArgs.addAll("-Xexplicit-api=warning")
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<*>>()
+        .matching { task ->
+            !(task is KaptGenerateStubsTask || task.name.endsWith("TestKotlin"))
         }
-    }
+        .configureEach {
+            compilerOptions {
+                freeCompilerArgs.addAll("-Xexplicit-api=warning")
+            }
+        }
 }
 
 androidComponents {

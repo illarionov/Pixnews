@@ -28,7 +28,7 @@ public interface ExperimentsComponent {
     public fun appExperiments(): Set<@JvmSuppressWildcards Experiment>
 
     @Suppress("MaxLineLength")
-    public fun appExperimentVariantSerializers(): Map<ExperimentKey, @JvmSuppressWildcards(false) ExperimentVariantSerializer>
+    public fun appExperimentVariantSerializers(): Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>
 
     public companion object {
         public operator fun invoke(): ExperimentsComponent = DaggerExperimentsComponent.create()

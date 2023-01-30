@@ -35,7 +35,7 @@ public class DefaultVariantDataSource(
         }
     private val noSuchExperimentStateFlow: StateFlow<DataSourceResult<ExperimentVariant>> by lazy(PUBLICATION) {
         MutableStateFlow(
-            DataSourceResult.failure(FeatureToggleDataSourceError.ExperimentNotFound),
+            DataSourceResult.completeFailure(FeatureToggleDataSourceError.ExperimentNotFound),
         )
     }
 
@@ -45,7 +45,7 @@ public class DefaultVariantDataSource(
             val controlVariant = checkNotNull(experiment.variants[CONTROL_GROUP]) {
                 "No control variant on experiment $experimentKey"
             }
-            flowOf(DataSourceResult.success(controlVariant))
+            flowOf(DataSourceResult.completeSuccess(controlVariant))
         } else {
             noSuchExperimentStateFlow
         }

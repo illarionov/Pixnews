@@ -16,6 +16,7 @@
 
 plugins {
     id("ru.pixnews.kotlin-jvm-library")
+    `java-test-fixtures`
 }
 
 group = "ru.pixnews.foundation.featuretoggles.pub"

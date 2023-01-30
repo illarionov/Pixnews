@@ -19,12 +19,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
-import ru.pixnews.libraries.functional.NetworkRequestStatus
-import ru.pixnews.libraries.functional.NetworkRequestStatus.Companion
+import ru.pixnews.libraries.functional.RequestStatus
+import ru.pixnews.libraries.functional.RequestStatus.Companion
 
-public fun <T> Flow<T>.asNetworkRequestStatus(): Flow<NetworkRequestStatus<Throwable, T>> {
+public fun <T> Flow<T>.asRequestStatus(): Flow<RequestStatus<Throwable, T>> {
     return this
-        .map<T, NetworkRequestStatus<Throwable, T>>(Companion::success)
-        .onStart { emit(NetworkRequestStatus.Loading) }
-        .catch { emit(NetworkRequestStatus.failure(it)) }
+        .map<T, RequestStatus<Throwable, T>>(Companion::completeSuccess)
+        .onStart { emit(RequestStatus.Loading) }
+        .catch { emit(RequestStatus.completeFailure(it)) }
 }

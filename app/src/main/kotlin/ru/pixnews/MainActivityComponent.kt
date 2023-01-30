@@ -15,19 +15,25 @@
  */
 package ru.pixnews
 
-import com.squareup.anvil.annotations.MergeSubcomponent
+import com.squareup.anvil.annotations.ContributesSubcomponent
+import com.squareup.anvil.annotations.ContributesTo
 import dagger.BindsInstance
-import dagger.Subcomponent
 import ru.pixnews.foundation.di.scopes.ActivityScope
+import ru.pixnews.foundation.di.scopes.AppScope
 import ru.pixnews.foundation.di.scopes.SingleIn
 
 @SingleIn(ActivityScope::class)
-@MergeSubcomponent(scope = ActivityScope::class)
+@ContributesSubcomponent(scope = ActivityScope::class, parentScope = AppScope::class)
 interface MainActivityComponent {
     fun inject(activity: MainActivity)
 
-    @Subcomponent.Factory
-    fun interface Factory {
+    @ContributesSubcomponent.Factory
+    public fun interface Factory {
         fun create(@BindsInstance activity: MainActivity): MainActivityComponent
+    }
+
+    @ContributesTo(AppScope::class)
+    public fun interface FactoryProvider {
+        fun mainActivityComponentFactory(): Factory
     }
 }

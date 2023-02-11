@@ -104,10 +104,11 @@ public fun PixnewsTheme(
     useDynamicColor: Boolean = true,
     content: @Composable() () -> Unit,
 ) {
+    val context = LocalContext.current
     val dynamicColor = useDynamicColor && (appConfig.sdkInt >= Build.VERSION_CODES.S)
     val colors = when {
-        dynamicColor && useDarkTheme -> dynamicDarkColorScheme(LocalContext.current)
-        dynamicColor && !useDarkTheme -> dynamicLightColorScheme(LocalContext.current)
+        dynamicColor && useDarkTheme -> dynamicDarkColorScheme(context)
+        dynamicColor && !useDarkTheme -> dynamicLightColorScheme(context)
         useDarkTheme -> DarkColors
         else -> LightColors
     }

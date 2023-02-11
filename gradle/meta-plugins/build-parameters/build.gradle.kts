@@ -47,4 +47,10 @@ buildParameters {
             defaultValue.set(true)
         }
     }
+    group("testing") {
+        bool("verbose") {
+            description.set("Display test output in the console")
+            defaultValue.set(false)
+        }
+    }
 }

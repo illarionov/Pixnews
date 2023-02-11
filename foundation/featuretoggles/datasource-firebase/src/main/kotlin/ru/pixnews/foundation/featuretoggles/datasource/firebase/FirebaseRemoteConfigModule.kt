@@ -44,7 +44,7 @@ public object FirebaseRemoteConfigModule {
     @ExperimentFirebaseDefaults
     public fun provideExperimentDefaults(
         experiments: Set<@JvmSuppressWildcards Experiment>,
-        serializers: Map<@JvmSuppressWildcards ExperimentKey, ExperimentVariantSerializer>,
+        serializers: Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>,
     ): Map<String, String> {
         return experiments
             .groupingBy { experiment -> experiment.key.key }

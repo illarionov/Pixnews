@@ -29,7 +29,7 @@ import ru.pixnews.foundation.featuretoggles.pub.experimentKey
 import ru.pixnews.foundation.featuretoggles.pub.experimentVariantKey
 import ru.pixnews.foundation.featuretoggles.pub.serializers.BooleanVariantSerializer
 
-private const val DARK_MODE_EXPERIMENT_KEY: String = "dark_mode"
+private const val DARK_MODE_EXPERIMENT_KEY: String = "ui.dark_mode"
 private val controlGroup = DefaultExperimentVariant(
     key = CONTROL_GROUP,
     description = "Dark mode is not active",

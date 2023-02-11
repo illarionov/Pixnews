@@ -17,6 +17,10 @@ package ru.pixnews.foundation.featuretoggles.datasource.overrides
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import arrow.core.Either
+import arrow.core.flatMap
+import arrow.core.left
+import arrow.core.right
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
@@ -27,8 +31,8 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -42,13 +46,17 @@ import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.pub.FeatureToggleException
-import ru.pixnews.libraries.functional.NetworkRequestStatus.Complete
-import ru.pixnews.libraries.functional.NetworkRequestStatus.Loading
+import ru.pixnews.libraries.coroutines.asRequestStatus
+import ru.pixnews.libraries.functional.RequestStatus
+import ru.pixnews.libraries.functional.RequestStatus.Loading
+import ru.pixnews.libraries.functional.completeFailure
+import ru.pixnews.libraries.functional.mapComplete
 
+@Suppress("MaxLineLength")
 public class OverridesDataSource constructor(
     private val dataStore: DataStore<Overrides>,
-    private val serializers: Map<@JvmSuppressWildcards ExperimentKey, ExperimentVariantSerializer>,
-    ioDispatcherProvider: IoCoroutineDispatcherProvider,
+    private val serializers: Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>,
+    private val backgroundDispatcherProvider: IoCoroutineDispatcherProvider,
     logger: Logger,
 ) : FeatureToggleDataSource {
     private val log = logger.withTag(TAG)
@@ -56,17 +64,18 @@ public class OverridesDataSource constructor(
         log.e(throwable) { "Unhandled coroutine exception in $TAG" }
     }
     private val scope: CoroutineScope = CoroutineScope(
-        ioDispatcherProvider.get() +
+        backgroundDispatcherProvider.get() +
                 SupervisorJob() +
                 exceptionHandler +
                 CoroutineName("$TAG scope"),
     )
-    private val overridesFlow: StateFlow<DataSourceResult<Overrides>> = dataStore.data
-        .map { overrides ->
-            DataSourceResult.success(overrides) as DataSourceResult<Overrides>
-        }
-        .catch { err -> emit(DataSourceResult.failure(DataSourceError(err))) }
-        .stateIn(scope, started = SharingStarted.WhileSubscribed(), Loading)
+    private val overridesFlow: StateFlow<RequestStatus<Throwable, Overrides>> = dataStore.data
+        .asRequestStatus()
+        .stateIn(
+            scope = scope,
+            started = SharingStarted.Eagerly,
+            initialValue = Loading,
+        )
     private val initJob: Job = scope.launch {
         val result = overridesFlow
             .first { status -> status != Loading }
@@ -75,44 +84,66 @@ public class OverridesDataSource constructor(
 
     public constructor(
         context: Context,
-        serializers: Map<@JvmSuppressWildcards ExperimentKey, ExperimentVariantSerializer>,
+        serializers: Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>,
         ioDispatcherProvider: IoCoroutineDispatcherProvider,
         logger: Logger,
-    ) : this(context.applicationContext.overridesDataStore, serializers, ioDispatcherProvider, logger)
+    ) : this(
+        context.applicationContext.overridesDataStore,
+        serializers,
+        ioDispatcherProvider,
+        logger,
+    )
 
     override fun getAssignedVariant(experimentKey: ExperimentKey): Flow<DataSourceResult<ExperimentVariant>> {
-        return overridesFlow
-            .map { dataSourceResult ->
-                when (dataSourceResult) {
-                    is Loading -> Loading
-                    is Complete -> dataSourceResult.result.fold(
-                        ifLeft = { DataSourceResult.failure(it) },
-                        ifRight = { overrides -> deserializeVariant(overrides, experimentKey) },
-                    )
-                }
+        return overridesFlow.map { loadingOrComplete ->
+            loadingOrComplete.mapComplete { result: Either<Throwable, Overrides> ->
+                result
+                    .mapLeft(::DataSourceError)
+                    .flatMap { overrides ->
+                        deserializeVariant(overrides, experimentKey)
+                    }
             }
-    }
-
-    @Suppress("TooGenericExceptionCaught")
-    private fun deserializeVariant(
-        overrides: Overrides,
-        experimentKey: ExperimentKey,
-    ): DataSourceResult<ExperimentVariant> {
-        return try {
-            val payloadContainer = overrides.getTogglesOrDefault(experimentKey.key, null)
-            return if (payloadContainer != null) {
-                val variant = serializers[experimentKey]?.fromString(experimentKey, payloadContainer.payload)
-                    ?: throw FeatureToggleException("No serializer for experiment `$experimentKey` found")
-                DataSourceResult.success(variant)
-            } else {
-                DataSourceResult.failure<FeatureToggleDataSourceError>(ExperimentNotFound)
-            }
-        } catch (other: Throwable) {
-            DataSourceResult.failure(DataSourceError(other))
         }
     }
 
-    public suspend fun setAssistedVariant(experimentKey: ExperimentKey, variant: ExperimentVariant?) {
+    public fun getOverrides(): Flow<RequestStatus<Throwable, Map<ExperimentKey, ExperimentVariant>>> {
+        return overridesFlow.map { loadingOrComplete ->
+            loadingOrComplete.mapComplete { result: Either<Throwable, Overrides> ->
+                result.flatMap { overrides ->
+                    Either.catch { overrides.deserialize() }
+                }
+            }
+        }.flowOn(backgroundDispatcherProvider.get())
+    }
+
+    private fun deserializeVariant(
+        overrides: Overrides,
+        experimentKey: ExperimentKey,
+    ): Either<FeatureToggleDataSourceError, ExperimentVariant> {
+        val variant = overrides.getTogglesOrDefault(experimentKey.key, null)
+            ?: return ExperimentNotFound.completeFailure()
+        return try {
+            variant.deserialize(experimentKey).right()
+        } catch (toggleException: FeatureToggleException) {
+            DataSourceError(toggleException).left()
+        }
+    }
+
+    private fun Overrides.deserialize(): Map<ExperimentKey, ExperimentVariant> {
+        return this.togglesMap
+            .map { (key, value) ->
+                val experimentKey = ExperimentKey(key)
+                experimentKey to value.deserialize(experimentKey)
+            }
+            .toMap()
+    }
+
+    private fun VariantPayload.deserialize(experimentKey: ExperimentKey): ExperimentVariant {
+        return serializers[experimentKey]?.fromString(experimentKey, this.payload)
+            ?: throw FeatureToggleException("No serializer for experiment `$experimentKey` found")
+    }
+
+    public suspend fun setOverride(experimentKey: ExperimentKey, variant: ExperimentVariant?) {
         dataStore.updateData { overrides ->
             if (variant != null) {
                 val payload: String = serializers[experimentKey]?.toString(experimentKey, variant)

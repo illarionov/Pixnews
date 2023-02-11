@@ -35,6 +35,10 @@
   enabled: false
 - name: KDOC_NO_CONSTRUCTOR_PROPERTY
   enabled: false
+- name: KDOC_NO_EMPTY_TAGS
+  enabled: false
+- name: KDOC_WITHOUT_RETURN_TAG
+  enabled: false
 - name: LONG_LINE
   enabled: false
 - name: LONG_NUMERICAL_VALUES_SEPARATED
@@ -56,6 +60,10 @@
 - name: RUN_IN_SCRIPT
   enabled: false
 - name: TOO_LONG_FUNCTION
+  enabled: false
+- name: TOO_MANY_PARAMETERS
+  enabled: false
+- name: TOP_LEVEL_ORDER
   enabled: false
 - name: TRAILING_COMMA
   enabled: true
@@ -89,3 +97,6 @@
   enabled: false
 - name: WRONG_MULTIPLE_MODIFIERS_ORDER
   enabled: false # https://github.com/saveourtool/diktat/issues/1598
+# Clashes with "ArgumentListWrapping" and "Wrapping" from the Detekt rule set
+- name: WRONG_WHITESPACE
+  enabled: false

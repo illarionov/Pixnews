@@ -16,8 +16,7 @@
 
 plugins {
     id("ru.pixnews.android-library")
-    // https://github.com/square/anvil/issues/668
-    id("ru.pixnews.di-anvil-kapt")
+    id("ru.pixnews.di-anvil-factories")
 }
 
 pixnews {
@@ -40,4 +39,8 @@ dependencies {
     implementation(libs.firebase.analytics)
     api(libs.firebase.config)
     implementation(libs.kotlinx.coroutines.core)
+
+    testImplementation(project(":libraries:testing"))
+    testImplementation(testFixtures(project(":foundation:featuretoggles:pub")))
+    testImplementation(libs.mockk)
 }

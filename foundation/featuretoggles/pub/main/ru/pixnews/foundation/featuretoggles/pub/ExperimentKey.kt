@@ -18,11 +18,11 @@ package ru.pixnews.foundation.featuretoggles.pub
 @JvmInline
 public value class ExperimentKey(public val key: String) {
     init {
-        require(key.matches(KEY_FORMAT_REGEX))
+        require(key.matches(KEY_FORMAT_REGEX)) { "Experiment key `$key` should match experiment key format" }
     }
 
     private companion object {
-        private val KEY_FORMAT_REGEX: Regex = """[a-z0-9_-]+""".toRegex()
+        private val KEY_FORMAT_REGEX: Regex = """[a-z0-9._-]+""".toRegex()
     }
 }
 public fun String.experimentKey(): ExperimentKey = ExperimentKey(this)

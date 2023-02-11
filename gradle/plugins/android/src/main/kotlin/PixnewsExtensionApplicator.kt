@@ -25,4 +25,5 @@ internal fun PixnewsExtension.applyTo(project: Project, commonExtension: CommonE
     if (managedDevices.get()) {
         project.configureTestManagedDevices(commonExtension)
     }
+    project.configureUnitTesting(unitTestEngine.get(), commonExtension)
 }

@@ -17,18 +17,25 @@ package ru.pixnews.initializer
 
 import android.content.Context
 import androidx.startup.Initializer
-import ru.pixnews.app.PixnewsAppComponentHolder
+import ru.pixnews.app.PixnewsAppComponentImpl
+import ru.pixnews.di.root.PixnewsRootComponentHolder
 import ru.pixnews.foundation.initializers.AppInitializer
 import javax.inject.Inject
 
+/**
+ * [androidx.startup.Initializer] that sets up root app component and runs all
+ * local [ru.pixnews.foundation.initializers.Initializer]'s and [ru.pixnews.foundation.initializers.AsyncInitializer]'s
+ * added as multibindings to [PixnewsAppInitializerComponent]
+ */
 public class PixnewsAppInitializer : Initializer<Unit> {
     @Inject
     internal lateinit var appInitializer: AppInitializer
 
     override fun create(context: Context) {
-        val appComponent = PixnewsAppComponentHolder.getOrCreateAppComponent(context)
-        DaggerPixnewsAppInitializerComponent.factory().create(appComponent).inject(this)
-
+        val appComponent = PixnewsRootComponentHolder.init {
+            PixnewsAppComponentImpl(context)
+        }
+        PixnewsAppInitializerComponent(appComponent).inject(this)
         appInitializer.init()
     }
 

@@ -18,5 +18,5 @@ plugins {
 }
 
 dependencies {
-    implementation("org.gradle.kotlin:gradle-kotlin-dsl-plugins:4.0.0-rc-2")
+    implementation("org.gradle.kotlin:gradle-kotlin-dsl-plugins:4.0.6")
 }

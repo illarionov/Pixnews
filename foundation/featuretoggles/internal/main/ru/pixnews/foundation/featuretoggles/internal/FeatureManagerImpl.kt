@@ -24,7 +24,7 @@ import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.pub.FeatureManager
 import ru.pixnews.foundation.featuretoggles.pub.FeatureToggle
-import ru.pixnews.libraries.functional.NetworkRequestStatus.Complete
+import ru.pixnews.libraries.functional.RequestStatus.Complete
 import ru.pixnews.libraries.functional.Result
 import ru.pixnews.libraries.functional.onError
 import ru.pixnews.libraries.functional.onSuccess

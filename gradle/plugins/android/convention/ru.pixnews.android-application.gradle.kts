@@ -90,14 +90,9 @@ android {
     packagingOptions.resources.excludes += listOf(
         "**/*.properties",
         "*.properties",
-        "DebugProbesKt.bin",
-        "kotlin/**",
         "LICENSE.txt",
         "LICENSE_OFL",
         "LICENSE_UNICODE",
-        "META-INF/*.kotlin_module",
-        "META-INF/*.version",
-        "META-INF/androidx.*",
         "META-INF/CHANGES",
         "META-INF/LICENSE",
         "META-INF/LICENSE.txt",
@@ -107,6 +102,15 @@ android {
 }
 
 androidComponents {
+    onVariants(selector().withName("release")) { variant ->
+        variant.packaging.resources.excludes.addAll(
+            "DebugProbesKt.bin",
+            "META-INF/*.kotlin_module",
+            "META-INF/*.version",
+            "META-INF/androidx.*",
+            "kotlin/**",
+        )
+    }
     finalizeDsl {
         project.pixnews.applyTo(project, it)
     }

@@ -26,7 +26,7 @@ public value class ExperimentVariantKey(public val key: String) {
     }
 
     public companion object {
-        private val KEY_VARIANT_FORMAT_REGEX: Regex = """[a-z0-9_-]+""".toRegex()
+        private val KEY_VARIANT_FORMAT_REGEX: Regex = """[a-z0-9._-]+""".toRegex()
 
         /**
          * Unique name for the control group.

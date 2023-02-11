@@ -22,8 +22,11 @@ public interface ExperimentVariant {
      * Description of the variant to be shown in the debug panel. May be empty.
      */
     public val description: String
+        get() = ""
     public val weight: Int
+        get() = 0
     public val payload: String?
+        get() = null
 }
 
 public data class DefaultExperimentVariant(

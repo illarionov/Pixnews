@@ -17,7 +17,7 @@ package ru.pixnews.initializer
 
 import com.squareup.anvil.annotations.MergeComponent
 import dagger.Component
-import ru.pixnews.app.PixnewsAppComponent
+import ru.pixnews.di.root.components.PixnewsAppComponent
 import ru.pixnews.foundation.di.scopes.SingleIn
 import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
 
@@ -28,6 +28,12 @@ import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
 )
 interface PixnewsAppInitializerComponent {
     fun inject(initializer: PixnewsAppInitializer)
+
+    public companion object {
+        operator fun invoke(appComponent: PixnewsAppComponent): PixnewsAppInitializerComponent {
+            return DaggerPixnewsAppInitializerComponent.factory().create(appComponent)
+        }
+    }
 
     @Component.Factory
     fun interface Factory {

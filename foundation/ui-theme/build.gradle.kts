@@ -33,12 +33,16 @@ android {
 dependencies {
     api(project(":foundation:appconfig"))
     api(project(":foundation:featuretoggles:pub"))
+    api(project(":foundation:di"))
+    implementation(project(":libraries:android-utils"))
 
     api(libs.androidx.compose.ui.graphics)
     api(libs.androidx.compose.material3)
-    api(libs.dagger)
+    implementation(libs.android.material)
+    implementation(libs.androidx.compose.material.iconsExtended)
 
     implementation(libs.androidx.compose.ui.text.google.fonts)
+    implementation(libs.androidx.splashscreen)
 
     androidTestImplementation(libs.androidx.test.rules)
 }

@@ -19,23 +19,23 @@
     <!--Components-->
 
     <!--Bottom Sheets-->
-    <style name="ThemeOverlay.Pixradar.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+    <style name="ThemeOverlay.Pixnews.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowAnimationStyle">@style/Animation.Pixradar.BottomSheet.Modal</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Pixnews.BottomSheet.Modal</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="bottomSheetStyle">@style/Widget.Pixradar.BottomSheet.Modal</item>
+        <item name="bottomSheetStyle">@style/Widget.Pixnews.BottomSheet.Modal</item>
         <item name="android:navigationBarColor">?attr/colorSurface</item>
         <item name="android:navigationBarDividerColor" tools:ignore="NewApi">@android:color/transparent</item>
     </style>
 
-    <style name="Widget.Pixradar.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+    <style name="Widget.Pixnews.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
     </style>
 
     <!-- Popup menu -->
-    <style name="ThemeOverlay.Pixradar.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+    <style name="ThemeOverlay.Pixnews.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <style name="ThemeOverlay.Pixradar.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+    <style name="ThemeOverlay.Pixnews.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
 
 </resources>

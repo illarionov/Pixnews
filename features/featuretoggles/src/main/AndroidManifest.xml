@@ -23,7 +23,7 @@
             android:launchMode="singleTask"
             android:noHistory="true"
             android:taskAffinity="${applicationId}.featuretoggles"
-            android:theme="@style/Theme.Pixradar"
+            android:theme="@style/Theme.Pixnews"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

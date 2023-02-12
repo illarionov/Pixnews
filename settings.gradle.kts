@@ -22,7 +22,7 @@ plugins {
     id("ru.pixnews.settings")
 }
 
-rootProject.name = "PixRadar"
+rootProject.name = "Pixnews"
 
 include(":app")
 

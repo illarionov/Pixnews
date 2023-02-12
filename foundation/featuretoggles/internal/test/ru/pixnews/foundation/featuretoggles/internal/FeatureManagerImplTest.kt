@@ -52,8 +52,8 @@ class FeatureManagerImplTest {
 
     @Test
     fun `getVariant() should return correct variant from data source with higher priority`() = coroutinesExt.runTest {
-        val dataSourceLowPriority = FakeDataSource(HomeScreenGameCardTestExperiment.Variants.V1Group)
-        val dataMiddlePriority = FakeDataSource(HomeScreenGameCardTestExperiment.Variants.V2Group)
+        val dataSourceLowPriority = FakeDataSource(HomeScreenGameCardTestExperiment.Variant.V1Group)
+        val dataMiddlePriority = FakeDataSource(HomeScreenGameCardTestExperiment.Variant.V2Group)
         val dataSourceHighestPriority = FakeDataSource(ExperimentNotFound)
 
         val dataSources = listOf(
@@ -70,7 +70,7 @@ class FeatureManagerImplTest {
 
         val variant: ExperimentVariant = featureManager.getVariant(DarkModeTestExperiment)
 
-        variant shouldBe HomeScreenGameCardTestExperiment.Variants.V2Group
+        variant shouldBe HomeScreenGameCardTestExperiment.Variant.V2Group
     }
 
     @Test

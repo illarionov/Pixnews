@@ -13,15 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ru.pixnews.foundation.featuretoggles.di
 
-plugins {
-    id("ru.pixnews.kotlin-jvm-library")
-    `java-test-fixtures`
-}
+import dagger.MapKey
 
-group = "ru.pixnews.foundation.featuretoggles.pub"
-
-dependencies {
-    api(libs.dagger)
-    api(project(":libraries:functional"))
-}
+@MapKey
+public annotation class ExperimentVariantMapKey(val key: String)

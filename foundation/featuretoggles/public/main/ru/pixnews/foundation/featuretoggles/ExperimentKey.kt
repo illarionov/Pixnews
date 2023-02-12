@@ -13,27 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.featuretoggles.pub
+package ru.pixnews.foundation.featuretoggles
 
-public interface Experiment {
-    /**
-     * Unique key of the experiment.
-     */
-    public val key: ExperimentKey
+@JvmInline
+public value class ExperimentKey(public val stringValue: String) {
+    init {
+        require(stringValue.matches(KEY_FORMAT_REGEX)) {
+            "Experiment key `$stringValue` should match experiment key format"
+        }
+    }
 
-    /**
-     * Name of the experiment to be shown in the debug panel. May be empty.
-     */
-    public val name: String
+    override fun toString(): String = stringValue
 
-    /**
-     * Description of the experiment to be shown in the debug panel. May be empty.
-     */
-    public val description: String
-
-    /**
-     * Variants of the experiment.
-     * Should contain at least one variant.
-     */
-    public val variants: Map<ExperimentVariantKey, ExperimentVariant>
+    private companion object {
+        private val KEY_FORMAT_REGEX: Regex = """[a-z0-9._-]+""".toRegex()
+    }
 }
+public fun String.experimentKey(): ExperimentKey = ExperimentKey(this)

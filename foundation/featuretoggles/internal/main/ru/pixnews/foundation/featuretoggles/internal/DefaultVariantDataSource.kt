@@ -19,10 +19,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOf
-import ru.pixnews.foundation.featuretoggles.pub.Experiment
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantKey.Companion.CONTROL_GROUP
+import ru.pixnews.foundation.featuretoggles.Experiment
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariant
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey.Companion.CONTROL_GROUP
 import kotlin.LazyThreadSafetyMode.PUBLICATION
 
 public class DefaultVariantDataSource(

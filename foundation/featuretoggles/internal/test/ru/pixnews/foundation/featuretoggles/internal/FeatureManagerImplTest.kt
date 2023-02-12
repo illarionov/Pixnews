@@ -20,10 +20,10 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
+import ru.pixnews.foundation.featuretoggles.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.fixtures.DarkModeTestExperiment
 import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExperiment
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
 import ru.pixnews.libraries.testing.MainCoroutineExtension
 import ru.pixnews.libraries.testing.TestingLoggers
 

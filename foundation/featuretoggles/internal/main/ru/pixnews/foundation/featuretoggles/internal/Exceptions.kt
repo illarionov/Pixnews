@@ -15,7 +15,7 @@
  */
 package ru.pixnews.foundation.featuretoggles.internal
 
-import ru.pixnews.foundation.featuretoggles.pub.FeatureToggleException
+import ru.pixnews.foundation.featuretoggles.FeatureToggleException
 
 public class DuplicateExperimentException(message: String) : FeatureToggleException(message)
 

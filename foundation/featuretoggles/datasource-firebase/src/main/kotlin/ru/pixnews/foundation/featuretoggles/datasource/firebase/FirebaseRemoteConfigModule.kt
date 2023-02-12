@@ -25,11 +25,11 @@ import dagger.Provides
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.scopes.AppScope
 import ru.pixnews.foundation.di.scopes.SingleIn
+import ru.pixnews.foundation.featuretoggles.Experiment
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.internal.DuplicateExperimentException
-import ru.pixnews.foundation.featuretoggles.pub.Experiment
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantSerializer
 import javax.inject.Qualifier
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes

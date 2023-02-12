@@ -34,7 +34,7 @@ import ru.pixnews.features.featuretoggles.model.FeatureTogglesScreenState.Loadin
 import ru.pixnews.features.featuretoggles.model.FeatureTogglesScreenState.PermanentError
 import ru.pixnews.features.featuretoggles.model.FeatureTogglesScreenState.Populated
 import ru.pixnews.features.featuretoggles.model.VariantUiModel
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
 
 @Suppress("ModifierMissing")
 @Composable

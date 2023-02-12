@@ -13,6 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.featuretoggles.pub.di
+package ru.pixnews.foundation.featuretoggles
 
-public abstract class ExperimentScope private constructor()
+public interface FeatureToggle<out E : Experiment> {
+    public val experiment: E
+
+    public suspend fun <V : ExperimentVariant> getVariant(): V
+}
+
+public suspend fun FeatureToggle<*>.getVariantKey(): ExperimentVariantKey = getVariant<ExperimentVariant>().key
+
+public suspend fun FeatureToggle<*>.isEnabled(): Boolean = getVariant<ExperimentVariant>().key.isControl()

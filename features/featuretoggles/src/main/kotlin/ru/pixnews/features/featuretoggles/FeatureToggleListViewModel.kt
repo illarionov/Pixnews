@@ -32,12 +32,12 @@ import ru.pixnews.features.featuretoggles.model.PermanentErrorMessage
 import ru.pixnews.features.featuretoggles.model.VariantUiModel
 import ru.pixnews.features.featuretoggles.model.toExperimentVariant
 import ru.pixnews.features.featuretoggles.model.toUiModel
+import ru.pixnews.foundation.featuretoggles.Experiment
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariant
+import ru.pixnews.foundation.featuretoggles.FeatureManager
+import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.featuretoggles.datasource.overrides.OverridesDataSource
-import ru.pixnews.foundation.featuretoggles.pub.Experiment
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
-import ru.pixnews.foundation.featuretoggles.pub.FeatureManager
-import ru.pixnews.foundation.featuretoggles.pub.FeatureToggle
 import ru.pixnews.libraries.functional.RequestStatus.Complete
 import ru.pixnews.libraries.functional.RequestStatus.Loading
 

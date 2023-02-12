@@ -13,9 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.featuretoggles.pub
+package ru.pixnews.foundation.featuretoggles
 
-public open class FeatureToggleException @JvmOverloads public constructor(
-    message: String? = null,
-    cause: Throwable? = null,
-) : RuntimeException(message, cause)
+public interface Experiment {
+    /**
+     * Unique key of the experiment.
+     */
+    public val key: ExperimentKey
+
+    /**
+     * Name of the experiment to be shown in the debug panel. May be empty.
+     */
+    public val name: String
+
+    /**
+     * Description of the experiment to be shown in the debug panel. May be empty.
+     */
+    public val description: String
+
+    /**
+     * Variants of the experiment.
+     * Should contain at least one variant.
+     */
+    public val variants: Map<ExperimentVariantKey, ExperimentVariant>
+}

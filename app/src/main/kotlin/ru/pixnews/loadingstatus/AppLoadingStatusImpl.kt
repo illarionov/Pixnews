@@ -22,7 +22,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import ru.pixnews.foundation.di.scopes.AppScope
 import ru.pixnews.foundation.dispatchers.MainCoroutineDispatcherProvider
-import ru.pixnews.foundation.featuretoggles.pub.FeatureManager
+import ru.pixnews.foundation.featuretoggles.FeatureManager
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)

@@ -19,9 +19,9 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import ru.pixnews.foundation.di.scopes.ActivityScope
-import ru.pixnews.foundation.featuretoggles.pub.FeatureManager
-import ru.pixnews.foundation.featuretoggles.pub.FeatureToggle
-import ru.pixnews.foundation.featuretoggles.pub.getFeatureToggle
+import ru.pixnews.foundation.featuretoggles.FeatureManager
+import ru.pixnews.foundation.featuretoggles.FeatureToggle
+import ru.pixnews.foundation.featuretoggles.getFeatureToggle
 import ru.pixnews.foundation.ui.experiments.DarkModeExperiment
 
 @Module

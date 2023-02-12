@@ -32,7 +32,7 @@ android {
 
 dependencies {
     api(project(":foundation:dispatchers"))
-    api(project(":foundation:featuretoggles:pub"))
+    api(project(":foundation:featuretoggles:public"))
     api(project(":foundation:featuretoggles:internal"))
     api(project(":libraries:coroutines"))
 
@@ -40,6 +40,6 @@ dependencies {
     implementation(libs.androidx.datastore)
 
     testImplementation(project(":libraries:testing"))
-    testImplementation(testFixtures(project(":foundation:featuretoggles:pub")))
+    testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
     testImplementation(libs.turbine)
 }

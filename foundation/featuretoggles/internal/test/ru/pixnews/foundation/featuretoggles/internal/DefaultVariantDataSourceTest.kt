@@ -24,17 +24,17 @@ import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.first
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
+import ru.pixnews.foundation.featuretoggles.DefaultExperimentVariant
+import ru.pixnews.foundation.featuretoggles.Experiment
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariant
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey
+import ru.pixnews.foundation.featuretoggles.experimentKey
+import ru.pixnews.foundation.featuretoggles.experimentVariantKey
 import ru.pixnews.foundation.featuretoggles.fixtures.DarkModeTestExperiment
 import ru.pixnews.foundation.featuretoggles.fixtures.DtfIntegrationTestExperiment
 import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExperiment
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
-import ru.pixnews.foundation.featuretoggles.pub.DefaultExperimentVariant
-import ru.pixnews.foundation.featuretoggles.pub.Experiment
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantKey
-import ru.pixnews.foundation.featuretoggles.pub.experimentKey
-import ru.pixnews.foundation.featuretoggles.pub.experimentVariantKey
 import ru.pixnews.libraries.functional.RequestStatus.Complete
 import ru.pixnews.libraries.testing.MainCoroutineExtension
 

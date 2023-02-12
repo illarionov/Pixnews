@@ -26,16 +26,16 @@ import ru.pixnews.foundation.di.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.scopes.AppScope
 import ru.pixnews.foundation.di.scopes.SingleIn
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
+import ru.pixnews.foundation.featuretoggles.Experiment
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
+import ru.pixnews.foundation.featuretoggles.FeatureManager
 import ru.pixnews.foundation.featuretoggles.datasource.firebase.FirebaseDataSource
 import ru.pixnews.foundation.featuretoggles.datasource.overrides.OverridesDataSource
 import ru.pixnews.foundation.featuretoggles.internal.DataSourceWithPriority
 import ru.pixnews.foundation.featuretoggles.internal.DefaultVariantDataSource
 import ru.pixnews.foundation.featuretoggles.internal.FeatureManagerImpl
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSource
-import ru.pixnews.foundation.featuretoggles.pub.Experiment
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantSerializer
-import ru.pixnews.foundation.featuretoggles.pub.FeatureManager
 import javax.inject.Named
 
 @ContributesTo(AppScope::class)

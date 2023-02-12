@@ -13,11 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.featuretoggles.pub.serializers
+package ru.pixnews.foundation.featuretoggles.di
 
-import ru.pixnews.foundation.featuretoggles.pub.FeatureToggleException
-
-public open class SerializationException @JvmOverloads public constructor(
-    message: String? = null,
-    cause: Throwable? = null,
-) : FeatureToggleException(message, cause)
+public abstract class ExperimentScope private constructor()

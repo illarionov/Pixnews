@@ -17,7 +17,7 @@ package ru.pixnews.foundation.featuretoggles.datasource.overrides
 
 import androidx.datastore.core.Serializer
 import com.google.protobuf.InvalidProtocolBufferException
-import ru.pixnews.foundation.featuretoggles.pub.serializers.SerializationException
+import ru.pixnews.foundation.featuretoggles.serializers.SerializationException
 import java.io.InputStream
 import java.io.OutputStream
 

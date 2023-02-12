@@ -1,4 +1,6 @@
-# PixRadar
+# Pixnews
+
+Pixnews.ru
 
 Календарь выхода игр под Android
 

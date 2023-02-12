@@ -16,7 +16,7 @@
 -->
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.Pixnews.Splash" parent="NightAdjusted.Theme.Pixnews.Splash">
-        <item name="postSplashScreenTheme">@style/Theme.Pixradar</item>
+        <item name="postSplashScreenTheme">@style/Theme.Pixnews</item>
     </style>
 
     <style name="NightAdjusted.Theme.Pixnews.Splash" parent="Theme.SplashScreen">
@@ -24,9 +24,9 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
     </style>
 
-    <style name="Theme.Pixradar" parent="Base.Theme.Pixradar"/>
+    <style name="Theme.Pixnews" parent="Base.Theme.Pixnews"/>
 
-    <style name="Base.Theme.Pixradar" parent="Base.Theme.MaterialThemeBuilder">
+    <style name="Base.Theme.Pixnews" parent="Base.Theme.MaterialThemeBuilder">
         <item name="colorPrimary">@color/blue_500</item>
         <item name="colorPrimaryVariant">@color/blue_700</item>
         <item name="colorSecondary">@color/yellow_500</item>
@@ -47,28 +47,28 @@
         <item name="colorOnError">@color/white_50</item>
 
         <!--Material type attributes-->
-        <item name="textAppearanceHeadline1">@style/TextAppearance.Pixradar.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.Pixradar.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/TextAppearance.Pixradar.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/TextAppearance.Pixradar.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/TextAppearance.Pixradar.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/TextAppearance.Pixradar.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.Pixradar.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/TextAppearance.Pixradar.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.Pixradar.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.Pixradar.Body2</item>
-        <item name="textAppearanceButton">@style/TextAppearance.Pixradar.Button</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.Pixradar.Caption</item>
-        <item name="textAppearanceOverline">@style/TextAppearance.Pixradar.Overline</item>
+        <item name="textAppearanceHeadline1">@style/TextAppearance.Pixnews.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.Pixnews.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.Pixnews.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.Pixnews.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.Pixnews.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.Pixnews.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.Pixnews.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.Pixnews.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.Pixnews.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.Pixnews.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.Pixnews.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.Pixnews.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.Pixnews.Overline</item>
 
         <!--Material shape attributes-->
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.PixradarTheme.SmallComponent</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Pixradar.MediumComponent</item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Pixradar.LargeComponent</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.PixnewsTheme.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Pixnews.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Pixnews.LargeComponent</item>
 
         <!--Component styles-->
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert</item>
-        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.Pixradar.BottomSheetDialog</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.Pixnews.BottomSheetDialog</item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
     </style>
 

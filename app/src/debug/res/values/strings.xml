@@ -15,5 +15,5 @@
     limitations under the License.
 -->
 <resources>
-    <string name="app_name" translatable="false">Pixradar debug</string>
+    <string name="app_name" translatable="false">Pixnews debug</string>
 </resources>

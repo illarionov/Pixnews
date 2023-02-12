@@ -47,7 +47,7 @@ public object FirebaseRemoteConfigModule {
         serializers: Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>,
     ): Map<String, String> {
         return experiments
-            .groupingBy { experiment -> experiment.key.key }
+            .groupingBy { experiment -> experiment.key.stringValue }
             .reduce { key, _, element ->
                 throw DuplicateExperimentException("Duplicate key '$key' encountered for element '$element'")
             }

@@ -120,7 +120,7 @@ public class OverridesDataSource constructor(
         overrides: Overrides,
         experimentKey: ExperimentKey,
     ): Either<FeatureToggleDataSourceError, ExperimentVariant> {
-        val variant = overrides.getTogglesOrDefault(experimentKey.key, null)
+        val variant = overrides.getTogglesOrDefault(experimentKey.stringValue, null)
             ?: return ExperimentNotFound.completeFailure()
         return try {
             variant.deserialize(experimentKey).right()
@@ -149,11 +149,11 @@ public class OverridesDataSource constructor(
                 val payload: String = serializers[experimentKey]?.toString(experimentKey, variant)
                     ?: throw FeatureToggleException("No serializer for experiment `$experimentKey` found")
                 overrides.toBuilder()
-                    .putToggles(experimentKey.key, VariantPayload.newBuilder().setPayload(payload).build())
+                    .putToggles(experimentKey.stringValue, VariantPayload.newBuilder().setPayload(payload).build())
                     .build()
             } else {
                 overrides.toBuilder()
-                    .removeToggles(experimentKey.key)
+                    .removeToggles(experimentKey.stringValue)
                     .build()
             }
         }

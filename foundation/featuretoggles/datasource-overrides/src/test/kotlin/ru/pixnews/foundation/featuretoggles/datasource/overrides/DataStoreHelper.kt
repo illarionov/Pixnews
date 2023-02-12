@@ -39,7 +39,7 @@ internal fun populateDataStoreFile(
             .map { (key, variant) ->
                 val payloadString = serializers[key]?.toString(key, variant)
                     ?: throw FeatureToggleException("No serializer for experiment `$key` found")
-                key.key to VariantPayload.newBuilder().setPayload(payloadString).build()
+                key.stringValue to VariantPayload.newBuilder().setPayload(payloadString).build()
             }
             .toMap()
         data.toBuilder().putAllToggles(toggles).build()

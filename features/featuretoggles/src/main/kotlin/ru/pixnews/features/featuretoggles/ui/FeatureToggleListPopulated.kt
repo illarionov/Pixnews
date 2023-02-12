@@ -81,7 +81,7 @@ internal fun FeatureToggleListPopulated(
             contentPadding = paddingValues,
         ) {
             for (toggle in toggles) {
-                item(key = toggle.key.key, contentType = toggle.type) {
+                item(key = toggle.key.stringValue, contentType = toggle.type) {
                     ToggleListItem(
                         toggle = toggle,
                         onResetExperimentOverrideClicked = { onResetExperimentOverrideClicked(toggle.key) },
@@ -119,7 +119,7 @@ internal fun ToggleListItem(
                 .padding(horizontal = 16.dp, vertical = 12.dp),
         ) {
             Text(
-                text = toggle.key.key,
+                text = toggle.key.stringValue,
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
@@ -168,7 +168,7 @@ private fun GroupSelectionRow(
             GroupSelectionDropdown(
                 modifier = Modifier
                     .width(200.dp),
-                selectedKey = toggle.activeVariant.key,
+                selectedKey = toggle.activeVariant.stringValue,
                 variants = toggle.variants,
                 onVariantSelected = onExperimentVariantSelected,
             )
@@ -245,7 +245,7 @@ private fun VariantDropdownMenu(
                     verticalArrangement = Arrangement.Center,
                 ) {
                     Text(
-                        text = variant.key.key,
+                        text = variant.key.stringValue,
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurface,
                         maxLines = 1,

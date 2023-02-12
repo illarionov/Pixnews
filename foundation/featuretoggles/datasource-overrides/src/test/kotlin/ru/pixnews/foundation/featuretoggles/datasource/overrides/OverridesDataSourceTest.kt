@@ -145,7 +145,7 @@ class OverridesDataSourceTest {
             testScope = coroutinesExt.testScope,
             initialOverrides = mapOf(
                 DarkModeTestExperiment.key to DarkModeTestExperiment.activeGroup,
-                HomeScreenGameCardTestExperiment.key to HomeScreenGameCardTestExperiment.Variants.V3Group,
+                HomeScreenGameCardTestExperiment.key to HomeScreenGameCardTestExperiment.Variant.V3Group,
             ),
             populateDataStoreFileSerializers = mapOf(
                 DarkModeTestExperiment.key to DarkModeTestExperiment.Serializer,
@@ -175,7 +175,7 @@ class OverridesDataSourceTest {
                 it.shouldBeLeft().should(beInstanceOf<DataSourceError>())
             },
             {
-                it shouldBeRight HomeScreenGameCardTestExperiment.Variants.V3Group
+                it shouldBeRight HomeScreenGameCardTestExperiment.Variant.V3Group
             },
         )
     }
@@ -187,7 +187,7 @@ class OverridesDataSourceTest {
             testScope = coroutinesExt.testScope,
             initialOverrides = mapOf(
                 DarkModeTestExperiment.key to DarkModeTestExperiment.activeGroup,
-                HomeScreenGameCardTestExperiment.key to HomeScreenGameCardTestExperiment.Variants.V3Group,
+                HomeScreenGameCardTestExperiment.key to HomeScreenGameCardTestExperiment.Variant.V3Group,
             ),
             populateDataStoreFileSerializers = mapOf(
                 DarkModeTestExperiment.key to DarkModeTestExperiment.Serializer,
@@ -251,7 +251,7 @@ class OverridesDataSourceTest {
 
             dataSource.setOverride(
                 HomeScreenGameCardTestExperiment.key,
-                HomeScreenGameCardTestExperiment.Variants.V2Group,
+                HomeScreenGameCardTestExperiment.Variant.V2Group,
             )
 
             val loadedVariants = listOf(
@@ -266,7 +266,7 @@ class OverridesDataSourceTest {
 
             loadedVariants.shouldMatchEach(
                 {
-                    it shouldBeRight HomeScreenGameCardTestExperiment.Variants.V2Group
+                    it shouldBeRight HomeScreenGameCardTestExperiment.Variant.V2Group
                 },
                 {
                     it shouldBeRight DarkModeTestExperiment.activeGroup
@@ -416,7 +416,7 @@ class OverridesDataSourceTest {
     inner class GetOverridesTests {
         private val initialOverrides = mapOf(
             DarkModeTestExperiment.key to DarkModeTestExperiment.activeGroup,
-            HomeScreenGameCardTestExperiment.key to HomeScreenGameCardTestExperiment.Variants.V2Group,
+            HomeScreenGameCardTestExperiment.key to HomeScreenGameCardTestExperiment.Variant.V2Group,
         )
 
         @BeforeEach

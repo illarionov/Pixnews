@@ -16,7 +16,6 @@
 package ru.pixnews.foundation.ui.experiments
 
 import com.squareup.anvil.annotations.ContributesMultibinding
-import ru.pixnews.foundation.featuretoggles.pub.DefaultExperimentVariant
 import ru.pixnews.foundation.featuretoggles.pub.Experiment
 import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
@@ -29,33 +28,30 @@ import ru.pixnews.foundation.featuretoggles.pub.experimentKey
 import ru.pixnews.foundation.featuretoggles.pub.experimentVariantKey
 import ru.pixnews.foundation.featuretoggles.pub.serializers.BooleanVariantSerializer
 
-private const val DARK_MODE_EXPERIMENT_KEY: String = "ui.dark_mode"
-private val controlGroup = DefaultExperimentVariant(
-    key = CONTROL_GROUP,
-    description = "Dark mode is not active",
-    weight = 1,
-)
-private val activeGroup = DefaultExperimentVariant(
-    key = "active".experimentVariantKey(),
-    description = "Dark mode is active",
-    weight = 0,
-)
-
 @ContributesMultibinding(
     scope = ExperimentScope::class,
     boundType = Experiment::class,
 )
 public object DarkModeExperiment : Experiment {
-    override val key: ExperimentKey = DARK_MODE_EXPERIMENT_KEY.experimentKey()
+    override val key: ExperimentKey = "ui.dark_mode".experimentKey()
     override val name: String = "Dark mode"
     override val description: String = "Feature flag for dark mode development"
-    override val variants: Map<ExperimentVariantKey, DefaultExperimentVariant> = listOf(controlGroup, activeGroup)
+    override val variants: Map<ExperimentVariantKey, Variant> = listOf(Variant.Control, Variant.Active)
         .associateBy(ExperimentVariant::key)
-}
 
-@ContributesMultibinding(
-    scope = ExperimentScope::class,
-    boundType = ExperimentVariantSerializer::class,
-)
-@ExperimentVariantMapKey(DARK_MODE_EXPERIMENT_KEY)
-public object DarkModeExperimentSerializer : BooleanVariantSerializer(controlGroup, activeGroup)
+    @ContributesMultibinding(scope = ExperimentScope::class, boundType = ExperimentVariantSerializer::class)
+    @ExperimentVariantMapKey("ui.dark_mode")
+    public object Serializer : BooleanVariantSerializer(Variant.Control, Variant.Active)
+
+    public sealed class Variant : ExperimentVariant {
+        public object Control : Variant() {
+            override val key: ExperimentVariantKey = CONTROL_GROUP
+            override val description: String = "Dark mode is not active"
+        }
+
+        public object Active : Variant() {
+            override val key: ExperimentVariantKey = "active".experimentVariantKey()
+            override val description: String = "Dark mode is active"
+        }
+    }
+}

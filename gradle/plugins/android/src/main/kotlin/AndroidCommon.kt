@@ -30,11 +30,11 @@ internal fun Project.configureCommonAndroid(
     commonExtension: CommonExtension<*, *, *, *>,
 ) {
     commonExtension.apply {
-        compileSdk = 33
+        compileSdk = versionCatalog.findVersion("compileSdk").get().displayName.toInt()
         namespace = "ru.pixnews"
 
         defaultConfig {
-            minSdk = 24
+            minSdk = versionCatalog.findVersion("minSdk").get().displayName.toInt()
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
             resourceConfigurations.addAll(listOf("en", "ru"))

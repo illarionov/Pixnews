@@ -40,7 +40,7 @@ android {
     configureCommonAndroid(this)
 
     defaultConfig {
-        targetSdk = 33
+        targetSdk = versionCatalog.findVersion("targetSdk").get().displayName.toInt()
     }
 
     val releaseKeystorePropertiesFilePath = buildParameters.signing.release_keystore_properties_file

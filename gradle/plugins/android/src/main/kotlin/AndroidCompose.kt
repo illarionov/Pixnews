@@ -30,7 +30,7 @@ internal fun Project.configureCompose(
         @Suppress("MagicNumber")
         if (this is LibraryExtension) {
             // https://issuetracker.google.com/u/1/issues/267458965
-            defaultConfig.targetSdk = 33
+            defaultConfig.targetSdk = versionCatalog.findVersion("targetSdk").get().displayName.toInt()
         }
         buildFeatures {
             compose = true

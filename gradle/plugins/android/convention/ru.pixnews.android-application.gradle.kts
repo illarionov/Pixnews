@@ -89,6 +89,7 @@ android {
 
     packagingOptions.resources.excludes += listOf(
         "**/*.properties",
+        "**/*.proto",
         "*.properties",
         "LICENSE.txt",
         "LICENSE_OFL",

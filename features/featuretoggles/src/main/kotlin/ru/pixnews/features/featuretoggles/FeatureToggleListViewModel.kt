@@ -62,7 +62,7 @@ internal class FeatureToggleListViewModel(
         )
     private val togglesMap: Map<ExperimentKey, FeatureToggle<Experiment>> = featureManager.featureToggles.values
         .toList()
-        .sortedWith(compareBy({ it.experiment.key.key }, { it.experiment.name }, { it.experiment.description }))
+        .sortedWith(compareBy({ it.experiment.key.stringValue }, { it.experiment.name }, { it.experiment.description }))
         .associateBy { it.experiment.key }
 
     private suspend fun getScreenContent(

@@ -61,7 +61,7 @@ public object HomeScreenGameCardTestExperiment : Experiment {
     override val variants: Map<ExperimentVariantKey, Variant> = listOf(ControlGroup, V1Group, V2Group, V3Group, V4Group)
         .associateBy(ExperimentVariant::key)
 
-    public object Serializer : StringVariantSerializer(variants.mapKeys { it.key.key })
+    public object Serializer : StringVariantSerializer(variants.mapKeys { it.key.stringValue })
     public sealed class Variant : ExperimentVariant {
         public object ControlGroup : Variant() {
             override val key: ExperimentVariantKey = CONTROL_GROUP

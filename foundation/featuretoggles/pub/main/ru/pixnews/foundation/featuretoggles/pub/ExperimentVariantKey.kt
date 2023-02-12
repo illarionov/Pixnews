@@ -20,10 +20,12 @@ package ru.pixnews.foundation.featuretoggles.pub
  * Usually the name for the group of users who will get access to this variant.
  */
 @JvmInline
-public value class ExperimentVariantKey(public val key: String) {
+public value class ExperimentVariantKey(public val stringValue: String) {
     init {
-        require(key.matches(KEY_VARIANT_FORMAT_REGEX))
+        require(stringValue.matches(KEY_VARIANT_FORMAT_REGEX))
     }
+
+    override fun toString(): String = stringValue
 
     public companion object {
         private val KEY_VARIANT_FORMAT_REGEX: Regex = """[a-z0-9._-]+""".toRegex()

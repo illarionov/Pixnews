@@ -95,7 +95,7 @@ public class FirebaseDataSource(
                 emit(Loading)
                 initFirebaseJob.join()
             }
-            val value = remoteConfig.getValue(experimentKey.key)
+            val value = remoteConfig.getValue(experimentKey.stringValue)
             if (value.source != FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
                 val serialized = value.asString()
                 val activeVariant = serializers[experimentKey]?.fromString(experimentKey, serialized)

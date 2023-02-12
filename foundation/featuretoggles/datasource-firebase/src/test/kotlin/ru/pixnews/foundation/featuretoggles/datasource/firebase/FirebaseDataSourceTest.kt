@@ -91,7 +91,9 @@ class FirebaseDataSourceTest {
 
     @Test
     fun `getAssignedVariant() should return valid remote config variant`() = coroutinesExt.runTest {
-        every { remoteConfig.getValue(DarkModeTestExperiment.key.key) } returns FakeFirebaseRemoteConfigValue("true")
+        every {
+            remoteConfig.getValue(DarkModeTestExperiment.key.stringValue)
+        } returns FakeFirebaseRemoteConfigValue("true")
 
         val variant: Either<FeatureToggleDataSourceError, ExperimentVariant> = loadVariant(DarkModeTestExperiment.key)
 
@@ -102,7 +104,7 @@ class FirebaseDataSourceTest {
     @DisplayName("getAssignedVariant() should return ExperimentNotFound for an experiment not created on server")
     fun getAssignedVariantNoExperiment() = coroutinesExt.runTest {
         every {
-            remoteConfig.getValue(HomeScreenGameCardTestExperiment.key.key)
+            remoteConfig.getValue(HomeScreenGameCardTestExperiment.key.stringValue)
         } returns FakeFirebaseRemoteConfigValue("", source = FirebaseRemoteConfig.VALUE_SOURCE_STATIC)
 
         val variant = loadVariant(HomeScreenGameCardTestExperiment.key)
@@ -113,7 +115,7 @@ class FirebaseDataSourceTest {
     @Test
     fun `getAssignedVariant() should return DataSourceError on deserialization error`() = coroutinesExt.runTest {
         every {
-            remoteConfig.getValue(DarkModeTestExperiment.key.key)
+            remoteConfig.getValue(DarkModeTestExperiment.key.stringValue)
         } returns FakeFirebaseRemoteConfigValue("Value in unknown format")
 
         val variant = loadVariant(HomeScreenGameCardTestExperiment.key)
@@ -124,7 +126,7 @@ class FirebaseDataSourceTest {
     @Test
     fun `getAssignedVariant() should return DataSourceError on unknown experiment`() = coroutinesExt.runTest {
         every {
-            remoteConfig.getValue(DtfIntegrationTestExperiment.key.key)
+            remoteConfig.getValue(DtfIntegrationTestExperiment.key.stringValue)
         } returns FakeFirebaseRemoteConfigValue("true")
 
         val variant = loadVariant(DtfIntegrationTestExperiment.key)

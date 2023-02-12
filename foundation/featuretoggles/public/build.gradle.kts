@@ -13,25 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.featuretoggles.pub
 
-public interface ExperimentVariant {
-    public val key: ExperimentVariantKey
-
-    /**
-     * Description of the variant to be shown in the debug panel. May be empty.
-     */
-    public val description: String
-        get() = ""
-    public val weight: Int
-        get() = 0
-    public val payload: String?
-        get() = null
+plugins {
+    id("ru.pixnews.kotlin-jvm-library")
+    `java-test-fixtures`
 }
 
-public data class DefaultExperimentVariant(
-    override val key: ExperimentVariantKey,
-    override val description: String = "",
-    override val weight: Int = 1,
-    override val payload: String? = null,
-) : ExperimentVariant
+group = "ru.pixnews.foundation.featuretoggles"
+
+dependencies {
+    api(libs.dagger)
+    api(project(":libraries:functional"))
+}

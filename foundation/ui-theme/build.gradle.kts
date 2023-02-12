@@ -32,7 +32,7 @@ android {
 
 dependencies {
     api(project(":foundation:appconfig"))
-    api(project(":foundation:featuretoggles:pub"))
+    api(project(":foundation:featuretoggles:public"))
     api(project(":foundation:di"))
     implementation(project(":libraries:android-utils"))
 

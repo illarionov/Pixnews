@@ -59,7 +59,7 @@ import ru.pixnews.features.featuretoggles.FeatureTogglePreviewParameterProvider
 import ru.pixnews.features.featuretoggles.R.string
 import ru.pixnews.features.featuretoggles.model.FeatureToggleUiModel
 import ru.pixnews.features.featuretoggles.model.VariantUiModel
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.ui.icon.PixnewsIcons
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 

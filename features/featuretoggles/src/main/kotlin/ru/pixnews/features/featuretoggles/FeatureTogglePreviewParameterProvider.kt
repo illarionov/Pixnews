@@ -26,9 +26,9 @@ import ru.pixnews.features.featuretoggles.model.FeatureToggleState.ACTIVE
 import ru.pixnews.features.featuretoggles.model.FeatureToggleState.UPDATING
 import ru.pixnews.features.featuretoggles.model.FeatureToggleUiModel
 import ru.pixnews.features.featuretoggles.model.VariantUiModel
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantKey.Companion.CONTROL_GROUP
-import ru.pixnews.foundation.featuretoggles.pub.experimentKey
-import ru.pixnews.foundation.featuretoggles.pub.experimentVariantKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey.Companion.CONTROL_GROUP
+import ru.pixnews.foundation.featuretoggles.experimentKey
+import ru.pixnews.foundation.featuretoggles.experimentVariantKey
 
 private const val FEATURE_TOGGLE_TYPE_TOGGLE = "Toggle"
 

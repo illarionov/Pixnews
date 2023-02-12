@@ -31,15 +31,15 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariant
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
+import ru.pixnews.foundation.featuretoggles.FeatureToggleException
 import ru.pixnews.foundation.featuretoggles.internal.DataSourceResult
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSource
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.DataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantSerializer
-import ru.pixnews.foundation.featuretoggles.pub.FeatureToggleException
 import ru.pixnews.libraries.functional.RequestStatus.Loading
 import kotlin.time.Duration.Companion.seconds
 

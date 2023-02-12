@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.featuretoggles.pub
+package ru.pixnews.foundation.featuretoggles
 
 public interface FeatureManager {
     public val featureToggles: Map<ExperimentKey, FeatureToggle<*>>

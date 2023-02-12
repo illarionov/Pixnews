@@ -20,10 +20,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.multibindings.Multibinds
-import ru.pixnews.foundation.featuretoggles.pub.Experiment
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantSerializer
-import ru.pixnews.foundation.featuretoggles.pub.di.ExperimentScope
+import ru.pixnews.foundation.featuretoggles.Experiment
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
+import ru.pixnews.foundation.featuretoggles.di.ExperimentScope
 
 @Module
 @ContributesTo(ExperimentScope::class)

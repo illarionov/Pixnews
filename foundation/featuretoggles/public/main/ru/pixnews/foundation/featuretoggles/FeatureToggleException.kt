@@ -13,14 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.featuretoggles.pub
+package ru.pixnews.foundation.featuretoggles
 
-public interface FeatureToggle<out E : Experiment> {
-    public val experiment: E
-
-    public suspend fun <V : ExperimentVariant> getVariant(): V
-}
-
-public suspend fun FeatureToggle<*>.getVariantKey(): ExperimentVariantKey = getVariant<ExperimentVariant>().key
-
-public suspend fun FeatureToggle<*>.isEnabled(): Boolean = getVariant<ExperimentVariant>().key.isControl()
+public open class FeatureToggleException @JvmOverloads public constructor(
+    message: String? = null,
+    cause: Throwable? = null,
+) : RuntimeException(message, cause)

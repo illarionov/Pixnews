@@ -26,8 +26,8 @@ import kotlinx.coroutines.launch
 import ru.pixnews.databinding.ActivityMainBinding
 import ru.pixnews.di.root.PixnewsRootComponentHolder
 import ru.pixnews.foundation.appconfig.AppConfig
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
-import ru.pixnews.foundation.featuretoggles.pub.FeatureToggle
+import ru.pixnews.foundation.featuretoggles.ExperimentVariant
+import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.ui.experiments.DarkModeExperiment
 import ru.pixnews.loadingstatus.AppLoadingStatus
 import javax.inject.Inject

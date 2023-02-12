@@ -32,7 +32,7 @@ dependencies {
     api(project(":foundation:analytics"))
     api(project(":foundation:appconfig"))
     api(project(":foundation:dispatchers"))
-    api(project(":foundation:featuretoggles:pub"))
+    api(project(":foundation:featuretoggles:public"))
     api(project(":foundation:featuretoggles:datasource-overrides"))
     api(libs.kermit)
 }

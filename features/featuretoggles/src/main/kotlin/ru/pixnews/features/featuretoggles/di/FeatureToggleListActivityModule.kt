@@ -29,10 +29,10 @@ import ru.pixnews.foundation.di.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.scopes.ActivityScope
 import ru.pixnews.foundation.di.scopes.SingleIn
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
+import ru.pixnews.foundation.featuretoggles.FeatureManager
 import ru.pixnews.foundation.featuretoggles.datasource.overrides.OverridesDataSource
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantSerializer
-import ru.pixnews.foundation.featuretoggles.pub.FeatureManager
 import javax.inject.Named
 
 @Module

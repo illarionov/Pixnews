@@ -15,21 +15,21 @@
  */
 package ru.pixnews.foundation.featuretoggles.fixtures
 
+import ru.pixnews.foundation.featuretoggles.DefaultExperimentVariant
+import ru.pixnews.foundation.featuretoggles.Experiment
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariant
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey.Companion.CONTROL_GROUP
+import ru.pixnews.foundation.featuretoggles.experimentKey
+import ru.pixnews.foundation.featuretoggles.experimentVariantKey
 import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExperiment.Variant.ControlGroup
 import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExperiment.Variant.V1Group
 import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExperiment.Variant.V2Group
 import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExperiment.Variant.V3Group
 import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExperiment.Variant.V4Group
-import ru.pixnews.foundation.featuretoggles.pub.DefaultExperimentVariant
-import ru.pixnews.foundation.featuretoggles.pub.Experiment
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantKey.Companion.CONTROL_GROUP
-import ru.pixnews.foundation.featuretoggles.pub.experimentKey
-import ru.pixnews.foundation.featuretoggles.pub.experimentVariantKey
-import ru.pixnews.foundation.featuretoggles.pub.serializers.BooleanVariantSerializer
-import ru.pixnews.foundation.featuretoggles.pub.serializers.StringVariantSerializer
+import ru.pixnews.foundation.featuretoggles.serializers.BooleanVariantSerializer
+import ru.pixnews.foundation.featuretoggles.serializers.StringVariantSerializer
 
 public object DarkModeTestExperiment : Experiment {
     public val controlGroup: ExperimentVariant = DefaultExperimentVariant(

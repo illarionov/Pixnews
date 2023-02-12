@@ -17,13 +17,13 @@ package ru.pixnews.foundation.featuretoggles.internal
 
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.first
+import ru.pixnews.foundation.featuretoggles.Experiment
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariant
+import ru.pixnews.foundation.featuretoggles.FeatureManager
+import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.DataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
-import ru.pixnews.foundation.featuretoggles.pub.Experiment
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
-import ru.pixnews.foundation.featuretoggles.pub.FeatureManager
-import ru.pixnews.foundation.featuretoggles.pub.FeatureToggle
 import ru.pixnews.libraries.functional.RequestStatus.Complete
 import ru.pixnews.libraries.functional.Result
 import ru.pixnews.libraries.functional.onError

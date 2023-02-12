@@ -19,11 +19,11 @@ import androidx.compose.runtime.Immutable
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.features.featuretoggles.model.FeatureToggleState.ACTIVE
-import ru.pixnews.foundation.featuretoggles.pub.Experiment
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantKey
-import ru.pixnews.foundation.featuretoggles.pub.FeatureToggle
-import ru.pixnews.foundation.featuretoggles.pub.getVariantKey
+import ru.pixnews.foundation.featuretoggles.Experiment
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey
+import ru.pixnews.foundation.featuretoggles.FeatureToggle
+import ru.pixnews.foundation.featuretoggles.getVariantKey
 
 @Immutable
 internal data class FeatureToggleUiModel(

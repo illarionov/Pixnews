@@ -33,7 +33,7 @@ android {
 dependencies {
     implementation(project(":foundation:appconfig"))
     implementation(project(":foundation:di-root"))
-    implementation(project(":foundation:featuretoggles:pub"))
+    implementation(project(":foundation:featuretoggles:public"))
     implementation(project(":foundation:featuretoggles:datasource-overrides"))
     implementation(project(":foundation:ui-theme"))
     implementation(project(":libraries:compose-utils"))

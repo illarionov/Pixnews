@@ -50,7 +50,7 @@ dependencies {
     implementation(project(":foundation:ui-theme"))
     implementation(project(":foundation:dispatchers"))
     implementation(project(":foundation:initializers"))
-    implementation(project(":foundation:featuretoggles:pub"))
+    implementation(project(":foundation:featuretoggles:public"))
     implementation(project(":foundation:featuretoggles:internal"))
     implementation(project(":foundation:featuretoggles:datasource-firebase"))
     implementation(project(":foundation:featuretoggles:datasource-overrides"))

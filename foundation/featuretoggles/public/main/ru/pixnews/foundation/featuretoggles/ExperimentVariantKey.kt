@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.featuretoggles.pub
+package ru.pixnews.foundation.featuretoggles
 
 /**
  * Name of the the variant. Must be unique among the variants of the experiment.

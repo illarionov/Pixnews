@@ -13,9 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.featuretoggles.pub
+package ru.pixnews.foundation.featuretoggles
 
-public interface ExperimentVariantSerializer {
-    public fun fromString(key: ExperimentKey, serialized: String): ExperimentVariant
-    public fun toString(key: ExperimentKey, deserialized: ExperimentVariant): String
+public interface ExperimentVariant {
+    public val key: ExperimentVariantKey
+
+    /**
+     * Description of the variant to be shown in the debug panel. May be empty.
+     */
+    public val description: String
+        get() = ""
+    public val weight: Int
+        get() = 0
+    public val payload: String?
+        get() = null
 }
+
+public data class DefaultExperimentVariant(
+    override val key: ExperimentVariantKey,
+    override val description: String = "",
+    override val weight: Int = 1,
+    override val payload: String? = null,
+) : ExperimentVariant

@@ -32,7 +32,7 @@ listOf(
     "di",
     "di-root",
     "dispatchers",
-    "featuretoggles:pub",
+    "featuretoggles:public",
     "featuretoggles:internal",
     "featuretoggles:datasource-firebase",
     "featuretoggles:datasource-overrides",

@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.featuretoggles.pub.di
+package ru.pixnews.foundation.featuretoggles.serializers
 
-import dagger.MapKey
+import ru.pixnews.foundation.featuretoggles.FeatureToggleException
 
-@MapKey
-public annotation class ExperimentVariantMapKey(val key: String)
+public open class SerializationException @JvmOverloads public constructor(
+    message: String? = null,
+    cause: Throwable? = null,
+) : FeatureToggleException(message, cause)

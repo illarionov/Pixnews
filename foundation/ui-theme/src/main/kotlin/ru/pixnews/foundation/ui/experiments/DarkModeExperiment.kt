@@ -16,17 +16,17 @@
 package ru.pixnews.foundation.ui.experiments
 
 import com.squareup.anvil.annotations.ContributesMultibinding
-import ru.pixnews.foundation.featuretoggles.pub.Experiment
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantKey.Companion.CONTROL_GROUP
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantSerializer
-import ru.pixnews.foundation.featuretoggles.pub.di.ExperimentScope
-import ru.pixnews.foundation.featuretoggles.pub.di.ExperimentVariantMapKey
-import ru.pixnews.foundation.featuretoggles.pub.experimentKey
-import ru.pixnews.foundation.featuretoggles.pub.experimentVariantKey
-import ru.pixnews.foundation.featuretoggles.pub.serializers.BooleanVariantSerializer
+import ru.pixnews.foundation.featuretoggles.Experiment
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariant
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey.Companion.CONTROL_GROUP
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
+import ru.pixnews.foundation.featuretoggles.di.ExperimentScope
+import ru.pixnews.foundation.featuretoggles.di.ExperimentVariantMapKey
+import ru.pixnews.foundation.featuretoggles.experimentKey
+import ru.pixnews.foundation.featuretoggles.experimentVariantKey
+import ru.pixnews.foundation.featuretoggles.serializers.BooleanVariantSerializer
 
 @ContributesMultibinding(
     scope = ExperimentScope::class,

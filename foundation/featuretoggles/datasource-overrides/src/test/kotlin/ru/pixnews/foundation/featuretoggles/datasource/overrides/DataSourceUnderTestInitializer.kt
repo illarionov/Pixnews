@@ -19,12 +19,12 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
+import ru.pixnews.foundation.featuretoggles.ExperimentKey
+import ru.pixnews.foundation.featuretoggles.ExperimentVariant
+import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.fixtures.DarkModeTestExperiment
 import ru.pixnews.foundation.featuretoggles.fixtures.DtfIntegrationTestExperiment
 import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExperiment
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariant
-import ru.pixnews.foundation.featuretoggles.pub.ExperimentVariantSerializer
 import ru.pixnews.libraries.testing.TestingLoggers
 import java.io.File
 

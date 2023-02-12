@@ -20,7 +20,7 @@ import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.dispatchers.ComputationCoroutineDispatcherProvider
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.dispatchers.MainCoroutineDispatcherProvider
-import ru.pixnews.foundation.featuretoggles.pub.FeatureManager
+import ru.pixnews.foundation.featuretoggles.FeatureManager
 
 public interface PixnewsAppComponent {
     public fun getComputationDispatcherProvider(): ComputationCoroutineDispatcherProvider

@@ -13,20 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.featuretoggles.pub
+package ru.pixnews.foundation.featuretoggles
 
-@JvmInline
-public value class ExperimentKey(public val stringValue: String) {
-    init {
-        require(stringValue.matches(KEY_FORMAT_REGEX)) {
-            "Experiment key `$stringValue` should match experiment key format"
-        }
-    }
-
-    override fun toString(): String = stringValue
-
-    private companion object {
-        private val KEY_FORMAT_REGEX: Regex = """[a-z0-9._-]+""".toRegex()
-    }
+public interface ExperimentVariantSerializer {
+    public fun fromString(key: ExperimentKey, serialized: String): ExperimentVariant
+    public fun toString(key: ExperimentKey, deserialized: ExperimentVariant): String
 }
-public fun String.experimentKey(): ExperimentKey = ExperimentKey(this)

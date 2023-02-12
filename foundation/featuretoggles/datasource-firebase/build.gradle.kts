@@ -32,7 +32,7 @@ dependencies {
     api(project(":foundation:appconfig"))
     api(project(":foundation:di"))
     api(project(":foundation:dispatchers"))
-    api(project(":foundation:featuretoggles:pub"))
+    api(project(":foundation:featuretoggles:public"))
     api(project(":foundation:featuretoggles:internal"))
 
     api(platform(libs.firebase.bom))
@@ -41,6 +41,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
 
     testImplementation(project(":libraries:testing"))
-    testImplementation(testFixtures(project(":foundation:featuretoggles:pub")))
+    testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
     testImplementation(libs.mockk)
 }

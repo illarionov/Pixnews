@@ -14,13 +14,19 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<full-backup-content>
-    <include domain="file" path ="." />
-    <include domain="database" path ="." />
-    <include domain="sharedpref" path ="." />
-    <exclude domain="sharedpref" path="FirebaseAppHeartBeat.xml" />
-    <exclude domain="sharedpref" path="com.google.android.gms.appid.xml" />
-    <exclude domain="sharedpref" path="com.google.android.gms.measurement.prefs.xml" />
-    <exclude domain="sharedpref" path="com.google.firebase.crashlytics.xml" />
-    <exclude domain="external" />
-</full-backup-content>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+    </base-config>
+    <domain-config>
+        <domain includeSubdomains="true">pixnews.ru</domain>
+        <trust-anchors>
+            <certificates src="system"/>
+        </trust-anchors>
+    </domain-config>
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="system" overridePins="true"/>
+            <certificates src="user" overridePins="true"/>
+        </trust-anchors>
+    </debug-overrides>
+</network-security-config>

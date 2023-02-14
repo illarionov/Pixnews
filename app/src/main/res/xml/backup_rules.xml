@@ -15,5 +15,12 @@
     limitations under the License.
 -->
 <full-backup-content>
-    <!-- Exclude specific shared preferences that contain GCM registration Id -->
+    <include domain="file" path ="." />
+    <include domain="database" path ="." />
+    <include domain="sharedpref" path ="." />
+    <exclude domain="sharedpref" path="FirebaseAppHeartBeat.xml" />
+    <exclude domain="sharedpref" path="com.google.android.gms.appid.xml" />
+    <exclude domain="sharedpref" path="com.google.android.gms.measurement.prefs.xml" />
+    <exclude domain="sharedpref" path="com.google.firebase.crashlytics.xml" />
+    <exclude domain="external" />
 </full-backup-content>

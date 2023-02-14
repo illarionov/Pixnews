@@ -16,6 +16,7 @@
 
 plugins {
     id("ru.pixnews.kotlin-jvm-library")
+    id("ru.pixnews.kotlin-jvm-compose-compiler")
     `java-test-fixtures`
 }
 

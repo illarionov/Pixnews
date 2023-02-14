@@ -15,7 +15,6 @@
  */
 package ru.pixnews.features.featuretoggles.model
 
-import androidx.compose.runtime.Immutable
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.features.featuretoggles.model.FeatureToggleState.ACTIVE
@@ -25,7 +24,6 @@ import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey
 import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.featuretoggles.getVariantKey
 
-@Immutable
 internal data class FeatureToggleUiModel(
     val key: ExperimentKey,
     val name: String,

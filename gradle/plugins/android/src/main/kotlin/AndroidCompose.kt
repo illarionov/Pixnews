@@ -22,6 +22,7 @@ import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
+import ru.pixnews.compose.buildComposeMetricsParameters
 
 internal fun Project.configureCompose(
     commonExtension: CommonExtension<*, *, *, *>,
@@ -70,26 +71,4 @@ private fun Project.configureComposeMetrics() {
                 }
             }
     }
-}
-
-private fun Project.buildComposeMetricsParameters(): List<String> {
-    val metricParameters: MutableList<String> = mutableListOf()
-    val enableMetrics = project.buildParameters.compose.enable_compose_compiler_metrics
-    if (enableMetrics) {
-        val metricsFolder = project.layout.buildDirectory.dir("compose-metrics").get().asFile
-        metricParameters += listOf(
-            "-P",
-            "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=${metricsFolder.absolutePath}",
-        )
-    }
-
-    val enableReports = project.buildParameters.compose.enable_compose_compiler_reports
-    if (enableReports) {
-        val reportsFolder = project.layout.buildDirectory.dir("compose-reports").get().asFile
-        metricParameters += listOf(
-            "-P",
-            "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=${reportsFolder.absolutePath}",
-        )
-    }
-    return metricParameters
 }

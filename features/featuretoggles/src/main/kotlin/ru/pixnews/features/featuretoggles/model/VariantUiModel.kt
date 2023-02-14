@@ -15,13 +15,11 @@
  */
 package ru.pixnews.features.featuretoggles.model
 
-import androidx.compose.runtime.Immutable
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey
 import ru.pixnews.foundation.featuretoggles.experimentVariantKey
 
-@Immutable
 internal data class VariantUiModel constructor(
     val key: ExperimentVariantKey,
     val description: String = "",

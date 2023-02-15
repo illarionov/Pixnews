@@ -17,21 +17,18 @@ package ru.pixnews.features.featuretoggles
 
 import android.os.Bundle
 import android.view.ViewGroup
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
-import androidx.lifecycle.ViewModelProvider
 import co.touchlab.kermit.Logger
-import ru.pixnews.features.featuretoggles.di.FeatureToggleListActivityComponent
 import ru.pixnews.features.featuretoggles.ui.FeatureToggleListScreen
 import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.di.ui.base.activity.BaseActivity
+import ru.pixnews.foundation.di.ui.base.viewmodel.injectedViewModel
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import javax.inject.Inject
-import javax.inject.Named
 
-public class FeatureToggleListActivity : ComponentActivity() {
-    private val viewModel: FeatureToggleListViewModel by viewModels { viewModelFactory }
+public class FeatureToggleListActivity : BaseActivity() {
+    private val viewModel by injectedViewModel<FeatureToggleListViewModel>()
 
     @Inject
     internal lateinit var appConfig: AppConfig
@@ -39,14 +36,8 @@ public class FeatureToggleListActivity : ComponentActivity() {
     @Inject
     internal lateinit var logger: Logger
 
-    @Inject
-    @Named("FeatureTogglesViewModel")
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FeatureToggleListActivityComponent(this)
-            .inject(this)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             PixnewsTheme(

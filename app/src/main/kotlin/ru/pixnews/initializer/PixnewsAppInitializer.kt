@@ -18,7 +18,7 @@ package ru.pixnews.initializer
 import android.content.Context
 import androidx.startup.Initializer
 import ru.pixnews.app.PixnewsAppComponentImpl
-import ru.pixnews.di.root.PixnewsRootComponentHolder
+import ru.pixnews.di.root.component.PixnewsRootComponentHolder
 import ru.pixnews.foundation.initializers.AppInitializer
 import javax.inject.Inject
 

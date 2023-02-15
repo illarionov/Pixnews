@@ -16,7 +16,7 @@
 package ru.pixnews.experiments
 
 import com.squareup.anvil.annotations.MergeComponent
-import ru.pixnews.foundation.di.scopes.SingleIn
+import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer

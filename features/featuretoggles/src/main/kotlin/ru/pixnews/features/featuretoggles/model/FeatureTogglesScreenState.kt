@@ -19,7 +19,7 @@ import androidx.compose.runtime.Immutable
 import kotlinx.collections.immutable.ImmutableList
 
 @Immutable
-internal sealed class FeatureTogglesScreenState {
+public sealed class FeatureTogglesScreenState {
     internal object Loading : FeatureTogglesScreenState() {
         override fun toString(): String = "Loading"
     }

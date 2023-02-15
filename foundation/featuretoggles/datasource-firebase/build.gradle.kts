@@ -30,7 +30,7 @@ android {
 
 dependencies {
     api(project(":foundation:appconfig"))
-    api(project(":foundation:di"))
+    api(project(":foundation:di:base"))
     api(project(":foundation:dispatchers"))
     api(project(":foundation:featuretoggles:public"))
     api(project(":foundation:featuretoggles:internal"))

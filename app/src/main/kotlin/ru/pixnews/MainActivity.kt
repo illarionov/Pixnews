@@ -16,7 +16,6 @@
 package ru.pixnews
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle.State.STARTED
 import androidx.lifecycle.lifecycleScope
@@ -24,15 +23,15 @@ import androidx.lifecycle.repeatOnLifecycle
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.launch
 import ru.pixnews.databinding.ActivityMainBinding
-import ru.pixnews.di.root.PixnewsRootComponentHolder
 import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.di.ui.base.activity.BaseActivity
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.ui.experiments.DarkModeExperiment
 import ru.pixnews.loadingstatus.AppLoadingStatus
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
 
     @Inject
@@ -47,14 +46,12 @@ class MainActivity : AppCompatActivity() {
     @Inject
     internal lateinit var appLoadingStatus: AppLoadingStatus
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        (PixnewsRootComponentHolder.appComponent as MainActivityComponent.FactoryProvider)
-            .mainActivityComponentFactory()
-            .create(this)
-            .inject(this)
+    override fun onPostInjectPreCreate() {
         setupSplashScreen()
-        super.onCreate(savedInstanceState)
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

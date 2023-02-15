@@ -28,7 +28,7 @@ android {
 }
 
 dependencies {
-    api(project(":foundation:di"))
+    api(project(":foundation:di:base"))
     api(project(":foundation:appconfig"))
 
     implementation(libs.androidx.test.runner)

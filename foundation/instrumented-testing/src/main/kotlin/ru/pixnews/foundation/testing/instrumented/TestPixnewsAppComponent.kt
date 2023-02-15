@@ -19,8 +19,8 @@ import android.app.Application
 import com.squareup.anvil.annotations.MergeComponent
 import dagger.BindsInstance
 import dagger.Component
-import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
+import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.foundation.di.base.scopes.SingleIn
 
 @MergeComponent(AppScope::class)
 @SingleIn(AppScope::class)

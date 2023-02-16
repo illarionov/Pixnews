@@ -43,6 +43,7 @@ public class PixnewsViewModelProviderFactory @Inject constructor(
         } else {
             val factory = viewModelComponent.viewModelFactoryMap[modelClass]
                 ?: error("No factory for ${modelClass.name}")
+            @Suppress("UNCHECKED_CAST")
             return factory.create(extras) as T
         }
     }

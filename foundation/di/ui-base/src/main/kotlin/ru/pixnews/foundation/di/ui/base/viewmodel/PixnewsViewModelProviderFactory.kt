@@ -16,10 +16,10 @@
 package ru.pixnews.foundation.di.ui.base.viewmodel
 
 import androidx.annotation.RestrictTo
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
+import androidx.lifecycle.viewmodel.CreationExtras
 import com.squareup.anvil.annotations.ContributesBinding
 import dagger.Reusable
 import ru.pixnews.foundation.di.base.scopes.AppScope
@@ -28,21 +28,22 @@ import javax.inject.Inject
 @Reusable
 @ContributesBinding(AppScope::class, boundType = ViewModelProvider.Factory::class)
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-public class PixnewsViewModelFactory @Inject constructor(
+public class PixnewsViewModelProviderFactory @Inject constructor(
     private val vmSubcomponentFactory: ViewModelSubcomponent.Factory,
-) : AbstractSavedStateViewModelFactory() {
-    override fun <T : ViewModel> create(
-        key: String,
-        modelClass: Class<T>,
-        handle: SavedStateHandle,
-    ): T {
-        val viewModelComponent = vmSubcomponentFactory.create(handle)
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
+        val savedSateHandle = extras.createSavedStateHandle()
+        val viewModelComponent = vmSubcomponentFactory.create(savedSateHandle)
         val viewModelMap = viewModelComponent.viewModelMap
 
-        val viewModelProvider = viewModelMap.getOrElse(modelClass) {
-            error("No injector for ${modelClass.name}")
+        val viewModelProvider = viewModelMap[modelClass]
+        if (viewModelProvider != null) {
+            @Suppress("UNCHECKED_CAST")
+            return viewModelProvider.get() as T
+        } else {
+            val factory = viewModelComponent.viewModelFactoryMap[modelClass]
+                ?: error("No factory for ${modelClass.name}")
+            return factory.create(extras) as T
         }
-        @Suppress("UNCHECKED_CAST")
-        return viewModelProvider.get() as T
     }
 }

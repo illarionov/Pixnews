@@ -15,19 +15,9 @@
  */
 package ru.pixnews.foundation.di.ui.base.viewmodel
 
-import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
-import com.squareup.anvil.annotations.ContributesTo
-import dagger.Module
-import dagger.multibindings.Multibinds
+import androidx.lifecycle.viewmodel.CreationExtras
 
-@Module
-@ContributesTo(ViewModelScope::class)
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-public interface ViewModelModule {
-    @Multibinds
-    public fun viewModelProviders(): @JvmSuppressWildcards Map<Class<out ViewModel>, ViewModel>
-
-    @Multibinds
-    public fun viewModelFactoryProviders(): @JvmSuppressWildcards Map<Class<out ViewModel>, ViewModelFactory>
+public fun interface ViewModelFactory {
+    public fun create(creationExtras: CreationExtras): ViewModel
 }

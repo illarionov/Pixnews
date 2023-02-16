@@ -30,6 +30,7 @@ import javax.inject.Provider
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public interface ViewModelSubcomponent {
     public val viewModelMap: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
+    public val viewModelFactoryMap: @JvmSuppressWildcards Map<Class<out ViewModel>, ViewModelFactory>
 
     @ContributesSubcomponent.Factory
     public fun interface Factory {

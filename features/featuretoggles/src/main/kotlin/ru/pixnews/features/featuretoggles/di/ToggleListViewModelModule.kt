@@ -16,7 +16,6 @@
 package ru.pixnews.features.featuretoggles.di
 
 import android.content.Context
-import androidx.lifecycle.ViewModel
 import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
@@ -25,6 +24,7 @@ import dagger.multibindings.IntoMap
 import ru.pixnews.features.featuretoggles.FeatureToggleListViewModel
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.SingleIn
+import ru.pixnews.foundation.di.ui.base.viewmodel.ViewModelFactory
 import ru.pixnews.foundation.di.ui.base.viewmodel.ViewModelKey
 import ru.pixnews.foundation.di.ui.base.viewmodel.ViewModelScope
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
@@ -43,8 +43,8 @@ public object ToggleListViewModelModule {
         featureManager: FeatureManager,
         overridesDataSource: OverridesDataSource,
         logger: Logger,
-    ): ViewModel {
-        return FeatureToggleListViewModel(featureManager, overridesDataSource, logger)
+    ): ViewModelFactory = ViewModelFactory {
+        FeatureToggleListViewModel(featureManager, overridesDataSource, logger)
     }
 
     @Provides

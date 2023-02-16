@@ -30,6 +30,14 @@ dependencies {
     add("kapt", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
 }
 
+kapt {
+    javacOptions {
+        option("-Adagger.fastInit=enabled")
+        option("-Adagger.strictMultibindingValidation=enabled")
+        option("-Adagger.experimentalDaggerErrorMessages=enabled")
+    }
+}
+
 afterEvaluate {
     if (extensions.findByType<PixnewsExtension>()?.managedDevices?.get() == true) {
         dependencies.add("kaptAndroidTest", versionCatalog.findLibrary("dagger.compiler").orElseThrow())

@@ -20,7 +20,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import kotlinx.coroutines.Dispatchers
-import ru.pixnews.foundation.di.scopes.AppScope
+import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.dispatchers.ComputationCoroutineDispatcherProvider
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.dispatchers.MainCoroutineDispatcherProvider

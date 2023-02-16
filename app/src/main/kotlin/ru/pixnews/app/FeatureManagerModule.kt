@@ -22,9 +22,9 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import ru.pixnews.foundation.appconfig.AppConfig
-import ru.pixnews.foundation.di.qualifiers.ApplicationContext
-import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
+import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
+import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
@@ -51,7 +51,7 @@ public object FeatureManagerModule {
     @Named("firebase")
     public fun providesFirebaseDataSource(
         remoteConfig: FirebaseRemoteConfig,
-        serializers: Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>,
+        serializers: @JvmSuppressWildcards Map<ExperimentKey, ExperimentVariantSerializer>,
         ioDispatcherProvider: IoCoroutineDispatcherProvider,
         logger: Logger,
     ): FeatureToggleDataSource {
@@ -63,7 +63,7 @@ public object FeatureManagerModule {
     @Named("overrides")
     public fun providesOverridesDataSource(
         @ApplicationContext context: Context,
-        serializers: Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>,
+        serializers: @JvmSuppressWildcards Map<ExperimentKey, ExperimentVariantSerializer>,
         ioDispatcherProvider: IoCoroutineDispatcherProvider,
         logger: Logger,
         appConfig: AppConfig,

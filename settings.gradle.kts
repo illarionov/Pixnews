@@ -29,8 +29,9 @@ include(":app")
 listOf(
     "analytics",
     "appconfig",
-    "di",
-    "di-root",
+    "di:base",
+    "di:root-component",
+    "di:ui-base",
     "dispatchers",
     "featuretoggles:public",
     "featuretoggles:internal",
@@ -40,6 +41,7 @@ listOf(
     "instrumented-testing",
     "redux",
     "ui-theme",
+    "ui-base",
 ).forEach {
     include(":foundation:$it")
 }

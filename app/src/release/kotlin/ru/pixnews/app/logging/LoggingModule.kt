@@ -21,19 +21,19 @@ import co.touchlab.kermit.StaticConfig
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
-import ru.pixnews.foundation.di.scopes.AppScope
-import ru.pixnews.foundation.di.scopes.SingleIn
+import dagger.Reusable
+import ru.pixnews.foundation.di.base.scopes.AppScope
 
 @ContributesTo(AppScope::class)
 @Module
 object LoggingModule {
     @Provides
-    @SingleIn(AppScope::class)
+    @Reusable
     fun provideLogger(): Logger {
         val config = StaticConfig(
             minSeverity = Error,
             logWriterList = listOf(),
         )
-        return Logger(config).withTag("PixnewsDBG")
+        return Logger(config).withTag("Pixnews")
     }
 }

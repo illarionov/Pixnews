@@ -21,7 +21,7 @@ import dagger.Provides
 import dagger.Reusable
 import ru.pixnews.foundation.analytics.Analytics
 import ru.pixnews.foundation.analytics.NoOpAnalytics
-import ru.pixnews.foundation.di.scopes.AppScope
+import ru.pixnews.foundation.di.base.scopes.AppScope
 
 @ContributesTo(AppScope::class)
 @Module

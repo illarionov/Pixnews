@@ -32,15 +32,14 @@ public abstract class ExperimentsModule {
     public abstract fun appExperiments(): Set<@JvmSuppressWildcards Experiment>
 
     @Multibinds
-    @Suppress("MaxLineLength")
-    public abstract fun appExperimentSerializers(): Map<@JvmSuppressWildcards String, @JvmSuppressWildcards ExperimentVariantSerializer>
+    public abstract fun appExperimentSerializers(): @JvmSuppressWildcards Map<String, ExperimentVariantSerializer>
 
     companion object {
         @Provides
         @Reusable
         public fun provideAppExperimentVariantSerializers(
-            serializers: Map<@JvmSuppressWildcards String, @JvmSuppressWildcards ExperimentVariantSerializer>,
-        ): Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer> {
+            serializers: @JvmSuppressWildcards Map<String, ExperimentVariantSerializer>,
+        ): @JvmSuppressWildcards Map<ExperimentKey, ExperimentVariantSerializer> {
             return serializers
                 .mapKeys { (k, _) -> ExperimentKey(k) }
         }

@@ -20,7 +20,7 @@ import dagger.Reusable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import ru.pixnews.foundation.di.scopes.AppScope
+import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.dispatchers.MainCoroutineDispatcherProvider
 import ru.pixnews.foundation.featuretoggles.FeatureManager
 import javax.inject.Inject

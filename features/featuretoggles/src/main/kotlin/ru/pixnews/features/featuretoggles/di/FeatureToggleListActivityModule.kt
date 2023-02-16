@@ -15,50 +15,23 @@
  */
 package ru.pixnews.features.featuretoggles.di
 
-import android.content.Context
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import co.touchlab.kermit.Logger
+import android.app.Activity
 import com.squareup.anvil.annotations.ContributesTo
+import dagger.Binds
+import dagger.MembersInjector
 import dagger.Module
-import dagger.Provides
-import dagger.Reusable
-import ru.pixnews.features.featuretoggles.FeatureToggleListViewModel
-import ru.pixnews.foundation.di.qualifiers.ApplicationContext
-import ru.pixnews.foundation.di.scopes.ActivityScope
-import ru.pixnews.foundation.di.scopes.SingleIn
-import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
-import ru.pixnews.foundation.featuretoggles.ExperimentKey
-import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
-import ru.pixnews.foundation.featuretoggles.FeatureManager
-import ru.pixnews.foundation.featuretoggles.datasource.overrides.OverridesDataSource
-import javax.inject.Named
+import dagger.multibindings.IntoMap
+import ru.pixnews.features.featuretoggles.FeatureToggleListActivity
+import ru.pixnews.foundation.di.base.scopes.SingleIn
+import ru.pixnews.foundation.di.ui.base.activity.ActivityKey
+import ru.pixnews.foundation.di.ui.base.activity.ActivityScope
 
 @Module
 @ContributesTo(ActivityScope::class)
-public object FeatureToggleListActivityModule {
-    @Provides
+public interface FeatureToggleListActivityModule {
+    @Binds
+    @IntoMap
+    @ActivityKey(FeatureToggleListActivity::class)
     @SingleIn(ActivityScope::class)
-    public fun providesOverridesDataSource(
-        @ApplicationContext context: Context,
-        serializers: Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>,
-        ioDispatcherProvider: IoCoroutineDispatcherProvider,
-        logger: Logger,
-    ): OverridesDataSource {
-        return OverridesDataSource(context, serializers, ioDispatcherProvider, logger)
-    }
-
-    @Provides
-    @Reusable
-    @Named("FeatureTogglesViewModel")
-    public fun featureTogglesViewModelFactory(
-        featureManager: FeatureManager,
-        overridesDataSource: OverridesDataSource,
-        logger: Logger,
-    ): ViewModelProvider.Factory = viewModelFactory {
-        initializer {
-            FeatureToggleListViewModel(featureManager, overridesDataSource, logger)
-        }
-    }
+    public fun binds(target: MembersInjector<FeatureToggleListActivity>): MembersInjector<out Activity>
 }

@@ -46,7 +46,7 @@ naming:
     ignoreOverridden: true
   FunctionNaming:
     active: true
-    ignoreAnnotated: ['Composable']
+    ignoreAnnotated: ['Composable', 'ParameterizedTest']
   NoNameShadowing:
     active: false
   InvalidPackageDeclaration:

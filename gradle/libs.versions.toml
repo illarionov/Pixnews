@@ -21,7 +21,7 @@ androidx-compose-runtime-tracing = "1.0.0-alpha01"
 androidx-constraintlayout = "2.1.4"
 androidx-core = "1.9.0"
 androidx-datastore = "1.0.0"
-android-desugar-jdk-libs = "2.0.0"
+android-desugar-jdk-libs = "2.0.2"
 androidx-fragment = "1.6.0-alpha04"
 androidx-lifecycle = "2.5.1"
 androidx-lifecycle-runtime-compose = "2.6.0-alpha05"
@@ -38,6 +38,7 @@ androidx-test-uiauthomator = "2.3.0-alpha01"
 androidx-tracing = "1.2.0-alpha01"
 arrow = "1.1.5-alpha.4"
 firebase-bom = "31.2.0"
+firebase-crashlytics-plugin = "2.9.4"
 google-services = "4.3.15"
 kermit = "1.2.2"
 kotest = "5.5.5"
@@ -117,11 +118,12 @@ arrow-fx = { group = "io.arrow-kt", name = "arrow-fx-coroutines" }
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-config = { group = "com.google.firebase", name = "firebase-config-ktx" }
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 inject = { group = "javax.inject", name = "javax.inject", version = "1" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
-junit5-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit5" }
+junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit5" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter" }
 junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api" }
 junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine" }
@@ -154,6 +156,7 @@ kotlin-jvm-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jv
 detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 detekt-compose-rules = { group = "com.twitter.compose.rules", name = "detekt", version = "0.0.26" }
+firebase-crashlitycs-plugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-plugin" }
 protobuf-plugin = { group = "com.google.protobuf", name = "protobuf-gradle-plugin", version.ref = "protobuf-plugin" }
 spotless-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 
@@ -163,6 +166,7 @@ anvil = { id = "com.squareup.anvil", version.ref = "anvil" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kermit = { id = "co.touchlab.kermit", version.ref = "kermit" }

@@ -85,7 +85,7 @@ private fun Project.configureCommonJunit5Dependencies() {
     dependencies {
         listOf(
             "kotest-bom",
-            "junit5-bom",
+            "junit-bom",
         ).map { versionCatalog.findLibrary(it).orElseThrow() }
             .forEach {
                 add("testImplementation", platform(it))

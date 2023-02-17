@@ -15,9 +15,8 @@
  */
 package ru.pixnews.foundation.featuretoggles.datasource.firebase
 
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
@@ -65,6 +64,7 @@ public object FirebaseRemoteConfigModule {
     @SingleIn(AppScope::class)
     public fun provideFirebaseRemoteConfig(
         appConfig: AppConfig,
+        firebaseApp: FirebaseApp,
         @ExperimentFirebaseDefaults firebaseDefaults: Map<String, String>,
     ): FirebaseRemoteConfig {
         val configSettings = remoteConfigSettings {
@@ -73,7 +73,7 @@ public object FirebaseRemoteConfigModule {
                 else -> MINIMUM_FETCH_INTERVAL_RELEASE
             }.inWholeSeconds
         }
-        return Firebase.remoteConfig.apply {
+        return FirebaseRemoteConfig.getInstance(firebaseApp).apply {
             setConfigSettingsAsync(configSettings)
             setDefaultsAsync(firebaseDefaults)
         }

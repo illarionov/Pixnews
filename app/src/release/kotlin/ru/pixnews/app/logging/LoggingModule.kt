@@ -15,24 +15,41 @@
  */
 package ru.pixnews.app.logging
 
+import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.Logger
-import co.touchlab.kermit.Severity.Error
+import co.touchlab.kermit.Severity
 import co.touchlab.kermit.StaticConfig
+import com.google.firebase.FirebaseApp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import ru.pixnews.foundation.di.base.scopes.AppScope
+import javax.inject.Named
 
 @ContributesTo(AppScope::class)
 @Module
 object LoggingModule {
     @Provides
     @Reusable
-    fun provideLogger(): Logger {
+    @Named("CrashlyticsLogWriter")
+    fun provideCrashlyticsLogWriter(firebase: FirebaseApp): LogWriter {
+        return CrashlyticsLogWriter(
+            crashlytics = firebase.get(FirebaseCrashlytics::class.java),
+            minSeverity = Severity.Info,
+            minCrashSeverity = Severity.Warn,
+        )
+    }
+
+    @Provides
+    @Reusable
+    fun provideLogger(
+        @Named("CrashlyticsLogWriter") logWriter: LogWriter,
+    ): Logger {
         val config = StaticConfig(
-            minSeverity = Error,
-            logWriterList = listOf(),
+            minSeverity = Severity.Info,
+            logWriterList = listOf(logWriter),
         )
         return Logger(config).withTag("Pixnews")
     }

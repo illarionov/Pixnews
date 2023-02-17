@@ -24,5 +24,6 @@ dependencies {
 
     implementation(libs.agp.plugin)
     implementation(libs.kotlin.jvm.plugin)
+    implementation(libs.firebase.crashlitycs.plugin)
     implementation("ru.pixnews:build-parameters")
 }

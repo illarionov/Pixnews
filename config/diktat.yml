@@ -8,6 +8,9 @@
     srcDirectories: "main"
 - name: AVOID_NULL_CHECKS
   enabled: false
+- name: BACKTICKS_PROHIBITED
+  enabled: true
+  ignoreAnnotated: [ Nested, ParameterizedTest ]
 - name: COMMENTED_BY_KDOC
   enabled: false
 - name: CLASS_SHOULD_NOT_BE_ABSTRACT

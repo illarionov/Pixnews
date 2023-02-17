@@ -13,19 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ru.pixnews.app
 
-plugins {
-    id("ru.pixnews.kotlin-jvm-library")
-}
+import android.content.Context
+import com.google.firebase.FirebaseApp
+import com.squareup.anvil.annotations.ContributesTo
+import dagger.Module
+import dagger.Provides
+import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
+import ru.pixnews.foundation.di.base.scopes.AppScope
 
-group = "ru.pixnews.libraries.testing"
-
-dependencies {
-    api(platform(libs.junit.bom))
-    api(platform(libs.kotest.bom))
-    api(libs.junit.jupiter.api)
-
-    api(libs.kermit.jvm)
-
-    api(libs.kotlinx.coroutines.test)
+@ContributesTo(AppScope::class)
+@Module
+public object FirebaseModule {
+    @Provides
+    public fun provideFirebaseApp(@ApplicationContext context: Context): FirebaseApp {
+        return FirebaseApp.initializeApp(context) ?: error("Could not initialize firebase")
+    }
 }

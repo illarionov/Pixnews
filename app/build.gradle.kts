@@ -17,6 +17,7 @@
 plugins {
     id("ru.pixnews.android-application")
     id("ru.pixnews.di-anvil-kapt")
+    id("ru.pixnews.android-crashlytics")
     alias(libs.plugins.google.services)
 }
 
@@ -72,9 +73,8 @@ dependencies {
     implementation(libs.androidx.startup)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
-
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.runtime.tracing)
-
-    testImplementation(libs.junit4)
+    testImplementation(libs.mockk)
+    testImplementation(libs.junit.jupiter.params)
 }

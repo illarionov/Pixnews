@@ -25,6 +25,11 @@ buildParameters {
         defaultValue.set(false)
         fromEnvironment()
     }
+    bool("releasing") {
+        defaultValue.set(false)
+        description.set("Going to build the final release version.")
+        fromEnvironment()
+    }
     group("signing") {
         bool("sign_with_debug_keys") {
             description.set("Sign release build type with debug keys")

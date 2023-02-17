@@ -41,6 +41,7 @@ android {
 
     defaultConfig {
         targetSdk = versionCatalog.findVersion("targetSdk").get().displayName.toInt()
+        manifestPlaceholders["firebase_crashlytics_collection_enabled"] = "false"
     }
 
     val releaseKeystorePropertiesFilePath = buildParameters.signing.release_keystore_properties_file

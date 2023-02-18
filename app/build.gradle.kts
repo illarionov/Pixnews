@@ -46,6 +46,7 @@ android {
 dependencies {
     implementation(project(":foundation:appconfig"))
     implementation(project(":foundation:analytics"))
+    implementation(project(":foundation:domain-model"))
     implementation(project(":foundation:di:base"))
     implementation(project(":foundation:di:root-component"))
     implementation(project(":foundation:di:ui-base"))

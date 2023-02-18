@@ -39,9 +39,9 @@ listOf(
     "featuretoggles:datasource-overrides",
     "initializers",
     "instrumented-testing",
+    "domain-model",
     "redux",
     "ui-theme",
-    "ui-base",
 ).forEach {
     include(":foundation:$it")
 }

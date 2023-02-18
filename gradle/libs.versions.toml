@@ -51,6 +51,7 @@ junit4 = "4.13.2"
 junit5 = "5.9.2"
 kotlinx-coroutines = "1.6.4"
 kotlinx-collections-immutable = "0.3.5"
+kotlinx-dateime = "0.4.0"
 protobuf-plugin = "0.9.1"
 protobuf = "3.21.12"
 
@@ -140,6 +141,7 @@ kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlinx-coroutines-bom = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-bom", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-dateime" }
 kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 kermit-jvm = { group = "co.touchlab", name = "kermit-jvm", version.ref = "kermit" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }

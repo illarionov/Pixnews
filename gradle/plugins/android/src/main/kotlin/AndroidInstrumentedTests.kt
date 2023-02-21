@@ -19,10 +19,12 @@ package ru.pixnews
 
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.ManagedVirtualDevice
+import com.android.build.gradle.internal.tasks.ManagedDeviceInstrumentationTestTask
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.maybeCreate
+import org.gradle.kotlin.dsl.withType
 
 internal fun Project.configureTestManagedDevices(
     commonExtension: CommonExtension<*, *, *, *>,
@@ -58,6 +60,13 @@ internal fun Project.configureTestManagedDevices(
             }
             add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
             add("androidTestImplementation", project(":foundation:instrumented-testing"))
+        }
+    }
+
+    // https://issuetracker.google.com/issues/262270582
+    tasks.withType<ManagedDeviceInstrumentationTestTask>().configureEach {
+        doFirst {
+            com.android.utils.Environment.initialize()
         }
     }
 }

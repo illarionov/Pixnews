@@ -1,4 +1,4 @@
-name: CI on push to main
+name: Instrumented tests on self-hosted runner
 
 on:
   pull_request:
@@ -21,7 +21,7 @@ env:
   CI: true
   TERM: dumb
   GRADLE_OPTS: >
-    -Dorg.gradle.jvmargs="-Xmx4G -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError -XX:+UseG1GC"
+    -Dorg.gradle.jvmargs="-Xmx2G -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError -XX:+UseG1GC"
     -Dorg.gradle.parallel=true
     -Dorg.gradle.workers.max=2
     -Dorg.gradle.vfs.watch=false
@@ -30,81 +30,22 @@ env:
     -DwarningsAsErrors=false
 
 jobs:
-  assemble:
-    name: Assemble release
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
-
-    steps:
-      - name: Checkout sources
-        uses: actions/checkout@v3
-        with:
-          clean: true
-          fetch-depth: 0
-
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
-
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '19'
-
-      - name: Unpack sign keys and secrets
-        env:
-          SIGN_KEYS_AND_SECRETS: ${{ secrets.SIGN_KEYS_AND_SECRETS }}
-        run: echo "$SIGN_KEYS_AND_SECRETS" | base64 -d | zstd -d | tar -xf -
-
-      - name: Assemble release build, run static-analysis, build release
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: lintRelease assembleRelease --stacktrace
-
-      - name: Cleanup secrets
-        if: ${{ always() }}
-        run: |
-          rm -f config/signing/release.jks
-          rm -f config/signing/release.properties
-          rm -f app/src/google-services.json
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-outputs
-          path: app/build/outputs
-
-      - name: Bundle the build report and lint outputs
-        if: ${{ always() }}
-        run: >
-          find . -type d \( -name 'reports' -o -name 'compose-*' \) -print0
-          | xargs -0 tar -c -I 'zstd -19 -T0' -f build-reports.tar.zst
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v3
-        if: ${{ always() }}
-        with:
-          name: test-reports
-          path: build-reports.tar.zst
-
-      - name: Uploads lint .sarif files to GitHub
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: .
-          category: android-lint
-
   instrumented-tests:
     name: Instrumented tests
-    runs-on: macos-latest
+    runs-on: self-hosted
     timeout-minutes: 60
     if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
 
     steps:
+      - name: Clean the repository
+        run: |
+          /usr/bin/git clean -ffd || true
+          /usr/bin/git reset --hard HEAD || true
+
       - name: Checkout sources
         uses: actions/checkout@v3
         with:
-          clean: true
+          clean: false
           fetch-depth: 0
 
       - name: Validate Gradle wrapper
@@ -115,24 +56,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '19'
-
-      - name: Get pip cache dir
-        id: pip-cache
-        run: |
-          echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache PIP Packages for EnricoMi/publish-unit-test-result-action/composite
-        uses: actions/cache@v3
-        id: cache
-        with:
-          path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt', 'composite/action.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      - name: Accept licenses
-        run: |
-          yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses
 
       - name: Unpack google-services.json
         env:
@@ -163,7 +86,7 @@ jobs:
         run: rm -f app/src/google-services.json
 
       - name: Publish instrumented test results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: ${{ always() }}
         with:
           junit_files: '**/build/outputs/androidTest-results/**/*.xml'

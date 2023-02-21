@@ -152,7 +152,7 @@ jobs:
             -Dorg.gradle.workers.max=1
             -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
             -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
-            phoneGroupDebugAndroidTest
+            pixel2api30DebugAndroidTest
             --continue
 
       - name: Cleanup secrets

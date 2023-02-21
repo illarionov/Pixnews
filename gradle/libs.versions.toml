@@ -4,6 +4,7 @@ compileSdk = "33"
 targetSdk = "33"
 
 agp = "8.1.0-alpha05"
+android-tools-common = "31.1.0-alpha05"
 anvil = "2.4.4"
 bmversions = "0.44.0"
 detekt = "1.22.0"
@@ -150,6 +151,7 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 # Dependencies of the included build-logic
 agp-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 anvil-plugin = { group = "com.squareup.anvil", name = "gradle-plugin", version.ref = "anvil" }
+com-android-tools-common = { group = "com.android.tools", name = "common", version.ref = "android-tools-common" }
 google-services-plugin = { group = "com.google.gms", name = "google-services", version.ref = "google-services" }
 kermit-plugin = { group = "co.touchlab", name = "kermit-gradle-plugin", version.ref = "kermit" }
 kotlin-jvm-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }

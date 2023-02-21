@@ -126,9 +126,17 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
 
-      - name: Install emulators and accept licenses
+      - name: Cache PIP Packages for EnricoMi/publish-unit-test-result-action/composite
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: ~/Library/Caches/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt', 'composite/action.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Accept licenses
         run: |
-          yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;aosp_atd;x86" --sdk_root=${ANDROID_SDK_ROOT}
           yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses
 
       - name: Unpack google-services.json

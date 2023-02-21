@@ -13,27 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.domain.model.developer
+package ru.pixnews.domain.model.company
 
 import kotlinx.datetime.LocalDate
+import ru.pixnews.domain.model.company.CompanyStatus.UNKNOWN
 import ru.pixnews.domain.model.datasource.DataSources
-import ru.pixnews.domain.model.developer.DeveloperStatus.UNKNOWN
 import ru.pixnews.domain.model.links.ExternalLinks
+import ru.pixnews.domain.model.locale.CountryCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.ImageUrl
 import ru.pixnews.domain.model.util.RichText
 import ru.pixnews.domain.model.util.Url
 
-public data class GameDeveloper(
-    val id: GameDeveloperId,
+public data class Company(
+    val id: CompanyId,
     val name: String,
+    val description: Localized<RichText>,
     val avatar: ImageUrl?,
     val url: Url?,
     val foundingDate: LocalDate?,
-    val status: DeveloperStatus = UNKNOWN,
+    val status: CompanyStatus = UNKNOWN,
+    val country: CountryCode?,
+    val parentCompany: CompanyId?,
 
     val dataSources: DataSources,
-    val links: ExternalLinks<GameDeveloperId>,
-
-    val description: Localized<RichText>,
+    val links: ExternalLinks<CompanyId>,
 )

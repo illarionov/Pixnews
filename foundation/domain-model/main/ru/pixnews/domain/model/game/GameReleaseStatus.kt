@@ -13,11 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.domain.model.developer
+package ru.pixnews.domain.model.game
 
-public enum class DeveloperStatus {
-    ACTIVE,
-    INACTIVE,
-    UNKNOWN,
+public enum class GameReleaseStatus {
+    RELEASED,
+    ALPHA,
+    BETA,
+    EARLY_ACCESS,
+    OFFLINE,
+    CANCELLED,
+    RUMORED,
+    DELISTED,
     ;
 }

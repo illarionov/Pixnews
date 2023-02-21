@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.domain.model.ranking
+package ru.pixnews.domain.model.game
 
-public enum class EsrbRanking {
-    EVERYONE,
-    EVERYONE_10PLUS,
-    TEEN,
-    MATURE_17PLUS,
-    ADULTS_ONLY_18PLUS,
-    RATING_PENDING,
-    RATING_PENDING_LIKELY_MATURE_17PLUS,
-    ;
-}
+import kotlinx.collections.immutable.ImmutableSet
+import ru.pixnews.domain.model.locale.LanguageCode
+
+public data class GameLocalizations(
+    val sound: ImmutableSet<LanguageCode>,
+    val text: ImmutableSet<LanguageCode>,
+)

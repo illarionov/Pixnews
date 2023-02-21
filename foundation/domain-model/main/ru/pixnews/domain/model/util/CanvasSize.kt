@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.domain.model.developer
+package ru.pixnews.domain.model.util
 
-@JvmInline
-public value class GameDeveloperId(
-    public val stringValue: String,
+public data class CanvasSize(
+    val width: UInt,
+    val height: UInt,
 ) {
-    override fun toString(): String = stringValue
+    init {
+        require(width != 0U && height != 0U)
+    }
 }

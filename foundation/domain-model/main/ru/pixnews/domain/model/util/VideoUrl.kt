@@ -13,14 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.domain.model.ranking
+@file:Suppress("WRONG_OVERLOADING_FUNCTION_ARGUMENTS")
 
-public enum class PegiRanking {
-    PEGI_3,
-    PEGI_4,
-    PEGI_7,
-    PEGI_12,
-    PEGI_16,
-    PEGI_18,
-    ;
+package ru.pixnews.domain.model.util
+
+public interface VideoUrl {
+    public val size: CanvasSize?
+        get() = null
+    public fun getUrl(): String
+    public fun getUrl(width: Int, height: Int): String
+}
+
+public data class DefaultVideoUrl(
+    val rawUrl: String,
+) : ImageUrl {
+    override fun getUrl(): String = rawUrl
+    override fun getUrl(width: Int, height: Int): String = rawUrl
 }

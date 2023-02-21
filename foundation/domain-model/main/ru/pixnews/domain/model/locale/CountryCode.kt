@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.domain.model.ranking
+package ru.pixnews.domain.model.locale
 
-import ru.pixnews.domain.model.game.GameId
-
-public data class GameAgeRanking(
-    val gameId: GameId,
-    val esrbRanking: EsrbRanking?,
-    val pegiRanking: PegiRanking?,
+/**
+ * Two-letters ISO 3166-1 country code
+ */
+@JvmInline
+public value class CountryCode(
+    public val iso31661Code: String,
 ) {
     init {
-        require(esrbRanking != null || pegiRanking != null)
+        require(iso31661Code.length == 2)
     }
+    override fun toString(): String = iso31661Code
 }

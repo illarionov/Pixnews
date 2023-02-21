@@ -17,28 +17,31 @@ package ru.pixnews.domain.model.game
 
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableSet
+import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.datasource.DataSources
-import ru.pixnews.domain.model.developer.GameDeveloper
 import ru.pixnews.domain.model.links.ExternalLinks
 import ru.pixnews.domain.model.locale.Localized
-import ru.pixnews.domain.model.ranking.GameAgeRanking
+import ru.pixnews.domain.model.rating.AgeRating
+import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.ImageUrl
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
+import ru.pixnews.domain.model.util.VideoUrl
 import ru.pixnews.libraries.kotlin.utils.isNotWhitespaceOnly
 
 public data class Game(
     val id: GameId,
     val name: Localized<String>,
+    val summary: Localized<RichText>,
     val description: Localized<RichText>,
 
-    val trailerUrls: ImmutableList<Url>,
+    val videoUrls: ImmutableList<VideoUrl>,
     val screenshots: ImmutableList<ImageUrl>,
 
-    val developer: GameDeveloper?,
-    val publisher: GameDeveloper?,
+    val developer: Company?,
+    val publisher: Company?,
 
-    val releaseDate: GameReleaseDate,
+    val releaseDate: ApproximateDate,
+    val releaseStatus: GameReleaseStatus?,
 
     val genres: ImmutableSet<GameGenre>,
     val tags: ImmutableSet<GameTag>,
@@ -46,15 +49,19 @@ public data class Game(
     val ratings: RatingsSummary,
     val links: ExternalLinks<GameId>,
 
-    val dataSources: DataSources,
+    val category: GameReleaseCategory?,
+    val parentGame: GameId?,
+    val series: GameSeriesSummary?,
 
     val platforms: ImmutableSet<GamePlatform>,
-    val ageRanking: GameAgeRanking?,
+    val ageRanking: AgeRating?,
 
-    val series: GameSeriesSummary?,
-    val supportedLanguages: SupportedLanguages?,
+    val localizations: GameLocalizations?,
     val gameMode: ImmutableSet<GameMode>,
+    val playerPerspectives: ImmutableSet<PlayerPerspective>,
     val systemRequirements: GameSystemRequirements?,
+
+    val dataSources: DataSources,
 ) {
     init {
         require(name.value.isNotWhitespaceOnly())

@@ -13,22 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.domain.model.game
+package ru.pixnews.domain.model.util
 
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import ru.pixnews.domain.model.locale.Localized
 
-public sealed class GameReleaseDate {
-    public object Unknown : GameReleaseDate()
-    public data class ExactDate(val date: LocalDate)
+public sealed class ApproximateDate {
+    public data class Unknown(
+        val description: Localized<String>? = null,
+    ) : ApproximateDate()
+    public data class Year(val date: LocalDate)
+    public data class YearMonth(val date: LocalDate)
+    public data class YearMonthDay(val date: LocalDate)
     public data class ExactDateTime(val date: LocalDateTime)
 
     public data class ToBeDeterminedYear(
         val year: Int,
         val description: Localized<String>,
-    ) : GameReleaseDate() {
+    ) : ApproximateDate() {
         init {
             @Suppress("MagicNumber")
             require(year > 1958)
@@ -38,7 +42,7 @@ public sealed class GameReleaseDate {
     public data class ToBeDeterminedQuarter(
         val quarter: Int,
         val description: Localized<String>,
-    ) : GameReleaseDate() {
+    ) : ApproximateDate() {
         init {
             @Suppress("MagicNumber")
             require(quarter in 1..4)

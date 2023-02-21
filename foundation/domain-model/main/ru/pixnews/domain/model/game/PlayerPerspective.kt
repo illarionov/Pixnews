@@ -15,10 +15,16 @@
  */
 package ru.pixnews.domain.model.game
 
-import kotlinx.collections.immutable.ImmutableSet
-import ru.pixnews.domain.model.locale.LanguageCode
+public sealed class PlayerPerspective(
+    public open val name: String,
+) {
+    public object Auditory : PlayerPerspective("Auditory")
+    public object Isometric : PlayerPerspective("Bird view / Isometric")
+    public object FirstPerson : PlayerPerspective("First person")
+    public object ThirdPerson : PlayerPerspective("Third person")
+    public object SideView : PlayerPerspective("Side view")
+    public object Text : PlayerPerspective("Text")
+    public object Vr : PlayerPerspective("VR (Virtual Reality)")
 
-public data class SupportedLanguages(
-    val sound: ImmutableSet<LanguageCode>,
-    val text: ImmutableSet<LanguageCode>,
-)
+    public data class Other(override val name: String) : GameMode(name)
+}

@@ -13,11 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:Suppress("WRONG_OVERLOADING_FUNCTION_ARGUMENTS")
+
 package ru.pixnews.domain.model.util
 
-@JvmInline
-public value class ImageUrl(
-    public val raw: String,
-) {
-    override fun toString(): String = raw
+public interface ImageUrl {
+    public val size: CanvasSize?
+        get() = null
+    public fun getUrl(): String
+    public fun getUrl(width: Int, height: Int): String
+}
+
+public data class DefaultImageUrl(
+    val rawUrl: String,
+) : ImageUrl {
+    override fun getUrl(): String = rawUrl
+    override fun getUrl(width: Int, height: Int): String = rawUrl
 }

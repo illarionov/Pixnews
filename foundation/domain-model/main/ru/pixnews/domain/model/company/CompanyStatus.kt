@@ -13,31 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.domain.model.links
+package ru.pixnews.domain.model.company
 
-public enum class ExternalLinkType {
-    OFFICIAL,
-    APP_STORE,
-    BATTLE_NET,
-    DISCORD,
-    EPICGAMES_STORE,
-    FACEBOOK,
-    GOG,
-    GOOGLE_PLAY,
-    HUMBLE,
-    INSTAGRAM,
-    ITCH_IO,
-    METACRITIC,
-    NINTENDO,
-    ORIGIN,
-    PLAYSTATION,
-    REDDIT,
-    SOUNDCLOUD,
-    STEAM,
-    TWITCH,
-    TWITTER,
-    VK,
-    XBOX_COM,
-    YOUTUBE,
+public enum class CompanyStatus {
+    ACTIVE,
+    INACTIVE,
+    UNKNOWN,
     ;
 }

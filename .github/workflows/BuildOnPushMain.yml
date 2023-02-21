@@ -21,7 +21,7 @@ env:
   CI: true
   TERM: dumb
   GRADLE_OPTS: >
-    -Dorg.gradle.jvmargs="-Xmx2G -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError -XX:+UseG1GC"
+    -Dorg.gradle.jvmargs="-Xmx4G -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError -XX:+UseG1GC"
     -Dorg.gradle.parallel=true
     -Dorg.gradle.workers.max=2
     -Dorg.gradle.vfs.watch=false
@@ -93,9 +93,15 @@ jobs:
           name: test-reports
           path: build-reports.tar.zst
 
+      - name: Uploads lint .sarif files to GitHub
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: .
+          category: android-lint
+
   instrumented-tests:
     name: Instrumented tests
-    runs-on: self-hosted
+    runs-on: macos-latest
     timeout-minutes: 60
     if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
 
@@ -120,6 +126,11 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
 
+      - name: Install emulators and accept licenses
+        run: |
+          yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;aosp_atd;x86" --sdk_root=${ANDROID_SDK_ROOT}
+          yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses
+
       - name: Unpack google-services.json
         env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
@@ -141,7 +152,7 @@ jobs:
             -Dorg.gradle.workers.max=1
             -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
             -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
-            phoneGroupDebugAndroidTest
+            pixel2api30DebugAndroidTest
             --continue
 
       - name: Cleanup secrets
@@ -149,7 +160,7 @@ jobs:
         run: rm -f app/src/google-services.json
 
       - name: Publish instrumented test results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: ${{ always() }}
         with:
           junit_files: '**/build/outputs/androidTest-results/**/*.xml'

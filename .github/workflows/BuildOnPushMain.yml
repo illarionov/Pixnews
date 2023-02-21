@@ -126,6 +126,11 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
 
+      - name: Install emulators and accept licenses
+        run: |
+          yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;aosp_atd;x86" --sdk_root=${ANDROID_SDK_ROOT}
+          yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses
+
       - name: Unpack google-services.json
         env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}

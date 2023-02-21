@@ -1,85 +1,28 @@
 # Pixnews
 
-Pixnews.ru
+Repository for experimenting with modern Android technologies.\
+There will be a complete readme someday.
 
-Календарь выхода игр под Android
+### Acknowledgements
 
-Приложение позволяет следить за выходом новых игр для основных игровых платформ (PS, PlayStation, XBox),
-вести списки желаемого, устанавливать напоминания и искать новые игры.
+This code was inspired by the following projects and repositories:
 
-Основная цель приложения — помочь пользователю определиться, во что поиграть в следующем месяце.
+- [Now in Android App](https://github.com/android/nowinandroid)
+  Fully functional Android sample app from Google
+- [Tivi](https://github.com/chrisbanes/tivi)
+  TV show tracking Android app by Chris Banes
+- [CatchUp](https://github.com/ZacSweers/CatchUp)
+  An app for catching up on things by Zac Sweers
+- [ReactiveCircus/streamlined](https://github.com/ReactiveCircus/streamlined)
+  News app by Yang C
+- [Whetstone](https://github.com/deliveryhero/whetstone)
+  Dependency injection framework for Android from Delivery Hero
+- [Gradle Project Setup Howto](https://github.com/jjohannes/gradle-project-setup-howto/tree/android)
+  "How to structure a growing Gradle project" guide by Jendrik Johannes
 
-В качестве основных источников данных по играм будут использоваться API сайтов [RAWG](https://rawg.io/apidocs) и/или [IGDB](https://www.igdb.com/api)
+Thanks to the authors of these projects and the authors of all other tools and libraries used in the code.
 
-## Экраны
+### License
 
-- **Календарь релизов**
-
-  Основной экран. Содержит краткую информацию по релизам на текущий, либо на выбранный месяц.
-
-  У пользователя есть возможность переключить представление из нескольких:
-  - Сетка (Grid) игр. Элемент сетки — изображение и название, с разбитием по дням
-  - Список (изображение, название, описание, панель действий)
-
-  Возможно, будут и другие варианты: карусель, либо календарь
-
-  На экране также будет выбор месяца/года и виджет установки фильтров (игровые платформы, жанры)
-
-- **Информация об игре**
-
-  Подробная информация о релизе:
-  - Основное изображение
-  - Скриншоты, трейлер(ы)
-  - Название
-  - Жанры (ссылки chips)
-  - Дата релиза
-  - Описание
-  - Платформы
-  - Кнопка добавить в список желаемого / свой список
-  - Ссылки на магазины, где можно купить игру
-  - Ссылки на сайт игры, youtube, twitch
-  - Кнопка "поделиться"
-  - Кнопка "Оценить" (1 - 5)
-  - Игровая серия (ссылка)
-  - Разработчик
-  - Издатель
-  - Похожие игры
-  - Первый комментарий с переходом на все комментарии по клику
-  - Последние новости по игре
-  - Связанные игры, игры от того же издателя / автора
-  - Источник информации
-
-  (список примерный, будут не все пункты)
-
-- **Списки желаемого**
-
-  Экран для работы со списками. Есть главный список — "желаемое" и
-  возможность создавать дополнительные списки. Для игр из этих списков в день релиза будут приходить уведомления
-
-- **Поиск**
-
-  Отдельный экран для поиска игр
-
-- **Профиль и настройки**
-
-  Привязанные аккаунты, предпочитаемый язык, тема приложения и т.п.
-
-- **Комментарии**
-
-  Экран с последними комментариями к игре с возможностью написать свою рецензию
-
-В дальнейшем могут быть добавлены дополнительные экраны: связанные новости, информация по разработчику,
-издателю и т.п.
-
-## Стек технологий
-
-- Kotlin
-- Coroutines, Flow
-- Многомодульное приложение
-- Clean Architecture
-- MVVM (LiveData, ViewModel, Data Binding Library)
-- Jetpack Navigation component
-- Dagger 2, Hilt
-- Room
-- Paging library
-- Junit, Mockito, Espresso
+Pixnews is distributed under the terms of the Apache License (Version 2.0). See the
+[license](https://github.com/illarionov/Pixnews/blob/main/LICENSE) for more information.

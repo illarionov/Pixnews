@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("FILE_NAME_MATCH_CLASS")
+package ru.pixnews.foundation.ui.design.assets.icons.action
 
-package ru.pixnews.foundation.ui.icon
-
-import androidx.annotation.DrawableRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Cancel
-import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.tooling.preview.Preview
+import ru.pixnews.foundation.ui.design.assets.icons.util.IconsPreview
 
-public object PixnewsIcons {
-    public val CancelIcon: ImageVector = Icons.Outlined.Cancel
+public object ActionIcons {
+    public val Cancel: ImageVector
+        get() = CancelOutlinedUnfilled400w0g24dp
 }
 
-@Immutable
-public sealed class Icon {
-    public data class ImageVectorIcon(val imageVector: ImageVector) : Icon()
-    public data class DrawableResourceIcon(@DrawableRes val id: Int) : Icon()
-}
+@Preview(showBackground = true)
+@Composable
+private fun ActionIconsPreview() = IconsPreview(
+    listOf(
+        ActionIcons.Cancel,
+    ),
+)

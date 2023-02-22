@@ -37,6 +37,7 @@ dependencies {
     implementation(project(":foundation:featuretoggles:public"))
     implementation(project(":foundation:featuretoggles:datasource-overrides"))
     implementation(project(":foundation:ui:theme"))
+    implementation(project(":foundation:ui:design-assets"))
     implementation(project(":libraries:compose-utils"))
 
     implementation(libs.androidx.activity.compose)

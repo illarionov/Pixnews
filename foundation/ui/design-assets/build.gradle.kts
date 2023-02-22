@@ -25,24 +25,23 @@ pixnews {
 
 android {
     namespace = "ru.pixnews.foundation.ui.design.assets"
-    buildFeatures {
-        androidResources = true
-    }
 }
 
 dependencies {
     api(project(":foundation:appconfig"))
     api(project(":foundation:featuretoggles:public"))
     api(project(":foundation:di:base"))
+    api(project(":foundation:ui:theme"))
+    implementation(project(":libraries:ui-tooling"))
     implementation(project(":libraries:android-utils"))
 
     api(libs.androidx.compose.ui.graphics)
     api(libs.androidx.compose.material3)
-    implementation(libs.android.material)
-    implementation(libs.androidx.compose.material.iconsExtended)
 
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.material.icons.core)
     implementation(libs.androidx.compose.ui.text.google.fonts)
-    implementation(libs.androidx.splashscreen)
+    implementation(libs.androidx.compose.ui.tooling.preview)
 
     androidTestImplementation(libs.androidx.test.rules)
 }

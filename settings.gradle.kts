@@ -41,7 +41,8 @@ listOf(
     "instrumented-testing",
     "domain-model",
     "redux",
-    "ui-theme",
+    "ui:theme",
+    "ui:design-assets",
 ).forEach {
     include(":foundation:$it")
 }

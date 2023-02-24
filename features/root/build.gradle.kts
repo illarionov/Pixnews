@@ -24,7 +24,7 @@ pixnews {
 }
 
 android {
-    namespace = "ru.pixnews.features.featuretoggles"
+    namespace = "ru.pixnews.features.root"
     buildFeatures {
         androidResources = true
     }
@@ -32,29 +32,27 @@ android {
 
 dependencies {
     implementation(project(":foundation:appconfig"))
-    implementation(project(":foundation:di:root-component"))
     implementation(project(":foundation:di:ui-base"))
-    implementation(project(":foundation:featuretoggles:public"))
-    implementation(project(":foundation:featuretoggles:datasource-overrides"))
+    implementation(project(":foundation:domain-model"))
     implementation(project(":foundation:ui:theme"))
     implementation(project(":foundation:ui:design-assets"))
-    implementation(project(":libraries:android-utils"))
-    implementation(project(":libraries:compose-utils"))
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material3.windowSizeClass)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.androidx.navigation.compose)
+
+    api(libs.inject)
     implementation(libs.kermit)
+    implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(project(":libraries:ui-tooling"))
     debugImplementation(libs.androidx.compose.ui.tooling)
-
-    api(libs.inject)
 
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(project(":foundation:instrumented-testing"))

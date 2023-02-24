@@ -14,10 +14,11 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/nav_graph">
-
-</navigation>
+<resources>
+    <string name="bottom_bar_title_calendar">Calendar</string>
+    <string name="bottom_bar_content_description_calendar">Calendar</string>
+    <string name="bottom_bar_title_collections">Collections</string>
+    <string name="bottom_bar_content_description_collections">Collections</string>
+    <string name="bottom_bar_title_profile">Profile</string>
+    <string name="bottom_bar_content_description_profile">Profile</string>
+</resources>

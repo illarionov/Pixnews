@@ -16,7 +16,6 @@
 package ru.pixnews.features.featuretoggles
 
 import android.os.Bundle
-import android.view.ViewGroup
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
 import co.touchlab.kermit.Logger
@@ -25,6 +24,7 @@ import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.ui.base.activity.BaseActivity
 import ru.pixnews.foundation.di.ui.base.viewmodel.injectedViewModel
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
+import ru.pixnews.libraries.android.utils.rootView
 import javax.inject.Inject
 
 public class FeatureToggleListActivity : BaseActivity() {
@@ -56,7 +56,6 @@ public class FeatureToggleListActivity : BaseActivity() {
                 )
             }
         }
-        val rootView = window.decorView.findViewById<ViewGroup>(android.R.id.content).getChildAt(0)
         WindowCompat.getInsetsController(window, rootView).apply {
             isAppearanceLightStatusBars = true
             isAppearanceLightNavigationBars = true

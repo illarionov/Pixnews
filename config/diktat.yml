@@ -48,6 +48,9 @@
   enabled: true
   configuration:
     maxNumberLength: '8'
+- name: LAMBDA_IS_NOT_LAST_PARAMETER
+  enabled: true
+  ignoreAnnotated: [ Composable ]
 - name: MAGIC_NUMBER
   enabled: false
 - name: MISSING_KDOC_CLASS_ELEMENTS

@@ -61,6 +61,7 @@ listOf(
 
 listOf(
     "featuretoggles",
+    "root",
 ).forEach {
     include(":features:$it")
 }

@@ -34,7 +34,6 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
         buildConfig = true
     }
 
@@ -44,39 +43,45 @@ android {
 }
 
 dependencies {
-    implementation(project(":foundation:appconfig"))
+    implementation(project(":features:root"))
     implementation(project(":foundation:analytics"))
-    implementation(project(":foundation:domain-model"))
+    implementation(project(":foundation:appconfig"))
     implementation(project(":foundation:di:base"))
     implementation(project(":foundation:di:root-component"))
     implementation(project(":foundation:di:ui-base"))
-    implementation(project(":foundation:ui:theme"))
-    implementation(project(":foundation:ui:design-assets"))
     implementation(project(":foundation:dispatchers"))
-    implementation(project(":foundation:initializers"))
-    implementation(project(":foundation:featuretoggles:public"))
-    implementation(project(":foundation:featuretoggles:internal"))
+    implementation(project(":foundation:domain-model"))
     implementation(project(":foundation:featuretoggles:datasource-firebase"))
     implementation(project(":foundation:featuretoggles:datasource-overrides"))
+    implementation(project(":foundation:featuretoggles:internal"))
+    implementation(project(":foundation:featuretoggles:public"))
+    debugImplementation(project(":features:featuretoggles"))
+    implementation(project(":foundation:initializers"))
+    implementation(project(":foundation:ui:design-assets"))
+    implementation(project(":foundation:ui:theme"))
+    implementation(project(":libraries:android-utils"))
     implementation(project(":libraries:coroutines"))
     implementation(project(":libraries:functional"))
     implementation(project(":libraries:kotlin-utils"))
-    debugImplementation(project(":features:featuretoggles"))
 
-    implementation(libs.kermit)
-
-    implementation(libs.android.material)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.fragment)
-    implementation(libs.androidx.navigation.fragment)
-    implementation(libs.androidx.navigation.ui)
-    implementation(libs.androidx.splashscreen)
-    implementation(libs.androidx.startup)
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material3.windowSizeClass)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.runtime.tracing)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
+    implementation(libs.androidx.splashscreen)
+    implementation(libs.androidx.startup)
+
+    implementation(libs.kermit)
+    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
+
     testImplementation(libs.mockk)
     testImplementation(libs.junit.jupiter.params)
 }

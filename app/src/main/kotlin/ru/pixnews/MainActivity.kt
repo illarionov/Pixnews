@@ -16,24 +16,25 @@
 package ru.pixnews
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.Lifecycle.State.STARTED
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.core.view.WindowCompat
 import co.touchlab.kermit.Logger
-import kotlinx.coroutines.launch
-import ru.pixnews.databinding.ActivityMainBinding
+import ru.pixnews.features.root.PixnewsRootContent
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.ui.base.activity.BaseActivity
-import ru.pixnews.foundation.featuretoggles.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.ui.experiments.DarkModeExperiment
+import ru.pixnews.libraries.android.utils.rootView
 import ru.pixnews.loadingstatus.AppLoadingStatus
 import javax.inject.Inject
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 class MainActivity : BaseActivity() {
-    private lateinit var binding: ActivityMainBinding
-
     @Inject
     internal lateinit var appConfig: AppConfig
 
@@ -52,18 +53,17 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbar)
-
-        binding.contentMain.textView.text = "Build timestamp: ${appConfig.timestamp}"
-
-        lifecycleScope.launch {
-            repeatOnLifecycle(STARTED) {
-                val variant: ExperimentVariant = darkModeToggle.getVariant()
-                logger.w { "Dark mode variant: $variant" }
-            }
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        window.navigationBarColor = Color.Transparent.toArgb()
+        setContent {
+            PixnewsRootContent(
+                appConfig = appConfig,
+                windowSizeClass = calculateWindowSizeClass(this),
+            )
+        }
+        WindowCompat.getInsetsController(window, rootView).apply {
+            isAppearanceLightStatusBars = true
+            isAppearanceLightNavigationBars = true
         }
     }
 

@@ -23,34 +23,41 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.pixnews.foundation.ui.design.assets.icons.navigation.NavigationIcons.Calendar
 import ru.pixnews.foundation.ui.design.assets.icons.navigation.NavigationIcons.Collections
-import ru.pixnews.foundation.ui.design.assets.icons.navigation.NavigationIcons.Person
+import ru.pixnews.foundation.ui.design.assets.icons.navigation.NavigationIcons.Profile
 
 public object NavigationIcons {
-    public object Calendar {
-        public val Unfilled: ImageVector
+    public object Calendar : IconPair {
+        public override val unfilled: ImageVector
             get() = CalendarMonthRoundedUnfilled400w0g24dp
-        public val Filled: ImageVector
+        public override val filled: ImageVector
             get() = CalendarMonthRoundedFilled400w0g24dp
     }
 
-    public object Collections {
-        public val Unfilled: ImageVector
+    public object Collections : IconPair {
+        public override val unfilled: ImageVector
             get() = CollectionsBookmarkRoundedUnfilled400w0g24dp
-        public val Filled: ImageVector
+        public override val filled: ImageVector
             get() = CollectionsBookmarkRoundedFilled400w0g24dp
     }
 
-    public object Person {
-        public val Unfilled: ImageVector
+    public object Profile : IconPair {
+        public override val unfilled: ImageVector
             get() = PersonRoundedUnfilled400w0g24dp
-        public val Filled: ImageVector
+        public override val filled: ImageVector
             get() = PersonRoundedFilled400w0g24dp
+    }
+
+    @Immutable
+    public interface IconPair {
+        public val unfilled: ImageVector
+        public val filled: ImageVector
     }
 }
 
@@ -69,12 +76,12 @@ private fun NavigationIconsPreview() {
     ) {
         items(
             items = listOf(
-                Calendar.Unfilled,
-                Calendar.Filled,
-                Collections.Unfilled,
-                Collections.Filled,
-                Person.Unfilled,
-                Person.Filled,
+                Calendar.unfilled,
+                Calendar.filled,
+                Collections.unfilled,
+                Collections.filled,
+                Profile.unfilled,
+                Profile.filled,
             ),
         ) { icon ->
             Image(

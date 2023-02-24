@@ -13,11 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.model.navigation
+package ru.pixnews.features.root
 
-public enum class TopLevelDestination {
-    CALENDAR,
-    COLLECTIONS,
-    PROFILE,
-    ;
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.runtime.Composable
+import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.ui.theme.PixnewsTheme
+
+@Composable
+public fun PixnewsRootContent(
+    appConfig: AppConfig,
+    windowSizeClass: WindowSizeClass,
+) {
+    PixnewsTheme(
+        appConfig = appConfig,
+        useDynamicColor = false,
+    ) {
+        PixnewsApp(windowSizeClass = windowSizeClass)
+    }
 }

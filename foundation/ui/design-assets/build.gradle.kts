@@ -25,6 +25,9 @@ pixnews {
 
 android {
     namespace = "ru.pixnews.foundation.ui.design.assets"
+    buildFeatures {
+        androidResources = true
+    }
 }
 
 dependencies {
@@ -39,8 +42,6 @@ dependencies {
     api(libs.androidx.compose.material3)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.androidx.compose.material.icons.core)
-    implementation(libs.androidx.compose.ui.text.google.fonts)
     implementation(libs.androidx.compose.ui.tooling.preview)
 
     androidTestImplementation(libs.androidx.test.rules)

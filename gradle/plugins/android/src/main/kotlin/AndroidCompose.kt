@@ -22,6 +22,7 @@ import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import ru.pixnews.compose.buildComposeMetricsParameters
 
 internal fun Project.configureCompose(
@@ -47,12 +48,13 @@ internal fun Project.configureCompose(
         }
     }
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()
+    tasks.withType<KotlinCompilationTask<KotlinJvmCompilerOptions>>()
         .matching { it !is KaptGenerateStubsTask }
         .configureEach {
             compilerOptions {
                 freeCompilerArgs.addAll(
                     "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+                    "-opt-in=androidx.compose.foundation.layout.ExperimentalLayoutApi",
                 )
             }
         }
@@ -63,7 +65,7 @@ internal fun Project.configureCompose(
 private fun Project.configureComposeMetrics() {
     val metricsParams = buildComposeMetricsParameters()
     if (metricsParams.isNotEmpty()) {
-        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()
+        tasks.withType<KotlinCompilationTask<KotlinJvmCompilerOptions>>()
             .matching { it !is KaptGenerateStubsTask }
             .configureEach {
                 compilerOptions {

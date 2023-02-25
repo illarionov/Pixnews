@@ -17,8 +17,8 @@ package ru.pixnews.features.root
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
+import ru.pixnews.foundation.ui.assets.icons.navigation.NavigationIcons
 import ru.pixnews.foundation.ui.design.R
-import ru.pixnews.foundation.ui.design.assets.icons.navigation.NavigationIcons
 
 @Immutable
 public enum class TopLevelDestination(

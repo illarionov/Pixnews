@@ -36,8 +36,9 @@ dependencies {
     implementation(project(":foundation:di:ui-base"))
     implementation(project(":foundation:featuretoggles:public"))
     implementation(project(":foundation:featuretoggles:datasource-overrides"))
-    implementation(project(":foundation:ui:theme"))
+    implementation(project(":foundation:ui:assets-icons"))
     implementation(project(":foundation:ui:design"))
+    implementation(project(":foundation:ui:theme"))
     implementation(project(":libraries:android-utils"))
     implementation(project(":libraries:compose-utils"))
 

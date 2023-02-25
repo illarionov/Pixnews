@@ -31,8 +31,9 @@ dependencies {
     implementation(project(":foundation:appconfig"))
     implementation(project(":foundation:di:ui-base"))
     implementation(project(":foundation:domain-model"))
-    implementation(project(":foundation:ui:theme"))
+    implementation(project(":foundation:ui:assets-icons"))
     implementation(project(":foundation:ui:design"))
+    implementation(project(":foundation:ui:theme"))
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)

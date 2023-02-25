@@ -20,14 +20,11 @@ plugins {
 
 pixnews {
     compose.set(true)
-    managedDevices.set(true)
+    managedDevices.set(false)
 }
 
 android {
     namespace = "ru.pixnews.features.root"
-    buildFeatures {
-        androidResources = true
-    }
 }
 
 dependencies {
@@ -35,7 +32,7 @@ dependencies {
     implementation(project(":foundation:di:ui-base"))
     implementation(project(":foundation:domain-model"))
     implementation(project(":foundation:ui:theme"))
-    implementation(project(":foundation:ui:design-assets"))
+    implementation(project(":foundation:ui:design"))
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)

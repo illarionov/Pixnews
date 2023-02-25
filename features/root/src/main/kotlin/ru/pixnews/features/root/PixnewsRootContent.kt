@@ -15,7 +15,6 @@
  */
 package ru.pixnews.features.root
 
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
@@ -23,12 +22,11 @@ import ru.pixnews.foundation.ui.theme.PixnewsTheme
 @Composable
 public fun PixnewsRootContent(
     appConfig: AppConfig,
-    windowSizeClass: WindowSizeClass,
 ) {
     PixnewsTheme(
         appConfig = appConfig,
         useDynamicColor = false,
     ) {
-        PixnewsApp(windowSizeClass = windowSizeClass)
+        PixnewsApp()
     }
 }

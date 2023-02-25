@@ -28,21 +28,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import ru.pixnews.features.root.model.PixnewsRootNavigationState
-import ru.pixnews.features.root.model.navigation.TopLevelDestination
-import ru.pixnews.features.root.model.rememberPixnewsRootNavigationState
-import ru.pixnews.features.root.ui.PixnewsBottomNavigationBar
-import ru.pixnews.features.root.ui.PixnewsNavHost
+import ru.pixnews.foundation.ui.theme.PixnewsTheme
+import ru.pixnews.libraries.ui.tooling.CompletePreviews
 
 @Composable
 public fun PixnewsApp(
-    @Suppress("UNUSED_PARAMETER") windowSizeClass: WindowSizeClass,
     modifier: Modifier = Modifier,
     navigationState: PixnewsRootNavigationState = rememberPixnewsRootNavigationState(),
 ) {
@@ -54,9 +49,12 @@ public fun PixnewsApp(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         snackbarHost = { SnackbarHost(snackbarHostState) },
         bottomBar = {
-            PixnewsBottomNavigationBar(
-                selectedTabFlow = navigationState.currentTopLevelDestinationFlow,
-                onTabClicked = onTabClicked(navigationState),
+            val selectedItem = navigationState.currentTopLevelDestinationFlow
+                .collectAsState(initial = TopLevelDestination.START_DESTINATION)
+
+            BottomNavigationBar(
+                selectedTabFlow = selectedItem,
+                onTabClicked = navigationState::navigateToTopLevelDestination,
             )
         },
         modifier = modifier,
@@ -72,7 +70,7 @@ public fun PixnewsApp(
                     ),
                 ),
         ) {
-            PixnewsNavHost(
+            NavHost(
                 navController = navigationState.navController,
                 modifier = Modifier.fillMaxSize(),
             )
@@ -81,14 +79,11 @@ public fun PixnewsApp(
 }
 
 @Composable
-@Suppress("COMPLEX_EXPRESSION")
-private fun onTabClicked(navigationState: PixnewsRootNavigationState) = { targetDestination: TopLevelDestination ->
-    val navController = navigationState.navController
-    navController.navigate(targetDestination.route) {
-        popUpTo(navController.graph.findStartDestination().id) {
-            saveState = true
-        }
-        launchSingleTop = true
-        restoreState = true
+@CompletePreviews
+private fun PreviewApp() {
+    PixnewsTheme(
+        useDynamicColor = false,
+    ) {
+        PixnewsApp()
     }
 }

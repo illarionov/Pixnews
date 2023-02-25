@@ -24,7 +24,7 @@ pixnews {
 }
 
 android {
-    namespace = "ru.pixnews.foundation.ui.design.assets"
+    namespace = "ru.pixnews.foundation.ui.design"
     buildFeatures {
         androidResources = true
     }

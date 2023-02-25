@@ -42,7 +42,7 @@ listOf(
     "domain-model",
     "redux",
     "ui:theme",
-    "ui:design-assets",
+    "ui:design",
 ).forEach {
     include(":foundation:$it")
 }

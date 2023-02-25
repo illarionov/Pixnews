@@ -57,7 +57,7 @@ dependencies {
     implementation(project(":foundation:featuretoggles:public"))
     debugImplementation(project(":features:featuretoggles"))
     implementation(project(":foundation:initializers"))
-    implementation(project(":foundation:ui:design-assets"))
+    implementation(project(":foundation:ui:design"))
     implementation(project(":foundation:ui:theme"))
     implementation(project(":libraries:android-utils"))
     implementation(project(":libraries:coroutines"))

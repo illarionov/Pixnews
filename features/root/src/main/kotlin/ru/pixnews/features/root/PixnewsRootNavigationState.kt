@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.features.root.model
+package ru.pixnews.features.root
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import ru.pixnews.features.root.model.navigation.TopLevelDestination
 
 @Composable
 public fun rememberPixnewsRootNavigationState(
@@ -40,14 +41,24 @@ public class PixnewsRootNavigationState(
     public val navController: NavHostController,
 ) {
     public val currentDestination: NavDestination?
-        @Composable get() = navController
-            .currentBackStackEntry?.destination
+        @Composable get() = navController.currentBackStackEntry?.destination
 
     public val currentTopLevelDestinationFlow: Flow<TopLevelDestination?>
         get() = navController.currentBackStackEntryFlow
             .map { entry ->
                 entry.destination.hierarchy.firstNotNullOfOrNull { topLevelRoutes[it.route] }
             }
+
+    public fun navigateToTopLevelDestination(destination: TopLevelDestination) {
+        val topLevelNavOptions = navOptions {
+            popUpTo(navController.graph.findStartDestination().id) {
+                saveState = true
+            }
+            launchSingleTop = true
+            restoreState = true
+        }
+        navController.navigate(destination.route, topLevelNavOptions)
+    }
 
     private companion object {
         private val topLevelRoutes = TopLevelDestination

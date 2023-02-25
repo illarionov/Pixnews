@@ -13,19 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.features.root.ui
+package ru.pixnews.features.root
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import ru.pixnews.features.root.model.navigation.TopLevelDestination
+import ru.pixnews.features.root.TopLevelDestination.CALENDAR
+import ru.pixnews.features.root.TopLevelDestination.COLLECTIONS
+import ru.pixnews.features.root.TopLevelDestination.PROFILE
 
 @Composable
-public fun PixnewsNavHost(
+internal fun NavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
+    startDestination: String = TopLevelDestination.START_DESTINATION.route,
     calendarComposable: @Composable () -> Unit = {},
     collectionsComposable: @Composable () -> Unit = {},
     profileComposable: @Composable () -> Unit = {},
@@ -33,15 +36,15 @@ public fun PixnewsNavHost(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = TopLevelDestination.START_DESTINATION.route,
+        startDestination = startDestination,
     ) {
-        composable(TopLevelDestination.CALENDAR.route) {
+        composable(CALENDAR.route) {
             calendarComposable()
         }
-        composable(TopLevelDestination.COLLECTIONS.route) {
+        composable(COLLECTIONS.route) {
             collectionsComposable()
         }
-        composable(TopLevelDestination.PROFILE.route) {
+        composable(PROFILE.route) {
             profileComposable()
         }
     }

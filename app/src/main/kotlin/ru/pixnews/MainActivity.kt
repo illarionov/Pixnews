@@ -17,8 +17,6 @@ package ru.pixnews
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -33,7 +31,6 @@ import ru.pixnews.libraries.android.utils.rootView
 import ru.pixnews.loadingstatus.AppLoadingStatus
 import javax.inject.Inject
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 class MainActivity : BaseActivity() {
     @Inject
     internal lateinit var appConfig: AppConfig
@@ -58,7 +55,6 @@ class MainActivity : BaseActivity() {
         setContent {
             PixnewsRootContent(
                 appConfig = appConfig,
-                windowSizeClass = calculateWindowSizeClass(this),
             )
         }
         WindowCompat.getInsetsController(window, rootView).apply {

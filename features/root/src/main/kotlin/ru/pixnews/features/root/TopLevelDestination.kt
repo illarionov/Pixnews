@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.features.root.model.navigation
+package ru.pixnews.features.root
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
-import ru.pixnews.foundation.ui.design.assets.R
+import ru.pixnews.foundation.ui.design.R
 import ru.pixnews.foundation.ui.design.assets.icons.navigation.NavigationIcons
 
 @Immutable
 public enum class TopLevelDestination(
     public val route: String,
-    @StringRes public val title: Int,
-    @StringRes public val contentDescription: Int,
-    public val icon: NavigationIcons.IconPair,
+    @StringRes internal val title: Int,
+    @StringRes internal val contentDescription: Int,
+    internal val icon: NavigationIcons.IconPair,
 ) {
     CALENDAR(
         route = "calendar",

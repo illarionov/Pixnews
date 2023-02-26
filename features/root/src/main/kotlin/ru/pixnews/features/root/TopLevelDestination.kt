@@ -17,6 +17,9 @@ package ru.pixnews.features.root
 
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
+import ru.pixnews.features.calendar.navigation.CALENDAR_ROUTE
+import ru.pixnews.features.collections.navigation.COLLECTIONS_ROUTE
+import ru.pixnews.features.profile.navigation.PROFILE_ROUTE
 import ru.pixnews.foundation.ui.assets.icons.navigation.NavigationIcons
 import ru.pixnews.foundation.ui.design.R
 
@@ -28,19 +31,19 @@ public enum class TopLevelDestination(
     internal val icon: NavigationIcons.IconPair,
 ) {
     CALENDAR(
-        route = "calendar",
+        route = CALENDAR_ROUTE,
         title = R.string.bottom_bar_title_calendar,
         contentDescription = R.string.bottom_bar_content_description_calendar,
         icon = NavigationIcons.Calendar,
     ),
     COLLECTIONS(
-        route = "collections",
+        route = COLLECTIONS_ROUTE,
         title = R.string.bottom_bar_title_collections,
         contentDescription = R.string.bottom_bar_content_description_collections,
         icon = NavigationIcons.Collections,
     ),
     PROFILE(
-        route = "profile",
+        route = PROFILE_ROUTE,
         title = R.string.bottom_bar_title_profile,
         contentDescription = R.string.bottom_bar_content_description_profile,
         icon = NavigationIcons.Profile,

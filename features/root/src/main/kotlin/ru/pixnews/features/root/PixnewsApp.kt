@@ -18,7 +18,7 @@ package ru.pixnews.features.root
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.consumedWindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
@@ -32,7 +32,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.libraries.ui.tooling.CompletePreviews
 
@@ -44,7 +43,6 @@ public fun PixnewsApp(
     val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
-        containerColor = Color.Transparent,
         contentColor = MaterialTheme.colorScheme.onBackground,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -63,7 +61,7 @@ public fun PixnewsApp(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .consumedWindowInsets(paddingValues)
+                .consumeWindowInsets(paddingValues)
                 .windowInsetsPadding(
                     WindowInsets.safeDrawing.only(
                         WindowInsetsSides.Horizontal,

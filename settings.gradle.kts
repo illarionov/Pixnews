@@ -61,7 +61,10 @@ listOf(
 }
 
 listOf(
+    "calendar",
+    "collections",
     "featuretoggles",
+    "profile",
     "root",
 ).forEach {
     include(":features:$it")

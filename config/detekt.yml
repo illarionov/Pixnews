@@ -26,6 +26,8 @@ complexity:
   LongParameterList:
     functionThreshold: 10
     ignoreDefaultParameters: true
+  LongMethod:
+    ignoreAnnotated: ['Composable', 'Preview', '*Previews']
 
 coroutines:
   active: true

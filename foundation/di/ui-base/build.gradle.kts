@@ -19,7 +19,7 @@ plugins {
 }
 
 pixnews {
-    compose.set(false)
+    compose.set(true)
     managedDevices.set(false)
 }
 

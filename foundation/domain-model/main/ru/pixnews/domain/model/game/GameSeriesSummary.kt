@@ -16,8 +16,8 @@
 package ru.pixnews.domain.model.game
 
 import kotlinx.collections.immutable.ImmutableList
+import ru.pixnews.domain.model.datasource.DataSource
 import ru.pixnews.domain.model.locale.Localized
-import javax.sql.DataSource
 
 public data class GameSeriesSummary(
     val id: GameSeriesId,

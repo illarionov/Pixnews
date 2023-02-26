@@ -15,12 +15,14 @@
  */
 package ru.pixnews.domain.model.company
 
-import kotlinx.datetime.LocalDate
+import kotlinx.collections.immutable.ImmutableList
 import ru.pixnews.domain.model.company.CompanyStatus.UNKNOWN
-import ru.pixnews.domain.model.datasource.DataSources
-import ru.pixnews.domain.model.links.ExternalLinks
+import ru.pixnews.domain.model.datasource.DataSource
+import ru.pixnews.domain.model.links.ExternalLink
+import ru.pixnews.domain.model.links.ExternalLinkType.OFFICIAL
 import ru.pixnews.domain.model.locale.CountryCode
 import ru.pixnews.domain.model.locale.Localized
+import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.ImageUrl
 import ru.pixnews.domain.model.util.RichText
 import ru.pixnews.domain.model.util.Url
@@ -30,12 +32,13 @@ public data class Company(
     val name: String,
     val description: Localized<RichText>,
     val avatar: ImageUrl?,
-    val url: Url?,
-    val foundingDate: LocalDate?,
+    val foundingDate: ApproximateDate?,
     val status: CompanyStatus = UNKNOWN,
     val country: CountryCode?,
     val parentCompany: CompanyId?,
 
-    val dataSources: DataSources,
-    val links: ExternalLinks<CompanyId>,
-)
+    val dataSources: DataSource,
+    val links: ImmutableList<ExternalLink>,
+) {
+    val url: Url? = links.firstOrNull { it.type == OFFICIAL }?.url
+}

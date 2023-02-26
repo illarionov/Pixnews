@@ -13,12 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.domain.model.datasource
+package ru.pixnews.foundation.ui.design.card
 
-public sealed class ExternalDataSource {
-    public object Rawg : ExternalDataSource()
-    public object Igdb : ExternalDataSource()
-    public data class Other(
-        val name: String,
-    ) : ExternalDataSource()
+import androidx.compose.runtime.Immutable
+import kotlinx.collections.immutable.ImmutableSet
+import ru.pixnews.domain.model.game.GameId
+import ru.pixnews.domain.model.game.GamePlatform
+import ru.pixnews.domain.model.util.ImageUrl
+
+@Immutable
+public interface PixnewsGameCardGridSmallUiModel {
+    public val gameId: GameId
+    public val title: String
+    public val cover: ImageUrl?
+    public val platforms: ImmutableSet<GamePlatform>
+    public val favourite: Boolean
 }

@@ -26,7 +26,7 @@ public interface VideoUrl {
 
 public data class DefaultVideoUrl(
     val rawUrl: String,
-) : ImageUrl {
+) : VideoUrl {
     override fun getUrl(): String = rawUrl
     override fun getUrl(width: Int, height: Int): String = rawUrl
 }

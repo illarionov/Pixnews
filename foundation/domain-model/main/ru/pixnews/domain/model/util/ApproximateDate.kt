@@ -18,24 +18,56 @@ package ru.pixnews.domain.model.util
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Month
 import ru.pixnews.domain.model.locale.Localized
+
+private const val YEAR_MIN = 1958
 
 public sealed class ApproximateDate {
     public data class Unknown(
         val description: Localized<String>? = null,
     ) : ApproximateDate()
-    public data class Year(val date: LocalDate)
-    public data class YearMonth(val date: LocalDate)
-    public data class YearMonthDay(val date: LocalDate)
-    public data class ExactDateTime(val date: LocalDateTime)
+
+    public data class Year(val year: Int) : ApproximateDate() {
+        init {
+            require(year > YEAR_MIN)
+        }
+    }
+
+    public data class YearMonth(val date: LocalDate) : ApproximateDate() {
+        init {
+            require(date.year > YEAR_MIN)
+        }
+        public constructor(year: Int, month: Month) : this(
+            LocalDate(
+                year = year,
+                month = month,
+                dayOfMonth = 1,
+            ),
+        )
+}
+
+    public data class YearMonthDay(val date: LocalDate) : ApproximateDate() {
+        init {
+            require(date.year > YEAR_MIN)
+        }
+        public constructor(year: Int, month: Month, dayOfMonth: Int) : this(
+            LocalDate(
+                year = year,
+                month = month,
+                dayOfMonth = dayOfMonth,
+            ),
+        )
+}
+
+    public data class ExactDateTime(val date: LocalDateTime) : ApproximateDate()
 
     public data class ToBeDeterminedYear(
         val year: Int,
         val description: Localized<String>,
     ) : ApproximateDate() {
         init {
-            @Suppress("MagicNumber")
-            require(year > 1958)
+            require(year > YEAR_MIN)
         }
     }
 
@@ -50,7 +82,7 @@ public sealed class ApproximateDate {
     }
 
     public data class ToBeDetermined(
-        val expected: Pair<Instant, Instant>?,
+        val expected: Pair<Instant, Instant?>?,
         val description: Localized<String>,
-    )
+    ) : ApproximateDate()
 }

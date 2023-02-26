@@ -20,7 +20,7 @@ plugins {
 
 pixnews {
     compose.set(true)
-    managedDevices.set(false)
+    managedDevices.set(true)
 }
 
 android {
@@ -28,6 +28,11 @@ android {
 }
 
 dependencies {
+    // TODO should be in app
+    implementation(project(":features:calendar"))
+    implementation(project(":features:collections"))
+    implementation(project(":features:profile"))
+
     implementation(project(":foundation:appconfig"))
     implementation(project(":foundation:di:ui-base"))
     implementation(project(":foundation:domain-model"))

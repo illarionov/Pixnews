@@ -28,5 +28,6 @@ android {
 }
 
 dependencies {
+    api(libs.androidx.core)
     api(libs.androidx.compose.foundation)
 }

@@ -16,6 +16,7 @@
 package ru.pixnews.domain.model.game
 
 public enum class GameReleaseStatus {
+    NOT_YET_RELEASED,
     RELEASED,
     ALPHA,
     BETA,

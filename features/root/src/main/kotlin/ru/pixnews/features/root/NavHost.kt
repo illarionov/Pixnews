@@ -19,33 +19,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import ru.pixnews.features.root.TopLevelDestination.CALENDAR
-import ru.pixnews.features.root.TopLevelDestination.COLLECTIONS
-import ru.pixnews.features.root.TopLevelDestination.PROFILE
+import ru.pixnews.features.calendar.navigation.calendarScreen
+import ru.pixnews.features.collections.navigation.collectionsScreen
+import ru.pixnews.features.profile.navigation.profileScreen
 
 @Composable
 internal fun NavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
     startDestination: String = TopLevelDestination.START_DESTINATION.route,
-    calendarComposable: @Composable () -> Unit = {},
-    collectionsComposable: @Composable () -> Unit = {},
-    profileComposable: @Composable () -> Unit = {},
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
         startDestination = startDestination,
     ) {
-        composable(CALENDAR.route) {
-            calendarComposable()
-        }
-        composable(COLLECTIONS.route) {
-            collectionsComposable()
-        }
-        composable(PROFILE.route) {
-            profileComposable()
-        }
+        calendarScreen()
+        collectionsScreen()
+        profileScreen()
     }
 }

@@ -86,6 +86,8 @@
   enabled: false
   configuration:
     typeReferenceLength: '35'
+- name: UNUSED_IMPORT # Enabled in Detekt
+  enabled: false
 - name: USE_DATA_CLASS
   enabled: false
 - name: VARIABLE_NAME_INCORRECT_FORMAT

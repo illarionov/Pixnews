@@ -44,6 +44,11 @@ android {
 
 dependencies {
     implementation(project(":features:root"))
+
+    implementation(project(":features:calendar"))
+    implementation(project(":features:collections"))
+    implementation(project(":features:profile"))
+
     implementation(project(":foundation:analytics"))
     implementation(project(":foundation:appconfig"))
     implementation(project(":foundation:di:base"))
@@ -81,6 +86,7 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
+    runtimeOnly(libs.kotlinx.serialization.core)
 
     testImplementation(libs.mockk)
     testImplementation(libs.junit.jupiter.params)

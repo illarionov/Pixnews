@@ -14,11 +14,19 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="bottom_bar_title_calendar">Calendar</string>
     <string name="bottom_bar_content_description_calendar">Calendar</string>
     <string name="bottom_bar_title_collections">Collections</string>
     <string name="bottom_bar_content_description_collections">Collections</string>
     <string name="bottom_bar_title_profile">Profile</string>
     <string name="bottom_bar_content_description_profile">Profile</string>
+
+    <string name="search_game_placeholder">Search Game</string>
+    <string name="search_game_clear_field_content_description">Clear the game search field</string>
+
+    <string name="in_favorites_content_description">in favorites</string>
+    <string name="platforms_content_description">
+        Platforms: <xliff:g example="Windows, PlayStation 5, " id="platforms">%1$s</xliff:g>
+    </string>
 </resources>

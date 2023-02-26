@@ -18,8 +18,8 @@ package ru.pixnews.domain.model.game
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableSet
 import ru.pixnews.domain.model.company.Company
-import ru.pixnews.domain.model.datasource.DataSources
-import ru.pixnews.domain.model.links.ExternalLinks
+import ru.pixnews.domain.model.datasource.DataSource
+import ru.pixnews.domain.model.links.ExternalLink
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
 import ru.pixnews.domain.model.util.ApproximateDate
@@ -47,7 +47,7 @@ public data class Game(
     val tags: ImmutableSet<GameTag>,
 
     val ratings: RatingsSummary,
-    val links: ExternalLinks<GameId>,
+    val links: ImmutableList<ExternalLink>,
 
     val category: GameReleaseCategory?,
     val parentGame: GameId?,
@@ -61,7 +61,7 @@ public data class Game(
     val playerPerspectives: ImmutableSet<PlayerPerspective>,
     val systemRequirements: GameSystemRequirements?,
 
-    val dataSources: DataSources,
+    val dataSources: DataSource,
 ) {
     init {
         require(name.value.isNotWhitespaceOnly())

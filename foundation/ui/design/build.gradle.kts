@@ -32,14 +32,20 @@ android {
 
 dependencies {
     api(project(":foundation:appconfig"))
-    api(project(":foundation:featuretoggles:public"))
     api(project(":foundation:di:base"))
+    api(project(":foundation:featuretoggles:public"))
     api(project(":foundation:ui:theme"))
-    implementation(project(":libraries:ui-tooling"))
+    api(project(":foundation:domain-model"))
+    implementation(project(":foundation:ui:assets-icons"))
     implementation(project(":libraries:android-utils"))
+    implementation(project(":libraries:ui-tooling"))
+    implementation(testFixtures(project(":foundation:domain-model"))) {
+        because("For use with Composable Preview")
+    }
 
     api(libs.androidx.compose.ui.graphics)
     api(libs.androidx.compose.material3)
+    api(libs.kotlinx.collections.immutable)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)

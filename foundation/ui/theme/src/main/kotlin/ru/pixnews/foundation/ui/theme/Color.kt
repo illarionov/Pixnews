@@ -48,6 +48,13 @@ public val md_theme_light_surfaceTint: Color = Color(0xFF4356B9)
 public val md_theme_light_outlineVariant: Color = Color(0xFFC6C5D0)
 public val md_theme_light_scrim: Color = Color(0xFF000000)
 
+public val md_theme_palette_tertiary70: Color = Color(0xFFA5B40D)
+public val md_theme_palette_primary30: Color = Color(0xFF283C9F)
+
+public val md_theme_palette_neutral_variant_40: Color = Color(0xFF5D5E67)
+public val md_theme_palette_neutral_variant_90: Color = Color(0xFFE3E1EC)
+public val md_theme_palette_neutral_variant_95: Color = Color(0xFFF1EFFA)
+
 public val md_theme_dark_primary: Color = Color(0xFFBAC3FF)
 public val md_theme_dark_onPrimary: Color = Color(0xFF072289)
 public val md_theme_dark_primaryContainer: Color = Color(0xFF283C9F)

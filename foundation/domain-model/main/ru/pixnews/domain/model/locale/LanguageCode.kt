@@ -28,8 +28,22 @@ public value class LanguageCode private constructor(
     }
 
     public companion object {
+        public val ARABIC: LanguageCode = from("ara")
+        public val BENGALI: LanguageCode = from("ben")
+        public val CHINESE: LanguageCode = from("zho")
         public val ENGLISH: LanguageCode = from("eng")
+        public val FRENCH: LanguageCode = from("fra")
+        public val GERMAN: LanguageCode = from("deu")
+        public val HINDI: LanguageCode = from("hin")
+        public val INDONESIAN: LanguageCode = from("ind")
+        public val ITALIAN: LanguageCode = from("ita")
+        public val JAPANESE: LanguageCode = from("jpn")
+        public val KOREAN: LanguageCode = from("kor")
+        public val POLISH: LanguageCode = from("pol")
+        public val PORTUGUESE: LanguageCode = from("por")
         public val RUSSIAN: LanguageCode = from("rus")
+        public val SPANISH: LanguageCode = from("spa")
+        public val TURKISH: LanguageCode = from("tur")
 
         public fun from(identifier: String): LanguageCode {
             return requireNotNull(fromOrNull(identifier)) {

@@ -24,6 +24,7 @@ public value class CountryCode(
 ) {
     init {
         require(iso31661Code.length == 2)
+        require(iso31661Code.all { it in 'A'..'Z' })
     }
     override fun toString(): String = iso31661Code
 }

@@ -26,6 +26,7 @@ public interface ImageUrl {
 
 public data class DefaultImageUrl(
     val rawUrl: String,
+    override val size: CanvasSize? = null,
 ) : ImageUrl {
     override fun getUrl(): String = rawUrl
     override fun getUrl(width: Int, height: Int): String = rawUrl

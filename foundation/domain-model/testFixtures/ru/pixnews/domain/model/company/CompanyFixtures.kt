@@ -13,12 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.domain.model.datasource
+package ru.pixnews.domain.model.company
 
-import ru.pixnews.domain.model.locale.Localized
-import ru.pixnews.domain.model.util.RichText
-
-public data class DataSources(
-    val source: ExternalDataSource,
-    val attributionText: Localized<RichText>,
-)
+public object CompanyFixtures

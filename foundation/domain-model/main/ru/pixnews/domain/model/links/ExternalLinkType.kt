@@ -39,5 +39,6 @@ public enum class ExternalLinkType {
     VK,
     XBOX_COM,
     YOUTUBE,
+    WIKIPEDIA,
     ;
 }

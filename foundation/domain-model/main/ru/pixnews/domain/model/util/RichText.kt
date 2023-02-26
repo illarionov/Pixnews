@@ -19,5 +19,6 @@ package ru.pixnews.domain.model.util
 public value class RichText(
     public val raw: String,
 ) {
+    public fun asPlainText(): String = raw
     override fun toString(): String = raw
 }

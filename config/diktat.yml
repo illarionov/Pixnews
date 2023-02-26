@@ -17,6 +17,8 @@
   enabled: false
 - name: CUSTOM_GETTERS_SETTERS
   enabled: false
+- name: EMPTY_BLOCK_STRUCTURE_ERROR # Enabled in Detekt
+  enabled: false
 - name: EXTENSION_FUNCTION_WITH_CLASS
   enabled: false
 - name: FILE_NO_BLANK_LINE_BETWEEN_BLOCKS
@@ -95,7 +97,7 @@
 - name: WHEN_WITHOUT_ELSE
   enabled: false
 - name: WRONG_INDENTATION
-  enabled: true
+  enabled: false
 - name: WRONG_NEWLINES
   enabled: false
   configuration:

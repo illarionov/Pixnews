@@ -47,7 +47,7 @@ internal fun Project.configureCommonAndroid(
             sourceCompatibility = JavaVersion.VERSION_11
             targetCompatibility = JavaVersion.VERSION_11
             // https://issuetracker.google.com/u/1/issues/266687543
-            // isCoreLibraryDesugaringEnabled = true
+            isCoreLibraryDesugaringEnabled = true
         }
 
         tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()

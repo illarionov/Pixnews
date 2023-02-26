@@ -16,6 +16,7 @@
 package ru.pixnews.domain.model.links
 
 import kotlinx.collections.immutable.ImmutableList
+import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.util.Url
 
 public data class ExternalLinks<out I>(
@@ -26,4 +27,5 @@ public data class ExternalLinks<out I>(
 public data class ExternalLink(
     val type: ExternalLinkType,
     val url: Url,
+    val language: LanguageCode? = null,
 )

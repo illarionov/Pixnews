@@ -13,20 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("KDOC_WITHOUT_PARAM_TAG")
+@file:Suppress("KDOC_WITHOUT_PARAM_TAG", "UnusedImports")
 
 package ru.pixnews.foundation.di.ui.base.viewmodel
 
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.annotation.MainThread
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.CreationExtras
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
 
@@ -41,30 +37,6 @@ public inline fun <reified VM : ViewModel> ComponentActivity.injectedViewModel(
     storeProducer = { viewModelStore },
     factoryProducer = PixnewsRootComponentHolder::viewModelFactory,
     extrasProducer = extrasProducer,
-)
-
-/**
- * [Fragment.viewModels] that uses application's [ViewModelProvider.Factory]
- */
-@MainThread
-public inline fun <reified VM : ViewModel> Fragment.injectedViewModel(
-    noinline ownerProducer: () -> ViewModelStoreOwner = { this },
-    noinline extrasProducer: (() -> CreationExtras)? = null,
-): Lazy<VM> = viewModels(
-    ownerProducer = ownerProducer,
-    extrasProducer = extrasProducer,
-    factoryProducer = PixnewsRootComponentHolder::viewModelFactory,
-)
-
-/**
- * [Fragment.activityViewModels] that uses application's [ViewModelProvider.Factory]
- */
-@MainThread
-public inline fun <reified VM : ViewModel> Fragment.injectedActivityViewModel(
-    noinline extrasProducer: (() -> CreationExtras)? = null,
-): Lazy<VM> = activityViewModels(
-    extrasProducer = extrasProducer,
-    factoryProducer = PixnewsRootComponentHolder::viewModelFactory,
 )
 
 public val PixnewsRootComponentHolder.viewModelFactory: ViewModelProvider.Factory

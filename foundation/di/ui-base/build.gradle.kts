@@ -42,6 +42,7 @@ dependencies {
     api(libs.androidx.activity)
     api(libs.androidx.lifecycle.viewmodel)
     api(libs.androidx.lifecycle.viewmodel.savedstate)
+    api(libs.androidx.lifecycle.viewmodel.compose)
 
     androidTestImplementation(libs.androidx.test.rules)
 }

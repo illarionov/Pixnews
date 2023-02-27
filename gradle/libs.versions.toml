@@ -3,7 +3,7 @@ minSdk = "24"
 compileSdk = "33"
 targetSdk = "33"
 
-agp = "8.1.0-alpha06"
+agp = "8.1.0-alpha07"
 android-tools-common = "31.1.0-alpha06"
 anvil = "2.4.4"
 bmversions = "0.44.0"

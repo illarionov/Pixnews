@@ -15,5 +15,10 @@
     limitations under the License.
 -->
 <resources>
-    <public />
+    <public type="string" name="bottom_bar_title_calendar" />
+    <public type="string" name="bottom_bar_content_description_calendar" />
+    <public type="string" name="bottom_bar_title_collections" />
+    <public type="string" name="bottom_bar_content_description_collections" />
+    <public type="string" name="bottom_bar_title_profile" />
+    <public type="string" name="bottom_bar_content_description_profile" />
 </resources>

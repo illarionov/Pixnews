@@ -83,6 +83,9 @@ internal fun Project.configureCommonAndroid(
             sarifReport = true
             checkDependencies = false
             ignoreTestSources = true
+
+            disable += "ObsoleteSdkInt"
+            informational += "GradleDependency"
         }
     }
 

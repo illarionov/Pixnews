@@ -15,14 +15,14 @@ concurrency:
 env:
   CI: true
   TERM: dumb
-  GRADLE_OPTS: >
-    -Dorg.gradle.jvmargs="-Xmx4G -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError -XX:+UseG1GC"
-    -Dorg.gradle.parallel=true
+  GRADLE_OPTS: >-
+    -Dorg.gradle.jvmargs="-Xmx3G -XX:MaxMetaspaceSize=1g -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC"
     -Dorg.gradle.workers.max=2
     -Dorg.gradle.vfs.watch=false
     -Dorg.gradle.dependency.verification.console=verbose
-    -Dkotlin.compiler.execution.strategy=in-process
     -DwarningsAsErrors=false
+  KOTLIN_DAEMON_JVMARGS: >-
+    -Xmx2G -XX:MaxMetaspaceSize=320M -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC -XX:NewRatio=1
 
 jobs:
   assemble:
@@ -55,7 +55,9 @@ jobs:
       - name: Assemble debug build, run tests
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: assembleDebug test --stacktrace
+          arguments: |
+            -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
+            assembleDebug test --stacktrace
 
       - name: Cleanup secrets
         if: ${{ always() }}
@@ -132,7 +134,9 @@ jobs:
       - name: Run static code analyzers
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: styleCheck --continue
+          arguments: |
+            -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
+            styleCheck --continue
 
       - name: Cleanup secrets
         if: ${{ always() }}

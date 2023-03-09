@@ -20,14 +20,15 @@ concurrency:
 env:
   CI: true
   TERM: dumb
-  GRADLE_OPTS: >
-    -Dorg.gradle.jvmargs="-Xmx2G -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError -XX:+UseG1GC"
+  GRADLE_OPTS: >-
+    -Dorg.gradle.jvmargs="-Xmx1536M -XX:MaxMetaspaceSize=1g -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC"
     -Dorg.gradle.parallel=true
     -Dorg.gradle.workers.max=2
     -Dorg.gradle.vfs.watch=false
     -Dorg.gradle.dependency.verification.console=verbose
-    -Dkotlin.compiler.execution.strategy=in-process
     -DwarningsAsErrors=false
+  KOTLIN_DAEMON_JVMARGS: >-
+    -Xmx1536M -XX:MaxMetaspaceSize=320M -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC -XX:NewRatio=1
 
 jobs:
   instrumented-tests:
@@ -66,6 +67,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: |
+            -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
             -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
             -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
             cleanManagedDevices --unused-only
@@ -75,6 +77,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: |
+            -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
             -Dorg.gradle.workers.max=1
             -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
             -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true

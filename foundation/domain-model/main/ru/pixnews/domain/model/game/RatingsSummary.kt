@@ -15,8 +15,9 @@
  */
 package ru.pixnews.domain.model.game
 
+import java.math.BigDecimal
+import java.math.RoundingMode.HALF_UP
 import java.util.Locale
-import kotlin.math.roundToInt
 
 public data class RatingsSummary(
     val gameId: GameId,
@@ -53,7 +54,11 @@ public value class AverageRating private constructor(
 
         public operator fun invoke(value: Float): AverageRating {
             require(value in 1F..10F)
-            return AverageRating((value * 100F).roundToInt().toUInt())
+            val intValue = BigDecimal.valueOf(value.toDouble() * 100F)
+                .setScale(0, HALF_UP)
+                .toInt()
+                .toUInt()
+            return AverageRating(intValue)
         }
     }
 }

@@ -45,6 +45,14 @@ class AverageRatingTest {
         }
     }
 
+    @ParameterizedTest
+    @ValueSource(floats = [9.70500f, 4.727499f])
+    fun `invoke(float) should creates correct value parametrized test`(value: Float) {
+        val rating = AverageRating(value)
+        String.format(Locale.ROOT, "%.2f", rating.value) shouldBe
+                String.format(Locale.ROOT, "%.2f", value)
+    }
+
     @Test
     fun `invoke(float) should creates correct value`(): Unit = runBlocking {
         Arb.float(1F..10F).filter(Float::isFinite).checkAll { value ->

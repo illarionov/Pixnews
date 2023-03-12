@@ -15,13 +15,13 @@
  */
 package ru.pixnews.foundation.ui.design.card
 
-import android.R.drawable
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -42,13 +42,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.request.ImageRequest
+import coil.size.Scale.FILL
 import kotlinx.collections.immutable.ImmutableSet
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform
@@ -56,8 +58,12 @@ import ru.pixnews.domain.model.game.game.halfLife3
 import ru.pixnews.foundation.ui.design.icon.PixnewsGameCardFavouriteIcon
 import ru.pixnews.foundation.ui.design.util.contentDescription
 import ru.pixnews.foundation.ui.design.util.uniqueIcons
+import ru.pixnews.foundation.ui.imageloader.coil.compose.AsyncImage
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.foundation.ui.theme.md_theme_palette_neutral_variant_40
+
+@Suppress("FLOAT_IN_ACCURATE_CALCULATIONS")
+private const val GAME_CARD_IMAGE_ASPECT_RATIO = 3f / 4f
 
 @Composable
 public fun PixnewsGameCard(
@@ -78,18 +84,23 @@ public fun PixnewsGameCard(
             contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
         ),
     ) {
-        Image(
+        AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
+                .aspectRatio(GAME_CARD_IMAGE_ASPECT_RATIO)
                 .clip(
                     MaterialTheme.shapes.medium.copy(
                         bottomStart = ZeroCornerSize,
                         bottomEnd = ZeroCornerSize,
                     ),
                 ),
-            painter = painterResource(drawable.ic_input_get),
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(game.cover?.getUrl())
+                .scale(FILL)
+                .crossfade(true)
+                .build(),
             contentDescription = null,
-            contentScale = ContentScale.FillWidth,
+            contentScale = ContentScale.Crop,
         )
         Box(
             modifier = Modifier.fillMaxWidth(),

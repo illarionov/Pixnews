@@ -27,6 +27,7 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
 import coil.decode.VideoFrameDecoder
+import coil.disk.DiskCache
 import coil.intercept.Interceptor
 import coil.memory.MemoryCache
 import coil.request.CachePolicy.DISABLED
@@ -36,6 +37,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoSet
 import dagger.multibindings.Multibinds
+import ru.pixnews.foundation.appconfig.NetworkConfig
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
@@ -51,6 +53,8 @@ import ru.pixnews.foundation.ui.imageloader.coil.PrefetchingImageLoader
 import javax.inject.Qualifier
 import coil.ImageLoader as CoilImageLoader
 import coil.intercept.Interceptor as CoilInterceptor
+
+private const val IMAGE_CACHE_SUBDIR = "image_cache"
 
 @ContributesTo(AppScope::class)
 @Module
@@ -72,7 +76,7 @@ public abstract class ImageLoaderModule {
         @SingleIn(AppScope::class)
         public fun providesUiImageLoader(
             @RootImageLoader rootImageLoader: CoilImageLoader,
-            @RootMemoryCache memoryCache: MemoryCache,
+            @Internal memoryCache: MemoryCache,
         ): ImageLoader {
             val imageLoaderWithMemoryCache = rootImageLoader
                 .newBuilder()
@@ -83,7 +87,7 @@ public abstract class ImageLoaderModule {
         }
 
         @Provides
-        @RootMemoryCache
+        @Internal
         @SingleIn(AppScope::class)
         public fun providesMemoryCache(
             @ApplicationContext context: Context,
@@ -100,6 +104,7 @@ public abstract class ImageLoaderModule {
             ioDispatcher: IoCoroutineDispatcherProvider,
             computationDispatcher: ComputationCoroutineDispatcherProvider,
             rootOkhttpClient: RootOkHttpClientProvider,
+            @Internal diskCache: DiskCache,
             interceptors: Set<@JvmSuppressWildcards CoilInterceptor>,
             logger: Logger,
         ): CoilImageLoader {
@@ -123,6 +128,22 @@ public abstract class ImageLoaderModule {
                 .callFactory { request -> rootOkhttpClient.get().newCall(request) }
                 .memoryCache(null)
                 .memoryCachePolicy(DISABLED)
+                .diskCache(diskCache)
+                .build()
+        }
+
+        @Internal
+        @Provides
+        @SingleIn(AppScope::class)
+        @Suppress("MagicNumber")
+        internal fun provideDiskCache(
+            networkConfig: NetworkConfig,
+            @ApplicationContext context: Context,
+        ): DiskCache {
+            val cacheDir = context.externalCacheDir ?: context.cacheDir
+            return DiskCache.Builder()
+                .directory(cacheDir.resolve(IMAGE_CACHE_SUBDIR))
+                .maxSizeBytes(networkConfig.imageCacheSizeMbytes.toLong() * 1_000_000L)
                 .build()
         }
 
@@ -140,6 +161,6 @@ public abstract class ImageLoaderModule {
         internal annotation class RootImageLoader
 
         @Qualifier
-        internal annotation class RootMemoryCache
+        internal annotation class Internal
     }
 }

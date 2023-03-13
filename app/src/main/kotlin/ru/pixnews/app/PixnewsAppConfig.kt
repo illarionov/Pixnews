@@ -19,6 +19,7 @@ import android.os.Build
 import com.squareup.anvil.annotations.ContributesBinding
 import ru.pixnews.BuildConfig
 import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.appconfig.NetworkConfig
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import kotlin.LazyThreadSafetyMode.NONE
 
@@ -31,4 +32,8 @@ public object PixnewsAppConfig : AppConfig {
     override val versionCode: Int = BuildConfig.VERSION_CODE
     override val timestamp: String by lazy(NONE) { "TODO" }
     override val sdkInt: Int = Build.VERSION.SDK_INT
+    override val networkConfig: NetworkConfig by lazy(NONE) {
+        object : NetworkConfig {
+        }
+    }
 }

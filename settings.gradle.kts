@@ -37,12 +37,14 @@ listOf(
     "featuretoggles:internal",
     "featuretoggles:datasource-firebase",
     "featuretoggles:datasource-overrides",
+    "network:public",
     "initializers",
     "instrumented-testing",
     "domain-model",
     "redux",
     "ui:design",
     "ui:assets-icons",
+    "ui:imageloader:coil",
     "ui:theme",
 ).forEach {
     include(":foundation:$it")

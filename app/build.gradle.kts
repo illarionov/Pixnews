@@ -47,6 +47,7 @@ dependencies {
 
     implementation(project(":features:calendar"))
     implementation(project(":features:collections"))
+    debugImplementation(project(":features:featuretoggles"))
     implementation(project(":features:profile"))
 
     implementation(project(":foundation:analytics"))
@@ -60,9 +61,10 @@ dependencies {
     implementation(project(":foundation:featuretoggles:datasource-overrides"))
     implementation(project(":foundation:featuretoggles:internal"))
     implementation(project(":foundation:featuretoggles:public"))
-    debugImplementation(project(":features:featuretoggles"))
     implementation(project(":foundation:initializers"))
+    implementation(project(":foundation:network:public"))
     implementation(project(":foundation:ui:design"))
+    implementation(project(":foundation:ui:imageloader:coil"))
     implementation(project(":foundation:ui:theme"))
     implementation(project(":libraries:android-utils"))
     implementation(project(":libraries:coroutines"))

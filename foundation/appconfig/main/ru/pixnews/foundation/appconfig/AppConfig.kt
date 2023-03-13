@@ -15,6 +15,10 @@
  */
 package ru.pixnews.foundation.appconfig
 
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
+
 public interface AppConfig {
     public val isDebug: Boolean
     public val applicationId: String
@@ -23,6 +27,25 @@ public interface AppConfig {
     public val versionCode: Int
     public val timestamp: String
     public val sdkInt: Int
+    public val networkConfig: NetworkConfig
+}
+
+public interface NetworkConfig {
+    public val httpLoggingLevel: HttpLoggingLevel get() = HttpLoggingLevel.NONE
+    public val connectTimeout: Duration get() = 20.seconds
+    public val readTimeout: Duration get() = 20.seconds
+    public val writeTimeout: Duration get() = 20.seconds
+    public val cacheSizeMbytes: ULong get() = 10U
+    public val imageCacheSizeMbytes: ULong get() = 50U
+
+    public val connectionPoolMaxIdleConnections: UInt get() = 10U
+    public val connectionPoolKeepAliveTimeout: Duration get() = 2.minutes
+
+    public val maxConnectionsPerHost: UInt get() = 10U
+}
+
+public enum class HttpLoggingLevel {
+    NONE, BASIC, HEADERS, BODY
 }
 
 public open class DefaultAppConfig : AppConfig {
@@ -39,5 +62,7 @@ public open class DefaultAppConfig : AppConfig {
     override val timestamp: String
         get() = throw NotImplementedError()
     override val sdkInt: Int
+        get() = throw NotImplementedError()
+    override val networkConfig: NetworkConfig
         get() = throw NotImplementedError()
 }

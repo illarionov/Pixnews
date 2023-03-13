@@ -20,36 +20,33 @@ plugins {
 
 pixnews {
     compose.set(true)
-    managedDevices.set(true)
+    managedDevices.set(false)
 }
 
 android {
-    namespace = "ru.pixnews.foundation.ui.design"
-    buildFeatures {
-        androidResources = true
-    }
+    namespace = "ru.pixnews.foundation.ui.imageloader.coil"
 }
 
 dependencies {
     api(project(":foundation:appconfig"))
     api(project(":foundation:di:base"))
-    api(project(":foundation:featuretoggles:public"))
-    api(project(":foundation:ui:theme"))
+    api(project(":foundation:di:root-component"))
     api(project(":foundation:domain-model"))
-    implementation(project(":foundation:ui:imageloader:coil"))
-    implementation(project(":foundation:ui:assets-icons"))
+    implementation(project(":foundation:network:public"))
     implementation(project(":libraries:android-utils"))
-    implementation(project(":libraries:ui-tooling"))
-    implementation(testFixtures(project(":foundation:domain-model"))) {
-        because("For use with Composable Preview")
-    }
 
+    api(libs.kermit)
+    api(libs.dagger)
+    api(libs.coil.bom)
+    api(libs.coil.base)
+    api(libs.coil.compose.base)
     api(libs.androidx.compose.ui.graphics)
-    api(libs.androidx.compose.material3)
-    api(libs.kotlinx.collections.immutable)
 
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-
-    androidTestImplementation(libs.androidx.test.rules)
+    implementation(libs.androidx.core)
+    implementation(libs.coil.gif)
+    implementation(libs.coil.svg)
+    implementation(libs.coil.video)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.okhttp)
+    implementation(platform(libs.okhttp.bom))
 }

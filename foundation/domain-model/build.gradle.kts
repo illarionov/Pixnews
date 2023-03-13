@@ -25,6 +25,7 @@ dependencies {
     api(libs.kotlinx.collections.immutable)
     api(project(":libraries:functional"))
     api(libs.kotlinx.datetime)
+    api(libs.androidx.annotation)
     implementation(project(":libraries:kotlin-utils"))
 
     testImplementation(libs.junit.jupiter.params)

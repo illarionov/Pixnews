@@ -27,12 +27,15 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
 import coil.decode.VideoFrameDecoder
+import coil.intercept.Interceptor
 import coil.memory.MemoryCache
 import coil.request.CachePolicy.DISABLED
 import coil.request.CachePolicy.ENABLED
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoSet
+import dagger.multibindings.Multibinds
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
@@ -43,86 +46,100 @@ import ru.pixnews.foundation.network.RootOkHttpClientProvider
 import ru.pixnews.foundation.ui.imageloader.coil.DelegatingImageLoader
 import ru.pixnews.foundation.ui.imageloader.coil.ImageLoader
 import ru.pixnews.foundation.ui.imageloader.coil.ImageLoaderLogger
+import ru.pixnews.foundation.ui.imageloader.coil.ImageUrlCoilInterceptor
 import ru.pixnews.foundation.ui.imageloader.coil.PrefetchingImageLoader
 import javax.inject.Qualifier
+import coil.ImageLoader as CoilImageLoader
+import coil.intercept.Interceptor as CoilInterceptor
 
 @ContributesTo(AppScope::class)
 @Module
 @RestrictTo(LIBRARY)
-public object ImageLoaderModule {
-    @Provides
-    @SingleIn(AppScope::class)
-    public fun providesPrefetchingImageLoader(
-        @RootImageLoader rootImageLoader: coil.ImageLoader,
-    ): PrefetchingImageLoader {
-        return DelegatingImageLoader(rootImageLoader)
-    }
+public abstract class ImageLoaderModule {
+    @Multibinds
+    internal abstract fun provideCoilInterceptors(): Set<@JvmSuppressWildcards CoilInterceptor>
 
-    @Provides
-    @SingleIn(AppScope::class)
-    public fun providesUiImageLoader(
-        @RootImageLoader rootImageLoader: coil.ImageLoader,
-        @RootMemoryCache memoryCache: MemoryCache,
-    ): ImageLoader {
-        val imageLoaderWithMemoryCache = rootImageLoader
-            .newBuilder()
-            .memoryCache(memoryCache)
-            .memoryCachePolicy(ENABLED)
-            .build()
-        return DelegatingImageLoader(imageLoaderWithMemoryCache)
-    }
+    public companion object {
+        @Provides
+        @SingleIn(AppScope::class)
+        public fun providesPrefetchingImageLoader(
+            @RootImageLoader rootImageLoader: CoilImageLoader,
+        ): PrefetchingImageLoader {
+            return DelegatingImageLoader(rootImageLoader)
+        }
 
-    @Provides
-    @RootMemoryCache
-    @SingleIn(AppScope::class)
-    public fun providesMemoryCache(
-        @ApplicationContext context: Context,
-    ): MemoryCache {
-        return MemoryCache.Builder(context).build()
-    }
+        @Provides
+        @SingleIn(AppScope::class)
+        public fun providesUiImageLoader(
+            @RootImageLoader rootImageLoader: CoilImageLoader,
+            @RootMemoryCache memoryCache: MemoryCache,
+        ): ImageLoader {
+            val imageLoaderWithMemoryCache = rootImageLoader
+                .newBuilder()
+                .memoryCache(memoryCache)
+                .memoryCachePolicy(ENABLED)
+                .build()
+            return DelegatingImageLoader(imageLoaderWithMemoryCache)
+        }
 
-    @Provides
-    @RootImageLoader
-    @SingleIn(AppScope::class)
-    public fun providesRootImageLoader(
-        @ApplicationContext context: Context,
-        mainDispatcher: MainCoroutineDispatcherProvider,
-        ioDispatcher: IoCoroutineDispatcherProvider,
-        computationDispatcher: ComputationCoroutineDispatcherProvider,
-        rootOkhttpClient: RootOkHttpClientProvider,
-        logger: Logger,
-    ): coil.ImageLoader {
-        return coil.ImageLoader.Builder(context)
-            .components {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    add(ImageDecoderDecoder.Factory())
-                } else {
-                    add(GifDecoder.Factory())
+        @Provides
+        @RootMemoryCache
+        @SingleIn(AppScope::class)
+        public fun providesMemoryCache(
+            @ApplicationContext context: Context,
+        ): MemoryCache {
+            return MemoryCache.Builder(context).build()
+        }
+
+        @Provides
+        @RootImageLoader
+        @SingleIn(AppScope::class)
+        public fun providesRootImageLoader(
+            @ApplicationContext context: Context,
+            mainDispatcher: MainCoroutineDispatcherProvider,
+            ioDispatcher: IoCoroutineDispatcherProvider,
+            computationDispatcher: ComputationCoroutineDispatcherProvider,
+            rootOkhttpClient: RootOkHttpClientProvider,
+            interceptors: Set<@JvmSuppressWildcards CoilInterceptor>,
+            logger: Logger,
+        ): CoilImageLoader {
+            return CoilImageLoader.Builder(context)
+                .components {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        add(ImageDecoderDecoder.Factory())
+                    } else {
+                        add(GifDecoder.Factory())
+                    }
+                    add(SvgDecoder.Factory())
+                    add(VideoFrameDecoder.Factory())
+                    interceptors.forEach<@JvmSuppressWildcards Interceptor>(::add)
                 }
-                add(SvgDecoder.Factory())
-                add(VideoFrameDecoder.Factory())
-            }
-            .decoderDispatcher(computationDispatcher.get())
-            .allowRgb565(isLowRamDevice(context))
-            .interceptorDispatcher(mainDispatcher.get().immediate)
-            .fetcherDispatcher(ioDispatcher.get())
-            .transformationDispatcher(computationDispatcher.get())
-            .logger(ImageLoaderLogger(logger))
-            .callFactory { request -> rootOkhttpClient.get().newCall(request) }
-            .memoryCache(null)
-            .memoryCachePolicy(DISABLED)
-            .build()
+                .decoderDispatcher(computationDispatcher.get())
+                .allowRgb565(isLowRamDevice(context))
+                .interceptorDispatcher(mainDispatcher.get().immediate)
+                .fetcherDispatcher(ioDispatcher.get())
+                .transformationDispatcher(computationDispatcher.get())
+                .logger(ImageLoaderLogger(logger))
+                .callFactory { request -> rootOkhttpClient.get().newCall(request) }
+                .memoryCache(null)
+                .memoryCachePolicy(DISABLED)
+                .build()
+        }
+
+        @Provides
+        @IntoSet
+        internal fun provideImageUrlInterceptor(): CoilInterceptor = ImageUrlCoilInterceptor()
+
+        private fun isLowRamDevice(context: Context): Boolean {
+            return context.getSystemService<ActivityManager>()?.let {
+                ActivityManagerCompat.isLowRamDevice(it)
+            } ?: true
+        }
+
+        @Qualifier
+        internal annotation class RootImageLoader
+
+        @Qualifier
+        internal annotation class RootMemoryCache
     }
-
-    private fun isLowRamDevice(context: Context): Boolean {
-        return context.getSystemService<ActivityManager>()?.let {
-            ActivityManagerCompat.isLowRamDevice(it)
-        } ?: true
-    }
-
-    @Qualifier
-    internal annotation class RootImageLoader
-
-    @Qualifier
-    internal annotation class RootMemoryCache
 }

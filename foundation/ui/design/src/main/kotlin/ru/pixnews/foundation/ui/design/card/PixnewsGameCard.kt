@@ -95,7 +95,7 @@ public fun PixnewsGameCard(
                     ),
                 ),
             model = ImageRequest.Builder(LocalContext.current)
-                .data(game.cover?.getUrl())
+                .data(game.cover)
                 .scale(FILL)
                 .crossfade(true)
                 .build(),

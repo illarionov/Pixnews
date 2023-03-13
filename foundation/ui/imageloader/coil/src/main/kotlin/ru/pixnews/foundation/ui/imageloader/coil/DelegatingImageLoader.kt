@@ -25,7 +25,7 @@ import coil.request.ImageRequest
 import coil.request.ImageResult
 
 internal class DelegatingImageLoader(
-    val rootImageLoader: coil.ImageLoader,
+    private val rootImageLoader: coil.ImageLoader,
 ) : PrefetchingImageLoader, ImageLoader {
     override val components: ComponentRegistry get() = rootImageLoader.components
     override val defaults: DefaultRequestOptions get() = rootImageLoader.defaults

@@ -72,7 +72,6 @@ private fun NavigationIconsPreview() {
         contentPadding = PaddingValues(vertical = 24.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
-
     ) {
         items(
             items = listOf(
@@ -87,8 +86,7 @@ private fun NavigationIconsPreview() {
             Image(
                 imageVector = icon,
                 contentDescription = null,
-                modifier = Modifier
-                    .aspectRatio(1f),
+                modifier = Modifier.aspectRatio(1f),
             )
         }
     }

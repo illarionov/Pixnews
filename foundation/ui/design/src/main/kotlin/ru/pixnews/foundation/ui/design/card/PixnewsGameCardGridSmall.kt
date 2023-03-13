@@ -17,7 +17,6 @@
 
 package ru.pixnews.foundation.ui.design.card
 
-import android.R.drawable
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -38,8 +37,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
@@ -65,7 +64,9 @@ import ru.pixnews.domain.model.game.game.theLostWild
 import ru.pixnews.foundation.ui.design.icon.PixnewsGameCardFavouriteIcon
 import ru.pixnews.foundation.ui.design.util.contentDescription
 import ru.pixnews.foundation.ui.design.util.uniqueIcons
+import ru.pixnews.foundation.ui.imageloader.coil.compose.AsyncImage
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
+import ru.pixnews.foundation.ui.theme.md_theme_palette_neutral_variant_40
 
 @Suppress("FLOAT_IN_ACCURATE_CALCULATIONS")
 private const val GAME_CARD_ASPECT_RATIO = 3f / 4f
@@ -92,11 +93,11 @@ public fun PixnewsGameCardGridSmall(
         onClick = { onClick(game.gameId) },
         border = remember(borderColor) { BorderStroke(1.dp, borderColor) },
     ) {
-        Image(
+        AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(GAME_CARD_ASPECT_RATIO),
-            painter = painterResource(drawable.ic_input_get),
+            model = game.cover,
             contentDescription = game.title,
             contentScale = ContentScale.Crop,
         )
@@ -158,6 +159,7 @@ internal fun PlatformsRowSmall(
                     .size(6.dp),
                 imageVector = icon,
                 contentDescription = null,
+                colorFilter = ColorFilter.tint(md_theme_palette_neutral_variant_40),
             )
         }
     }

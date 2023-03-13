@@ -37,6 +37,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -62,9 +63,10 @@ import ru.pixnews.domain.model.game.game.smalland
 import ru.pixnews.domain.model.game.game.starWarsEclipse
 import ru.pixnews.domain.model.game.game.theLostWild
 import ru.pixnews.foundation.ui.design.icon.PixnewsGameCardFavouriteIcon
+import ru.pixnews.foundation.ui.design.image.NetworkImage
+import ru.pixnews.foundation.ui.design.util.composeColor
 import ru.pixnews.foundation.ui.design.util.contentDescription
 import ru.pixnews.foundation.ui.design.util.uniqueIcons
-import ru.pixnews.foundation.ui.imageloader.coil.compose.AsyncImage
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.foundation.ui.theme.md_theme_palette_neutral_variant_40
 
@@ -93,13 +95,14 @@ public fun PixnewsGameCardGridSmall(
         onClick = { onClick(game.gameId) },
         border = remember(borderColor) { BorderStroke(1.dp, borderColor) },
     ) {
-        AsyncImage(
+        NetworkImage(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(GAME_CARD_ASPECT_RATIO),
             model = game.cover,
             contentDescription = game.title,
             contentScale = ContentScale.Crop,
+            placeholderColor = game.cover?.prevailingColor?.composeColor() ?: Color.Unspecified,
         )
         Box(
             modifier = Modifier.fillMaxWidth(),

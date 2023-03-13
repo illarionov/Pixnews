@@ -38,10 +38,10 @@ dependencies {
     implementation(project(":foundation:ui:assets-icons"))
     implementation(project(":foundation:ui:theme"))
     implementation(project(":foundation:ui:design"))
+    implementation(project(":foundation:ui:imageloader:coil"))
     implementation(project(":libraries:compose-utils"))
 
     implementation(libs.accompanist.pager)
-    implementation(libs.accompanist.placeholder.material)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui)

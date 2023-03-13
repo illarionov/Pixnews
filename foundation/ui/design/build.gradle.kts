@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":foundation:ui:imageloader:coil"))
     implementation(project(":foundation:ui:assets-icons"))
     implementation(project(":libraries:android-utils"))
+    implementation(project(":libraries:compose-utils"))
     implementation(project(":libraries:ui-tooling"))
     implementation(testFixtures(project(":foundation:domain-model"))) {
         because("For use with Composable Preview")
@@ -46,6 +47,7 @@ dependencies {
 
     api(libs.androidx.compose.ui.graphics)
     api(libs.androidx.compose.material3)
+    api(libs.accompanist.placeholder.material3)
     api(libs.kotlinx.collections.immutable)
 
     debugImplementation(libs.androidx.compose.ui.tooling)

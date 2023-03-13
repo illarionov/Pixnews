@@ -22,4 +22,8 @@ public data class CanvasSize(
     init {
         require(width != 0U && height != 0U)
     }
+
+    public fun aspectRatio(): Float {
+        return width.toFloat() / height.toFloat()
+    }
 }

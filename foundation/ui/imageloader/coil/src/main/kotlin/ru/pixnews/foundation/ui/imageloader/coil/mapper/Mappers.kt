@@ -13,20 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("WRONG_OVERLOADING_FUNCTION_ARGUMENTS")
+package ru.pixnews.foundation.ui.imageloader.coil.mapper
 
-package ru.pixnews.domain.model.util
+import coil.size.Dimension
+import coil.size.Dimension.Pixels
+import coil.size.Dimension.Undefined
+import ru.pixnews.domain.model.util.Dimension as PixnewsDimension
 
-public interface VideoUrl {
-    public val size: CanvasSize?
-        get() = null
-    public fun getUrl(): String
-    public fun getUrl(width: Dimension, height: Dimension): String
-}
-
-public data class DefaultVideoUrl(
-    val rawUrl: String,
-) : VideoUrl {
-    override fun getUrl(): String = rawUrl
-    override fun getUrl(width: Dimension, height: Dimension): String = rawUrl
+internal fun Dimension.toDimensionModel(): PixnewsDimension {
+    return when (this) {
+        is Pixels -> PixnewsDimension(this.px.toUInt())
+        Undefined -> PixnewsDimension.Undefined
+    }
 }

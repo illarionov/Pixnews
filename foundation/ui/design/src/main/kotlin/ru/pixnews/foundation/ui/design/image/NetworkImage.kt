@@ -1,0 +1,83 @@
+/*
+ * Copyright 2023 Alexey Illarionov
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package ru.pixnews.foundation.ui.design.image
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.DefaultAlpha
+import androidx.compose.ui.graphics.FilterQuality
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.AsyncImagePainter
+import coil.compose.AsyncImagePainter.State
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material3.fade
+import com.google.accompanist.placeholder.material3.placeholder
+import ru.pixnews.foundation.ui.imageloader.coil.compose.AsyncImage
+
+/**
+ * [AsyncImage] with placeholder
+ *
+ * @param placeholderColor color the color used to draw the placeholder UI. If [Color.Unspecified] is provided,
+ * the placeholder will use PlaceholderDefaults.color.
+ * @param placeholderHighlight optional highlight animation.
+ */
+@Composable
+public fun NetworkImage(
+    model: Any?,
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    transform: (State) -> State = AsyncImagePainter.DefaultTransform,
+    onState: ((State) -> Unit)? = null,
+    alignment: Alignment = Alignment.Center,
+    contentScale: ContentScale = ContentScale.Fit,
+    alpha: Float = DefaultAlpha,
+    colorFilter: ColorFilter? = null,
+    filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
+    placeholderColor: Color = Color.Unspecified,
+    placeholderHighlight: PlaceholderHighlight? = PlaceholderHighlight.fade(),
+) {
+    var imageLoading by remember(model) { mutableStateOf(true) }
+    AsyncImage(
+        model = model,
+        contentDescription = contentDescription,
+        modifier = modifier
+            .placeholder(
+                visible = imageLoading,
+                color = placeholderColor,
+                highlight = placeholderHighlight,
+            ),
+        transform = transform,
+        onState = {
+            imageLoading = it is State.Loading
+            if (onState != null) {
+                onState(it)
+            }
+        },
+        alignment = alignment,
+        contentScale = contentScale,
+        alpha = alpha,
+        colorFilter = colorFilter,
+        filterQuality = filterQuality,
+    )
+}

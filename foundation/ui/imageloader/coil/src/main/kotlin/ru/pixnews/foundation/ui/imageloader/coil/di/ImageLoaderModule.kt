@@ -28,15 +28,16 @@ import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
 import coil.decode.VideoFrameDecoder
 import coil.disk.DiskCache
-import coil.intercept.Interceptor
 import coil.memory.MemoryCache
 import coil.request.CachePolicy.DISABLED
 import coil.request.CachePolicy.ENABLED
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.ElementsIntoSet
 import dagger.multibindings.IntoSet
 import dagger.multibindings.Multibinds
+import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.appconfig.NetworkConfig
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
@@ -50,9 +51,9 @@ import ru.pixnews.foundation.ui.imageloader.coil.ImageLoader
 import ru.pixnews.foundation.ui.imageloader.coil.ImageLoaderLogger
 import ru.pixnews.foundation.ui.imageloader.coil.ImageUrlCoilInterceptor
 import ru.pixnews.foundation.ui.imageloader.coil.PrefetchingImageLoader
+import ru.pixnews.foundation.ui.imageloader.coil.tooling.CoilDebugInterceptor
 import javax.inject.Qualifier
 import coil.ImageLoader as CoilImageLoader
-import coil.intercept.Interceptor as CoilInterceptor
 
 private const val IMAGE_CACHE_SUBDIR = "image_cache"
 
@@ -61,7 +62,7 @@ private const val IMAGE_CACHE_SUBDIR = "image_cache"
 @RestrictTo(LIBRARY)
 public abstract class ImageLoaderModule {
     @Multibinds
-    internal abstract fun provideCoilInterceptors(): Set<@JvmSuppressWildcards CoilInterceptor>
+    internal abstract fun provideCoilInterceptors(): Set<@JvmSuppressWildcards CoilInterceptorWithPriority>
 
     public companion object {
         @Provides
@@ -105,7 +106,7 @@ public abstract class ImageLoaderModule {
             computationDispatcher: ComputationCoroutineDispatcherProvider,
             rootOkhttpClient: RootOkHttpClientProvider,
             @Internal diskCache: DiskCache,
-            interceptors: Set<@JvmSuppressWildcards CoilInterceptor>,
+            interceptors: Set<@JvmSuppressWildcards CoilInterceptorWithPriority>,
             logger: Logger,
         ): CoilImageLoader {
             return CoilImageLoader.Builder(context)
@@ -117,7 +118,10 @@ public abstract class ImageLoaderModule {
                     }
                     add(SvgDecoder.Factory())
                     add(VideoFrameDecoder.Factory())
-                    interceptors.forEach<@JvmSuppressWildcards Interceptor>(::add)
+                    interceptors
+                        .toList()
+                        .sortedBy(CoilInterceptorWithPriority::priority)
+                        .forEach { add(it.interceptor) }
                 }
                 .decoderDispatcher(computationDispatcher.get())
                 .allowRgb565(isLowRamDevice(context))
@@ -149,7 +153,22 @@ public abstract class ImageLoaderModule {
 
         @Provides
         @IntoSet
-        internal fun provideImageUrlInterceptor(): CoilInterceptor = ImageUrlCoilInterceptor()
+        internal fun provideImageUrlInterceptor(): CoilInterceptorWithPriority {
+            return CoilInterceptorWithPriority(ImageUrlCoilInterceptor(), 0)
+        }
+
+        @Provides
+        @ElementsIntoSet
+        internal fun provideDebugImageUrlInterceptor(
+            appConfig: AppConfig,
+        ): Set<@JvmSuppressWildcards CoilInterceptorWithPriority> {
+            return buildSet {
+                if (appConfig.isDebug) {
+                    @Suppress("MagicNumber")
+                    add(CoilInterceptorWithPriority(CoilDebugInterceptor(), -10))
+                }
+            }
+        }
 
         private fun isLowRamDevice(context: Context): Boolean {
             return context.getSystemService<ActivityManager>()?.let {

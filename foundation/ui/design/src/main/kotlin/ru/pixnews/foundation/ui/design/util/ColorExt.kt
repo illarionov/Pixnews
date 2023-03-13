@@ -13,25 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("WRONG_OVERLOADING_FUNCTION_ARGUMENTS")
+package ru.pixnews.foundation.ui.design.util
 
-package ru.pixnews.domain.model.util
+import androidx.compose.ui.graphics.Color as ComposeColor
+import ru.pixnews.domain.model.util.Color as PixnewsColor
 
-public interface ImageUrl {
-    public val size: CanvasSize?
-        get() = null
-
-    public val prevailingColor: Color
-        get() = Color.Unspecified
-
-    public fun getUrl(): String
-    public fun getUrl(width: Dimension, height: Dimension): String
-}
-
-public data class DefaultImageUrl(
-    val rawUrl: String,
-    override val size: CanvasSize? = null,
-) : ImageUrl {
-    override fun getUrl(): String = rawUrl
-    override fun getUrl(width: Dimension, height: Dimension): String = rawUrl
+public fun PixnewsColor.composeColor(): ComposeColor {
+    return if (this == PixnewsColor.Unspecified) {
+        ComposeColor.Unspecified
+    } else {
+        ComposeColor(argbValue())
+    }
 }

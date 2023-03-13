@@ -40,6 +40,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -56,9 +57,10 @@ import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.game.game.halfLife3
 import ru.pixnews.foundation.ui.design.icon.PixnewsGameCardFavouriteIcon
+import ru.pixnews.foundation.ui.design.image.NetworkImage
+import ru.pixnews.foundation.ui.design.util.composeColor
 import ru.pixnews.foundation.ui.design.util.contentDescription
 import ru.pixnews.foundation.ui.design.util.uniqueIcons
-import ru.pixnews.foundation.ui.imageloader.coil.compose.AsyncImage
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.foundation.ui.theme.md_theme_palette_neutral_variant_40
 
@@ -84,10 +86,10 @@ public fun PixnewsGameCard(
             contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
         ),
     ) {
-        AsyncImage(
+        NetworkImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(GAME_CARD_IMAGE_ASPECT_RATIO)
+                .aspectRatio(game.cover?.size?.aspectRatio() ?: GAME_CARD_IMAGE_ASPECT_RATIO)
                 .clip(
                     MaterialTheme.shapes.medium.copy(
                         bottomStart = ZeroCornerSize,
@@ -100,7 +102,8 @@ public fun PixnewsGameCard(
                 .crossfade(true)
                 .build(),
             contentDescription = null,
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.FillWidth,
+            placeholderColor = game.cover?.prevailingColor?.composeColor() ?: Color.Unspecified,
         )
         Box(
             modifier = Modifier.fillMaxWidth(),

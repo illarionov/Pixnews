@@ -52,6 +52,7 @@
   enabled: true
   configuration:
     maxNumberLength: '8'
+    maxBlockLength: '4'
 - name: LAMBDA_IS_NOT_LAST_PARAMETER
   enabled: true
   ignoreAnnotated: [ Composable ]
@@ -68,6 +69,8 @@
 - name: PACKAGE_NAME_INCORRECT_PATH
   enabled: false
 - name: RUN_IN_SCRIPT
+  enabled: false
+- name: SAY_NO_TO_VAR
   enabled: false
 - name: TOO_LONG_FUNCTION
   enabled: false

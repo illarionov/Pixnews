@@ -48,6 +48,8 @@ import ru.pixnews.features.calendar.model.GamesOnDay
 import ru.pixnews.features.calendar.model.MajorReleaseCarouselItemUiModel
 import ru.pixnews.features.calendar.model.toCalendarListItem
 import ru.pixnews.features.calendar.model.toMajorReleaseCarouselItemUiModel
+import ru.pixnews.foundation.ui.imageloader.coil.tooling.withDebug
+import kotlin.time.Duration.Companion.seconds
 
 internal object PreviewFixtures {
     val DummyCalendarModel: CalendarModel = DEFAULT_CALENDAR_MODEL
@@ -71,7 +73,9 @@ internal object PreviewFixtures {
     )
     val previewSuccessState: CalendarScreenState.Success = CalendarScreenState.Success(
         majorReleases = persistentListOf(
-            MajorRelease.slimerancher2,
+            MajorRelease.slimerancher2.copy(
+                cover = Release.slimerancher2.cover?.withDebug(loadingDelay = 10.seconds),
+            ),
             MajorRelease.smalland,
             MajorRelease.halflife3,
             MajorRelease.beyondgoodandevil2,
@@ -84,7 +88,9 @@ internal object PreviewFixtures {
         ),
         games = persistentListOf(
             CalendarListTitle(title = "1 January 2024"),
-            Release.slimerancher2,
+            Release.slimerancher2.copy(
+                cover = Release.slimerancher2.cover?.withDebug(loadingDelay = 10.seconds),
+            ),
             Release.hytale,
             CalendarListTitle(title = "2 January 2024"),
             Release.gta6,

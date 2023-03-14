@@ -33,11 +33,11 @@ public sealed class OverrideResult {
     public object Original : OverrideResult()
 
     public class Success(
-        public val drawable: Drawable?,
+        public val drawable: Drawable? = null,
     ) : OverrideResult()
 
     public class Error(
-        public val throwable: Throwable?,
+        public val throwable: Throwable? = null,
     ) : OverrideResult()
 }
 

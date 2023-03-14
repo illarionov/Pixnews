@@ -13,10 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:Suppress("FILE_NAME_MATCH_CLASS")
+
 package ru.pixnews.foundation.ui.imageloader.coil.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -27,6 +30,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImagePainter.Companion.DefaultTransform
 import coil.compose.AsyncImagePainter.State
+import coil.request.NullRequestDataException
 import ru.pixnews.foundation.ui.imageloader.coil.ImageLoaderHolder
 
 // Based on coil.compose.AsyncImage
@@ -42,9 +46,7 @@ import ru.pixnews.foundation.ui.imageloader.coil.ImageLoaderHolder
  * @param placeholder A [Painter] that is displayed while the image is loading.
  * @param error A [Painter] that is displayed when the image request is unsuccessful.
  * @param fallback A [Painter] that is displayed when the request's [ImageRequest.data] is null.
- * @param onLoading Called when the image request begins loading.
- * @param onSuccess Called when the image request completes successfully.
- * @param onError Called when the image request completes unsuccessfully.
+ * @param onState Called when the state of this painter changes.
  * @param alignment Optional alignment parameter used to place the [AsyncImagePainter] in the given
  *  bounds defined by the width and height.
  * @param contentScale Optional scale parameter used to determine the aspect ratio scaling to be
@@ -57,7 +59,6 @@ import ru.pixnews.foundation.ui.imageloader.coil.ImageLoaderHolder
  *  destination.
  */
 @Composable
-@NonRestartableComposable
 public fun AsyncImage(
     model: Any?,
     contentDescription: String?,
@@ -65,31 +66,27 @@ public fun AsyncImage(
     placeholder: Painter? = null,
     error: Painter? = null,
     fallback: Painter? = error,
-    onLoading: ((State.Loading) -> Unit)? = null,
-    onSuccess: ((State.Success) -> Unit)? = null,
-    onError: ((State.Error) -> Unit)? = null,
+    onState: ((State) -> Unit)? = null,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     filterQuality: FilterQuality = DefaultFilterQuality,
-): Unit = coil.compose.AsyncImage(
-    model = model,
-    contentDescription = contentDescription,
-    imageLoader = ImageLoaderHolder.getComposeImageLoader(),
-    modifier = modifier,
-    placeholder = placeholder,
-    error = error,
-    fallback = fallback,
-    onLoading = onLoading,
-    onSuccess = onSuccess,
-    onError = onError,
-    alignment = alignment,
-    contentScale = contentScale,
-    alpha = alpha,
-    colorFilter = colorFilter,
-    filterQuality = filterQuality,
-)
+) {
+    coil.compose.AsyncImage(
+        model = model,
+        contentDescription = contentDescription,
+        imageLoader = ImageLoaderHolder.getComposeImageLoader(),
+        modifier = modifier,
+        transform = transformOf(placeholder, error, fallback),
+        onState = onState,
+        alignment = alignment,
+        contentScale = contentScale,
+        alpha = alpha,
+        colorFilter = colorFilter,
+        filterQuality = filterQuality,
+    )
+}
 
 /**
  * A composable that executes an [ImageRequest] asynchronously and renders the result.
@@ -139,3 +136,66 @@ public fun AsyncImage(
     colorFilter = colorFilter,
     filterQuality = filterQuality,
 )
+
+@Stable
+private fun transformOf(
+    placeholder: Painter?,
+    error: Painter?,
+    fallback: Painter?,
+): (State) -> State {
+    return if (placeholder != null || error != null || fallback != null) {
+        DefaultStatesTransform(placeholder, error, fallback)
+    } else {
+        DefaultTransform
+    }
+}
+
+private class DefaultStatesTransform(
+    private val placeholder: Painter?,
+    private val error: Painter?,
+    private val fallback: Painter?,
+) : (State) -> State {
+    override fun invoke(state: State): State {
+        return when (state) {
+            is State.Loading -> if (placeholder != null) state.copy(painter = placeholder) else state
+
+            is State.Error -> if (state.result.throwable is NullRequestDataException) {
+                if (fallback != null) state.copy(painter = fallback) else state
+            } else {
+                if (error != null) state.copy(painter = error) else state
+            }
+
+            else -> state
+        }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+        if (javaClass != other?.javaClass) {
+            return false
+        }
+
+        other as DefaultStatesTransform
+
+        if (placeholder != other.placeholder) {
+            return false
+        }
+        if (error != other.error) {
+            return false
+        }
+        if (fallback != other.fallback) {
+            return false
+        }
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = placeholder?.hashCode() ?: 0
+        result = 31 * result + (error?.hashCode() ?: 0)
+        result = 31 * result + (fallback?.hashCode() ?: 0)
+        return result
+    }
+}

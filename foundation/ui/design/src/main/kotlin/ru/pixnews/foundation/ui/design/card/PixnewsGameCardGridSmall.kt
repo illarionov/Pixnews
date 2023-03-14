@@ -62,8 +62,11 @@ import ru.pixnews.domain.model.game.game.slimeRancher2
 import ru.pixnews.domain.model.game.game.smalland
 import ru.pixnews.domain.model.game.game.starWarsEclipse
 import ru.pixnews.domain.model.game.game.theLostWild
+import ru.pixnews.foundation.ui.assets.icons.image.ImagePlaceholders
 import ru.pixnews.foundation.ui.design.icon.PixnewsGameCardFavouriteIcon
 import ru.pixnews.foundation.ui.design.image.NetworkImage
+import ru.pixnews.foundation.ui.design.image.errorLoadingImageSmallPainter
+import ru.pixnews.foundation.ui.design.image.noImageSmallPainter
 import ru.pixnews.foundation.ui.design.util.composeColor
 import ru.pixnews.foundation.ui.design.util.contentDescription
 import ru.pixnews.foundation.ui.design.util.uniqueIcons
@@ -100,6 +103,8 @@ public fun PixnewsGameCardGridSmall(
                 .fillMaxWidth()
                 .aspectRatio(GAME_CARD_ASPECT_RATIO),
             model = game.cover,
+            fallback = ImagePlaceholders.noImageSmallPainter(),
+            error = ImagePlaceholders.errorLoadingImageSmallPainter(),
             contentDescription = game.title,
             contentScale = ContentScale.Crop,
             placeholderColor = game.cover?.prevailingColor?.composeColor() ?: Color.Unspecified,

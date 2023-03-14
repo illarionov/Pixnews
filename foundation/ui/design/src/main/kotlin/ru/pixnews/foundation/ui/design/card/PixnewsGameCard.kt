@@ -56,8 +56,11 @@ import kotlinx.collections.immutable.ImmutableSet
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.game.game.halfLife3
+import ru.pixnews.foundation.ui.assets.icons.image.ImagePlaceholders
 import ru.pixnews.foundation.ui.design.icon.PixnewsGameCardFavouriteIcon
 import ru.pixnews.foundation.ui.design.image.NetworkImage
+import ru.pixnews.foundation.ui.design.image.errorLoadingImageLargePainter
+import ru.pixnews.foundation.ui.design.image.noImageLargePainter
 import ru.pixnews.foundation.ui.design.util.composeColor
 import ru.pixnews.foundation.ui.design.util.contentDescription
 import ru.pixnews.foundation.ui.design.util.uniqueIcons
@@ -65,7 +68,7 @@ import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.foundation.ui.theme.md_theme_palette_neutral_variant_40
 
 @Suppress("FLOAT_IN_ACCURATE_CALCULATIONS")
-private const val GAME_CARD_IMAGE_ASPECT_RATIO = 3f / 4f
+private const val GAME_CARD_IMAGE_ASPECT_RATIO = 4f / 3f
 
 @Composable
 public fun PixnewsGameCard(
@@ -87,6 +90,11 @@ public fun PixnewsGameCard(
         ),
     ) {
         NetworkImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(game.cover)
+                .scale(FILL)
+                .crossfade(true)
+                .build(),
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(game.cover?.size?.aspectRatio() ?: GAME_CARD_IMAGE_ASPECT_RATIO)
@@ -96,13 +104,10 @@ public fun PixnewsGameCard(
                         bottomEnd = ZeroCornerSize,
                     ),
                 ),
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(game.cover)
-                .scale(FILL)
-                .crossfade(true)
-                .build(),
+            fallback = ImagePlaceholders.noImageLargePainter(),
+            error = ImagePlaceholders.errorLoadingImageLargePainter(),
             contentDescription = null,
-            contentScale = ContentScale.FillWidth,
+            contentScale = ContentScale.Crop,
             placeholderColor = game.cover?.prevailingColor?.composeColor() ?: Color.Unspecified,
         )
         Box(

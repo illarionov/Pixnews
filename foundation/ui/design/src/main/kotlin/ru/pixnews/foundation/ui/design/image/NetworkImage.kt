@@ -27,8 +27,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import coil.compose.AsyncImagePainter
 import coil.compose.AsyncImagePainter.State
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material3.fade
@@ -47,7 +47,8 @@ public fun NetworkImage(
     model: Any?,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    transform: (State) -> State = AsyncImagePainter.DefaultTransform,
+    error: Painter? = null,
+    fallback: Painter? = error,
     onState: ((State) -> Unit)? = null,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
@@ -67,7 +68,9 @@ public fun NetworkImage(
                 color = placeholderColor,
                 highlight = placeholderHighlight,
             ),
-        transform = transform,
+        placeholder = null,
+        error = error,
+        fallback = fallback,
         onState = {
             imageLoading = it is State.Loading
             if (onState != null) {

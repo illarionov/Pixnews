@@ -48,6 +48,7 @@ import ru.pixnews.features.calendar.model.GamesOnDay
 import ru.pixnews.features.calendar.model.MajorReleaseCarouselItemUiModel
 import ru.pixnews.features.calendar.model.toCalendarListItem
 import ru.pixnews.features.calendar.model.toMajorReleaseCarouselItemUiModel
+import ru.pixnews.foundation.ui.imageloader.coil.tooling.OverrideResult
 import ru.pixnews.foundation.ui.imageloader.coil.tooling.withDebug
 import kotlin.time.Duration.Companion.seconds
 
@@ -76,7 +77,9 @@ internal object PreviewFixtures {
             MajorRelease.slimerancher2.copy(
                 cover = Release.slimerancher2.cover?.withDebug(loadingDelay = 10.seconds),
             ),
-            MajorRelease.smalland,
+            MajorRelease.smalland.copy(
+                cover = Release.smalland.cover?.withDebug(overrideResult = OverrideResult.Error()),
+            ),
             MajorRelease.halflife3,
             MajorRelease.beyondgoodandevil2,
             MajorRelease.thelostwild,
@@ -100,7 +103,12 @@ internal object PreviewFixtures {
             Release.beyondgoodandevil2,
             Release.starwarseclipse,
             CalendarListTitle(title = "TBD Early 2024"),
-            Release.halflife3,
+            Release.halflife3.copy(
+                cover = Release.halflife3.cover?.withDebug(
+                    loadingDelay = 5.seconds,
+                    overrideResult = OverrideResult.Error(),
+                ),
+            ),
             CalendarListTitle(title = "TBD"),
             Release.smalland,
             Release.project007,

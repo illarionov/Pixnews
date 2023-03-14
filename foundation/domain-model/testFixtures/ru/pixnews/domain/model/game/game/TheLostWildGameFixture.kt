@@ -50,7 +50,7 @@ import ru.pixnews.domain.model.util.DefaultVideoUrl
 import ru.pixnews.domain.model.util.RichText
 import ru.pixnews.domain.model.util.Url
 
-internal val theLostWildGameId = GameId("smalland")
+internal val theLostWildGameId = GameId("the-lost-wild")
 
 public val GameFixtures.theLostWild: Game
     get() = Game(

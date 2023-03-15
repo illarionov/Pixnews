@@ -53,17 +53,18 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
 
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
       - name: Unpack sign keys and secrets
         env:
           SIGN_KEYS_AND_SECRETS: ${{ secrets.SIGN_KEYS_AND_SECRETS }}
         run: echo "$SIGN_KEYS_AND_SECRETS" | base64 -d | zstd -d | tar -xf -
 
       - name: Assemble release build, run static-analysis, build release
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: |
-            -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
-            lintRelease assembleRelease --stacktrace
+        run: >
+          ./gradlew -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
+          lintRelease assembleRelease --stacktrace
 
       - name: Cleanup secrets
         if: ${{ always() }}
@@ -119,6 +120,9 @@ jobs:
           distribution: 'temurin'
           java-version: '19'
 
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
       - name: Get pip cache dir
         id: pip-cache
         run: |
@@ -143,25 +147,23 @@ jobs:
         run: echo "$GOOGLE_SERVICES_JSON" | base64 -d | zstd -d  -o app/src/google-services.json
 
       - name: Clean unused managed devices
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: |
-            -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
-            -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
-            -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
-            cleanManagedDevices --unused-only
-            --continue
+        run: >
+          ./gradlew
+          -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
+          -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
+          -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
+          cleanManagedDevices --unused-only
+          --continue
 
       - name: Run instrumented tests
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: |
-            -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
-            -Dorg.gradle.workers.max=1
-            -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
-            -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
-            pixel2api30DebugAndroidTest
-            --continue
+        run: >
+          ./gradlew
+          -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
+          -Dorg.gradle.workers.max=1
+          -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
+          -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
+          pixel2api30DebugAndroidTest
+          --continue --info
 
       - name: Cleanup secrets
         if: ${{ always() }}

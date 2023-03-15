@@ -40,6 +40,7 @@ dependencies {
     implementation(project(":foundation:ui:design"))
     implementation(project(":foundation:ui:imageloader:coil"))
     implementation(project(":libraries:compose-utils"))
+    implementation(project(":libraries:kotlin-utils"))
 
     implementation(libs.accompanist.pager)
     implementation(libs.androidx.compose.foundation)

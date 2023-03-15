@@ -73,7 +73,6 @@ internal fun CalendarScreenHeader(
             onSearch = onSearch,
         )
         DateSelectionHeader(
-            yearPickerText = remember { mutableStateOf("Февраль, 2023") },
             activeDate = remember { mutableStateOf(System.todayIn(TimeZone.currentSystemDefault())) },
             onYearMonthSelectionClick = {},
             games = PreviewFixtures.gamesSummaryOnActiveDate,

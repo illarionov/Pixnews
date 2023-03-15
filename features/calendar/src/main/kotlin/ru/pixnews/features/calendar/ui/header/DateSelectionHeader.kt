@@ -55,7 +55,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
@@ -85,7 +84,6 @@ import ru.pixnews.libraries.compose.utils.defaultLocale
 internal fun DateSelectionHeader(
     activeDate: State<LocalDate>,
     games: ImmutableMap<LocalDate, GamesOnDay>,
-    yearPickerText: State<String>,
     onYearMonthSelectionClick: () -> Unit,
     onDaySelectionClick: (LocalDate) -> Unit,
     modifier: Modifier = Modifier,
@@ -96,7 +94,7 @@ internal fun DateSelectionHeader(
                 .fillMaxWidth(),
         ) {
             YearMonthPicker(
-                yearPickerText = yearPickerText,
+                activeDate = activeDate,
                 onClick = onYearMonthSelectionClick,
             )
             WeekDaysRow(
@@ -208,7 +206,7 @@ internal fun WeeksDay(
 
 @Composable
 internal fun YearMonthPicker(
-    yearPickerText: State<String>,
+    activeDate: State<LocalDate>,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -223,15 +221,15 @@ internal fun YearMonthPicker(
             modifier = Modifier
                 .widthIn(min = 156.dp),
         ) {
+            val title = formatYearMonthPickerTitle(activeDate.value)
             Text(
-                text = yearPickerText.value,
+                text = title,
                 style = MaterialTheme.typography.labelLarge,
                 modifier = Modifier
                     // Make the screen reader read out updates to the menu button text as the user
                     // scrolls to change the displayed month.
                     .semantics {
                         liveRegion = LiveRegionMode.Polite
-                        contentDescription = yearPickerText.value
                     },
             )
         }
@@ -290,6 +288,11 @@ private fun formatDayContentDescription(
     return stringResource(id = skeletonResourceId, dateString)
 }
 
+@Composable
+internal fun formatYearMonthPickerTitle(date: LocalDate): String {
+    return DateFormatter.formatYearMonthSelectionTitle(date, defaultLocale())
+}
+
 @Preview
 @Composable
 private fun DateSelectionPreview() {
@@ -298,7 +301,6 @@ private fun DateSelectionPreview() {
     ) {
         Surface {
             DateSelectionHeader(
-                yearPickerText = remember { mutableStateOf("Февраль, 2023") },
                 activeDate = remember { mutableStateOf(System.todayIn(TimeZone.currentSystemDefault())) },
                 onYearMonthSelectionClick = {},
                 games = PreviewFixtures.gamesSummaryOnActiveDate,

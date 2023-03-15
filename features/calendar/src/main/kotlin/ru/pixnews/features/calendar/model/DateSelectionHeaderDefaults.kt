@@ -16,9 +16,14 @@
 package ru.pixnews.features.calendar.model
 
 internal object DateSelectionHeaderDefaults {
-/**
+    /**
      * A date format skeleton used to format a selected date to be used as content description for
      * screen readers (e.g. "Saturday, March 27, 2021")
      */
     const val YEAR_MONTH_WEEKDAY_DAY_SKELETON: String = "yMMMMEEEEd"
+
+    /**
+     * A date format skeleton used to format a selected month for month selection widget
+     */
+    const val YEAR_MONTH_SKELETON: String = "LLLL, yyyy"
 }

@@ -15,10 +15,16 @@
  */
 package ru.pixnews.libraries.kotlin.utils
 
+import java.util.Locale
+
 public fun CharSequence.isWhitespaceOnly(): Boolean {
     return isNotEmpty() && isBlank()
 }
 
 public fun CharSequence.isNotWhitespaceOnly(): Boolean {
     return isEmpty() || !isBlank()
+}
+
+public fun String.capitalize(locale: Locale): String {
+    return replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale) else it.toString() }
 }

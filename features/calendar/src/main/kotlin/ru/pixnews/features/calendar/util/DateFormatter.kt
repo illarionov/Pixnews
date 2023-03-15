@@ -17,10 +17,16 @@ package ru.pixnews.features.calendar.util
 
 import android.text.format.DateFormat
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toJavaLocalDate
+import ru.pixnews.features.calendar.model.DateSelectionHeaderDefaults.YEAR_MONTH_SKELETON
 import ru.pixnews.features.calendar.model.DateSelectionHeaderDefaults.YEAR_MONTH_WEEKDAY_DAY_SKELETON
+import ru.pixnews.libraries.kotlin.utils.capitalize
+import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.time.format.DecimalStyle
+import java.util.Date
 import java.util.Locale
 
 internal object DateFormatter {
@@ -31,5 +37,18 @@ internal object DateFormatter {
         return date
             .toJavaLocalDate()
             .format(formatter)
+    }
+
+    fun formatYearMonthSelectionTitle(date: LocalDate, locale: Locale): String {
+        return date.formatWithDateFormat(YEAR_MONTH_SKELETON, locale)
+    }
+
+    // Workaround for https://issuetracker.google.com/issues/160113376
+    private fun LocalDate.formatWithDateFormat(pattern: String, locale: Locale): String {
+        val formatter = SimpleDateFormat(pattern, locale).apply {
+            timeZone = java.util.TimeZone.getTimeZone("UTC")
+        }
+        return formatter.format(Date(this.atStartOfDayIn(TimeZone.UTC).toEpochMilliseconds()))
+            .capitalize(locale)
     }
 }

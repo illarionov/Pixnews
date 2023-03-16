@@ -29,6 +29,9 @@
     useRecommendedImportsOrder: false
 - name: FUNCTION_NAME_INCORRECT_CASE
   enabled: false
+- name: GENERIC_VARIABLE_WRONG_DECLARATION
+  enabled: true
+  ignoreAnnotated: [ Rule ]
 - name: HEADER_MISSING_IN_NON_SINGLE_CLASS_FILE
   enabled: false
 - name: HEADER_MISSING_OR_WRONG_COPYRIGHT

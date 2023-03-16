@@ -15,9 +15,9 @@
  */
 package ru.pixnews.features.root
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import ru.pixnews.features.calendar.navigation.calendarScreen
 import ru.pixnews.features.collections.navigation.collectionsScreen
@@ -25,13 +25,14 @@ import ru.pixnews.features.profile.navigation.profileScreen
 
 @Composable
 internal fun NavHost(
-    navController: NavHostController,
+    navState: PixnewsRootNavigationState,
     modifier: Modifier = Modifier,
     startDestination: String = TopLevelDestination.START_DESTINATION.route,
 ) {
     NavHost(
-        modifier = modifier,
-        navController = navController,
+        modifier = modifier
+            .fillMaxSize(),
+        navController = navState.navController,
         startDestination = startDestination,
     ) {
         calendarScreen()

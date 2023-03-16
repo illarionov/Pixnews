@@ -17,6 +17,8 @@ package ru.pixnews.features.root
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -40,8 +42,13 @@ public fun rememberPixnewsRootNavigationState(
 public class PixnewsRootNavigationState(
     public val navController: NavHostController,
 ) {
-    public val currentDestination: NavDestination?
-        @Composable get() = navController.currentBackStackEntry?.destination
+    public val currentDestination: State<NavDestination?>
+        @Composable get() {
+            val destinationFlow = remember(navController) {
+                navController.currentBackStackEntryFlow.map { it.destination }
+            }
+            return destinationFlow.collectAsState(null)
+        }
 
     public val currentTopLevelDestinationFlow: Flow<TopLevelDestination?>
         get() = navController.currentBackStackEntryFlow
@@ -53,6 +60,7 @@ public class PixnewsRootNavigationState(
         val topLevelNavOptions = navOptions {
             popUpTo(navController.graph.findStartDestination().id) {
                 saveState = true
+                inclusive = false
             }
             launchSingleTop = true
             restoreState = true

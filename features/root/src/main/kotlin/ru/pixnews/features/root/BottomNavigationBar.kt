@@ -25,9 +25,12 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import ru.pixnews.foundation.ui.design.navigation.PixnewsBottomNavigationBar
 import ru.pixnews.foundation.ui.design.navigation.PixnewsBottomNavigationBarItem
+
+internal const val BOTTOM_NAVIGATION_BAR_TEST_TAG = "PixnewsBottomNavigationBar"
 
 @Composable
 internal fun BottomNavigationBar(
@@ -36,7 +39,8 @@ internal fun BottomNavigationBar(
     modifier: Modifier = Modifier,
 ) {
     PixnewsBottomNavigationBar(
-        modifier = modifier,
+        modifier = modifier
+            .testTag(BOTTOM_NAVIGATION_BAR_TEST_TAG),
     ) {
         TopLevelDestination.values().forEach { destination ->
             DestinationNavigationBarItem(

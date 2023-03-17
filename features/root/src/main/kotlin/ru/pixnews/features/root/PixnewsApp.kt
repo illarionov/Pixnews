@@ -16,6 +16,7 @@
 package ru.pixnews.features.root
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.consumeWindowInsets
@@ -39,6 +40,7 @@ import ru.pixnews.libraries.ui.tooling.CompletePreviews
 public fun PixnewsApp(
     modifier: Modifier = Modifier,
     navigationState: PixnewsRootNavigationState = rememberPixnewsRootNavigationState(),
+    navHost: @Composable ColumnScope.() -> Unit = { NavHost(navState = navigationState) },
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -67,12 +69,8 @@ public fun PixnewsApp(
                         WindowInsetsSides.Horizontal,
                     ),
                 ),
-        ) {
-            NavHost(
-                navController = navigationState.navController,
-                modifier = Modifier.fillMaxSize(),
-            )
-        }
+            content = navHost,
+        )
     }
 }
 

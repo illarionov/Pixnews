@@ -57,6 +57,11 @@ dependencies {
     implementation(project(":libraries:ui-tooling"))
     debugImplementation(libs.androidx.compose.ui.tooling)
 
+    androidTestImplementation(libs.accompanist.test.harness)
     androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.androidx.navigation.testing)
+    androidTestImplementation(libs.assertk)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.turbine)
     androidTestImplementation(project(":foundation:instrumented-testing"))
 }

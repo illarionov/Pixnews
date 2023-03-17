@@ -16,6 +16,7 @@
 plugins {
     id("ru.pixnews.android-library")
     id("ru.pixnews.di-anvil-factories")
+    id("ru.pixnews.android-testing-paparazzi")
 }
 
 pixnews {
@@ -25,6 +26,9 @@ pixnews {
 
 android {
     namespace = "ru.pixnews.features.root"
+    buildFeatures {
+        androidResources = true
+    }
 }
 
 dependencies {

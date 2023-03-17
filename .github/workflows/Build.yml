@@ -37,6 +37,10 @@ jobs:
         with:
           clean: true
           fetch-depth: 0
+          lfs: true
+
+      - name: Check LFS files
+        uses: actionsdesk/lfs-warning@v3.2
 
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
@@ -58,7 +62,7 @@ jobs:
       - name: Assemble debug build, run tests
         run: >
           ./gradlew -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
-          assembleDebug test --stacktrace
+          assembleDebug test verifyPaparazzi --stacktrace
 
       - name: Cleanup secrets
         if: ${{ always() }}

@@ -15,14 +15,13 @@
  */
 
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
-import org.gradle.kotlin.dsl.configure
 import ru.pixnews.versionCatalog
 
 /**
  * Convention plugin that configures crashlytics
  */
 plugins {
-    id("com.android.application")
+    id("com.android.application") apply false
     id("ru.pixnews.build-parameters")
     id("com.google.firebase.crashlytics")
 }

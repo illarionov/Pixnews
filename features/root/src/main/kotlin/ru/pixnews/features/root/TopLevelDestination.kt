@@ -21,7 +21,6 @@ import ru.pixnews.features.calendar.navigation.CALENDAR_ROUTE
 import ru.pixnews.features.collections.navigation.COLLECTIONS_ROUTE
 import ru.pixnews.features.profile.navigation.PROFILE_ROUTE
 import ru.pixnews.foundation.ui.assets.icons.navigation.NavigationIcons
-import ru.pixnews.foundation.ui.design.R
 
 @Immutable
 public enum class TopLevelDestination(

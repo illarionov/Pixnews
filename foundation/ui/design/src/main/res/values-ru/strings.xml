@@ -15,13 +15,6 @@
     limitations under the License.
 -->
 <resources  xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="bottom_bar_title_calendar">Календарь</string>
-    <string name="bottom_bar_content_description_calendar">Calendar</string>
-    <string name="bottom_bar_title_collections">Списки</string>
-    <string name="bottom_bar_content_description_collections">Списки</string>
-    <string name="bottom_bar_title_profile">Профиль</string>
-    <string name="bottom_bar_content_description_profile">Профиль</string>
-
     <string name="search_game_placeholder">Поиск игры</string>
     <string name="search_game_clear_field_content_description">Очистить поле поиска игры</string>
 

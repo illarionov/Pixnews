@@ -13,19 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import com.android.build.gradle.LibraryPlugin
+import ru.pixnews.versionCatalog
+
+/**
+ * Convention plugin with paparazzi configuration
+ */
 plugins {
-    id("ru.pixnews.kotlindsl")
+    id("com.android.library") apply false
+    id("app.cash.paparazzi")
 }
 
-dependencies {
-    implementation(project(":base"))
-    implementation(project(":di"))
-    implementation(project(":testing"))
+plugins.withType<LibraryPlugin>() {
+    android {
+        buildFeatures {
+            // https://github.com/cashapp/paparazzi/issues/472
+            androidResources = true
+        }
+    }
 
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
-    implementation(libs.firebase.crashlitycs.plugin)
-    implementation(libs.com.android.tools.common)
-    implementation(libs.paparazzi.plugin)
-    implementation("ru.pixnews:build-parameters")
+    dependencies {
+        "testImplementation"(versionCatalog.findLibrary("junit-jupiter-vintage-engine").get())
+    }
 }

@@ -40,6 +40,14 @@ android {
     lint {
         checkDependencies = true
     }
+
+    sourceSets {
+        listOf("release", "benchmark").forEach { sourceSet ->
+            getByName(sourceSet) {
+                kotlin.srcDir("src/commonReleaseBenchmark/kotlin")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -80,6 +88,7 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.profileinstaller)
 
     implementation(libs.androidx.splashscreen)
     implementation(libs.androidx.startup)

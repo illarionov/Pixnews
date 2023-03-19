@@ -15,9 +15,22 @@
  */
 package ru.pixnews.features.collections
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 
 @Composable
 @Suppress("EmptyFunctionBlock")
-internal fun CollectionsScreen() {
+internal fun CollectionsScreen(
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .testTag("collections:success_content")
+            .fillMaxSize(),
+    ) {
+        // TODO("Not yet implemented")
+    }
 }

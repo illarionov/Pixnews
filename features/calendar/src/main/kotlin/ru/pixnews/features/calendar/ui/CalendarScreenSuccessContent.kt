@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.datetime.Clock.System
@@ -45,7 +46,9 @@ internal fun CalendarScreenSuccessContent(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .testTag("calendar:success_content")
+            .fillMaxSize(),
     ) {
         CalendarScreenHeader(
             onSearch = {},
@@ -70,6 +73,8 @@ internal fun CalendarScreenHeader(
             .fillMaxWidth(),
     ) {
         SearchBox(
+            modifier = Modifier
+                .testTag("calendar:header:search_box"),
             onSearch = onSearch,
         )
         DateSelectionHeader(

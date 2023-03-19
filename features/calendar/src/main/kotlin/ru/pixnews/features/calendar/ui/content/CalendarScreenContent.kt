@@ -31,6 +31,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.ImmutableList
 import ru.pixnews.domain.model.game.GameId
@@ -61,13 +62,17 @@ internal fun CalendarScreenContent(
         .asPaddingValues()
 
     LazyColumn(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .testTag("calendar:content:lazy_list")
+            .fillMaxWidth(),
         contentPadding = contentPaddings.asPaddingValues(),
         state = state,
         verticalArrangement = spacedBy(8.dp),
     ) {
         item {
             MajorReleasesCarousel(
+                modifier = Modifier
+                    .testTag("calendar:content:major_releases_carousel"),
                 releases = majorReleases,
                 onReleaseClick = onMajorReleaseClick,
                 contentPadding = listItemsPadding,
@@ -80,7 +85,9 @@ internal fun CalendarScreenContent(
         ) { gameIndex ->
             when (val item = games[gameIndex]) {
                 is CalendarListTitle -> GameSubheader(
-                    modifier = Modifier.padding(listItemsPadding),
+                    modifier = Modifier
+                        .testTag("calendar:content:game_subheader")
+                        .padding(listItemsPadding),
                     title = item.title,
                 )
 

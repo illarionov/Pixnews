@@ -1,28 +1,13 @@
-name: Instrumented tests on self-hosted runner
+name: Generate Baseline profile
 
 on:
-  pull_request:
-    paths-ignore:
-      - '**/*.md'
-    branches:
-      - main
-  push:
-    paths-ignore:
-      - '**/*.md'
-    branches:
-      - main
   workflow_dispatch:
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 env:
   CI: true
   TERM: dumb
   GRADLE_OPTS: >-
     -Dorg.gradle.jvmargs="-Xmx1536M -XX:MaxMetaspaceSize=1g -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC"
-    -Dorg.gradle.parallel=true
     -Dorg.gradle.workers.max=2
     -Dorg.gradle.vfs.watch=false
     -Dorg.gradle.dependency.verification.console=verbose
@@ -31,11 +16,10 @@ env:
     -Xmx1536M -XX:MaxMetaspaceSize=320M -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC -XX:NewRatio=1
 
 jobs:
-  instrumented-tests:
-    name: Instrumented tests
+  baseline-profile:
+    name: Generate baseline profile
     runs-on: self-hosted
     timeout-minutes: 60
-    if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
 
     steps:
       - name: Clean the repository
@@ -48,9 +32,6 @@ jobs:
         with:
           clean: false
           fetch-depth: 0
-
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
 
       - name: Setup Java
         uses: actions/setup-java@v3
@@ -66,49 +47,50 @@ jobs:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo "$GOOGLE_SERVICES_JSON" | base64 -d | zstd -d  -o app/src/google-services.json
 
-      - name: Clean unused managed devices
+      - name: Build dependencies, clean unused managed devices
         run: >
           ./gradlew
           -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
           -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
-          -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
+          -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile
+          :test:benchmark:assembleBenchmark :app:assembleBenchmark
           cleanManagedDevices --unused-only
           --continue
 
-      - name: Run instrumented tests
+      - name: Generate baseline profile
         run: >
           ./gradlew
           -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
           -Dorg.gradle.workers.max=1
           -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
           -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
-          -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=""
-          pixel2api30DebugAndroidTest
+          -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile
+          :test:benchmark:pixel2api30BenchmarkAndroidTest
           --continue
 
       - name: Cleanup secrets
         if: ${{ always() }}
         run: rm -f app/src/google-services.json
 
-      - name: Publish instrumented test results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: ${{ always() }}
-        with:
-          junit_files: '**/build/outputs/androidTest-results/**/*.xml'
-          check_name: "Instrumented test results"
-
-      - name: Bundle the instrumented tests report
-        if: ${{ failure() }}
+      - name: Pack baseline profile
         run: >-
-          find . -type d \( -path '*/build/compose-*'
-          -o -path '*/build/outputs/androidTest-results'
-          -o -path '*/build/outputs/managed_*'
-          -o -path '*/build/reports/androidTests' \) -print0
-          |  xargs -0 tar -c -I 'zstd -19 -T0' -f instrumented-tests.tar.zst
+          tar -c -I 'zstd -19 -T0' -f baseline-profile.tar.zst test/benchmark/build/outputs/managed_device_android_test_additional_output/benchmark/
 
-      - name: Upload test reports
+      - name: Upload baseline profile
         if: ${{ failure() }}
         uses: actions/upload-artifact@v3
         with:
           name: instrumented-test-reports
-          path: instrumented-tests.tar.zst
+          path: baseline-profile.tar.zst
+
+      - name: Replace old baseline profile
+        run: >-
+          cp test/benchmark/build/outputs/managed_device_android_test_additional_output/benchmark/pixel5api33/*-baseline-prof.txt
+          app/src/main/baseline-prof.txt
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          add-paths: app/src/main/baseline-prof.txt
+          commit-message: \[baseline-profile-generator\] New baseline profile
+          branch: auto/baseline-profile

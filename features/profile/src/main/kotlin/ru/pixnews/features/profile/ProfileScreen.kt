@@ -15,9 +15,21 @@
  */
 package ru.pixnews.features.profile
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 
 @Composable
-internal fun ProfileScreen() {
-    TODO("Not yet implemented")
+internal fun ProfileScreen(
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .testTag("profile:success_content")
+            .fillMaxSize(),
+    ) {
+        // TODO("Not yet implemented")
+    }
 }

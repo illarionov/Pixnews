@@ -44,7 +44,6 @@ internal fun Project.configureCompose(
         dependencies {
             val bom = versionCatalog.findLibrary("androidx-compose-bom").orElseThrow()
             add("implementation", platform(bom))
-            add("androidTestImplementation", platform(bom))
         }
     }
 
@@ -54,8 +53,9 @@ internal fun Project.configureCompose(
             compilerOptions {
                 freeCompilerArgs.addAll(
                     "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
-                    "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
                     "-opt-in=androidx.compose.foundation.layout.ExperimentalLayoutApi",
+                    "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+                    "-opt-in=androidx.compose.ui.ExperimentalComposeUiApi",
                 )
             }
         }

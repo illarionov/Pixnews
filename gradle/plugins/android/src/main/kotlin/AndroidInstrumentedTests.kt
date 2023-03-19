@@ -19,6 +19,7 @@ package ru.pixnews
 
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.ManagedVirtualDevice
+import com.android.build.api.dsl.TestedExtension
 import com.android.build.gradle.internal.tasks.ManagedDeviceInstrumentationTestTask
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -53,7 +54,9 @@ internal fun Project.configureTestManagedDevices(
                 }
             }
         }
+    }
 
+    if (commonExtension is TestedExtension) {
         dependencies {
             if (pixnews.compose.get()) {
                 add("debugImplementation", versionCatalog.findLibrary("androidx-compose-ui-testManifest").orElseThrow())

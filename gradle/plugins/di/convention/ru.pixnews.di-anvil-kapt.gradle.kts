@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import ru.pixnews.PixnewsExtension
 import ru.pixnews.versionCatalog
 
 /**
@@ -35,11 +34,5 @@ kapt {
         option("-Adagger.fastInit=enabled")
         option("-Adagger.strictMultibindingValidation=enabled")
         option("-Adagger.experimentalDaggerErrorMessages=enabled")
-    }
-}
-
-afterEvaluate {
-    if (extensions.findByType<PixnewsExtension>()?.managedDevices?.get() == true) {
-        dependencies.add("kaptAndroidTest", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
     }
 }

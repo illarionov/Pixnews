@@ -30,7 +30,7 @@ import androidx.compose.ui.res.stringResource
 import ru.pixnews.foundation.ui.design.navigation.PixnewsBottomNavigationBar
 import ru.pixnews.foundation.ui.design.navigation.PixnewsBottomNavigationBarItem
 
-internal const val BOTTOM_NAVIGATION_BAR_TEST_TAG = "PixnewsBottomNavigationBar"
+internal const val BOTTOM_NAVIGATION_BAR_TEST_TAG = "bottom_navigation_bar"
 
 @Composable
 internal fun BottomNavigationBar(
@@ -64,7 +64,8 @@ private fun RowScope.DestinationNavigationBarItem(
     modifier: Modifier = Modifier,
 ) {
     PixnewsBottomNavigationBarItem(
-        modifier = modifier,
+        modifier = modifier
+            .testTag("bottom_bar:${destination.route}"),
         selected = isSelected.value,
         onClick = { onTabClicked(destination) },
         label = {

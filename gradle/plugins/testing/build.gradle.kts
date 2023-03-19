@@ -22,5 +22,4 @@ dependencies {
     implementation(gradleKotlinDsl())
     implementation(project(":base"))
     implementation("ru.pixnews:build-parameters")
-    implementation(libs.kotlin.jvm.plugin)
 }

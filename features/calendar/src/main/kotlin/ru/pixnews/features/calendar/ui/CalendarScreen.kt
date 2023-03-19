@@ -24,6 +24,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ru.pixnews.features.calendar.CalendarViewModel
 import ru.pixnews.features.calendar.PreviewFixtures
@@ -65,6 +66,7 @@ internal fun CalendarScreen(
     ) {
         Box(
             modifier = Modifier
+                .testTag("calendar:loading_overlay")
                 .background(MaterialTheme.colorScheme.surface),
         ) {
             PixnewsLoadingOverlay(

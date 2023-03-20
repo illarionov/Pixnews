@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
+import ru.pixnews.ReleaseConfig
 import ru.pixnews.applyTo
 import ru.pixnews.configureCommonAndroid
+import ru.pixnews.configureSigning
 import ru.pixnews.createPixnewsExtension
 import ru.pixnews.pixnews
 import ru.pixnews.versionCatalog
-import java.io.StringReader
-import java.util.Properties
 
 /**
  * Convention plugin that configures android application
@@ -44,46 +44,32 @@ android {
         manifestPlaceholders["firebase_crashlytics_collection_enabled"] = "false"
     }
 
-    val releaseKeystorePropertiesFilePath = buildParameters.signing.release_keystore_properties_file
-    val releaseKeystorePropertiesContent = providers.fileContents(
-        rootProject.layout.projectDirectory.file(releaseKeystorePropertiesFilePath),
-    ).asText
-    val useReleaseKeystore = releaseKeystorePropertiesContent.isPresent &&
-            !buildParameters.signing.sign_with_debug_keys
-
-    signingConfigs {
-        getByName("debug") {
-            storeFile = rootProject.file("config/signing/debug.jks")
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
-        }
-        if (useReleaseKeystore) {
-            val releaseProperties = Properties().apply {
-                load(StringReader(releaseKeystorePropertiesContent.get()))
-            }
-            create("release") {
-                storeFile = rootProject.file(releaseProperties["storeFile"] as String)
-                keyAlias = releaseProperties["keyAlias"] as String
-                storePassword = releaseProperties["storePassword"] as String
-                keyPassword = releaseProperties["keyPassword"] as String
-            }
-        } else {
-            create("release")
-        }
-    }
+    val releaseConfig = ReleaseConfig(project)
+    configureSigning(signingConfigs, releaseConfig)
 
     buildTypes {
-        getByName("release") {
+        val release = getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             isCrunchPngs = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName(if (useReleaseKeystore) "release" else "debug")
+            signingConfig = signingConfigs.getByName(if (releaseConfig.useReleaseKeystore) "release" else "debug")
         }
         getByName("debug") {
             applicationIdSuffix = ".debug"
             signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += "release"
+        }
+        create("benchmark") {
+            initWith(release)
+            applicationIdSuffix = ".benchmark"
+            signingConfig = signingConfigs.getByName("debug")
+
+            // https://issuetracker.google.com/issues/266687543
+            isShrinkResources = false
+            isMinifyEnabled = false
+
+            proguardFiles("proguard-benchmark.pro")
             matchingFallbacks += "release"
         }
     }

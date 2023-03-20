@@ -163,6 +163,7 @@ jobs:
           -Dorg.gradle.workers.max=1
           -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
           -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
+          -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=""
           pixel2api30DebugAndroidTest
           --continue --info
 

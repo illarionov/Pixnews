@@ -13,20 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews
+package ru.pixnews.test
 
-import com.android.build.api.dsl.CommonExtension
-import com.android.build.api.dsl.TestedExtension
-import org.gradle.api.Project
+import ru.pixnews.test.benchmark.BuildConfig
 
-internal fun PixnewsExtension.applyTo(project: Project, commonExtension: CommonExtension<*, *, *, *>) {
-    if (compose.get()) {
-        project.configureCompose(commonExtension)
-    }
-    if (managedDevices.get()) {
-        project.configureTestManagedDevices(commonExtension)
-    }
-    if (commonExtension is TestedExtension) {
-        project.configureUnitTesting(unitTestEngine.get(), commonExtension)
-    }
+@Suppress("CONSTANT_UPPERCASE")
+object BenchmarkAppConfig {
+    const val targetPackage: String = "ru.pixnews${BuildConfig.APP_BUILD_TYPE_SUFFIX}"
 }

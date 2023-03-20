@@ -16,9 +16,13 @@
 package ru.pixnews.features.root
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 
+@Suppress("ModifierMissing")
 @Composable
 public fun PixnewsRootContent(
     appConfig: AppConfig,
@@ -27,6 +31,11 @@ public fun PixnewsRootContent(
         appConfig = appConfig,
         useDynamicColor = false,
     ) {
-        PixnewsApp()
+        PixnewsApp(
+            modifier = Modifier
+                .semantics {
+                    testTagsAsResourceId = appConfig.buildType != "release"
+                },
+        )
     }
 }

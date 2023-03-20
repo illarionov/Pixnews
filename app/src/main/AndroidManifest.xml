@@ -30,6 +30,7 @@
         android:theme="@style/Theme.Pixnews"
         android:usesCleartextTraffic="false"
         tools:ignore="UnusedAttribute">
+        <profileable android:shell="true" tools:targetApi="q" />
 
         <activity
             android:name=".MainActivity"

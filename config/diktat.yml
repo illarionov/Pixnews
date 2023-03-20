@@ -17,9 +17,13 @@
   enabled: false
 - name: CUSTOM_GETTERS_SETTERS
   enabled: false
-- name: EMPTY_BLOCK_STRUCTURE_ERROR # Enabled in Detekt
+# Enabled in Detekt
+- name: EMPTY_BLOCK_STRUCTURE_ERROR
   enabled: false
 - name: EXTENSION_FUNCTION_WITH_CLASS
+  enabled: false
+# "MatchingDeclarationName" rule in Detekt
+- name: FILE_NAME_MATCH_CLASS
   enabled: false
 - name: FILE_NO_BLANK_LINE_BETWEEN_BLOCKS
   enabled: true
@@ -96,7 +100,8 @@
   enabled: false
   configuration:
     typeReferenceLength: '35'
-- name: UNUSED_IMPORT # Enabled in Detekt
+# Enabled in Detekt
+- name: UNUSED_IMPORT
   enabled: false
 - name: USE_DATA_CLASS
   enabled: false

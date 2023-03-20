@@ -24,7 +24,7 @@ plugins {
 
 rootProject.name = "Pixnews"
 
-include(":app")
+include(":app", ":test:benchmark")
 
 listOf(
     "analytics",

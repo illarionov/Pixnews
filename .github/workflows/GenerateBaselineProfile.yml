@@ -77,7 +77,6 @@ jobs:
           tar -c -I 'zstd -19 -T0' -f baseline-profile.tar.zst test/benchmark/build/outputs/managed_device_android_test_additional_output/benchmark/
 
       - name: Upload baseline profile
-        if: ${{ failure() }}
         uses: actions/upload-artifact@v3
         with:
           name: instrumented-test-reports
@@ -92,5 +91,6 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           add-paths: app/src/main/baseline-prof.txt
-          commit-message: \[baseline-profile-generator\] New baseline profile
+          commit-message: "[baseline-profile-generator] New baseline profile"
+          title: Updated baseline profile
           branch: auto/baseline-profile

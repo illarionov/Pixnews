@@ -52,6 +52,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         window.navigationBarColor = Color.Transparent.toArgb()
+        window.statusBarColor = Color.Transparent.toArgb()
         setContent {
             PixnewsRootContent(
                 appConfig = appConfig,

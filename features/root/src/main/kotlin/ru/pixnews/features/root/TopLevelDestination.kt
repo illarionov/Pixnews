@@ -16,6 +16,7 @@
 package ru.pixnews.features.root
 
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Immutable
 import ru.pixnews.features.calendar.navigation.CALENDAR_ROUTE
 import ru.pixnews.features.collections.navigation.COLLECTIONS_ROUTE
@@ -25,7 +26,7 @@ import ru.pixnews.foundation.ui.assets.icons.navigation.NavigationIcons
 @Immutable
 public enum class TopLevelDestination(
     public val route: String,
-    @StringRes internal val title: Int,
+    @get:VisibleForTesting @StringRes val title: Int,
     @StringRes internal val contentDescription: Int,
     internal val icon: NavigationIcons.IconPair,
 ) {

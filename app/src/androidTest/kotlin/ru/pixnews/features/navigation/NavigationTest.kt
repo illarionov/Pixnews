@@ -13,16 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.features.root.test
+package ru.pixnews.features.navigation
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.SemanticsMatcher
-import androidx.compose.ui.test.SemanticsNodeInteraction
-import androidx.compose.ui.test.assertIsNotSelected
-import androidx.compose.ui.test.assertIsSelected
-import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasTestTag
-import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.performClick
@@ -31,11 +26,6 @@ import androidx.test.espresso.NoActivityResumedException
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import ru.pixnews.features.root.BOTTOM_NAVIGATION_BAR_TEST_TAG
-import ru.pixnews.features.root.CALENDAR_CONTENT_TEST_TAG
-import ru.pixnews.features.root.COLLECTIONS_CONTENT_TEST_TAG
-import ru.pixnews.features.root.FakeNavHost
-import ru.pixnews.features.root.PROFILE_CONTENT_TEST_TAG
 import ru.pixnews.features.root.PixnewsApp
 import ru.pixnews.features.root.TopLevelDestination
 import ru.pixnews.features.root.TopLevelDestination.CALENDAR
@@ -77,10 +67,10 @@ class NavigationTest {
     @Test
     fun testNavigateToCollectionsAndBack() {
         with(screen) {
-            collectionsTab.button().performClick()
+            bottomBar.button(COLLECTIONS).performClick()
             assertActiveTab(COLLECTIONS)
 
-            calendarTab.button().performClick()
+            bottomBar.button(CALENDAR).performClick()
             assertActiveTab(CALENDAR)
         }
     }
@@ -88,10 +78,10 @@ class NavigationTest {
     @Test
     fun testNavigateToProfile() {
         with(screen) {
-            profileTab.button().performClick()
+            bottomBar.button(PROFILE).performClick()
             assertActiveTab(PROFILE)
 
-            calendarTab.button().performClick()
+            bottomBar.button(CALENDAR).performClick()
             assertActiveTab(CALENDAR)
         }
     }
@@ -100,9 +90,9 @@ class NavigationTest {
     fun homeScreen_collections_back_quitApp() {
         with(screen) {
             // GIVEN the user navigates to the Collections destination
-            collectionsTab.button().performClick()
+            bottomBar.button(COLLECTIONS).performClick()
             // and then navigates to the Calendar destination
-            calendarTab.button().performClick()
+            bottomBar.button(CALENDAR).performClick()
             // WHEN the user uses the system button/gesture to go back
             Espresso.pressBack()
             // THEN the app quits
@@ -112,8 +102,8 @@ class NavigationTest {
     @Test
     fun backFromAnyDestinationShouldReturnToCalendar() {
         with(screen) {
-            listOf(collectionsTab, profileTab).forEach { tab ->
-                tab.button().performClick()
+            listOf(COLLECTIONS, PROFILE).forEach { tab ->
+                bottomBar.button(tab).performClick()
                 Espresso.pressBack()
                 assertActiveTab(CALENDAR)
             }
@@ -123,65 +113,25 @@ class NavigationTest {
     private class NavigationTestScreen(
         private val composeRule: AndroidComposeTestRule<*, *>,
     ) {
-        private val bottomBar = BottomBar(composeRule)
-        val calendarTab: Tab = Tab(
-            destination = CALENDAR,
-            buttonMatcher = bottomBar.calendarButton,
-            contentMatcher = hasTestTag(CALENDAR_CONTENT_TEST_TAG),
-        )
-        val profileTab: Tab = Tab(
-            destination = PROFILE,
-            buttonMatcher = bottomBar.profileButton,
-            contentMatcher = hasTestTag(PROFILE_CONTENT_TEST_TAG),
-        )
-        val collectionsTab: Tab = Tab(
-            destination = COLLECTIONS,
-            buttonMatcher = bottomBar.collectionsButton,
-            contentMatcher = hasTestTag(COLLECTIONS_CONTENT_TEST_TAG),
-        )
-        val tabs: Map<TopLevelDestination, Tab> = listOf(calendarTab, profileTab, collectionsTab)
-            .associateBy(Tab::destination)
+        val bottomBar = BottomBarElement(composeRule)
+        private val TopLevelDestination.contentMatcher: SemanticsMatcher
+            get() = when (this) {
+                CALENDAR -> hasTestTag(CALENDAR_CONTENT_TEST_TAG)
+                PROFILE -> hasTestTag(PROFILE_CONTENT_TEST_TAG)
+                COLLECTIONS -> hasTestTag(COLLECTIONS_CONTENT_TEST_TAG)
+            }
 
-        fun assertActiveTab(destination: TopLevelDestination) {
-            tabs.values.forEach {
-                if (destination == it.destination) {
-                    it.assertActive()
+        fun TopLevelDestination.bottomBarContent() = composeRule.onNode(this.contentMatcher)
+
+        fun assertActiveTab(tab: TopLevelDestination) {
+            bottomBar.assertActiveTab(tab)
+            for (destination in TopLevelDestination.values()) {
+                if (tab == destination) {
+                    destination.bottomBarContent().assertExists()
                 } else {
-                    it.assertNotActive()
+                    destination.bottomBarContent().assertDoesNotExist()
                 }
             }
         }
-
-        public inner class Tab(
-            val destination: TopLevelDestination,
-            val buttonMatcher: SemanticsMatcher,
-            val contentMatcher: SemanticsMatcher,
-        ) {
-            fun button(): SemanticsNodeInteraction = composeRule.onNode(buttonMatcher)
-            fun content(): SemanticsNodeInteraction = composeRule.onNode(contentMatcher)
-
-            fun assertActive() {
-                button().assertIsSelected()
-                content().assertExists()
-            }
-
-            fun assertNotActive() {
-                button().assertIsNotSelected()
-                content().assertDoesNotExist()
-            }
-        }
-}
-
-    private class BottomBar(
-        composeRule: AndroidComposeTestRule<*, *>,
-    ) {
-        private val context = composeRule.activity
-        val root: SemanticsMatcher = hasTestTag(BOTTOM_NAVIGATION_BAR_TEST_TAG)
-        var calendarDestination = context.getString(CALENDAR.title)
-        var profileDestination = context.getString(PROFILE.title)
-        var collectionsDestination = context.getString(COLLECTIONS.title)
-        val calendarButton = hasText(calendarDestination).and(hasAnyAncestor(root))
-        val profileButton = hasText(profileDestination).and(hasAnyAncestor(root))
-        val collectionsButton = hasText(collectionsDestination).and(hasAnyAncestor(root))
     }
 }

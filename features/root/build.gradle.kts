@@ -57,15 +57,15 @@ dependencies {
     implementation(libs.kermit)
     implementation(libs.kotlinx.collections.immutable)
 
-    implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(project(":libraries:ui-tooling"))
+    implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
+    androidTestImplementation(project(":foundation:instrumented-testing"))
     androidTestImplementation(libs.accompanist.test.harness)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.navigation.testing)
     androidTestImplementation(libs.assertk)
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.turbine)
-    androidTestImplementation(project(":foundation:instrumented-testing"))
 }

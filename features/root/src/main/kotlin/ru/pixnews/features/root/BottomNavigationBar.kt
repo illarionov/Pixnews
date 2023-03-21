@@ -15,6 +15,7 @@
  */
 package ru.pixnews.features.root
 
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -30,7 +31,8 @@ import androidx.compose.ui.res.stringResource
 import ru.pixnews.foundation.ui.design.navigation.PixnewsBottomNavigationBar
 import ru.pixnews.foundation.ui.design.navigation.PixnewsBottomNavigationBarItem
 
-internal const val BOTTOM_NAVIGATION_BAR_TEST_TAG = "bottom_navigation_bar"
+@VisibleForTesting
+public const val BOTTOM_NAVIGATION_BAR_TEST_TAG: String = "bottom_navigation_bar"
 
 @Composable
 internal fun BottomNavigationBar(

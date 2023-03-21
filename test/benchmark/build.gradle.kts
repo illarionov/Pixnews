@@ -30,7 +30,6 @@ android {
 
     defaultConfig {
         buildConfigField("String", APP_BUILD_TYPE_SUFFIX, "\"\"")
-        testInstrumentationRunnerArguments["androidx.benchmark.fullTracing.enable"] = "true"
     }
 
     buildFeatures {
@@ -66,4 +65,5 @@ androidComponents {
 
 dependencies {
     implementation(libs.androidx.benchmark.macro)
+    implementation(libs.androidx.test.ext.junit)
 }

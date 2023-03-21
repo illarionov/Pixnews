@@ -89,6 +89,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.profileinstaller)
+    implementation(libs.androidx.tracing)
 
     implementation(libs.androidx.splashscreen)
     implementation(libs.androidx.startup)
@@ -101,4 +102,12 @@ dependencies {
 
     testImplementation(libs.mockk)
     testImplementation(libs.junit.jupiter.params)
+
+    androidTestImplementation(project(":foundation:instrumented-testing"))
+    androidTestImplementation(libs.accompanist.test.harness)
+    androidTestImplementation(libs.androidx.navigation.compose)
+    androidTestImplementation(libs.androidx.navigation.testing)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.assertk)
 }

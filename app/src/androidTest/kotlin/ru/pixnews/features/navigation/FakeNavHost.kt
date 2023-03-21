@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.features.root
+package ru.pixnews.features.navigation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
@@ -23,6 +23,8 @@ import androidx.navigation.compose.composable
 import ru.pixnews.features.calendar.navigation.CALENDAR_ROUTE
 import ru.pixnews.features.collections.navigation.COLLECTIONS_ROUTE
 import ru.pixnews.features.profile.navigation.PROFILE_ROUTE
+import ru.pixnews.features.root.PixnewsRootNavigationState
+import ru.pixnews.features.root.TopLevelDestination
 
 internal const val CALENDAR_CONTENT_TEST_TAG = "calendar_content"
 internal const val COLLECTIONS_CONTENT_TEST_TAG = "collections_content"

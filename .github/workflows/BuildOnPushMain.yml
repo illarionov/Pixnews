@@ -101,7 +101,7 @@ jobs:
 
   instrumented-tests:
     name: Instrumented tests
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 60
     if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
 
@@ -124,19 +124,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Get pip cache dir
-        id: pip-cache
+      - name: Enable KVM group perms
         run: |
-          echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache PIP Packages for EnricoMi/publish-unit-test-result-action/composite
-        uses: actions/cache@v3
-        id: cache
-        with:
-          path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt', 'composite/action.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
 
       - name: Accept licenses
         run: |
@@ -152,7 +144,6 @@ jobs:
           ./gradlew
           -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
           -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
-          -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
           cleanManagedDevices --unused-only
           --continue
 
@@ -162,7 +153,6 @@ jobs:
           -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
           -Dorg.gradle.workers.max=1
           -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
-          -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
           -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=""
           pixel2api30DebugAndroidTest
           --continue --info
@@ -172,7 +162,7 @@ jobs:
         run: rm -f app/src/google-services.json
 
       - name: Publish instrumented test results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: ${{ always() }}
         with:
           junit_files: '**/build/outputs/androidTest-results/**/*.xml'

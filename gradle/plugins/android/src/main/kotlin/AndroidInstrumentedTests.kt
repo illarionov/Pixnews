@@ -28,7 +28,7 @@ import org.gradle.kotlin.dsl.maybeCreate
 import org.gradle.kotlin.dsl.withType
 
 internal fun Project.configureTestManagedDevices(
-    commonExtension: CommonExtension<*, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     commonExtension.apply {
         defaultConfig {

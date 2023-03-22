@@ -20,7 +20,7 @@ import org.gradle.api.Project
 
 internal fun Project.configureUnitTesting(
     engine: UnitTestEngine,
-    commonExtension: CommonExtension<*, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     configureCommonUnitTesting(engine)
     commonExtension.testOptions {

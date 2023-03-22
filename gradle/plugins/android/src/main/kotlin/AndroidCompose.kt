@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import ru.pixnews.compose.buildComposeMetricsParameters
 
 internal fun Project.configureCompose(
-    commonExtension: CommonExtension<*, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     commonExtension.apply {
         @Suppress("MagicNumber")

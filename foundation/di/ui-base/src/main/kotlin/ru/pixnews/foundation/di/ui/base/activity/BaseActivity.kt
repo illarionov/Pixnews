@@ -16,12 +16,13 @@
 package ru.pixnews.foundation.di.ui.base.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentFactory
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
 import javax.inject.Inject
 
-public abstract class BaseActivity : AppCompatActivity() {
+public abstract class BaseActivity : FragmentActivity() {
     @Inject
     internal lateinit var fragmentFactory: FragmentFactory
 
@@ -36,5 +37,6 @@ public abstract class BaseActivity : AppCompatActivity() {
         supportFragmentManager.fragmentFactory = fragmentFactory
         onPostInjectPreCreate()
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 }

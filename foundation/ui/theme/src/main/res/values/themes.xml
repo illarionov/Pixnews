@@ -21,62 +21,24 @@
 
     <style name="NightAdjusted.Theme.Pixnews.Splash" parent="Theme.SplashScreen">
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
     </style>
 
-    <style name="Theme.Pixnews" parent="Base.Theme.Pixnews"/>
+    <style name="Theme.Pixnews" parent="NightAdjusted.Theme.Pixnews"/>
 
-    <style name="Base.Theme.Pixnews" parent="Base.Theme.MaterialThemeBuilder">
-        <item name="colorPrimary">@color/blue_500</item>
-        <item name="colorPrimaryVariant">@color/blue_700</item>
-        <item name="colorSecondary">@color/yellow_500</item>
-        <item name="colorSecondaryVariant">@color/yellow_200</item>
-        <!--colorBackground appears behind scrollable content and is used for the default window-->
-        <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
-        <!--and menus. colorError is used to indicate an error state for components such as-->
-        <!--text fields.-->
-        <item name="android:colorBackground">@color/white_50</item>
-        <item name="colorSurface">@color/white_50</item>
-        <item name="colorError">@color/red_600</item>
-        <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
-        <!--on which they appear.-->
-        <item name="colorOnPrimary">@color/white_50</item>
-        <item name="colorOnSecondary">@color/black_900</item>
-        <item name="colorOnBackground">@color/black_900</item>
-        <item name="colorOnSurface">@color/black_900</item>
-        <item name="colorOnError">@color/white_50</item>
-
-        <!--Material type attributes-->
-        <item name="textAppearanceHeadline1">@style/TextAppearance.Pixnews.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.Pixnews.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/TextAppearance.Pixnews.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/TextAppearance.Pixnews.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/TextAppearance.Pixnews.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/TextAppearance.Pixnews.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.Pixnews.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/TextAppearance.Pixnews.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.Pixnews.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.Pixnews.Body2</item>
-        <item name="textAppearanceButton">@style/TextAppearance.Pixnews.Button</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.Pixnews.Caption</item>
-        <item name="textAppearanceOverline">@style/TextAppearance.Pixnews.Overline</item>
-
-        <!--Material shape attributes-->
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.PixnewsTheme.SmallComponent</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Pixnews.MediumComponent</item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Pixnews.LargeComponent</item>
-
-        <!--Component styles-->
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert</item>
-        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.Pixnews.BottomSheetDialog</item>
-        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+    <style name="NightAdjusted.Theme.Pixnews" parent="PlatformAdjusted.Theme.Pixnews">
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <style name="Base.Theme.MaterialThemeBuilder" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:statusBarColor" tools:ignore="NewApi">?attr/colorSurface</item>
-        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
-        <item name="android:navigationBarColor" tools:ignore="NewApi">?android:attr/colorBackground</item>
-        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
-        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?attr/colorControlHighlight</item>
+    <style name="PlatformAdjusted.Theme.Pixnews" parent="Base.Theme.Pixnews" />
+
+    <style name="Base.Theme.Pixnews" parent="DayNight.Theme.Pixnews">
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
+
+    <style name="DayNight.Theme.Pixnews" parent="android:Theme.Material.Light.NoActionBar" />
+
 </resources>

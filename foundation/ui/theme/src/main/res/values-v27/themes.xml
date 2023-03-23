@@ -14,11 +14,12 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <dimen name="keyline_0" tools:ignore="UnusedResources">2dp</dimen>
-    <dimen name="keyline_1" tools:ignore="UnusedResources">4dp</dimen>
-    <dimen name="keyline_2" tools:ignore="UnusedResources">8dp</dimen>
-    <dimen name="keyline_4" tools:ignore="UnusedResources">16dp</dimen>
-    <dimen name="keyline_5" tools:ignore="UnusedResources">24dp</dimen>
+<resources>
+
+    <style name="PlatformAdjusted.Theme.Pixnews" parent="Base.Theme.Pixnews">
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
 
 </resources>

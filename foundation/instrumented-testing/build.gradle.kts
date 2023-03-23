@@ -32,6 +32,7 @@ dependencies {
     api(project(":foundation:appconfig"))
 
     implementation(libs.androidx.test.runner)
+    implementation(libs.androidx.test.uiautomator)
 
     api(libs.androidx.test.core)
     api(libs.androidx.test.ext.junit)

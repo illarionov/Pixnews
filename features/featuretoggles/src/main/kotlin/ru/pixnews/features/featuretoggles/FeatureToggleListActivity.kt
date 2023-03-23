@@ -17,14 +17,12 @@ package ru.pixnews.features.featuretoggles
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.core.view.WindowCompat
 import co.touchlab.kermit.Logger
 import ru.pixnews.features.featuretoggles.ui.FeatureToggleListScreen
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.ui.base.activity.BaseActivity
 import ru.pixnews.foundation.di.ui.base.viewmodel.injectedViewModel
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.libraries.android.utils.rootView
 import javax.inject.Inject
 
 public class FeatureToggleListActivity : BaseActivity() {
@@ -38,7 +36,6 @@ public class FeatureToggleListActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             PixnewsTheme(
                 appConfig = appConfig,
@@ -55,10 +52,6 @@ public class FeatureToggleListActivity : BaseActivity() {
                     },
                 )
             }
-        }
-        WindowCompat.getInsetsController(window, rootView).apply {
-            isAppearanceLightStatusBars = true
-            isAppearanceLightNavigationBars = true
         }
     }
 }

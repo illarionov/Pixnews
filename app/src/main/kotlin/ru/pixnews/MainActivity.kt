@@ -17,17 +17,13 @@ package ru.pixnews
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.WindowCompat
 import co.touchlab.kermit.Logger
 import ru.pixnews.features.root.PixnewsRootContent
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.ui.base.activity.BaseActivity
 import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.ui.experiments.DarkModeExperiment
-import ru.pixnews.libraries.android.utils.rootView
 import ru.pixnews.loadingstatus.AppLoadingStatus
 import javax.inject.Inject
 
@@ -50,17 +46,10 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        window.navigationBarColor = Color.Transparent.toArgb()
-        window.statusBarColor = Color.Transparent.toArgb()
         setContent {
             PixnewsRootContent(
                 appConfig = appConfig,
             )
-        }
-        WindowCompat.getInsetsController(window, rootView).apply {
-            isAppearanceLightStatusBars = true
-            isAppearanceLightNavigationBars = true
         }
     }
 

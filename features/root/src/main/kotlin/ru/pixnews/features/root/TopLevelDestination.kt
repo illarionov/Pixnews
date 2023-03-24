@@ -26,7 +26,7 @@ import ru.pixnews.foundation.ui.assets.icons.navigation.NavigationIcons
 @Immutable
 public enum class TopLevelDestination(
     public val route: String,
-    @get:VisibleForTesting @StringRes val title: Int,
+    @get:VisibleForTesting @StringRes public val title: Int,
     @StringRes internal val contentDescription: Int,
     internal val icon: NavigationIcons.IconPair,
 ) {

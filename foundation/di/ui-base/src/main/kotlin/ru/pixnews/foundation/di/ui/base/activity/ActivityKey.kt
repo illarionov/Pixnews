@@ -23,4 +23,4 @@ import kotlin.reflect.KClass
  * A Dagger multi-binding key used for registering a [Activity] into the top level dagger graphs.
  */
 @MapKey
-public annotation class ActivityKey(val fragmentClass: KClass<out Activity>)
+public annotation class ActivityKey(val activityClass: KClass<out Activity>)

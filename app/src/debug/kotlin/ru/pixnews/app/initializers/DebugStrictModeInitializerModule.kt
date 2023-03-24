@@ -13,8 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.initializer
+package ru.pixnews.app.initializers
 
-interface PixnewsAppInitializerComponent {
-    fun inject(initializer: PixnewsAppInitializer)
+import com.squareup.anvil.annotations.ContributesTo
+import dagger.Binds
+import dagger.Module
+import dagger.multibindings.IntoSet
+import ru.pixnews.foundation.initializers.Initializer
+import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
+import ru.pixnews.initializers.DebugStrictModeInitializer
+
+@Module
+@ContributesTo(AppInitializersScope::class)
+interface DebugStrictModeInitializerModule {
+    @Binds
+    @IntoSet
+    fun enableStrictMode(initializer: DebugStrictModeInitializer): Initializer
 }

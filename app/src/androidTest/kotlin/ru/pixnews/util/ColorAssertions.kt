@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.initializer
+package ru.pixnews.util
 
-interface PixnewsAppInitializerComponent {
-    fun inject(initializer: PixnewsAppInitializer)
-}
+import androidx.compose.ui.graphics.Color
+import assertk.Assert
+import assertk.assertions.isZero
+import assertk.assertions.prop
+
+fun Assert<Color>.isTransparent() = prop(Color::alpha).isZero()

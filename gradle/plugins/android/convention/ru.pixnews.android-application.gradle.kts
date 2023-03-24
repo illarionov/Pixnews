@@ -99,6 +99,9 @@ androidComponents {
             "kotlin/**",
         )
     }
+    onVariants(selector().withName("androidTest")) { variant ->
+        variant.manifestPlaceholders.put("firebase_crashlytics_collection_enabled", "false")
+    }
     finalizeDsl {
         project.pixnews.applyTo(project, it)
     }

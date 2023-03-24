@@ -52,6 +52,8 @@ import ru.pixnews.foundation.ui.imageloader.coil.ImageLoaderLogger
 import ru.pixnews.foundation.ui.imageloader.coil.ImageUrlCoilInterceptor
 import ru.pixnews.foundation.ui.imageloader.coil.PrefetchingImageLoader
 import ru.pixnews.foundation.ui.imageloader.coil.tooling.CoilDebugInterceptor
+import ru.pixnews.libraries.android.utils.precondition.checkNotMainThread
+import javax.inject.Provider
 import javax.inject.Qualifier
 import coil.ImageLoader as CoilImageLoader
 
@@ -105,7 +107,7 @@ public abstract class ImageLoaderModule {
             ioDispatcher: IoCoroutineDispatcherProvider,
             computationDispatcher: ComputationCoroutineDispatcherProvider,
             rootOkhttpClient: RootOkHttpClientProvider,
-            @Internal diskCache: DiskCache,
+            @Internal diskCache: Provider<DiskCache>,
             interceptors: Set<@JvmSuppressWildcards CoilInterceptorWithPriority>,
             logger: Logger,
         ): CoilImageLoader {
@@ -132,7 +134,7 @@ public abstract class ImageLoaderModule {
                 .callFactory { request -> rootOkhttpClient.get().newCall(request) }
                 .memoryCache(null)
                 .memoryCachePolicy(DISABLED)
-                .diskCache(diskCache)
+                .diskCache { diskCache.get() }
                 .build()
         }
 
@@ -144,6 +146,7 @@ public abstract class ImageLoaderModule {
             networkConfig: NetworkConfig,
             @ApplicationContext context: Context,
         ): DiskCache {
+            checkNotMainThread()
             val cacheDir = context.externalCacheDir ?: context.cacheDir
             return DiskCache.Builder()
                 .directory(cacheDir.resolve(IMAGE_CACHE_SUBDIR))

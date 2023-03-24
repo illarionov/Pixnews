@@ -31,6 +31,7 @@ listOf(
     "appconfig",
     "di:base",
     "di:root-component",
+    "di:instrumented-testing",
     "di:ui-base",
     "dispatchers",
     "featuretoggles:public",

@@ -16,16 +16,25 @@
 package ru.pixnews.features.root
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import co.touchlab.kermit.Logger
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.MainActivity
 import ru.pixnews.features.navigation.BottomBarElement
 import ru.pixnews.features.root.TopLevelDestination.CALENDAR
+import ru.pixnews.foundation.di.instrumented.testing.rule.InjectDependenciesRule
+import javax.inject.Inject
 
 class FirstScreenTest {
     @get:Rule
+    val injectDependencies = InjectDependenciesRule(this)
+
+    @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
+
+    @Inject
+    lateinit var logger: Logger
     private lateinit var bottomBar: BottomBarElement
 
     @Before

@@ -13,8 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.initializer
+package ru.pixnews.foundation.di.instrumented.testing
 
-interface PixnewsAppInitializerComponent {
-    fun inject(initializer: PixnewsAppInitializer)
+internal class DefaultInstrumentedTestInjector(
+    private val providers: Map<Class<out Any>, SingleInstrumentedTestInjector>,
+) : InstrumentedTestInjector {
+    @Suppress("UNCHECKED_CAST")
+    override fun inject(test: Any) {
+        providers[test::class.java]?.also {
+            it.injectMembers(test)
+        } ?: error("No member injector for $test")
+    }
 }

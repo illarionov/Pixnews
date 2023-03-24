@@ -8,3 +8,4 @@
 gradle/verification-metadata.xml    linguist-vendored
 baseline-prof.txt                   linguist-generated
 **/snapshots/**/*.png filter=lfs diff=lfs merge=lfs -text
+app/src/androidTest/assets/fixtures/** filter=lfs diff=lfs merge=lfs -text

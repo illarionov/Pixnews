@@ -38,9 +38,10 @@ import ru.pixnews.features.root.TopLevelDestination.CALENDAR
 import ru.pixnews.features.root.TopLevelDestination.COLLECTIONS
 import ru.pixnews.features.root.TopLevelDestination.PROFILE
 import ru.pixnews.features.root.rememberPixnewsRootNavigationState
+import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
 import kotlin.time.Duration.Companion.milliseconds
 
-class PixnewsRootNavigationStateTest {
+class PixnewsRootNavigationStateTest : BaseInstrumentedTest() {
     @get:Rule
     val composeTestRule = createComposeRule()
     private lateinit var navController: TestNavHostController

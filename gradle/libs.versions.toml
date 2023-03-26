@@ -58,6 +58,7 @@ mockk = "1.13.4"
 okhttp = "4.10.0"
 okio = "3.3.0"
 paparazzi = "1.2.0"
+radiography = "2.4.1"
 turbine = "0.12.1"
 
 junit4 = "4.13.2"
@@ -187,6 +188,7 @@ okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver" 
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
 protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
+radiography = { group = "com.squareup.radiography", name = "radiography", version.ref = "radiography" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
 # Dependencies of the included build-logic

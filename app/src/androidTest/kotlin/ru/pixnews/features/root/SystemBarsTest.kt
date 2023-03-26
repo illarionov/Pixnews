@@ -29,13 +29,14 @@ import org.junit.experimental.runners.Enclosed
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import ru.pixnews.MainActivity
+import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
 import ru.pixnews.foundation.testing.rule.NightModeRule
 import ru.pixnews.foundation.testing.rule.NightModeRule.NightMode.DARK
 import ru.pixnews.foundation.testing.rule.NightModeRule.NightMode.LIGHT
 import ru.pixnews.util.isTransparent
 
 @RunWith(Enclosed::class)
-class SystemBarsTest {
+class SystemBarsTest : BaseInstrumentedTest() {
     @RunWith(Parameterized::class)
     class SystemBarsApi27Test(
         uiMode: NightModeRule.NightMode,

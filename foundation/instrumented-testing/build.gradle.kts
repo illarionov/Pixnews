@@ -33,9 +33,12 @@ dependencies {
 
     implementation(libs.androidx.test.runner)
     implementation(libs.androidx.test.uiautomator)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.kermit)
+    implementation(libs.radiography)
 
+    implementation(libs.androidx.compose.ui.test.junit4)
     api(libs.androidx.test.core)
+    implementation(libs.androidx.test.espresso.core)
     api(libs.androidx.test.ext.junit)
-
-    api(libs.androidx.compose.ui.test.junit4)
 }

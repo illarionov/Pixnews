@@ -34,9 +34,10 @@ import ru.pixnews.features.root.TopLevelDestination.PROFILE
 import ru.pixnews.features.root.rememberPixnewsRootNavigationState
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.appconfig.DefaultAppConfig
+import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 
-class NavigationTest {
+class NavigationTest : BaseInstrumentedTest() {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private val appConfig: AppConfig = DefaultAppConfig()

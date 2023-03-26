@@ -18,12 +18,7 @@ package ru.pixnews.foundation.testing.instrumented
 import android.app.Application
 
 public class PixnewsTestApplication : Application() {
-    private lateinit var appComponent: TestPixnewsAppComponent
-
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerTestPixnewsAppComponent.factory().create(this).apply {
-            inject(this@PixnewsTestApplication)
-        }
     }
 }

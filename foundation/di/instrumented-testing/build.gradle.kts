@@ -13,20 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app.initializers
 
-import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
-import dagger.Module
-import dagger.multibindings.IntoSet
-import ru.pixnews.foundation.initializers.Initializer
-import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
-import ru.pixnews.initializers.StrictModeInitializer
+plugins {
+    id("ru.pixnews.android-library")
+    id("ru.pixnews.di-anvil-factories")
+}
 
-@Module
-@ContributesTo(AppInitializersScope::class)
-interface InitializersModule {
-    @Binds
-    @IntoSet
-    fun enableStrictMode(initializer: StrictModeInitializer): Initializer
+pixnews {
+    compose.set(false)
+    managedDevices.set(false)
+}
+
+android {
+    namespace = "ru.pixnews.foundation.di.instrumented.testing"
+}
+
+dependencies {
+    implementation(project(":foundation:di:base"))
+    implementation(project(":foundation:di:root-component"))
+    implementation(libs.androidx.test.core)
+    api(libs.androidx.annotation)
+    api(libs.dagger)
+    api(libs.junit4)
 }

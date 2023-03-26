@@ -27,7 +27,7 @@ import java.util.concurrent.Executors
 import javax.inject.Inject
 
 @Suppress("MagicNumber")
-class StrictModeInitializer @Inject constructor(logger: Logger) : Initializer {
+class DebugStrictModeInitializer @Inject constructor(logger: Logger) : Initializer {
     private val logger = logger.withTag("StrictModeInitializer")
 
     override fun init() {

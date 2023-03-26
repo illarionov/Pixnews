@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.test.util
+package ru.pixnews.app
 
-import androidx.compose.ui.graphics.Color
-import assertk.Assert
-import assertk.assertions.isZero
-import assertk.assertions.prop
+import com.squareup.anvil.annotations.ContributesTo
+import dagger.Module
+import ru.pixnews.foundation.di.base.scopes.AppScope
 
-fun Assert<Color>.isTransparent() = prop(Color::alpha).isZero()
+@ContributesTo(AppScope::class, replaces = [FirebaseModule::class])
+@Module
+object TestFirebaseModule

@@ -15,28 +15,6 @@
  */
 package ru.pixnews.initializer
 
-import com.squareup.anvil.annotations.MergeComponent
-import dagger.Component
-import ru.pixnews.di.root.component.PixnewsAppComponent
-import ru.pixnews.foundation.di.base.scopes.SingleIn
-import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
-
-@SingleIn(AppInitializersScope::class)
-@MergeComponent(
-    scope = AppInitializersScope::class,
-    dependencies = [PixnewsAppComponent::class],
-)
 interface PixnewsAppInitializerComponent {
     fun inject(initializer: PixnewsAppInitializer)
-
-    public companion object {
-        operator fun invoke(appComponent: PixnewsAppComponent): PixnewsAppInitializerComponent {
-            return DaggerPixnewsAppInitializerComponent.factory().create(appComponent)
-        }
-    }
-
-    @Component.Factory
-    fun interface Factory {
-        fun create(appComponent: PixnewsAppComponent): PixnewsAppInitializerComponent
-    }
 }

@@ -64,6 +64,12 @@ internal fun Project.configureTestManagedDevices(
             add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
             add("androidTestImplementation", project(":foundation:instrumented-testing"))
         }
+
+        plugins.withId("ru.pixnews.di-anvil-kapt") {
+            dependencies {
+                add("kaptAndroidTest", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
+            }
+        }
     }
 
     // https://issuetracker.google.com/issues/262270582

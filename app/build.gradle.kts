@@ -94,6 +94,7 @@ dependencies {
     implementation(libs.androidx.splashscreen)
     implementation(libs.androidx.startup)
 
+    implementation(libs.okio)
     implementation(libs.kermit)
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.kotlinx.coroutines.android)
@@ -104,6 +105,7 @@ dependencies {
     testImplementation(libs.junit.jupiter.params)
 
     androidTestImplementation(project(":foundation:instrumented-testing"))
+    androidTestImplementation(project(":foundation:di:instrumented-testing"))
     androidTestImplementation(libs.accompanist.test.harness)
     androidTestImplementation(libs.androidx.navigation.compose)
     androidTestImplementation(libs.androidx.navigation.testing)

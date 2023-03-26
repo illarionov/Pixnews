@@ -32,7 +32,7 @@ import ru.pixnews.MainActivity
 import ru.pixnews.foundation.testing.rule.NightModeRule
 import ru.pixnews.foundation.testing.rule.NightModeRule.NightMode.DARK
 import ru.pixnews.foundation.testing.rule.NightModeRule.NightMode.LIGHT
-import ru.pixnews.test.util.isTransparent
+import ru.pixnews.util.isTransparent
 
 @RunWith(Enclosed::class)
 class SystemBarsTest {

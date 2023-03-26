@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.testing.instrumented
+package ru.pixnews.initializer
 
-import android.app.Application
 import com.squareup.anvil.annotations.MergeComponent
-import dagger.BindsInstance
 import dagger.Component
-import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.foundation.di.base.scopes.SingleIn
+import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
 
-@MergeComponent(AppScope::class)
-@SingleIn(AppScope::class)
-public interface TestPixnewsAppComponent {
-    public fun inject(app: PixnewsTestApplication)
-
+@SingleIn(AppInitializersScope::class)
+@MergeComponent(
+    scope = AppInitializersScope::class,
+    dependencies = [PixnewsAppComponent::class],
+)
+interface TestPixnewsAppInitializerComponent : PixnewsAppInitializerComponent {
     @Component.Factory
-    public fun interface Factory {
-        public fun create(@BindsInstance application: Application): TestPixnewsAppComponent
+    fun interface Factory {
+        fun create(appComponent: PixnewsAppComponent): TestPixnewsAppInitializerComponent
     }
 }

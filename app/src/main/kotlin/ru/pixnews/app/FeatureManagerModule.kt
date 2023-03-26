@@ -82,7 +82,7 @@ public object FeatureManagerModule {
         experiments: Set<@JvmSuppressWildcards Experiment>,
         defaultDataSource: DefaultVariantDataSource,
         @Named("overrides") overridesDataSource: FeatureToggleDataSource?,
-        @Named("firebase") firebaseDataSource: FeatureToggleDataSource,
+        @Named("firebase") firebaseDataSource: FeatureToggleDataSource?,
         logger: Logger,
     ): FeatureManager {
         return FeatureManagerImpl(
@@ -91,7 +91,9 @@ public object FeatureManagerModule {
                 overridesDataSource?.let {
                     add(DataSourceWithPriority(it, 0))
                 }
-                add(DataSourceWithPriority(firebaseDataSource, 10))
+                firebaseDataSource?.let {
+                    add(DataSourceWithPriority(firebaseDataSource, 10))
+                }
                 add(DataSourceWithPriority(defaultDataSource, 19))
             },
             logger,

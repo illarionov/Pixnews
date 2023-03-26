@@ -30,19 +30,12 @@ import ru.pixnews.foundation.di.base.scopes.SingleIn
     dependencies = [ExperimentsComponent::class],
 )
 @SingleIn(AppScope::class)
-interface PixnewsAppComponentImpl : PixnewsAppComponent {
-    public companion object {
-        public operator fun invoke(
-            @ApplicationContext context: Context,
-            experimentsComponent: ExperimentsComponent = ExperimentsComponent(),
-        ): PixnewsAppComponentImpl = DaggerPixnewsAppComponentImpl.factory().create(context, experimentsComponent)
-    }
-
+interface MainPixnewsAppComponent : PixnewsAppComponent {
     @Component.Factory
     fun interface Factory {
         fun create(
             @BindsInstance @ApplicationContext context: Context,
             experimentsComponent: ExperimentsComponent,
-        ): PixnewsAppComponentImpl
+        ): MainPixnewsAppComponent
     }
 }

@@ -23,7 +23,6 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onRoot
 import junit.framework.TestCase.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -32,7 +31,6 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
 import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
-import ru.pixnews.foundation.testing.util.HierarchyDumper
 
 @RunWith(Enclosed::class)
 public class ThemeTest : BaseInstrumentedTest() {
@@ -53,8 +51,6 @@ public class ThemeTest : BaseInstrumentedTest() {
                     assertColorSchemesEqual(testCase.expectedColorScheme(), MaterialTheme.colorScheme)
                 }
             }
-            HierarchyDumper.printAllToLog()
-            HierarchyDumper.printToLog(composeTestRule.onRoot())
         }
 
         data class TestCase(

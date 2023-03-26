@@ -20,11 +20,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.tappableElement
+import androidx.compose.foundation.layout.systemGestures
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyRow
@@ -47,6 +48,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -72,15 +74,12 @@ internal fun ChipsRow(
 ) {
     Row(
         modifier = modifier
-            .windowInsetsPadding(
-                WindowInsets.tappableElement.only(WindowInsetsSides.End),
-            )
             .fillMaxWidth()
             .heightIn(min = 48.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        val contentPadding = WindowInsets(left = 16.dp, right = 8.dp)
-            .union(WindowInsets.tappableElement.only(WindowInsetsSides.Start))
+        val contentPadding = WindowInsets(left = 16.dp, right = 16.dp)
+            .union(WindowInsets.systemGestures.only(WindowInsetsSides.Start))
             .asPaddingValues()
 
         val surfaceColor = MaterialTheme.colorScheme.surface
@@ -97,7 +96,8 @@ internal fun ChipsRow(
                         drawContent()
                         drawRect(brush)
                     }
-                },
+                }
+                .testTag("calendar:header:chips_lazy_row"),
             contentPadding = contentPadding,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
@@ -142,7 +142,13 @@ internal fun ChipsRow(
             }
             IconButton(
                 onClick = { onViewModeClick() },
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier
+                    .windowInsetsPadding(
+                        WindowInsets.systemGestures.only(WindowInsetsSides.End)
+                            .exclude(WindowInsets(right = 12.dp))
+                            .union(WindowInsets(right = 4.dp)),
+                    )
+                    .size(48.dp),
             ) {
                 Icon(
                     imageVector = viewMode.value.icon,

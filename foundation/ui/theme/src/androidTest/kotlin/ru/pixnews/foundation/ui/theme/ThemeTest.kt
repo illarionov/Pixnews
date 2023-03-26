@@ -13,8 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("KDOC_NO_CONSTRUCTOR_PROPERTY")
-
 package ru.pixnews.foundation.ui.theme
 
 import android.os.Build
@@ -25,6 +23,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onRoot
 import junit.framework.TestCase.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -32,9 +31,11 @@ import org.junit.experimental.runners.Enclosed
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
+import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
+import ru.pixnews.foundation.testing.util.HierarchyDumper
 
 @RunWith(Enclosed::class)
-public class ThemeTest {
+public class ThemeTest : BaseInstrumentedTest() {
     @RunWith(Parameterized::class)
     internal class ValidateColorScheme(
         val testCase: TestCase,
@@ -52,6 +53,8 @@ public class ThemeTest {
                     assertColorSchemesEqual(testCase.expectedColorScheme(), MaterialTheme.colorScheme)
                 }
             }
+            HierarchyDumper.printAllToLog()
+            HierarchyDumper.printToLog(composeTestRule.onRoot())
         }
 
         data class TestCase(

@@ -63,9 +63,10 @@ dependencies {
 
     androidTestImplementation(project(":foundation:instrumented-testing"))
     androidTestImplementation(libs.accompanist.test.harness)
-    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.navigation.testing)
-    androidTestImplementation(libs.assertk)
     androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.assertk)
     androidTestImplementation(libs.turbine)
 }

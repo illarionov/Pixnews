@@ -24,9 +24,10 @@ import ru.pixnews.MainActivity
 import ru.pixnews.features.navigation.BottomBarElement
 import ru.pixnews.features.root.TopLevelDestination.CALENDAR
 import ru.pixnews.foundation.di.instrumented.testing.rule.InjectDependenciesRule
+import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
 import javax.inject.Inject
 
-class FirstScreenTest {
+class FirstScreenTest : BaseInstrumentedTest() {
     @get:Rule
     val injectDependencies = InjectDependenciesRule(this)
 

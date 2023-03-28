@@ -86,8 +86,8 @@ internal fun CalendarScreenContent(
             when (val item = games[gameIndex]) {
                 is CalendarListTitle -> GameSubheader(
                     modifier = Modifier
-                        .testTag("calendar:content:game_subheader")
-                        .padding(listItemsPadding),
+                        .padding(listItemsPadding)
+                        .testTag("calendar:content:game_subheader"),
                     title = item.title,
                 )
 

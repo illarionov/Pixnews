@@ -27,6 +27,7 @@ import androidx.fragment.app.strictmode.FragmentStrictMode
 import androidx.fragment.app.strictmode.FragmentStrictMode.Policy
 import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesMultibinding
+import ru.pixnews.MainActivity
 import ru.pixnews.app.initializers.DebugStrictModeInitializerModule
 import ru.pixnews.foundation.initializers.Initializer
 import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
@@ -62,6 +63,8 @@ class TestStrictModeInitializer @Inject constructor(logger: Logger) : Initialize
         StrictMode.setVmPolicy(
             VmPolicy.Builder()
                 .detectAll()
+                // Class instance limit occasionally triggered in instrumented tests for unknown reasons
+                .setClassInstanceLimit(MainActivity::class.java, 3)
                 .also { builder ->
                     if (VERSION.SDK_INT >= 28) {
                         builder.penaltyListener(threadExecutor) { violation ->

@@ -45,6 +45,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
@@ -57,6 +58,7 @@ import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.game.game.halfLife3
 import ru.pixnews.foundation.ui.assets.icons.image.ImagePlaceholders
+import ru.pixnews.foundation.ui.design.gameId
 import ru.pixnews.foundation.ui.design.icon.PixnewsGameCardFavouriteIcon
 import ru.pixnews.foundation.ui.design.image.NetworkImage
 import ru.pixnews.foundation.ui.design.image.errorLoadingImageLargePainter
@@ -81,7 +83,10 @@ public fun PixnewsGameCard(
     OutlinedCard(
         modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .semantics {
+                gameId = game.gameId.toString()
+            },
         shape = MaterialTheme.shapes.medium,
         onClick = onClick,
         border = remember(borderColor) { BorderStroke(1.dp, borderColor) },

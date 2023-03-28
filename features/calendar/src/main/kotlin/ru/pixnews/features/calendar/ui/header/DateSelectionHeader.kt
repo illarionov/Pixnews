@@ -19,17 +19,19 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.foundation.layout.tappableElement
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.systemGestures
+import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -52,13 +54,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.isContainer
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -115,9 +120,17 @@ internal fun WeekDaysRow(
 ) {
     Row(
         modifier = modifier
-            .windowInsetsPadding(WindowInsets.tappableElement.only(WindowInsetsSides.Horizontal))
+            .windowInsetsPadding(
+                WindowInsets.systemGestures
+                    .only(WindowInsetsSides.Horizontal)
+                    .union(WindowInsets(left = 16.dp, right = 16.dp)),
+            )
+            .semantics {
+                isContainer = true
+                testTag = "calendar:header:week_days_row"
+            }
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         val days = getWeekDays(activeDate.value, LocalCalendarModel.current.firstDayOfWeek)
         for (day in days) {
@@ -212,14 +225,19 @@ internal fun YearMonthPicker(
 ) {
     Box(
         modifier = modifier
-            .windowInsetsPadding(WindowInsets.tappableElement.only(WindowInsetsSides.Horizontal))
+            .windowInsetsPadding(
+                WindowInsets.systemGestures
+                    .only(WindowInsetsSides.Horizontal)
+                    .exclude(WindowInsets(left = 16.dp, right = 12.dp))
+                    .union(WindowInsets(right = 4.dp)),
+            )
             .fillMaxWidth()
             .height(56.dp),
     ) {
         YearMonthPickerButton(
             onClick = onClick,
             modifier = Modifier
-                .widthIn(min = 156.dp),
+                .testTag("calendar:header:year_month_picker_button"),
         ) {
             val title = formatYearMonthPickerTitle(activeDate.value)
             Text(
@@ -248,6 +266,12 @@ internal fun YearMonthPickerButton(
         shape = CircleShape,
         colors = ButtonDefaults.textButtonColors(
             contentColor = MaterialTheme.colorScheme.onSurface,
+        ),
+        contentPadding = PaddingValues(
+            start = 16.dp,
+            end = 12.dp,
+            top = 8.dp,
+            bottom = 8.dp,
         ),
         elevation = null,
         border = null,

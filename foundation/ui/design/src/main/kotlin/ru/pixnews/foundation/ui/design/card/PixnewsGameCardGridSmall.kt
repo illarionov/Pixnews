@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
@@ -63,6 +64,7 @@ import ru.pixnews.domain.model.game.game.smalland
 import ru.pixnews.domain.model.game.game.starWarsEclipse
 import ru.pixnews.domain.model.game.game.theLostWild
 import ru.pixnews.foundation.ui.assets.icons.image.ImagePlaceholders
+import ru.pixnews.foundation.ui.design.gameId
 import ru.pixnews.foundation.ui.design.icon.PixnewsGameCardFavouriteIcon
 import ru.pixnews.foundation.ui.design.image.NetworkImage
 import ru.pixnews.foundation.ui.design.image.errorLoadingImageSmallPainter
@@ -93,7 +95,10 @@ public fun PixnewsGameCardGridSmall(
     OutlinedCard(
         modifier = modifier
             .width(136.dp)
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .semantics {
+                gameId = game.gameId.toString()
+            },
         shape = MaterialTheme.shapes.medium,
         onClick = { onClick(game.gameId) },
         border = remember(borderColor) { BorderStroke(1.dp, borderColor) },

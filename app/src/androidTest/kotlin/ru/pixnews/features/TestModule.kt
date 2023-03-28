@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:Suppress("MaxLineLength")
+
 package ru.pixnews.features
 
 import com.squareup.anvil.annotations.ContributesTo
@@ -21,6 +23,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
+import ru.pixnews.features.calendar.CalendarScreenPaddingsTest
 import ru.pixnews.features.root.FirstScreenTest
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
@@ -33,7 +36,15 @@ public object TestModule {
     @IntoMap
     @ClassKey(FirstScreenTest::class)
     @SingleIn(AppScope::class)
-    public fun providesFirstScreenTest(injector: MembersInjector<FirstScreenTest>): SingleInstrumentedTestInjector {
+    fun providesFirstScreenTest(injector: MembersInjector<FirstScreenTest>): SingleInstrumentedTestInjector {
+        return SingleInstrumentedTestInjector(injector)
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(CalendarScreenPaddingsTest::class)
+    @SingleIn(AppScope::class)
+    fun providesCalendarScreenPaddingsTest(injector: MembersInjector<CalendarScreenPaddingsTest>): SingleInstrumentedTestInjector {
         return SingleInstrumentedTestInjector(injector)
     }
 }

@@ -96,7 +96,7 @@ jobs:
       - name: Uploads lint .sarif files to GitHub
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: .
+          sarif_file: app/build/reports/
           category: android-lint
 
   instrumented-tests:

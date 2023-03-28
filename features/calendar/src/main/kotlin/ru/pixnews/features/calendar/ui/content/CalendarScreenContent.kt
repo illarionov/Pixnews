@@ -16,6 +16,7 @@
 package ru.pixnews.features.calendar.ui.content
 
 import androidx.compose.foundation.layout.Arrangement.spacedBy
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.add
@@ -26,10 +27,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
@@ -43,7 +46,9 @@ import ru.pixnews.features.calendar.model.MajorReleaseCarouselItemUiModel
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCard
 import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.libraries.ui.tooling.PhonePreviews
+import ru.pixnews.libraries.ui.tooling.DevicePreviews
+
+internal val feedMaxWidth = 552.dp
 
 @Composable
 internal fun CalendarScreenContent(
@@ -68,6 +73,7 @@ internal fun CalendarScreenContent(
         contentPadding = contentPaddings.asPaddingValues(),
         state = state,
         verticalArrangement = spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         item {
             MajorReleasesCarousel(
@@ -86,13 +92,16 @@ internal fun CalendarScreenContent(
             when (val item = games[gameIndex]) {
                 is CalendarListTitle -> GameSubheader(
                     modifier = Modifier
+                        .widthIn(max = feedMaxWidth)
                         .padding(listItemsPadding)
                         .testTag("calendar:content:game_subheader"),
                     title = item.title,
                 )
 
                 is CalendarListPixnewsGameUi -> PixnewsGameCard(
-                    modifier = Modifier.padding(listItemsPadding),
+                    modifier = Modifier
+                        .widthIn(max = feedMaxWidth)
+                        .padding(listItemsPadding),
                     game = item,
                     onClick = { onGameClick(item.gameId) },
                     onFavouriteClick = { onFavouriteClick(item.gameId) },
@@ -110,26 +119,31 @@ internal fun GameSubheader(
     PixnewsGameListSubheader(
         title = title,
         modifier = modifier
+            .fillMaxWidth()
             .padding(
                 bottom = 8.dp,
             ),
     )
 }
 
-@PhonePreviews
+@DevicePreviews
 @Composable
 private fun PreviewCalendarScreenContent() {
     PixnewsTheme(
         useDynamicColor = false,
     ) {
         Surface {
-            CalendarScreenContent(
-                majorReleases = PreviewFixtures.previewSuccessState.majorReleases,
-                games = PreviewFixtures.previewSuccessState.games,
-                onMajorReleaseClick = {},
-                onFavouriteClick = {},
-                onGameClick = {},
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                CalendarScreenContent(
+                    majorReleases = PreviewFixtures.previewSuccessState.majorReleases,
+                    games = PreviewFixtures.previewSuccessState.games,
+                    onMajorReleaseClick = {},
+                    onFavouriteClick = {},
+                    onGameClick = {},
+                )
+            }
         }
     }
 }

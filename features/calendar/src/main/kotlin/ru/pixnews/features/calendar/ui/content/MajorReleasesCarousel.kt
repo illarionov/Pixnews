@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.union
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Surface
@@ -65,7 +66,11 @@ internal fun MajorReleasesCarousel(
     ) {
         PixnewsGameListSubheader(
             title = stringResource(string.major_releases_title),
-            modifier = Modifier.padding(contentPadding),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .widthIn(max = feedMaxWidth)
+                .fillMaxWidth()
+                .padding(contentPadding),
         )
 
         val state = rememberLazyListState()

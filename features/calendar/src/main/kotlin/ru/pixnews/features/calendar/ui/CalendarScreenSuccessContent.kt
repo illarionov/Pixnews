@@ -23,6 +23,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,6 +50,7 @@ internal fun CalendarScreenSuccessContent(
         modifier = modifier
             .testTag("calendar:success_content")
             .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         CalendarScreenHeader(
             onSearch = {},

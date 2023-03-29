@@ -201,7 +201,7 @@ class CalendarScreenPaddingsTest(
         private val majorReleasesTitleMatcher = isHeading().and(
             hasAnyAncestor(hasTestTag("calendar:content:major_releases_carousel")),
         )
-        private val gameCardInFeedMatcher = SemanticsMatcher.expectValue(GameIdKey, "slime-rancher-2")
+        internal val gameCardInFeedMatcher = SemanticsMatcher.expectValue(GameIdKey, "slime-rancher-2")
             .and(
                 hasAnyAncestor(hasTestTag("calendar:content:major_releases_carousel")).not(),
             )

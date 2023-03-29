@@ -23,6 +23,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
+import ru.pixnews.features.calendar.CalendarFeedWidthOnMediumSizeTest
 import ru.pixnews.features.calendar.CalendarScreenPaddingsTest
 import ru.pixnews.features.root.FirstScreenTest
 import ru.pixnews.foundation.di.base.scopes.AppScope
@@ -45,6 +46,14 @@ public object TestModule {
     @ClassKey(CalendarScreenPaddingsTest::class)
     @SingleIn(AppScope::class)
     fun providesCalendarScreenPaddingsTest(injector: MembersInjector<CalendarScreenPaddingsTest>): SingleInstrumentedTestInjector {
+        return SingleInstrumentedTestInjector(injector)
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(CalendarFeedWidthOnMediumSizeTest::class)
+    @SingleIn(AppScope::class)
+    fun providesCalendarFeedWidthOnMediumSizeTest(injector: MembersInjector<CalendarFeedWidthOnMediumSizeTest>): SingleInstrumentedTestInjector {
         return SingleInstrumentedTestInjector(injector)
     }
 }

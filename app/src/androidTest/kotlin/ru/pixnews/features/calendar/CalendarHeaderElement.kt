@@ -20,16 +20,13 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.hasAnyChild
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
-import androidx.compose.ui.test.hasParent
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import ru.pixnews.features.calendar.R as calendarR
-import ru.pixnews.foundation.ui.design.R as uiDesignR
 
 internal class CalendarHeaderElement(
     composeRule: AndroidComposeTestRule<*, *>,
 ) {
-    val searchBox: SearchBoxElement = SearchBoxElement(composeRule)
     val dateSelectionHeader = DateSelectionHeaderElement(composeRule)
     val chipsRow = ChipsRowElement(composeRule)
 
@@ -47,33 +44,6 @@ internal class CalendarHeaderElement(
 
         fun weekDaysRoot(): SemanticsNodeInteraction = composeRule.onNode(
             weekDaysRootMatcher.havingAchestor(parentSemanticMatcher),
-        )
-    }
-
-    class SearchBoxElement(
-        private val composeRule: AndroidComposeTestRule<*, *>,
-        private val parentSemanticMatcher: SemanticsMatcher? = null,
-    ) {
-        private val context
-            get() = composeRule.activity
-
-        val rootMatcher: SemanticsMatcher = hasParent(hasTestTag("calendar:header:search_box"))
-
-        val clearButton: SemanticsMatcher
-            get() = hasClickAction().and(
-                hasAnyChild(
-                    hasContentDescription(
-                        context.getString(uiDesignR.string.search_game_clear_field_content_description),
-                    ),
-                ),
-            )
-
-        fun root(): SemanticsNodeInteraction = composeRule.onNode(
-            rootMatcher.havingAchestor(parentSemanticMatcher),
-        )
-
-        fun clearButton(): SemanticsNodeInteraction = composeRule.onNode(
-            clearButton.havingAchestor(parentSemanticMatcher),
         )
     }
 

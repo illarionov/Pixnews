@@ -45,6 +45,8 @@
     copyrightText: ''
 - name: HEADER_WRONG_FORMAT
   enabled: false
+- name: IDENTIFIER_LENGTH
+  ignoreAnnotated: [ Test ]
 - name: KDOC_NO_CONSTRUCTOR_PROPERTY
   enabled: false
 - name: KDOC_NO_EMPTY_TAGS
@@ -85,8 +87,9 @@
   enabled: false
 - name: TOP_LEVEL_ORDER
   enabled: false
+# Enabled in Detekt
 - name: TRAILING_COMMA
-  enabled: true
+  enabled: false
   configuration:
     valueArgument: true
     valueParameter: true

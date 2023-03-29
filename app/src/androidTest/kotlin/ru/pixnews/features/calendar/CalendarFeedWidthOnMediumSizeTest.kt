@@ -17,12 +17,9 @@ package ru.pixnews.features.calendar
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsEqualTo
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
-import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -34,6 +31,7 @@ import com.google.accompanist.testharness.TestHarness
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import ru.pixnews.features.calendar.element.GameFeedElement
 import ru.pixnews.features.root.PixnewsRootContent
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.instrumented.testing.rule.InjectDependenciesRule
@@ -46,13 +44,7 @@ class CalendarFeedWidthOnMediumSizeTest : BaseInstrumentedTest() {
 
     @get:Rule(order = 20)
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
-
-    private val gameFeed: SemanticsNodeInteraction
-        get() = composeTestRule.onNode(hasTestTag("calendar:content:lazy_list"))
-
-    private val gameCardInFeed: SemanticsNodeInteraction
-        get() = composeTestRule.onNode(CalendarScreenPaddingsTest.gameCardInFeedMatcher)
-
+    private val gameFeed = GameFeedElement(composeTestRule)
     private var screenWidth: Dp = (-1).dp
 
     @Inject
@@ -78,10 +70,10 @@ class CalendarFeedWidthOnMediumSizeTest : BaseInstrumentedTest() {
     }
 
     @Test
-    fun calendarScreen_gameFeed_shouldHaveMaxWeight() {
-        gameFeed.performScrollToNode(CalendarScreenPaddingsTest.gameCardInFeedMatcher)
+    fun calendarScreen_gameFeed_shouldHaveMaxWidth() {
+        gameFeed.scrollToGameCard()
+        val bounds = gameFeed.gameCard().getUnclippedBoundsInRoot()
 
-        val bounds = gameCardInFeed.getUnclippedBoundsInRoot()
         assertThat(bounds.width).isLessThanOrEqualTo(552.dp)
         bounds.left.assertIsEqualTo((screenWidth - bounds.width) / 2, "horizontal padding")
     }

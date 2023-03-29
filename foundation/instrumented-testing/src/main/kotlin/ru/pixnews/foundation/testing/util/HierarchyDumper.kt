@@ -17,9 +17,12 @@ package ru.pixnews.foundation.testing.util
 
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.printToString
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
 import co.touchlab.kermit.Logger
 import radiography.Radiography
 import radiography.ViewStateRenderers
+import java.io.ByteArrayOutputStream
 
 public object HierarchyDumper {
     private const val TAG: String = "Hierarchy"
@@ -44,5 +47,18 @@ public object HierarchyDumper {
             viewStateRenderers = ViewStateRenderers.DefaultsIncludingPii,
         )
         return "\nView hierarchies:\n$prettyHierarchy"
+    }
+
+    public fun printXmlWindowHierarchyToLog() {
+        Logger.i(TAG) {
+            printXmlWindowHierarchyToString()
+        }
+    }
+
+    public fun printXmlWindowHierarchyToString(): String {
+        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        val outputStream = ByteArrayOutputStream()
+        device.dumpWindowHierarchy(outputStream)
+        return "\nWindow hierarchy:\n$outputStream"
     }
 }

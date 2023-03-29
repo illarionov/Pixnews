@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.util
+package ru.pixnews.test.util
 
 import androidx.compose.ui.graphics.Color
 import assertk.Assert

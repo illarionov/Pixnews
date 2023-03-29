@@ -106,6 +106,7 @@ dependencies {
 
     androidTestImplementation(project(":foundation:instrumented-testing"))
     androidTestImplementation(project(":foundation:di:instrumented-testing"))
+    androidTestImplementation(testFixtures(project(":foundation:domain-model")))
     androidTestImplementation(libs.accompanist.test.harness)
     androidTestImplementation(libs.androidx.navigation.compose)
     androidTestImplementation(libs.androidx.navigation.testing)

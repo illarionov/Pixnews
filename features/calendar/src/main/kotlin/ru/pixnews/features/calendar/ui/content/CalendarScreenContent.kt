@@ -17,15 +17,16 @@ package ru.pixnews.features.calendar.ui.content
 
 import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContent
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
@@ -60,8 +61,7 @@ internal fun CalendarScreenContent(
     modifier: Modifier = Modifier,
 ) {
     val state = rememberLazyListState()
-    val contentPaddings = WindowInsets.systemBars
-        .add(WindowInsets(bottom = 24.dp))
+    val contentPaddings = PaddingValues(top = 8.dp, bottom = 24.dp)
     val listItemsPadding = WindowInsets.safeContent.only(WindowInsetsSides.Horizontal)
         .union(WindowInsets(left = 16.dp, right = 16.dp))
         .asPaddingValues()
@@ -70,7 +70,7 @@ internal fun CalendarScreenContent(
         modifier = modifier
             .testTag("calendar:content:lazy_list")
             .fillMaxWidth(),
-        contentPadding = contentPaddings.asPaddingValues(),
+        contentPadding = contentPaddings,
         state = state,
         verticalArrangement = spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -89,22 +89,36 @@ internal fun CalendarScreenContent(
             contentType = { index -> games[index].uniqueId.contentType },
             key = { index -> games[index].uniqueId },
         ) { gameIndex ->
-            when (val item = games[gameIndex]) {
-                is CalendarListTitle -> GameSubheader(
-                    modifier = Modifier
-                        .widthIn(max = feedMaxWidth)
-                        .padding(listItemsPadding)
-                        .testTag("calendar:content:game_subheader"),
-                    title = item.title,
-                )
+            val currentItem = games[gameIndex]
+
+            if (gameIndex != 0) {
+                val predItem = games[gameIndex - 1]
+                val height = when {
+                    currentItem is CalendarListTitle -> 8.dp
+                    predItem is CalendarListTitle && currentItem is CalendarListPixnewsGameUi -> 0.dp
+                    else -> 16.dp
+                }
+                if (height != 0.dp) {
+                    Spacer(modifier = Modifier.height(height))
+                }
+            }
+
+            when (currentItem) {
+                is CalendarListTitle ->
+                    GameSubheader(
+                        modifier = Modifier
+                            .widthIn(max = feedMaxWidth)
+                            .padding(listItemsPadding),
+                        title = currentItem.title,
+                    )
 
                 is CalendarListPixnewsGameUi -> PixnewsGameCard(
                     modifier = Modifier
                         .widthIn(max = feedMaxWidth)
                         .padding(listItemsPadding),
-                    game = item,
-                    onClick = { onGameClick(item.gameId) },
-                    onFavouriteClick = { onFavouriteClick(item.gameId) },
+                    game = currentItem,
+                    onClick = { onGameClick(currentItem.gameId) },
+                    onFavouriteClick = { onFavouriteClick(currentItem.gameId) },
                 )
             }
         }
@@ -120,9 +134,8 @@ internal fun GameSubheader(
         title = title,
         modifier = modifier
             .fillMaxWidth()
-            .padding(
-                bottom = 8.dp,
-            ),
+            .padding(top = 8.dp)
+            .testTag("calendar:content:game_subheader"),
     )
 }
 

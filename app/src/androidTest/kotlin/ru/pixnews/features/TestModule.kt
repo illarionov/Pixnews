@@ -24,7 +24,8 @@ import dagger.Provides
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import ru.pixnews.features.calendar.CalendarFeedWidthOnMediumSizeTest
-import ru.pixnews.features.calendar.CalendarScreenPaddingsTest
+import ru.pixnews.features.calendar.CalendarScreenFeedPaddingsTest
+import ru.pixnews.features.calendar.CalendarScreenVerticalPaddingsTest
 import ru.pixnews.features.root.FirstScreenTest
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
@@ -43,9 +44,9 @@ public object TestModule {
 
     @Provides
     @IntoMap
-    @ClassKey(CalendarScreenPaddingsTest::class)
+    @ClassKey(CalendarScreenVerticalPaddingsTest::class)
     @SingleIn(AppScope::class)
-    fun providesCalendarScreenPaddingsTest(injector: MembersInjector<CalendarScreenPaddingsTest>): SingleInstrumentedTestInjector {
+    fun providesCalendarScreenPaddingsTest(injector: MembersInjector<CalendarScreenVerticalPaddingsTest>): SingleInstrumentedTestInjector {
         return SingleInstrumentedTestInjector(injector)
     }
 
@@ -54,6 +55,14 @@ public object TestModule {
     @ClassKey(CalendarFeedWidthOnMediumSizeTest::class)
     @SingleIn(AppScope::class)
     fun providesCalendarFeedWidthOnMediumSizeTest(injector: MembersInjector<CalendarFeedWidthOnMediumSizeTest>): SingleInstrumentedTestInjector {
+        return SingleInstrumentedTestInjector(injector)
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(CalendarScreenFeedPaddingsTest::class)
+    @SingleIn(AppScope::class)
+    fun providesCalendarScreenPaddingTest(injector: MembersInjector<CalendarScreenFeedPaddingsTest>): SingleInstrumentedTestInjector {
         return SingleInstrumentedTestInjector(injector)
     }
 }

@@ -13,22 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.test.util
+package ru.pixnews.features.calendar.testing.element
 
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
-import androidx.compose.ui.test.assertIsEqualTo
-import androidx.compose.ui.test.getUnclippedBoundsInRoot
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 
-fun assertVerticalPaddingBetweenAdjacentItems(
-    subject: String,
-    expectedPadding: Dp,
-    topItem: SemanticsNodeInteraction,
-    bottomItem: SemanticsNodeInteraction,
+public class CalendarHeaderElement(
+    private val composeRule: AndroidComposeTestRule<*, *>,
 ) {
-    val bottomFirst = topItem.getUnclippedBoundsInRoot().bottom
-    val topSecond = bottomItem.getUnclippedBoundsInRoot().top
+    public val searchBoxMatcher: SemanticsMatcher = hasTestTag("calendar:header:search_box")
+    public val dateSelectionHeader: DateSelectionHeaderElement = DateSelectionHeaderElement(composeRule)
+    public val chipsRow: ChipsRowElement = ChipsRowElement(composeRule)
 
-    (topSecond - bottomFirst)
-        .assertIsEqualTo(expectedPadding, subject)
+    public fun searchBox(): SemanticsNodeInteraction = composeRule.onNode(searchBoxMatcher)
 }

@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
@@ -75,7 +74,6 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.todayIn
 import ru.pixnews.features.calendar.PreviewFixtures
-import ru.pixnews.features.calendar.R
 import ru.pixnews.features.calendar.model.GamesOnDay
 import ru.pixnews.features.calendar.model.LocalCalendarModel
 import ru.pixnews.features.calendar.util.DateFormatter
@@ -84,6 +82,7 @@ import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.foundation.ui.theme.md_theme_palette_neutral_variant_90
 import ru.pixnews.foundation.ui.theme.md_theme_palette_tertiary70
 import ru.pixnews.libraries.compose.utils.defaultLocale
+import ru.pixnews.foundation.ui.design.R as uiDesignR
 
 @Composable
 internal fun DateSelectionHeader(
@@ -231,8 +230,7 @@ internal fun YearMonthPicker(
                     .exclude(WindowInsets(left = 16.dp, right = 12.dp))
                     .union(WindowInsets(right = 4.dp)),
             )
-            .fillMaxWidth()
-            .height(56.dp),
+            .fillMaxWidth(),
     ) {
         YearMonthPickerButton(
             onClick = onClick,
@@ -280,7 +278,7 @@ internal fun YearMonthPickerButton(
         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         Icon(
             Icons.Filled.ArrowDropDown,
-            contentDescription = stringResource(R.string.yeas_selection_show_date_picker_content_description),
+            contentDescription = stringResource(uiDesignR.string.yeas_selection_show_date_picker_content_description),
         )
     }
 }
@@ -304,9 +302,9 @@ private fun formatDayContentDescription(
 ): String {
     val dateString = DateFormatter.formatCalendarDateForContentDescription(date, defaultLocale())
     val skeletonResourceId = if (gamesOnDay?.hasFollowedGames == true) {
-        R.string.weekdays_row_has_tracked_games_content_description
+        uiDesignR.string.weekdays_row_has_tracked_games_content_description
     } else {
-        R.string.weekdays_row_no_tracked_games_content_description
+        uiDesignR.string.weekdays_row_no_tracked_games_content_description
     }
 
     return stringResource(id = skeletonResourceId, dateString)

@@ -17,8 +17,8 @@ package ru.pixnews.features.calendar.model
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
-import ru.pixnews.features.calendar.R
 import ru.pixnews.foundation.ui.assets.icons.content.ContentIcons
+import ru.pixnews.foundation.ui.design.R as uiDesignR
 
 internal enum class GameListViewMode(
     val icon: ImageVector,
@@ -26,11 +26,11 @@ internal enum class GameListViewMode(
 ) {
     LIST(
         icon = ContentIcons.GridView.Unfilled,
-        contentDescription = R.string.switch_display_mode_to_grid_content_description,
+        contentDescription = uiDesignR.string.switch_display_mode_to_grid_content_description,
     ),
     GRID(
         icon = ContentIcons.GridView.Filled,
-        contentDescription = R.string.switch_display_mode_to_list_content_description,
+        contentDescription = uiDesignR.string.switch_display_mode_to_list_content_description,
     ),
     ;
 

@@ -13,11 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.test.util
+plugins {
+    id("ru.pixnews.android-library")
+}
 
-import androidx.compose.ui.graphics.Color
-import assertk.Assert
-import assertk.assertions.isZero
-import assertk.assertions.prop
+pixnews {
+    compose.set(true)
+    managedDevices.set(false)
+}
 
-fun Assert<Color>.isTransparent() = prop(Color::alpha).isZero()
+android {
+    namespace = "ru.pixnews.features.calendar.testing"
+}
+
+dependencies {
+    api(project(":foundation:ui:design"))
+
+    api(libs.androidx.compose.ui.test.junit4)
+    implementation(project(":foundation:instrumented-testing"))
+}

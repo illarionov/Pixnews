@@ -41,4 +41,5 @@ dependencies {
     api(libs.androidx.test.core)
     implementation(libs.androidx.test.espresso.core)
     api(libs.androidx.test.ext.junit)
+    api(libs.assertk)
 }

@@ -22,4 +22,16 @@
     <string name="platforms_content_description">
         Платформы: <xliff:g example="Windows, PlayStation 5, " id="platforms">%1$s</xliff:g>
     </string>
+
+    <string name="yeas_selection_show_date_picker_content_description">Показать выбор даты</string>
+    <string name="weekdays_row_no_tracked_games_content_description">
+        <xliff:g example="Среда, 1 марта 2023" id="date">%1$s</xliff:g>
+    </string>
+    <string name="weekdays_row_has_tracked_games_content_description">
+        <xliff:g example="Среда, 1 марта 2023" id="date">%1$s</xliff:g>, есть отслеживаемые релизы
+    </string>
+    <string name="open_filter_menu_content_description">Открыть меню фильтров</string>
+    <string name="switch_display_mode_to_list_content_description">Переключить на отображение списком</string>
+    <string name="switch_display_mode_to_grid_content_description">Переключить на отображение сеткой</string>
+    <string name="major_releases_title">Главные релизы</string>
 </resources>

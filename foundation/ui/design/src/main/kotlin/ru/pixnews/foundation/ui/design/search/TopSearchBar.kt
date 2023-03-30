@@ -57,6 +57,7 @@ public fun PixnewsTopSearchBar(
         containerColor = MaterialTheme.colorScheme.onPrimary,
     ),
     placeholderText: String = stringResource(id = R.string.search_game_placeholder),
+    closeIconContentDescriptionText: String = stringResource(R.string.search_game_clear_field_content_description),
     windowInsets: WindowInsets = WindowInsets.statusBars.add(WindowInsets(top = 7.dp)),
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -99,7 +100,7 @@ public fun PixnewsTopSearchBar(
                     ) {
                         Icon(
                             Icons.Default.Close,
-                            contentDescription = stringResource(R.string.search_game_clear_field_content_description),
+                            contentDescription = closeIconContentDescriptionText,
                         )
                     }
                 }

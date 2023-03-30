@@ -51,7 +51,7 @@ internal fun Project.configureAndroidInstrumentedTests(
     configureAndroidTestDependencies(commonExtension)
 }
 
-internal fun Project.configureTestManagedDevices(
+private fun Project.configureTestManagedDevices(
     commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     commonExtension.testOptions.managedDevices {
@@ -79,7 +79,7 @@ internal fun Project.configureTestManagedDevices(
     }
 }
 
-internal fun Project.configureAndroidTestDependencies(
+private fun Project.configureAndroidTestDependencies(
     commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     if (commonExtension !is TestedExtension) {

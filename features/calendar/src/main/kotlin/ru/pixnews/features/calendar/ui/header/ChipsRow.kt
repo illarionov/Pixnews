@@ -55,13 +55,13 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import ru.pixnews.features.calendar.PreviewFixtures.FilterChip
-import ru.pixnews.features.calendar.R.string
 import ru.pixnews.features.calendar.model.GameListFilterChip
 import ru.pixnews.features.calendar.model.GameListFilterChipStyle.SELECTED
 import ru.pixnews.features.calendar.model.GameListViewMode
 import ru.pixnews.features.calendar.model.GameListViewMode.GRID
 import ru.pixnews.foundation.ui.assets.icons.content.ContentIcons
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
+import ru.pixnews.foundation.ui.design.R as uiDesignR
 
 @Composable
 internal fun ChipsRow(
@@ -137,7 +137,7 @@ internal fun ChipsRow(
             ) {
                 Icon(
                     imageVector = ContentIcons.FilterList,
-                    contentDescription = stringResource(string.open_filter_menu_content_description),
+                    contentDescription = stringResource(uiDesignR.string.open_filter_menu_content_description),
                 )
             }
             IconButton(

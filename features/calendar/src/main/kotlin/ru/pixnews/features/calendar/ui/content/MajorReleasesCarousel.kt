@@ -45,11 +45,11 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.features.calendar.PreviewFixtures.MajorRelease
-import ru.pixnews.features.calendar.R.string
 import ru.pixnews.features.calendar.model.MajorReleaseCarouselItemUiModel
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCardGridSmall
 import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
+import ru.pixnews.foundation.ui.design.R as uiDesignR
 
 @Composable
 internal fun MajorReleasesCarousel(
@@ -65,7 +65,7 @@ internal fun MajorReleasesCarousel(
         verticalArrangement = spacedBy(8.dp),
     ) {
         PixnewsGameListSubheader(
-            title = stringResource(string.major_releases_title),
+            title = stringResource(uiDesignR.string.major_releases_title),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .widthIn(max = feedMaxWidth)

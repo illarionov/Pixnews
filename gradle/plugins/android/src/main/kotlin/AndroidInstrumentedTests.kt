@@ -26,56 +26,77 @@ import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.maybeCreate
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
-internal fun Project.configureTestManagedDevices(
+internal fun Project.configureAndroidInstrumentedTests(
     commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     commonExtension.apply {
         defaultConfig {
             testInstrumentationRunner = "ru.pixnews.foundation.testing.instrumented.PixnewsTestRunner"
         }
+    }
+    if (pixnews.compose.get()) {
+        tasks.withType<KotlinCompilationTask<KotlinJvmCompilerOptions>>()
+            .matching { it.name.endsWith("AndroidTestKotlin") }
+            .configureEach {
+                compilerOptions.freeCompilerArgs.addAll(
+                    "-opt-in=androidx.compose.ui.test.ExperimentalTestApi",
+                )
+            }
+    }
 
-        testOptions {
-            managedDevices {
-                val pixel5api33 = devices.maybeCreate<ManagedVirtualDevice>("pixel5api33").apply {
-                    device = "Pixel 5"
-                    apiLevel = 33
-                    systemImageSource = "google"
-                }
-                val pixel2api30 = devices.maybeCreate<ManagedVirtualDevice>("pixel2api30").apply {
-                    device = "Pixel 2"
-                    apiLevel = 30
-                    systemImageSource = "aosp-atd"
-                }
-                groups {
-                    maybeCreate("phone").apply {
-                        targetDevices += listOf(pixel5api33, pixel2api30)
-                    }
-                }
+    configureTestManagedDevices(commonExtension)
+    configureAndroidTestDependencies(commonExtension)
+}
+
+internal fun Project.configureTestManagedDevices(
+    commonExtension: CommonExtension<*, *, *, *, *>,
+) {
+    commonExtension.testOptions.managedDevices {
+        val pixel5api33 = devices.maybeCreate<ManagedVirtualDevice>("pixel5api33").apply {
+            device = "Pixel 5"
+            apiLevel = 33
+            systemImageSource = "google"
+        }
+        val pixel2api30 = devices.maybeCreate<ManagedVirtualDevice>("pixel2api30").apply {
+            device = "Pixel 2"
+            apiLevel = 30
+            systemImageSource = "aosp-atd"
+        }
+        groups {
+            maybeCreate("phone").apply {
+                targetDevices += listOf(pixel5api33, pixel2api30)
             }
         }
     }
-
-    if (commonExtension is TestedExtension) {
-        dependencies {
-            if (pixnews.compose.get()) {
-                add("debugImplementation", versionCatalog.findLibrary("androidx-compose-ui-testManifest").orElseThrow())
-            }
-            add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
-            add("androidTestImplementation", project(":foundation:instrumented-testing"))
-        }
-
-        plugins.withId("ru.pixnews.di-anvil-kapt") {
-            dependencies {
-                add("kaptAndroidTest", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
-            }
-        }
-    }
-
     // https://issuetracker.google.com/issues/262270582
     tasks.withType<ManagedDeviceInstrumentationTestTask>().configureEach {
         doFirst {
             com.android.utils.Environment.initialize()
+        }
+    }
+}
+
+internal fun Project.configureAndroidTestDependencies(
+    commonExtension: CommonExtension<*, *, *, *, *>,
+) {
+    if (commonExtension !is TestedExtension) {
+        return
+    }
+
+    dependencies {
+        if (pixnews.compose.get()) {
+            add("debugImplementation", versionCatalog.findLibrary("androidx-compose-ui-testManifest").orElseThrow())
+        }
+        add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
+        add("androidTestImplementation", project(":foundation:instrumented-testing"))
+    }
+
+    plugins.withId("ru.pixnews.di-anvil-kapt") {
+        dependencies {
+            add("kaptAndroidTest", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
         }
     }
 }

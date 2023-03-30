@@ -18,23 +18,17 @@ package ru.pixnews.features.calendar
 import android.os.Build
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
-import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsMatcher
-import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsEqualTo
 import androidx.compose.ui.test.assertLeftPositionInRootIsEqualTo
 import androidx.compose.ui.test.filter
 import androidx.compose.ui.test.filterToOne
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
-import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasClickAction
-import androidx.compose.ui.test.hasTestTag
-import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onLast
-import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -50,20 +44,20 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
 import ru.pixnews.MainActivity
+import ru.pixnews.features.calendar.element.CalendarHeaderElement
+import ru.pixnews.features.calendar.element.GameFeedElement
 import ru.pixnews.foundation.di.instrumented.testing.rule.InjectDependenciesRule
 import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
 import ru.pixnews.foundation.testing.rule.SystemNavigationRule
 import ru.pixnews.foundation.testing.rule.SystemNavigationRule.NavigationMode
 import ru.pixnews.foundation.testing.rule.SystemNavigationRule.NavigationMode.GESTURAL
 import ru.pixnews.foundation.testing.rule.SystemNavigationRule.NavigationMode.THREE_BUTTON
-import ru.pixnews.foundation.ui.design.GameIdKey
 import ru.pixnews.libraries.android.utils.rootView
 import javax.inject.Inject
 import kotlin.LazyThreadSafetyMode.NONE
 
-@OptIn(ExperimentalTestApi::class)
 @RunWith(Parameterized::class)
-class CalendarScreenPaddingsTest(
+class CalendarScreenVerticalPaddingsTest(
     private val testSpec: TestCaseDeviceSpec,
 ) : BaseInstrumentedTest() {
     @get:Rule(order = 10)
@@ -82,14 +76,7 @@ class CalendarScreenPaddingsTest(
         }
     }
     private var calendarHeader = CalendarHeaderElement(composeTestRule)
-    private val gameFeed: SemanticsNodeInteraction
-        get() = composeTestRule.onNode(hasTestTag("calendar:content:lazy_list"))
-    private val majorReleasesTitle: SemanticsNodeInteraction
-        get() = composeTestRule.onNode(majorReleasesTitleMatcher)
-    private val gameSubheader: SemanticsNodeInteraction
-        get() = composeTestRule.onAllNodes(gameSubheaderMatcher).onFirst()
-    private val gameCardInFeed: SemanticsNodeInteraction
-        get() = composeTestRule.onNode(gameCardInFeedMatcher)
+    private var gameFeed = GameFeedElement(composeTestRule)
 
     @Inject
     lateinit var logger: Logger
@@ -114,16 +101,20 @@ class CalendarScreenPaddingsTest(
 
     @Test
     fun calendarScreen_mainElements_shouldHaveCorrectPaddings() {
-        composeTestRule.waitUntilExactlyOneExists(majorReleasesTitleMatcher, timeoutMillis = 5_000)
-        majorReleasesTitle.assertLeftPositionInRootIsEqualTo(leftGuideline)
+        with(gameFeed.majorReleases) {
+            waitTitle()
+            title().assertLeftPositionInRootIsEqualTo(leftGuideline)
+        }
 
-        gameFeed.performScrollToNode(gameSubheaderMatcher)
-        gameSubheader.assertLeftPositionInRootIsEqualTo(leftGuideline)
+        with(gameFeed) {
+            scrollToDateSubheader()
+            dateSubheader().assertLeftPositionInRootIsEqualTo(leftGuideline)
 
-        gameFeed.performScrollToNode(gameCardInFeedMatcher)
-        with(gameCardInFeed.getUnclippedBoundsInRoot()) {
-            left.assertIsEqualTo(leftGuideline, "left")
-            right.assertIsEqualTo(rightGuideline, "right")
+            scrollToGameCard()
+            with(gameCard().getUnclippedBoundsInRoot()) {
+                left.assertIsEqualTo(leftGuideline, "left")
+                right.assertIsEqualTo(rightGuideline, "right")
+            }
         }
     }
 
@@ -158,12 +149,10 @@ class CalendarScreenPaddingsTest(
     @Test
     fun calendarScreen_chipsRow_shouldHaveCorrectPaddings() {
         // Chips row should not be clipped by left padding
-        calendarHeader.chipsRow.list().assertLeftPositionInRootIsEqualTo(0.dp)
+        calendarHeader.chipsRow.chipsLazyList().assertLeftPositionInRootIsEqualTo(0.dp)
 
         // First chip should be aligned to the left guideline
-        calendarHeader.chipsRow.list()
-            .onChildren()
-            .filter(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Checkbox))
+        calendarHeader.chipsRow.chipsButtons()
             .onFirst()
             .assertLeftPositionInRootIsEqualTo(leftGuideline)
 
@@ -195,17 +184,6 @@ class CalendarScreenPaddingsTest(
                 )
             }
         }
-        private val gameSubheaderMatcher = isHeading().and(
-            hasTestTag("calendar:content:game_subheader"),
-        )
-        private val majorReleasesTitleMatcher = isHeading().and(
-            hasAnyAncestor(hasTestTag("calendar:content:major_releases_carousel")),
-        )
-        internal val gameCardInFeedMatcher = SemanticsMatcher.expectValue(GameIdKey, "slime-rancher-2")
-            .and(
-                hasAnyAncestor(hasTestTag("calendar:content:major_releases_carousel")).not(),
-            )
-            .and(hasAnyAncestor(hasTestTag("calendar:content:lazy_list")))
 
         @JvmStatic
         @Parameters(name = "{index} {0}")

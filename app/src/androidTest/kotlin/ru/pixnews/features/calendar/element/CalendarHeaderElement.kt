@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.features.calendar
+package ru.pixnews.features.calendar.element
 
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.SemanticsNodeInteractionCollection
+import androidx.compose.ui.test.filter
 import androidx.compose.ui.test.hasAnyChild
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.compose.ui.test.onChildren
 import ru.pixnews.features.calendar.R as calendarR
 
 internal class CalendarHeaderElement(
@@ -79,9 +84,13 @@ internal class CalendarHeaderElement(
                     ),
                 )
 
-        fun list(): SemanticsNodeInteraction = composeRule.onNode(
+        fun chipsLazyList(): SemanticsNodeInteraction = composeRule.onNode(
             lazyListMatcher.havingAchestor(parentSemanticMatcher),
         )
+
+        fun chipsButtons(): SemanticsNodeInteractionCollection = chipsLazyList()
+            .onChildren()
+            .filter(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Checkbox))
 
         fun filterButton(): SemanticsNodeInteraction = composeRule.onNode(
             filterButtonMatcher.havingAchestor(parentSemanticMatcher),

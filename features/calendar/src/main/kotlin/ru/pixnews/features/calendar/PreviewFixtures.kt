@@ -90,30 +90,42 @@ internal object PreviewFixtures {
             MajorRelease.project007,
         ),
         games = persistentListOf(
-            CalendarListTitle(title = "1 January 2024"),
+            CalendarDateGroup.jan1st2024,
             Release.slimerancher2.copy(
                 cover = Release.slimerancher2.cover?.withDebug(loadingDelay = 10.seconds),
             ),
             Release.hytale,
-            CalendarListTitle(title = "2 January 2024"),
+            CalendarDateGroup.jan2st2024,
             Release.gta6,
             Release.thelostwild,
-            CalendarListTitle(title = "TBD January 2024"),
+            CalendarDateGroup.tbdJan2024,
             Release.thesims5,
             Release.beyondgoodandevil2,
             Release.starwarseclipse,
-            CalendarListTitle(title = "TBD Early 2024"),
+            CalendarDateGroup.tbdFeb2024,
+            CalendarDateGroup.tbdMar2024,
+            CalendarDateGroup.tbdEarly2024,
             Release.halflife3.copy(
                 cover = Release.halflife3.cover?.withDebug(
                     loadingDelay = 5.seconds,
                     overrideResult = OverrideResult.Error(),
                 ),
             ),
-            CalendarListTitle(title = "TBD"),
+            CalendarDateGroup.tbd,
             Release.smalland,
             Release.project007,
         ),
     )
+
+    object CalendarDateGroup {
+        val jan1st2024 = CalendarListTitle(title = "1 January 2024")
+        val jan2st2024 = CalendarListTitle(title = "2 January 2024")
+        val tbdJan2024 = CalendarListTitle(title = "TBD January 2024")
+        val tbdFeb2024 = CalendarListTitle(title = "TBD February 2024")
+        val tbdMar2024 = CalendarListTitle(title = "TBD March 2024")
+        val tbdEarly2024 = CalendarListTitle(title = "TBD Early 2024")
+        val tbd = CalendarListTitle(title = "TBD")
+    }
 
     object FilterChip {
         val popularChip = GameListFilterChip(id = "popular", label = "Popular", SELECTED)

@@ -19,12 +19,17 @@ import android.app.UiAutomation
 import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.UiDevice
 import co.touchlab.kermit.Logger
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
+import ru.pixnews.foundation.testing.rule.SystemNavigationRule.NavigationMode.THREE_BUTTON
+import ru.pixnews.foundation.testing.util.HierarchyDumper
 import ru.pixnews.foundation.testing.util.executeShellCommandIs
+import java.util.concurrent.TimeoutException
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
@@ -67,7 +72,7 @@ public class SystemNavigationRule(
             logger.i { "Current system navigation mode: $initialMode, requested mode: $requiredMode" }
             if (needToChangeMode) {
                 overlayModeExecutor.setGesturalMode(requiredMode)
-                waitUntilNavigationModeIsApplied()
+                waitUntilNavigationModeIsApplied(requiredMode)
             }
             try {
                 base.evaluate()
@@ -77,7 +82,7 @@ public class SystemNavigationRule(
                     try {
                         logger.i { "Restore initial navigation mode: $initialMode" }
                         overlayModeExecutor.setGesturalMode(initialMode)
-                        waitUntilNavigationModeIsApplied()
+                        waitUntilNavigationModeIsApplied(initialMode)
                     } catch (throwable: Throwable) {
                         logger.e(throwable) { "setGesturalMode() failed" }
                     }
@@ -86,20 +91,58 @@ public class SystemNavigationRule(
         }
 
         @OptIn(ExperimentalTime::class)
-        private fun waitUntilNavigationModeIsApplied() {
+        private fun waitUntilNavigationModeIsApplied(
+            requiredMode: NavigationMode,
+        ) {
+            var waitResult: Result<Unit> = Result.success(Unit)
             val time = measureTime {
-                UiDevice.getInstance(InstrumentationRegistry.getInstrumentation()).waitForWindowUpdate(
-                    null,
-                    WAIT_NAVIGATION_APPLIED_TIMEOUT,
-                )
+                waitResult = runCatching {
+                    waitForHomeButtonVisibility(
+                        homeButtonShouldBeVisible = requiredMode == THREE_BUTTON,
+                    )
+                }
             }
-            logger.i {
-                "Waiting until the new navigation mode is applied completed completed in ${time.inWholeMilliseconds}ms"
+            waitResult.onSuccess {
+                logger.i {
+                    "Waiting until the new navigation mode completed in ${time.inWholeMilliseconds}ms"
+                }
+            }.onFailure { error ->
+                logger.e(error) {
+                    "Waiting for new navigation mode to be applied timed out"
+                }
+            }
+        }
+
+        private fun waitForHomeButtonVisibility(
+            homeButtonShouldBeVisible: Boolean,
+            timeout: Duration = WAIT_NAVIGATION_APPLIED_TIMEOUT,
+            pollInterval: Duration = WAIT_NAVIGATION_APPLIED_POLL_INTERVAL,
+        ) {
+            val entTime = System.nanoTime() + timeout.inWholeNanoseconds
+            while (System.nanoTime() < entTime) {
+                if (isAnyOfNavbarButtonsVisible() == homeButtonShouldBeVisible) {
+                    return
+                }
+                Thread.sleep(pollInterval.inWholeMilliseconds)
+            }
+            throw TimeoutException("Timeout waiting for new navigation mode")
+        }
+
+        private fun isAnyOfNavbarButtonsVisible(): Boolean {
+            // XXX need a more efficient way
+            val hierarchy = HierarchyDumper.printXmlWindowHierarchyToString()
+            return listOf(
+                "com.android.systemui:id/home", // also covers the "com.android.systemui:id/home_button" case
+                "com.android.systemui:id/back",
+                "com.android.systemui:id/recent_apps",
+            ).any {
+                hierarchy.contains(it)
             }
         }
 
         private companion object {
-            private const val WAIT_NAVIGATION_APPLIED_TIMEOUT = 5000L
+            private val WAIT_NAVIGATION_APPLIED_TIMEOUT = 10.seconds
+            private val WAIT_NAVIGATION_APPLIED_POLL_INTERVAL = 300.milliseconds
         }
     }
 }

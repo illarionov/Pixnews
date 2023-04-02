@@ -38,9 +38,7 @@ import ru.pixnews.domain.model.game.game.theLostWild
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.DefaultImageUrl
 import ru.pixnews.features.calendar.model.CalendarListTitle
-import ru.pixnews.features.calendar.model.CalendarModel
 import ru.pixnews.features.calendar.model.CalendarScreenState
-import ru.pixnews.features.calendar.model.DEFAULT_CALENDAR_MODEL
 import ru.pixnews.features.calendar.model.GameListFilterChip
 import ru.pixnews.features.calendar.model.GameListFilterChipStyle.SELECTED
 import ru.pixnews.features.calendar.model.GameListFilterChipStyle.UNSELECTED
@@ -53,7 +51,6 @@ import ru.pixnews.foundation.ui.imageloader.coil.tooling.withDebug
 import kotlin.time.Duration.Companion.seconds
 
 internal object PreviewFixtures {
-    val DummyCalendarModel: CalendarModel = DEFAULT_CALENDAR_MODEL
     val previewActiveDate: LocalDate = LocalDate(2023, 2, 28)
     val gamesSummaryOnActiveDate: ImmutableMap<LocalDate, GamesOnDay> = persistentHashMapOf(
         LocalDate(2023, 2, 27) to GamesOnDay(

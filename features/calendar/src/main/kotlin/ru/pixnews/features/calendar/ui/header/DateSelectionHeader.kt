@@ -75,8 +75,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.todayIn
 import ru.pixnews.features.calendar.PreviewFixtures
 import ru.pixnews.features.calendar.model.GamesOnDay
-import ru.pixnews.features.calendar.model.LocalCalendarModel
-import ru.pixnews.features.calendar.util.DateFormatter
+import ru.pixnews.features.calendar.util.DateLocalization
 import ru.pixnews.features.calendar.util.getWeekDays
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.foundation.ui.theme.md_theme_palette_neutral_variant_90
@@ -92,21 +91,19 @@ internal fun DateSelectionHeader(
     onDaySelectionClick: (LocalDate) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(LocalCalendarModel provides PreviewFixtures.DummyCalendarModel) {
-        Column(
-            modifier = modifier
-                .fillMaxWidth(),
-        ) {
-            YearMonthPicker(
-                activeDate = activeDate,
-                onClick = onYearMonthSelectionClick,
-            )
-            WeekDaysRow(
-                activeDate = activeDate,
-                onDayClick = onDaySelectionClick,
-                games = games,
-            )
-        }
+    Column(
+        modifier = modifier
+            .fillMaxWidth(),
+    ) {
+        YearMonthPicker(
+            activeDate = activeDate,
+            onClick = onYearMonthSelectionClick,
+        )
+        WeekDaysRow(
+            activeDate = activeDate,
+            onDayClick = onDaySelectionClick,
+            games = games,
+        )
     }
 }
 
@@ -131,7 +128,10 @@ internal fun WeekDaysRow(
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        val days = getWeekDays(activeDate.value, LocalCalendarModel.current.firstDayOfWeek)
+        val days = getWeekDays(
+            activeDate.value,
+            DateLocalization.getFirstDayOfWeek(defaultLocale()),
+        )
         for (day in days) {
             val isActive = day == activeDate.value
             val contentDescription = AnnotatedString(
@@ -181,7 +181,7 @@ internal fun WeeksDay(
     games: ImmutableMap<LocalDate, GamesOnDay>,
     modifier: Modifier = Modifier,
 ) {
-    val weekdayNames = LocalCalendarModel.current.weekdayShortNames
+    val weekdayNames = DateLocalization.getShortWeekDays(defaultLocale())
     Column(
         modifier = modifier
             .sizeIn(minWidth = 32.dp, minHeight = 42.dp),
@@ -300,7 +300,7 @@ private fun formatDayContentDescription(
     date: LocalDate,
     gamesOnDay: GamesOnDay?,
 ): String {
-    val dateString = DateFormatter.formatCalendarDateForContentDescription(date, defaultLocale())
+    val dateString = DateLocalization.formatCalendarDateForContentDescription(date, defaultLocale())
     val skeletonResourceId = if (gamesOnDay?.hasFollowedGames == true) {
         uiDesignR.string.weekdays_row_has_tracked_games_content_description
     } else {
@@ -312,7 +312,7 @@ private fun formatDayContentDescription(
 
 @Composable
 internal fun formatYearMonthPickerTitle(date: LocalDate): String {
-    return DateFormatter.formatYearMonthSelectionTitle(date, defaultLocale())
+    return DateLocalization.formatYearMonthSelectionTitle(date, defaultLocale())
 }
 
 @Preview

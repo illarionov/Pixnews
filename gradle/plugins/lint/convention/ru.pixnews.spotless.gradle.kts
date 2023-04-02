@@ -16,6 +16,7 @@
 
 import com.diffplug.gradle.spotless.SpotlessTask
 import com.diffplug.spotless.FormatterStep
+import com.diffplug.spotless.LineEnding
 import com.diffplug.spotless.generic.LicenseHeaderStep
 import ru.pixnews.configRootDir
 
@@ -28,6 +29,11 @@ plugins {
 
 spotless {
     isEnforceCheck = false
+
+    // https://github.com/diffplug/spotless/issues/1527
+    // https://github.com/diffplug/spotless/issues/1644
+    lineEndings = LineEnding.PLATFORM_NATIVE
+
     val commonExcludes = listOf("**/build/**", "**/.gradle/**", "config/copyright/**")
     kotlin {
         target("**/*.kt")

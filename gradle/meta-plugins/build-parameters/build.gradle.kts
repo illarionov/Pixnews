@@ -21,6 +21,7 @@ group = "ru.pixnews"
 
 buildParameters {
     pluginId("ru.pixnews.build-parameters")
+    enableValidation.set(false)
     bool("ci") {
         defaultValue.set(false)
         fromEnvironment()

@@ -65,6 +65,7 @@ listOf(
 
 listOf(
     "calendar",
+    "calendar-testing",
     "collections",
     "featuretoggles",
     "profile",

@@ -16,6 +16,7 @@
 plugins {
     id("ru.pixnews.android-library")
     id("ru.pixnews.di-anvil-factories")
+    id("ru.pixnews.android-testing-paparazzi")
     id("kotlin-parcelize")
 }
 
@@ -65,6 +66,8 @@ dependencies {
 
     testImplementation(libs.junit.jupiter.params)
 
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(project(":foundation:instrumented-testing"))
+    androidTestImplementation(project(":features:calendar-testing"))
 }

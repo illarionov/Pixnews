@@ -26,12 +26,12 @@ import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.beyondGoodEvil2
 import ru.pixnews.domain.model.game.game.hytale
 import ru.pixnews.domain.model.game.game.sims5
-import ru.pixnews.features.calendar.element.CalendarHeaderElement
 import ru.pixnews.features.calendar.element.GameFeedElement
+import ru.pixnews.features.calendar.testing.element.CalendarHeaderElement
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.instrumented.testing.rule.InjectDependenciesRule
 import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
-import ru.pixnews.test.util.assertVerticalPaddingBetweenAdjacentItems
+import ru.pixnews.foundation.testing.util.assertVerticalPaddingBetweenAdjacentItems
 import javax.inject.Inject
 
 class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {

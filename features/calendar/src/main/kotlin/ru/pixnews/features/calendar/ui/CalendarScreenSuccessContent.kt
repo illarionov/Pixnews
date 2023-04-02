@@ -17,28 +17,17 @@ package ru.pixnews.features.calendar.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
-import kotlinx.collections.immutable.toImmutableList
-import kotlinx.datetime.Clock.System
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.todayIn
 import ru.pixnews.features.calendar.PreviewFixtures
-import ru.pixnews.features.calendar.PreviewFixtures.FilterChip
 import ru.pixnews.features.calendar.model.CalendarScreenState
-import ru.pixnews.features.calendar.model.GameListViewMode.GRID
 import ru.pixnews.features.calendar.ui.content.CalendarScreenContent
-import ru.pixnews.features.calendar.ui.header.ChipsRow
-import ru.pixnews.features.calendar.ui.header.DateSelectionHeader
-import ru.pixnews.features.calendar.ui.header.SearchBox
+import ru.pixnews.features.calendar.ui.header.CalendarScreenHeader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 
 @Composable
@@ -54,6 +43,11 @@ internal fun CalendarScreenSuccessContent(
     ) {
         CalendarScreenHeader(
             onSearch = {},
+            onDaySelectionClick = {},
+            onYearMonthSelectionClick = {},
+            onOpenFilterClick = {},
+            onViewModeClick = {},
+            onFilterChipClick = {},
         )
         CalendarScreenContent(
             games = state.games,
@@ -61,36 +55,6 @@ internal fun CalendarScreenSuccessContent(
             onMajorReleaseClick = {},
             onGameClick = {},
             onFavouriteClick = {},
-        )
-    }
-}
-
-@Composable
-internal fun CalendarScreenHeader(
-    onSearch: (String) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth(),
-    ) {
-        SearchBox(
-            modifier = Modifier
-                .testTag("calendar:header:search_box"),
-            onSearch = onSearch,
-        )
-        DateSelectionHeader(
-            activeDate = remember { mutableStateOf(System.todayIn(TimeZone.currentSystemDefault())) },
-            onYearMonthSelectionClick = {},
-            games = PreviewFixtures.gamesSummaryOnActiveDate,
-            onDaySelectionClick = {},
-        )
-        ChipsRow(
-            chips = FilterChip.sampleChips.toImmutableList(),
-            viewMode = remember { mutableStateOf(GRID) },
-            onOpenFilterClick = {},
-            onViewModeClick = {},
-            onFilterChipClick = {},
         )
     }
 }

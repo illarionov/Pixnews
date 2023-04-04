@@ -46,7 +46,7 @@ androidx-tracing = "1.2.0-beta01"
 androidx-tracing-perfetto = "1.0.0-alpha12"
 arrow = "1.1.5-alpha.4"
 assertk = "0.25"
-coil = "2.2.2"
+coil = "2.3.0"
 firebase-bom = "31.2.0"
 firebase-crashlytics-plugin = "2.9.4"
 google-services = "4.3.15"
@@ -143,12 +143,13 @@ arrow-core = { group = "io.arrow-kt", name = "arrow-core" }
 arrow-fx = { group = "io.arrow-kt", name = "arrow-fx-coroutines" }
 assertk = { group = "com.willowtreeapps.assertk", name = "assertk-jvm", version.ref = "assertk" }
 coil-base = { group = "io.coil-kt", name = "coil-base" }
+coil-bom = { group = "io.coil-kt", name = "coil-bom", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose" }
 coil-compose-base = { group = "io.coil-kt", name = "coil-compose-base" }
 coil-gif = { group = "io.coil-kt", name = "coil-gif" }
 coil-svg = { group = "io.coil-kt", name = "coil-svg" }
+coil-test = { group = "io.coil-kt", name = "coil-test", version.ref = "coil" }
 coil-video = { group = "io.coil-kt", name = "coil-video" }
-coil-bom = { group = "io.coil-kt", name = "coil-bom", version.ref = "coil" }
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }

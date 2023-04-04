@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.graphics.FilterQuality
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -57,6 +58,7 @@ public fun NetworkImage(
     filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
     placeholderColor: Color = Color.Unspecified,
     placeholderHighlight: PlaceholderHighlight? = PlaceholderHighlight.fade(),
+    placeholderShape: Shape? = null,
 ) {
     var imageLoading by remember(model) { mutableStateOf(true) }
     AsyncImage(
@@ -67,6 +69,7 @@ public fun NetworkImage(
                 visible = imageLoading,
                 color = placeholderColor,
                 highlight = placeholderHighlight,
+                shape = placeholderShape,
             ),
         placeholder = null,
         error = error,

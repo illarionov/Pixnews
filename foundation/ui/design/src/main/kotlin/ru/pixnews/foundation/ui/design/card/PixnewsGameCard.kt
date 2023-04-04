@@ -44,6 +44,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.text
@@ -94,6 +95,10 @@ public fun PixnewsGameCard(
             contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
         ),
     ) {
+        val shape = MaterialTheme.shapes.medium.copy(
+            bottomStart = ZeroCornerSize,
+            bottomEnd = ZeroCornerSize,
+        )
         NetworkImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(game.cover)
@@ -103,17 +108,14 @@ public fun PixnewsGameCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(game.cover?.size?.aspectRatio() ?: GAME_CARD_IMAGE_ASPECT_RATIO)
-                .clip(
-                    MaterialTheme.shapes.medium.copy(
-                        bottomStart = ZeroCornerSize,
-                        bottomEnd = ZeroCornerSize,
-                    ),
-                ),
+                .clip(shape)
+                .testTag(PixnewsGameCardTestTags.IMAGE),
             fallback = ImagePlaceholders.noImageLargePainter(),
             error = ImagePlaceholders.errorLoadingImageLargePainter(),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             placeholderColor = game.cover?.prevailingColor?.composeColor() ?: Color.Unspecified,
+            placeholderShape = shape,
         )
         Box(
             modifier = Modifier.fillMaxWidth(),
@@ -121,7 +123,8 @@ public fun PixnewsGameCard(
             IconButton(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .size(48.dp),
+                    .size(48.dp)
+                    .testTag(PixnewsGameCardTestTags.FAVOURITE_BUTTON),
                 onClick = onFavouriteClick,
             ) {
                 PixnewsGameCardFavouriteIcon(
@@ -144,6 +147,8 @@ public fun PixnewsGameCard(
                     maxLines = 5,
                     style = MaterialTheme.typography.bodyMedium,
                     overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .testTag(PixnewsGameCardTestTags.DESCRIPTION),
                 )
             }
         }
@@ -158,7 +163,8 @@ internal fun Headline(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier
+            .testTag(PixnewsGameCardTestTags.HEADLINE),
         verticalArrangement = spacedBy(1.dp),
     ) {
         Text(
@@ -190,6 +196,7 @@ private fun PlatformsRow(
     Row(
         modifier = modifier
             .height(24.dp)
+            .testTag(PixnewsGameCardTestTags.PLATFORMS)
             .clearAndSetSemantics {
                 text = contentDescription
             },

@@ -17,6 +17,7 @@
 
 package ru.pixnews.foundation.ui.imageloader.coil.compose
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.Stable
@@ -58,6 +59,7 @@ import ru.pixnews.foundation.ui.imageloader.coil.ImageLoaderHolder
  * @param filterQuality Sampling algorithm applied to a bitmap when it is scaled and drawn into the
  *  destination.
  */
+@SuppressLint("VisibleForTests")
 @Composable
 public fun AsyncImage(
     model: Any?,
@@ -110,6 +112,7 @@ public fun AsyncImage(
  * @param filterQuality Sampling algorithm applied to a bitmap when it is scaled and drawn into the
  *  destination.
  */
+@SuppressLint("VisibleForTests")
 @Composable
 @NonRestartableComposable
 public fun AsyncImage(

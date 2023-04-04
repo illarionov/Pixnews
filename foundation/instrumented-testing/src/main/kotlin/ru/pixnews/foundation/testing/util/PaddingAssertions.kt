@@ -19,6 +19,8 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsEqualTo
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.height
+import androidx.compose.ui.unit.width
 
 public fun assertVerticalPaddingBetweenAdjacentItems(
     subject: String,
@@ -29,8 +31,7 @@ public fun assertVerticalPaddingBetweenAdjacentItems(
     val bottomFirst = topItem.getUnclippedBoundsInRoot().bottom
     val topSecond = bottomItem.getUnclippedBoundsInRoot().top
 
-    (topSecond - bottomFirst)
-        .assertIsEqualTo(expectedPadding, subject)
+    (topSecond - bottomFirst).assertIsEqualTo(expectedPadding, subject)
 }
 
 public fun assertHorizontalPaddingBetweenAdjacentItems(
@@ -44,4 +45,40 @@ public fun assertHorizontalPaddingBetweenAdjacentItems(
 
     (rightStart - leftEnd)
         .assertIsEqualTo(expectedPadding, subject)
+}
+
+public fun SemanticsNodeInteraction.assertTopPaddingInParentIsEqualTo(
+    parent: SemanticsNodeInteraction,
+    expectedTop: Dp,
+): SemanticsNodeInteraction {
+    (getUnclippedBoundsInRoot().top - parent.getUnclippedBoundsInRoot().top)
+        .assertIsEqualTo(expectedTop, "top padding")
+    return this
+}
+
+public fun SemanticsNodeInteraction.assertBottomPaddingInParentIsEqualTo(
+    parent: SemanticsNodeInteraction,
+    expectedBottom: Dp,
+): SemanticsNodeInteraction {
+    (parent.getUnclippedBoundsInRoot().height - getUnclippedBoundsInRoot().bottom)
+        .assertIsEqualTo(expectedBottom, "bottom padding")
+    return this
+}
+
+public fun SemanticsNodeInteraction.assertLeftPaddingInParentIsEqualTo(
+    parent: SemanticsNodeInteraction,
+    expectedLeft: Dp,
+): SemanticsNodeInteraction {
+    (getUnclippedBoundsInRoot().left - parent.getUnclippedBoundsInRoot().left)
+        .assertIsEqualTo(expectedLeft, "left padding")
+    return this
+}
+
+public fun SemanticsNodeInteraction.assertRightPaddingInParentIsEqualTo(
+    parent: SemanticsNodeInteraction,
+    expectedRight: Dp,
+): SemanticsNodeInteraction {
+    (parent.getUnclippedBoundsInRoot().width - getUnclippedBoundsInRoot().right)
+        .assertIsEqualTo(expectedRight, "right padding")
+    return this
 }

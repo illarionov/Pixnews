@@ -15,6 +15,8 @@
  */
 package ru.pixnews.foundation.ui.imageloader.coil
 
+import androidx.annotation.RestrictTo
+import androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP
 import coil.intercept.Interceptor
 import coil.intercept.Interceptor.Chain
 import coil.request.ImageRequest
@@ -22,7 +24,8 @@ import coil.request.ImageResult
 import ru.pixnews.domain.model.util.ImageUrl
 import ru.pixnews.foundation.ui.imageloader.coil.mapper.toDimensionModel
 
-internal class ImageUrlCoilInterceptor : Interceptor {
+@RestrictTo(LIBRARY_GROUP)
+public class ImageUrlCoilInterceptor : Interceptor {
     override suspend fun intercept(chain: Chain): ImageResult {
         val request = when (val data = chain.request.data) {
             is ImageUrl -> handle(chain, data)

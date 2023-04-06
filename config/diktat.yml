@@ -81,6 +81,9 @@
   enabled: false
 - name: SAY_NO_TO_VAR
   enabled: false
+# Slow
+- name: SMART_CAST_NEEDED
+  enabled: false
 - name: TOO_LONG_FUNCTION
   enabled: false
 - name: TOO_MANY_PARAMETERS

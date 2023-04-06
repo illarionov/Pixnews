@@ -34,7 +34,7 @@ spotless {
     // https://github.com/diffplug/spotless/issues/1644
     lineEndings = LineEnding.PLATFORM_NATIVE
 
-    val commonExcludes = listOf("**/build/**", "**/.gradle/**", "config/copyright/**")
+    val commonExcludes = listOf("**/build/**", "**/.gradle/**", "**/out/**", "config/copyright/**")
     kotlin {
         target("**/*.kt")
         targetExclude(commonExcludes)
@@ -72,7 +72,7 @@ spotless {
         endWithNewline()
     }
     groovyGradle {
-        target("*.gradle")
+        target("**/*.gradle")
         targetExclude(commonExcludes)
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"), "(^(?![\\/ ]\\*).*$)")
 
@@ -80,8 +80,16 @@ spotless {
         trimTrailingWhitespace()
         endWithNewline()
     }
+    format("properties") {
+        // "**/.gitignore" does not work: https://github.com/diffplug/spotless/issues/1146
+        target("../.gitignore", "../.gitattributes", "../.editorconfig", "../gradle.properties")
+        targetExclude(commonExcludes)
+
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
     format("yaml") {
-        target("*.yml")
+        target("**/*.yml")
         targetExclude(commonExcludes)
 
         trimTrailingWhitespace()
@@ -89,7 +97,7 @@ spotless {
         indentWithSpaces(2)
     }
     format("toml") {
-        target("*.toml")
+        target("**/*.toml")
         targetExclude(commonExcludes)
 
         trimTrailingWhitespace()

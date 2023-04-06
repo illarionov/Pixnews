@@ -34,24 +34,31 @@ spotless {
     // https://github.com/diffplug/spotless/issues/1644
     lineEndings = LineEnding.PLATFORM_NATIVE
 
-    val commonExcludes = listOf("**/build/**", "**/.gradle/**", "**/out/**", "config/copyright/**")
+    val excludedDirectories = setOf("build", ".gradle", "out", ".git", ".idea")
+    val rootDir = layout.projectDirectory.asFileTree
+        .matching {
+            exclude {
+                it.isDirectory && it.name in excludedDirectories
+            }
+            exclude {
+                it.isDirectory && it.relativePath.startsWith("config/copyright")
+            }
+        }
+
     kotlin {
-        target("**/*.kt")
-        targetExclude(commonExcludes)
+        target(rootDir.filter { it.name.endsWith(".kt") })
 
         diktat().configFile(configRootDir.file("diktat.yml"))
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"))
     }
     kotlinGradle {
-        target("**/*.gradle.kts")
-        targetExclude(commonExcludes)
+        target(rootDir.filter { it.name.endsWith(".gradle.kts") })
 
         diktat().configFile(configRootDir.file("diktat.yml"))
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"), "(^(?![\\/ ]\\*).*$)")
     }
     java {
-        target("**/*.java")
-        targetExclude(commonExcludes)
+        target(rootDir.filter { it.name.endsWith(".java") })
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"))
 
         importOrder("", "javax", "java", "\\#")
@@ -62,8 +69,7 @@ spotless {
         endWithNewline()
     }
     groovy {
-        target("**/*.groovy")
-        targetExclude(commonExcludes)
+        target(rootDir.filter { it.name.endsWith(".groovy") })
         importOrder("", "javax", "java", "\\#")
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"))
 
@@ -72,8 +78,7 @@ spotless {
         endWithNewline()
     }
     groovyGradle {
-        target("**/*.gradle")
-        targetExclude(commonExcludes)
+        target(rootDir.filter { it.name.endsWith(".gradle") })
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"), "(^(?![\\/ ]\\*).*$)")
 
         indentWithSpaces()
@@ -82,50 +87,53 @@ spotless {
     }
     format("properties") {
         // "**/.gitignore" does not work: https://github.com/diffplug/spotless/issues/1146
-        target("../.gitignore", "../.gitattributes", "../.editorconfig", "../gradle.properties")
-        targetExclude(commonExcludes)
+        val propertyFiles = setOf(
+            ".gitignore",
+            ".gitattributes",
+            ".editorconfig",
+            "gradle.properties",
+        )
+        target(rootDir.filter { it.name in propertyFiles })
 
         trimTrailingWhitespace()
         endWithNewline()
     }
     format("yaml") {
-        target("**/*.yml")
-        targetExclude(commonExcludes)
+        target(rootDir.filter { it.name.endsWith(".yml") })
 
         trimTrailingWhitespace()
         endWithNewline()
         indentWithSpaces(2)
     }
     format("toml") {
-        target("**/*.toml")
-        targetExclude(commonExcludes)
+        target(rootDir.filter { it.name.endsWith(".toml") })
 
         trimTrailingWhitespace()
         endWithNewline()
         indentWithSpaces(2)
     }
     format("markdown") {
-        target("**/*.md", "**/*.markdown")
-        targetExclude(commonExcludes)
+        target(rootDir.filter { it.name.endsWith(".md") || it.name.endsWith(".markdown") })
 
         endWithNewline()
     }
     format("protobuf") {
-        target("**/*.proto")
-        targetExclude(commonExcludes)
+        target(rootDir.filter { it.name.endsWith(".proto") })
 
         // Disabled until https://github.com/diffplug/spotless/issues/673 is fixed
         // clangFormat("14.0.0-1ubuntu1").style("LLVM")
         endWithNewline()
     }
     format("xml") {
-        target("**/*.xml")
-        targetExclude(
-            commonExcludes + listOf(
-                ".idea/**/*.xml",
-                "gradle/verification-metadata.xml",
-                "**/res/xml/remote_config_defaults.xml",
-            ),
+        target(
+            rootDir
+                .matching {
+                    exclude(
+                        "gradle/verification-metadata.xml",
+                        "**/res/xml/remote_config_defaults.xml",
+                    )
+                }
+                .filter { it.name.endsWith(".xml") },
         )
 
         val deactivatableLicenseStep: FormatterStep = run {

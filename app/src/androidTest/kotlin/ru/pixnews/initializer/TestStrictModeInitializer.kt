@@ -28,9 +28,9 @@ import androidx.fragment.app.strictmode.FragmentStrictMode.Policy
 import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesMultibinding
 import ru.pixnews.MainActivity
-import ru.pixnews.app.initializers.DebugStrictModeInitializerModule
 import ru.pixnews.foundation.initializers.Initializer
 import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
+import ru.pixnews.inject.initializers.DebugStrictModeInitializerModule
 import java.util.concurrent.Executors
 import javax.inject.Inject
 

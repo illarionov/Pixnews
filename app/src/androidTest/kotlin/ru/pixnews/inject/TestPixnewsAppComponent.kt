@@ -13,26 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews
+package ru.pixnews.inject
 
 import android.content.Context
+import com.squareup.anvil.annotations.MergeComponent
+import dagger.BindsInstance
+import dagger.Component
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.experiments.ExperimentsComponent
-import ru.pixnews.initializer.DaggerMainPixnewsAppInitializerComponent
-import ru.pixnews.initializer.PixnewsAppInitializerComponent
-import ru.pixnews.inject.DaggerMainPixnewsAppComponent
+import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
+import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.foundation.di.base.scopes.SingleIn
 
-internal object PixnewsComponentsFactory {
-    fun createAppComponent(
-        context: Context,
-        experimentsComponent: ExperimentsComponent = ExperimentsComponent(),
-    ): PixnewsAppComponent {
-        return DaggerMainPixnewsAppComponent.factory().create(context, experimentsComponent)
-    }
-
-    fun createInitializersComponent(
-        appComponent: PixnewsAppComponent,
-    ): PixnewsAppInitializerComponent {
-        return DaggerMainPixnewsAppInitializerComponent.factory().create(appComponent)
+@MergeComponent(
+    scope = AppScope::class,
+    dependencies = [ExperimentsComponent::class],
+)
+@SingleIn(AppScope::class)
+interface TestPixnewsAppComponent : PixnewsAppComponent {
+    @Component.Factory
+    fun interface Factory {
+        fun create(
+            @BindsInstance @ApplicationContext context: Context,
+            experimentsComponent: ExperimentsComponent,
+        ): TestPixnewsAppComponent
     }
 }

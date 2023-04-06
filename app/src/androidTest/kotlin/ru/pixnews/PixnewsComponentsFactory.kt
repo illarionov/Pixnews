@@ -16,11 +16,11 @@
 package ru.pixnews
 
 import android.content.Context
-import ru.pixnews.app.DaggerTestPixnewsAppComponent
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.experiments.ExperimentsComponent
 import ru.pixnews.initializer.DaggerTestPixnewsAppInitializerComponent
 import ru.pixnews.initializer.PixnewsAppInitializerComponent
+import ru.pixnews.inject.DaggerTestPixnewsAppComponent
 
 internal object PixnewsComponentsFactory {
     fun createAppComponent(

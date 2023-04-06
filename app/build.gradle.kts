@@ -44,7 +44,7 @@ android {
     sourceSets {
         listOf("release", "benchmark").forEach { sourceSet ->
             getByName(sourceSet) {
-                kotlin.srcDir("src/commonReleaseBenchmark/kotlin")
+                kotlin.srcDir("src/sharedReleaseBenchmark/kotlin")
             }
         }
     }

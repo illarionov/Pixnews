@@ -25,7 +25,7 @@ import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.fixtures.DarkModeTestExperiment
 import ru.pixnews.foundation.featuretoggles.fixtures.DtfIntegrationTestExperiment
 import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExperiment
-import ru.pixnews.library.testing.TestingLoggers
+import ru.pixnews.library.test.TestingLoggers
 import java.io.File
 
 class DataSourceUnderTestInitializer(

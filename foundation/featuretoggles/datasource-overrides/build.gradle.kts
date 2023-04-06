@@ -39,7 +39,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.datastore)
 
-    testImplementation(project(":library:testing"))
+    testImplementation(project(":library:test"))
     testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
     testImplementation(libs.turbine)
 }

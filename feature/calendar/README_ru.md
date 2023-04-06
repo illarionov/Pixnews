@@ -1,3 +1,3 @@
-# features:calendar
+# feature:calendar
 
 Календарь

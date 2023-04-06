@@ -44,8 +44,8 @@ import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceErro
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.DataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
 import ru.pixnews.library.functional.RequestStatus.Complete
-import ru.pixnews.library.testing.MainCoroutineExtension
-import ru.pixnews.library.testing.TestingLoggers
+import ru.pixnews.library.test.MainCoroutineExtension
+import ru.pixnews.library.test.TestingLoggers
 
 @ExtendWith(MockKExtension::class)
 class FirebaseDataSourceTest {

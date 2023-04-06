@@ -23,7 +23,7 @@ import dagger.Provides
 import dagger.multibindings.IntoSet
 import okhttp3.Interceptor
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.di.instrumented.testing.InstrumentationAppContext
+import ru.pixnews.foundation.di.instrumented.test.InstrumentationAppContext
 import ru.pixnews.foundation.network.di.qualifier.RootHttpClientInterceptor
 import ru.pixnews.test.mockokhttp.MockDataInterceptor
 import javax.inject.Provider

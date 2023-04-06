@@ -36,10 +36,10 @@ import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.feature.calendar.CalendarHeaderTestFixtures
 import ru.pixnews.feature.calendar.model.GameListViewMode.GRID
-import ru.pixnews.feature.calendar.testing.element.CalendarHeaderElement
-import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
-import ru.pixnews.foundation.testing.util.assertHorizontalPaddingBetweenAdjacentItems
-import ru.pixnews.foundation.testing.util.assertVerticalPaddingBetweenAdjacentItems
+import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
+import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
+import ru.pixnews.foundation.instrumented.test.util.assertHorizontalPaddingBetweenAdjacentItems
+import ru.pixnews.foundation.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 
 class CalendarScreenHeaderPaddingsTest : BaseInstrumentedTest() {

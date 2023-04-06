@@ -30,7 +30,7 @@ import org.junit.experimental.runners.Enclosed
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
-import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
+import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 
 @RunWith(Enclosed::class)
 public class ThemeTest : BaseInstrumentedTest() {

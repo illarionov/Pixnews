@@ -34,7 +34,7 @@ import ru.pixnews.feature.root.TopLevelDestination.PROFILE
 import ru.pixnews.feature.root.rememberPixnewsRootNavigationState
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.appconfig.DefaultAppConfig
-import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
+import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 
 class NavigationTest : BaseInstrumentedTest() {

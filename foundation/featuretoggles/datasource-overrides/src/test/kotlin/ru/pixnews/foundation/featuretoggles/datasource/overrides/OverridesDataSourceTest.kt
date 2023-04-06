@@ -58,7 +58,7 @@ import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceErro
 import ru.pixnews.foundation.featuretoggles.serializers.SerializationException
 import ru.pixnews.library.functional.RequestStatus
 import ru.pixnews.library.functional.RequestStatus.Complete
-import ru.pixnews.library.testing.MainCoroutineExtension
+import ru.pixnews.library.test.MainCoroutineExtension
 import java.io.File
 
 class OverridesDataSourceTest {

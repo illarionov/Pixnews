@@ -29,7 +29,7 @@ import ru.pixnews.feature.calendar.CalendarScreenVerticalPaddingsTest
 import ru.pixnews.feature.root.FirstScreenTest
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
-import ru.pixnews.foundation.di.instrumented.testing.SingleInstrumentedTestInjector
+import ru.pixnews.foundation.di.instrumented.test.SingleInstrumentedTestInjector
 
 @Module
 @ContributesTo(AppScope::class)

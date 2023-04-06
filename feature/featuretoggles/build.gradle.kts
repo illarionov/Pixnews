@@ -58,5 +58,5 @@ dependencies {
     api(libs.inject)
 
     androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(project(":foundation:instrumented-testing"))
+    androidTestImplementation(project(":foundation:instrumented-test"))
 }

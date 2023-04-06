@@ -68,6 +68,6 @@ dependencies {
 
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(project(":foundation:instrumented-testing"))
-    androidTestImplementation(project(":feature:calendar-testing"))
+    androidTestImplementation(project(":foundation:instrumented-test"))
+    androidTestImplementation(project(":feature:calendar-test"))
 }

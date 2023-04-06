@@ -38,7 +38,7 @@ import ru.pixnews.feature.root.TopLevelDestination.CALENDAR
 import ru.pixnews.feature.root.TopLevelDestination.COLLECTIONS
 import ru.pixnews.feature.root.TopLevelDestination.PROFILE
 import ru.pixnews.feature.root.rememberPixnewsRootNavigationState
-import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
+import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import kotlin.time.Duration.Companion.milliseconds
 
 class PixnewsRootNavigationStateTest : BaseInstrumentedTest() {

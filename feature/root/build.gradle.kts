@@ -61,7 +61,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    androidTestImplementation(project(":foundation:instrumented-testing"))
+    androidTestImplementation(project(":foundation:instrumented-test"))
     androidTestImplementation(libs.accompanist.test.harness)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.navigation.testing)

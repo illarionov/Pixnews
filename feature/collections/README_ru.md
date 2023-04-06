@@ -1,3 +1,3 @@
-# features:collections
+# feature:collections
 
 Коллекции

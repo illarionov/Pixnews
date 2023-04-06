@@ -104,9 +104,9 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.junit.jupiter.params)
 
-    androidTestImplementation(project(":foundation:instrumented-testing"))
-    androidTestImplementation(project(":foundation:di:instrumented-testing"))
-    androidTestImplementation(project(":feature:calendar-testing"))
+    androidTestImplementation(project(":foundation:instrumented-test"))
+    androidTestImplementation(project(":foundation:di:instrumented-test"))
+    androidTestImplementation(project(":feature:calendar-test"))
     androidTestImplementation(testFixtures(project(":foundation:domain-model")))
     androidTestImplementation(libs.accompanist.test.harness)
     androidTestImplementation(libs.androidx.navigation.compose)

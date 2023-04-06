@@ -26,7 +26,7 @@ dependencies {
     api(libs.kermit)
     api(libs.kotlinx.coroutines.core)
 
-    testImplementation(project(":library:testing"))
+    testImplementation(project(":library:test"))
     testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
     testImplementation(libs.turbine)
 }

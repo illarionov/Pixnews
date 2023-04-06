@@ -34,8 +34,8 @@ import org.junit.Test
 import ru.pixnews.feature.calendar.element.GameFeedElement
 import ru.pixnews.feature.root.PixnewsRootContent
 import ru.pixnews.foundation.appconfig.AppConfig
-import ru.pixnews.foundation.di.instrumented.testing.rule.InjectDependenciesRule
-import ru.pixnews.foundation.testing.base.BaseInstrumentedTest
+import ru.pixnews.foundation.di.instrumented.test.rule.InjectDependenciesRule
+import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import javax.inject.Inject
 
 class CalendarFeedWidthOnMediumSizeTest : BaseInstrumentedTest() {

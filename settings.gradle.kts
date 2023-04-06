@@ -46,6 +46,7 @@ listOf(
     "ui:design",
     "ui:assets-icons",
     "ui:imageloader:coil",
+    "ui:imageloader:coil-test",
     "ui:theme",
 ).forEach {
     include(":foundation:$it")

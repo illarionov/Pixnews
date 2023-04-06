@@ -30,6 +30,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.ZeroCornerSize
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
@@ -40,6 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.text
@@ -102,17 +105,25 @@ public fun PixnewsGameCardGridSmall(
         shape = MaterialTheme.shapes.medium,
         onClick = { onClick(game.gameId) },
         border = remember(borderColor) { BorderStroke(1.dp, borderColor) },
+        colors = CardDefaults.outlinedCardColors(
+            contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+        ),
     ) {
         NetworkImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(GAME_CARD_ASPECT_RATIO),
+                .aspectRatio(GAME_CARD_ASPECT_RATIO)
+                .testTag(PixnewsGameCardGridSmallTestTags.IMAGE),
             model = game.cover,
             fallback = ImagePlaceholders.noImageSmallPainter(),
             error = ImagePlaceholders.errorLoadingImageSmallPainter(),
             contentDescription = game.title,
             contentScale = ContentScale.Crop,
             placeholderColor = game.cover?.prevailingColor?.composeColor() ?: Color.Unspecified,
+            placeholderShape = MaterialTheme.shapes.small.copy(
+                bottomStart = ZeroCornerSize,
+                bottomEnd = ZeroCornerSize,
+            ),
         )
         Box(
             modifier = Modifier.fillMaxWidth(),
@@ -121,21 +132,24 @@ public fun PixnewsGameCardGridSmall(
                 isFavourite = game.favourite,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .padding(top = 2.dp, end = 4.dp)
-                    .size(16.dp),
+                    .padding(top = 4.dp, end = 4.dp)
+                    .size(16.dp)
+                    .testTag(PixnewsGameCardGridSmallTestTags.FAVOURITE_ICON),
             )
             Column(
                 modifier = Modifier
                     .padding(
-                        top = 4.dp,
+                        top = 6.dp,
                         start = 8.dp,
                         end = 8.dp,
                         bottom = 8.dp,
                     ),
-                verticalArrangement = Arrangement.spacedBy(2.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 PlatformsRowSmall(
-                    modifier = Modifier.height(8.dp),
+                    modifier = Modifier
+                        .height(8.dp)
+                        .testTag(PixnewsGameCardGridSmallTestTags.PLATFORMS_ROW),
                     platforms = game.platforms,
                 )
                 Text(
@@ -163,13 +177,13 @@ internal fun PlatformsRowSmall(
                 text = contentDescription
             },
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(2.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         val uniqueIcons = remember(platforms, platforms::uniqueIcons)
         for (icon in uniqueIcons) {
             Image(
                 modifier = Modifier
-                    .size(6.dp),
+                    .size(8.dp),
                 imageVector = icon,
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(md_theme_palette_neutral_variant_40),

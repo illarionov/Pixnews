@@ -15,21 +15,33 @@
  */
 package ru.pixnews.foundation.ui.imageloader.coil
 
+import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalInspectionMode
-import coil.ImageLoader
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
 import ru.pixnews.foundation.ui.imageloader.coil.di.AppScopeImageLoaderProvider
+import kotlin.LazyThreadSafetyMode.PUBLICATION
 
 /**
  * For use only from compose functions
  */
-internal object ImageLoaderHolder {
-    private val imageLoader: ImageLoader
-        get() = (PixnewsRootComponentHolder.appComponent as AppScopeImageLoaderProvider).imageLoaderProvider.get()
+@VisibleForTesting
+public object ImageLoaderHolder {
+    @Volatile
+    private var imageLoaderInitializer: () -> ImageLoader = {
+        (PixnewsRootComponentHolder.appComponent as AppScopeImageLoaderProvider).imageLoaderProvider.get()
+    }
+    private val imageLoader: ImageLoader by lazy(PUBLICATION) {
+        imageLoaderInitializer()
+    }
 
     @Composable
     internal fun getComposeImageLoader(): ImageLoader {
         return if (LocalInspectionMode.current) FakePreviewImageLoader else imageLoader
+    }
+
+    @VisibleForTesting
+    public fun overrideImageLoaderInitializer(initializer: () -> ImageLoader) {
+        this.imageLoaderInitializer = initializer
     }
 }

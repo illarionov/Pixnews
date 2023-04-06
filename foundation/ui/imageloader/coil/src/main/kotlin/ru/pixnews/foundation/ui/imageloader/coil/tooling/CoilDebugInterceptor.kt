@@ -17,6 +17,8 @@ package ru.pixnews.foundation.ui.imageloader.coil.tooling
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import androidx.annotation.RestrictTo
+import androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP
 import coil.decode.DataSource.NETWORK
 import coil.intercept.Interceptor
 import coil.intercept.Interceptor.Chain
@@ -29,7 +31,8 @@ import ru.pixnews.foundation.ui.imageloader.coil.tooling.OverrideResult.Original
 import ru.pixnews.foundation.ui.imageloader.coil.tooling.OverrideResult.Success
 import kotlin.time.Duration.Companion.ZERO
 
-internal class CoilDebugInterceptor : Interceptor {
+@RestrictTo(LIBRARY_GROUP)
+public class CoilDebugInterceptor : Interceptor {
     override suspend fun intercept(chain: Chain): ImageResult {
         val model = chain.request.data
         if (model !is DebugImageUrl) {

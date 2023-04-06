@@ -16,6 +16,7 @@
 plugins {
     id("ru.pixnews.android-library")
     id("ru.pixnews.di-anvil-factories")
+    id("ru.pixnews.android-testing-paparazzi")
 }
 
 pixnews {
@@ -53,5 +54,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
 
+    testImplementation(project(":foundation:ui:imageloader:coil-test"))
+
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(project(":foundation:ui:imageloader:coil-test"))
 }

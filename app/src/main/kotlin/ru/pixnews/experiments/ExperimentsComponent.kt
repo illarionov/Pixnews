@@ -20,7 +20,7 @@ import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
-import ru.pixnews.foundation.featuretoggles.di.ExperimentScope
+import ru.pixnews.foundation.featuretoggles.inject.ExperimentScope
 
 @SingleIn(ExperimentScope::class)
 @MergeComponent(scope = ExperimentScope::class)

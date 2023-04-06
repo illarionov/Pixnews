@@ -23,10 +23,10 @@ group = "ru.pixnews.foundation.domain.model"
 
 dependencies {
     api(libs.kotlinx.collections.immutable)
-    api(project(":libraries:functional"))
+    api(project(":library:functional"))
     api(libs.kotlinx.datetime)
     api(libs.androidx.annotation)
-    implementation(project(":libraries:kotlin-utils"))
+    implementation(project(":library:kotlin-utils"))
 
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.kotest.property)

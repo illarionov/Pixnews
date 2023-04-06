@@ -40,7 +40,7 @@ dependencies {
     api(libs.firebase.config)
     implementation(libs.kotlinx.coroutines.core)
 
-    testImplementation(project(":libraries:testing"))
+    testImplementation(project(":library:test"))
     testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
     testImplementation(libs.mockk)
 }

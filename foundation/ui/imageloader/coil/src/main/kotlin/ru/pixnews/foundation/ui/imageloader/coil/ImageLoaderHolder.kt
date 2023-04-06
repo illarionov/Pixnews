@@ -19,7 +19,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalInspectionMode
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
-import ru.pixnews.foundation.ui.imageloader.coil.di.AppScopeImageLoaderProvider
+import ru.pixnews.foundation.ui.imageloader.coil.inject.AppScopeImageLoaderProvider
 import kotlin.LazyThreadSafetyMode.PUBLICATION
 
 /**

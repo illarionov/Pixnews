@@ -22,11 +22,11 @@ group = "ru.pixnews.foundation.featuretoggles.internal"
 
 dependencies {
     api(project(":foundation:featuretoggles:public"))
-    implementation(project(":libraries:functional"))
+    implementation(project(":library:functional"))
     api(libs.kermit)
     api(libs.kotlinx.coroutines.core)
 
-    testImplementation(project(":libraries:testing"))
+    testImplementation(project(":library:test"))
     testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
     testImplementation(libs.turbine)
 }

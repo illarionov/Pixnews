@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.Flow
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant
-import ru.pixnews.libraries.functional.RequestStatus
+import ru.pixnews.library.functional.RequestStatus
 
 public typealias DataSourceResult<V> = RequestStatus<FeatureToggleDataSourceError, V>
 

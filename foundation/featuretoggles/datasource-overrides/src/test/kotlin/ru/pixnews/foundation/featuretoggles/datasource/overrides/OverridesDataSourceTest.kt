@@ -56,9 +56,9 @@ import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceErro
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.DataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
 import ru.pixnews.foundation.featuretoggles.serializers.SerializationException
-import ru.pixnews.libraries.functional.RequestStatus
-import ru.pixnews.libraries.functional.RequestStatus.Complete
-import ru.pixnews.libraries.testing.MainCoroutineExtension
+import ru.pixnews.library.functional.RequestStatus
+import ru.pixnews.library.functional.RequestStatus.Complete
+import ru.pixnews.library.test.MainCoroutineExtension
 import java.io.File
 
 class OverridesDataSourceTest {

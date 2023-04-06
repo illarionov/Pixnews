@@ -30,10 +30,10 @@ import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.slimeRancher2
-import ru.pixnews.foundation.testing.util.assertBottomPaddingInParentIsEqualTo
-import ru.pixnews.foundation.testing.util.assertLeftPaddingInParentIsEqualTo
-import ru.pixnews.foundation.testing.util.assertRightPaddingInParentIsEqualTo
-import ru.pixnews.foundation.testing.util.assertVerticalPaddingBetweenAdjacentItems
+import ru.pixnews.foundation.instrumented.test.util.assertBottomPaddingInParentIsEqualTo
+import ru.pixnews.foundation.instrumented.test.util.assertLeftPaddingInParentIsEqualTo
+import ru.pixnews.foundation.instrumented.test.util.assertRightPaddingInParentIsEqualTo
+import ru.pixnews.foundation.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
 import ru.pixnews.foundation.ui.design.card.element.PixnewsGameCardElement
 import ru.pixnews.foundation.ui.imageloader.coil.test.FakeImageLoaderRule
 import ru.pixnews.foundation.ui.theme.PixnewsTheme

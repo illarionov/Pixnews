@@ -24,8 +24,8 @@ import ru.pixnews.foundation.featuretoggles.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.fixtures.DarkModeTestExperiment
 import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExperiment
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
-import ru.pixnews.libraries.testing.MainCoroutineExtension
-import ru.pixnews.libraries.testing.TestingLoggers
+import ru.pixnews.library.test.MainCoroutineExtension
+import ru.pixnews.library.test.TestingLoggers
 
 class FeatureManagerImplTest {
     @JvmField

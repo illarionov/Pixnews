@@ -43,9 +43,9 @@ import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExper
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.DataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
-import ru.pixnews.libraries.functional.RequestStatus.Complete
-import ru.pixnews.libraries.testing.MainCoroutineExtension
-import ru.pixnews.libraries.testing.TestingLoggers
+import ru.pixnews.library.functional.RequestStatus.Complete
+import ru.pixnews.library.test.MainCoroutineExtension
+import ru.pixnews.library.test.TestingLoggers
 
 @ExtendWith(MockKExtension::class)
 class FirebaseDataSourceTest {

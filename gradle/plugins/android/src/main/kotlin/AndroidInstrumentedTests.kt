@@ -34,7 +34,7 @@ internal fun Project.configureAndroidInstrumentedTests(
 ) {
     commonExtension.apply {
         defaultConfig {
-            testInstrumentationRunner = "ru.pixnews.foundation.testing.instrumented.PixnewsTestRunner"
+            testInstrumentationRunner = "ru.pixnews.foundation.instrumented.test.PixnewsTestRunner"
         }
     }
     if (pixnews.compose.get()) {
@@ -91,7 +91,7 @@ private fun Project.configureAndroidTestDependencies(
             add("debugImplementation", versionCatalog.findLibrary("androidx-compose-ui-testManifest").orElseThrow())
         }
         add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
-        add("androidTestImplementation", project(":foundation:instrumented-testing"))
+        add("androidTestImplementation", project(":foundation:instrumented-test"))
     }
 
     plugins.withId("ru.pixnews.di-anvil-kapt") {

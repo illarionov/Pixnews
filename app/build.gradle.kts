@@ -44,19 +44,19 @@ android {
     sourceSets {
         listOf("release", "benchmark").forEach { sourceSet ->
             getByName(sourceSet) {
-                kotlin.srcDir("src/commonReleaseBenchmark/kotlin")
+                kotlin.srcDir("src/sharedReleaseBenchmark/kotlin")
             }
         }
     }
 }
 
 dependencies {
-    implementation(project(":features:root"))
+    implementation(project(":feature:root"))
 
-    implementation(project(":features:calendar"))
-    implementation(project(":features:collections"))
-    debugImplementation(project(":features:featuretoggles"))
-    implementation(project(":features:profile"))
+    implementation(project(":feature:calendar"))
+    implementation(project(":feature:collections"))
+    debugImplementation(project(":feature:featuretoggles"))
+    implementation(project(":feature:profile"))
 
     implementation(project(":foundation:analytics"))
     implementation(project(":foundation:appconfig"))
@@ -74,10 +74,10 @@ dependencies {
     implementation(project(":foundation:ui:design"))
     implementation(project(":foundation:ui:imageloader:coil"))
     implementation(project(":foundation:ui:theme"))
-    implementation(project(":libraries:android-utils"))
-    implementation(project(":libraries:coroutines"))
-    implementation(project(":libraries:functional"))
-    implementation(project(":libraries:kotlin-utils"))
+    implementation(project(":library:android-utils"))
+    implementation(project(":library:coroutines"))
+    implementation(project(":library:functional"))
+    implementation(project(":library:kotlin-utils"))
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
@@ -104,9 +104,9 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.junit.jupiter.params)
 
-    androidTestImplementation(project(":foundation:instrumented-testing"))
-    androidTestImplementation(project(":foundation:di:instrumented-testing"))
-    androidTestImplementation(project(":features:calendar-testing"))
+    androidTestImplementation(project(":foundation:instrumented-test"))
+    androidTestImplementation(project(":foundation:di:instrumented-test"))
+    androidTestImplementation(project(":feature:calendar-test"))
     androidTestImplementation(testFixtures(project(":foundation:domain-model")))
     androidTestImplementation(libs.accompanist.test.harness)
     androidTestImplementation(libs.androidx.navigation.compose)

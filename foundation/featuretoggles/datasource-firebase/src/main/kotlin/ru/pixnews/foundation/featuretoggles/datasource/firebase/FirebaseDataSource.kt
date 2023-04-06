@@ -40,7 +40,7 @@ import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSource
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.DataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
-import ru.pixnews.libraries.functional.RequestStatus.Loading
+import ru.pixnews.library.functional.RequestStatus.Loading
 import kotlin.time.Duration.Companion.seconds
 
 @Suppress("TooGenericExceptionCaught")

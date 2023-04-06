@@ -22,10 +22,10 @@ import ru.pixnews.foundation.featuretoggles.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey.Companion.CONTROL_GROUP
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
-import ru.pixnews.foundation.featuretoggles.di.ExperimentScope
-import ru.pixnews.foundation.featuretoggles.di.ExperimentVariantMapKey
 import ru.pixnews.foundation.featuretoggles.experimentKey
 import ru.pixnews.foundation.featuretoggles.experimentVariantKey
+import ru.pixnews.foundation.featuretoggles.inject.ExperimentScope
+import ru.pixnews.foundation.featuretoggles.inject.ExperimentVariantMapKey
 import ru.pixnews.foundation.featuretoggles.serializers.BooleanVariantSerializer
 
 @ContributesMultibinding(

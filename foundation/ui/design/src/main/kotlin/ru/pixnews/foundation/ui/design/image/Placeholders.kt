@@ -19,7 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import ru.pixnews.foundation.ui.assets.icons.image.ImagePlaceholders
 import ru.pixnews.foundation.ui.theme.md_theme_palette_neutral_variant_95
-import ru.pixnews.libraries.compose.utils.painter.rememberCenteredInParentVectorPainter
+import ru.pixnews.library.compose.utils.painter.rememberCenteredInParentVectorPainter
 
 @Composable
 public fun ImagePlaceholders.noImageLargePainter(): Painter {

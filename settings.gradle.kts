@@ -31,7 +31,7 @@ listOf(
     "appconfig",
     "di:base",
     "di:root-component",
-    "di:instrumented-testing",
+    "di:instrumented-test",
     "di:ui-base",
     "dispatchers",
     "featuretoggles:public",
@@ -40,7 +40,7 @@ listOf(
     "featuretoggles:datasource-overrides",
     "network:public",
     "initializers",
-    "instrumented-testing",
+    "instrumented-test",
     "domain-model",
     "redux",
     "ui:design",
@@ -59,18 +59,18 @@ listOf(
     "functional",
     "kotlin-utils",
     "ui-tooling",
-    "testing",
+    "test",
 ).forEach {
-    include(":libraries:$it")
+    include(":library:$it")
 }
 
 listOf(
     "calendar",
-    "calendar-testing",
+    "calendar-test",
     "collections",
     "featuretoggles",
     "profile",
     "root",
 ).forEach {
-    include(":features:$it")
+    include(":feature:$it")
 }

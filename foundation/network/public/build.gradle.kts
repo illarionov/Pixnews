@@ -31,7 +31,7 @@ dependencies {
     api(project(":foundation:appconfig"))
     api(project(":foundation:di:base"))
     api(project(":foundation:di:root-component"))
-    implementation(project(":libraries:android-utils"))
+    implementation(project(":library:android-utils"))
 
     api(libs.inject)
     api(libs.okhttp)

@@ -34,12 +34,12 @@ dependencies {
     api(project(":foundation:dispatchers"))
     api(project(":foundation:featuretoggles:public"))
     api(project(":foundation:featuretoggles:internal"))
-    api(project(":libraries:coroutines"))
+    api(project(":library:coroutines"))
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.datastore)
 
-    testImplementation(project(":libraries:testing"))
+    testImplementation(project(":library:test"))
     testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
     testImplementation(libs.turbine)
 }

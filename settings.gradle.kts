@@ -72,5 +72,5 @@ listOf(
     "profile",
     "root",
 ).forEach {
-    include(":features:$it")
+    include(":feature:$it")
 }

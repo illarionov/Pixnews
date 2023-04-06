@@ -13,50 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews
+package ru.pixnews.feature.featuretoggles
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import co.touchlab.kermit.Logger
-import ru.pixnews.feature.root.PixnewsRootContent
+import ru.pixnews.feature.featuretoggles.ui.FeatureToggleListScreen
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.ui.base.activity.BaseActivity
-import ru.pixnews.foundation.featuretoggles.FeatureToggle
-import ru.pixnews.foundation.ui.experiments.DarkModeExperiment
-import ru.pixnews.loadingstatus.AppLoadingStatus
+import ru.pixnews.foundation.di.ui.base.viewmodel.injectedViewModel
+import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
+public class FeatureToggleListActivity : BaseActivity() {
+    private val viewModel by injectedViewModel<FeatureToggleListViewModel>()
+
     @Inject
     internal lateinit var appConfig: AppConfig
 
     @Inject
     internal lateinit var logger: Logger
 
-    @Inject
-    internal lateinit var darkModeToggle: FeatureToggle<DarkModeExperiment>
-
-    @Inject
-    internal lateinit var appLoadingStatus: AppLoadingStatus
-
-    override fun onPostInjectPreCreate() {
-        setupSplashScreen()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PixnewsRootContent(
+            PixnewsTheme(
                 appConfig = appConfig,
-            )
-        }
-    }
-
-    private fun setupSplashScreen() {
-        val splashScreen = installSplashScreen()
-        splashScreen.setKeepOnScreenCondition {
-            !appLoadingStatus.loadingComplete
+            ) {
+                FeatureToggleListScreen(
+                    viewStateFlow = viewModel.viewState,
+                    onResetOverridesClicked = { viewModel.resetOverrides() },
+                    onResetExperimentOverrideClicked = { viewModel.resetExperimentOverride(it) },
+                    onExperimentVariantSelected = { experimentKey, variant ->
+                        viewModel.onExperimentVariantSelected(
+                            experimentKey,
+                            variant,
+                        )
+                    },
+                )
+            }
         }
     }
 }

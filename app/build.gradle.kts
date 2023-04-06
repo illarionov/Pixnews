@@ -51,12 +51,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":features:root"))
+    implementation(project(":feature:root"))
 
-    implementation(project(":features:calendar"))
-    implementation(project(":features:collections"))
-    debugImplementation(project(":features:featuretoggles"))
-    implementation(project(":features:profile"))
+    implementation(project(":feature:calendar"))
+    implementation(project(":feature:collections"))
+    debugImplementation(project(":feature:featuretoggles"))
+    implementation(project(":feature:profile"))
 
     implementation(project(":foundation:analytics"))
     implementation(project(":foundation:appconfig"))
@@ -106,7 +106,7 @@ dependencies {
 
     androidTestImplementation(project(":foundation:instrumented-testing"))
     androidTestImplementation(project(":foundation:di:instrumented-testing"))
-    androidTestImplementation(project(":features:calendar-testing"))
+    androidTestImplementation(project(":feature:calendar-testing"))
     androidTestImplementation(testFixtures(project(":foundation:domain-model")))
     androidTestImplementation(libs.accompanist.test.harness)
     androidTestImplementation(libs.androidx.navigation.compose)

@@ -35,8 +35,8 @@ import ru.pixnews.foundation.featuretoggles.fixtures.DarkModeTestExperiment
 import ru.pixnews.foundation.featuretoggles.fixtures.DtfIntegrationTestExperiment
 import ru.pixnews.foundation.featuretoggles.fixtures.HomeScreenGameCardTestExperiment
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
-import ru.pixnews.libraries.functional.RequestStatus.Complete
-import ru.pixnews.libraries.testing.MainCoroutineExtension
+import ru.pixnews.library.functional.RequestStatus.Complete
+import ru.pixnews.library.testing.MainCoroutineExtension
 
 class DefaultVariantDataSourceTest {
     @JvmField

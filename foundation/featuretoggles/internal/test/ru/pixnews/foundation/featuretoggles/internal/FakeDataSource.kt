@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.flowOf
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
-import ru.pixnews.libraries.functional.RequestStatus.Complete
+import ru.pixnews.library.functional.RequestStatus.Complete
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 

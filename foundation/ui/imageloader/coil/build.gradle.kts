@@ -33,7 +33,7 @@ dependencies {
     api(project(":foundation:di:root-component"))
     api(project(":foundation:domain-model"))
     implementation(project(":foundation:network:public"))
-    implementation(project(":libraries:android-utils"))
+    implementation(project(":library:android-utils"))
 
     api(libs.kermit)
     api(libs.dagger)

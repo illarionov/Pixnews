@@ -13,20 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 plugins {
     id("ru.pixnews.kotlin-jvm-library")
 }
 
-group = "ru.pixnews.foundation.featuretoggles.internal"
+group = "ru.pixnews.library.functional"
 
 dependencies {
-    api(project(":foundation:featuretoggles:public"))
-    implementation(project(":library:functional"))
-    api(libs.kermit)
-    api(libs.kotlinx.coroutines.core)
-
-    testImplementation(project(":library:testing"))
-    testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
-    testImplementation(libs.turbine)
+    api(platform(libs.arrow.bom))
+    api(libs.arrow.core)
 }

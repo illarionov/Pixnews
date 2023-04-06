@@ -80,7 +80,7 @@ import ru.pixnews.features.calendar.util.getWeekDays
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.foundation.ui.theme.md_theme_palette_neutral_variant_90
 import ru.pixnews.foundation.ui.theme.md_theme_palette_tertiary70
-import ru.pixnews.libraries.compose.utils.defaultLocale
+import ru.pixnews.library.compose.utils.defaultLocale
 import ru.pixnews.foundation.ui.design.R as uiDesignR
 
 @Composable

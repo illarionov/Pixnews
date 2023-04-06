@@ -47,7 +47,7 @@ import ru.pixnews.features.calendar.model.MajorReleaseCarouselItemUiModel
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCard
 import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.libraries.ui.tooling.DevicePreviews
+import ru.pixnews.library.ui.tooling.DevicePreviews
 
 internal val feedMaxWidth = 552.dp
 

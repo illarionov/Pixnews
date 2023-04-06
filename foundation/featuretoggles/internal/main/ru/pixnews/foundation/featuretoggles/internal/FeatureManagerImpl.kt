@@ -24,10 +24,10 @@ import ru.pixnews.foundation.featuretoggles.FeatureManager
 import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.DataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
-import ru.pixnews.libraries.functional.RequestStatus.Complete
-import ru.pixnews.libraries.functional.Result
-import ru.pixnews.libraries.functional.onError
-import ru.pixnews.libraries.functional.onSuccess
+import ru.pixnews.library.functional.RequestStatus.Complete
+import ru.pixnews.library.functional.Result
+import ru.pixnews.library.functional.onError
+import ru.pixnews.library.functional.onSuccess
 
 public class FeatureManagerImpl(
     experiments: Set<Experiment>,

@@ -34,7 +34,7 @@ dependencies {
     api(project(":foundation:appconfig"))
     api(project(":foundation:featuretoggles:public"))
     api(project(":foundation:di:base"))
-    implementation(project(":libraries:android-utils"))
+    implementation(project(":library:android-utils"))
 
     api(libs.androidx.compose.ui.graphics)
     api(libs.androidx.compose.material3)

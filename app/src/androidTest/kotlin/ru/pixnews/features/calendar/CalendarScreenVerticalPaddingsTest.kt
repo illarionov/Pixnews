@@ -52,7 +52,7 @@ import ru.pixnews.foundation.testing.rule.SystemNavigationRule
 import ru.pixnews.foundation.testing.rule.SystemNavigationRule.NavigationMode
 import ru.pixnews.foundation.testing.rule.SystemNavigationRule.NavigationMode.GESTURAL
 import ru.pixnews.foundation.testing.rule.SystemNavigationRule.NavigationMode.THREE_BUTTON
-import ru.pixnews.libraries.android.utils.rootView
+import ru.pixnews.library.android.utils.rootView
 import javax.inject.Inject
 import kotlin.LazyThreadSafetyMode.NONE
 

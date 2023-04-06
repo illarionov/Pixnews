@@ -34,7 +34,7 @@ import ru.pixnews.features.calendar.model.CalendarScreenState.Success
 import ru.pixnews.foundation.di.ui.base.viewmodel.injectedViewModel
 import ru.pixnews.foundation.ui.design.overlay.PixnewsLoadingOverlay
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.libraries.ui.tooling.PhonePreviews
+import ru.pixnews.library.ui.tooling.PhonePreviews
 
 @Composable
 internal fun CalendarScreen(

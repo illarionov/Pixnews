@@ -34,7 +34,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.libraries.ui.tooling.CompletePreviews
+import ru.pixnews.library.ui.tooling.CompletePreviews
 
 @Composable
 public fun PixnewsApp(

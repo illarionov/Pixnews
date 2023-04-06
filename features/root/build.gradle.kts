@@ -57,7 +57,7 @@ dependencies {
     implementation(libs.kermit)
     implementation(libs.kotlinx.collections.immutable)
 
-    implementation(project(":libraries:ui-tooling"))
+    implementation(project(":library:ui-tooling"))
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 

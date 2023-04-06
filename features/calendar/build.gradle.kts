@@ -40,8 +40,8 @@ dependencies {
     implementation(project(":foundation:ui:theme"))
     implementation(project(":foundation:ui:design"))
     implementation(project(":foundation:ui:imageloader:coil"))
-    implementation(project(":libraries:compose-utils"))
-    implementation(project(":libraries:kotlin-utils"))
+    implementation(project(":library:compose-utils"))
+    implementation(project(":library:kotlin-utils"))
 
     implementation(libs.accompanist.pager)
     implementation(libs.androidx.compose.foundation)
@@ -61,7 +61,7 @@ dependencies {
         because("For use with Composable Preview")
     }
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(project(":libraries:ui-tooling"))
+    implementation(project(":library:ui-tooling"))
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     testImplementation(libs.junit.jupiter.params)

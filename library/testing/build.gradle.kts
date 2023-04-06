@@ -18,15 +18,14 @@ plugins {
     id("ru.pixnews.kotlin-jvm-library")
 }
 
-group = "ru.pixnews.foundation.featuretoggles.internal"
+group = "ru.pixnews.library.testing"
 
 dependencies {
-    api(project(":foundation:featuretoggles:public"))
-    implementation(project(":library:functional"))
-    api(libs.kermit)
-    api(libs.kotlinx.coroutines.core)
+    api(platform(libs.junit.bom))
+    api(platform(libs.kotest.bom))
+    api(libs.junit.jupiter.api)
 
-    testImplementation(project(":library:testing"))
-    testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
-    testImplementation(libs.turbine)
+    api(libs.kermit.jvm)
+
+    api(libs.kotlinx.coroutines.test)
 }

@@ -39,9 +39,9 @@ dependencies {
     api(project(":foundation:domain-model"))
     implementation(project(":foundation:ui:imageloader:coil"))
     implementation(project(":foundation:ui:assets-icons"))
-    implementation(project(":libraries:android-utils"))
-    implementation(project(":libraries:compose-utils"))
-    implementation(project(":libraries:ui-tooling"))
+    implementation(project(":library:android-utils"))
+    implementation(project(":library:compose-utils"))
+    implementation(project(":library:ui-tooling"))
     implementation(testFixtures(project(":foundation:domain-model"))) {
         because("For use with Composable Preview")
     }

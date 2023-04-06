@@ -61,7 +61,7 @@ listOf(
     "ui-tooling",
     "testing",
 ).forEach {
-    include(":libraries:$it")
+    include(":library:$it")
 }
 
 listOf(

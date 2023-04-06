@@ -30,7 +30,7 @@ import ru.pixnews.foundation.network.RootOkHttpClientProvider
 import ru.pixnews.foundation.network.di.qualifier.RootHttpClientEventListener
 import ru.pixnews.foundation.network.di.qualifier.RootHttpClientInterceptor
 import ru.pixnews.foundation.network.di.qualifier.RootHttpClientNetworkInterceptor
-import ru.pixnews.libraries.android.utils.precondition.checkNotMainThread
+import ru.pixnews.library.android.utils.precondition.checkNotMainThread
 import javax.inject.Qualifier
 
 @ContributesTo(AppScope::class)

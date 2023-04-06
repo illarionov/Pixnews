@@ -38,8 +38,8 @@ import ru.pixnews.foundation.featuretoggles.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.FeatureManager
 import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.featuretoggles.datasource.overrides.OverridesDataSource
-import ru.pixnews.libraries.functional.RequestStatus.Complete
-import ru.pixnews.libraries.functional.RequestStatus.Loading
+import ru.pixnews.library.functional.RequestStatus.Complete
+import ru.pixnews.library.functional.RequestStatus.Loading
 
 internal class FeatureToggleListViewModel(
     featureManager: FeatureManager,

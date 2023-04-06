@@ -52,7 +52,7 @@ import ru.pixnews.foundation.ui.imageloader.coil.ImageLoaderLogger
 import ru.pixnews.foundation.ui.imageloader.coil.ImageUrlCoilInterceptor
 import ru.pixnews.foundation.ui.imageloader.coil.PrefetchingImageLoader
 import ru.pixnews.foundation.ui.imageloader.coil.tooling.CoilDebugInterceptor
-import ru.pixnews.libraries.android.utils.precondition.checkNotMainThread
+import ru.pixnews.library.android.utils.precondition.checkNotMainThread
 import javax.inject.Provider
 import javax.inject.Qualifier
 import coil.ImageLoader as CoilImageLoader

@@ -23,7 +23,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toJavaLocalDate
-import ru.pixnews.libraries.kotlin.utils.capitalize
+import ru.pixnews.library.kotlin.utils.capitalize
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.time.format.DecimalStyle

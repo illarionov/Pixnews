@@ -26,7 +26,7 @@ import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.ImageUrl
 import ru.pixnews.domain.model.util.RichText
 import ru.pixnews.domain.model.util.VideoUrl
-import ru.pixnews.libraries.kotlin.utils.isNotWhitespaceOnly
+import ru.pixnews.library.kotlin.utils.isNotWhitespaceOnly
 
 public data class Game(
     val id: GameId,

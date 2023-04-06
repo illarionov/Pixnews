@@ -28,8 +28,8 @@ android {
 
 dependencies {
     api(project(":foundation:ui:theme"))
-    implementation(project(":libraries:ui-tooling"))
-    implementation(project(":libraries:android-utils"))
+    implementation(project(":library:ui-tooling"))
+    implementation(project(":library:android-utils"))
 
     api(libs.androidx.compose.ui.graphics)
 

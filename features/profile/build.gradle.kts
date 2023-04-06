@@ -46,7 +46,7 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(project(":libraries:ui-tooling"))
+    implementation(project(":library:ui-tooling"))
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     androidTestImplementation(libs.androidx.test.rules)

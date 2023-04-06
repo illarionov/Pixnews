@@ -35,7 +35,7 @@ dependencies {
     api(project(":foundation:di:base"))
     api(project(":foundation:di:root-component"))
     api(libs.dagger)
-    implementation(project(":libraries:android-utils"))
+    implementation(project(":library:android-utils"))
 
     api(libs.androidx.appcompat)
     api(libs.androidx.fragment)

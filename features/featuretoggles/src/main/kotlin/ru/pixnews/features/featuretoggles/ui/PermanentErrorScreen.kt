@@ -38,8 +38,8 @@ import androidx.compose.ui.unit.dp
 import ru.pixnews.features.featuretoggles.R.string
 import ru.pixnews.features.featuretoggles.model.PermanentErrorMessage
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.libraries.compose.utils.fillMinHeight
-import ru.pixnews.libraries.ui.tooling.CompletePreviews
+import ru.pixnews.library.compose.utils.fillMinHeight
+import ru.pixnews.library.ui.tooling.CompletePreviews
 
 @Composable
 @Suppress("MagicNumber")

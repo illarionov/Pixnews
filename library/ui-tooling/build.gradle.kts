@@ -16,30 +16,18 @@
 
 plugins {
     id("ru.pixnews.android-library")
-    id("ru.pixnews.protobuf-lite-java")
-    id("ru.pixnews.di-anvil-factories")
 }
 
 pixnews {
     compose.set(false)
     managedDevices.set(false)
-    unitTestEngine.set(ru.pixnews.UnitTestEngine.JUNIT5)
 }
 
 android {
-    namespace = "ru.pixnews.foundation.featuretoggles.datasource.overrides"
+    namespace = "ru.pixnews.library.ui.tooling"
 }
 
 dependencies {
-    api(project(":foundation:dispatchers"))
-    api(project(":foundation:featuretoggles:public"))
-    api(project(":foundation:featuretoggles:internal"))
-    api(project(":library:coroutines"))
-
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.datastore)
-
-    testImplementation(project(":library:testing"))
-    testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
-    testImplementation(libs.turbine)
+    implementation(platform(libs.androidx.compose.bom))
+    api(libs.androidx.compose.ui.tooling.preview)
 }

@@ -39,8 +39,8 @@ dependencies {
     implementation(project(":foundation:ui:assets-icons"))
     implementation(project(":foundation:ui:design"))
     implementation(project(":foundation:ui:theme"))
-    implementation(project(":libraries:android-utils"))
-    implementation(project(":libraries:compose-utils"))
+    implementation(project(":library:android-utils"))
+    implementation(project(":library:compose-utils"))
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
@@ -52,7 +52,7 @@ dependencies {
     implementation(libs.kermit)
 
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(project(":libraries:ui-tooling"))
+    implementation(project(":library:ui-tooling"))
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     api(libs.inject)

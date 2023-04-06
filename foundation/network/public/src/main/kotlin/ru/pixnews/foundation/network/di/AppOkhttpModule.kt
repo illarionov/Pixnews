@@ -28,7 +28,7 @@ import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.network.OkHttpClientProvider
 import ru.pixnews.foundation.network.RootOkHttpClientProvider
-import ru.pixnews.libraries.android.utils.precondition.checkNotMainThread
+import ru.pixnews.library.android.utils.precondition.checkNotMainThread
 import java.io.File
 import javax.inject.Qualifier
 

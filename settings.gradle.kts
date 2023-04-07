@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 pluginManagement {
-    includeBuild("gradle/plugin/util/kotlindsl")
-    includeBuild("gradle/meta-plugins")
+    includeBuild("gradle/plugin/settings")
 }
 
 plugins {
-    id("ru.pixnews.settings")
+    id("ru.pixnews.gradle.settings.root")
 }
 
 rootProject.name = "Pixnews"

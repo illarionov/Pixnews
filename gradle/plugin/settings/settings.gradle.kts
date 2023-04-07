@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+dependencyResolutionManagement {
+    @Suppress("UnstableApiUsage")
+    repositories.gradlePluginPortal()
+}
 
-/**
- * Base settings convention plugin for the use in the main android application and
- * in library modules
- */
-plugins {
-    id("ru.pixnews.repositories")
-    id("ru.pixnews.gradle-enterprise")
+pluginManagement {
+    includeBuild("../util/kotlindsl")
+    includeBuild("../base/build-parameters")
 }

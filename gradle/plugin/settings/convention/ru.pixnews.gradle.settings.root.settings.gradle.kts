@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("ru.pixnews.gradle.util.kotlindsl")
-}
 
-dependencies {
-    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.12.6")
+/**
+ * Base settings convention plugin for the use in the main android application and
+ * in library modules
+ */
+plugins {
+    id("ru.pixnews.gradle.settings.repositories")
+    id("ru.pixnews.gradle.settings.gradle-enterprise")
 }

@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-dependencyResolutionManagement {
-    @Suppress("UnstableApiUsage")
-    repositories.gradlePluginPortal()
+plugins {
+    id("ru.pixnews.gradle.util.kotlindsl")
 }
 
-pluginManagement {
-    includeBuild("../plugin/util/kotlindsl")
-    includeBuild("../plugin/base/build-parameters")
-}
+group = "ru.pixnews.gradle.settings"
 
-include("settings")
+dependencies {
+    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.12.6")
+}

@@ -15,11 +15,11 @@
  */
 pluginManagement {
     includeBuild("../plugin/util/kotlindsl")
-    includeBuild("../meta-plugins")
+    includeBuild("../plugin/settings")
 }
 
 plugins {
-    id("ru.pixnews.settings")
+    id("ru.pixnews.gradle.settings.root")
 }
 
 dependencyResolutionManagement {

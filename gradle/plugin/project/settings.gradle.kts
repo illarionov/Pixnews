@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 pluginManagement {
-    includeBuild("../plugin/util/kotlindsl")
-    includeBuild("../plugin/settings")
+    includeBuild("../util/kotlindsl")
+    includeBuild("../settings")
 }
 
 plugins {
@@ -23,10 +23,10 @@ plugins {
 }
 
 dependencyResolutionManagement {
-    includeBuild("../plugin/base/build-parameters")
+    includeBuild("../base/build-parameters")
     versionCatalogs {
         create("libs") {
-            from(files("../libs.versions.toml"))
+            from(files("../../libs.versions.toml"))
         }
     }
 }

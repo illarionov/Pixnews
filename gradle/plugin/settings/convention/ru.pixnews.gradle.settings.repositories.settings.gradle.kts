@@ -23,13 +23,13 @@ pluginManagement {
         gradlePluginPortal()
     }
 
-    // Get our own convention plugins from 'gradle/plugins'
-    if (File(rootDir, "gradle/plugins").exists()) {
-        includeBuild("gradle/plugins")
+    // Get our own convention plugins from 'gradle/plugin/project'
+    if (File(rootDir, "gradle/plugin/project").exists()) {
+        includeBuild("gradle/plugin/project")
     }
-    // If not the main build, 'plugins' is located next to the build (e.g. gradle/settings)
-    if (File(rootDir, "../plugins").exists()) {
-        includeBuild("../plugins")
+    // If not the main build, 'project' is located next to the build
+    if (File(rootDir, "../project").exists()) {
+        includeBuild("../project")
     }
 }
 

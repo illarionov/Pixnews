@@ -1,5 +1,5 @@
 /*
- * Copyright 2105 Alexey Illarionov
+ * Copyright 2023 Alexey Illarionov
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/**
- * Convention plugin that adds additional directory to the gradle-dsl source directory list
- * Workaround for https://github.com/gradle/gradle/issues/21052
- */
 plugins {
-    `java-gradle-plugin`
+    `kotlin-dsl`
 }
 
-sourceSets {
-    main {
-        java.srcDir("convention")
-    }
-}
+group = "ru.pixnews.gradle.base"
 
-// apply kotlin-dsl plugin last, because it erroneously fetches source dirs eagerly.
-apply(plugin = "org.gradle.kotlin.kotlin-dsl")
+dependencies {
+    implementation("org.gradle.kotlin:gradle-kotlin-dsl-plugins:4.0.7")
+}

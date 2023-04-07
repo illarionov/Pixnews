@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 plugins {
-    id("ru.pixnews.kotlindsl")
+    id("ru.pixnews.gradle.util.kotlindsl")
 }
 
 dependencies {

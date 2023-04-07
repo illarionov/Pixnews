@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 pluginManagement {
-    includeBuild("gradle/base-kotlin-dsl-plugin")
+    includeBuild("gradle/plugin/util/kotlindsl")
     includeBuild("gradle/meta-plugins")
 }
 

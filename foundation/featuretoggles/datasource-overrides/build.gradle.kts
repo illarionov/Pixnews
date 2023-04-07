@@ -15,15 +15,15 @@
  */
 
 plugins {
-    id("ru.pixnews.android-library")
-    id("ru.pixnews.protobuf-lite-java")
-    id("ru.pixnews.di-anvil-factories")
+    id("ru.pixnews.gradle.android.library")
+    id("ru.pixnews.gradle.di.anvil-factories")
+    id("ru.pixnews.gradle.protobuf-lite-java")
 }
 
 pixnews {
     compose.set(false)
     managedDevices.set(false)
-    unitTestEngine.set(ru.pixnews.UnitTestEngine.JUNIT5)
+    unitTestEngine.set(ru.pixnews.gradle.base.UnitTestEngine.JUNIT5)
 }
 
 android {

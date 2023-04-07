@@ -15,7 +15,7 @@
  */
 
 plugins {
-    id("ru.pixnews.android-library")
+    id("ru.pixnews.gradle.android.library")
 }
 
 pixnews {

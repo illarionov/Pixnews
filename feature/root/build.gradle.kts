@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 plugins {
-    id("ru.pixnews.android-library")
-    id("ru.pixnews.di-anvil-factories")
-    id("ru.pixnews.android-testing-paparazzi")
+    id("ru.pixnews.gradle.android.library")
+    id("ru.pixnews.gradle.android.test-paparazzi")
+    id("ru.pixnews.gradle.di.anvil-factories")
 }
 
 pixnews {

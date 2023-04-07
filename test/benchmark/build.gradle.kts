@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 plugins {
-    id("ru.pixnews.android-test")
+    id("ru.pixnews.gradle.android.test")
 }
 
 pixnews {

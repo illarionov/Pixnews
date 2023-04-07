@@ -18,6 +18,8 @@ plugins {
     id("ru.pixnews.gradle.util.kotlindsl")
 }
 
+group = "ru.pixnews.gradle.lint"
+
 dependencies {
     implementation(project(":base"))
     implementation(libs.agp.plugin)

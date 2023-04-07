@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 plugins {
-    id("ru.pixnews.android-library")
-    id("ru.pixnews.di-anvil-kapt")
+    id("ru.pixnews.gradle.android.library")
+    id("ru.pixnews.gradle.di.anvil-kapt")
 }
 
 pixnews {

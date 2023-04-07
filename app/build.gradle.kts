@@ -15,9 +15,9 @@
  */
 
 plugins {
-    id("ru.pixnews.android-application")
-    id("ru.pixnews.di-anvil-kapt")
-    id("ru.pixnews.android-crashlytics")
+    id("ru.pixnews.gradle.android.application")
+    id("ru.pixnews.gradle.android.crashlytics")
+    id("ru.pixnews.gradle.di.anvil-kapt")
     alias(libs.plugins.google.services)
 }
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 plugins {
-    id("ru.pixnews.kotlin-jvm-library")
+    id("ru.pixnews.gradle.kotlin.library")
 }
 
 group = "ru.pixnews.library.coroutines"

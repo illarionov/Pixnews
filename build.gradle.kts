@@ -22,8 +22,8 @@ plugins {
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.protobuf) apply false
     alias(libs.plugins.ben.manes.versions)
-    id("ru.pixnews.detekt")
-    id("ru.pixnews.spotless")
+    id("ru.pixnews.gradle.lint.detekt")
+    id("ru.pixnews.gradle.lint.spotless")
 }
 
 interface InjectedFileSystemOperations {

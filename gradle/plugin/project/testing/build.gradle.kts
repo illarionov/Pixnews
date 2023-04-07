@@ -18,6 +18,8 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
 }
 
+group = "ru.pixnews.gradle.testing"
+
 dependencies {
     implementation(gradleKotlinDsl())
     implementation(project(":base"))

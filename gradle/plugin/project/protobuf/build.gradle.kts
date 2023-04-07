@@ -17,6 +17,8 @@ plugins {
     id("ru.pixnews.gradle.util.kotlindsl")
 }
 
+group = "ru.pixnews.gradle.protobuf"
+
 dependencies {
     implementation(project(":base"))
     implementation(libs.protobuf.plugin)

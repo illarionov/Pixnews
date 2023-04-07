@@ -17,6 +17,8 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
 }
 
+group = "ru.pixnews.gradle"
+
 dependencies {
     implementation(gradleKotlinDsl())
     implementation("ru.pixnews.gradle.base:build-parameters")

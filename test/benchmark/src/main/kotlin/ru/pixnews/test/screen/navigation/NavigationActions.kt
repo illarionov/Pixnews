@@ -18,27 +18,31 @@ package ru.pixnews.test.screen.navigation
 import androidx.benchmark.macro.MacrobenchmarkScope
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
+import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
+import ru.pixnews.feature.collections.test.constants.CollectionsTestTags
+import ru.pixnews.feature.profile.test.constants.ProfileTestTags
+import ru.pixnews.feature.root.test.constants.BottomBarTestTags
 
 fun MacrobenchmarkScope.gotoCollectionsScreen() {
-    device.findObject(By.res("bottom_bar:collections")).click()
+    device.findObject(By.res(BottomBarTestTags.COLLECTIONS)).click()
     device.waitForIdle()
 
     // Wait until collections are shown on screen
-    device.wait(Until.hasObject(By.res("collections:success_content")), 10_000)
+    device.wait(Until.hasObject(By.res(CollectionsTestTags.SUCCESS_CONTENT)), 10_000)
 }
 
 fun MacrobenchmarkScope.gotoProfileScreen() {
-    device.findObject(By.res("bottom_bar:profile")).click()
+    device.findObject(By.res(BottomBarTestTags.PROFILE)).click()
     device.waitForIdle()
 
     // Wait until profile shown on screen
-    device.wait(Until.hasObject(By.res("profile:success_content")), 10_000)
+    device.wait(Until.hasObject(By.res(ProfileTestTags.SUCCESS_CONTENT)), 10_000)
 }
 
 fun MacrobenchmarkScope.gotoCalendarScreen() {
-    device.findObject(By.res("bottom_bar:calendar")).click()
+    device.findObject(By.res(BottomBarTestTags.CALENDAR)).click()
     device.waitForIdle()
 
     // Wait until calendar shown on screen
-    device.wait(Until.hasObject(By.res("calendar:success_content")), 10_000)
+    device.wait(Until.hasObject(By.res(CalendarTestTag.SUCCESS_CONTENT)), 10_000)
 }

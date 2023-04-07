@@ -64,12 +64,16 @@ listOf(
 }
 
 listOf(
-    "calendar",
-    "calendar-test",
-    "collections",
-    "featuretoggles",
-    "profile",
-    "root",
+    "calendar:public",
+    "calendar:test",
+    "calendar:test-constants",
+    "collections:public",
+    "collections:test-constants",
+    "featuretoggles:public",
+    "profile:public",
+    "profile:test-constants",
+    "root:public",
+    "root:test-constants",
 ).forEach {
     include(":feature:$it")
 }

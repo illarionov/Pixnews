@@ -26,8 +26,8 @@ import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.beyondGoodEvil2
 import ru.pixnews.domain.model.game.game.hytale
 import ru.pixnews.domain.model.game.game.sims5
-import ru.pixnews.feature.calendar.element.GameFeedElement
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
+import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.instrumented.test.rule.InjectDependenciesRule
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest

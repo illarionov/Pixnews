@@ -17,10 +17,3 @@ dependencyResolutionManagement {
     @Suppress("UnstableApiUsage")
     repositories.gradlePluginPortal()
 }
-
-pluginManagement {
-    includeBuild("../plugin/util/kotlindsl")
-    includeBuild("../plugin/base/build-parameters")
-}
-
-include("settings")

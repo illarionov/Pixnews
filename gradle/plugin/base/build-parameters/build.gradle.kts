@@ -17,10 +17,10 @@ plugins {
     id("org.gradlex.build-parameters") version "1.4.3"
 }
 
-group = "ru.pixnews"
+group = "ru.pixnews.gradle.base"
 
 buildParameters {
-    pluginId("ru.pixnews.build-parameters")
+    pluginId("ru.pixnews.gradle.base.build-parameters")
     enableValidation.set(false)
     bool("ci") {
         defaultValue.set(false)

@@ -27,7 +27,7 @@ import ru.pixnews.versionCatalog
  */
 plugins {
     kotlin("jvm")
-    id("ru.pixnews.build-parameters")
+    id("ru.pixnews.gradle.base.build-parameters")
 }
 
 private val composeCompilerPluginClasspath = createComposeCompilerPluginClasspath()

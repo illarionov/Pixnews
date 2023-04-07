@@ -21,5 +21,5 @@ plugins {
 dependencies {
     implementation(gradleKotlinDsl())
     implementation(project(":base"))
-    implementation("ru.pixnews:build-parameters")
+    implementation("ru.pixnews.gradle.base:build-parameters")
 }

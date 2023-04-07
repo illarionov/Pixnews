@@ -22,7 +22,7 @@ import ru.pixnews.versionCatalog
  */
 plugins {
     id("com.android.application") apply false
-    id("ru.pixnews.build-parameters")
+    id("ru.pixnews.gradle.base.build-parameters")
     id("com.google.firebase.crashlytics")
 }
 

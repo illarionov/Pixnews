@@ -28,7 +28,7 @@ import ru.pixnews.versionCatalog
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("ru.pixnews.build-parameters")
+    id("ru.pixnews.gradle.base.build-parameters")
 }
 
 createPixnewsExtension().apply {

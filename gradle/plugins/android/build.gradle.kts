@@ -27,5 +27,5 @@ dependencies {
     implementation(libs.firebase.crashlitycs.plugin)
     implementation(libs.com.android.tools.common)
     implementation(libs.paparazzi.plugin)
-    implementation("ru.pixnews:build-parameters")
+    implementation("ru.pixnews.gradle.base:build-parameters")
 }

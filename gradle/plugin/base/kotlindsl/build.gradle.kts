@@ -17,7 +17,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "ru.pixnews.gradle.util"
+group = "ru.pixnews.gradle.base"
 
 dependencies {
     implementation("org.gradle.kotlin:gradle-kotlin-dsl-plugins:4.0.7")

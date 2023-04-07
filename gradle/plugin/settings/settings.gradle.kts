@@ -19,6 +19,6 @@ dependencyResolutionManagement {
 }
 
 pluginManagement {
-    includeBuild("../util/kotlindsl")
+    includeBuild("../base/kotlindsl")
     includeBuild("../base/build-parameters")
 }

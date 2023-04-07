@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 plugins {
-    id("ru.pixnews.gradle.util.kotlindsl")
+    id("ru.pixnews.gradle.base.kotlindsl")
 }
 
 group = "ru.pixnews.gradle.kotlin"

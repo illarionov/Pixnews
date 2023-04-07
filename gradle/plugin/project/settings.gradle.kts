@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 pluginManagement {
-    includeBuild("../util/kotlindsl")
+    includeBuild("../base/kotlindsl")
     includeBuild("../settings")
 }
 

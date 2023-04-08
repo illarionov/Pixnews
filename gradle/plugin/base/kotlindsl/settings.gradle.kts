@@ -17,3 +17,6 @@ dependencyResolutionManagement {
     @Suppress("UnstableApiUsage")
     repositories.gradlePluginPortal()
 }
+
+rootProject.name = "gradle-kotlindsl"
+rootProject.buildFileName = "kotlindsl.gradle.kts"

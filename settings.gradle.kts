@@ -22,8 +22,10 @@ plugins {
 }
 
 rootProject.name = "Pixnews"
+rootProject.buildFileName = "pixnews.gradle.kts"
 
-include(":app", ":test:benchmark")
+includeSubproject(":app")
+includeSubproject(":test:app")
 
 listOf(
     "analytics",
@@ -48,7 +50,7 @@ listOf(
     "ui:imageloader:coil-test",
     "ui:theme",
 ).forEach {
-    include(":foundation:$it")
+    includeSubproject(":foundation:$it")
 }
 
 listOf(
@@ -60,7 +62,7 @@ listOf(
     "ui-tooling",
     "test",
 ).forEach {
-    include(":library:$it")
+    includeSubproject(":library:$it")
 }
 
 listOf(
@@ -75,5 +77,17 @@ listOf(
     "root:public",
     "root:test-constants",
 ).forEach {
-    include(":feature:$it")
+    includeSubproject(":feature:$it")
+}
+
+fun includeSubproject(projectPath: String, buildFileName: String? = null) {
+    include(projectPath)
+
+    val newBuildFileName = buildFileName ?: (
+            projectPath
+                .replace("""^:(?:feature|library|foundation|test)""".toRegex(), "")
+                .removePrefix(":")
+                .replace("""[:_-]+""".toRegex(), "-") + ".gradle.kts"
+            )
+    project(projectPath).buildFileName = newBuildFileName
 }

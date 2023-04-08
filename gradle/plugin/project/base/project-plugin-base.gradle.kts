@@ -14,20 +14,12 @@
  * limitations under the License.
  */
 plugins {
-    id("ru.pixnews.gradle.base.kotlindsl")
+    alias(libs.plugins.kotlin.jvm)
 }
 
-group = "ru.pixnews.gradle.android"
+group = "ru.pixnews.gradle"
 
 dependencies {
-    implementation(projects.base)
-    implementation(projects.di)
-    implementation(projects.testing)
-
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
-    implementation(libs.firebase.crashlitycs.plugin)
-    implementation(libs.com.android.tools.common)
-    implementation(libs.paparazzi.plugin)
-    implementation("ru.pixnews.gradle.base:build-parameters")
+    implementation(gradleKotlinDsl())
+    implementation("ru.pixnews.gradle.base:gradle-build-parameters")
 }

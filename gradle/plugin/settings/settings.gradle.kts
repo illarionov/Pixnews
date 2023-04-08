@@ -22,3 +22,6 @@ pluginManagement {
     includeBuild("../base/kotlindsl")
     includeBuild("../base/build-parameters")
 }
+
+rootProject.name = "gradle-settings-plugins"
+rootProject.buildFileName = "settings-plugins.gradle.kts"

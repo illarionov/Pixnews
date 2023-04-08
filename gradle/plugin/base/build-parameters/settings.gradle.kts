@@ -17,3 +17,6 @@ dependencyResolutionManagement {
     @Suppress("UnstableApiUsage")
     repositories.gradlePluginPortal()
 }
+
+rootProject.name = "gradle-build-parameters"
+rootProject.buildFileName = "build-parameters.gradle.kts"

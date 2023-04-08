@@ -19,6 +19,7 @@
  * in library modules
  */
 plugins {
+    id("ru.pixnews.gradle.settings.common")
     id("ru.pixnews.gradle.settings.repositories")
     id("ru.pixnews.gradle.settings.gradle-enterprise")
 }

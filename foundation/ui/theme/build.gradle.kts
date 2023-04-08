@@ -31,10 +31,10 @@ android {
 }
 
 dependencies {
-    api(project(":foundation:appconfig"))
-    api(project(":foundation:featuretoggles:public"))
-    api(project(":foundation:di:base"))
-    implementation(project(":library:android-utils"))
+    api(projects.foundation.appconfig)
+    api(projects.foundation.featuretoggles.public)
+    api(projects.foundation.di.base)
+    implementation(projects.library.androidUtils)
 
     api(libs.androidx.compose.ui.graphics)
     api(libs.androidx.compose.material3)

@@ -28,11 +28,11 @@ android {
 }
 
 dependencies {
-    api(project(":foundation:di:base"))
-    api(project(":foundation:analytics"))
-    api(project(":foundation:appconfig"))
-    api(project(":foundation:dispatchers"))
-    api(project(":foundation:featuretoggles:public"))
-    api(project(":foundation:featuretoggles:datasource-overrides"))
+    api(projects.foundation.di.base)
+    api(projects.foundation.analytics)
+    api(projects.foundation.appconfig)
+    api(projects.foundation.dispatchers)
+    api(projects.foundation.featuretoggles.public)
+    api(projects.foundation.featuretoggles.datasourceOverrides)
     api(libs.kermit)
 }

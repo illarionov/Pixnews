@@ -20,7 +20,7 @@ plugins {
 group = "ru.pixnews.gradle.di"
 
 dependencies {
-    implementation(project(":base"))
+    implementation(projects.base)
     implementation(libs.anvil.plugin)
     implementation(libs.kotlin.jvm.plugin)
 }

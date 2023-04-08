@@ -20,8 +20,8 @@ plugins {
 group = "ru.pixnews.gradle.kotlin"
 
 dependencies {
-    implementation(project(":base"))
-    implementation(project(":testing"))
+    implementation(projects.base)
+    implementation(projects.testing)
     implementation(libs.agp.plugin)
     implementation(libs.kotlin.jvm.plugin)
 }

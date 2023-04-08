@@ -21,12 +21,12 @@ plugins {
 group = "ru.pixnews.foundation.featuretoggles.internal"
 
 dependencies {
-    api(project(":foundation:featuretoggles:public"))
-    implementation(project(":library:functional"))
+    api(projects.foundation.featuretoggles.public)
+    implementation(projects.library.functional)
     api(libs.kermit)
     api(libs.kotlinx.coroutines.core)
 
-    testImplementation(project(":library:test"))
-    testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
+    testImplementation(projects.library.test)
+    testImplementation(testFixtures(projects.foundation.featuretoggles.public))
     testImplementation(libs.turbine)
 }

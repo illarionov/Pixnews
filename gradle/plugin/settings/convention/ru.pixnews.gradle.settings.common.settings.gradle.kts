@@ -13,23 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("ru.pixnews.gradle.android.library")
-}
 
-pixnews {
-    compose.set(true)
-    managedDevices.set(false)
-}
-
-android {
-    namespace = "ru.pixnews.feature.calendar.test"
-}
-
-dependencies {
-    implementation(projects.feature.calendar.testConstants)
-    implementation(testFixtures(projects.foundation.domainModel))
-    implementation(projects.foundation.instrumentedTest)
-    api(projects.foundation.ui.design)
-    api(libs.androidx.compose.ui.test.junit4)
-}
+/**
+ * Settings convention plugin with common gradle settings
+ */
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

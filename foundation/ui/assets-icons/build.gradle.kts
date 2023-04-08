@@ -27,9 +27,9 @@ android {
 }
 
 dependencies {
-    api(project(":foundation:ui:theme"))
-    implementation(project(":library:ui-tooling"))
-    implementation(project(":library:android-utils"))
+    api(projects.foundation.ui.theme)
+    implementation(projects.library.uiTooling)
+    implementation(projects.library.androidUtils)
 
     api(libs.androidx.compose.ui.graphics)
 

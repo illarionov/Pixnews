@@ -32,17 +32,17 @@ android {
 }
 
 dependencies {
-    api(project(":foundation:appconfig"))
-    api(project(":foundation:di:base"))
-    api(project(":foundation:featuretoggles:public"))
-    api(project(":foundation:ui:theme"))
-    api(project(":foundation:domain-model"))
-    implementation(project(":foundation:ui:imageloader:coil"))
-    implementation(project(":foundation:ui:assets-icons"))
-    implementation(project(":library:android-utils"))
-    implementation(project(":library:compose-utils"))
-    implementation(project(":library:ui-tooling"))
-    implementation(testFixtures(project(":foundation:domain-model"))) {
+    api(projects.foundation.appconfig)
+    api(projects.foundation.di.base)
+    api(projects.foundation.featuretoggles.public)
+    api(projects.foundation.ui.theme)
+    api(projects.foundation.domainModel)
+    implementation(projects.foundation.ui.imageloader.coil)
+    implementation(projects.foundation.ui.assetsIcons)
+    implementation(projects.library.androidUtils)
+    implementation(projects.library.composeUtils)
+    implementation(projects.library.uiTooling)
+    implementation(testFixtures(projects.foundation.domainModel)) {
         because("For use with Composable Preview")
     }
 
@@ -54,9 +54,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
 
-    testImplementation(project(":foundation:ui:imageloader:coil-test"))
+    testImplementation(projects.foundation.ui.imageloader.coilTest)
 
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(project(":foundation:ui:imageloader:coil-test"))
+    androidTestImplementation(projects.foundation.ui.imageloader.coilTest)
 }

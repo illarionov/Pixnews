@@ -28,8 +28,8 @@ android {
 }
 
 dependencies {
-    api(project(":foundation:di:base"))
-    api(project(":foundation:appconfig"))
+    api(projects.foundation.di.base)
+    api(projects.foundation.appconfig)
 
     implementation(libs.androidx.test.runner)
     implementation(libs.androidx.test.uiautomator)

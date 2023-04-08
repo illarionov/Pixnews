@@ -20,6 +20,6 @@ plugins {
 group = "ru.pixnews.gradle.protobuf"
 
 dependencies {
-    implementation(project(":base"))
+    implementation(projects.base)
     implementation(libs.protobuf.plugin)
 }

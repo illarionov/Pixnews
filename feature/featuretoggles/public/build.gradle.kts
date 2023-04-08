@@ -31,16 +31,16 @@ android {
 }
 
 dependencies {
-    implementation(project(":foundation:appconfig"))
-    implementation(project(":foundation:di:root-component"))
-    implementation(project(":foundation:di:ui-base"))
-    implementation(project(":foundation:featuretoggles:public"))
-    implementation(project(":foundation:featuretoggles:datasource-overrides"))
-    implementation(project(":foundation:ui:assets-icons"))
-    implementation(project(":foundation:ui:design"))
-    implementation(project(":foundation:ui:theme"))
-    implementation(project(":library:android-utils"))
-    implementation(project(":library:compose-utils"))
+    implementation(projects.foundation.appconfig)
+    implementation(projects.foundation.di.rootComponent)
+    implementation(projects.foundation.di.uiBase)
+    implementation(projects.foundation.featuretoggles.public)
+    implementation(projects.foundation.featuretoggles.datasourceOverrides)
+    implementation(projects.foundation.ui.assetsIcons)
+    implementation(projects.foundation.ui.design)
+    implementation(projects.foundation.ui.theme)
+    implementation(projects.library.androidUtils)
+    implementation(projects.library.composeUtils)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
@@ -52,11 +52,11 @@ dependencies {
     implementation(libs.kermit)
 
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(project(":library:ui-tooling"))
+    implementation(projects.library.uiTooling)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     api(libs.inject)
 
     androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(project(":foundation:instrumented-test"))
+    androidTestImplementation(projects.foundation.instrumentedTest)
 }

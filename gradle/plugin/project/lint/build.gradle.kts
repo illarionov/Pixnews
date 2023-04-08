@@ -21,7 +21,7 @@ plugins {
 group = "ru.pixnews.gradle.lint"
 
 dependencies {
-    implementation(project(":base"))
+    implementation(projects.base)
     implementation(libs.agp.plugin)
     implementation(libs.detekt.plugin)
     implementation(libs.spotless.plugin)

@@ -31,10 +31,18 @@ dependencyResolutionManagement {
     }
 }
 
-include("base")
-include("android")
-include("di")
-include("kotlin")
-include("lint")
-include("protobuf")
-include("testing")
+includeSubproject("base")
+includeSubproject("android")
+includeSubproject("di")
+includeSubproject("kotlin")
+includeSubproject("lint")
+includeSubproject("protobuf")
+includeSubproject("testing")
+
+fun includeSubproject(path: String) {
+    include(path)
+    project(":$path").buildFileName = "project-plugin-$path.gradle.kts"
+}
+
+rootProject.name = "gradle-project-plugins"
+rootProject.buildFileName = "project-plugins.gradle.kts"

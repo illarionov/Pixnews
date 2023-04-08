@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
 }
 
-group = "ru.pixnews.gradle"
+group = "ru.pixnews.gradle.testing"
 
 dependencies {
     implementation(gradleKotlinDsl())
-    implementation("ru.pixnews.gradle.base:build-parameters")
+    implementation(projects.base)
+    implementation("ru.pixnews.gradle.base:gradle-build-parameters")
 }

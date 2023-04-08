@@ -44,8 +44,8 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
 import ru.pixnews.MainActivity
-import ru.pixnews.feature.calendar.element.GameFeedElement
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
+import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.foundation.di.instrumented.test.rule.InjectDependenciesRule
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import ru.pixnews.foundation.instrumented.test.rule.SystemNavigationRule

@@ -31,7 +31,7 @@ import com.google.accompanist.testharness.TestHarness
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import ru.pixnews.feature.calendar.element.GameFeedElement
+import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.feature.root.PixnewsRootContent
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.instrumented.test.rule.InjectDependenciesRule

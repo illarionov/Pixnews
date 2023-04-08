@@ -66,4 +66,8 @@ androidComponents {
 dependencies {
     implementation(libs.androidx.benchmark.macro)
     implementation(libs.androidx.test.ext.junit)
+    implementation(project(":feature:calendar:test-constants"))
+    implementation(project(":feature:root:test-constants"))
+    implementation(project(":feature:collections:test-constants"))
+    implementation(project(":feature:profile:test-constants"))
 }

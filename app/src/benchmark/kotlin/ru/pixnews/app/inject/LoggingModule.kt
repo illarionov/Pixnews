@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app.logging
+package ru.pixnews.app.inject
 
 import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.Logger
@@ -26,6 +26,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.logging.CrashlyticsLogWriter
 import javax.inject.Named
 
 @ContributesTo(AppScope::class)

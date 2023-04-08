@@ -40,14 +40,6 @@ android {
     lint {
         checkDependencies = true
     }
-
-    sourceSets {
-        listOf("release", "benchmark").forEach { sourceSet ->
-            getByName(sourceSet) {
-                kotlin.srcDir("src/sharedReleaseBenchmark/kotlin")
-            }
-        }
-    }
 }
 
 dependencies {

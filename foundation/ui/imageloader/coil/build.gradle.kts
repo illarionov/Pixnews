@@ -28,12 +28,12 @@ android {
 }
 
 dependencies {
-    api(project(":foundation:appconfig"))
-    api(project(":foundation:di:base"))
-    api(project(":foundation:di:root-component"))
-    api(project(":foundation:domain-model"))
-    implementation(project(":foundation:network:public"))
-    implementation(project(":library:android-utils"))
+    api(projects.foundation.appconfig)
+    api(projects.foundation.di.base)
+    api(projects.foundation.di.rootComponent)
+    api(projects.foundation.domainModel)
+    implementation(projects.foundation.network.public)
+    implementation(projects.library.androidUtils)
 
     api(libs.kermit)
     api(libs.dagger)

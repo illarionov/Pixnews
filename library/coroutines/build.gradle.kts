@@ -20,7 +20,7 @@ plugins {
 group = "ru.pixnews.library.coroutines"
 
 dependencies {
-    api(project(":library:functional"))
+    api(projects.library.functional)
     implementation(platform(libs.kotlinx.coroutines.bom))
     api(libs.kotlinx.coroutines.core)
 }

@@ -31,11 +31,11 @@ android {
 }
 
 dependencies {
-    api(project(":foundation:appconfig"))
-    api(project(":foundation:di:base"))
-    api(project(":foundation:di:root-component"))
+    api(projects.foundation.appconfig)
+    api(projects.foundation.di.base)
+    api(projects.foundation.di.rootComponent)
     api(libs.dagger)
-    implementation(project(":library:android-utils"))
+    implementation(projects.library.androidUtils)
 
     api(libs.androidx.appcompat)
     api(libs.androidx.fragment)

@@ -31,15 +31,15 @@ android {
 }
 
 dependencies {
-    api(project(":foundation:dispatchers"))
-    api(project(":foundation:featuretoggles:public"))
-    api(project(":foundation:featuretoggles:internal"))
-    api(project(":library:coroutines"))
+    api(projects.foundation.dispatchers)
+    api(projects.foundation.featuretoggles.public)
+    api(projects.foundation.featuretoggles.internal)
+    api(projects.library.coroutines)
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.datastore)
 
-    testImplementation(project(":library:test"))
-    testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
+    testImplementation(projects.library.test)
+    testImplementation(testFixtures(projects.foundation.featuretoggles.public))
     testImplementation(libs.turbine)
 }

@@ -22,6 +22,6 @@ group = "ru.pixnews.gradle.testing"
 
 dependencies {
     implementation(gradleKotlinDsl())
-    implementation(project(":base"))
+    implementation(projects.base)
     implementation("ru.pixnews.gradle.base:build-parameters")
 }

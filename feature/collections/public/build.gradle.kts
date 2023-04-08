@@ -28,12 +28,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:collections:test-constants"))
-    implementation(project(":foundation:appconfig"))
-    implementation(project(":foundation:di:ui-base"))
-    implementation(project(":foundation:domain-model"))
-    implementation(project(":foundation:ui:assets-icons"))
-    implementation(project(":foundation:ui:theme"))
+    implementation(projects.feature.collections.testConstants)
+    implementation(projects.foundation.appconfig)
+    implementation(projects.foundation.di.uiBase)
+    implementation(projects.foundation.domainModel)
+    implementation(projects.foundation.ui.assetsIcons)
+    implementation(projects.foundation.ui.theme)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
@@ -47,9 +47,9 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(project(":library:ui-tooling"))
+    implementation(projects.library.uiTooling)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(project(":foundation:instrumented-test"))
+    androidTestImplementation(projects.foundation.instrumentedTest)
 }

@@ -29,18 +29,18 @@ android {
 }
 
 dependencies {
-    api(project(":foundation:appconfig"))
-    api(project(":foundation:di:base"))
-    api(project(":foundation:dispatchers"))
-    api(project(":foundation:featuretoggles:public"))
-    api(project(":foundation:featuretoggles:internal"))
+    api(projects.foundation.appconfig)
+    api(projects.foundation.di.base)
+    api(projects.foundation.dispatchers)
+    api(projects.foundation.featuretoggles.public)
+    api(projects.foundation.featuretoggles.internal)
 
     api(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     api(libs.firebase.config)
     implementation(libs.kotlinx.coroutines.core)
 
-    testImplementation(project(":library:test"))
-    testImplementation(testFixtures(project(":foundation:featuretoggles:public")))
+    testImplementation(projects.library.test)
+    testImplementation(testFixtures(projects.foundation.featuretoggles.public))
     testImplementation(libs.mockk)
 }

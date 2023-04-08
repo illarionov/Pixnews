@@ -33,16 +33,16 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:calendar:test-constants"))
-    implementation(project(":foundation:appconfig"))
-    implementation(project(":foundation:di:ui-base"))
-    implementation(project(":foundation:domain-model"))
-    implementation(project(":foundation:ui:assets-icons"))
-    implementation(project(":foundation:ui:theme"))
-    implementation(project(":foundation:ui:design"))
-    implementation(project(":foundation:ui:imageloader:coil"))
-    implementation(project(":library:compose-utils"))
-    implementation(project(":library:kotlin-utils"))
+    implementation(projects.feature.calendar.testConstants)
+    implementation(projects.foundation.appconfig)
+    implementation(projects.foundation.di.uiBase)
+    implementation(projects.foundation.domainModel)
+    implementation(projects.foundation.ui.assetsIcons)
+    implementation(projects.foundation.ui.theme)
+    implementation(projects.foundation.ui.design)
+    implementation(projects.foundation.ui.imageloader.coil)
+    implementation(projects.library.composeUtils)
+    implementation(projects.library.kotlinUtils)
 
     implementation(libs.accompanist.pager)
     implementation(libs.androidx.compose.foundation)
@@ -58,17 +58,17 @@ dependencies {
     implementation(libs.kermit)
     implementation(libs.kotlinx.collections.immutable)
 
-    implementation(testFixtures(project(":foundation:domain-model"))) {
+    implementation(testFixtures(projects.foundation.domainModel)) {
         because("For use with Composable Preview")
     }
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(project(":library:ui-tooling"))
+    implementation(projects.library.uiTooling)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     testImplementation(libs.junit.jupiter.params)
 
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(project(":foundation:instrumented-test"))
-    androidTestImplementation(project(":feature:calendar:test"))
+    androidTestImplementation(projects.foundation.instrumentedTest)
+    androidTestImplementation(projects.feature.calendar.test)
 }

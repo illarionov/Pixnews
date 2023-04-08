@@ -20,8 +20,8 @@ plugins {
 group = "ru.pixnews.foundation.redux"
 
 dependencies {
-    api(project(":library:coroutines"))
-    api(project(":library:functional"))
-    implementation(project(":library:kotlin-utils"))
+    api(projects.library.coroutines)
+    api(projects.library.functional)
+    implementation(projects.library.kotlinUtils)
     implementation(libs.kermit)
 }

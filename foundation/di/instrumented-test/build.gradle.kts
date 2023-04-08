@@ -29,8 +29,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":foundation:di:base"))
-    implementation(project(":foundation:di:root-component"))
+    implementation(projects.foundation.di.base)
+    implementation(projects.foundation.di.rootComponent)
     implementation(libs.androidx.test.core)
     api(libs.androidx.annotation)
     api(libs.dagger)

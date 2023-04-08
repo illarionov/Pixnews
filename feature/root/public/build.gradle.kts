@@ -32,19 +32,19 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:root:test-constants"))
+    implementation(projects.feature.root.testConstants)
 
     // TODO should be in app
-    implementation(project(":feature:calendar:public"))
-    implementation(project(":feature:collections:public"))
-    implementation(project(":feature:profile:public"))
+    implementation(projects.feature.calendar.public)
+    implementation(projects.feature.collections.public)
+    implementation(projects.feature.profile.public)
 
-    implementation(project(":foundation:appconfig"))
-    implementation(project(":foundation:di:ui-base"))
-    implementation(project(":foundation:domain-model"))
-    implementation(project(":foundation:ui:assets-icons"))
-    implementation(project(":foundation:ui:design"))
-    implementation(project(":foundation:ui:theme"))
+    implementation(projects.foundation.appconfig)
+    implementation(projects.foundation.di.uiBase)
+    implementation(projects.foundation.domainModel)
+    implementation(projects.foundation.ui.assetsIcons)
+    implementation(projects.foundation.ui.design)
+    implementation(projects.foundation.ui.theme)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
@@ -59,11 +59,11 @@ dependencies {
     implementation(libs.kermit)
     implementation(libs.kotlinx.collections.immutable)
 
-    implementation(project(":library:ui-tooling"))
+    implementation(projects.library.uiTooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    androidTestImplementation(project(":foundation:instrumented-test"))
+    androidTestImplementation(projects.foundation.instrumentedTest)
     androidTestImplementation(libs.accompanist.test.harness)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.navigation.testing)

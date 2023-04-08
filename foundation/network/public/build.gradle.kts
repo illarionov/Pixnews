@@ -28,10 +28,10 @@ android {
 }
 
 dependencies {
-    api(project(":foundation:appconfig"))
-    api(project(":foundation:di:base"))
-    api(project(":foundation:di:root-component"))
-    implementation(project(":library:android-utils"))
+    api(projects.foundation.appconfig)
+    api(projects.foundation.di.base)
+    api(projects.foundation.di.rootComponent)
+    implementation(projects.library.androidUtils)
 
     api(libs.inject)
     api(libs.okhttp)

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.app.logging
+package ru.pixnews.logging
 
 import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.Severity

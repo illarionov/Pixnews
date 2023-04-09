@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModel
 import com.squareup.anvil.annotations.ContributesSubcomponent
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.BindsInstance
+import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
 import javax.inject.Provider
@@ -29,8 +30,8 @@ import javax.inject.Provider
 @ContributesSubcomponent(scope = ViewModelScope::class, parentScope = AppScope::class)
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public interface ViewModelSubcomponent {
-    public val viewModelMap: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
-    public val viewModelFactoryMap: @JvmSuppressWildcards Map<Class<out ViewModel>, ViewModelFactory>
+    public val viewModelMap: DaggerMap<Class<out ViewModel>, Provider<ViewModel>>
+    public val viewModelFactoryMap: DaggerMap<Class<out ViewModel>, ViewModelFactory>
 
     @ContributesSubcomponent.Factory
     public fun interface Factory {

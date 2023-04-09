@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant
@@ -46,7 +47,7 @@ import kotlin.time.Duration.Companion.seconds
 @Suppress("TooGenericExceptionCaught")
 public class FirebaseDataSource(
     private val remoteConfig: FirebaseRemoteConfig,
-    private val serializers: Map<@JvmSuppressWildcards ExperimentKey, ExperimentVariantSerializer>,
+    private val serializers: DaggerMap<ExperimentKey, ExperimentVariantSerializer>,
     ioDispatcherProvider: IoCoroutineDispatcherProvider,
     logger: Logger,
 ) : FeatureToggleDataSource {

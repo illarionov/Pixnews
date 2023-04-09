@@ -21,6 +21,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.multibindings.Multibinds
+import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.scopes.AppScope
 
 @Module
@@ -28,13 +29,13 @@ import ru.pixnews.foundation.di.base.scopes.AppScope
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public interface InstrumentedTestsInjectorsModule {
     @Multibinds
-    public fun instrumentedTestInjectors(): @JvmSuppressWildcards Map<Class<out Any>, SingleInstrumentedTestInjector>
+    public fun instrumentedTestInjectors(): DaggerMap<Class<out Any>, SingleInstrumentedTestInjector>
 
     public companion object {
         @Reusable
         @Provides
         public fun provideInstrumentedTestInjector(
-            injectors: @JvmSuppressWildcards Map<Class<out Any>, SingleInstrumentedTestInjector>,
+            injectors: DaggerMap<Class<out Any>, SingleInstrumentedTestInjector>,
         ): InstrumentedTestInjector {
             return DefaultInstrumentedTestInjector(injectors)
         }

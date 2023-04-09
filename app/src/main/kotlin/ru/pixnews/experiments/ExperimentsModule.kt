@@ -20,6 +20,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.multibindings.Multibinds
+import ru.pixnews.foundation.di.base.DaggerMap
+import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
@@ -29,17 +31,17 @@ import ru.pixnews.foundation.featuretoggles.inject.ExperimentScope
 @ContributesTo(ExperimentScope::class)
 public abstract class ExperimentsModule {
     @Multibinds
-    public abstract fun appExperiments(): Set<@JvmSuppressWildcards Experiment>
+    public abstract fun appExperiments(): DaggerSet<Experiment>
 
     @Multibinds
-    public abstract fun appExperimentSerializers(): @JvmSuppressWildcards Map<String, ExperimentVariantSerializer>
+    public abstract fun appExperimentSerializers(): DaggerMap<String, ExperimentVariantSerializer>
 
     companion object {
         @Provides
         @Reusable
         public fun provideAppExperimentVariantSerializers(
-            serializers: @JvmSuppressWildcards Map<String, ExperimentVariantSerializer>,
-        ): @JvmSuppressWildcards Map<ExperimentKey, ExperimentVariantSerializer> {
+            serializers: DaggerMap<String, ExperimentVariantSerializer>,
+        ): DaggerMap<ExperimentKey, ExperimentVariantSerializer> {
             return serializers
                 .mapKeys { (k, _) -> ExperimentKey(k) }
         }

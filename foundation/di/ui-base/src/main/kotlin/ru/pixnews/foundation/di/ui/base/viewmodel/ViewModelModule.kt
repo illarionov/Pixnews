@@ -20,14 +20,15 @@ import androidx.lifecycle.ViewModel
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.multibindings.Multibinds
+import ru.pixnews.foundation.di.base.DaggerMap
 
 @Module
 @ContributesTo(ViewModelScope::class)
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public interface ViewModelModule {
     @Multibinds
-    public fun viewModelProviders(): @JvmSuppressWildcards Map<Class<out ViewModel>, ViewModel>
+    public fun viewModelProviders(): DaggerMap<Class<out ViewModel>, ViewModel>
 
     @Multibinds
-    public fun viewModelFactoryProviders(): @JvmSuppressWildcards Map<Class<out ViewModel>, ViewModelFactory>
+    public fun viewModelFactoryProviders(): DaggerMap<Class<out ViewModel>, ViewModelFactory>
 }

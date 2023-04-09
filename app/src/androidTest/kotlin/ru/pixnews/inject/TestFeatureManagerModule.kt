@@ -19,6 +19,7 @@ import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
+import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.featuretoggles.Experiment
@@ -32,14 +33,14 @@ import ru.pixnews.foundation.featuretoggles.internal.FeatureManagerImpl
 object TestFeatureManagerModule {
     @Provides
     public fun providesDefaultVariantDataSource(
-        experiments: Set<@JvmSuppressWildcards Experiment>,
+        experiments: DaggerSet<Experiment>,
     ): DefaultVariantDataSource = DefaultVariantDataSource(experiments)
 
     @SingleIn(AppScope::class)
     @Provides
     @Suppress("MagicNumber")
     public fun provideTestFeatureManager(
-        experiments: Set<@JvmSuppressWildcards Experiment>,
+        experiments: DaggerSet<Experiment>,
         defaultDataSource: DefaultVariantDataSource,
         logger: Logger,
     ): FeatureManager {

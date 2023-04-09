@@ -19,6 +19,7 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.Multibinds
+import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.initializers.AppInitializer
 import ru.pixnews.foundation.initializers.AsyncInitializer
@@ -29,16 +30,16 @@ import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
 @Module
 abstract class PixnewsInitializersModule {
     @Multibinds
-    abstract fun appInitializers(): Set<@JvmSuppressWildcards Initializer>
+    abstract fun appInitializers(): DaggerSet<Initializer>
 
     @Multibinds
-    abstract fun appAsyncInitializers(): Set<@JvmSuppressWildcards AsyncInitializer>
+    abstract fun appAsyncInitializers(): DaggerSet<AsyncInitializer>
 
     companion object {
         @Provides
         fun providesAppInitializer(
-            initializers: Set<@JvmSuppressWildcards Initializer>,
-            asyncInitializers: Set<@JvmSuppressWildcards AsyncInitializer>,
+            initializers: DaggerSet<Initializer>,
+            asyncInitializers: DaggerSet<AsyncInitializer>,
             dispatcher: IoCoroutineDispatcherProvider,
         ): AppInitializer {
             return AppInitializer(initializers, asyncInitializers, dispatcher.get())

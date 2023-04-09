@@ -55,7 +55,7 @@ import ru.pixnews.library.functional.mapComplete
 @Suppress("MaxLineLength")
 public class OverridesDataSource constructor(
     private val dataStore: DataStore<Overrides>,
-    private val serializers: Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>,
+    private val serializers: Map<ExperimentKey, ExperimentVariantSerializer>,
     private val backgroundDispatcherProvider: IoCoroutineDispatcherProvider,
     logger: Logger,
 ) : FeatureToggleDataSource {
@@ -84,7 +84,7 @@ public class OverridesDataSource constructor(
 
     public constructor(
         context: Context,
-        serializers: Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>,
+        serializers: Map<ExperimentKey, ExperimentVariantSerializer>,
         ioDispatcherProvider: IoCoroutineDispatcherProvider,
         logger: Logger,
     ) : this(

@@ -31,6 +31,7 @@ import ru.pixnews.foundation.appconfig.HttpLoggingLevel.BODY
 import ru.pixnews.foundation.appconfig.HttpLoggingLevel.HEADERS
 import ru.pixnews.foundation.appconfig.HttpLoggingLevel.NONE
 import ru.pixnews.foundation.appconfig.NetworkConfig
+import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.network.KermitOkhttpLogger
 import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientEventListener
@@ -59,7 +60,7 @@ public abstract class RootOkHttpDependenciesModule {
         internal fun provideOkhttpLoggingInterceptor(
             appConfig: AppConfig,
             logger: Logger,
-        ): Set<@JvmSuppressWildcards Interceptor> {
+        ): DaggerSet<Interceptor> {
             if (appConfig.networkConfig.httpLoggingLevel == NONE) {
                 return emptySet()
             }

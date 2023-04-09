@@ -39,6 +39,7 @@ import dagger.multibindings.IntoSet
 import dagger.multibindings.Multibinds
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.appconfig.NetworkConfig
+import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
@@ -64,7 +65,7 @@ private const val IMAGE_CACHE_SUBDIR = "image_cache"
 @RestrictTo(LIBRARY)
 public abstract class ImageLoaderModule {
     @Multibinds
-    internal abstract fun provideCoilInterceptors(): Set<@JvmSuppressWildcards CoilInterceptorWithPriority>
+    internal abstract fun provideCoilInterceptors(): DaggerSet<CoilInterceptorWithPriority>
 
     public companion object {
         @Provides
@@ -108,7 +109,7 @@ public abstract class ImageLoaderModule {
             computationDispatcher: ComputationCoroutineDispatcherProvider,
             rootOkhttpClient: RootOkHttpClientProvider,
             @Internal diskCache: Provider<DiskCache>,
-            interceptors: Set<@JvmSuppressWildcards CoilInterceptorWithPriority>,
+            interceptors: DaggerSet<CoilInterceptorWithPriority>,
             logger: Logger,
         ): CoilImageLoader {
             return CoilImageLoader.Builder(context)
@@ -164,7 +165,7 @@ public abstract class ImageLoaderModule {
         @ElementsIntoSet
         internal fun provideDebugImageUrlInterceptor(
             appConfig: AppConfig,
-        ): Set<@JvmSuppressWildcards CoilInterceptorWithPriority> {
+        ): DaggerSet<CoilInterceptorWithPriority> {
             return buildSet {
                 if (appConfig.isDebug) {
                     @Suppress("MagicNumber")

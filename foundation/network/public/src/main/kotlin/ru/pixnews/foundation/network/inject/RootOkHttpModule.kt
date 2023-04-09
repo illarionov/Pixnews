@@ -24,6 +24,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import ru.pixnews.foundation.appconfig.NetworkConfig
+import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.network.RootOkHttpClientProvider
@@ -51,8 +52,8 @@ public object RootOkHttpModule {
     @SingleIn(AppScope::class)
     public fun provideRootOkhttpClient(
         networkConfig: NetworkConfig,
-        @RootHttpClientInterceptor interceptors: Set<@JvmSuppressWildcards Interceptor>,
-        @RootHttpClientNetworkInterceptor networkInterceptors: Set<@JvmSuppressWildcards Interceptor>,
+        @RootHttpClientInterceptor interceptors: DaggerSet<Interceptor>,
+        @RootHttpClientNetworkInterceptor networkInterceptors: DaggerSet<Interceptor>,
         @RootHttpClientEventListener eventListener: EventListener?,
     ): OkHttpClient {
         checkNotMainThread()

@@ -23,19 +23,20 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.multibindings.Multibinds
+import ru.pixnews.foundation.di.base.DaggerMap
 
 @Module
 @ContributesTo(ActivityScope::class)
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public interface PixnewsActivityModule {
     @Multibinds
-    public fun activityInjectors(): @JvmSuppressWildcards Map<Class<out Activity>, MembersInjector<out Activity>>
+    public fun activityInjectors(): DaggerMap<Class<out Activity>, MembersInjector<out Activity>>
 
     public companion object {
         @Reusable
         @Provides
         public fun provideActivityInjector(
-            injectors: @JvmSuppressWildcards Map<Class<out Activity>, MembersInjector<out Activity>>,
+            injectors: DaggerMap<Class<out Activity>, MembersInjector<out Activity>>,
         ): ActivityInjector {
             return DefaultActivityInjector(injectors)
         }

@@ -22,6 +22,8 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.di.base.DaggerMap
+import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.featuretoggles.Experiment
@@ -42,8 +44,8 @@ public object FirebaseRemoteConfigModule {
     @Provides
     @ExperimentFirebaseDefaults
     public fun provideExperimentDefaults(
-        experiments: Set<@JvmSuppressWildcards Experiment>,
-        serializers: Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>,
+        experiments: DaggerSet<Experiment>,
+        serializers: DaggerMap<ExperimentKey, ExperimentVariantSerializer>,
     ): Map<String, String> {
         return experiments
             .groupingBy { experiment -> experiment.key.stringValue }

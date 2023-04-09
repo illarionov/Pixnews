@@ -22,6 +22,8 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.di.base.DaggerMap
+import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
@@ -43,7 +45,7 @@ import javax.inject.Named
 public object FeatureManagerModule {
     @Provides
     public fun providesDefaultVariantDataSource(
-        experiments: Set<@JvmSuppressWildcards Experiment>,
+        experiments: DaggerSet<Experiment>,
     ): DefaultVariantDataSource = DefaultVariantDataSource(experiments)
 
     @Provides
@@ -51,7 +53,7 @@ public object FeatureManagerModule {
     @Named("firebase")
     public fun providesFirebaseDataSource(
         remoteConfig: FirebaseRemoteConfig,
-        serializers: @JvmSuppressWildcards Map<ExperimentKey, ExperimentVariantSerializer>,
+        serializers: DaggerMap<ExperimentKey, ExperimentVariantSerializer>,
         ioDispatcherProvider: IoCoroutineDispatcherProvider,
         logger: Logger,
     ): FeatureToggleDataSource {
@@ -63,7 +65,7 @@ public object FeatureManagerModule {
     @Named("overrides")
     public fun providesOverridesDataSource(
         @ApplicationContext context: Context,
-        serializers: @JvmSuppressWildcards Map<ExperimentKey, ExperimentVariantSerializer>,
+        serializers: DaggerMap<ExperimentKey, ExperimentVariantSerializer>,
         ioDispatcherProvider: IoCoroutineDispatcherProvider,
         logger: Logger,
         appConfig: AppConfig,
@@ -79,7 +81,7 @@ public object FeatureManagerModule {
     @Provides
     @Suppress("MagicNumber")
     public fun provideFeatureManager(
-        experiments: Set<@JvmSuppressWildcards Experiment>,
+        experiments: DaggerSet<Experiment>,
         defaultDataSource: DefaultVariantDataSource,
         @Named("overrides") overridesDataSource: FeatureToggleDataSource?,
         @Named("firebase") firebaseDataSource: FeatureToggleDataSource?,

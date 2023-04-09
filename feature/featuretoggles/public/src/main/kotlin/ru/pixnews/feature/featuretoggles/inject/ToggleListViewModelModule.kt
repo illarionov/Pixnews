@@ -22,6 +22,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
 import ru.pixnews.feature.featuretoggles.FeatureToggleListViewModel
+import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.di.ui.base.viewmodel.ViewModelFactory
@@ -51,7 +52,7 @@ public object ToggleListViewModelModule {
     @SingleIn(ViewModelScope::class)
     public fun providesOverridesDataSource(
         @ApplicationContext context: Context,
-        serializers: Map<@JvmSuppressWildcards ExperimentKey, @JvmSuppressWildcards ExperimentVariantSerializer>,
+        serializers: DaggerMap<ExperimentKey, ExperimentVariantSerializer>,
         ioDispatcherProvider: IoCoroutineDispatcherProvider,
         logger: Logger,
     ): OverridesDataSource {

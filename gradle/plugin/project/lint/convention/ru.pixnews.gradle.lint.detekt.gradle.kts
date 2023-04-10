@@ -17,6 +17,7 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import ru.pixnews.gradle.base.versionCatalog
 import ru.pixnews.gradle.lint.configRootDir
+import ru.pixnews.gradle.lint.lintedFileTree
 
 /**
  * Convention plugin that creates and configures task designated to run Detekt static code analyzer
@@ -29,16 +30,21 @@ val detektCheck = tasks.register("detektCheck", Detekt::class) {
     description = "Custom detekt for to check all modules"
 
     config.setFrom(configRootDir.file("detekt.yml"))
-    setSource(rootProject.projectDir)
+    setSource(
+        lintedFileTree
+            .matching {
+                exclude("**/resources/**")
+            }
+            .filter {
+                it.name.endsWith(".kt") || it.name.endsWith(".kts")
+            },
+    )
     basePath = rootProject.projectDir.toString()
 
     parallel = true
     ignoreFailures = false
     buildUponDefaultConfig = true
     allRules = true
-
-    include("**/*.kt", "**/*.kts")
-    exclude("**/resources/**", "**/build/**", "**/generated/**", "config/copyright/**")
 
     reports {
         html.required.set(true)

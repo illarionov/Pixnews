@@ -83,15 +83,18 @@ jobs:
       - name: Bundle the build report and lint outputs
         if: ${{ always() }}
         run: >
-          find . -type d \( -name 'reports' -o -name 'compose-*' \) -print0
-          | xargs -0 tar -c -I 'zstd -19 -T0' -f build-reports.tar.zst
+          find . \(
+          -name .idea -o -path '*build/intermediates' -o -path '*build/.transforms' -o -path '*build/generated'
+          \) -prune -o
+          -type d \( -name 'reports' -o -name 'compose-metrics' -o -name 'compose-reports' -o -name 'out' \) -print0
+          | xargs -0 tar -c -I 'zstd -19 -T0' -f test-reports.tar.zst
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
         if: ${{ always() }}
         with:
           name: test-reports
-          path: build-reports.tar.zst
+          path: test-reports.tar.zst
 
       - name: Uploads lint .sarif files to GitHub
         uses: github/codeql-action/upload-sarif@v2
@@ -176,6 +179,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: ${{ always() }}
         with:
+          comment_mode: off
           junit_files: '**/build/outputs/androidTest-results/**/*.xml'
           check_name: "Instrumented test results"
 

@@ -79,7 +79,7 @@ jobs:
       - name: Upload baseline profile
         uses: actions/upload-artifact@v3
         with:
-          name: instrumented-test-reports
+          name: baseline-profile
           path: baseline-profile.tar.zst
 
       - name: Replace old baseline profile

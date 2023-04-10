@@ -79,21 +79,25 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: ${{ always() }}
         with:
+          comment_mode: off
           junit_files: '**/build/test-results/**/*.xml'
           check_name: "Unit test results"
 
       - name: Bundle the build report
         if: ${{ failure() }}
         run: >
-          find . -type d \( -name 'reports' -o -name 'compose-*' \) -print0
-          | xargs -0 tar -c -I 'zstd -19 -T0' -f build-reports.tar.zst
+          find . \(
+          -name .idea -o -path '*build/intermediates' -o -path '*build/.transforms' -o -path '*build/generated'
+          \) -prune -o
+          -type d \( -name 'reports' -o -name 'compose-metrics' -o -name 'compose-reports' -o -name 'out' \) -print0
+          | xargs -0 tar -c -I 'zstd -19 -T0' -f test-reports.tar.zst
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
         if: ${{ failure() }}
         with:
           name: test-reports
-          path: build-reports.tar.zst
+          path: test-reports.tar.zst
 
   static-analysis:
     name: Style check
@@ -157,11 +161,11 @@ jobs:
       - name: Bundle the build report
         if: ${{ always() }}
         run: >
-          tar -c -I 'zstd -19 -T0' -f build-reports.tar.zst build/reports
+          tar -c -I 'zstd -19 -T0' -f lint-outputs.tar.zst build/reports
 
       - name: Upload lint outputs
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: lint-outputs
-          path: build-reports.tar.zst
+          path: lint-outputs.tar.zst

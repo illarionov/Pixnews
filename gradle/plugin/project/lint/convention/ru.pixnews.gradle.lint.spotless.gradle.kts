@@ -19,6 +19,7 @@ import com.diffplug.spotless.FormatterStep
 import com.diffplug.spotless.LineEnding
 import com.diffplug.spotless.generic.LicenseHeaderStep
 import ru.pixnews.gradle.lint.configRootDir
+import ru.pixnews.gradle.lint.lintedFileTree
 
 /**
  * Convention plugin that configures Spotless
@@ -34,16 +35,7 @@ spotless {
     // https://github.com/diffplug/spotless/issues/1644
     lineEndings = LineEnding.PLATFORM_NATIVE
 
-    val excludedDirectories = setOf("build", ".gradle", "out", ".git", ".idea")
-    val rootDir = layout.projectDirectory.asFileTree
-        .matching {
-            exclude {
-                it.isDirectory && it.name in excludedDirectories
-            }
-            exclude {
-                it.isDirectory && it.relativePath.startsWith("config/copyright")
-            }
-        }
+    val rootDir = lintedFileTree
 
     kotlin {
         target(rootDir.filter { it.name.endsWith(".kt") })

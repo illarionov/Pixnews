@@ -13,14 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("HEADER_MISSING_IN_NON_SINGLE_CLASS_FILE")
-
 package ru.pixnews.gradle.lint
 
 import org.gradle.api.Project
 import org.gradle.api.file.Directory
+import org.gradle.api.file.FileTree
 
 internal val Project.configRootDir: Directory
     get() {
         return rootProject.layout.projectDirectory.dir("config")
     }
+
+internal val Project.lintedFileTree: FileTree
+    get() = rootProject.layout.projectDirectory.asFileTree.matching {
+        exclude {
+            it.isDirectory && it.name in excludedDirectories
+        }
+        exclude {
+            it.isDirectory && it.relativePath.startsWith("config/copyright")
+        }
+    }
+
+private val excludedDirectories = setOf(
+    ".git",
+    ".gradle",
+    ".idea",
+    "build",
+    "generated",
+    "out",
+)

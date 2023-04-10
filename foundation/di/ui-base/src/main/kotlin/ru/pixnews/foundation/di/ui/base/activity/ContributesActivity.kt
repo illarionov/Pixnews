@@ -15,12 +15,20 @@
  */
 package ru.pixnews.foundation.di.ui.base.activity
 
-import android.app.Activity
-import dagger.MapKey
-import kotlin.reflect.KClass
-
 /**
- * A Dagger multi-binding key used for registering a [Activity] into the top level dagger graphs.
+ * Annotate a Activity class with this to automatically contribute it to the ActivityScope multibinding.
+ * Equivalent to the following declaration in an application module:
+ *```
+ *  @Module
+ *  @ContributesTo(ActivityScope::class)
+ *  abstract class MainActivityModule {
+ *    @Binds
+ *    @IntoMap
+ *    @ActivityKey(MainActivity::class)
+ *    @SingleIn(ActivityScope::class)
+ *    abstract fun bindsMainInjector(target: MembersInjector<MainActivity>): MembersInjector<out Activity>
+ *  }
+ *```
+ * The generated code created via the anvil-codegen module.
  */
-@MapKey
-public annotation class ActivityKey(val activityClass: KClass<out Activity>)
+public annotation class ContributesActivity

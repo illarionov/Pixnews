@@ -13,21 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import ru.pixnews.gradle.base.versionCatalog
+package ru.pixnews.foundation.di.ui.base.viewmodel
 
 /**
- * Convention plugin that configures anvil with generateDaggerFactories turned on
+ * Annotate a ViewModel class with this to automatically contribute it to the ViewModel scope multibinding.
+ * Equivalent to the following declaration in an application module:
+ *```
+ *   @Provides
+ *   @IntoMap
+ *   @ViewModelKey(MainViewModel::class)
+ *   public fun providesMainViewModel(
+ *       <arguments>
+ *   ): ViewModelFactory = ViewModelFactory {
+ *       MainViewModel(
+ *           <arguments>
+ *       )
+ *   }
+ *```
+ * The generated code created via the anvil-codegen module.
  */
-plugins {
-    id("com.squareup.anvil")
-}
-
-anvil {
-    generateDaggerFactories.set(true)
-}
-
-dependencies {
-    add("anvil", project(":foundation:di:anvil-codegen"))
-    add("api", versionCatalog.findLibrary("dagger").orElseThrow())
-}
+public annotation class ContributesViewModel

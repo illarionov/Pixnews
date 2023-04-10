@@ -34,10 +34,12 @@ import org.junit.Test
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.feature.root.PixnewsRootContent
 import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.di.instrumented.test.ContributesTest
 import ru.pixnews.foundation.di.instrumented.test.rule.InjectDependenciesRule
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import javax.inject.Inject
 
+@ContributesTest
 class CalendarFeedWidthOnMediumSizeTest : BaseInstrumentedTest() {
     @get:Rule(order = 10)
     val injectDependencies = InjectDependenciesRule(this)

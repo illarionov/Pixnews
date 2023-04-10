@@ -13,21 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ru.pixnews.foundation.featuretoggles.inject
 
-import ru.pixnews.gradle.base.versionCatalog
+import kotlin.annotation.AnnotationTarget.CLASS
 
 /**
- * Convention plugin that configures anvil with generateDaggerFactories turned on
+ * Annotate a Experiment class with this to automatically contribute it to the ExperimentScope multibinding.
+ * Equivalent to the following declaration in an application module:
+ *```
+ *  @Module
+ *  @ContributesTo(ExperimentScope::class)
+ *  abstract class ExperimentModule {
+ *    @Binds @IntoSet
+ *    abstract fun bindMainExperiment(experiment: MainExperiment): Experiment
+ *  }
+ *```
+ * The generated code created via the anvil-codegen module.
  */
-plugins {
-    id("com.squareup.anvil")
-}
-
-anvil {
-    generateDaggerFactories.set(true)
-}
-
-dependencies {
-    add("anvil", project(":foundation:di:anvil-codegen"))
-    add("api", versionCatalog.findLibrary("dagger").orElseThrow())
-}
+@Target(CLASS)
+public annotation class ContributesExperiment

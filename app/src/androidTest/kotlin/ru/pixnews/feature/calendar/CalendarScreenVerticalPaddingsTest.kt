@@ -46,6 +46,7 @@ import org.junit.runners.Parameterized.Parameters
 import ru.pixnews.MainActivity
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
+import ru.pixnews.foundation.di.instrumented.test.ContributesTest
 import ru.pixnews.foundation.di.instrumented.test.rule.InjectDependenciesRule
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import ru.pixnews.foundation.instrumented.test.rule.SystemNavigationRule
@@ -57,6 +58,7 @@ import javax.inject.Inject
 import kotlin.LazyThreadSafetyMode.NONE
 
 @RunWith(Parameterized::class)
+@ContributesTest
 class CalendarScreenVerticalPaddingsTest(
     private val testSpec: TestCaseDeviceSpec,
 ) : BaseInstrumentedTest() {

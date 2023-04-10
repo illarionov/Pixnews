@@ -15,8 +15,12 @@
  */
 package ru.pixnews.di.root.component
 
-public interface PixnewsAppComponent :
-    DispatchersProvider,
-    LoggerProvider,
-    FeatureManagerProvider,
-    AppConfigProvider
+import ru.pixnews.foundation.dispatchers.ComputationCoroutineDispatcherProvider
+import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
+import ru.pixnews.foundation.dispatchers.MainCoroutineDispatcherProvider
+
+public interface DispatchersProvider {
+    public fun getComputationDispatcherProvider(): ComputationCoroutineDispatcherProvider
+    public fun getMainDispatcherProvider(): MainCoroutineDispatcherProvider
+    public fun getIoDispatcherProvider(): IoCoroutineDispatcherProvider
+}

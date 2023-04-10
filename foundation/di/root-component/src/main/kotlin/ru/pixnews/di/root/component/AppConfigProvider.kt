@@ -15,8 +15,8 @@
  */
 package ru.pixnews.di.root.component
 
-public interface PixnewsAppComponent :
-    DispatchersProvider,
-    LoggerProvider,
-    FeatureManagerProvider,
-    AppConfigProvider
+import ru.pixnews.foundation.appconfig.AppConfig
+
+public fun interface AppConfigProvider {
+    public fun getAppConfig(): AppConfig
+}

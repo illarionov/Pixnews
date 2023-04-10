@@ -15,8 +15,8 @@
  */
 package ru.pixnews.di.root.component
 
-public interface PixnewsAppComponent :
-    DispatchersProvider,
-    LoggerProvider,
-    FeatureManagerProvider,
-    AppConfigProvider
+import ru.pixnews.foundation.featuretoggles.FeatureManager
+
+public interface FeatureManagerProvider {
+    public fun getFeatureManager(): FeatureManager
+}

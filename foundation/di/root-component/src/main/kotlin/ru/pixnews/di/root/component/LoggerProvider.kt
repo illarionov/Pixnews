@@ -15,8 +15,8 @@
  */
 package ru.pixnews.di.root.component
 
-public interface PixnewsAppComponent :
-    DispatchersProvider,
-    LoggerProvider,
-    FeatureManagerProvider,
-    AppConfigProvider
+import co.touchlab.kermit.Logger
+
+public fun interface LoggerProvider {
+    public fun getLogger(): Logger
+}

@@ -15,6 +15,7 @@
  */
 package ru.pixnews.foundation.ui.imageloader.coil.compose
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.drawscope.DrawScope.Companion.DefaultFilterQuality
@@ -53,6 +54,7 @@ import ru.pixnews.foundation.ui.imageloader.coil.ImageLoaderHolder
  * @param filterQuality Sampling algorithm applied to a bitmap when it is scaled and drawn into the
  *  destination.
  */
+@SuppressLint("VisibleForTests")
 @Composable
 public fun rememberAsyncImagePainter(
     model: Any?,
@@ -100,6 +102,7 @@ public fun rememberAsyncImagePainter(
  * @param filterQuality Sampling algorithm applied to a bitmap when it is scaled and drawn into the
  *  destination.
  */
+@SuppressLint("VisibleForTests")
 @Composable
 public fun rememberAsyncImagePainter(
     model: Any?,

@@ -2,7 +2,8 @@
 /*
 !/.gitignore
 !/IntelliLang.xml
+!/codeInsightSettings.xml
 !/copyright
 !/detekt.xml
-!/jsonSchemas.xml
 !/dictionaries
+!/jsonSchemas.xml

@@ -29,8 +29,8 @@ public abstract class BaseActivity : FragmentActivity() {
     protected open fun onPostInjectPreCreate(): Unit = Unit
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (PixnewsRootComponentHolder.appComponent as ActivitySubcomponent.ProviderInParentComponent)
-            .activitySubcomponentFactory()
+        (PixnewsRootComponentHolder.appComponent as ActivitySubcomponent.ActivitySubcomponentFactoryHolder)
+            .getActivitySubcomponentFactory()
             .create(this)
             .activityInjector
             .inject(this)

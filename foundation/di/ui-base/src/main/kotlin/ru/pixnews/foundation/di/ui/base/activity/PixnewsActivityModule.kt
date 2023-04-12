@@ -25,8 +25,8 @@ import dagger.Reusable
 import dagger.multibindings.Multibinds
 import ru.pixnews.foundation.di.base.DaggerMap
 
-@Module
 @ContributesTo(ActivityScope::class)
+@Module
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public interface PixnewsActivityModule {
     @Multibinds

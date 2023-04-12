@@ -13,15 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.di.ui.base.viewmodel
+package ru.pixnews.foundation.network.inject
 
 import androidx.annotation.RestrictTo
-import androidx.lifecycle.ViewModelProvider
 import com.squareup.anvil.annotations.ContributesTo
 import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.foundation.network.OkHttpClientProvider
+import ru.pixnews.foundation.network.RootOkHttpClientProvider
 
 @ContributesTo(AppScope::class)
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-public interface ViewModelFactoryInParentComponent {
-    public val viewModelFactory: ViewModelProvider.Factory
+public interface OkHttpProvidersHolder {
+    public val rootOkHttpClientProvider: RootOkHttpClientProvider
+    public val okkHttpClientProvider: OkHttpClientProvider
 }

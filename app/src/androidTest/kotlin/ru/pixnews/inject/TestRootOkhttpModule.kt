@@ -28,8 +28,8 @@ import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientInterceptor
 import ru.pixnews.test.mockokhttp.MockDataInterceptor
 import javax.inject.Provider
 
-@Module
 @ContributesTo(AppScope::class)
+@Module
 public object TestRootOkhttpModule {
     @Provides
     @IntoSet

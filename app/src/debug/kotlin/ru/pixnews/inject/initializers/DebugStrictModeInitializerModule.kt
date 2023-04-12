@@ -23,8 +23,8 @@ import ru.pixnews.foundation.initializers.Initializer
 import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
 import ru.pixnews.initializers.DebugStrictModeInitializer
 
-@Module
 @ContributesTo(AppInitializersScope::class)
+@Module
 interface DebugStrictModeInitializerModule {
     @Binds
     @IntoSet

@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.ui.imageloader.coil.inject
+package ru.pixnews.foundation.di.ui.base.viewmodel
 
 import androidx.annotation.RestrictTo
+import androidx.lifecycle.ViewModelProvider
 import com.squareup.anvil.annotations.ContributesTo
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.ui.imageloader.coil.ImageLoader
-import javax.inject.Provider
 
 @ContributesTo(AppScope::class)
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-public interface AppScopeImageLoaderProvider {
-    public val imageLoaderProvider: Provider<ImageLoader>
+public interface ViewModelProviderFactoryHolder {
+    public val viewModelFactory: ViewModelProvider.Factory
 }

@@ -35,8 +35,8 @@ import javax.inject.Qualifier
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 
-@Module
 @ContributesTo(AppScope::class)
+@Module
 public object FirebaseRemoteConfigModule {
     private val MINIMUM_FETCH_INTERVAL_DEBUG = 5.minutes
     private val MINIMUM_FETCH_INTERVAL_RELEASE = 12.hours

@@ -40,4 +40,4 @@ public inline fun <reified VM : ViewModel> ComponentActivity.injectedViewModel(
 )
 
 public val PixnewsRootComponentHolder.viewModelFactory: ViewModelProvider.Factory
-    get() = (this.appComponent as ViewModelFactoryInParentComponent).viewModelFactory
+    get() = (this.appComponent as ViewModelProviderFactoryHolder).viewModelFactory

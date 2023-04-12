@@ -29,8 +29,8 @@ import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.datasource.overrides.OverridesDataSource
 
-@Module
 @ContributesTo(ViewModelScope::class)
+@Module
 public object ToggleListViewModelModule {
     @Provides
     @SingleIn(ViewModelScope::class)

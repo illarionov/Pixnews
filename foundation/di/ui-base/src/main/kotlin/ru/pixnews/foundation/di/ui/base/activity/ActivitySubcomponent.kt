@@ -35,7 +35,7 @@ public interface ActivitySubcomponent {
     }
 
     @ContributesTo(AppScope::class)
-    public fun interface ProviderInParentComponent {
-        public fun activitySubcomponentFactory(): Factory
+    public interface ActivitySubcomponentFactoryHolder {
+        public fun getActivitySubcomponentFactory(): ActivitySubcomponent.Factory
     }
 }

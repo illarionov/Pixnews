@@ -26,9 +26,9 @@ import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
 import javax.inject.Provider
 
-@SingleIn(ViewModelScope::class)
 @ContributesSubcomponent(scope = ViewModelScope::class, parentScope = AppScope::class)
 @RestrictTo(RestrictTo.Scope.LIBRARY)
+@SingleIn(ViewModelScope::class)
 public interface ViewModelSubcomponent {
     public val viewModelMap: DaggerMap<Class<out ViewModel>, Provider<ViewModel>>
     public val viewModelFactoryMap: DaggerMap<Class<out ViewModel>, ViewModelFactory>
@@ -39,7 +39,7 @@ public interface ViewModelSubcomponent {
     }
 
     @ContributesTo(AppScope::class)
-    public fun interface ProviderInParentComponent {
-        public fun viewModelSubcomponentFactory(): ViewModelSubcomponent.Factory
+    public interface ViewModelSubcomponentFactoryHolder {
+        public fun getViewModelSubcomponentFactory(): ViewModelSubcomponent.Factory
     }
 }

@@ -13,17 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.network.inject
+package ru.pixnews.di.root.component
 
-import androidx.annotation.RestrictTo
-import com.squareup.anvil.annotations.ContributesTo
-import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.network.OkHttpClientProvider
-import ru.pixnews.foundation.network.RootOkHttpClientProvider
+import ru.pixnews.foundation.appconfig.AppConfig
 
-@ContributesTo(AppScope::class)
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-public interface AppScopeOkHttpProvider {
-    public val rootOkHttpClientProvider: RootOkHttpClientProvider
-    public val okkHttpClientProvider: OkHttpClientProvider
+public interface AppConfigHolder {
+    public val appConfig: AppConfig
 }

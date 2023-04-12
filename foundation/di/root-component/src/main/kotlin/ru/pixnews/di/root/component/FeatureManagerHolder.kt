@@ -15,8 +15,8 @@
  */
 package ru.pixnews.di.root.component
 
-import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.featuretoggles.FeatureManager
 
-public fun interface AppConfigProvider {
-    public fun getAppConfig(): AppConfig
+public interface FeatureManagerHolder {
+    public val featureManager: FeatureManager
 }

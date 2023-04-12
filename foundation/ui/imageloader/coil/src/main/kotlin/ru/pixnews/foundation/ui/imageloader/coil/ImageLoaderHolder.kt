@@ -19,7 +19,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalInspectionMode
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
-import ru.pixnews.foundation.ui.imageloader.coil.inject.AppScopeImageLoaderProvider
+import ru.pixnews.foundation.ui.imageloader.coil.inject.ImageLoaderProviderHolder
 import kotlin.LazyThreadSafetyMode.PUBLICATION
 
 /**
@@ -29,7 +29,7 @@ import kotlin.LazyThreadSafetyMode.PUBLICATION
 public object ImageLoaderHolder {
     @Volatile
     private var imageLoaderInitializer: () -> ImageLoader = {
-        (PixnewsRootComponentHolder.appComponent as AppScopeImageLoaderProvider).imageLoaderProvider.get()
+        (PixnewsRootComponentHolder.appComponent as ImageLoaderProviderHolder).imageLoaderProvider.get()
     }
     private val imageLoader: ImageLoader by lazy(PUBLICATION) {
         imageLoaderInitializer()

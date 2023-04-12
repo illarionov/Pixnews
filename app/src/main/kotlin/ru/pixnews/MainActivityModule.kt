@@ -24,8 +24,8 @@ import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.featuretoggles.getFeatureToggle
 import ru.pixnews.foundation.ui.experiments.DarkModeExperiment
 
-@Module
 @ContributesTo(ActivityScope::class)
+@Module
 object MainActivityModule {
     @Provides
     fun providesDarkModeExperiment(

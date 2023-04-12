@@ -15,8 +15,12 @@
  */
 package ru.pixnews.di.root.component
 
-import co.touchlab.kermit.Logger
+import ru.pixnews.foundation.dispatchers.ComputationCoroutineDispatcherProvider
+import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
+import ru.pixnews.foundation.dispatchers.MainCoroutineDispatcherProvider
 
-public fun interface LoggerProvider {
-    public fun getLogger(): Logger
+public interface DispatchersHolder {
+    public val computationDispatcherProvider: ComputationCoroutineDispatcherProvider
+    public val mainDispatcherProvider: MainCoroutineDispatcherProvider
+    public val ioDispatcherProvider: IoCoroutineDispatcherProvider
 }

@@ -21,8 +21,8 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.multibindings.Multibinds
 
-@Module
 @ContributesTo(FragmentScope::class)
+@Module
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public interface FragmentModule {
     @Multibinds

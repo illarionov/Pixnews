@@ -24,8 +24,8 @@ import dagger.multibindings.Multibinds
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.scopes.AppScope
 
-@Module
 @ContributesTo(AppScope::class)
+@Module
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public interface InstrumentedTestsInjectorsModule {
     @Multibinds

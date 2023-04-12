@@ -16,7 +16,7 @@
 package ru.pixnews.di.root.component
 
 public interface PixnewsAppComponent :
-    DispatchersProvider,
-    LoggerProvider,
-    FeatureManagerProvider,
-    AppConfigProvider
+    DispatchersHolder,
+    LoggerHolder,
+    FeatureManagerHolder,
+    AppConfigHolder

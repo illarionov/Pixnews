@@ -13,10 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.di.root.component
+package ru.pixnews.foundation.ui.imageloader.coil.inject
 
-import ru.pixnews.foundation.featuretoggles.FeatureManager
+import androidx.annotation.RestrictTo
+import com.squareup.anvil.annotations.ContributesTo
+import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.foundation.ui.imageloader.coil.ImageLoader
+import javax.inject.Provider
 
-public interface FeatureManagerProvider {
-    public fun getFeatureManager(): FeatureManager
+@ContributesTo(AppScope::class)
+@RestrictTo(RestrictTo.Scope.LIBRARY)
+public interface ImageLoaderProviderHolder {
+    public val imageLoaderProvider: Provider<ImageLoader>
 }

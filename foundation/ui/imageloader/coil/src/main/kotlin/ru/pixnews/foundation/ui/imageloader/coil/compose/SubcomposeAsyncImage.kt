@@ -15,6 +15,7 @@
  */
 package ru.pixnews.foundation.ui.imageloader.coil.compose
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.Alignment
@@ -56,6 +57,7 @@ import ru.pixnews.foundation.ui.imageloader.coil.ImageLoaderHolder
  * @param filterQuality Sampling algorithm applied to a bitmap when it is scaled and drawn into the
  *  destination.
  */
+@SuppressLint("VisibleForTests")
 @Composable
 @NonRestartableComposable
 public fun SubcomposeAsyncImage(
@@ -114,6 +116,7 @@ public fun SubcomposeAsyncImage(
  *  destination.
  * @param content A callback to draw the content inside an [SubcomposeAsyncImageScope].
  */
+@SuppressLint("VisibleForTests")
 @Composable
 @NonRestartableComposable
 public fun SubcomposeAsyncImage(

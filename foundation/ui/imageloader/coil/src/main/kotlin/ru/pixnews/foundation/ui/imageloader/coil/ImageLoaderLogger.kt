@@ -29,6 +29,7 @@ private const val LOG_TAG = "ImageLoader"
 internal class ImageLoaderLogger(kermitLogger: Logger) : coil.util.Logger {
     private val logger = kermitLogger.withTag(LOG_TAG)
 
+    @Suppress("UNUSED_PARAMETER", "NO_CORRESPONDING_PROPERTY")
     override var level: Int
         get() = when (logger.config.minSeverity) {
             Verbose -> Log.VERBOSE
@@ -38,7 +39,9 @@ internal class ImageLoaderLogger(kermitLogger: Logger) : coil.util.Logger {
             Error -> Log.ERROR
             Assert -> Log.ASSERT
         }
-        set(value) {}
+        set(value) {
+            /* no-op */
+        }
 
     override fun log(tag: String, priority: Int, message: String?, throwable: Throwable?) {
         val severity = when (priority) {

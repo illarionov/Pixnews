@@ -24,7 +24,7 @@ import ru.pixnews.feature.calendar.model.CalendarScreenState
 import ru.pixnews.foundation.di.ui.base.viewmodel.ContributesViewModel
 import ru.pixnews.foundation.featuretoggles.FeatureManager
 
-@Suppress("UnusedPrivateMember")
+@Suppress("UnusedPrivateMember", "UNUSED_PARAMETER")
 @ContributesViewModel
 internal class CalendarViewModel(
     featureManager: FeatureManager,

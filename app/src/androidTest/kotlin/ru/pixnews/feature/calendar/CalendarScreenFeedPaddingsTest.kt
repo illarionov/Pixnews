@@ -15,10 +15,12 @@
  */
 package ru.pixnews.feature.calendar
 
+import android.os.Build
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.unit.dp
 import co.touchlab.kermit.Logger
+import org.junit.Assume
 import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.MainActivity
@@ -113,6 +115,8 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
 
     @Test
     fun calendarScreen_adjacent_gameCard_gameCard_shouldHaveCorrectPadding() {
+        Assume.assumeTrue("Too far scrolling on small screens", Build.VERSION.SDK_INT > 24)
+
         val game1Id = GameFixtures.sims5.id
         val game2Id = GameFixtures.beyondGoodEvil2.id
         with(gameFeed) {

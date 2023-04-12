@@ -20,4 +20,4 @@ import assertk.Assert
 import assertk.assertions.isZero
 import assertk.assertions.prop
 
-fun Assert<Color>.isTransparent() = prop(Color::alpha).isZero()
+public fun Assert<Color>.isTransparent(): Unit = prop(Color::alpha).isZero()

@@ -15,23 +15,18 @@
  */
 package ru.pixnews.foundation.ui.experiments
 
-import com.squareup.anvil.annotations.ContributesMultibinding
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey.Companion.CONTROL_GROUP
-import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.experimentKey
 import ru.pixnews.foundation.featuretoggles.experimentVariantKey
-import ru.pixnews.foundation.featuretoggles.inject.ExperimentScope
-import ru.pixnews.foundation.featuretoggles.inject.ExperimentVariantMapKey
+import ru.pixnews.foundation.featuretoggles.inject.ContributesExperiment
+import ru.pixnews.foundation.featuretoggles.inject.ContributesExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.serializers.BooleanVariantSerializer
 
-@ContributesMultibinding(
-    scope = ExperimentScope::class,
-    boundType = Experiment::class,
-)
+@ContributesExperiment
 public object DarkModeExperiment : Experiment {
     override val key: ExperimentKey = "ui.dark_mode".experimentKey()
     override val name: String = "Dark mode"
@@ -39,8 +34,7 @@ public object DarkModeExperiment : Experiment {
     override val variants: Map<ExperimentVariantKey, Variant> = listOf(Variant.Control, Variant.Active)
         .associateBy(ExperimentVariant::key)
 
-    @ContributesMultibinding(scope = ExperimentScope::class, boundType = ExperimentVariantSerializer::class)
-    @ExperimentVariantMapKey("ui.dark_mode")
+    @ContributesExperimentVariantSerializer("ui.dark_mode")
     public object Serializer : BooleanVariantSerializer(Variant.Control, Variant.Active)
 
     public sealed class Variant : ExperimentVariant {

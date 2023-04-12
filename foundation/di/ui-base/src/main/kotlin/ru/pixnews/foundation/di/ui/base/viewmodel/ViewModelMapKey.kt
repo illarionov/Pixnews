@@ -13,21 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ru.pixnews.foundation.di.ui.base.viewmodel
 
-import ru.pixnews.gradle.base.versionCatalog
+import androidx.lifecycle.ViewModel
+import dagger.MapKey
+import kotlin.reflect.KClass
 
 /**
- * Convention plugin that configures anvil with generateDaggerFactories turned on
+ * A Dagger multi-binding key used for registering a [ViewModel] into the top level dagger graphs.
  */
-plugins {
-    id("com.squareup.anvil")
-}
-
-anvil {
-    generateDaggerFactories.set(true)
-}
-
-dependencies {
-    add("anvil", project(":foundation:di:anvil-codegen"))
-    add("api", versionCatalog.findLibrary("dagger").orElseThrow())
-}
+@MapKey
+public annotation class ViewModelMapKey(val viewModelClass: KClass<out ViewModel>)

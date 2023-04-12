@@ -25,6 +25,7 @@ plugins {
 }
 
 dependencies {
+    add("anvil", project(":foundation:di:anvil-codegen"))
     add("api", versionCatalog.findLibrary("dagger").orElseThrow())
     add("kapt", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
 }

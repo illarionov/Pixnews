@@ -46,6 +46,7 @@ androidx-tracing = "1.2.0-beta01"
 androidx-tracing-perfetto = "1.0.0-alpha12"
 arrow = "1.1.5-alpha.4"
 assertk = "0.25"
+auto-service = "1.0.1"
 coil = "2.3.0"
 firebase-bom = "31.2.0"
 firebase-crashlytics-plugin = "2.9.4"
@@ -53,6 +54,7 @@ google-services = "4.3.15"
 kermit = "1.2.2"
 kotest = "5.5.5"
 kotest-assertions-arrow = "1.3.0"
+kotlinpoet = "1.13.0"
 material = "1.7.0"
 mockk = "1.13.4"
 okhttp = "4.10.0"
@@ -138,10 +140,14 @@ android-desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_li
 accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist" }
 accompanist-placeholder-material3 = { group = "com.google.accompanist", name = "accompanist-placeholder-material3", version.ref = "accompanist" }
 accompanist-test-harness = { group = "com.google.accompanist", name = "accompanist-testharness", version.ref = "accompanist" }
+anvil-compiler-api = { group = "com.squareup.anvil", name = "compiler-api", version.ref = "anvil" }
+anvil-compiler-utils = { group = "com.squareup.anvil", name = "compiler-utils", version.ref = "anvil" }
 arrow-bom = { group = "io.arrow-kt", name = "arrow-stack", version.ref = "arrow" }
 arrow-core = { group = "io.arrow-kt", name = "arrow-core" }
 arrow-fx = { group = "io.arrow-kt", name = "arrow-fx-coroutines" }
 assertk = { group = "com.willowtreeapps.assertk", name = "assertk-jvm", version.ref = "assertk" }
+auto-service-annotations = { group = "com.google.auto.service", name = "auto-service-annotations", version.ref = "auto-service" }
+auto-service-compiler = { group = "com.google.auto.service", name = "auto-service", version.ref = "auto-service" }
 coil-base = { group = "io.coil-kt", name = "coil-base" }
 coil-bom = { group = "io.coil-kt", name = "coil-bom", version.ref = "coil" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose" }
@@ -181,6 +187,7 @@ kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
 kermit-jvm = { group = "co.touchlab", name = "kermit-jvm", version.ref = "kermit" }
+kotlinpoet = { group = "com.squareup", name = "kotlinpoet", version.ref = "kotlinpoet" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 okhttp-bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref = "okhttp" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }

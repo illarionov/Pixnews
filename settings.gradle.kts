@@ -30,6 +30,7 @@ includeSubproject(":test:app")
 listOf(
     "analytics",
     "appconfig",
+    "di:anvil-codegen",
     "di:base",
     "di:root-component",
     "di:instrumented-test",

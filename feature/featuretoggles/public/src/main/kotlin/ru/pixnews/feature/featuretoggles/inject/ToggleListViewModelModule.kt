@@ -20,34 +20,18 @@ import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
-import dagger.multibindings.IntoMap
-import ru.pixnews.feature.featuretoggles.FeatureToggleListViewModel
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.SingleIn
-import ru.pixnews.foundation.di.ui.base.viewmodel.ViewModelFactory
-import ru.pixnews.foundation.di.ui.base.viewmodel.ViewModelKey
 import ru.pixnews.foundation.di.ui.base.viewmodel.ViewModelScope
 import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
-import ru.pixnews.foundation.featuretoggles.FeatureManager
 import ru.pixnews.foundation.featuretoggles.datasource.overrides.OverridesDataSource
 
 @Module
 @ContributesTo(ViewModelScope::class)
 public object ToggleListViewModelModule {
-    @Provides
-    @IntoMap
-    @ViewModelKey(FeatureToggleListViewModel::class)
-    public fun providesViewModel(
-        featureManager: FeatureManager,
-        overridesDataSource: OverridesDataSource,
-        logger: Logger,
-    ): ViewModelFactory = ViewModelFactory {
-        FeatureToggleListViewModel(featureManager, overridesDataSource, logger)
-    }
-
     @Provides
     @SingleIn(ViewModelScope::class)
     public fun providesOverridesDataSource(

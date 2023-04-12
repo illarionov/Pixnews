@@ -21,9 +21,11 @@ import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ru.pixnews.feature.calendar.model.CalendarScreenState
+import ru.pixnews.foundation.di.ui.base.viewmodel.ContributesViewModel
 import ru.pixnews.foundation.featuretoggles.FeatureManager
 
 @Suppress("UnusedPrivateMember")
+@ContributesViewModel
 internal class CalendarViewModel(
     featureManager: FeatureManager,
     logger: Logger,

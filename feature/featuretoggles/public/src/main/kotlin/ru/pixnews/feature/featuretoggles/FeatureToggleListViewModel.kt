@@ -32,6 +32,7 @@ import ru.pixnews.feature.featuretoggles.model.PermanentErrorMessage
 import ru.pixnews.feature.featuretoggles.model.VariantUiModel
 import ru.pixnews.feature.featuretoggles.model.toExperimentVariant
 import ru.pixnews.feature.featuretoggles.model.toUiModel
+import ru.pixnews.foundation.di.ui.base.viewmodel.ContributesViewModel
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant
@@ -41,6 +42,7 @@ import ru.pixnews.foundation.featuretoggles.datasource.overrides.OverridesDataSo
 import ru.pixnews.library.functional.RequestStatus.Complete
 import ru.pixnews.library.functional.RequestStatus.Loading
 
+@ContributesViewModel
 internal class FeatureToggleListViewModel(
     featureManager: FeatureManager,
     private val overridesDataSource: OverridesDataSource,

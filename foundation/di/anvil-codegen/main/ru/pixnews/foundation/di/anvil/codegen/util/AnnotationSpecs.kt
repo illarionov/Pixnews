@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.di.ui.base.viewmodel
+package ru.pixnews.foundation.di.anvil.codegen.util
 
-import androidx.lifecycle.ViewModel
-import dagger.MapKey
-import kotlin.reflect.KClass
+import com.squareup.kotlinpoet.AnnotationSpec
 
 /**
- * A Dagger multi-binding key used for registering a [ViewModel] into the top level dagger graphs.
+ * `@ContributesTo(className::class)`
  */
-@MapKey
-public annotation class ViewModelKey(val viewModelClass: KClass<out ViewModel>)
+internal fun contributesToAnnotation(className: com.squareup.kotlinpoet.ClassName): AnnotationSpec {
+    return AnnotationSpec.builder(ClassNames.Anvil.contributesTo)
+        .addMember("%T::class", className)
+        .build()
+}

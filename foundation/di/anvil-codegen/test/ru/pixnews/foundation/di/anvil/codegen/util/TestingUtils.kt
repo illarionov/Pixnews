@@ -13,21 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ru.pixnews.foundation.di.anvil.codegen.util
 
-import ru.pixnews.gradle.base.versionCatalog
+import com.squareup.kotlinpoet.ClassName
 
-/**
- * Convention plugin that configures anvil with generateDaggerFactories turned on
- */
-plugins {
-    id("com.squareup.anvil")
-}
+fun ClassLoader.loadClass(clazz: ClassName): Class<*> = this.loadClass(clazz.canonicalName)
 
-anvil {
-    generateDaggerFactories.set(true)
-}
-
-dependencies {
-    add("anvil", project(":foundation:di:anvil-codegen"))
-    add("api", versionCatalog.findLibrary("dagger").orElseThrow())
-}
+public fun <T> Annotation.getElementValue(elementName: String): T =
+    this::class.java.declaredMethods.single { it.name == elementName }.invoke(this) as T

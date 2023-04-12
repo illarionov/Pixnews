@@ -15,15 +15,9 @@
  */
 package ru.pixnews
 
-import android.app.Activity
 import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
-import dagger.MembersInjector
 import dagger.Module
 import dagger.Provides
-import dagger.multibindings.IntoMap
-import ru.pixnews.foundation.di.base.scopes.SingleIn
-import ru.pixnews.foundation.di.ui.base.activity.ActivityKey
 import ru.pixnews.foundation.di.ui.base.activity.ActivityScope
 import ru.pixnews.foundation.featuretoggles.FeatureManager
 import ru.pixnews.foundation.featuretoggles.FeatureToggle
@@ -32,19 +26,11 @@ import ru.pixnews.foundation.ui.experiments.DarkModeExperiment
 
 @Module
 @ContributesTo(ActivityScope::class)
-public interface MainActivityModule {
-    @Binds
-    @IntoMap
-    @ActivityKey(MainActivity::class)
-    @SingleIn(ActivityScope::class)
-    public fun bindsMainInjector(target: MembersInjector<MainActivity>): MembersInjector<out Activity>
-
-    companion object {
-        @Provides
-        fun providesDarkModeExperiment(
-            featureManager: FeatureManager,
-        ): FeatureToggle<DarkModeExperiment> {
-            return featureManager.getFeatureToggle(DarkModeExperiment)
-        }
+object MainActivityModule {
+    @Provides
+    fun providesDarkModeExperiment(
+        featureManager: FeatureManager,
+    ): FeatureToggle<DarkModeExperiment> {
+        return featureManager.getFeatureToggle(DarkModeExperiment)
     }
 }

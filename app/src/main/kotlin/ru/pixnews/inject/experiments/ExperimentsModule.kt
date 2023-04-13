@@ -13,26 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.experiments
+package ru.pixnews.inject.experiments
 
-import com.squareup.anvil.annotations.MergeComponent
+import com.squareup.anvil.annotations.ContributesTo
+import dagger.Module
+import dagger.Provides
+import dagger.Reusable
+import dagger.multibindings.Multibinds
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.DaggerSet
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.inject.ExperimentScope
 
-@SingleIn(ExperimentScope::class)
-@MergeComponent(scope = ExperimentScope::class)
-public interface ExperimentsComponent {
-    public fun appExperiments(): DaggerSet<Experiment>
+@Module
+@ContributesTo(ExperimentScope::class)
+public abstract class ExperimentsModule {
+    @Multibinds
+    public abstract fun appExperiments(): DaggerSet<Experiment>
 
-    @Suppress("MaxLineLength")
-    public fun appExperimentVariantSerializers(): DaggerMap<ExperimentKey, ExperimentVariantSerializer>
+    @Multibinds
+    public abstract fun appExperimentSerializers(): DaggerMap<String, ExperimentVariantSerializer>
 
-    public companion object {
-        public operator fun invoke(): ExperimentsComponent = DaggerExperimentsComponent.create()
+    companion object {
+        @Provides
+        @Reusable
+        public fun provideAppExperimentVariantSerializers(
+            serializers: DaggerMap<String, ExperimentVariantSerializer>,
+        ): DaggerMap<ExperimentKey, ExperimentVariantSerializer> {
+            return serializers
+                .mapKeys { (k, _) -> ExperimentKey(k) }
+        }
     }
 }

@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.initializer
+package ru.pixnews.inject.initializer
+
+import ru.pixnews.PixnewsAppInitializer
 
 interface PixnewsAppInitializerComponent {
     fun inject(initializer: PixnewsAppInitializer)

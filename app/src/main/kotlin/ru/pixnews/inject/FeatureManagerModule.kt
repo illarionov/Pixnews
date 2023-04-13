@@ -22,12 +22,13 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
+import ru.pixnews.foundation.coroutines.RootCoroutineScope
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
-import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
@@ -54,10 +55,11 @@ public object FeatureManagerModule {
     public fun providesFirebaseDataSource(
         remoteConfig: FirebaseRemoteConfig,
         serializers: DaggerMap<ExperimentKey, ExperimentVariantSerializer>,
+        rootScope: RootCoroutineScope,
         ioDispatcherProvider: IoCoroutineDispatcherProvider,
         logger: Logger,
     ): FeatureToggleDataSource {
-        return FirebaseDataSource(remoteConfig, serializers, ioDispatcherProvider, logger)
+        return FirebaseDataSource(remoteConfig, serializers, rootScope, ioDispatcherProvider.get(), logger)
     }
 
     @Provides
@@ -66,12 +68,13 @@ public object FeatureManagerModule {
     public fun providesOverridesDataSource(
         @ApplicationContext context: Context,
         serializers: DaggerMap<ExperimentKey, ExperimentVariantSerializer>,
+        rootCoroutineScope: RootCoroutineScope,
         ioDispatcherProvider: IoCoroutineDispatcherProvider,
         logger: Logger,
         appConfig: AppConfig,
     ): FeatureToggleDataSource? {
         return if (appConfig.isDebug) {
-            OverridesDataSource(context, serializers, ioDispatcherProvider, logger)
+            OverridesDataSource(context, serializers, rootCoroutineScope, ioDispatcherProvider.get(), logger)
         } else {
             null
         }

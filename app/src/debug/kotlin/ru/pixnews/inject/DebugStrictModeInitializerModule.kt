@@ -13,9 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.dispatchers
+package ru.pixnews.inject
 
-import kotlinx.coroutines.CoroutineDispatcher
-import javax.inject.Provider
+import com.squareup.anvil.annotations.ContributesTo
+import dagger.Binds
+import dagger.Module
+import dagger.multibindings.IntoSet
+import ru.pixnews.foundation.initializers.Initializer
+import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
+import ru.pixnews.initializers.DebugStrictModeInitializer
 
-public fun interface ComputationCoroutineDispatcherProvider : Provider<CoroutineDispatcher>
+@ContributesTo(AppInitializersScope::class)
+@Module
+interface DebugStrictModeInitializerModule {
+    @Binds
+    @IntoSet
+    fun enableStrictMode(initializer: DebugStrictModeInitializer): Initializer
+}

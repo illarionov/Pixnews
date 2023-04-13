@@ -13,20 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.inject.initializers
+package ru.pixnews.di.root.component
 
-import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
-import dagger.Module
-import dagger.multibindings.IntoSet
-import ru.pixnews.foundation.initializers.Initializer
-import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
-import ru.pixnews.initializers.DebugStrictModeInitializer
+import ru.pixnews.foundation.coroutines.RootCoroutineScope
 
-@ContributesTo(AppInitializersScope::class)
-@Module
-interface DebugStrictModeInitializerModule {
-    @Binds
-    @IntoSet
-    fun enableStrictMode(initializer: DebugStrictModeInitializer): Initializer
+public interface RootCoroutineScopeHolder {
+    public val rootCoroutineScope: RootCoroutineScope
 }

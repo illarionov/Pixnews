@@ -13,9 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.dispatchers
 
-import kotlinx.coroutines.MainCoroutineDispatcher
-import javax.inject.Provider
+plugins {
+    id("ru.pixnews.gradle.kotlin.library")
+}
 
-public fun interface MainCoroutineDispatcherProvider : Provider<MainCoroutineDispatcher>
+group = "ru.pixnews.foundation.coroutines"
+
+dependencies {
+    api(libs.inject)
+    api(libs.kotlinx.coroutines.android)
+}

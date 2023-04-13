@@ -13,30 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.inject.logging
+package ru.pixnews.inject
 
-import co.touchlab.kermit.LogcatWriter
+import co.touchlab.kermit.LogWriter
 import co.touchlab.kermit.Logger
-import co.touchlab.kermit.Severity.Verbose
+import co.touchlab.kermit.Severity
 import co.touchlab.kermit.StaticConfig
+import com.google.firebase.FirebaseApp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.logging.CrashlyticsLogWriter
+import javax.inject.Named
 
 @ContributesTo(AppScope::class)
 @Module
 object LoggingModule {
     @Provides
     @Reusable
-    fun provideLogger(): Logger {
-        val config = StaticConfig(
-            minSeverity = Verbose,
-            logWriterList = listOf(
-                LogcatWriter(),
-            ),
+    @Named("CrashlyticsLogWriter")
+    fun provideCrashlyticsLogWriter(firebase: FirebaseApp): LogWriter {
+        return CrashlyticsLogWriter(
+            crashlytics = firebase.get(FirebaseCrashlytics::class.java),
+            minSeverity = Severity.Info,
+            minCrashSeverity = Severity.Warn,
         )
-        return Logger(config).withTag("PixnewsDBG")
+    }
+
+    @Provides
+    @Reusable
+    fun provideLogger(
+        @Named("CrashlyticsLogWriter") logWriter: LogWriter,
+    ): Logger {
+        val config = StaticConfig(
+            minSeverity = Severity.Info,
+            logWriterList = listOf(logWriter),
+        )
+        return Logger(config).withTag("Pixnews")
     }
 }

@@ -25,5 +25,5 @@ import ru.pixnews.foundation.network.RootOkHttpClientProvider
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public interface OkHttpProvidersHolder {
     public val rootOkHttpClientProvider: RootOkHttpClientProvider
-    public val okkHttpClientProvider: OkHttpClientProvider
+    public val okHttpClientProvider: OkHttpClientProvider
 }

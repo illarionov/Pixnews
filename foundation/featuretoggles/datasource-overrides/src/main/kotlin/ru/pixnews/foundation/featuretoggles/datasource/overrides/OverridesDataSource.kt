@@ -22,12 +22,11 @@ import arrow.core.flatMap
 import arrow.core.left
 import arrow.core.right
 import co.touchlab.kermit.Logger
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -36,7 +35,6 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
@@ -47,6 +45,7 @@ import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceErro
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.DataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
 import ru.pixnews.library.coroutines.asRequestStatus
+import ru.pixnews.library.coroutines.newChildSupervisorScope
 import ru.pixnews.library.functional.RequestStatus
 import ru.pixnews.library.functional.RequestStatus.Loading
 import ru.pixnews.library.functional.completeFailure
@@ -56,18 +55,16 @@ import ru.pixnews.library.functional.mapComplete
 public class OverridesDataSource constructor(
     private val dataStore: DataStore<Overrides>,
     private val serializers: Map<ExperimentKey, ExperimentVariantSerializer>,
-    private val backgroundDispatcherProvider: IoCoroutineDispatcherProvider,
+    rootCoroutineScope: CoroutineScope,
+    private val backgroundDispatcher: CoroutineDispatcher,
     logger: Logger,
 ) : FeatureToggleDataSource {
     private val log = logger.withTag(TAG)
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         log.e(throwable) { "Unhandled coroutine exception in $TAG" }
     }
-    private val scope: CoroutineScope = CoroutineScope(
-        backgroundDispatcherProvider.get() +
-                SupervisorJob() +
-                exceptionHandler +
-                CoroutineName("$TAG scope"),
+    private val scope: CoroutineScope = rootCoroutineScope.newChildSupervisorScope(
+        backgroundDispatcher + exceptionHandler + CoroutineName("$TAG scope"),
     )
     private val overridesFlow: StateFlow<RequestStatus<Throwable, Overrides>> = dataStore.data
         .asRequestStatus()
@@ -85,12 +82,14 @@ public class OverridesDataSource constructor(
     public constructor(
         context: Context,
         serializers: Map<ExperimentKey, ExperimentVariantSerializer>,
-        ioDispatcherProvider: IoCoroutineDispatcherProvider,
+        rootCoroutineScope: CoroutineScope,
+        backgroundDispatcher: CoroutineDispatcher,
         logger: Logger,
     ) : this(
         context.applicationContext.overridesDataStore,
         serializers,
-        ioDispatcherProvider,
+        rootCoroutineScope,
+        backgroundDispatcher,
         logger,
     )
 
@@ -113,7 +112,7 @@ public class OverridesDataSource constructor(
                     Either.catch { overrides.deserialize() }
                 }
             }
-        }.flowOn(backgroundDispatcherProvider.get())
+        }.flowOn(backgroundDispatcher)
     }
 
     private fun deserializeVariant(
@@ -165,10 +164,6 @@ public class OverridesDataSource constructor(
 
     override suspend fun awaitUntilInitialized() {
         initJob.join()
-    }
-
-    public fun cancel() {
-        scope.cancel()
     }
 
     private companion object {

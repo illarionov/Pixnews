@@ -63,7 +63,8 @@ class DataSourceUnderTestInitializer(
         dataSource = OverridesDataSource(
             dataStore = dataStore,
             serializers = serializers,
-            backgroundDispatcherProvider = { backgroundDispatcher },
+            rootCoroutineScope = testScope.backgroundScope,
+            backgroundDispatcher = backgroundDispatcher,
             logger = TestingLoggers.consoleLogger,
         )
     }

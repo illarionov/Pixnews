@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.dispatchers
+package ru.pixnews.foundation.coroutines
 
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Provider

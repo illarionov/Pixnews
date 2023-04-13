@@ -15,6 +15,7 @@
  */
 package ru.pixnews.foundation.ui.imageloader.coil.test
 
+import android.annotation.SuppressLint
 import android.content.Context
 import org.junit.rules.ExternalResource
 import ru.pixnews.foundation.ui.imageloader.coil.ImageLoader
@@ -25,6 +26,7 @@ public class FakeImageLoaderRule(context: () -> Context) : ExternalResource() {
         FakeImageLoader.Builder(context()).build()
     }
 
+    @SuppressLint("VisibleForTests")
     override fun before() {
         ImageLoaderHolder.overrideImageLoaderInitializer { imageLoader }
     }

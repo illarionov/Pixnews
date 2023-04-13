@@ -13,30 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.inject
+package ru.pixnews.app.inject
 
-import co.touchlab.kermit.LogcatWriter
 import co.touchlab.kermit.Logger
-import co.touchlab.kermit.Severity.Verbose
-import co.touchlab.kermit.StaticConfig
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import ru.pixnews.foundation.coroutines.GlobalExceptionHandler
 import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.inject.DevelopmentExceptionHandlersModule
 
-@ContributesTo(AppScope::class, replaces = [LoggingModule::class])
+@ContributesTo(AppScope::class, replaces = [DevelopmentExceptionHandlersModule::class])
 @Module
-class TestLoggingModule {
+object ReleaseExceptionHandlerModule {
     @Provides
     @Reusable
-    fun provideLogger(): Logger {
-        val config = StaticConfig(
-            minSeverity = Verbose,
-            logWriterList = listOf(
-                LogcatWriter(),
-            ),
-        )
-        return Logger(config).withTag("PixnewsAndroidTest")
+    fun provideGlobalExceptionHandler(
+        logger: Logger,
+    ): GlobalExceptionHandler = GlobalExceptionHandler { _, exception ->
+        logger.e("Uncaught coroutine exception", exception)
     }
 }

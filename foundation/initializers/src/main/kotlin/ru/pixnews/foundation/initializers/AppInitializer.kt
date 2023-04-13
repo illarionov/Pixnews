@@ -19,16 +19,17 @@ import androidx.tracing.Trace
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import ru.pixnews.library.coroutines.newChildScope
 
 public class AppInitializer(
     private val initializers: Set<Initializer> = emptySet(),
     private val asyncInitializers: Set<AsyncInitializer> = emptySet(),
+    rootCoroutineScope: CoroutineScope = MainScope(),
     asyncDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
-    private val scope: CoroutineScope = CoroutineScope(Job() + asyncDispatcher)
+    private val scope: CoroutineScope = rootCoroutineScope.newChildScope(asyncDispatcher)
 
     public fun init() {
         startInitAsyncInitializers()
@@ -74,10 +75,6 @@ public class AppInitializer(
                 Trace.endSection()
             }
         }
-    }
-
-    public fun cancel() {
-        scope.cancel()
     }
 
     public companion object {

@@ -19,8 +19,9 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.Multibinds
+import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
+import ru.pixnews.foundation.coroutines.RootCoroutineScope
 import ru.pixnews.foundation.di.base.DaggerSet
-import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.initializers.AppInitializer
 import ru.pixnews.foundation.initializers.AsyncInitializer
 import ru.pixnews.foundation.initializers.Initializer
@@ -40,9 +41,10 @@ abstract class PixnewsInitializersModule {
         fun providesAppInitializer(
             initializers: DaggerSet<Initializer>,
             asyncInitializers: DaggerSet<AsyncInitializer>,
+            rootCoroutineScope: RootCoroutineScope,
             dispatcher: IoCoroutineDispatcherProvider,
         ): AppInitializer {
-            return AppInitializer(initializers, asyncInitializers, dispatcher.get())
+            return AppInitializer(initializers, asyncInitializers, rootCoroutineScope, dispatcher.get())
         }
     }
 }

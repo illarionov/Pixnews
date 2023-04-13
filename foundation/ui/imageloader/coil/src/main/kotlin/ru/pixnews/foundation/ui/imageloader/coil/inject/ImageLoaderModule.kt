@@ -39,13 +39,13 @@ import dagger.multibindings.IntoSet
 import dagger.multibindings.Multibinds
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.appconfig.NetworkConfig
+import ru.pixnews.foundation.coroutines.ComputationCoroutineDispatcherProvider
+import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
+import ru.pixnews.foundation.coroutines.MainCoroutineDispatcherProvider
 import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
-import ru.pixnews.foundation.dispatchers.ComputationCoroutineDispatcherProvider
-import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
-import ru.pixnews.foundation.dispatchers.MainCoroutineDispatcherProvider
 import ru.pixnews.foundation.network.RootOkHttpClientProvider
 import ru.pixnews.foundation.ui.imageloader.coil.DelegatingImageLoader
 import ru.pixnews.foundation.ui.imageloader.coil.ImageLoader

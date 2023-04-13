@@ -15,9 +15,9 @@
  */
 package ru.pixnews.di.root.component
 
-import ru.pixnews.foundation.dispatchers.ComputationCoroutineDispatcherProvider
-import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
-import ru.pixnews.foundation.dispatchers.MainCoroutineDispatcherProvider
+import ru.pixnews.foundation.coroutines.ComputationCoroutineDispatcherProvider
+import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
+import ru.pixnews.foundation.coroutines.MainCoroutineDispatcherProvider
 
 public interface DispatchersHolder {
     public val computationDispatcherProvider: ComputationCoroutineDispatcherProvider

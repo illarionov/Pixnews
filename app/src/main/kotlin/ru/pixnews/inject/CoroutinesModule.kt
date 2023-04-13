@@ -20,14 +20,18 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import kotlinx.coroutines.Dispatchers
+import ru.pixnews.coroutines.DefaultRootCoroutineScope
+import ru.pixnews.foundation.coroutines.ComputationCoroutineDispatcherProvider
+import ru.pixnews.foundation.coroutines.GlobalExceptionHandler
+import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
+import ru.pixnews.foundation.coroutines.MainCoroutineDispatcherProvider
+import ru.pixnews.foundation.coroutines.RootCoroutineScope
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.dispatchers.ComputationCoroutineDispatcherProvider
-import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
-import ru.pixnews.foundation.dispatchers.MainCoroutineDispatcherProvider
+import ru.pixnews.foundation.di.base.scopes.SingleIn
 
 @ContributesTo(AppScope::class)
 @Module
-object DispatchersModule {
+object CoroutinesModule {
     @Provides
     @Reusable
     fun provideMainDispatcherProvider(): MainCoroutineDispatcherProvider =
@@ -41,4 +45,14 @@ object DispatchersModule {
     @Reusable
     fun provideComputationDispatcherProvider(): ComputationCoroutineDispatcherProvider =
         ComputationCoroutineDispatcherProvider(Dispatchers::Default)
+
+    @Provides
+    @SingleIn(AppScope::class)
+    fun provideRootCoroutineScope(
+        rootDispatcherProvider: ComputationCoroutineDispatcherProvider,
+        exceptionHandler: GlobalExceptionHandler,
+    ): RootCoroutineScope = DefaultRootCoroutineScope(
+        dispatcher = rootDispatcherProvider.get(),
+        exceptionHandler = exceptionHandler,
+    )
 }

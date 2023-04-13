@@ -35,7 +35,7 @@ listOf(
     "di:root-component",
     "di:instrumented-test",
     "di:ui-base",
-    "dispatchers",
+    "coroutines",
     "featuretoggles:public",
     "featuretoggles:internal",
     "featuretoggles:datasource-firebase",

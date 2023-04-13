@@ -76,7 +76,8 @@ class FirebaseDataSourceTest {
         dataSource = FirebaseDataSource(
             remoteConfig = remoteConfig,
             serializers = serializers,
-            ioDispatcherProvider = { backgroundDispatcher },
+            rootCoroutineScope = coroutinesExt.testScope.backgroundScope,
+            backgroundDispatcher = backgroundDispatcher,
             logger = TestingLoggers.consoleLogger,
         )
     }

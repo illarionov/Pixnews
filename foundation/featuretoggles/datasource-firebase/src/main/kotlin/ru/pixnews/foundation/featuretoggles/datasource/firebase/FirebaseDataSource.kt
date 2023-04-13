@@ -18,12 +18,11 @@ package ru.pixnews.foundation.featuretoggles.datasource.firebase
 import co.touchlab.kermit.Logger
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -31,7 +30,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import ru.pixnews.foundation.di.base.DaggerMap
-import ru.pixnews.foundation.dispatchers.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
@@ -41,6 +39,7 @@ import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSource
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.DataSourceError
 import ru.pixnews.foundation.featuretoggles.internal.FeatureToggleDataSourceError.ExperimentNotFound
+import ru.pixnews.library.coroutines.newChildSupervisorScope
 import ru.pixnews.library.functional.RequestStatus.Loading
 import kotlin.time.Duration.Companion.seconds
 
@@ -48,18 +47,16 @@ import kotlin.time.Duration.Companion.seconds
 public class FirebaseDataSource(
     private val remoteConfig: FirebaseRemoteConfig,
     private val serializers: DaggerMap<ExperimentKey, ExperimentVariantSerializer>,
-    ioDispatcherProvider: IoCoroutineDispatcherProvider,
+    rootCoroutineScope: CoroutineScope,
+    backgroundDispatcher: CoroutineDispatcher,
     logger: Logger,
 ) : FeatureToggleDataSource {
     private val log = logger.withTag("FirebaseDataSource")
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         log.e(throwable) { "Unhandled coroutine exception in FirebaseDataSource" }
     }
-    private val scope: CoroutineScope = CoroutineScope(
-        ioDispatcherProvider.get() +
-                SupervisorJob() +
-                exceptionHandler +
-                CoroutineName("FirebaseDataSource scope"),
+    private val scope: CoroutineScope = rootCoroutineScope.newChildSupervisorScope(
+        backgroundDispatcher + exceptionHandler + CoroutineName("FirebaseDataSource scope"),
     )
     private val initFirebaseJob: Job = scope.launch {
         val activatedStatus = remoteConfig.activate().await()
@@ -112,10 +109,6 @@ public class FirebaseDataSource(
 
     override suspend fun awaitUntilInitialized() {
         initFirebaseJob.join()
-    }
-
-    public fun cancel() {
-        scope.cancel()
     }
 
     private companion object {

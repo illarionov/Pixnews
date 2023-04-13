@@ -13,26 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ru.pixnews.foundation.coroutines
 
-plugins {
-    id("ru.pixnews.gradle.android.library")
-}
+import kotlinx.coroutines.MainCoroutineDispatcher
+import javax.inject.Provider
 
-pixnews {
-    compose.set(false)
-    managedDevices.set(false)
-}
-
-android {
-    namespace = "ru.pixnews.foundation.di.root.component"
-}
-
-dependencies {
-    api(projects.foundation.di.base)
-    api(projects.foundation.analytics)
-    api(projects.foundation.appconfig)
-    api(projects.foundation.coroutines)
-    api(projects.foundation.featuretoggles.public)
-    api(projects.foundation.featuretoggles.datasourceOverrides)
-    api(libs.kermit)
-}
+public fun interface MainCoroutineDispatcherProvider : Provider<MainCoroutineDispatcher>

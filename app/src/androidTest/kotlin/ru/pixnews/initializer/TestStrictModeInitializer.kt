@@ -30,7 +30,7 @@ import com.squareup.anvil.annotations.ContributesMultibinding
 import ru.pixnews.MainActivity
 import ru.pixnews.foundation.initializers.Initializer
 import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
-import ru.pixnews.inject.initializers.DebugStrictModeInitializerModule
+import ru.pixnews.inject.DebugStrictModeInitializerModule
 import java.util.concurrent.Executors
 import javax.inject.Inject
 

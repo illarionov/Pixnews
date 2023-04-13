@@ -15,28 +15,24 @@
  */
 package ru.pixnews.inject
 
-import co.touchlab.kermit.LogcatWriter
-import co.touchlab.kermit.Logger
-import co.touchlab.kermit.Severity.Verbose
-import co.touchlab.kermit.StaticConfig
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import ru.pixnews.foundation.coroutines.GlobalExceptionHandler
 import ru.pixnews.foundation.di.base.scopes.AppScope
 
-@ContributesTo(AppScope::class, replaces = [LoggingModule::class])
 @Module
-class TestLoggingModule {
+@ContributesTo(AppScope::class)
+object DevelopmentExceptionHandlersModule {
     @Provides
     @Reusable
-    fun provideLogger(): Logger {
-        val config = StaticConfig(
-            minSeverity = Verbose,
-            logWriterList = listOf(
-                LogcatWriter(),
-            ),
-        )
-        return Logger(config).withTag("PixnewsAndroidTest")
+    fun provideGlobalExceptionHandler(): GlobalExceptionHandler = GlobalExceptionHandler { _, exception ->
+        throw UncaughtCoroutineException("Uncaught coroutine exception", exception)
     }
+
+    internal class UncaughtCoroutineException(
+        message: String,
+        cause: Throwable,
+    ) : RuntimeException(message, cause)
 }

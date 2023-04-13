@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.library.coroutines)
     api(libs.inject)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.tracing)

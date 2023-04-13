@@ -31,9 +31,10 @@ android {
 dependencies {
     api(projects.foundation.appconfig)
     api(projects.foundation.di.base)
-    api(projects.foundation.dispatchers)
+    api(projects.foundation.coroutines)
     api(projects.foundation.featuretoggles.public)
     api(projects.foundation.featuretoggles.internal)
+    implementation(projects.library.coroutines)
 
     api(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)

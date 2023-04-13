@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    api(projects.foundation.dispatchers)
+    api(projects.foundation.coroutines)
     api(projects.foundation.featuretoggles.public)
     api(projects.foundation.featuretoggles.internal)
     api(projects.library.coroutines)

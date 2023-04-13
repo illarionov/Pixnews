@@ -13,14 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ru.pixnews.foundation.coroutines
 
-plugins {
-    id("ru.pixnews.gradle.kotlin.library")
-}
+import kotlin.coroutines.CoroutineContext
 
-group = "ru.pixnews.foundation.dispatchers"
-
-dependencies {
-    api(libs.inject)
-    implementation(libs.kotlinx.coroutines.android)
+public fun interface GlobalExceptionHandler {
+    public fun handleException(context: CoroutineContext, exception: Throwable)
 }

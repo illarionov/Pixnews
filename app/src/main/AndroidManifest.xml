@@ -49,7 +49,7 @@
             android:exported="false"
             tools:node="merge">
             <meta-data
-                android:name="ru.pixnews.initializer.PixnewsAppInitializer"
+                android:name="ru.pixnews.PixnewsAppInitializer"
                 android:value="androidx.startup" />
         </provider>
 

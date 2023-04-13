@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.initializer
+package ru.pixnews
 
 import android.content.Context
 import androidx.startup.Initializer
-import ru.pixnews.PixnewsComponentsFactory
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
 import ru.pixnews.foundation.initializers.AppInitializer
 import javax.inject.Inject

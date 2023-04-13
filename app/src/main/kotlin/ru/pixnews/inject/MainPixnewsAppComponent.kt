@@ -20,10 +20,10 @@ import com.squareup.anvil.annotations.MergeComponent
 import dagger.BindsInstance
 import dagger.Component
 import ru.pixnews.di.root.component.PixnewsAppComponent
-import ru.pixnews.experiments.ExperimentsComponent
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.di.base.scopes.SingleIn
+import ru.pixnews.inject.experiments.ExperimentsComponent
 
 @MergeComponent(
     scope = AppScope::class,

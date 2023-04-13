@@ -13,25 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.initializer
+package ru.pixnews.inject.initializer
 
 import com.squareup.anvil.annotations.MergeComponent
-import dagger.Component
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
 
-/**
- * AppInitializersScope component used to collect all initializers into multibining set
- */
 @SingleIn(AppInitializersScope::class)
 @MergeComponent(
     scope = AppInitializersScope::class,
     dependencies = [PixnewsAppComponent::class],
 )
-interface MainPixnewsAppInitializerComponent : PixnewsAppInitializerComponent {
-    @Component.Factory
+interface TestPixnewsAppInitializerComponent : PixnewsAppInitializerComponent {
+    @dagger.Component.Factory
     fun interface Factory {
-        fun create(appComponent: PixnewsAppComponent): MainPixnewsAppInitializerComponent
+        fun create(appComponent: PixnewsAppComponent): TestPixnewsAppInitializerComponent
     }
 }

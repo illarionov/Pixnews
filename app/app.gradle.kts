@@ -18,7 +18,7 @@ plugins {
     id("ru.pixnews.gradle.android.application")
     id("ru.pixnews.gradle.android.crashlytics")
     id("ru.pixnews.gradle.di.anvil-kapt")
-    alias(libs.plugins.google.services)
+    id("ru.pixnews.gradle.config.firebase")
 }
 
 pixnews {
@@ -35,6 +35,7 @@ android {
 
     buildFeatures {
         buildConfig = true
+        resValues = true
     }
 
     lint {

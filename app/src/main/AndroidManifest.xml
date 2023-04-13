@@ -30,7 +30,9 @@
         android:theme="@style/Theme.Pixnews"
         android:usesCleartextTraffic="false"
         tools:ignore="UnusedAttribute">
-        <profileable android:shell="true" tools:targetApi="q" />
+        <profileable
+            android:shell="true"
+            tools:targetApi="q" />
 
         <activity
             android:name=".MainActivity"
@@ -52,6 +54,12 @@
                 android:name="ru.pixnews.PixnewsAppInitializer"
                 android:value="androidx.startup" />
         </provider>
+
+        <!-- Firebase is initialized manually in code -->
+        <provider
+            android:name="com.google.firebase.provider.FirebaseInitProvider"
+            android:authorities="${applicationId}.firebaseinitprovider"
+            tools:node="remove" />
 
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"

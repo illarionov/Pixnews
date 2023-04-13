@@ -16,6 +16,7 @@
 package ru.pixnews.gradle.base
 
 import org.gradle.api.Project
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.create
@@ -28,11 +29,19 @@ public open class PixnewsExtension
 constructor(
     objects: ObjectFactory,
 ) {
+    val configFile: RegularFileProperty = objects.fileProperty()
+        .convention(objects.directoryProperty().file("config/pixnews.properties"))
     val compose: Property<Boolean> = objects.property<Boolean>().convention(false)
     val managedDevices: Property<Boolean> = objects.property<Boolean>().convention(false)
     val unitTestEngine: Property<UnitTestEngine> = objects.property<UnitTestEngine>().convention(JUNIT5)
 }
 
 public fun Project.createPixnewsExtension(): PixnewsExtension {
-    return extensions.create("pixnews")
+    return extensions.create<PixnewsExtension>("pixnews").apply {
+        this.configFile.convention(
+            provider {
+                project.rootProject.layout.projectDirectory.file("config/pixnews.properties")
+            },
+        )
+    }
 }

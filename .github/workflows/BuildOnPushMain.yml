@@ -72,7 +72,7 @@ jobs:
         run: |
           rm -f config/signing/release.jks
           rm -f config/signing/release.properties
-          rm -f app/src/google-services.json
+          rm -f config/pixnews.properties
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
@@ -146,10 +146,10 @@ jobs:
         run: |
           yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses
 
-      - name: Unpack google-services.json
+      - name: Unpack pixnews.properties
         env:
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: echo "$GOOGLE_SERVICES_JSON" | base64 -d | zstd -d  -o app/src/google-services.json
+          PIXNEWS_CONFIG: ${{ secrets.PIXNEWS_CONFIG }}
+        run: echo "$PIXNEWS_CONFIG" | base64 -d | zstd -d  -o config/pixnews.properties
 
       - name: Clean unused managed devices
         run: >
@@ -169,11 +169,11 @@ jobs:
           -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
           -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=""
           pixel2api30DebugAndroidTest
-          --continue --info
+          --continue
 
       - name: Cleanup secrets
         if: ${{ always() }}
-        run: rm -f app/src/google-services.json
+        run: rm -f config/pixnews.properties
 
       - name: Publish instrumented test results
         uses: EnricoMi/publish-unit-test-result-action/composite@v2

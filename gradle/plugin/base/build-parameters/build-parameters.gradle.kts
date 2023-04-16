@@ -31,6 +31,12 @@ buildParameters {
         description.set("Going to build the final release version.")
         fromEnvironment()
     }
+    string("config") {
+        fromEnvironment()
+        description.set("Path to the .properties file with all configurations and API keys")
+        defaultValue.set("config/pixnews.properties")
+    }
+
     group("signing") {
         bool("sign_with_debug_keys") {
             description.set("Sign release build type with debug keys")

@@ -20,6 +20,7 @@ import dagger.Component
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
+import ru.pixnews.inject.FirebaseModule.FirebaseProviderHolder
 
 /**
  * AppInitializersScope component used to collect all initializers into multibining set
@@ -27,11 +28,14 @@ import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
 @SingleIn(AppInitializersScope::class)
 @MergeComponent(
     scope = AppInitializersScope::class,
-    dependencies = [PixnewsAppComponent::class],
+    dependencies = [PixnewsAppComponent::class, FirebaseProviderHolder::class],
 )
 interface MainPixnewsAppInitializerComponent : PixnewsAppInitializerComponent {
     @Component.Factory
     fun interface Factory {
-        fun create(appComponent: PixnewsAppComponent): MainPixnewsAppInitializerComponent
+        fun create(
+            appComponent: PixnewsAppComponent,
+            firebaseProviderHolder: FirebaseProviderHolder,
+        ): MainPixnewsAppInitializerComponent
     }
 }

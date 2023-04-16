@@ -20,14 +20,22 @@ import com.google.firebase.FirebaseApp
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
+import ru.pixnews.firebase.GeneratedFirebaseOptions
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.foundation.di.base.scopes.SingleIn
 
 @ContributesTo(AppScope::class)
 @Module
 public object FirebaseModule {
     @Provides
+    @SingleIn(AppScope::class)
     public fun provideFirebaseApp(@ApplicationContext context: Context): FirebaseApp {
-        return FirebaseApp.initializeApp(context) ?: error("Could not initialize firebase")
+        return FirebaseApp.initializeApp(context, GeneratedFirebaseOptions.firebaseOptions)
+    }
+
+    @ContributesTo(AppScope::class)
+    public interface FirebaseProviderHolder {
+        fun getFirebaseAppProvider(): FirebaseApp
     }
 }

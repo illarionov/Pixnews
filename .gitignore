@@ -12,6 +12,7 @@ build/
 keystore.properties
 local.properties
 secret.properties
+config/pixnews.properties
 config/signing/release.properties
 config/signing/release.jks
 

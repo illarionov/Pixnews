@@ -33,6 +33,7 @@ dependencyResolutionManagement {
 
 includeSubproject("base")
 includeSubproject("android")
+includeSubproject("config")
 includeSubproject("di")
 includeSubproject("kotlin")
 includeSubproject("lint")

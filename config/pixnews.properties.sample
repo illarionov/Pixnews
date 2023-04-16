@@ -1,0 +1,26 @@
+### Firebase configuration
+# {YOUR_CLIENT}/client_info/mobilesdk_app_id in google-services.json
+# firebase_google_app_id = 1:1035469437089:android:73a4fb8297b2cd4f
+
+# project_info/project_number in google-services.json
+# firebase_gcm_default_sender_id = 1035469437089
+
+# {YOUR_CLIENT}/services/analytics-service/analytics_property/tracking_id in google-services.json
+# firebase_ga_tracking_id = UA-65557217-3
+
+# project_info/firebase_url in google-services.json
+# firebase_database_url = https://pixnews-ru.firebaseio.com
+
+# {YOUR_CLIENT}/api_key/current_key in google-services.json
+# firebase_google_api_key = AIzbSyCILMsOuUKwN3qhtxrPq7FFemDJUAXTyZ8
+
+# project_info/project_id in google-services.json
+# firebase_project_id = pixnews-ru
+
+# project_info/storage_bucket in google-services.json
+# firebase_storage_bucket = pixnews-ru.appspot.com
+
+# google_app_id for different build types
+# firebase_ru_pixnews_google_app_id = 1:1035469437089:android:112233445566778899aabb
+# firebase_ru_pixnews_benchmark_google_app_id = 1:1035469437089:android:2233445566778899aabbcc
+# firebase_ru_pixnews_debug_google_app_id = 1:1035469437089:android:33445566778899aabbccdd

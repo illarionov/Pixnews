@@ -65,7 +65,7 @@ jobs:
       - name: Assemble release build, run static-analysis, build release
         run: >
           ./gradlew -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
-          lintRelease assembleRelease --stacktrace
+          app:lintRelease assembleRelease --stacktrace
 
       - name: Cleanup secrets
         if: ${{ always() }}

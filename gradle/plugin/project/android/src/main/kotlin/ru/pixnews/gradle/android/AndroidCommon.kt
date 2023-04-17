@@ -75,19 +75,6 @@ internal fun Project.configureCommonAndroid(
                 isIncludeAndroidResources = true
             }
         }
-
-        lint {
-            quiet = false
-            ignoreWarnings = false
-            htmlReport = true
-            xmlReport = true
-            sarifReport = true
-            checkDependencies = false
-            ignoreTestSources = true
-
-            disable += "ObsoleteSdkInt"
-            informational += "GradleDependency"
-        }
     }
 
     dependencies {

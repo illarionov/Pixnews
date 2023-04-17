@@ -23,6 +23,7 @@ dependencies {
     implementation(projects.base)
     implementation(projects.di)
     implementation(projects.testing)
+    implementation(projects.lint)
 
     implementation(libs.agp.plugin)
     implementation(libs.kotlin.jvm.plugin)

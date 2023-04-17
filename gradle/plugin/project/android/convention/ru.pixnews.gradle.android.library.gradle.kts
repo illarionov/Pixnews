@@ -28,6 +28,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     id("ru.pixnews.gradle.base.build-parameters")
+    id("ru.pixnews.gradle.lint.android-lint")
 }
 
 createPixnewsExtension()
@@ -48,10 +49,6 @@ android {
         getByName("debug") {
             matchingFallbacks += "release"
         }
-    }
-
-    lint {
-        checkDependencies = false
     }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<*>>()

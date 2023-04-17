@@ -13,7 +13,7 @@ keystore.properties
 local.properties
 secret.properties
 config/pixnews.properties
-config/signing/release.properties
+config/release_keystore.properties
 config/signing/release.jks
 
 # Log Files

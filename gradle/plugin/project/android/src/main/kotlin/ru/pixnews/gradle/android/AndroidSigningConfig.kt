@@ -28,13 +28,14 @@ internal fun Project.configureSigning(
         getByName("debug") {
             configureDebugSigningConfig(this)
         }
+
         if (config.useReleaseKeystore) {
-            config.properties?.let { releaseProperties ->
+            config.signingConfig?.let { signConfig ->
                 create("release") {
-                    storeFile = rootProject.file(releaseProperties["storeFile"] as String)
-                    keyAlias = releaseProperties["keyAlias"] as String
-                    storePassword = releaseProperties["storePassword"] as String
-                    keyPassword = releaseProperties["keyPassword"] as String
+                    storeFile = rootProject.file(signConfig.storeFile)
+                    keyAlias = signConfig.keyAlias
+                    storePassword = signConfig.storePassword
+                    keyPassword = signConfig.keyPassword
                 }
             }
         }

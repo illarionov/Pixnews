@@ -28,6 +28,7 @@ plugins {
     id("com.android.test")
     kotlin("android")
     id("ru.pixnews.gradle.base.build-parameters")
+    id("ru.pixnews.gradle.lint.android-lint")
 }
 
 createPixnewsExtension()

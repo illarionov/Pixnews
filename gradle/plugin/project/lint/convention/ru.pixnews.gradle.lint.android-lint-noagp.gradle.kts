@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import ru.pixnews.gradle.lint.configureCommonAndroidLint
+
+/**
+ * Convention plugin that configures Android Lint in libraries without the Android Gradle plugin
+ */
 plugins {
-    id("ru.pixnews.gradle.base.kotlindsl")
+    id("com.android.lint")
 }
 
-group = "ru.pixnews.gradle.kotlin"
-
-dependencies {
-    implementation(projects.base)
-    implementation(projects.testing)
-    implementation(projects.lint)
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
+lint {
+    configureCommonAndroidLint()
 }

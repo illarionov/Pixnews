@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id("ru.pixnews.gradle.base.kotlindsl")
-}
+package ru.pixnews.gradle.lint
 
-group = "ru.pixnews.gradle.kotlin"
+import com.android.build.api.dsl.Lint
 
-dependencies {
-    implementation(projects.base)
-    implementation(projects.testing)
-    implementation(projects.lint)
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
+internal fun Lint.configureCommonAndroidLint() {
+    quiet = false
+    ignoreWarnings = false
+    htmlReport = true
+    xmlReport = true
+    sarifReport = true
+    checkDependencies = false
+    ignoreTestSources = true
+
+    disable += "ObsoleteSdkInt"
+    informational += "GradleDependency"
 }

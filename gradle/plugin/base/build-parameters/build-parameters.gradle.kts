@@ -45,7 +45,7 @@ buildParameters {
         string("release_keystore_properties_file") {
             fromEnvironment()
             description.set("Path to the .properties file with signing information for the release build type")
-            defaultValue.set("config/signing/release.properties")
+            defaultValue.set("config/release_keystore.properties")
         }
     }
 

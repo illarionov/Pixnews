@@ -71,7 +71,7 @@ jobs:
         if: ${{ always() }}
         run: |
           rm -f config/signing/release.jks
-          rm -f config/signing/release.properties
+          rm -f config/release_keystore.properties
           rm -f config/pixnews.properties
 
       - name: Upload build artifacts

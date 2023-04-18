@@ -19,7 +19,7 @@ plugins {
 }
 
 pixnews {
-    compose.set(false)
+    compose.set(true)
     managedDevices.set(false)
 }
 
@@ -29,5 +29,7 @@ android {
 
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.kermit)
     api(libs.androidx.compose.ui.tooling.preview)
 }

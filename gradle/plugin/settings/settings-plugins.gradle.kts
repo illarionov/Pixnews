@@ -20,5 +20,5 @@ plugins {
 group = "ru.pixnews.gradle.settings"
 
 dependencies {
-    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.12.6")
+    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.13")
 }

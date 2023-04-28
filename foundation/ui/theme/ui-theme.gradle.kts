@@ -38,10 +38,11 @@ dependencies {
 
     api(libs.androidx.compose.ui.graphics)
     api(libs.androidx.compose.material3)
-    implementation(libs.android.material)
 
     implementation(libs.androidx.compose.ui.text.google.fonts)
     implementation(libs.androidx.splashscreen)
+
+    implementation(libs.kotlinx.coroutines.android)
 
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.rules)

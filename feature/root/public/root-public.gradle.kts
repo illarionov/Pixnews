@@ -58,6 +58,7 @@ dependencies {
     api(libs.inject)
     implementation(libs.kermit)
     implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.coroutines.android)
 
     implementation(projects.library.uiTooling)
     implementation(libs.androidx.compose.ui.tooling.preview)

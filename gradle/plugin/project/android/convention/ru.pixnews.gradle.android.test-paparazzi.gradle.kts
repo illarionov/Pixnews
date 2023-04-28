@@ -31,9 +31,17 @@ plugins.withType<LibraryPlugin>() {
             // https://github.com/cashapp/paparazzi/issues/472
             androidResources = true
         }
+        testOptions {
+            unitTests.isReturnDefaultValues = true
+        }
     }
 
     dependencies {
         "testImplementation"(versionCatalog.findLibrary("junit-jupiter-vintage-engine").get())
     }
+}
+
+tasks.withType<Test> {
+    // https://github.com/cashapp/paparazzi/pull/739
+    systemProperty("kotlinx.coroutines.main.delay", true)
 }

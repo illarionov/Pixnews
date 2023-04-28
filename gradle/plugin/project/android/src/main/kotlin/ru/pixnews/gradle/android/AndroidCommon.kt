@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("MagicNumber", "LONG_LINE")
+@file:Suppress("MagicNumber", "MaxLineLength")
 
 package ru.pixnews.gradle.android
 
@@ -56,15 +56,18 @@ internal fun Project.configureCommonAndroid(
                 compilerOptions {
                     jvmTarget.set(JvmTarget.JVM_11)
                     // There are some plugins incompatible with K2 compiler:
-                    // com.squareup.anvil.compiler.AnvilComponentRegistrar
-                    // androidx.compose.compiler.plugins.kotlin.ComposeComponentRegistrar
-                    useK2.set(false)
+                    // ComposeCompiler, R8
+                    // languageVersion.set(KOTLIN_2_0)
                     freeCompilerArgs.addAll(
                         "-opt-in=kotlin.RequiresOptIn",
                         "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
                         "-opt-in=kotlinx.coroutines.FlowPreview",
                         // https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/
                         "-Xjvm-default=all",
+                    )
+                    freeCompilerArgs.addAll(
+                        "-P",
+                        "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.8.21",
                     )
                 }
             }

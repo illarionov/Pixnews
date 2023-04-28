@@ -35,6 +35,7 @@ dependencies {
     implementation(libs.androidx.test.uiautomator)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.kermit)
+    implementation(libs.kotlinx.coroutines.android)
     implementation(libs.radiography)
 
     implementation(libs.androidx.compose.ui.test.junit4)

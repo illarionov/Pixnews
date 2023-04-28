@@ -30,11 +30,7 @@ android {
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.ui.text) {
-        version {
-            require("1.4.0")
-        }
-    }
+    implementation(libs.androidx.compose.ui.text)
     implementation(libs.kermit)
     api(libs.androidx.compose.ui.tooling.preview)
 

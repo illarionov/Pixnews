@@ -49,6 +49,8 @@ import ru.pixnews.foundation.ui.design.card.PixnewsGameCard
 import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.library.ui.tooling.DevicePreviews
+import ru.pixnews.library.ui.tooling.debuglayout.DebugLayout.Companion.debugLayout
+import ru.pixnews.library.ui.tooling.debuglayout.mediumLaptopScreen12Columns
 
 internal val feedMaxWidth = 552.dp
 
@@ -146,7 +148,11 @@ private fun PreviewCalendarScreenContent() {
     PixnewsTheme(
         useDynamicColor = false,
     ) {
-        Surface {
+        Surface(
+            modifier = Modifier.debugLayout {
+                mediumLaptopScreen12Columns(true)
+            },
+        ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {

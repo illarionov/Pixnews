@@ -13,30 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ru.pixnews.library.ui.tooling.debuglayout.ruler
 
-plugins {
-    id("ru.pixnews.gradle.android.library")
-}
+import ru.pixnews.library.ui.tooling.debuglayout.ruler.DebugRulerHorizontalZeroPoint.Alignment.LEFT
 
-pixnews {
-    compose.set(true)
-    managedDevices.set(false)
-}
-
-android {
-    namespace = "ru.pixnews.library.ui.tooling"
-}
-
-dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.ui.text) {
-        version {
-            require("1.4.0")
-        }
+public data class DebugRulerHorizontalZeroPoint(
+    val alignment: Alignment = LEFT,
+    val offset: DebugRulerMeasureUnit = DebugRulerMeasureUnit.ZERO,
+) {
+    public enum class Alignment {
+        LEFT, CENTER, RIGHT
     }
-    implementation(libs.kermit)
-    api(libs.androidx.compose.ui.tooling.preview)
 
-    testImplementation(libs.junit.jupiter.params)
+    public companion object {
+        public val ZERO: DebugRulerHorizontalZeroPoint = DebugRulerHorizontalZeroPoint(LEFT, DebugRulerMeasureUnit.ZERO)
+    }
 }

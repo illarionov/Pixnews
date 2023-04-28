@@ -13,30 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ru.pixnews.library.ui.tooling.debuglayout.ruler
 
-plugins {
-    id("ru.pixnews.gradle.android.library")
-}
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.Locale
 
-pixnews {
-    compose.set(true)
-    managedDevices.set(false)
-}
-
-android {
-    namespace = "ru.pixnews.library.ui.tooling"
-}
-
-dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.ui.text) {
-        version {
-            require("1.4.0")
-        }
-    }
-    implementation(libs.kermit)
-    api(libs.androidx.compose.ui.tooling.preview)
-
-    testImplementation(libs.junit.jupiter.params)
+internal val markerTextFormatter = DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ROOT)).apply {
+    maximumFractionDigits = 1
 }

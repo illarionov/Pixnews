@@ -13,30 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ru.pixnews.library.ui.tooling.debuglayout.rowcolumn
 
-plugins {
-    id("ru.pixnews.gradle.android.library")
-}
-
-pixnews {
-    compose.set(true)
-    managedDevices.set(false)
-}
-
-android {
-    namespace = "ru.pixnews.library.ui.tooling"
-}
-
-dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.ui.text) {
-        version {
-            require("1.4.0")
-        }
+@JvmInline
+public value class RowsColumnsCount(
+    public val value: Int,
+) {
+    public companion object {
+        public val Auto: RowsColumnsCount = RowsColumnsCount(0)
     }
-    implementation(libs.kermit)
-    api(libs.androidx.compose.ui.tooling.preview)
-
-    testImplementation(libs.junit.jupiter.params)
 }
+
+public val Int.asRowColumnCount: RowsColumnsCount
+    get() = RowsColumnsCount(this)

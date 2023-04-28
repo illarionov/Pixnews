@@ -50,7 +50,7 @@ internal class VerticalRulerLayer(
     private val step: DebugRulerMeasureUnit = Ruler.step,
     private val zeroOffset: DebugRulerVerticalZeroPoint = DebugRulerVerticalZeroPoint.ZERO,
     private val width: Dp = Ruler.verticalRulerWidth,
-    private val ticksColor: Color = Ruler.tickColor,
+    private val tickColor: Color = Ruler.tickColor,
     textStyle: TextStyle = Ruler.textStyle,
     private val backgroundColor: Color = Ruler.backgroundColor,
     private val outlineColor: Color = Ruler.outlineColor,
@@ -137,7 +137,7 @@ internal class VerticalRulerLayer(
                 MAJOR -> majorTickWidthPx
             }
             drawLine(
-                color = ticksColor,
+                color = tickColor,
                 start = Offset(
                     x = rulerSize.width - width,
                     y = position,

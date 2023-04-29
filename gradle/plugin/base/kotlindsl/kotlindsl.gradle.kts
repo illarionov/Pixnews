@@ -13,11 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 plugins {
     `kotlin-dsl`
 }
 
 group = "ru.pixnews.gradle.base"
+
+kotlin {
+    jvmToolchain(17)
+}
 
 dependencies {
     implementation("org.gradle.kotlin:gradle-kotlin-dsl-plugins:4.0.7")

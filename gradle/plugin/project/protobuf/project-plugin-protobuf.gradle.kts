@@ -19,6 +19,10 @@ plugins {
 
 group = "ru.pixnews.gradle.protobuf"
 
+kotlin {
+    jvmToolchain(17)
+}
+
 dependencies {
     implementation(projects.base)
     implementation(libs.protobuf.plugin)

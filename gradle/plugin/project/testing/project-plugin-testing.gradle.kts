@@ -20,6 +20,10 @@ plugins {
 
 group = "ru.pixnews.gradle.testing"
 
+kotlin {
+    jvmToolchain(17)
+}
+
 dependencies {
     implementation(gradleKotlinDsl())
     implementation(projects.base)

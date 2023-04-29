@@ -19,6 +19,10 @@ plugins {
 
 group = "ru.pixnews.gradle.android"
 
+kotlin {
+    jvmToolchain(17)
+}
+
 dependencies {
     implementation(projects.base)
     implementation(projects.di)

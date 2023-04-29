@@ -57,6 +57,7 @@ dependencies {
     api(libs.inject)
     implementation(libs.kermit)
     implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.coroutines.android)
 
     implementation(testFixtures(projects.foundation.domainModel)) {
         because("For use with Composable Preview")

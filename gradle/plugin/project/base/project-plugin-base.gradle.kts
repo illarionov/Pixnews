@@ -19,6 +19,10 @@ plugins {
 
 group = "ru.pixnews.gradle"
 
+kotlin {
+    jvmToolchain(17)
+}
+
 dependencies {
     implementation(gradleKotlinDsl())
     implementation("ru.pixnews.gradle.base:gradle-build-parameters")

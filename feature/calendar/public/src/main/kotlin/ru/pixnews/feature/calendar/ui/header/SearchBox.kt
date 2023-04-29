@@ -73,8 +73,8 @@ internal fun SearchBox(
             items(3) { idx ->
                 val resultText = "Suggestion $idx"
                 ListItem(
-                    headlineText = { Text(resultText) },
-                    supportingText = { Text("Additional info") },
+                    headlineContent = { Text(resultText) },
+                    supportingContent = { Text("Additional info") },
                     modifier = Modifier.clickable {
                         searchQuery = resultText
                         active = false

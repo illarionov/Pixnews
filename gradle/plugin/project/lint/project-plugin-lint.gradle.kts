@@ -20,6 +20,10 @@ plugins {
 
 group = "ru.pixnews.gradle.lint"
 
+kotlin {
+    jvmToolchain(17)
+}
+
 dependencies {
     implementation(projects.base)
     implementation(libs.agp.plugin)

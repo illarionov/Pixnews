@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import com.android.build.gradle.internal.tasks.R8Task
 import ru.pixnews.gradle.android.ReleaseConfig
 import ru.pixnews.gradle.android.applyTo
 import ru.pixnews.gradle.android.configureCommonAndroid
@@ -105,6 +106,13 @@ androidComponents {
     }
     finalizeDsl {
         project.pixnews.applyTo(project, it)
+    }
+}
+
+// Disable ART profile rewriting until https://issuetracker.google.com/issues/279516901 is fixed
+afterEvaluate {
+    tasks.withType<R8Task>().configureEach {
+        artProfileRewriting.set(false)
     }
 }
 

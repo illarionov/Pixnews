@@ -64,9 +64,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvm
     .configureEach {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
-            // Class 'Experiment' is compiled by the new Kotlin compiler frontend and cannot be loaded by the
-            // old compiler
-            useK2.set(false)
+            // D8: An error occurred when parsing kotlin metadata.
+            // languageVersion.set(KOTLIN_2_0)
             freeCompilerArgs.addAll(
                 "-opt-in=kotlin.RequiresOptIn",
                 "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",

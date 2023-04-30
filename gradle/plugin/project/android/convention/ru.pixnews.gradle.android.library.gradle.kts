@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import com.android.build.api.dsl.LibraryExtension
 import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
 import ru.pixnews.gradle.android.applyTo
 import ru.pixnews.gradle.android.configureCommonAndroid
@@ -32,7 +33,7 @@ plugins {
 
 createPixnewsExtension()
 
-android {
+extensions.configure<LibraryExtension>("android") {
     configureCommonAndroid(this)
 
     defaultConfig {

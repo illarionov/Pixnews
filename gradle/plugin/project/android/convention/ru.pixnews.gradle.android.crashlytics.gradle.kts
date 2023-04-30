@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import com.android.build.api.dsl.ApplicationExtension
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 import ru.pixnews.gradle.base.versionCatalog
 
@@ -26,7 +27,7 @@ plugins {
     id("com.google.firebase.crashlytics")
 }
 
-android {
+extensions.configure<ApplicationExtension>("android") {
     buildTypes {
         all {
             configure<CrashlyticsExtension> {

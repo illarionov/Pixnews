@@ -26,7 +26,6 @@ import ru.pixnews.gradle.kotlin.UnpackAarClassesTransform
  * Used to infer stability of the data-classes.
  */
 plugins {
-    kotlin("jvm") apply false
     id("ru.pixnews.gradle.base.build-parameters")
 }
 

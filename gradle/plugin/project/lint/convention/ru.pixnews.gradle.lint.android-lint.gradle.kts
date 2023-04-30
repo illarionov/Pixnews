@@ -19,23 +19,22 @@ import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.DynamicFeaturePlugin
 import com.android.build.gradle.LibraryPlugin
 import com.android.build.gradle.TestPlugin
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
-import com.android.build.gradle.internal.lint.AndroidLintTask
+import ru.pixnews.gradle.android.agp.workarounds.AndroidGradlePluginWorkarounds
 import ru.pixnews.gradle.lint.configureCommonAndroidLint
 
 /**
  * Convention plugin that configures Android Lint in projects with the Android Gradle plugin
  */
 project.plugins.withType(AppPlugin::class.java) {
-    extensions.configure<BaseAppModuleExtension> {
+    extensions.configure<CommonExtension<*, *, *, *, *>>("android") {
         lint {
             configureCommonAndroidLint()
             checkDependencies = true
         }
     }
 
-    tasks.withType<AndroidLintTask>().configureEach {
-        this.variantInputs.mainArtifact.warnIfProjectTreatedAsExternalDependency.set(false)
+    with(AndroidGradlePluginWorkarounds) {
+        disableProjectAsExternalDependencyLintTaskWarning()
     }
 }
 

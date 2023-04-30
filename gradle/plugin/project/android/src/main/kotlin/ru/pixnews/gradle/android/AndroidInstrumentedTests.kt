@@ -20,7 +20,6 @@ package ru.pixnews.gradle.android
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.ManagedVirtualDevice
 import com.android.build.api.dsl.TestedExtension
-import com.android.build.gradle.internal.tasks.ManagedDeviceInstrumentationTestTask
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.invoke
@@ -28,6 +27,7 @@ import org.gradle.kotlin.dsl.maybeCreate
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import ru.pixnews.gradle.android.agp.workarounds.AndroidGradlePluginWorkarounds
 import ru.pixnews.gradle.base.pixnews
 import ru.pixnews.gradle.base.versionCatalog
 
@@ -74,10 +74,8 @@ private fun Project.configureTestManagedDevices(
         }
     }
     // https://issuetracker.google.com/issues/262270582
-    tasks.withType<ManagedDeviceInstrumentationTestTask>().configureEach {
-        doFirst {
-            com.android.utils.Environment.initialize()
-        }
+    with(AndroidGradlePluginWorkarounds) {
+        initializeManagedDeviceTestEnvironment()
     }
 }
 

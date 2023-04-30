@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import com.android.build.api.dsl.TestExtension
 import ru.pixnews.gradle.android.applyTo
 import ru.pixnews.gradle.android.configureCommonAndroid
 import ru.pixnews.gradle.android.configureSigning
@@ -33,7 +34,7 @@ plugins {
 
 createPixnewsExtension()
 
-android {
+extensions.configure<TestExtension>("android") {
     configureCommonAndroid(this)
 
     defaultConfig {

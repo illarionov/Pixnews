@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
+import com.android.build.api.dsl.Lint
+import com.android.build.gradle.LintPlugin
 import ru.pixnews.gradle.lint.configureCommonAndroidLint
 
 /**
  * Convention plugin that configures Android Lint in libraries without the Android Gradle plugin
  */
-plugins {
-    id("com.android.lint")
-}
+apply<LintPlugin>()
 
-lint {
+extensions.configure<Lint> {
     configureCommonAndroidLint()
 }
 

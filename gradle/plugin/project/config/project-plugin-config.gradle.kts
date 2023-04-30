@@ -34,9 +34,7 @@ tasks.withType<Test> {
 dependencies {
     implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
     implementation("ru.pixnews.gradle.base:gradle-build-parameters")
-    implementation(projects.base)
-    implementation(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
+    implementation(libs.agp.plugin.api)
     implementation(libs.kotlinpoet)
 
     testImplementation(platform(libs.kotest.bom))

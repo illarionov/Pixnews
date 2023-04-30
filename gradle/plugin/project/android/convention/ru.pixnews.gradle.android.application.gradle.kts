@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-import com.android.build.gradle.internal.tasks.R8Task
+import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import ru.pixnews.gradle.android.ReleaseConfig
+import ru.pixnews.gradle.android.agp.workarounds.AndroidGradlePluginWorkarounds
 import ru.pixnews.gradle.android.applyTo
 import ru.pixnews.gradle.android.configureCommonAndroid
 import ru.pixnews.gradle.android.configureSigning
@@ -38,7 +40,7 @@ createPixnewsExtension().apply {
     managedDevices.convention(true)
 }
 
-android {
+extensions.configure<ApplicationExtension>("android") {
     configureCommonAndroid(this)
 
     defaultConfig {
@@ -91,7 +93,7 @@ android {
     )
 }
 
-androidComponents {
+extensions.configure<ApplicationAndroidComponentsExtension> {
     onVariants(selector().withName("release")) { variant ->
         variant.packaging.resources.excludes.addAll(
             "DebugProbesKt.bin",
@@ -109,11 +111,8 @@ androidComponents {
     }
 }
 
-// Disable ART profile rewriting until https://issuetracker.google.com/issues/279516901 is fixed
-afterEvaluate {
-    tasks.withType<R8Task>().configureEach {
-        artProfileRewriting.set(false)
-    }
+with(AndroidGradlePluginWorkarounds) {
+    disableArtProfileRewriting()
 }
 
 dependencies {

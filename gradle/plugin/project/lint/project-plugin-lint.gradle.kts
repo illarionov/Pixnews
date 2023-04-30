@@ -27,7 +27,8 @@ kotlin {
 dependencies {
     implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
     implementation(projects.base)
-    implementation(libs.agp.plugin)
+    implementation(projects.androidAgpWorkarounds)
+    implementation(libs.agp.plugin.api)
     implementation(libs.detekt.plugin)
     implementation(libs.spotless.plugin)
 }

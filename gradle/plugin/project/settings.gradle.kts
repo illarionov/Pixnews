@@ -33,6 +33,7 @@ dependencyResolutionManagement {
 
 includeSubproject("base")
 includeSubproject("android")
+includeSubproject("android-agp-workarounds")
 includeSubproject("config")
 includeSubproject("di")
 includeSubproject("kotlin")

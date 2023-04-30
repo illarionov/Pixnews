@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import buildparameters.BuildParametersExtension
 import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.ResValue
@@ -21,7 +22,6 @@ import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.DynamicFeaturePlugin
 import com.android.build.gradle.LibraryPlugin
 import com.android.build.gradle.TestPlugin
-import ru.pixnews.gradle.base.buildParameters
 import ru.pixnews.gradle.config.firebase.FirebaseConfigReader
 import ru.pixnews.gradle.config.firebase.GenerateFirebaseOptionsTask
 
@@ -36,7 +36,7 @@ listOf(
     TestPlugin::class.java,
 ).forEach { agpPlugin ->
     project.plugins.withType(agpPlugin) {
-        project.extensions.getByType(AndroidComponentsExtension::class.java).apply {
+        project.extensions.configure(AndroidComponentsExtension::class.java) {
             registerFirebaseOptionsTask()
         }
     }
@@ -45,7 +45,7 @@ listOf(
 fun AndroidComponentsExtension<*, *, *>.registerFirebaseOptionsTask() {
     val pixnewsConfigFileContent = providers.fileContents(
         rootProject.layout.projectDirectory.file(
-            providers.provider { buildParameters.config },
+            providers.provider { extensions.getByType<BuildParametersExtension>().config },
         ),
     )
 

@@ -17,7 +17,7 @@ plugins {
     id("ru.pixnews.gradle.base.kotlindsl")
 }
 
-group = "ru.pixnews.gradle.kotlin"
+group = "ru.pixnews.gradle.agp.workarounds"
 
 kotlin {
     jvmToolchain(17)
@@ -25,8 +25,7 @@ kotlin {
 
 dependencies {
     implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
-    implementation(projects.base)
-    implementation(projects.testing)
-    implementation(projects.lint)
-    implementation(libs.kotlin.jvm.plugin)
+
+    implementation(libs.agp.plugin)
+    implementation(libs.com.android.tools.common)
 }

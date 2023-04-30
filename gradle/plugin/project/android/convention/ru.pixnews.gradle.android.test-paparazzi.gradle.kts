@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import com.android.build.api.dsl.LibraryExtension
 import com.android.build.gradle.LibraryPlugin
 import ru.pixnews.gradle.base.versionCatalog
 
@@ -26,7 +27,7 @@ plugins {
 }
 
 plugins.withType<LibraryPlugin>() {
-    android {
+    extensions.configure<LibraryExtension>("android") {
         buildFeatures {
             // https://github.com/cashapp/paparazzi/issues/472
             androidResources = true

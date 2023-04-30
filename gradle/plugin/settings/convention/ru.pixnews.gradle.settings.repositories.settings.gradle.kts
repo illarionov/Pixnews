@@ -24,16 +24,20 @@ pluginManagement {
     }
 
     // Get our own convention plugins from 'gradle/plugin/project'
-    val gradleProjectsPluginName = "gradle-project-plugins"
-    if (File(rootDir, "gradle/plugin/project").exists()) {
-        includeBuild("gradle/plugin/project") {
-            name = gradleProjectsPluginName
+    listOf(
+        "project" to "gradle-project-plugins",
+        "base/billofmaterials" to "gradle-billofmaterials",
+    ).forEach { (path, gradleProjectsPluginName) ->
+        if (File(rootDir, "gradle/plugin/$path").exists()) {
+            includeBuild("gradle/plugin/$path") {
+                name = gradleProjectsPluginName
+            }
         }
-    }
-    // If not the main build, 'project' is located next to the build
-    if (File(rootDir, "../project").exists()) {
-        includeBuild("../project") {
-            name = gradleProjectsPluginName
+        // If not the main build, 'project' is located next to the build
+        if (File(rootDir, "../$path").exists()) {
+            includeBuild("../$path") {
+                name = gradleProjectsPluginName
+            }
         }
     }
 }

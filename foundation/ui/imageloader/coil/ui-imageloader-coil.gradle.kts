@@ -48,5 +48,4 @@ dependencies {
     implementation(libs.coil.video)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.okhttp)
-    implementation(platform(libs.okhttp.bom))
 }

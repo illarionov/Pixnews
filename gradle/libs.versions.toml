@@ -17,8 +17,9 @@ accompanist = "0.31.1-alpha"
 androidx-activity = "1.7.1"
 androidx-annotation = "1.6.0"
 androidx-appcompat = "1.6.1"
-androidx-arch-core-testing = "2.2.0"
+androidx-arch-core = "2.2.0"
 androidx-benchmark = "1.2.0-alpha13"
+androidx-collection = "1.2.0"
 androidx-compose-bom = "2023.04.01"
 androidx-compose-compiler = "1.4.6"
 androidx-compose-material3 = "1.1.0-rc01"
@@ -27,6 +28,7 @@ androidx-constraintlayout = "2.1.4"
 androidx-core = "1.10.0"
 androidx-datastore = "1.0.0"
 android-desugar-jdk-libs = "2.0.3"
+androidx-emoji2 = "1.4.0-beta02"
 androidx-fragment = "1.6.0-beta01"
 androidx-lifecycle = "2.6.1"
 androidx-lifecycle-runtime-compose = "2.6.1"
@@ -46,10 +48,12 @@ androidx-tracing = "1.2.0-beta03"
 androidx-tracing-perfetto = "1.0.0-alpha12"
 arrow = "1.2.0-RC"
 assertk = "0.25"
+asm = "9.5"
 auto-service = "1.0.1"
 coil = "2.3.0"
 firebase-bom = "31.5.0"
 firebase-crashlytics-plugin = "2.9.5"
+guava = "31.1-jre"
 kermit = "1.2.2"
 kotest = "5.6.1"
 kotest-assertions-arrow = "1.3.3"
@@ -76,8 +80,11 @@ androidx-activity = { group = "androidx.activity", name = "activity-ktx", versio
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "androidx-annotation" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }
-androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidx-arch-core-testing" }
+androidx-arch-core-common = { group = "androidx.arch.core", name = "core-common", version.ref = "androidx-arch-core" }
+androidx-arch-core-runtime = { group = "androidx.arch.core", name = "core-runtime", version.ref = "androidx-arch-core" }
+androidx-arch-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidx-arch-core" }
 androidx-benchmark-macro = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "androidx-benchmark" }
+androidx-collection = { group = "androidx.collection", name = "collection", version.ref = "androidx-collection" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidx-compose-bom" }
 androidx-compose-animation = { group = "androidx.compose.animation", name = "animation" }
@@ -108,12 +115,20 @@ androidx-compose-ui-viwebinding = { group = "androidx.compose.ui", name = "ui-vi
 androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core" }
 androidx-datastore-core = { group = "androix.datastore", name = "datastore-core", version.ref = "androidx-datastore" }
 androidx-datastore = { group = "androidx.datastore", name = "datastore", version.ref = "androidx-datastore" }
+androidx-emoji2 = { group = "androidx.emoji2", name = "emoji2", version.ref = "androidx-emoji2" }
+androidx-emoji2-views = { group = "androidx.emoji2", name = "emoji2-views", version.ref = "androidx-emoji2" }
+androidx-emoji2-views-helper = { group = "androidx.emoji2", name = "emoji2-views-helper", version.ref = "androidx-emoji2" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "androidx-fragment" }
+androidx-lifecycle-common = { group = "androidx.lifecycle", name = "lifecycle-common", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-common-java8 = { group = "androidx.lifecycle", name = "lifecycle-common-java8", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-livedata-core = { group = "androidx.lifecycle", name = "lifecycle-livedata-core", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle-runtime-compose" }
-androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-savedstate = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-savedstate", version.ref = "androidx-lifecycle" }
 androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "androidx-navigation" }
@@ -144,6 +159,7 @@ arrow-bom = { group = "io.arrow-kt", name = "arrow-stack", version.ref = "arrow"
 arrow-core = { group = "io.arrow-kt", name = "arrow-core" }
 arrow-fx = { group = "io.arrow-kt", name = "arrow-fx-coroutines" }
 assertk = { group = "com.willowtreeapps.assertk", name = "assertk-jvm", version.ref = "assertk" }
+asm-bom = { group = "org.ow2.asm", name = "asm-bom", version.ref = "asm" }
 auto-service-annotations = { group = "com.google.auto.service", name = "auto-service-annotations", version.ref = "auto-service" }
 auto-service-compiler = { group = "com.google.auto.service", name = "auto-service", version.ref = "auto-service" }
 coil-base = { group = "io.coil-kt", name = "coil-base" }
@@ -160,6 +176,7 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-config = { group = "com.google.firebase", name = "firebase-config-ktx" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+guava-bom = { group = "com.google.guava", name = "guava-bom", version.ref = "guava" }
 inject = { group = "javax.inject", name = "javax.inject", version = "1" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit5" }
@@ -173,8 +190,9 @@ kotest-runner-junit5 = { group = "io.kotest", name = "kotest-runner-junit5" }
 kotest-assertions-core = { group = "io.kotest", name = "kotest-assertions-core" }
 kotest-property = { group = "io.kotest", name = "kotest-property" }
 kotest-extensions-arrow = { group = "io.kotest.extensions", name = "kotest-assertions-arrow", version.ref = "kotest-assertions-arrow" }
-kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
-kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8" }
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android" }
 kotlinx-coroutines-bom = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-bom", version.ref = "kotlinx-coroutines" }
@@ -216,6 +234,18 @@ spotless-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gra
 
 [bundles]
 coil = ["coil-bom", "coil-compose-base"]
+boms = [
+    "androidx-compose-bom",
+    "arrow-bom",
+    "asm-bom",
+    "firebase-bom",
+    "guava-bom",
+    "junit-bom",
+    "kotest-bom",
+    "kotlin-bom",
+    "kotlinx-coroutines-bom",
+    "okhttp-bom",
+]
 
 [plugins]
 agp = { id = "com.android.tools.build:gradle", version.ref = "agp" }

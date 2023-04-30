@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import ru.pixnews.gradle.lint.configureCommonAndroidLint
-
-/**
- * Convention plugin that configures Android Lint in libraries without the Android Gradle plugin
- */
-plugins {
-    id("com.android.lint")
+dependencyResolutionManagement {
+    @Suppress("UnstableApiUsage")
+    repositories.gradlePluginPortal()
+    versionCatalogs {
+        create("libs") {
+            from(files("../../../libs.versions.toml"))
+        }
+    }
 }
 
-lint {
-    configureCommonAndroidLint()
-}
-
-dependencies {
-    add("lintChecks", platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
-}
+rootProject.name = "gradle-billofmaterials"
+rootProject.buildFileName = "billofmaterials.gradle.kts"

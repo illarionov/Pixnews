@@ -20,6 +20,5 @@ plugins {
 group = "ru.pixnews.library.functional"
 
 dependencies {
-    api(platform(libs.arrow.bom))
     api(libs.arrow.core)
 }

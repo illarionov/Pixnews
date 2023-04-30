@@ -36,6 +36,5 @@ dependencies {
     api(libs.inject)
     api(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
-    api(platform(libs.okhttp.bom))
     api(libs.androidx.annotation)
 }

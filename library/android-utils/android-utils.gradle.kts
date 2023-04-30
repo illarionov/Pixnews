@@ -26,7 +26,3 @@ pixnews {
 android {
     namespace = "ru.pixnews.library.android.utils"
 }
-
-dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-}

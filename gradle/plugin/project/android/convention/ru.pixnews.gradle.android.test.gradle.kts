@@ -54,6 +54,8 @@ androidComponents {
 }
 
 dependencies {
+    implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
+
     listOf(
         "androidx-test-core",
         "androidx-test-rules",
@@ -64,6 +66,4 @@ dependencies {
     ).forEach {
         implementation(versionCatalog.findLibrary(it).get())
     }
-
-    implementation(versionCatalog.findLibrary("kotlinx.coroutines.bom").get())
 }

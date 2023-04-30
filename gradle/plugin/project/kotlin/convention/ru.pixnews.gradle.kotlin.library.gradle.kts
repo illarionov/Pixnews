@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import ru.pixnews.gradle.base.createPixnewsExtension
 import ru.pixnews.gradle.base.pixnews
-import ru.pixnews.gradle.base.versionCatalog
 import ru.pixnews.gradle.testing.configureCommonUnitTesting
 import ru.pixnews.gradle.testing.configureCommonUnitTestingOptions
 
@@ -53,6 +52,9 @@ plugins.withId("java-test-fixtures") {
         kotlin.setSrcDirs(listOf("testFixtures"))
         resources.setSrcDirs(listOf("testFixtures_resources"))
     }
+    dependencies {
+        add("testFixturesImplementation", platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
+    }
 }
 
 java {
@@ -80,10 +82,9 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvm
     }
 
 dependencies {
-    add("implementation", kotlin("stdlib"))
-    versionCatalog.findLibrary("kotlinx.coroutines.bom").orElseThrow().also {
-        implementation(platform(it))
-        testImplementation(platform(it))
+    val bom = platform("ru.pixnews.gradle.base:gradle-billofmaterials")
+    listOf("implementation", "testImplementation").forEach {
+        add(it, bom)
     }
 }
 

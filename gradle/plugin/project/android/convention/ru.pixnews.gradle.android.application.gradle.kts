@@ -117,10 +117,8 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    versionCatalog.findLibrary("kotlinx.coroutines.bom").orElseThrow().also {
-        implementation(platform(it))
-        testImplementation(platform(it))
-        androidTestImplementation(platform(it))
+    val bom = platform("ru.pixnews.gradle.base:gradle-billofmaterials")
+    listOf("implementation", "testImplementation", "androidTestImplementation").forEach {
+        add(it, bom)
     }
 }

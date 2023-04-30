@@ -19,7 +19,6 @@ import ru.pixnews.gradle.android.applyTo
 import ru.pixnews.gradle.android.configureCommonAndroid
 import ru.pixnews.gradle.base.createPixnewsExtension
 import ru.pixnews.gradle.base.pixnews
-import ru.pixnews.gradle.base.versionCatalog
 
 /**
  * Convention plugin for use in android library modules
@@ -74,9 +73,8 @@ androidComponents {
 }
 
 dependencies {
-    versionCatalog.findLibrary("kotlinx.coroutines.bom").orElseThrow().also {
-        implementation(platform(it))
-        testImplementation(platform(it))
-        androidTestImplementation(platform(it))
+    val bom = platform("ru.pixnews.gradle.base:gradle-billofmaterials")
+    listOf("implementation", "testImplementation", "androidTestImplementation").forEach {
+        add(it, bom)
     }
 }

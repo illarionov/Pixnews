@@ -24,6 +24,9 @@ kotlin {
 }
 
 dependencies {
+    implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
+    implementation("ru.pixnews.gradle.base:gradle-build-parameters")
+
     implementation(projects.base)
     implementation(projects.di)
     implementation(projects.testing)
@@ -34,5 +37,4 @@ dependencies {
     implementation(libs.firebase.crashlitycs.plugin)
     implementation(libs.com.android.tools.common)
     implementation(libs.paparazzi.plugin)
-    implementation("ru.pixnews.gradle.base:gradle-build-parameters")
 }

@@ -40,7 +40,7 @@ dependencies {
     api(libs.androidx.appcompat)
     api(libs.androidx.fragment)
     api(libs.androidx.activity)
-    api(libs.androidx.lifecycle.viewmodel)
+    api(libs.androidx.lifecycle.viewmodel.ktx)
     api(libs.androidx.lifecycle.viewmodel.savedstate)
     api(libs.androidx.lifecycle.viewmodel.compose)
 

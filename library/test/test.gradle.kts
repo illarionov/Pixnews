@@ -21,8 +21,6 @@ plugins {
 group = "ru.pixnews.library.test"
 
 dependencies {
-    api(platform(libs.junit.bom))
-    api(platform(libs.kotest.bom))
     api(libs.junit.jupiter.api)
 
     api(libs.kermit.jvm)

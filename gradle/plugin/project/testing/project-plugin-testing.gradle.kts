@@ -25,7 +25,8 @@ kotlin {
 }
 
 dependencies {
+    implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
+    implementation("ru.pixnews.gradle.base:gradle-build-parameters")
     implementation(gradleKotlinDsl())
     implementation(projects.base)
-    implementation("ru.pixnews.gradle.base:gradle-build-parameters")
 }

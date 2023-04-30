@@ -43,7 +43,6 @@ android {
 }
 
 dependencies {
-    implementation(platform(versionCatalog.findLibrary("firebase.bom").get()))
     implementation(versionCatalog.findLibrary("firebase.analytics").get())
     implementation(versionCatalog.findLibrary("firebase.crashlytics").get())
 }

@@ -24,6 +24,16 @@ pixnews {
 
 android {
     namespace = "ru.pixnews.foundation.ui.assets.icons"
+
+    lint {
+        // Module with mostly automatically generated source code.
+        // Enable only simple checks that do not touch Kotlin files.
+        // Adding any check targeting Kotlin source code greatly increases execution time of the `lintAnalyzeRelease`
+        // task.
+        checkOnly += listOf(
+            "AnnotationProcessorOnCompilePath",
+        )
+    }
 }
 
 dependencies {

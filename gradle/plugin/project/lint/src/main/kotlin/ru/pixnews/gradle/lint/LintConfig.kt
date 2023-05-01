@@ -32,6 +32,10 @@ internal val Project.lintedFileTree: FileTree
         exclude {
             it.isDirectory && it.relativePath.startsWith("config/copyright")
         }
+        exclude {
+            // mostly auto-generated
+            it.isDirectory && it.relativePath.startsWith("foundation/ui/assets-icons/src/main/kotlin")
+        }
     }
 
 private val excludedDirectories = setOf(

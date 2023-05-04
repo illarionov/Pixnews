@@ -64,10 +64,6 @@ internal fun Project.configureCommonAndroid(
                         // https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/
                         "-Xjvm-default=all",
                     )
-                    freeCompilerArgs.addAll(
-                        "-P",
-                        "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.8.21",
-                    )
                 }
             }
 

@@ -21,9 +21,9 @@ import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams.RenderingMode.SHRINK
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.datetime.LocalDate
 import org.junit.Rule
 import org.junit.Test
-import ru.pixnews.feature.calendar.CalendarHeaderTestFixtures
 import ru.pixnews.feature.calendar.model.GameListViewMode.GRID
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 
@@ -38,6 +38,8 @@ class CalendarScreenHeaderScreenshotTest {
 
     @Test
     fun checkCalendarScreenHeader() {
+        val activeDate = LocalDate(2023, 3, 4)
+
         paparazzi.snapshot {
             PixnewsTheme(useDynamicColor = false) {
                 CalendarScreenHeader(

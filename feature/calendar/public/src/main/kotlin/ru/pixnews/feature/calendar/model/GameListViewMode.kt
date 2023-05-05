@@ -20,9 +20,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import ru.pixnews.foundation.ui.assets.icons.content.ContentIcons
 import ru.pixnews.foundation.ui.design.R as uiDesignR
 
-internal enum class GameListViewMode(
-    val icon: ImageVector,
-    @StringRes val contentDescription: Int,
+public enum class GameListViewMode(
+    public val icon: ImageVector,
+    @StringRes public val contentDescription: Int,
 ) {
     LIST(
         icon = ContentIcons.GridView.Unfilled,
@@ -34,7 +34,7 @@ internal enum class GameListViewMode(
     ),
     ;
 
-    fun next() = when (this) {
+    public fun next(): GameListViewMode = when (this) {
         LIST -> GRID
         GRID -> LIST
     }

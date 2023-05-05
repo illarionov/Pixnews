@@ -33,7 +33,7 @@ import java.util.Date
 import java.util.EnumMap
 import java.util.Locale
 
-internal object DateLocalization {
+public object DateLocalization {
     /**
      * A date format skeleton used to format a selected date to be used as content description for
      * screen readers (e.g. "Saturday, March 27, 2021")
@@ -45,7 +45,7 @@ internal object DateLocalization {
      */
     private const val YEAR_MONTH_SKELETON: String = "LLLL, yyyy"
 
-    fun formatCalendarDateForContentDescription(date: LocalDate, locale: Locale): String {
+    public fun formatCalendarDateForContentDescription(date: LocalDate, locale: Locale): String {
         val pattern = DateFormat.getBestDateTimePattern(locale, YEAR_MONTH_WEEKDAY_DAY_SKELETON)
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern(pattern, locale)
             .withDecimalStyle(DecimalStyle.of(locale))
@@ -54,15 +54,15 @@ internal object DateLocalization {
             .format(formatter)
     }
 
-    fun formatYearMonthSelectionTitle(date: LocalDate, locale: Locale): String {
+    public fun formatYearMonthSelectionTitle(date: LocalDate, locale: Locale): String {
         return date.formatWithDateFormat(YEAR_MONTH_SKELETON, locale)
     }
 
-    fun getFirstDayOfWeek(locale: Locale): DayOfWeek {
+    public fun getFirstDayOfWeek(locale: Locale): DayOfWeek {
         return WeekFields.of(locale).firstDayOfWeek
     }
 
-    fun getShortWeekDays(locale: Locale): Map<DayOfWeek, String> {
+    public fun getShortWeekDays(locale: Locale): Map<DayOfWeek, String> {
         val dayNames = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             DateFormatSymbols.getInstance(locale).getWeekdays(DateFormatSymbols.STANDALONE, DateFormatSymbols.SHORT)
         } else {

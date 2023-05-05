@@ -13,18 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.feature.calendar.model
+package ru.pixnews.foundation.ui.design.test.constants.card
 
-import ru.pixnews.feature.calendar.model.GameListFilterChipStyle.SELECTED
-
-public data class GameListFilterChip(
-    val id: String,
-    val label: String,
-    val style: GameListFilterChipStyle = SELECTED,
-)
-
-public enum class GameListFilterChipStyle {
-    SELECTED,
-    UNSELECTED,
-    ;
+public object PixnewsGameCardGridSmallTestTags {
+    public const val IMAGE: String = "PixnewsGameCardGridSmall:image"
+    public const val FAVOURITE_ICON: String = "PixnewsGameCardGridSmall:favouriteIcon"
+    public const val PLATFORMS_ROW: String = "PixnewsGameCardGridSmall:platformsRow"
 }

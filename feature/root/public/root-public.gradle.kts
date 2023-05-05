@@ -21,7 +21,7 @@ plugins {
 
 pixnews {
     compose.set(true)
-    managedDevices.set(true)
+    managedDevices.set(false)
 }
 
 android {
@@ -63,13 +63,4 @@ dependencies {
     implementation(projects.library.uiTooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
-
-    androidTestImplementation(projects.foundation.instrumentedTest)
-    androidTestImplementation(libs.accompanist.test.harness)
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    androidTestImplementation(libs.androidx.navigation.testing)
-    androidTestImplementation(libs.androidx.test.espresso.core)
-    androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(libs.assertk)
-    androidTestImplementation(libs.turbine)
 }

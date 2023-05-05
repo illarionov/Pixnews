@@ -15,7 +15,7 @@
  */
 package ru.pixnews.feature.calendar.model
 
-internal data class GamesOnDay(
+public data class GamesOnDay(
     val hasFollowedGames: Boolean = false,
     val hasReleases: Boolean = false,
 )

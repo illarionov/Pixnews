@@ -13,18 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.feature.calendar.model
 
-import ru.pixnews.feature.calendar.model.GameListFilterChipStyle.SELECTED
-
-public data class GameListFilterChip(
-    val id: String,
-    val label: String,
-    val style: GameListFilterChipStyle = SELECTED,
-)
-
-public enum class GameListFilterChipStyle {
-    SELECTED,
-    UNSELECTED,
-    ;
+plugins {
+    id("ru.pixnews.gradle.kotlin.library")
+    id("ru.pixnews.gradle.kotlin.compose-compiler")
 }
+
+group = "ru.pixnews.foundation.ui.design.test.constants"

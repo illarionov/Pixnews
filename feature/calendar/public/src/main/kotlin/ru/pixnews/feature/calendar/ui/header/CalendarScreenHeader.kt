@@ -45,7 +45,7 @@ import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 
 @Composable
-internal fun CalendarScreenHeader(
+public fun CalendarScreenHeader(
     onSearch: (String) -> Unit,
     onDaySelectionClick: (LocalDate) -> Unit,
     onYearMonthSelectionClick: () -> Unit,

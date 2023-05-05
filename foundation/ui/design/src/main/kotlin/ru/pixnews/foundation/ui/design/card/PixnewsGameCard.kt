@@ -64,6 +64,7 @@ import ru.pixnews.foundation.ui.design.icon.PixnewsGameCardFavouriteIcon
 import ru.pixnews.foundation.ui.design.image.NetworkImage
 import ru.pixnews.foundation.ui.design.image.errorLoadingImageLargePainter
 import ru.pixnews.foundation.ui.design.image.noImageLargePainter
+import ru.pixnews.foundation.ui.design.test.constants.card.PixnewsGameCardTestTags
 import ru.pixnews.foundation.ui.design.util.composeColor
 import ru.pixnews.foundation.ui.design.util.contentDescription
 import ru.pixnews.foundation.ui.design.util.uniqueIcons

@@ -98,6 +98,8 @@ dependencies {
     testImplementation(libs.junit.jupiter.params)
 
     androidTestImplementation(projects.foundation.instrumentedTest)
+    androidTestImplementation(projects.foundation.ui.imageloader.coilTest)
+    androidTestImplementation(projects.foundation.ui.designTestConstants)
     androidTestImplementation(projects.foundation.di.instrumentedTest)
     androidTestImplementation(projects.feature.calendar.test)
     androidTestImplementation(projects.feature.calendar.testConstants)
@@ -109,4 +111,5 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.assertk)
+    androidTestImplementation(libs.turbine)
 }

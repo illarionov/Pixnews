@@ -72,6 +72,7 @@ import ru.pixnews.foundation.ui.design.icon.PixnewsGameCardFavouriteIcon
 import ru.pixnews.foundation.ui.design.image.NetworkImage
 import ru.pixnews.foundation.ui.design.image.errorLoadingImageSmallPainter
 import ru.pixnews.foundation.ui.design.image.noImageSmallPainter
+import ru.pixnews.foundation.ui.design.test.constants.card.PixnewsGameCardGridSmallTestTags
 import ru.pixnews.foundation.ui.design.util.composeColor
 import ru.pixnews.foundation.ui.design.util.contentDescription
 import ru.pixnews.foundation.ui.design.util.uniqueIcons

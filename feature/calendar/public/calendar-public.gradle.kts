@@ -22,7 +22,7 @@ plugins {
 
 pixnews {
     compose.set(true)
-    managedDevices.set(true)
+    managedDevices.set(false)
 }
 
 android {
@@ -67,9 +67,4 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     testImplementation(libs.junit.jupiter.params)
-
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(projects.foundation.instrumentedTest)
-    androidTestImplementation(projects.feature.calendar.test)
 }

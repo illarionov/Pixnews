@@ -46,6 +46,7 @@ listOf(
     "domain-model",
     "redux",
     "ui:design",
+    "ui:design-test-constants",
     "ui:assets-icons",
     "ui:imageloader:coil",
     "ui:imageloader:coil-test",

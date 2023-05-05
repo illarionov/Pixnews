@@ -29,7 +29,7 @@ import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.appconfig.DefaultAppConfig
 
 @VisibleForTesting
-internal val LightColors = lightColorScheme(
+public val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
     primaryContainer = md_theme_light_primaryContainer,
@@ -62,7 +62,7 @@ internal val LightColors = lightColorScheme(
 )
 
 @VisibleForTesting
-internal val DarkColors = darkColorScheme(
+public val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
     primaryContainer = md_theme_dark_primaryContainer,

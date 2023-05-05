@@ -18,7 +18,7 @@ package ru.pixnews.foundation.ui.design.card
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameGenre
 
-internal fun Game.toGameCardItem(favourite: Boolean = false): PixnewsGameCardUiModel {
+public fun Game.toGameCardItem(favourite: Boolean = false): PixnewsGameCardUiModel {
     return object : PixnewsGameCardUiModel {
         override val gameId = id
         override val title = name.value
@@ -30,7 +30,7 @@ internal fun Game.toGameCardItem(favourite: Boolean = false): PixnewsGameCardUiM
     }
 }
 
-internal fun Game.toGameCardGridMajorReleasesUiItem(favourite: Boolean = false): PixnewsGameCardGridSmallUiModel {
+public fun Game.toGameCardGridMajorReleasesUiItem(favourite: Boolean = false): PixnewsGameCardGridSmallUiModel {
     return object : PixnewsGameCardGridSmallUiModel {
         override val gameId = id
         override val title = name.value

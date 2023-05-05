@@ -21,7 +21,7 @@ plugins {
 
 pixnews {
     compose.set(true)
-    managedDevices.set(true)
+    managedDevices.set(false)
 }
 
 android {
@@ -37,6 +37,7 @@ dependencies {
     api(projects.foundation.featuretoggles.public)
     api(projects.foundation.ui.theme)
     api(projects.foundation.domainModel)
+    implementation(projects.foundation.ui.designTestConstants)
     implementation(projects.foundation.ui.imageloader.coil)
     implementation(projects.foundation.ui.assetsIcons)
     implementation(projects.library.androidUtils)
@@ -55,8 +56,4 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
 
     testImplementation(projects.foundation.ui.imageloader.coilTest)
-
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(projects.foundation.ui.imageloader.coilTest)
 }

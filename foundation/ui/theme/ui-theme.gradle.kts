@@ -20,7 +20,7 @@ plugins {
 
 pixnews {
     compose.set(true)
-    managedDevices.set(true)
+    managedDevices.set(false)
 }
 
 android {

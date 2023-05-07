@@ -42,7 +42,7 @@ dependencies {
     api(libs.coil.compose.base)
     api(libs.androidx.compose.ui.graphics)
 
-    implementation(libs.androidx.core)
+    implementation(libs.androidx.core.ktx)
     implementation(libs.coil.gif)
     implementation(libs.coil.svg)
     implementation(libs.coil.video)

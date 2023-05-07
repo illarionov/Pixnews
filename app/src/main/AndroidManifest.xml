@@ -29,6 +29,7 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Pixnews"
         android:usesCleartextTraffic="false"
+        android:name=".PixnewsApplication"
         tools:ignore="UnusedAttribute">
         <profileable
             android:shell="true"
@@ -53,6 +54,10 @@
             <meta-data
                 android:name="ru.pixnews.PixnewsAppInitializer"
                 android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
         </provider>
 
         <!-- Firebase is initialized manually in code -->

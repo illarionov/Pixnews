@@ -56,6 +56,7 @@ dependencies {
     implementation(projects.foundation.di.base)
     implementation(projects.foundation.di.rootComponent)
     implementation(projects.foundation.di.uiBase)
+    implementation(projects.foundation.di.workmanager)
     implementation(projects.foundation.coroutines)
     implementation(projects.foundation.domainModel)
     implementation(projects.foundation.featuretoggles.datasourceFirebase)

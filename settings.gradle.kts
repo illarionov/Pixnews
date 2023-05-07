@@ -35,6 +35,7 @@ listOf(
     "di:root-component",
     "di:instrumented-test",
     "di:ui-base",
+    "di:workmanager",
     "coroutines",
     "featuretoggles:public",
     "featuretoggles:internal",

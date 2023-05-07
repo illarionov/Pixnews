@@ -13,17 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.instrumented.test
+package ru.pixnews.foundation.di.workmanager
 
-import android.app.Application
-import androidx.work.Configuration
+import androidx.work.CoroutineWorker
+import dagger.MapKey
+import kotlin.reflect.KClass
 
-public class PixnewsTestApplication : Application(), Configuration.Provider {
-    private val workManagerConfiguration = Configuration.Builder().build()
-
-    override fun onCreate() {
-        super.onCreate()
-    }
-
-    override fun getWorkManagerConfiguration(): Configuration = workManagerConfiguration
-}
+@MapKey
+public annotation class CoroutineWorkerMapKey(val workerClass: KClass<out CoroutineWorker>)

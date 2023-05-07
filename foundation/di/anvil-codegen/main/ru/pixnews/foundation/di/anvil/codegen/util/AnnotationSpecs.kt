@@ -25,3 +25,12 @@ internal fun contributesToAnnotation(className: com.squareup.kotlinpoet.ClassNam
         .addMember("%T::class", className)
         .build()
 }
+
+/**
+ * `@ContributesTo(className::class)`
+ */
+internal fun contributesMultibindingAnnotation(scope: com.squareup.kotlinpoet.ClassName): AnnotationSpec {
+    return AnnotationSpec.builder(ClassNames.Anvil.contributesMultibinding)
+        .addMember("scope = %T::class", scope)
+        .build()
+}

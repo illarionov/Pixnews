@@ -25,11 +25,16 @@ pixnews {
 
 android {
     namespace = "ru.pixnews.foundation.testing.instrumented"
+
+    lint {
+        disable += "RemoveWorkManagerInitializer"
+    }
 }
 
 dependencies {
     api(projects.foundation.di.base)
     api(projects.foundation.appconfig)
+    implementation(projects.foundation.di.workmanager)
 
     implementation(libs.androidx.test.runner)
     implementation(libs.androidx.test.uiautomator)

@@ -13,17 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.instrumented.test
+package ru.pixnews.foundation.di.workmanager
 
-import android.app.Application
-import androidx.work.Configuration
+import android.content.Context
+import androidx.work.CoroutineWorker
+import androidx.work.WorkerParameters
+import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 
-public class PixnewsTestApplication : Application(), Configuration.Provider {
-    private val workManagerConfiguration = Configuration.Builder().build()
-
-    override fun onCreate() {
-        super.onCreate()
-    }
-
-    override fun getWorkManagerConfiguration(): Configuration = workManagerConfiguration
+public interface CoroutineWorkerFactory {
+    public fun create(
+        @ApplicationContext context: Context,
+        workerParameters: WorkerParameters,
+    ): CoroutineWorker
 }

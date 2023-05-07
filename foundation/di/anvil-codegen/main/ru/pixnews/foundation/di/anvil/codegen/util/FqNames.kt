@@ -21,18 +21,20 @@ import org.jetbrains.kotlin.name.FqName
 
 internal object FqNames {
     val anyClass: FqName = Any::class.fqName
+    val contributesActivity = FqName("ru.pixnews.foundation.di.ui.base.activity.ContributesActivity")
+    val contributesCoroutineWorker = FqName("ru.pixnews.foundation.di.workmanager.ContributesCoroutineWorker")
     val contributesExperiment = FqName("ru.pixnews.foundation.featuretoggles.inject.ContributesExperiment")
+    val contributesTest = FqName("ru.pixnews.foundation.di.instrumented.test.ContributesTest")
     val contributesVariantSerializer = FqName(
         "ru.pixnews.foundation.featuretoggles.inject.ContributesExperimentVariantSerializer",
     )
-    val contributesActivity = FqName("ru.pixnews.foundation.di.ui.base.activity.ContributesActivity")
     val contributesViewModel = FqName("ru.pixnews.foundation.di.ui.base.viewmodel.ContributesViewModel")
-    val contributesTest = FqName("ru.pixnews.foundation.di.instrumented.test.ContributesTest")
     val experiment = ClassNames.experiment.asFqName()
     val experimentVariantSerializer = ClassNames.experimentVariantSerializer.asFqName()
 
     internal object Android {
         val activity = ClassNames.Android.activity.asFqName()
+        val coroutineWorker = FqName("androidx.work.CoroutineWorker")
         val viewModel = FqName("androidx.lifecycle.ViewModel")
     }
 

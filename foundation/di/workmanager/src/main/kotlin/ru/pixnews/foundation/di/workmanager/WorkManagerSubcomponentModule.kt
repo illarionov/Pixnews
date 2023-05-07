@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.instrumented.test
+package ru.pixnews.foundation.di.workmanager
 
-import android.app.Application
-import androidx.work.Configuration
+import androidx.annotation.RestrictTo
+import androidx.work.CoroutineWorker
+import com.squareup.anvil.annotations.ContributesTo
+import dagger.Module
+import dagger.multibindings.Multibinds
+import ru.pixnews.foundation.di.base.DaggerMap
 
-public class PixnewsTestApplication : Application(), Configuration.Provider {
-    private val workManagerConfiguration = Configuration.Builder().build()
-
-    override fun onCreate() {
-        super.onCreate()
-    }
-
-    override fun getWorkManagerConfiguration(): Configuration = workManagerConfiguration
+@ContributesTo(WorkManagerScope::class)
+@Module
+@RestrictTo(RestrictTo.Scope.LIBRARY)
+public interface WorkManagerSubcomponentModule {
+    @Multibinds
+    public fun workerProviders(): DaggerMap<Class<out CoroutineWorker>, CoroutineWorkerFactory>
 }

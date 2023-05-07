@@ -13,17 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.instrumented.test
+package ru.pixnews
 
 import android.app.Application
 import androidx.work.Configuration
+import ru.pixnews.di.root.component.PixnewsRootComponentHolder
+import ru.pixnews.inject.MainPixnewsAppComponent
+import javax.inject.Inject
 
-public class PixnewsTestApplication : Application(), Configuration.Provider {
-    private val workManagerConfiguration = Configuration.Builder().build()
+class PixnewsApplication : Application(), Configuration.Provider {
+    @field:Inject
+    lateinit var localWorkManagerConfiguration: Configuration
 
     override fun onCreate() {
         super.onCreate()
+        (PixnewsRootComponentHolder.appComponent as MainPixnewsAppComponent).inject(this)
     }
 
-    override fun getWorkManagerConfiguration(): Configuration = workManagerConfiguration
+    override fun getWorkManagerConfiguration(): Configuration = localWorkManagerConfiguration
 }

@@ -16,6 +16,7 @@ spotless = "6.12.1"
 accompanist = "0.31.1-alpha"
 androidx-activity = "1.7.1"
 androidx-annotation = "1.6.0"
+androidx-annotation-experimental = "1.3.0"
 androidx-appcompat = "1.6.1"
 androidx-arch-core = "2.2.0"
 androidx-benchmark = "1.2.0-alpha14"
@@ -46,6 +47,7 @@ androidx-test-rules = "1.5.0"
 androidx-test-uiautomator = "2.3.0-alpha03"
 androidx-tracing = "1.2.0-beta04"
 androidx-tracing-perfetto = "1.0.0-alpha12"
+androidx-workmanager = "2.8.1"
 arrow = "1.2.0-RC"
 assertk = "0.25"
 asm = "9.5"
@@ -79,6 +81,7 @@ protobuf = "3.22.3"
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidx-activity" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "androidx-annotation" }
+androidx-annotation-experimental = { group = "androidx.annotation", name = "annotation-experimental", version.ref = "androidx-annotation-experimental" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }
 androidx-arch-core-common = { group = "androidx.arch.core", name = "core-common", version.ref = "androidx-arch-core" }
 androidx-arch-core-runtime = { group = "androidx.arch.core", name = "core-runtime", version.ref = "androidx-arch-core" }
@@ -112,7 +115,8 @@ androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "u
 androidx-compose-ui-unit = { group = "androidx.compose.ui", name = "ui-unit" }
 androidx-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
 androidx-compose-ui-viwebinding = { group = "androidx.compose.ui", name = "ui-viewbinding" }
-androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core" }
+androidx-core = { group = "androidx.core", name = "core", version.ref = "androidx-core" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core" }
 androidx-datastore-core = { group = "androix.datastore", name = "datastore-core", version.ref = "androidx-datastore" }
 androidx-datastore = { group = "androidx.datastore", name = "datastore", version.ref = "androidx-datastore" }
 androidx-emoji2 = { group = "androidx.emoji2", name = "emoji2", version.ref = "androidx-emoji2" }
@@ -148,6 +152,10 @@ androidx-test-runner = { group = "androidx.test", name = "runner", version.ref =
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidx-test-rules" }
 androidx-test-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "androidx-test-uiautomator" }
 androidx-tracing = { group = "androidx.tracing", name = "tracing", version.ref = "androidx-tracing" }
+androidx-workmanager = { group = "androidx.work", name = "work-runtime", version.ref = "androidx-workmanager" }
+androidx-workmanager-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "androidx-workmanager" }
+androidx-workmanager-multiprocess = { group = "androidx.work", name = "work-multiprocess", version.ref = "androidx-workmanager" }
+androidx-workmanager-testing = { group = "androidx.work", name = "work-testin", version.ref = "androidx-workmanager" }
 android-desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "android-desugar-jdk-libs" }
 
 accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist" }

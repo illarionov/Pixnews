@@ -23,7 +23,7 @@ import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
 import ru.pixnews.inject.FirebaseModule.FirebaseProviderHolder
 
 /**
- * AppInitializersScope component used to collect all initializers into multibining set
+ * AppInitializersScope component used to collect all initializers into multibinding set
  */
 @SingleIn(AppInitializersScope::class)
 @MergeComponent(

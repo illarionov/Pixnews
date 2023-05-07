@@ -13,17 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.instrumented.test
+plugins {
+    id("ru.pixnews.gradle.android.library")
+    id("ru.pixnews.gradle.di.anvil-factories")
+}
 
-import android.app.Application
-import androidx.work.Configuration
+pixnews {
+    compose.set(false)
+    managedDevices.set(false)
+}
 
-public class PixnewsTestApplication : Application(), Configuration.Provider {
-    private val workManagerConfiguration = Configuration.Builder().build()
+android {
+    namespace = "ru.pixnews.foundation.di.workmanager"
 
-    override fun onCreate() {
-        super.onCreate()
+    lint {
+        disable += "BadConfigurationProvider"
     }
+}
 
-    override fun getWorkManagerConfiguration(): Configuration = workManagerConfiguration
+dependencies {
+    implementation(projects.foundation.di.base)
+    implementation(projects.foundation.di.rootComponent)
+    api(libs.dagger)
+
+    api(libs.androidx.workmanager.ktx)
+    api(libs.androidx.core)
 }

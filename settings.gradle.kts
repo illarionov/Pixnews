@@ -33,7 +33,6 @@ listOf(
     "di:anvil-codegen",
     "di:base",
     "di:root-component",
-    "di:instrumented-test",
     "di:ui-base",
     "di:workmanager",
     "coroutines",
@@ -61,9 +60,10 @@ listOf(
     "compose-utils",
     "coroutines",
     "functional",
+    "instrumented-test",
     "kotlin-utils",
-    "ui-tooling",
     "test",
+    "ui-tooling",
 ).forEach {
     includeSubproject(":library:$it")
 }

@@ -34,9 +34,9 @@ import org.junit.Test
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.feature.root.PixnewsRootContent
 import ru.pixnews.foundation.appconfig.AppConfig
-import ru.pixnews.foundation.di.instrumented.test.ContributesTest
-import ru.pixnews.foundation.di.instrumented.test.rule.InjectDependenciesRule
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
+import ru.pixnews.foundation.instrumented.test.di.ContributesTest
+import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
 import javax.inject.Inject
 
 @ContributesTest

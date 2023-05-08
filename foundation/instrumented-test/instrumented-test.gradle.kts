@@ -15,11 +15,11 @@
  */
 plugins {
     id("ru.pixnews.gradle.android.library")
-    id("ru.pixnews.gradle.di.anvil-kapt")
+    id("ru.pixnews.gradle.di.anvil-factories")
 }
 
 pixnews {
-    compose.set(true)
+    compose.set(false)
     managedDevices.set(false)
 }
 
@@ -32,20 +32,18 @@ android {
 }
 
 dependencies {
-    api(projects.foundation.di.base)
-    api(projects.foundation.appconfig)
-    implementation(projects.foundation.di.workmanager)
-
-    implementation(libs.androidx.test.runner)
-    implementation(libs.androidx.test.uiautomator)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.kermit)
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.radiography)
-
-    implementation(libs.androidx.compose.ui.test.junit4)
+    api(libs.androidx.annotation)
     api(libs.androidx.test.core)
-    implementation(libs.androidx.test.espresso.core)
     api(libs.androidx.test.ext.junit)
+    api(libs.androidx.test.runner)
     api(libs.assertk)
+    api(libs.dagger)
+    api(libs.junit4)
+
+    implementation(libs.androidx.test.core)
+    implementation(libs.androidx.test.espresso.core)
+    implementation(projects.foundation.di.base)
+    implementation(projects.foundation.di.rootComponent)
+    implementation(projects.foundation.di.workmanager)
+    implementation(projects.library.instrumentedTest)
 }

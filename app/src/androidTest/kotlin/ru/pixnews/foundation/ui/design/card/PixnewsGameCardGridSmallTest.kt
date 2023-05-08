@@ -29,10 +29,10 @@ import org.junit.Test
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.hytale
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
-import ru.pixnews.foundation.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
 import ru.pixnews.foundation.ui.design.card.element.PixnewsGameCardGridSmallElement
 import ru.pixnews.foundation.ui.imageloader.coil.test.FakeImageLoaderRule
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
+import ru.pixnews.library.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
 
 class PixnewsGameCardGridSmallTest : BaseInstrumentedTest() {
     @get:Rule()

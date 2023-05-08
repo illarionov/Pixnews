@@ -45,7 +45,7 @@ internal object ClassNames {
     val experimentVariantMapKey = ClassName("ru.pixnews.foundation.featuretoggles.inject", "ExperimentVariantMapKey")
     val experimentVariantSerializer = ClassName("ru.pixnews.foundation.featuretoggles", "ExperimentVariantSerializer")
     val singleInstrumentedTestInjector = ClassName(
-        packageName = "ru.pixnews.foundation.di.instrumented.test",
+        packageName = "ru.pixnews.foundation.instrumented.test.di",
         "SingleInstrumentedTestInjector",
     )
     val viewModelFactory = ClassName("ru.pixnews.foundation.di.ui.base.viewmodel", "ViewModelFactory")

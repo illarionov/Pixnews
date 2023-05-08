@@ -13,18 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.instrumented.test.base
+package ru.pixnews.library.instrumented.test.util
 
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso
-import org.junit.Before
-import ru.pixnews.library.instrumented.test.espresso.CleanHierarchyEspressoFailureHandler
+import androidx.compose.ui.graphics.Color
+import assertk.Assert
+import assertk.assertions.isZero
+import assertk.assertions.prop
 
-public abstract class BaseInstrumentedTest {
-    @Before
-    public open fun setupEspresso() {
-        Espresso.setFailureHandler(
-            CleanHierarchyEspressoFailureHandler(ApplicationProvider.getApplicationContext()),
-        )
-    }
-}
+public fun Assert<Color>.isTransparent(): Unit = prop(Color::alpha).isZero()

@@ -31,10 +31,10 @@ import ru.pixnews.domain.model.game.game.sims5
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.foundation.appconfig.AppConfig
-import ru.pixnews.foundation.di.instrumented.test.ContributesTest
-import ru.pixnews.foundation.di.instrumented.test.rule.InjectDependenciesRule
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
-import ru.pixnews.foundation.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
+import ru.pixnews.foundation.instrumented.test.di.ContributesTest
+import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
+import ru.pixnews.library.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
 import javax.inject.Inject
 
 @ContributesTest

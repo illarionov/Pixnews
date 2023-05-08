@@ -47,7 +47,7 @@ class ContributesTestCodeGeneratorTest {
     @Suppress("LOCAL_VARIABLE_EARLY_DECLARATION")
     fun setup() {
         val testStubs = """
-            package ru.pixnews.foundation.di.instrumented.test
+            package ru.pixnews.foundation.instrumented.test.di
             import dagger.MembersInjector
 
             annotation class ContributesTest
@@ -58,7 +58,7 @@ class ContributesTestCodeGeneratorTest {
 
         val testClass = """
             package com.test
-            import ru.pixnews.foundation.di.instrumented.test.ContributesTest
+            import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 
             @ContributesTest
             class MainTest

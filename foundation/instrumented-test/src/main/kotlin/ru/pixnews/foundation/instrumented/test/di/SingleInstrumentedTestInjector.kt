@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.instrumented.test.base
+package ru.pixnews.foundation.instrumented.test.di
 
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso
-import org.junit.Before
-import ru.pixnews.library.instrumented.test.espresso.CleanHierarchyEspressoFailureHandler
+import androidx.annotation.RestrictTo
+import androidx.annotation.RestrictTo.Scope.LIBRARY
+import dagger.MembersInjector
 
-public abstract class BaseInstrumentedTest {
-    @Before
-    public open fun setupEspresso() {
-        Espresso.setFailureHandler(
-            CleanHierarchyEspressoFailureHandler(ApplicationProvider.getApplicationContext()),
-        )
+@RestrictTo(LIBRARY)
+public class SingleInstrumentedTestInjector(
+    private val injector: MembersInjector<*>,
+) {
+    public fun <T> injectMembers(instance: T) {
+        @Suppress("UNCHECKED_CAST")
+        (injector as MembersInjector<T>).injectMembers(instance)
     }
 }

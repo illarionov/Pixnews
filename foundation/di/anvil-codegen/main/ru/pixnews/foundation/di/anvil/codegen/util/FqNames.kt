@@ -24,7 +24,7 @@ internal object FqNames {
     val contributesActivity = FqName("ru.pixnews.foundation.di.ui.base.activity.ContributesActivity")
     val contributesCoroutineWorker = FqName("ru.pixnews.foundation.di.workmanager.ContributesCoroutineWorker")
     val contributesExperiment = FqName("ru.pixnews.foundation.featuretoggles.inject.ContributesExperiment")
-    val contributesTest = FqName("ru.pixnews.foundation.di.instrumented.test.ContributesTest")
+    val contributesTest = FqName("ru.pixnews.foundation.instrumented.test.di.ContributesTest")
     val contributesVariantSerializer = FqName(
         "ru.pixnews.foundation.featuretoggles.inject.ContributesExperimentVariantSerializer",
     )

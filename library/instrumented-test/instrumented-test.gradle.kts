@@ -13,18 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.instrumented.test.base
+plugins {
+    id("ru.pixnews.gradle.android.library")
+}
 
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso
-import org.junit.Before
-import ru.pixnews.library.instrumented.test.espresso.CleanHierarchyEspressoFailureHandler
+pixnews {
+    compose.set(true)
+    managedDevices.set(false)
+}
 
-public abstract class BaseInstrumentedTest {
-    @Before
-    public open fun setupEspresso() {
-        Espresso.setFailureHandler(
-            CleanHierarchyEspressoFailureHandler(ApplicationProvider.getApplicationContext()),
-        )
-    }
+android {
+    namespace = "ru.pixnews.library.instrumented.test"
+}
+
+dependencies {
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui.test.junit4)
+    implementation(libs.androidx.test.espresso.core)
+    implementation(libs.androidx.test.uiautomator)
+    implementation(libs.assertk)
+    implementation(libs.kermit)
+    implementation(libs.radiography)
 }

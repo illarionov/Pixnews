@@ -18,6 +18,7 @@ package ru.pixnews.foundation.ui.theme
 import android.os.Build
 import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -29,7 +30,7 @@ import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.appconfig.DefaultAppConfig
 
 @VisibleForTesting
-public val LightColors = lightColorScheme(
+public val LightColors: ColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
     primaryContainer = md_theme_light_primaryContainer,
@@ -62,7 +63,7 @@ public val LightColors = lightColorScheme(
 )
 
 @VisibleForTesting
-public val DarkColors = darkColorScheme(
+public val DarkColors: ColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
     primaryContainer = md_theme_dark_primaryContainer,

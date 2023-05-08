@@ -13,29 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.inject
+package ru.pixnews.foundation.instrumented.test.di
 
-import android.content.Context
-import co.touchlab.kermit.Logger
+import androidx.annotation.RestrictTo
+import androidx.annotation.RestrictTo.Scope.LIBRARY
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
-import dagger.multibindings.IntoSet
-import okhttp3.Interceptor
+import dagger.Reusable
+import dagger.multibindings.Multibinds
+import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.instrumented.test.di.InstrumentationAppContext
-import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientInterceptor
-import ru.pixnews.test.mockokhttp.MockDataInterceptor
-import javax.inject.Provider
 
 @ContributesTo(AppScope::class)
 @Module
-public object TestRootOkhttpModule {
-    @Provides
-    @IntoSet
-    @RootHttpClientInterceptor
-    fun provideMockingInterceptor(
-        @InstrumentationAppContext context: Provider<Context>,
-        logger: Logger,
-    ): Interceptor = MockDataInterceptor(context, logger)
+@RestrictTo(LIBRARY)
+public interface InstrumentedTestsInjectorsModule {
+    @Multibinds
+    public fun instrumentedTestInjectors(): DaggerMap<Class<out Any>, SingleInstrumentedTestInjector>
+
+    public companion object {
+        @Reusable
+        @Provides
+        public fun provideInstrumentedTestInjector(
+            injectors: DaggerMap<Class<out Any>, SingleInstrumentedTestInjector>,
+        ): InstrumentedTestInjector {
+            return DefaultInstrumentedTestInjector(injectors)
+        }
+    }
 }

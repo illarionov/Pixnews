@@ -37,9 +37,9 @@ import org.junit.Test
 import ru.pixnews.feature.calendar.model.GameListViewMode.GRID
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
-import ru.pixnews.foundation.instrumented.test.util.assertHorizontalPaddingBetweenAdjacentItems
-import ru.pixnews.foundation.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
+import ru.pixnews.library.instrumented.test.util.assertHorizontalPaddingBetweenAdjacentItems
+import ru.pixnews.library.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
 
 class CalendarScreenHeaderPaddingsTest : BaseInstrumentedTest() {
     @get:Rule

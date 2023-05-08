@@ -13,18 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.instrumented.test.base
+package ru.pixnews.foundation.instrumented.test.di
 
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso
-import org.junit.Before
-import ru.pixnews.library.instrumented.test.espresso.CleanHierarchyEspressoFailureHandler
-
-public abstract class BaseInstrumentedTest {
-    @Before
-    public open fun setupEspresso() {
-        Espresso.setFailureHandler(
-            CleanHierarchyEspressoFailureHandler(ApplicationProvider.getApplicationContext()),
-        )
+internal class DefaultInstrumentedTestInjector(
+    private val providers: Map<Class<out Any>, SingleInstrumentedTestInjector>,
+) : InstrumentedTestInjector {
+    override fun inject(test: Any) {
+        providers[test::class.java]?.also {
+            it.injectMembers(test)
+        } ?: error("No member injector for $test")
     }
 }

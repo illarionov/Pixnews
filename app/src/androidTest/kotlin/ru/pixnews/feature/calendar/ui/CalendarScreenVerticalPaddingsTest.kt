@@ -46,14 +46,14 @@ import org.junit.runners.Parameterized.Parameters
 import ru.pixnews.MainActivity
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
-import ru.pixnews.foundation.di.instrumented.test.ContributesTest
-import ru.pixnews.foundation.di.instrumented.test.rule.InjectDependenciesRule
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
-import ru.pixnews.foundation.instrumented.test.rule.SystemNavigationRule
-import ru.pixnews.foundation.instrumented.test.rule.SystemNavigationRule.NavigationMode
-import ru.pixnews.foundation.instrumented.test.rule.SystemNavigationRule.NavigationMode.GESTURAL
-import ru.pixnews.foundation.instrumented.test.rule.SystemNavigationRule.NavigationMode.THREE_BUTTON
+import ru.pixnews.foundation.instrumented.test.di.ContributesTest
+import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
 import ru.pixnews.library.android.utils.rootView
+import ru.pixnews.library.instrumented.test.rule.SystemNavigationRule
+import ru.pixnews.library.instrumented.test.rule.SystemNavigationRule.NavigationMode
+import ru.pixnews.library.instrumented.test.rule.SystemNavigationRule.NavigationMode.GESTURAL
+import ru.pixnews.library.instrumented.test.rule.SystemNavigationRule.NavigationMode.THREE_BUTTON
 import javax.inject.Inject
 import kotlin.LazyThreadSafetyMode.NONE
 

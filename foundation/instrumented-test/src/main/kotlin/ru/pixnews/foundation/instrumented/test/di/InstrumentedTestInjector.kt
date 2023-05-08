@@ -13,18 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.instrumented.test.base
+package ru.pixnews.foundation.instrumented.test.di
 
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso
-import org.junit.Before
-import ru.pixnews.library.instrumented.test.espresso.CleanHierarchyEspressoFailureHandler
+import androidx.annotation.RestrictTo
+import androidx.annotation.RestrictTo.Scope.LIBRARY
 
-public abstract class BaseInstrumentedTest {
-    @Before
-    public open fun setupEspresso() {
-        Espresso.setFailureHandler(
-            CleanHierarchyEspressoFailureHandler(ApplicationProvider.getApplicationContext()),
-        )
-    }
+@RestrictTo(LIBRARY)
+public fun interface InstrumentedTestInjector {
+    public fun inject(test: Any)
 }

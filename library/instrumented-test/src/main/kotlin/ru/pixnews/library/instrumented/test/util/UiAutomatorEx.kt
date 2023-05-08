@@ -13,18 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.foundation.instrumented.test.base
+package ru.pixnews.library.instrumented.test.util
 
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso
-import org.junit.Before
-import ru.pixnews.library.instrumented.test.espresso.CleanHierarchyEspressoFailureHandler
+import android.app.UiAutomation
+import android.os.ParcelFileDescriptor.AutoCloseInputStream
+import java.io.InputStream
 
-public abstract class BaseInstrumentedTest {
-    @Before
-    public open fun setupEspresso() {
-        Espresso.setFailureHandler(
-            CleanHierarchyEspressoFailureHandler(ApplicationProvider.getApplicationContext()),
-        )
-    }
+public fun UiAutomation.executeShellCommandIs(command: String): InputStream {
+    return AutoCloseInputStream(this.executeShellCommand(command))
 }

@@ -13,29 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.inject
+package ru.pixnews.foundation.instrumented.test.di
 
 import android.content.Context
-import co.touchlab.kermit.Logger
+import androidx.annotation.RestrictTo
+import androidx.annotation.RestrictTo.Scope.LIBRARY
+import androidx.test.platform.app.InstrumentationRegistry
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
-import dagger.multibindings.IntoSet
-import okhttp3.Interceptor
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.instrumented.test.di.InstrumentationAppContext
-import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientInterceptor
-import ru.pixnews.test.mockokhttp.MockDataInterceptor
-import javax.inject.Provider
 
 @ContributesTo(AppScope::class)
 @Module
-public object TestRootOkhttpModule {
+@RestrictTo(LIBRARY)
+public object InstrumentationAppContextModule {
     @Provides
-    @IntoSet
-    @RootHttpClientInterceptor
-    fun provideMockingInterceptor(
-        @InstrumentationAppContext context: Provider<Context>,
-        logger: Logger,
-    ): Interceptor = MockDataInterceptor(context, logger)
+    @InstrumentationAppContext
+    public fun providesInstrumentationContext(): Context {
+        return InstrumentationRegistry.getInstrumentation().context
+    }
 }

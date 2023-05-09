@@ -18,7 +18,7 @@ package ru.pixnews.inject.initializer
 import com.squareup.anvil.annotations.MergeComponent
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.foundation.di.base.scopes.SingleIn
-import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
+import ru.pixnews.foundation.initializers.inject.AppInitializersScope
 
 @SingleIn(AppInitializersScope::class)
 @MergeComponent(

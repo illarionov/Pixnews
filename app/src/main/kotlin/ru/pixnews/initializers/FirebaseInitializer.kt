@@ -17,14 +17,12 @@ package ru.pixnews.initializers
 
 import co.touchlab.kermit.Logger
 import com.google.firebase.FirebaseApp
-import com.squareup.anvil.annotations.ContributesMultibinding
 import ru.pixnews.foundation.initializers.AsyncInitializer
-import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
-import javax.inject.Inject
+import ru.pixnews.foundation.initializers.inject.ContributesInitializer
 import javax.inject.Provider
 
-@ContributesMultibinding(AppInitializersScope::class)
-public class FirebaseInitializer @Inject constructor(
+@ContributesInitializer
+public class FirebaseInitializer(
     private val logger: Logger,
     private val firebaseApp: Provider<@JvmSuppressWildcards FirebaseApp>,
 ) : AsyncInitializer {

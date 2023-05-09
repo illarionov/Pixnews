@@ -25,7 +25,7 @@ import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.initializers.AppInitializer
 import ru.pixnews.foundation.initializers.AsyncInitializer
 import ru.pixnews.foundation.initializers.Initializer
-import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
+import ru.pixnews.foundation.initializers.inject.AppInitializersScope
 
 @ContributesTo(AppInitializersScope::class)
 @Module

@@ -16,13 +16,11 @@
 package ru.pixnews.initializers
 
 import co.touchlab.kermit.Logger
-import com.squareup.anvil.annotations.ContributesMultibinding
 import ru.pixnews.foundation.initializers.Initializer
-import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
-import javax.inject.Inject
+import ru.pixnews.foundation.initializers.inject.ContributesInitializer
 
-@ContributesMultibinding(AppInitializersScope::class)
-class GlobalLoggerInitializer @Inject constructor(private val localLogger: Logger) : Initializer {
+@ContributesInitializer
+class GlobalLoggerInitializer(private val localLogger: Logger) : Initializer {
     override fun init() {
         Logger.setLogWriters(localLogger.config.logWriterList)
         Logger.setMinSeverity(localLogger.config.minSeverity)

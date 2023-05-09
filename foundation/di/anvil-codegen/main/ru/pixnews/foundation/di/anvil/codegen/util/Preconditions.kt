@@ -20,27 +20,21 @@ import com.squareup.anvil.compiler.internal.reference.ClassReference
 import com.squareup.anvil.compiler.internal.reference.allSuperTypeClassReferences
 import org.jetbrains.kotlin.name.FqName
 
-// com/squareup/anvil/compiler/codegen/ClassReferenceExtensions.kt
-internal fun ClassReference.checkClassExtendsBoundType(
-    annotationFqName: FqName,
-) {
-    val boundType = annotations.find { it.fqName == annotationFqName }?.boundTypeOrNull()
-        ?: directSuperTypeReferences().singleOrNull()?.asClassReference()
-        ?: throw AnvilCompilationExceptionClassReference(
-            message = "Couldn't find the bound type.",
+internal fun ClassReference.checkClassExtendsType(type: FqName) {
+    if (allSuperTypeClassReferences().none { it.fqName == type }) {
+        throw AnvilCompilationExceptionClassReference(
+            message = "${this.fqName} doesn't extend $type",
             classReference = this,
         )
-
-    // The boundType is declared explicitly in the annotation. Since all classes extend Any, we can
-    // stop here.
-    if (boundType.fqName == FqNames.anyClass) {
-        return
     }
+}
 
-    if (allSuperTypeClassReferences().none { it.fqName == boundType.fqName }) {
+internal fun ClassReference.checkClassExtendsAnyOfType(
+    vararg types: FqName,
+) {
+    if (allSuperTypeClassReferences().none { it.fqName in types }) {
         throw AnvilCompilationExceptionClassReference(
-            message = "${this.fqName} contributes a binding for ${boundType.fqName}, but doesn't " +
-                    "extend this type.",
+            message = "${this.fqName} doesn't extend any od $types",
             classReference = this,
         )
     }

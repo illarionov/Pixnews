@@ -34,7 +34,7 @@ import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.psi.KtFile
 import ru.pixnews.foundation.di.anvil.codegen.util.ClassNames
 import ru.pixnews.foundation.di.anvil.codegen.util.FqNames
-import ru.pixnews.foundation.di.anvil.codegen.util.checkClassExtendsBoundType
+import ru.pixnews.foundation.di.anvil.codegen.util.checkClassExtendsType
 import ru.pixnews.foundation.di.anvil.codegen.util.contributesToAnnotation
 import java.io.File
 
@@ -116,7 +116,7 @@ public class ContributesExperimentCodeGenerator : CodeGenerator {
      * `@Provides @IntoSet abstract fun provideMainExperiment(experiment: MainExperiment): Experiment`
      */
     private fun providesExperimentFunction(annotatedExperiment: ClassReference): FunSpec {
-        annotatedExperiment.checkClassExtendsBoundType(FqNames.experiment)
+        annotatedExperiment.checkClassExtendsType(FqNames.experiment)
 
         return FunSpec.builder("provide${annotatedExperiment.shortName}")
             .addAnnotation(ClassNames.Dagger.provides)
@@ -133,7 +133,7 @@ public class ContributesExperimentCodeGenerator : CodeGenerator {
         annotatedSerializer: ClassReference,
         experimentVariantKey: String,
     ): FunSpec {
-        annotatedSerializer.checkClassExtendsBoundType(FqNames.experimentVariantSerializer)
+        annotatedSerializer.checkClassExtendsType(FqNames.experimentVariantSerializer)
 
         return FunSpec.builder("provide${annotatedSerializer.shortName}")
             .addAnnotation(ClassNames.Dagger.provides)

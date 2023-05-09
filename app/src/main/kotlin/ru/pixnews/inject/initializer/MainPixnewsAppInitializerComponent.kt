@@ -19,7 +19,7 @@ import com.squareup.anvil.annotations.MergeComponent
 import dagger.Component
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.foundation.di.base.scopes.SingleIn
-import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
+import ru.pixnews.foundation.initializers.inject.AppInitializersScope
 import ru.pixnews.inject.FirebaseModule.FirebaseProviderHolder
 
 /**

@@ -23,6 +23,7 @@ import dagger.Binds
 import dagger.MembersInjector
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import dagger.assisted.AssistedFactory
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
@@ -37,6 +38,7 @@ internal object ClassNames {
     val activityMapKey = ClassName("ru.pixnews.foundation.di.ui.base.activity", "ActivityMapKey")
     val coroutineWorkerMapKey = ClassName("ru.pixnews.foundation.di.workmanager", "CoroutineWorkerMapKey")
     val activityScope = ClassName("ru.pixnews.foundation.di.ui.base.activity", "ActivityScope")
+    val appInitializersScope = ClassName("ru.pixnews.foundation.initializers.inject", "AppInitializersScope")
     val appScope = AppScope::class.asClassName()
     val coroutineWorkerFactory = ClassName("ru.pixnews.foundation.di.workmanager", "CoroutineWorkerFactory")
     val workManagerScope: ClassName = ClassName("ru.pixnews.foundation.di.workmanager", "WorkManagerScope")
@@ -51,6 +53,8 @@ internal object ClassNames {
     val viewModelFactory = ClassName("ru.pixnews.foundation.di.ui.base.viewmodel", "ViewModelFactory")
     val viewModelMapKey = ClassName("ru.pixnews.foundation.di.ui.base.viewmodel", "ViewModelMapKey")
     val viewModelScope = ClassName("ru.pixnews.foundation.di.ui.base.viewmodel", "ViewModelScope")
+    val asyncInitializer = ClassName("ru.pixnews.foundation.initializers", "AsyncInitializer")
+    val initializer = ClassName("ru.pixnews.foundation.initializers", "Initializer")
 
     internal object Anvil {
         val contributesMultibinding = ContributesMultibinding::class.asClassName()
@@ -66,6 +70,7 @@ internal object ClassNames {
         val membersInjector = MembersInjector::class.asClassName()
         val module = Module::class.asClassName()
         val provides = Provides::class.asClassName()
+        val reusable = Reusable::class.asClassName()
     }
 
     internal object Android {

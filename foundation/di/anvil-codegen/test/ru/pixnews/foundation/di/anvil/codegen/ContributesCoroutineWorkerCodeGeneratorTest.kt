@@ -153,7 +153,7 @@ class ContributesCoroutineWorkerCodeGeneratorTest {
         clazz.getAnnotation(coroutineWorkerMapKeyClass).getElementValue<Class<*>>("workerClass")
             .shouldBe(testWorkerClass)
 
-        assertTrue { coroutineWorkerFactoryClass.isAssignableFrom(coroutineWorkerFactoryClass) }
+        assertTrue { coroutineWorkerFactoryClass.isAssignableFrom(clazz) }
     }
 
     @Test

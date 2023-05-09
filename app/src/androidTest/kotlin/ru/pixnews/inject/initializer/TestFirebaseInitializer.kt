@@ -16,14 +16,12 @@
 package ru.pixnews.inject.initializer
 
 import co.touchlab.kermit.Logger
-import com.squareup.anvil.annotations.ContributesMultibinding
 import ru.pixnews.foundation.initializers.AsyncInitializer
-import ru.pixnews.foundation.initializers.qualifiers.AppInitializersScope
+import ru.pixnews.foundation.initializers.inject.ContributesInitializer
 import ru.pixnews.initializers.FirebaseInitializer
-import javax.inject.Inject
 
-@ContributesMultibinding(AppInitializersScope::class, replaces = [FirebaseInitializer::class])
-class TestFirebaseInitializer @Inject constructor(
+@ContributesInitializer(replaces = [FirebaseInitializer::class])
+class TestFirebaseInitializer(
     val logger: Logger,
 ) : AsyncInitializer {
     override fun init() {

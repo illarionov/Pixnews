@@ -15,15 +15,14 @@
  */
 package ru.pixnews.foundation.di.anvil.codegen.util
 
-import com.squareup.anvil.compiler.internal.fqName
 import com.squareup.kotlinpoet.ClassName
 import org.jetbrains.kotlin.name.FqName
 
 internal object FqNames {
-    val anyClass: FqName = Any::class.fqName
     val contributesActivity = FqName("ru.pixnews.foundation.di.ui.base.activity.ContributesActivity")
     val contributesCoroutineWorker = FqName("ru.pixnews.foundation.di.workmanager.ContributesCoroutineWorker")
     val contributesExperiment = FqName("ru.pixnews.foundation.featuretoggles.inject.ContributesExperiment")
+    val contributesInitializer = FqName("ru.pixnews.foundation.initializers.inject.ContributesInitializer")
     val contributesTest = FqName("ru.pixnews.foundation.instrumented.test.di.ContributesTest")
     val contributesVariantSerializer = FqName(
         "ru.pixnews.foundation.featuretoggles.inject.ContributesExperimentVariantSerializer",

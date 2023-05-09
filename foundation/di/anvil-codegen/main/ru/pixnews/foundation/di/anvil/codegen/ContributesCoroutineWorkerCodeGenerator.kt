@@ -39,7 +39,7 @@ import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.psi.KtFile
 import ru.pixnews.foundation.di.anvil.codegen.util.ClassNames
 import ru.pixnews.foundation.di.anvil.codegen.util.FqNames
-import ru.pixnews.foundation.di.anvil.codegen.util.checkClassExtendsBoundType
+import ru.pixnews.foundation.di.anvil.codegen.util.checkClassExtendsType
 import ru.pixnews.foundation.di.anvil.codegen.util.contributesMultibindingAnnotation
 import java.io.File
 
@@ -63,7 +63,7 @@ public class ContributesCoroutineWorkerCodeGenerator : CodeGenerator {
         annotatedClass: ClassReference,
         codeGenDir: File,
     ): GeneratedFile {
-        annotatedClass.checkClassExtendsBoundType(FqNames.Android.coroutineWorker)
+        annotatedClass.checkClassExtendsType(FqNames.Android.coroutineWorker)
 
         val workerClassName = annotatedClass.asClassName()
         val factoryClassId = annotatedClass.generateClassName(suffix = "_AssistedFactory")

@@ -35,7 +35,6 @@ internal fun Project.configureCommonAndroid(
 
         defaultConfig {
             minSdk = versionCatalog.findVersion("minSdk").get().displayName.toInt()
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
             resourceConfigurations.addAll(listOf("en", "ru"))
             vectorDrawables {

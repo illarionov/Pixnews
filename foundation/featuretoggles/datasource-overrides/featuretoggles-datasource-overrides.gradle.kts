@@ -22,7 +22,6 @@ plugins {
 
 pixnews {
     compose.set(false)
-    managedDevices.set(false)
     unitTestEngine.set(ru.pixnews.gradle.base.UnitTestEngine.JUNIT5)
 }
 

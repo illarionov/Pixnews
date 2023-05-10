@@ -67,15 +67,13 @@ androidComponents {
         project.pixnews.applyTo(project, it)
     }
     beforeVariants(selector().withBuildType("debug")) { builder ->
-        if (!project.pixnews.managedDevices.get()) {
-            builder.enable = false
-        }
+        builder.enable = false
     }
 }
 
 dependencies {
     val bom = platform("ru.pixnews.gradle.base:gradle-billofmaterials")
-    listOf("implementation", "testImplementation", "androidTestImplementation").forEach {
+    listOf("implementation", "testImplementation").forEach {
         add(it, bom)
     }
 }

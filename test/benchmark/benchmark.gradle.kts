@@ -15,11 +15,11 @@
  */
 plugins {
     id("ru.pixnews.gradle.android.test")
+    id("ru.pixnews.gradle.android.test-instrumented")
 }
 
 pixnews {
     compose.set(false)
-    managedDevices.set(true)
 }
 
 @Suppress("VariableNaming")

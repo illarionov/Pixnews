@@ -17,13 +17,13 @@
 plugins {
     id("ru.pixnews.gradle.android.application")
     id("ru.pixnews.gradle.android.crashlytics")
+    id("ru.pixnews.gradle.android.test-instrumented")
     id("ru.pixnews.gradle.di.anvil-kapt")
     id("ru.pixnews.gradle.config.firebase")
 }
 
 pixnews {
     compose.set(true)
-    managedDevices.set(true)
 }
 
 android {

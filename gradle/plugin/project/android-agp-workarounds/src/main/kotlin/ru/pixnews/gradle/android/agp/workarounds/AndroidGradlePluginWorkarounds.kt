@@ -17,7 +17,6 @@ package ru.pixnews.gradle.android.agp.workarounds
 
 import com.android.build.gradle.internal.lint.AndroidLintTask
 import com.android.build.gradle.internal.tasks.ManagedDeviceInstrumentationTestTask
-import com.android.build.gradle.internal.tasks.R8Task
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.withType
 
@@ -25,15 +24,6 @@ object AndroidGradlePluginWorkarounds {
     fun Project.disableProjectAsExternalDependencyLintTaskWarning() {
         tasks.withType<AndroidLintTask>().configureEach {
             this.variantInputs.mainArtifact.warnIfProjectTreatedAsExternalDependency.set(false)
-        }
-    }
-
-    // Workaround for https://issuetracker.google.com/issues/279516901
-    fun Project.disableArtProfileRewriting() {
-        afterEvaluate {
-            tasks.withType<R8Task>().configureEach {
-                artProfileRewriting.set(false)
-            }
         }
     }
 

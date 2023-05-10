@@ -27,6 +27,8 @@ import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.extension.AfterEachCallback
 import org.junit.jupiter.api.extension.BeforeEachCallback
 import org.junit.jupiter.api.extension.ExtensionContext
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 public class MainCoroutineExtension : BeforeEachCallback, AfterEachCallback {
     public lateinit var testScope: TestScope
@@ -51,7 +53,7 @@ public class MainCoroutineExtension : BeforeEachCallback, AfterEachCallback {
     }
 
     public fun runTest(
-        dispatchTimeoutMs: Long = 60_000L,
+        timeout: Duration = 60.seconds,
         testBody: suspend TestScope.() -> Unit,
-    ): TestResult = testScope.runTest(dispatchTimeoutMs, testBody)
+    ): TestResult = testScope.runTest(timeout = timeout, testBody)
 }

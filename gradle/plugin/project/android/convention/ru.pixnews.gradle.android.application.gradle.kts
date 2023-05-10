@@ -17,7 +17,6 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import ru.pixnews.gradle.android.ReleaseConfig
-import ru.pixnews.gradle.android.agp.workarounds.AndroidGradlePluginWorkarounds
 import ru.pixnews.gradle.android.applyTo
 import ru.pixnews.gradle.android.configureCommonAndroid
 import ru.pixnews.gradle.android.configureSigning
@@ -109,10 +108,6 @@ extensions.configure<ApplicationAndroidComponentsExtension> {
     finalizeDsl {
         project.pixnews.applyTo(project, it)
     }
-}
-
-with(AndroidGradlePluginWorkarounds) {
-    disableArtProfileRewriting()
 }
 
 dependencies {

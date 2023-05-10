@@ -21,7 +21,6 @@ plugins {
 
 pixnews {
     compose.set(false)
-    managedDevices.set(false)
 }
 
 android {

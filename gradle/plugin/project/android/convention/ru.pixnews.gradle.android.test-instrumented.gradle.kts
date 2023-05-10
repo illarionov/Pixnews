@@ -13,47 +13,68 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("UnstableApiUsage", "MagicNumber")
 
-package ru.pixnews.gradle.android
+@file:Suppress("UnstableApiUsage")
 
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.ManagedVirtualDevice
 import com.android.build.api.dsl.TestedExtension
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.invoke
-import org.gradle.kotlin.dsl.maybeCreate
-import org.gradle.kotlin.dsl.withType
+import com.android.build.api.variant.AndroidComponentsExtension
+import com.android.build.gradle.AppPlugin
+import com.android.build.gradle.DynamicFeaturePlugin
+import com.android.build.gradle.LibraryPlugin
+import com.android.build.gradle.TestPlugin
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import ru.pixnews.gradle.android.agp.workarounds.AndroidGradlePluginWorkarounds
 import ru.pixnews.gradle.base.pixnews
 import ru.pixnews.gradle.base.versionCatalog
 
-internal fun Project.configureAndroidInstrumentedTests(
-    commonExtension: CommonExtension<*, *, *, *, *>,
-) {
-    commonExtension.apply {
-        defaultConfig {
-            testInstrumentationRunner = "ru.pixnews.foundation.instrumented.test.PixnewsTestRunner"
+/**
+ * Convention plugin that configures instrumental tests for all of android plugins.
+ * Used with one of these plugins:
+ * `ru.pixnews.gradle.android.application.gradle.kts`,
+ * `ru.pixnews.gradle.android.library.gradle.kts`,
+ * or `ru.pixnews.gradle.android.test.gradle.kts`
+ */
+listOf(
+    AppPlugin::class.java,
+    LibraryPlugin::class.java,
+    DynamicFeaturePlugin::class.java,
+    TestPlugin::class.java,
+).forEach { agpPluginType ->
+    plugins.withType(agpPluginType) {
+        extensions.configure<CommonExtension<*, *, *, *, *>>("android") {
+            defaultConfig {
+                testInstrumentationRunner = "ru.pixnews.foundation.instrumented.test.PixnewsTestRunner"
+            }
+            configureTestManagedDevices(this)
+            if (this is TestedExtension) {
+                configureAndroidTestDependencies()
+            }
+        }
+        extensions.configure(AndroidComponentsExtension::class.java) {
+            onVariants(selector().withName("androidTest")) { variant ->
+                variant.manifestPlaceholders.put("firebase_crashlytics_collection_enabled", "false")
+            }
+            finalizeDsl {
+                if (pixnews.compose.get()) {
+                    configureComposeInstrumentedTestSpecifics()
+                }
+            }
         }
     }
-    if (pixnews.compose.get()) {
-        tasks.withType<KotlinCompilationTask<KotlinJvmCompilerOptions>>()
-            .matching { it.name.endsWith("AndroidTestKotlin") }
-            .configureEach {
-                compilerOptions.freeCompilerArgs.addAll(
-                    "-opt-in=androidx.compose.ui.test.ExperimentalTestApi",
-                )
-            }
-    }
-
-    configureTestManagedDevices(commonExtension)
-    configureAndroidTestDependencies(commonExtension)
 }
 
-private fun Project.configureTestManagedDevices(
+plugins.withType<LibraryPlugin> {
+    extensions.configure(AndroidComponentsExtension::class.java) {
+        beforeVariants(selector().withBuildType("debug")) { builder ->
+            builder.enable = true
+        }
+    }
+}
+
+fun configureTestManagedDevices(
     commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     commonExtension.testOptions.managedDevices {
@@ -79,19 +100,12 @@ private fun Project.configureTestManagedDevices(
     }
 }
 
-private fun Project.configureAndroidTestDependencies(
-    commonExtension: CommonExtension<*, *, *, *, *>,
-) {
-    if (commonExtension !is TestedExtension) {
-        return
-    }
-
+fun configureAndroidTestDependencies() {
     dependencies {
-        if (pixnews.compose.get()) {
-            add("debugImplementation", versionCatalog.findLibrary("androidx-compose-ui-testManifest").orElseThrow())
-        }
-        add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
+        val bom = platform("ru.pixnews.gradle.base:gradle-billofmaterials")
+        add("androidTestImplementation", bom)
         add("androidTestImplementation", project(":foundation:instrumented-test"))
+        add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
 
         constraints {
             listOf(
@@ -113,5 +127,18 @@ private fun Project.configureAndroidTestDependencies(
         dependencies {
             add("kaptAndroidTest", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
         }
+    }
+}
+
+fun configureComposeInstrumentedTestSpecifics() {
+    tasks.withType<KotlinCompilationTask<KotlinJvmCompilerOptions>>()
+        .matching { it.name.endsWith("AndroidTestKotlin") }
+        .configureEach {
+            compilerOptions.freeCompilerArgs.addAll(
+                "-opt-in=androidx.compose.ui.test.ExperimentalTestApi",
+            )
+        }
+    dependencies {
+        add("debugImplementation", versionCatalog.findLibrary("androidx-compose-ui-testManifest").get())
     }
 }

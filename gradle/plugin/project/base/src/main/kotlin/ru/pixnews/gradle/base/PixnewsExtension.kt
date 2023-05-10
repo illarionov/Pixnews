@@ -32,7 +32,6 @@ constructor(
     val configFile: RegularFileProperty = objects.fileProperty()
         .convention(objects.directoryProperty().file("config/pixnews.properties"))
     val compose: Property<Boolean> = objects.property<Boolean>().convention(false)
-    val managedDevices: Property<Boolean> = objects.property<Boolean>().convention(false)
     val unitTestEngine: Property<UnitTestEngine> = objects.property<UnitTestEngine>().convention(JUNIT5)
 }
 

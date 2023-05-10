@@ -36,7 +36,6 @@ plugins {
 
 createPixnewsExtension().apply {
     compose.convention(true)
-    managedDevices.convention(true)
 }
 
 extensions.configure<ApplicationExtension>("android") {
@@ -101,9 +100,6 @@ extensions.configure<ApplicationAndroidComponentsExtension> {
             "META-INF/androidx.*",
             "kotlin/**",
         )
-    }
-    onVariants(selector().withName("androidTest")) { variant ->
-        variant.manifestPlaceholders.put("firebase_crashlytics_collection_enabled", "false")
     }
     finalizeDsl {
         project.pixnews.applyTo(project, it)

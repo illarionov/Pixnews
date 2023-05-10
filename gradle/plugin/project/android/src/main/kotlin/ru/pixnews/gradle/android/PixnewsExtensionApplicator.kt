@@ -24,9 +24,6 @@ internal fun PixnewsExtension.applyTo(project: Project, commonExtension: CommonE
     if (compose.get()) {
         project.configureCompose(commonExtension)
     }
-    if (managedDevices.get()) {
-        project.configureAndroidInstrumentedTests(commonExtension)
-    }
     if (commonExtension is TestedExtension) {
         project.configureUnitTesting(unitTestEngine.get(), commonExtension)
     }

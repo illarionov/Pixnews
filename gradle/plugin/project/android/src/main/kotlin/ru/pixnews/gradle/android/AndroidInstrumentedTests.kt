@@ -92,6 +92,21 @@ private fun Project.configureAndroidTestDependencies(
         }
         add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
         add("androidTestImplementation", project(":foundation:instrumented-test"))
+
+        constraints {
+            listOf(
+                "org.jetbrains.kotlinx:kotlinx-coroutines-test",
+                "org.jetbrains.kotlinx:kotlinx-coroutines-test-jvm",
+            ).forEach { testDependency ->
+                add("androidTestImplementation", testDependency) {
+                    version {
+                        strictly("1.6.4")
+                        reject("1.7.0")
+                        because("https://github.com/Kotlin/kotlinx.coroutines/issues/3673")
+                    }
+                }
+            }
+        }
     }
 
     plugins.withId("ru.pixnews.gradle.di.anvil-kapt") {

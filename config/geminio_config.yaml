@@ -1,0 +1,6 @@
+templatesRootDirPath: /config/template
+modulesTemplatesRootDirPath: /config/template
+
+groupsNames:
+  forNewGroup: Pixnews Templates
+  forNewModulesGroup: Pixnews Modules

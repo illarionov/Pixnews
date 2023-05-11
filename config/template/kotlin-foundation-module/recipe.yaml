@@ -1,0 +1,41 @@
+requiredParams:
+  name: Kotlin foundation module
+  description: Creates Kotlin foundation module
+
+predefinedFeatures:
+  - enableModuleCreationParams:
+      defaultPackageNamePrefix: ru.pixnews.foundation
+
+widgets:
+  - stringParameter:
+      id: description
+      name: Module description
+      help: Description to be added to the README file
+      constraints:
+        - string
+        - nonempty
+      default: Module with unknown purpose
+
+  - booleanParameter:
+      id: enableCompose
+      name: Enable Compose
+      help: Enable Compose type inference
+      default: true
+
+globals:
+  - stringParameter:
+      id: moduleType
+      value: "library"
+
+recipe:
+  - mkDirs:
+      - ${rootOut}/main/ru/pixnews/foundation
+  - instantiate:
+      from: root/.gitignore.ftl
+      to: ${rootOut}/.gitignore
+  - instantiate:
+      from: root/README_ru.md.ftl
+      to: ${rootOut}/README_ru.md
+  - instantiate:
+      from: root/build.gradle.kts.ftl
+      to: ${rootOut}/${__moduleName}.gradle.kts

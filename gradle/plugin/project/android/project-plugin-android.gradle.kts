@@ -27,13 +27,13 @@ dependencies {
     implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
     implementation("ru.pixnews.gradle.base:gradle-build-parameters")
 
-    implementation(projects.androidAgpWorkarounds)
     implementation(projects.base)
     implementation(projects.di)
     implementation(projects.testing)
     implementation(projects.lint)
 
     implementation(libs.agp.plugin.api)
+    runtimeOnly(libs.agp.plugin)
     implementation(libs.kotlin.jvm.plugin)
     implementation(libs.firebase.crashlitycs.plugin)
     implementation(libs.paparazzi.plugin)

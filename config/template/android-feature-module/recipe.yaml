@@ -1,0 +1,44 @@
+requiredParams:
+  name: Android feature module
+  description: Creates Android feature module
+
+predefinedFeatures:
+  - enableModuleCreationParams:
+      defaultPackageNamePrefix: ru.pixnews.feature
+
+widgets:
+  - stringParameter:
+      id: description
+      name: Module description
+      help: Description to be added to the README file
+      constraints:
+        - string
+        - nonempty
+      default: Module with unknown purpose
+
+  - booleanParameter:
+      id: enableCompose
+      name: Enable Compose
+      help: Enable Compose
+      default: true
+
+globals:
+  - stringParameter:
+      id: moduleType
+      value: "feature"
+
+recipe:
+  - mkDirs:
+      - ${rootOut}/src/main/kotlin/ru/pixnews/feature
+  - instantiate:
+      from: root/.gitignore.ftl
+      to: ${rootOut}/.gitignore
+  - instantiate:
+      from: root/README_ru.md.ftl
+      to: ${rootOut}/README_ru.md
+  - instantiate:
+      from: root/build.gradle.kts.ftl
+      to: ${rootOut}/${__moduleName}.gradle.kts
+  - instantiate:
+      from: root/lib-proguard-rules.pro.ftl
+      to: ${rootOut}/lib-proguard-rules.pro

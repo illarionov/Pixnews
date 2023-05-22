@@ -1,0 +1,41 @@
+requiredParams:
+  name: Kotlin feature module
+  description: Creates Kotlin feature module
+
+predefinedFeatures:
+  - enableModuleCreationParams:
+      defaultPackageNamePrefix: ru.pixnews.feature
+
+widgets:
+  - stringParameter:
+      id: description
+      name: Module description
+      help: Description to be added to the README file
+      constraints:
+        - string
+        - nonempty
+      default: Module with unknown purpose
+
+  - booleanParameter:
+      id: enableCompose
+      name: Enable Compose
+      help: Enable Compose type inference
+      default: true
+
+globals:
+  - stringParameter:
+      id: moduleType
+      value: "feature"
+
+recipe:
+  - mkDirs:
+      - ${rootOut}/main/ru/pixnews/feature
+  - instantiate:
+      from: root/.gitignore.ftl
+      to: ${rootOut}/.gitignore
+  - instantiate:
+      from: root/README_ru.md.ftl
+      to: ${rootOut}/README_ru.md
+  - instantiate:
+      from: root/build.gradle.kts.ftl
+      to: ${rootOut}/${__moduleName}.gradle.kts

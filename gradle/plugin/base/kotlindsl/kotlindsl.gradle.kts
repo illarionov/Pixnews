@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import org.gradle.kotlin.dsl.support.expectedKotlinDslPluginsVersion
+
 plugins {
     `kotlin-dsl`
 }
@@ -25,5 +27,5 @@ kotlin {
 }
 
 dependencies {
-    implementation("org.gradle.kotlin:gradle-kotlin-dsl-plugins:4.0.7")
+    implementation("org.gradle.kotlin:gradle-kotlin-dsl-plugins:$expectedKotlinDslPluginsVersion")
 }

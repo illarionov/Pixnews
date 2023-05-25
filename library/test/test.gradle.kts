@@ -22,8 +22,9 @@ group = "ru.pixnews.library.test"
 
 dependencies {
     api(libs.junit.jupiter.api)
-
     api(libs.kermit.jvm)
-
     api(libs.kotlinx.coroutines.test)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.mockwebserver)
+    implementation(libs.okhttp.logging.interceptor)
 }

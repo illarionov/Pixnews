@@ -30,6 +30,7 @@ globals:
 recipe:
   - mkDirs:
       - ${rootOut}/src/main/kotlin/ru/pixnews/feature
+      - ${rootOut}/src/test/kotlin/ru/pixnews/feature
   - instantiate:
       from: root/.gitignore.ftl
       to: ${rootOut}/.gitignore

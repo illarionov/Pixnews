@@ -30,6 +30,7 @@ globals:
 recipe:
   - mkDirs:
       - ${rootOut}/main/ru/pixnews/foundation
+      - ${rootOut}/test/ru/pixnews/foundation
   - instantiate:
       from: root/.gitignore.ftl
       to: ${rootOut}/.gitignore

@@ -50,6 +50,7 @@
          <trusted-key id="475f3b8e59e6e63aa78067482c7b12f2a511e325" group="org.slf4j" name="slf4j-api"/>
          <trusted-key id="4797b4f5dcc46cea61059071a1ae06236ca2ba62" group="com.diffplug.spotless"/>
          <trusted-key id="4db1a49729b053caf015cee9a6adfc93ef34893e" group="org.hamcrest"/>
+         <trusted-key id="52f2d559d58ab86a5bec44e2ee2717174b5e29fe" group="com.google.protobuf"/>
          <trusted-key id="576234c01ec3d940352ed2e5e707f8370e7a8b89" group="^com[.]willowtreeapps($|([.].*))" regex="true"/>
          <trusted-key id="59b06224fd8912e36603be79fefe78456eddc34a" group="io.mockk"/>
          <trusted-key id="5cba19e56141e78d54bf716f08a4a4958d61fc3d" group="^io[.]kotest($|([.].*))" regex="true"/>
@@ -66,7 +67,10 @@
             <trusting group="androidx.emoji2"/>
          </trusted-key>
          <trusted-key id="8756c4f765c9ac3cb6b85d62379ce192d401ab61" group="com.diffplug.durian"/>
-         <trusted-key id="90ee19787a7bcf6fd37a1e9180c08b1c29100955" group="com.squareup" name="javawriter"/>
+         <trusted-key id="90ee19787a7bcf6fd37a1e9180c08b1c29100955">
+            <trusting group="com.squareup" name="javawriter"/>
+            <trusting group="com.squareup.retrofit2"/>
+         </trusted-key>
          <trusted-key id="95115197c5227c0887299d000f9fe62f88e938d8" group="com.google.dagger"/>
          <trusted-key id="a5bd02b93e7a40482eb1d66a5f69ad087600b22c" group="org.ow2.asm"/>
          <trusted-key id="a6d6c97108b8585f91b158748671a8df71296252" group="^com[.]squareup($|([.].*))" regex="true"/>
@@ -115,6 +119,11 @@
       </component>
       <component group="com.charleskorn.kaml" name="kaml-jvm" version="0.47.0">
          <artifact name="kaml-jvm-0.47.0.jar">
+            <pgp value="e01ed293981ae484403b65d7da70bcba6d76ad03"/>
+         </artifact>
+      </component>
+      <component group="com.charleskorn.kaml" name="kaml-jvm" version="0.53.0">
+         <artifact name="kaml-jvm-0.53.0.jar">
             <pgp value="e01ed293981ae484403b65d7da70bcba6d76ad03"/>
          </artifact>
       </component>
@@ -298,6 +307,11 @@
             <pgp value="050a37a2e0577f4baa095b52602ec18d20c4661c"/>
          </artifact>
       </component>
+      <component group="io.outfoxx" name="swiftpoet" version="1.5.0">
+         <artifact name="swiftpoet-1.5.0.jar">
+            <pgp value="78ab011fa6e5907950ea3e2747dcfc2a59f59b5b"/>
+         </artifact>
+      </component>
       <component group="io.perfmark" name="perfmark-api" version="0.23.0">
          <artifact name="perfmark-api-0.23.0.jar">
             <pgp value="c6f7d1c804c821f49af3bfc13ad93c3c677a106e"/>
@@ -423,6 +437,11 @@
             <pgp value="8e3a02905a1ae67e7b0f9acd3967d4eda591b991"/>
          </artifact>
       </component>
+      <component group="org.json" name="json" version="20230227">
+         <artifact name="json-20230227.jar">
+            <pgp value="86616cd3c4f0803e73374a434dbf5995d492505d"/>
+         </artifact>
+      </component>
       <component group="org.junit.vintage" name="junit-vintage-engine" version="5.9.3">
          <artifact name="junit-vintage-engine-5.9.3.jar">
             <pgp value="ff6e2c001948c5f2f38b0cc385911f425ec61b51"/>
@@ -445,6 +464,11 @@
       </component>
       <component group="org.snakeyaml" name="snakeyaml-engine" version="2.3">
          <artifact name="snakeyaml-engine-2.3.jar">
+            <pgp value="120d6f34e627ed3a772ebbfe55c7e5e701832382"/>
+         </artifact>
+      </component>
+      <component group="org.snakeyaml" name="snakeyaml-engine" version="2.6">
+         <artifact name="snakeyaml-engine-2.6.jar">
             <pgp value="120d6f34e627ed3a772ebbfe55c7e5e701832382"/>
          </artifact>
       </component>

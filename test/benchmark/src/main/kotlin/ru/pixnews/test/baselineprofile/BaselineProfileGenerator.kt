@@ -37,7 +37,7 @@ class BaselineProfileGenerator {
 
     @Test
     fun generateBaselineProfile() {
-        baselineProfileRule.collectBaselineProfile(packageName = BenchmarkAppConfig.targetPackage) {
+        baselineProfileRule.collect(packageName = BenchmarkAppConfig.targetPackage) {
             pressHome()
             startActivityAndWait()
 

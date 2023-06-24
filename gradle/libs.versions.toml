@@ -65,8 +65,10 @@ mockk = "1.13.5"
 okhttp = "4.10.0"
 okio = "3.3.0"
 paparazzi = "1.2.0"
+retrofit = "2.9.0"
 radiography = "2.4.1"
 turbine = "0.12.3"
+orgjson = "20230227"
 
 junit4 = "4.13.2"
 junit5 = "5.9.3"
@@ -75,7 +77,8 @@ kotlinx-collections-immutable = "0.3.5"
 kotlinx-dateime = "0.4.0"
 kotlinx-serialization = "1.5.0"
 protobuf-plugin = "0.9.3"
-protobuf = "3.22.3"
+protobuf = "3.23.1"
+wire = "4.7.2"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidx-activity" }
@@ -219,10 +222,18 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor" }
 okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver" }
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
+org-json = { group = "org.json", name = "json", version.ref = "orgjson" }
+protobuf-java = { group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf" }
 protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf" }
+protobuf-kotlinlite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
 radiography = { group = "com.squareup.radiography", name = "radiography", version.ref = "radiography" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-protobuf = { group = "com.squareup.retrofit2", name = "converter-protobuf", version.ref = "retrofit" }
+retrofit-converter-scalars = { group = "com.squareup.retrofit2", name = "converter-scalars", version.ref = "retrofit" }
+retrofit-converter-wire = { group = "com.squareup.retrofit2", name = "converter-wire", version.ref = "retrofit" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+wire-runtime-jvm = { group = "com.squareup.wire", name = "wire-runtime-jvm", version.ref = "wire" }
 
 # Dependencies of the included build-logic
 agp-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -239,6 +250,7 @@ firebase-crashlitycs-plugin = { group = "com.google.firebase", name = "firebase-
 protobuf-plugin = { group = "com.google.protobuf", name = "protobuf-gradle-plugin", version.ref = "protobuf-plugin" }
 paparazzi-plugin = { group = "app.cash.paparazzi", name = "paparazzi-gradle-plugin", version.ref = "paparazzi" }
 spotless-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
+wire-plugin = { group = "com.squareup.wire", name = "wire-gradle-plugin", version.ref = "wire" }
 
 [bundles]
 coil = ["coil-bom", "coil-compose-base"]
@@ -271,3 +283,4 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+wire = { id = "com.squareup.wire", version.ref = "wire" }

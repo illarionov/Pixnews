@@ -13,29 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ru.pixnews.library.igdb.error
 
-import ru.pixnews.gradle.base.versionCatalog
-
-plugins {
-    id("com.google.protobuf")
-}
-
-dependencies {
-    add("implementation", versionCatalog.findLibrary("protobuf.javalite").orElseThrow())
-}
-
-protobuf {
-    protoc {
-        artifact = versionCatalog.findLibrary("protobuf.protoc").orElseThrow().get().toString()
-    }
-
-    generateProtoTasks {
-        all().forEach { task ->
-            task.builtins {
-                create("java") {
-                    option("lite")
-                }
-            }
-        }
-    }
+public open class IgdbException : RuntimeException {
+    internal constructor(message: String?) : super(message)
+    internal constructor(message: String?, cause: Throwable?) : super(message, cause)
+    internal constructor(cause: Throwable?) : super(cause)
 }

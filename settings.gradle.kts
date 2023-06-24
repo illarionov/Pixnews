@@ -61,6 +61,7 @@ listOf(
     "coroutines",
     "functional",
     "instrumented-test",
+    "igdb",
     "kotlin-utils",
     "test",
     "ui-tooling",

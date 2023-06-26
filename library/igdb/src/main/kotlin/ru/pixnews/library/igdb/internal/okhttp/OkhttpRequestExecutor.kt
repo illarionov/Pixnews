@@ -21,6 +21,7 @@ import okhttp3.Call.Factory
 import okhttp3.HttpUrl
 import okhttp3.Request.Builder
 import okhttp3.RequestBody.Companion.toRequestBody
+import ru.pixnews.library.igdb.IgdbResult
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
 import ru.pixnews.library.igdb.internal.IgdbConstants.Header
@@ -28,7 +29,6 @@ import ru.pixnews.library.igdb.internal.IgdbConstants.MediaType
 import ru.pixnews.library.igdb.internal.IgdbErrorResponseParser
 import ru.pixnews.library.igdb.internal.RequestExecutor
 import ru.pixnews.library.igdb.internal.model.IgdbAuthToken
-import ru.pixnews.library.igdb.internal.model.IgdbResult
 import java.io.InputStream
 
 internal class OkhttpRequestExecutor(
@@ -41,11 +41,11 @@ internal class OkhttpRequestExecutor(
     private val httpErrorJsonParser: (InputStream) -> IgdbHttpErrorResponse = IgdbErrorResponseParser,
 ) : RequestExecutor {
     override suspend operator fun <T : Any> invoke(
-        endpoint: String,
+        path: String,
         query: ApicalypseQuery,
-        successResponseParser: (InputStream) -> T,
+        successResponseParser: (ApicalypseQuery, InputStream) -> T,
     ): IgdbResult<T, IgdbHttpErrorResponse> {
-        val url = baseUrl.newBuilder().addPathSegment(endpoint).build()
+        val url = baseUrl.newBuilder().addPathSegment(path).build()
         val body = query.toString().toRequestBody(MediaType.TEXT_PLAIN)
 
         val okhttpRequest = Builder().apply {
@@ -66,8 +66,9 @@ internal class OkhttpRequestExecutor(
             .newCall(okhttpRequest)
             .executeAsyncWithResult()
             .toIgdbResult(
+                query = query,
                 successResponseParser = successResponseParser,
-                errorResponseParser = httpErrorJsonParser,
+                errorResponseParser = { _, stream -> httpErrorJsonParser(stream) },
                 backgroundDispatcher = backgroundDispatcher,
             )
     }

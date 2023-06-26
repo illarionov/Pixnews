@@ -22,10 +22,11 @@ import okhttp3.Call
 import okhttp3.FormBody
 import okhttp3.HttpUrl
 import okhttp3.Request
+import ru.pixnews.library.igdb.IgdbResult
+import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery.Companion.apicalypseQuery
 import ru.pixnews.library.igdb.auth.model.TwitchToken
 import ru.pixnews.library.igdb.internal.IgdbConstants
 import ru.pixnews.library.igdb.internal.IgdbConstants.MediaType
-import ru.pixnews.library.igdb.internal.model.IgdbResult
 import ru.pixnews.library.igdb.internal.okhttp.executeAsyncWithResult
 import ru.pixnews.library.igdb.internal.okhttp.toIgdbResult
 import java.io.InputStream
@@ -62,7 +63,8 @@ internal class OkhttpTwitchTokenFetcher(
             .newCall(request)
             .executeAsyncWithResult()
             .toIgdbResult(
-                successResponseParser = { inputStream ->
+                query = apicalypseQuery { },
+                successResponseParser = { _, inputStream ->
                     @Suppress("MagicNumber")
                     twitchTokenParser(inputStream).copy(
                         receive_timestamp = Instant.ofEpochSecond(
@@ -71,7 +73,7 @@ internal class OkhttpTwitchTokenFetcher(
                         ),
                     )
                 },
-                errorResponseParser = twitchErrorResponseParser,
+                errorResponseParser = { _, stream -> twitchErrorResponseParser(stream) },
                 backgroundDispatcher = backgroundDispatcher,
             )
     }

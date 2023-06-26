@@ -25,9 +25,9 @@ import okhttp3.mockwebserver.RecordedRequest
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
+import ru.pixnews.library.igdb.IgdbResult
+import ru.pixnews.library.igdb.IgdbResult.Failure.HttpFailure
 import ru.pixnews.library.igdb.internal.IgdbConstants.MediaType
-import ru.pixnews.library.igdb.internal.model.IgdbResult
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.HttpFailure
 import ru.pixnews.library.igdb.util.MockWebServerExt.createOkHttpClientBuilder
 import ru.pixnews.library.test.MainCoroutineExtension
 import ru.pixnews.library.test.okhttp.ConcatMockDispatcher

@@ -30,9 +30,9 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 import ru.pixnews.library.igdb.Fixtures
 import ru.pixnews.library.igdb.Fixtures.MockIgdbResponseContent
-import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery.Companion.apicalypseQuery
 import ru.pixnews.library.igdb.dsl.IgdbClientConfig
 import ru.pixnews.library.igdb.error.IgdbHttpException
+import ru.pixnews.library.igdb.game
 import ru.pixnews.library.igdb.internal.IgdbConstants
 import ru.pixnews.library.igdb.internal.IgdbConstants.MediaType.APPLICATION_JSON
 import ru.pixnews.library.test.MainCoroutineExtension
@@ -64,7 +64,7 @@ class OkhttpIgdbClientFactoryTest {
         }
         val executor = OkhttpIgdbClientFactory(config).build()
 
-        val response = executor.game(apicalypseQuery { })
+        val response = executor.game { }
 
         response.games.shouldNotBeEmpty()
     }
@@ -103,7 +103,7 @@ class OkhttpIgdbClientFactoryTest {
         }
         val executor = OkhttpIgdbClientFactory(config).build()
 
-        val response = executor.game(apicalypseQuery { })
+        val response = executor.game { }
 
         response.games.shouldNotBeEmpty()
         twitchAuthRequested.get() shouldBe true
@@ -127,7 +127,7 @@ class OkhttpIgdbClientFactoryTest {
         }
         val executor = OkhttpIgdbClientFactory(config).build()
 
-        val response = executor.game(apicalypseQuery { })
+        val response = executor.game { }
 
         response.games.shouldNotBeEmpty()
     }
@@ -154,7 +154,7 @@ class OkhttpIgdbClientFactoryTest {
         }
         val executor = OkhttpIgdbClientFactory(config).build()
 
-        val response = kotlin.runCatching { executor.game(apicalypseQuery { }) }
+        val response = kotlin.runCatching { executor.game { } }
 
         response.shouldBeFailure {
             (it as? IgdbHttpException)?.code shouldBe 429
@@ -187,7 +187,7 @@ class OkhttpIgdbClientFactoryTest {
         }
         val executor = OkhttpIgdbClientFactory(config).build()
 
-        val response = kotlin.runCatching { executor.game(apicalypseQuery { }) }
+        val response = kotlin.runCatching { executor.game { } }
 
         response.shouldBeFailure {
             (it as? IgdbHttpException)?.code shouldBe 429

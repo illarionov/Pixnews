@@ -25,6 +25,7 @@ import okhttp3.OkHttpClient
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable
 import org.junit.jupiter.api.extension.RegisterExtension
+import ru.pixnews.library.igdb.IgdbEndpoint.Companion.countEndpoint
 import ru.pixnews.library.igdb.auth.model.TwitchToken
 import ru.pixnews.library.igdb.auth.twitch.InMemoryTwitchTokenStorage
 import ru.pixnews.library.igdb.auth.twitch.TwitchTokenPayload.Companion.toTokenPayload
@@ -125,7 +126,7 @@ class RealNetworkTestClient {
     @Test
     fun testMultiQuery() = runBlocking {
         val response = client.multiquery {
-            query("platforms/count", "Count of Platforms") {}
+            query(IgdbEndpoint.PLATFORM.countEndpoint(), "Count of Platforms") {}
             query(IgdbEndpoint.GAME, "Playstation Games") {
                 fields("name", "category", "platforms.name")
                 where("platforms !=n ")

@@ -16,26 +16,28 @@
 package ru.pixnews.library.igdb.internal.multiquery
 
 import ru.pixnews.library.igdb.apicalypse.ApicalypseMultiQuery
-import ru.pixnews.library.igdb.internal.multiquery.IgdbEndpointParser.getProtobufParserForEndpoint
+import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.model.MultiQueryResult
 import ru.pixnews.library.igdb.model.MultiQueryResultArray
 import ru.pixnews.library.igdb.multiquery.UnpackedMultiQueryResult
 import java.io.InputStream
 
 internal class MultiQueryArrayParser(
-    private val multiQueryRequest: ApicalypseMultiQuery,
     private val resultArrayParser: (InputStream) -> MultiQueryResultArray = MultiQueryResultArray.ADAPTER::decode,
-) : (InputStream) -> List<UnpackedMultiQueryResult<*>> {
-    override fun invoke(inputStream: InputStream): List<UnpackedMultiQueryResult<*>> {
+) : (ApicalypseQuery, InputStream) -> List<UnpackedMultiQueryResult<*>> {
+    override fun invoke(query: ApicalypseQuery, inputStream: InputStream): List<UnpackedMultiQueryResult<*>> {
+        val multiQuery = query as? ApicalypseMultiQuery ?: error("should be ApicalypseMultiQuery")
         val multiQueryResultArray = resultArrayParser(inputStream)
         return multiQueryResultArray.result.mapIndexed { subqueryIndex, subqueryResult: MultiQueryResult ->
-            val endpoint = multiQueryRequest.subqueries[subqueryIndex].endpoint
+            val endpoint = multiQuery.subqueries[subqueryIndex].endpoint
             UnpackedMultiQueryResult(
                 name = subqueryResult.name,
                 count = subqueryResult.count,
                 results = subqueryResult.results.let { results ->
                     if (results.isNotEmpty()) {
-                        val parser: (InputStream) -> Any = getProtobufParserForEndpoint(endpoint)
+                        val parser = checkNotNull(endpoint.singleItemParser) {
+                            "No parser for `$endpoint`"
+                        }
                         subqueryResult.results.map { payload -> parser(payload.toByteArray().inputStream()) }
                     } else {
                         null

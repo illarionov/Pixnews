@@ -35,6 +35,9 @@ internal object Fixtures {
         val syntaxError: Buffer
             get() = readResourceAsBuffer("$MOCK_RESPONSES_PATH/400_syntax_error.json")
 
+        val multiQueryPlatformsCountPsGames: Buffer
+            get() = readResourceAsBuffer("$MOCK_RESPONSES_PATH/multiquery/multiquery_count_ps_games.pb")
+
         fun createSuccessMockResponse() = MockResponse()
             .setResponseCode(200)
             .setHeader("Content-Type", MediaType.APPLICATION_PROTOBUF)

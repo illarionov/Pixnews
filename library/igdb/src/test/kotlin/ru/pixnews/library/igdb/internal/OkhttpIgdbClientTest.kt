@@ -39,7 +39,9 @@ import org.junit.jupiter.params.provider.EnumSource
 import ru.pixnews.library.igdb.Fixtures
 import ru.pixnews.library.igdb.Fixtures.MockIgdbResponseContent
 import ru.pixnews.library.igdb.Fixtures.MockIgdbResponseContent.createSuccessMockResponse
+import ru.pixnews.library.igdb.Fixtures.MockIgdbResponseContent.multiQueryPlatformsCountPsGames
 import ru.pixnews.library.igdb.IgdbClient
+import ru.pixnews.library.igdb.IgdbEndpoint
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.error.IgdbApiFailureException
 import ru.pixnews.library.igdb.error.IgdbException
@@ -49,6 +51,10 @@ import ru.pixnews.library.igdb.error.IgdbHttpException
 import ru.pixnews.library.igdb.internal.IgdbConstants.Header.AUTHORIZATION
 import ru.pixnews.library.igdb.internal.IgdbConstants.Header.CLIENT_ID
 import ru.pixnews.library.igdb.internal.IgdbConstants.MediaType
+import ru.pixnews.library.igdb.model.Game
+import ru.pixnews.library.igdb.model.Platform
+import ru.pixnews.library.igdb.multiquery
+import ru.pixnews.library.igdb.multiquery.UnpackedMultiQueryResult
 import ru.pixnews.library.igdb.util.MockWebServerExt.createOkHttpClientBuilder
 import ru.pixnews.library.test.MainCoroutineExtension
 import ru.pixnews.library.test.TestingLoggers
@@ -223,6 +229,53 @@ class OkhttpIgdbClientTest {
         request.cancelAndJoin()
 
         okhttpRequestCancelled.get() shouldBe true
+    }
+
+    @Test
+    fun `Implementation should correctly parse multiquery responses`() = coroutinesExt.runTest {
+        val api = startServerPrepareApi { request ->
+            if (request.path == "/v4/multiquery.pb") {
+                createSuccessMockResponse().setBody(multiQueryPlatformsCountPsGames)
+            } else {
+                null
+            }
+        }
+
+        val response = api.multiquery {
+            query("platforms/count", "Count of Platforms") {}
+            query(IgdbEndpoint.GAME, "Playstation Games") {
+                fields("name", "category", "platforms.name")
+                where("platforms !=n ")
+                limit(2)
+            }
+        }
+
+        response shouldHaveSize 2
+        response[0] shouldBe UnpackedMultiQueryResult<Any>(
+            name = "Count of Platforms",
+            count = 200,
+            results = null,
+        )
+        response[1] shouldBe UnpackedMultiQueryResult<Any>(
+            name = "Playstation Games",
+            count = 0,
+            results = listOf(
+                Game(
+                    id = 176032,
+                    name = "Nick Quest",
+                    platforms = listOf(
+                        Platform(id = 6, name = "PC (Microsoft Windows)"),
+                    ),
+                ),
+                Game(
+                    id = 50975,
+                    name = "Storybook Workshop",
+                    platforms = listOf(
+                        Platform(id = 5, name = "Wii"),
+                    ),
+                ),
+            ),
+        )
     }
 
     @AfterEach

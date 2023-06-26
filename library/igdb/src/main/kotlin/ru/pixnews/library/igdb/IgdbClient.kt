@@ -17,6 +17,9 @@
 
 package ru.pixnews.library.igdb
 
+import ru.pixnews.library.igdb.apicalypse.ApicalypseMultiQuery
+import ru.pixnews.library.igdb.apicalypse.ApicalypseMultiQuery.Companion.apicalypseMultiQuery
+import ru.pixnews.library.igdb.apicalypse.ApicalypseMultiQueryBuilder
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery.Companion.apicalypseQuery
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQueryBuilder
@@ -67,6 +70,7 @@ import ru.pixnews.library.igdb.model.ScreenshotResult
 import ru.pixnews.library.igdb.model.SearchResult
 import ru.pixnews.library.igdb.model.ThemeResult
 import ru.pixnews.library.igdb.model.WebsiteResult
+import ru.pixnews.library.igdb.multiquery.UnpackedMultiQueryResult
 
 /**
  * Creates a [IgdbClient] with the specified [block] configuration.
@@ -241,6 +245,11 @@ public interface IgdbClient {
      * Data about the supported multiplayer types
      */
     public suspend fun multiplayerMode(query: ApicalypseQuery): MultiplayerModeResult
+
+    /**
+     * Allows you to execute multiple queries at once
+     */
+    public suspend fun multiquery(query: ApicalypseMultiQuery): List<UnpackedMultiQueryResult<*>>
 
     /**
      * The hardware used to run the game or game delivery network
@@ -496,6 +505,13 @@ public suspend fun IgdbClient.languageSupportType(
  */
 public suspend fun IgdbClient.multiplayerMode(builder: ApicalypseQueryBuilder.() -> Unit): MultiplayerModeResult =
     multiplayerMode(apicalypseQuery(builder))
+
+/**
+ * Allows you to execute multiple queries at once
+ */
+public suspend fun IgdbClient.multiquery(
+    builder: ApicalypseMultiQueryBuilder.() -> Unit,
+): List<UnpackedMultiQueryResult<*>> = multiquery(apicalypseMultiQuery(builder))
 
 /**
  * The hardware used to run the game or game delivery network

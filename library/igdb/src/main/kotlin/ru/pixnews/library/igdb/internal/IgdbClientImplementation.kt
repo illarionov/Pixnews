@@ -16,6 +16,8 @@
 package ru.pixnews.library.igdb.internal
 
 import ru.pixnews.library.igdb.IgdbClient
+import ru.pixnews.library.igdb.IgdbEndpoint
+import ru.pixnews.library.igdb.apicalypse.ApicalypseMultiQuery
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.error.IgdbApiFailureException
 import ru.pixnews.library.igdb.error.IgdbException
@@ -26,6 +28,7 @@ import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.NetworkFailure
 import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.UnknownFailure
 import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.UnknownHttpCodeFailure
 import ru.pixnews.library.igdb.internal.model.IgdbResult.Success
+import ru.pixnews.library.igdb.internal.multiquery.MultiQueryArrayParser
 import ru.pixnews.library.igdb.model.AgeRatingContentDescriptionResult
 import ru.pixnews.library.igdb.model.AgeRatingResult
 import ru.pixnews.library.igdb.model.AlternativeNameResult
@@ -70,6 +73,7 @@ import ru.pixnews.library.igdb.model.ScreenshotResult
 import ru.pixnews.library.igdb.model.SearchResult
 import ru.pixnews.library.igdb.model.ThemeResult
 import ru.pixnews.library.igdb.model.WebsiteResult
+import ru.pixnews.library.igdb.multiquery.UnpackedMultiQueryResult
 import java.io.InputStream
 
 @Suppress("TooManyFunctions")
@@ -277,6 +281,13 @@ internal class IgdbClientImplementation(
             endpoint = IgdbEndpoint.MULTIPLAYER_MODE,
             query = query,
             successResponseParser = MultiplayerModeResult.ADAPTER::decode,
+        )
+
+    override suspend fun multiquery(query: ApicalypseMultiQuery): List<UnpackedMultiQueryResult<*>> =
+        executeRequest(
+            endpoint = IgdbEndpoint.MULTIQUERY,
+            query = query,
+            successResponseParser = MultiQueryArrayParser(query),
         )
 
     override suspend fun platform(query: ApicalypseQuery): PlatformResult =

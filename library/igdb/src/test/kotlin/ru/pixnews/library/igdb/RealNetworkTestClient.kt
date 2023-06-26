@@ -28,6 +28,7 @@ import org.junit.jupiter.api.extension.RegisterExtension
 import ru.pixnews.library.igdb.auth.model.TwitchToken
 import ru.pixnews.library.igdb.auth.twitch.InMemoryTwitchTokenStorage
 import ru.pixnews.library.igdb.auth.twitch.TwitchTokenPayload.Companion.toTokenPayload
+import ru.pixnews.library.igdb.model.Game
 import ru.pixnews.library.test.MainCoroutineExtension
 import ru.pixnews.library.test.TestingLoggers
 import ru.pixnews.library.test.okhttp.TestingLoggerInterceptor
@@ -121,6 +122,23 @@ class RealNetworkTestClient {
         logger.i { "responses: $responses" }
     }
 
+    @Test
+    fun testMultiQuery() = runBlocking {
+        val response = client.multiquery {
+            query("platforms/count", "Count of Platforms") {}
+            query(IgdbEndpoint.GAME, "Playstation Games") {
+                fields("name", "category", "platforms.name")
+                where("platforms !=n ")
+                limit(5)
+            }
+        }
+
+        @Suppress("UNCHECKED_CAST")
+        val responseGames: List<Game>? = response[1].results as List<Game>?
+
+        logger.i { "response2: $responseGames" }
+    }
+
     class TestTokenProperties(
         val clientId: String?,
         val clientSecret: String?,
@@ -129,7 +147,7 @@ class RealNetworkTestClient {
         companion object {
             private const val TEST_TOKEN_PROPERTIES_FILES = "/test_token.properties"
             fun loadFromResources(): TestTokenProperties {
-                val stream = javaClass.getResourceAsStream(TEST_TOKEN_PROPERTIES_FILES)
+                val stream = TestTokenProperties::class.java.getResourceAsStream(TEST_TOKEN_PROPERTIES_FILES)
                     ?: error("No resource `$TEST_TOKEN_PROPERTIES_FILES`")
                 return stream.use {
                     val properties = Properties().apply {

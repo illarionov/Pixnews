@@ -122,7 +122,7 @@ public class ApicalypseQueryBuilder {
      * Builds the specified query.
      */
     public fun build(): ApicalypseQuery {
-        val req = buildString {
+        val query = buildString {
             search?.let {
                 append("search \"", quoteString(it), "\";")
             }
@@ -158,7 +158,7 @@ public class ApicalypseQueryBuilder {
             }
         }
         return object : ApicalypseQuery {
-            override fun toString(): String = req
+            override fun toString(): String = query
         }
     }
 

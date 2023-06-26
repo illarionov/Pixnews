@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.library.igdb.internal
+package ru.pixnews.library.igdb
 
 import androidx.annotation.StringDef
 
@@ -22,250 +22,250 @@ import androidx.annotation.StringDef
  *
  * https://api-docs.igdb.com/
  */
-internal object IgdbEndpoint {
+public object IgdbEndpoint {
     /**
      * Age Rating according to various rating organisations
      */
-    const val AGE_RATING: String = "age_ratings"
+    public const val AGE_RATING: String = "age_ratings"
 
     /**
      * Age Rating Descriptors
      */
-    const val AGE_RATING_CONTENT_DESCRIPTION: String = "age_rating_content_descriptions"
+    public const val AGE_RATING_CONTENT_DESCRIPTION: String = "age_rating_content_descriptions"
 
     /**
      * Alternative and international game titles
      */
-    const val ALTERNATIVE_NAME: String = "alternative_names"
+    public const val ALTERNATIVE_NAME: String = "alternative_names"
 
     /**
      * Official artworks (resolution and aspect ratio may vary)
      */
-    const val ARTWORK: String = "artworks"
+    public const val ARTWORK: String = "artworks"
 
     /**
      * Video game characters
      */
-    const val CHARACTER: String = "characters"
+    public const val CHARACTER: String = "characters"
 
     /**
      * Images depicting game characters
      */
-    const val CHARACTER_MUG_SHOT: String = "character_mug_shots"
+    public const val CHARACTER_MUG_SHOT: String = "character_mug_shots"
 
     /**
      * Collection, AKA Series
      */
-    const val COLLECTION: String = "collections"
+    public const val COLLECTION: String = "collections"
 
     /**
      * Video game companies. Both publishers & developers
      */
-    const val COMPANY: String = "companies"
+    public const val COMPANY: String = "companies"
 
     /**
      * The logos of developers and publishers
      */
-    const val COMPANY_LOGO: String = "company_logos"
+    public const val COMPANY_LOGO: String = "company_logos"
 
     /**
      * Company Website
      */
-    const val COMPANY_WEBSITE: String = "company_websites"
+    public const val COMPANY_WEBSITE: String = "company_websites"
 
     /**
      * The cover art of games
      */
-    const val COVER: String = "covers"
+    public const val COVER: String = "covers"
 
     /**
      * Game IDs on other services
      */
-    const val EXTERNAL_GAME: String = "external_games"
+    public const val EXTERNAL_GAME: String = "external_games"
 
     /**
      * A list of video game franchises such as Star Wars.
      */
-    const val FRANCHISE: String = "franchises"
+    public const val FRANCHISE: String = "franchises"
 
     /**
      * Video game engines such as unreal engine.
      */
-    const val GAME_ENGINE: String = "game_engines"
+    public const val GAME_ENGINE: String = "game_engines"
 
     /**
      * The logos of game engines
      */
-    const val GAME_ENGINE_LOGO: String = "game_engine_logos"
+    public const val GAME_ENGINE_LOGO: String = "game_engine_logos"
 
     /**
      * Video Games!
      */
-    const val GAME: String = "games"
+    public const val GAME: String = "games"
 
     /**
      * Game localization for a game
      */
-    const val GAME_LOCALIZATION: String = "game_localizations"
+    public const val GAME_LOCALIZATION: String = "game_localizations"
 
     /**
      * Single player, Multiplayer etc
      */
-    const val GAME_MODE: String = "game_modes"
+    public const val GAME_MODE: String = "game_modes"
 
     /**
      * Details about game editions and versions
      */
-    const val GAME_VERSION: String = "game_versions"
+    public const val GAME_VERSION: String = "game_versions"
 
     /**
      * Features and descriptions of what makes each version/edition different from the main game
      */
-    const val GAME_VERSION_FEATURE: String = "game_version_features"
+    public const val GAME_VERSION_FEATURE: String = "game_version_features"
 
     /**
      * A video associated with a game
      */
-    const val GAME_VIDEO: String = "game_videos"
+    public const val GAME_VIDEO: String = "game_videos"
 
     /**
      * The bool/text value of the feature
      */
-    const val GAME_VERSION_FEATURE_VALUE: String = "game_version_feature_values"
+    public const val GAME_VERSION_FEATURE_VALUE: String = "game_version_feature_values"
 
     /**
      * Genres of video game
      */
-    const val GENRE: String = "genres"
+    public const val GENRE: String = "genres"
 
     /**
      * Involved Company
      */
-    const val INVOLVED_COMPANY: String = "involved_companies"
+    public const val INVOLVED_COMPANY: String = "involved_companies"
 
     /**
      * Languages that are used in the Language Support endpoint
      */
-    const val LANGUAGE: String = "languages"
+    public const val LANGUAGE: String = "languages"
 
     /**
      * Keywords are words or phrases that get tagged to a game such as “world war 2” or “steampunk”
      */
-    const val KEYWORD: String = "keywords"
+    public const val KEYWORD: String = "keywords"
 
     /**
      * Games can be played with different languages for voice acting, subtitles, or the interface language.
      */
-    const val LANGUAGE_SUPPORT: String = "language_supports"
+    public const val LANGUAGE_SUPPORT: String = "language_supports"
 
     /**
      * Language Support Types contains the identifiers for the support types that Language Support uses.
      */
-    const val LANGUAGE_SUPPORT_TYPE: String = "language_support_types"
+    public const val LANGUAGE_SUPPORT_TYPE: String = "language_support_types"
 
     /**
      * Data about the supported multiplayer types
      */
-    const val MULTIPLAYER_MODE: String = "multiplayer_modes"
+    public const val MULTIPLAYER_MODE: String = "multiplayer_modes"
 
     /**
      * The hardware used to run the game or game delivery network
      */
-    const val PLATFORM: String = "platforms"
+    public const val PLATFORM: String = "platforms"
 
     /**
      * Platform Version
      */
-    const val PLATFORM_VERSION: String = "platform_versions"
+    public const val PLATFORM_VERSION: String = "platform_versions"
 
     /**
      * A collection of closely related platforms
      */
-    const val PLATFORM_FAMILY: String = "platform_families"
+    public const val PLATFORM_FAMILY: String = "platform_families"
 
     /**
      * A platform developer
      */
-    const val PLATFORM_VERSION_COMPANY: String = "platform_version_companies"
+    public const val PLATFORM_VERSION_COMPANY: String = "platform_version_companies"
 
     /**
      * A handy endpoint that extends platform release dates. Used to dig deeper into release dates, platforms and
      * versions
      */
-    const val PLATFORM_VERSION_RELEASE_DATE: String = "platform_version_release_dates"
+    public const val PLATFORM_VERSION_RELEASE_DATE: String = "platform_version_release_dates"
 
     /**
      * The main website for the platform
      */
-    const val PLATFORM_WEBSITE: String = "platform_websites"
+    public const val PLATFORM_WEBSITE: String = "platform_websites"
 
     /**
      * Logo for a platform
      */
-    const val PLATFORM_LOGO: String = "platform_logos"
+    public const val PLATFORM_LOGO: String = "platform_logos"
 
     /**
      * Player perspectives describe the view/perspective of the player in a video game
      */
-    const val PLAYER_PERSPECTIVE: String = "player_perspectives"
+    public const val PLAYER_PERSPECTIVE: String = "player_perspectives"
 
     /**
      * Region for game localization
      */
-    const val REGION: String = "regions"
+    public const val REGION: String = "regions"
 
     /**
      * A handy endpoint that extends game release dates. Used to dig deeper into release dates, platforms and versions
      */
-    const val RELEASE_DATE: String = "release_dates"
+    public const val RELEASE_DATE: String = "release_dates"
 
     /**
      * An endpoint to provide definition of all of the current release date statuses
      */
-    const val RELEASE_DATE_STATUS: String = "release_date_statuses"
+    public const val RELEASE_DATE_STATUS: String = "release_date_statuses"
 
     /**
      * Screenshots of games
      */
-    const val SCREENSHOT: String = "screenshots"
+    public const val SCREENSHOT: String = "screenshots"
 
     /**
      * Search
      */
-    const val SEARCH: String = "search"
+    public const val SEARCH: String = "search"
 
     /**
      * Video game themes
      */
-    const val THEME: String = "themes"
+    public const val THEME: String = "themes"
 
     /**
      * A website url, usually associated with a game
      */
-    const val WEBSITE: String = "websites"
+    public const val WEBSITE: String = "websites"
 
     /**
      * Endpoint to get all registered webhooks
      */
-    const val WEBHOOKS: String = "webhooks"
+    public const val WEBHOOKS: String = "webhooks"
 
     /**
      * Endpoint to execute multi-queries
      */
-    const val MULTIQUERY: String = "multiquery"
+    public const val MULTIQUERY: String = "multiquery"
 
-    fun getProtobufEndpoint(@IgdbEndpoint endpoint: String): String = "$endpoint.pb"
+    public fun getProtobufEndpoint(@IgdbEndpoint endpoint: String): String = "$endpoint.pb"
 
-    fun getJsonEndpoint(@IgdbEndpoint endpoint: String): String = endpoint
+    public fun getJsonEndpoint(@IgdbEndpoint endpoint: String): String = endpoint
 
-    fun getWebhookEndpoint(@IgdbEndpoint endpoint: String): String = "$endpoint/webhooks"
+    public fun getWebhookEndpoint(@IgdbEndpoint endpoint: String): String = "$endpoint/webhooks"
 
-    fun getTestWebhookEndpoint(
+    public fun getTestWebhookEndpoint(
         @IgdbEndpoint endpoint: String,
         entityId: String,
     ): String = "$endpoint/webhooks/test/$entityId"
 
-    fun getRemoveWebhookEndpoint(webhookId: String): String = "$WEBHOOKS/$webhookId"
+    public fun getRemoveWebhookEndpoint(webhookId: String): String = "$WEBHOOKS/$webhookId"
 
     @Retention(AnnotationRetention.SOURCE)
     @StringDef(
@@ -316,5 +316,5 @@ internal object IgdbEndpoint {
         WEBHOOKS,
         MULTIQUERY,
     )
-    annotation class IgdbEndpoint
+    public annotation class IgdbEndpoint
 }

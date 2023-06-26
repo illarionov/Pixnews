@@ -32,37 +32,43 @@ class ApicalypseQueryBuilderTest {
         companion object {
             @JvmStatic
             fun testRequestBuilder(): List<QueryBuilderTestData> = listOf(
-                builderTest("") {},
+                builderTest({}, ""),
                 builderTest(
-                    """f *;""",
-                ) {
-                    fields("*")
-                },
-                builderTest("f age_ratings,aggregated_rating,collection.created_at,collection.url;") {
-                    fields("age_ratings", "aggregated_rating", "collection.created_at", "collection.url")
-                },
+                    builder = {
+                        fields("*")
+                    },
+                    expectedResult = """f *;""",
+                ),
                 builderTest(
-                    """search "Beyond Good & Evil";""" +
+                    builder = {
+                        fields("age_ratings", "aggregated_rating", "collection.created_at", "collection.url")
+                    },
+                    expectedResult = "f age_ratings,aggregated_rating,collection.created_at,collection.url;",
+                ),
+                builderTest(
+                    builder = {
+                        fields("*")
+                        exclude("age_ratings", "aggregated_rating", "collection.created_at")
+                        where("game.platforms = 48 & date > 1538129354")
+                        limit(33)
+                        offset(22)
+                        sort("date", DESC)
+                        search("Beyond Good & Evil")
+                    },
+                    expectedResult = """search "Beyond Good & Evil";""" +
                             "f *;" +
                             "x age_ratings,aggregated_rating,collection.created_at;" +
                             "w game.platforms = 48 & date > 1538129354;" +
                             "l 33;" +
                             "o 22;" +
                             "s date desc;",
-                ) {
-                    fields("*")
-                    exclude("age_ratings", "aggregated_rating", "collection.created_at")
-                    where("game.platforms = 48 & date > 1538129354")
-                    limit(33)
-                    offset(22)
-                    sort("date", DESC)
-                    search("Beyond Good & Evil")
-                },
+                ),
             )
 
+            @Suppress("LAMBDA_IS_NOT_LAST_PARAMETER")
             private fun builderTest(
-                expectedResult: String,
                 builder: ApicalypseQueryBuilder.() -> Unit,
+                expectedResult: String,
             ): QueryBuilderTestData {
                 return QueryBuilderTestData(ApicalypseQueryBuilder().apply(builder), expectedResult)
             }
@@ -71,6 +77,6 @@ class ApicalypseQueryBuilderTest {
                 val builder: ApicalypseQueryBuilder,
                 val expectedResult: String,
             )
-}
+        }
     }
 }

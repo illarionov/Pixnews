@@ -42,9 +42,11 @@ import ru.pixnews.library.igdb.Fixtures.MockIgdbResponseContent.createSuccessMoc
 import ru.pixnews.library.igdb.Fixtures.MockIgdbResponseContent.multiQueryPlatformsCountPsGames
 import ru.pixnews.library.igdb.IgdbClient
 import ru.pixnews.library.igdb.IgdbEndpoint
+import ru.pixnews.library.igdb.IgdbEndpoint.Companion.GAME
 import ru.pixnews.library.igdb.IgdbEndpoint.Companion.countEndpoint
 import ru.pixnews.library.igdb.ageRating
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
+import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery.Companion.apicalypseQuery
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQueryBuilder
 import ru.pixnews.library.igdb.error.IgdbApiFailureException
 import ru.pixnews.library.igdb.error.IgdbException
@@ -283,6 +285,27 @@ class OkhttpIgdbClientTest {
                 ),
             ),
         )
+    }
+
+    @Test
+    fun `Implementation should correctly parse count() responses`() = coroutinesExt.runTest {
+        val api = startServerPrepareApi { request ->
+            if (request.path == "/v4/games/count.pb") {
+                createSuccessMockResponse().setBody(MockIgdbResponseContent.countGames)
+            } else {
+                null
+            }
+        }
+
+        val response = api.executeOrThrow(
+            GAME.countEndpoint(),
+            apicalypseQuery {
+                fields("*")
+                search("Diablo")
+            },
+        )
+
+        response.count shouldBe 34
     }
 
     @AfterEach

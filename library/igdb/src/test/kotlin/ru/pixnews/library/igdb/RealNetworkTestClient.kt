@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable
 import org.junit.jupiter.api.extension.RegisterExtension
 import ru.pixnews.library.igdb.IgdbEndpoint.Companion.countEndpoint
+import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery.Companion.apicalypseQuery
 import ru.pixnews.library.igdb.auth.model.TwitchToken
 import ru.pixnews.library.igdb.auth.twitch.InMemoryTwitchTokenStorage
 import ru.pixnews.library.igdb.auth.twitch.TwitchTokenPayload.Companion.toTokenPayload
@@ -138,6 +139,19 @@ class RealNetworkTestClient {
         val responseGames: List<Game>? = response[1].results as List<Game>?
 
         logger.i { "response2: $responseGames" }
+    }
+
+    @Test
+    fun testCountResponse() = runBlocking {
+        val diabloGamesCount = client.executeOrThrow(
+            IgdbEndpoint.GAME.countEndpoint(),
+            apicalypseQuery {
+                fields("*")
+                search("Diablo")
+            },
+        )
+
+        logger.i { "games count: $diabloGamesCount" }
     }
 
     class TestTokenProperties(

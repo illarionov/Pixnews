@@ -35,7 +35,6 @@ wire {
 
 dependencies {
     api(libs.okhttp)
-    implementation(libs.androidx.annotation)
     implementation(libs.kermit)
     implementation(projects.library.coroutines)
     testImplementation(libs.junit.jupiter.params)

@@ -39,6 +39,7 @@ import ru.pixnews.library.igdb.auth.twitch.TwitchTokenPayload
 import ru.pixnews.library.igdb.auth.twitch.TwitchTokenStorage
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse.Message
+import ru.pixnews.library.igdb.internal.IgdbRequest.ApicalypsePostRequest
 import ru.pixnews.library.igdb.internal.RequestExecutor
 import ru.pixnews.library.igdb.internal.model.IgdbAuthToken
 import ru.pixnews.library.igdb.internal.twitch.TwitchAuthenticationRequestDecorator.Companion.MAX_COMMIT_FRESH_TOKEN_ATTEMPTS
@@ -184,7 +185,7 @@ internal class TwitchAuthenticationRequestDecoratorTest {
     fun `Auth decorator should request new token when old token is expired`() = coroutinesExt.runTest {
         val authDecorator = TwitchDecoratorTestEnvironment(
             tokenStorage = InMemoryTwitchTokenStorage(validToken1Payload),
-            igdbExecutor = TracingRequestExecutor { _, _, _, requestNo ->
+            igdbExecutor = TracingRequestExecutor { _, requestNo ->
                 when (requestNo) {
                     1L -> HttpFailure<IgdbHttpErrorResponse>(
                         httpCode = 401,
@@ -225,7 +226,7 @@ internal class TwitchAuthenticationRequestDecoratorTest {
         )
         val authDecorator = TwitchDecoratorTestEnvironment(
             tokenStorage = InMemoryTwitchTokenStorage(validToken1Payload),
-            igdbExecutor = TracingRequestExecutor { _, _, _, _ ->
+            igdbExecutor = TracingRequestExecutor { _, _ ->
                 HttpFailure(
                     401,
                     "Expired authtoken",
@@ -271,7 +272,7 @@ internal class TwitchAuthenticationRequestDecoratorTest {
         val igdbExecutorLatch = Job()
         val authDecorator = TwitchDecoratorTestEnvironment(
             tokenStorage = InMemoryTwitchTokenStorage(validToken1Payload),
-            igdbExecutor = TracingRequestExecutor { _, _, _, _ ->
+            igdbExecutor = TracingRequestExecutor { _, _ ->
                 igdbExecutorLatch.complete()
                 awaitCancellation()
             },
@@ -315,7 +316,7 @@ internal class TwitchAuthenticationRequestDecoratorTest {
         )
 
         val firstRequestJob = backgroundScope.async {
-            authDecorator.invoke()
+            authDecorator()
         }.apply {
             invokeOnCompletion { logger.i { "First request complete" } }
         }
@@ -323,7 +324,7 @@ internal class TwitchAuthenticationRequestDecoratorTest {
         firstRequestLaunchedLatch.join()
         val subsequentRequests = (1 until 5).map { requestNo ->
             backgroundScope.async {
-                authDecorator.invoke()
+                authDecorator()
             }.apply {
                 invokeOnCompletion { logger.i { "Subsequent request $requestNo complete" } }
             }
@@ -352,7 +353,7 @@ internal class TwitchAuthenticationRequestDecoratorTest {
         val credentials: TwitchCredentials = TestCredentials(),
         val tokenStorage: TwitchTokenStorage = InMemoryTwitchTokenStorage(validToken1Payload),
         val tokenFetcher: TracingTwitchTokenFetcher = TracingTwitchTokenFetcher { _, _ -> Success(validToken2) },
-        val igdbExecutor: TracingRequestExecutor = TracingRequestExecutor { _, _, _, _ ->
+        val igdbExecutor: TracingRequestExecutor = TracingRequestExecutor { _, _ ->
             Success("Test Response")
         },
         val igdbExecutorFactory: TracingRequestExecutorFactory = TracingRequestExecutorFactory { _, _ -> igdbExecutor },
@@ -370,7 +371,9 @@ internal class TwitchAuthenticationRequestDecoratorTest {
             endpoint: String = "endpoint",
             query: ApicalypseQuery = apicalypseQuery { },
             successResponseParser: (ApicalypseQuery, InputStream) -> String = { _, _ -> "" },
-        ): IgdbResult<String, IgdbHttpErrorResponse> = authDecorator.invoke(endpoint, query, successResponseParser)
+        ): IgdbResult<String, IgdbHttpErrorResponse> = authDecorator(
+            ApicalypsePostRequest(endpoint, query, successResponseParser),
+        )
     }
 
     @Suppress("MaxLineLength")

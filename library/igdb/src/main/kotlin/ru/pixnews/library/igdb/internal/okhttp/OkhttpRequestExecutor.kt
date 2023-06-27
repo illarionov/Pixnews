@@ -18,7 +18,9 @@ package ru.pixnews.library.igdb.internal.okhttp
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import okhttp3.Call.Factory
+import okhttp3.FormBody
 import okhttp3.HttpUrl
+import okhttp3.Request
 import okhttp3.Request.Builder
 import okhttp3.RequestBody.Companion.toRequestBody
 import ru.pixnews.library.igdb.IgdbResult
@@ -27,6 +29,11 @@ import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
 import ru.pixnews.library.igdb.internal.IgdbConstants.Header
 import ru.pixnews.library.igdb.internal.IgdbConstants.MediaType
 import ru.pixnews.library.igdb.internal.IgdbErrorResponseParser
+import ru.pixnews.library.igdb.internal.IgdbRequest
+import ru.pixnews.library.igdb.internal.IgdbRequest.ApicalypsePostRequest
+import ru.pixnews.library.igdb.internal.IgdbRequest.DeleteRequest
+import ru.pixnews.library.igdb.internal.IgdbRequest.FormUrlEncodedPostRequest
+import ru.pixnews.library.igdb.internal.IgdbRequest.GetRequest
 import ru.pixnews.library.igdb.internal.RequestExecutor
 import ru.pixnews.library.igdb.internal.model.IgdbAuthToken
 import java.io.InputStream
@@ -40,27 +47,72 @@ internal class OkhttpRequestExecutor(
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
     private val httpErrorJsonParser: (InputStream) -> IgdbHttpErrorResponse = IgdbErrorResponseParser,
 ) : RequestExecutor {
-    override suspend operator fun <T : Any> invoke(
+    override suspend fun <T : Any> invoke(request: IgdbRequest): IgdbResult<T, IgdbHttpErrorResponse> {
+        val okhttpRequest: Request
+        val successResponseParser: (InputStream) -> Any
+        when (request) {
+            is ApicalypsePostRequest<*> -> @Suppress("UNCHECKED_CAST")
+            return postApicalypseRequest(request.path, request.query, request.successResponseParser)
+                    as IgdbResult<T, IgdbHttpErrorResponse>
+
+            is GetRequest<*> -> {
+                val url = baseUrl.newBuilder().apply {
+                    addPathSegments(request.path)
+                    request.queryParameters.forEach { addQueryParameter(it.key, it.value) }
+                }.build()
+                okhttpRequest = createIgdbOkhttpRequestBuilder(url).get().build()
+                successResponseParser = request.successResponseParser
+            }
+
+            is FormUrlEncodedPostRequest<*> -> {
+                val url = baseUrl.newBuilder().apply {
+                    addPathSegments(request.path)
+                    request.queryParameters.forEach { addQueryParameter(it.key, it.value) }
+                }.build()
+                val body = FormBody.Builder().apply {
+                    request.formUrlEncodedParameters.forEach { add(it.key, it.value) }
+                }.build()
+                okhttpRequest = createIgdbOkhttpRequestBuilder(url).post(body).build()
+                successResponseParser = request.successResponseParser
+            }
+
+            is DeleteRequest<*> -> {
+                val url = baseUrl.newBuilder().apply {
+                    addPathSegments(request.path)
+                    request.queryParameters.forEach { addQueryParameter(it.key, it.value) }
+                }.build()
+
+                okhttpRequest = createIgdbOkhttpRequestBuilder(
+                    url = url,
+                    acceptMediaType = MediaType.APPLICATION_JSON,
+                ).delete().build()
+
+                successResponseParser = request.successResponseParser
+            }
+        }
+
+        @Suppress("UNCHECKED_CAST")
+        return callFactory
+            .newCall(okhttpRequest)
+            .executeAsyncWithResult()
+            .toIgdbResult(
+                backgroundDispatcher = backgroundDispatcher,
+                successResponseParser = successResponseParser,
+                errorResponseParser = httpErrorJsonParser,
+            ) as IgdbResult<T, IgdbHttpErrorResponse>
+    }
+
+    private suspend fun <T : Any> postApicalypseRequest(
         path: String,
         query: ApicalypseQuery,
         successResponseParser: (ApicalypseQuery, InputStream) -> T,
     ): IgdbResult<T, IgdbHttpErrorResponse> {
         val url = baseUrl.newBuilder().addPathSegments(path).build()
         val body = query.toString().toRequestBody(MediaType.TEXT_PLAIN)
-
-        val okhttpRequest = Builder().apply {
-            url(url)
-            header("Accept", MediaType.APPLICATION_PROTOBUF)
-            userAgent?.let {
-                header("User-Agent", it)
-            }
-            token?.let {
-                header(Header.CLIENT_ID, it.clientId)
-                header(Header.AUTHORIZATION, "Bearer ${it.token}")
-            }
-            addUserDefinedHeaders()
-            post(body)
-        }.build()
+        val okhttpRequest = createIgdbOkhttpRequestBuilder(
+            url = url,
+            acceptMediaType = MediaType.APPLICATION_PROTOBUF,
+        ).post(body).build()
 
         return callFactory
             .newCall(okhttpRequest)
@@ -73,15 +125,29 @@ internal class OkhttpRequestExecutor(
             )
     }
 
-    private fun Builder.addUserDefinedHeaders() {
-        this@OkhttpRequestExecutor.headers.forEach { (headerName, values) ->
-            if (headerName.isSingleValueHeader()) {
-                values.firstOrNull()?.let {
-                    header(headerName, it)
-                }
-            } else {
-                values.forEach { addHeader(headerName, it) }
+    private fun createIgdbOkhttpRequestBuilder(
+        url: HttpUrl,
+        acceptMediaType: String = MediaType.APPLICATION_JSON,
+    ): Builder = Builder().apply {
+        url(url)
+        header("Accept", acceptMediaType)
+        userAgent?.let {
+            header("User-Agent", it)
+        }
+        token?.let {
+            header(Header.CLIENT_ID, it.clientId)
+            header(Header.AUTHORIZATION, "Bearer ${it.token}")
+        }
+        addUserDefinedHeaders()
+    }
+
+    private fun Builder.addUserDefinedHeaders() = headers.forEach { (headerName, values) ->
+        if (headerName.isSingleValueHeader()) {
+            values.firstOrNull()?.let {
+                header(headerName, it)
             }
+        } else {
+            values.forEach { addHeader(headerName, it) }
         }
     }
 

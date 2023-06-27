@@ -19,12 +19,16 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
+import ru.pixnews.library.igdb.IgdbResult
 import ru.pixnews.library.igdb.IgdbResult.Failure.HttpFailure
 import ru.pixnews.library.igdb.IgdbResult.Success
+import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery.Companion.apicalypseQuery
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
+import ru.pixnews.library.igdb.internal.IgdbRequest.ApicalypsePostRequest
 import ru.pixnews.library.igdb.util.TracingRequestExecutor
 import ru.pixnews.library.test.MainCoroutineExtension
+import java.io.InputStream
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
@@ -36,13 +40,15 @@ class RetryDecoratorTest {
 
     @Test
     fun `retryDecorator should skip success and non-429 responses`() = coroutinesExt.runTest {
-        val igdbExecutor = TracingRequestExecutor { _, _, _, _ -> Success("Test Response") }
+        val igdbExecutor = TracingRequestExecutor { _, _ -> Success("Test Response") }
         val decorator = RetryDecorator(
             delaySequenceFactory = { generateSequence(Duration::ZERO) },
             delegate = igdbExecutor,
         )
 
-        val result = decorator("endpoint", apicalypseQuery { }, { _, _ -> "" })
+        val result: IgdbResult<String, *> = decorator(
+            ApicalypsePostRequest("endpoint", apicalypseQuery { }, { _: ApicalypseQuery, _: InputStream -> "" }),
+        )
 
         (result as? Success<String>)?.value shouldBe "Test Response"
         igdbExecutor.invokeCount shouldBe 1
@@ -50,7 +56,7 @@ class RetryDecoratorTest {
 
     @Test
     fun `retryDecorator should retry on 429 responses`() = coroutinesExt.runTest {
-        val igdbExecutor = TracingRequestExecutor { _, _, _, requestNo ->
+        val igdbExecutor = TracingRequestExecutor { _, requestNo ->
             when (requestNo) {
                 1L, 2L -> createHttpFailure429TooManyRequests()
                 else -> Success("Test Response")
@@ -61,7 +67,9 @@ class RetryDecoratorTest {
             delegate = igdbExecutor,
         )
 
-        val result = decorator("endpoint", apicalypseQuery { }, { _, _ -> "" })
+        val result: IgdbResult<String, *> = decorator(
+            ApicalypsePostRequest("endpoint", apicalypseQuery { }, { _: ApicalypseQuery, _: InputStream -> "" }),
+        )
 
         (result as? Success<String>)?.value shouldBe "Test Response"
         igdbExecutor.invokeCount shouldBe 3
@@ -69,7 +77,7 @@ class RetryDecoratorTest {
 
     @Test
     fun `retryDecorator should sleep between retries`() = coroutinesExt.runTest {
-        val igdbExecutor = TracingRequestExecutor { _, _, _, requestNo ->
+        val igdbExecutor = TracingRequestExecutor { _, requestNo ->
             when (requestNo) {
                 in 1L..4L -> createHttpFailure429TooManyRequests()
                 else -> Success("Test Response")
@@ -80,7 +88,9 @@ class RetryDecoratorTest {
             delegate = igdbExecutor,
         )
 
-        val result = decorator("endpoint", apicalypseQuery { }, { _, _ -> "" })
+        val result: IgdbResult<String, *> = decorator(
+            ApicalypsePostRequest("endpoint", apicalypseQuery { }, { _: ApicalypseQuery, _: InputStream -> "" }),
+        )
 
         (result as? Success<String>)?.value shouldBe "Test Response"
         igdbExecutor.invokeCount shouldBe 5
@@ -89,14 +99,16 @@ class RetryDecoratorTest {
 
     @Test
     fun `retryDecorator should retry maximum maxRequests times`() = coroutinesExt.runTest {
-        val igdbExecutor = TracingRequestExecutor { _, _, _, _ -> createHttpFailure429TooManyRequests() }
+        val igdbExecutor = TracingRequestExecutor { _, _ -> createHttpFailure429TooManyRequests() }
         val decorator = RetryDecorator(
             delaySequenceFactory = { generateSequence(Duration::ZERO) },
             delegate = igdbExecutor,
             maxRequests = 10,
         )
 
-        val result = decorator("endpoint", apicalypseQuery { }, { _, _ -> "" })
+        val result: IgdbResult<Any, *> = decorator(
+            ApicalypsePostRequest("endpoint", apicalypseQuery { }, { _: ApicalypseQuery, _: InputStream -> "" }),
+        )
 
         result.shouldBeInstanceOf<HttpFailure<*>>()
         igdbExecutor.invokeCount shouldBe 10
@@ -104,7 +116,7 @@ class RetryDecoratorTest {
 
     @Test
     fun `retryDecorator should use the value of the Retry-After header`() = coroutinesExt.runTest {
-        val igdbExecutor = TracingRequestExecutor { _, _, _, requestNo ->
+        val igdbExecutor = TracingRequestExecutor { _, requestNo ->
             when (requestNo) {
                 1L -> createHttpFailure429TooManyRequests(
                     retryAfterHeaderValue = "123",
@@ -118,7 +130,9 @@ class RetryDecoratorTest {
             delegate = igdbExecutor,
         )
 
-        val result = decorator("endpoint", apicalypseQuery { }, { _, _ -> "" })
+        val result: IgdbResult<String, *> = decorator(
+            ApicalypsePostRequest("endpoint", apicalypseQuery { }, { _: ApicalypseQuery, _: InputStream -> "" }),
+        )
 
         (result as? Success<String>)?.value shouldBe "Test Response"
         testScheduler.currentTime shouldBe 123.seconds.inWholeMilliseconds

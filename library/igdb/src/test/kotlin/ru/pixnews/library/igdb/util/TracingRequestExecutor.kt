@@ -16,17 +16,14 @@
 package ru.pixnews.library.igdb.util
 
 import ru.pixnews.library.igdb.IgdbResult
-import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
+import ru.pixnews.library.igdb.internal.IgdbRequest
 import ru.pixnews.library.igdb.internal.RequestExecutor
-import java.io.InputStream
 import java.util.concurrent.atomic.AtomicLong
 
 internal class TracingRequestExecutor(
     private val delegate: suspend (
-        endpoint: String,
-        query: ApicalypseQuery,
-        successResponseParser: (ApicalypseQuery, InputStream) -> Any,
+        request: IgdbRequest,
         requestNo: Long,
     ) -> IgdbResult<Any, IgdbHttpErrorResponse>,
 ) : RequestExecutor {
@@ -34,18 +31,9 @@ internal class TracingRequestExecutor(
     val invokeCount: Long
         get() = _invokeCount.get()
 
-    @Suppress("UNCHECKED_CAST")
-    override suspend fun <T : Any> invoke(
-        path: String,
-        query: ApicalypseQuery,
-        successResponseParser: (ApicalypseQuery, InputStream) -> T,
-    ): IgdbResult<T, IgdbHttpErrorResponse> {
+    override suspend fun <T : Any> invoke(request: IgdbRequest): IgdbResult<T, IgdbHttpErrorResponse> {
         val requestNo = _invokeCount.incrementAndGet()
-        return delegate(
-            path,
-            query,
-            successResponseParser,
-            requestNo,
-        ) as IgdbResult<T, IgdbHttpErrorResponse>
+        @Suppress("UNCHECKED_CAST")
+        return delegate(request, requestNo) as IgdbResult<T, IgdbHttpErrorResponse>
     }
 }

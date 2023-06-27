@@ -25,17 +25,16 @@ import ru.pixnews.library.igdb.IgdbResult.Failure.NetworkFailure
 import ru.pixnews.library.igdb.IgdbResult.Failure.UnknownFailure
 import ru.pixnews.library.igdb.IgdbResult.Failure.UnknownHttpCodeFailure
 import ru.pixnews.library.igdb.IgdbResult.Success
-import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.auth.model.TwitchToken
 import ru.pixnews.library.igdb.auth.twitch.TwitchTokenPayload
 import ru.pixnews.library.igdb.auth.twitch.TwitchTokenStorage
 import ru.pixnews.library.igdb.error.IgdbException
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse.Message
+import ru.pixnews.library.igdb.internal.IgdbRequest
 import ru.pixnews.library.igdb.internal.RequestExecutor
 import ru.pixnews.library.igdb.internal.model.IgdbAuthToken
 import java.io.IOException
-import java.io.InputStream
 
 internal class TwitchAuthenticationRequestDecorator(
     private val credentials: TwitchCredentials,
@@ -47,16 +46,12 @@ internal class TwitchAuthenticationRequestDecorator(
     private val fetchTokenMutex = Mutex()
     private val requestExecutorProvider = CachedRequestExecutor(credentials, requestExecutorFactory)
 
-    override suspend fun <T : Any> invoke(
-        path: String,
-        query: ApicalypseQuery,
-        successResponseParser: (ApicalypseQuery, InputStream) -> T,
-    ): IgdbResult<T, IgdbHttpErrorResponse> = SingleRequestExecutor(path, query, successResponseParser).execute()
+    override suspend fun <T : Any> invoke(request: IgdbRequest): IgdbResult<T, IgdbHttpErrorResponse> {
+        return SingleRequestExecutor<T>(request).execute()
+    }
 
     private inner class SingleRequestExecutor<out T : Any>(
-        private val endpoint: String,
-        private val query: ApicalypseQuery,
-        private val successResponseParser: (ApicalypseQuery, InputStream) -> T,
+        private val request: IgdbRequest,
         private val maxFetchTokenAttempts: Int = this@TwitchAuthenticationRequestDecorator.maxRequestRetries,
         private val maxRequestRetries: Int = this@TwitchAuthenticationRequestDecorator.maxRequestRetries,
     ) {
@@ -74,7 +69,7 @@ internal class TwitchAuthenticationRequestDecorator(
                     is Failure -> return getTokenResult
                 }
 
-                lastResponse = executor.invoke(endpoint, query, successResponseParser)
+                lastResponse = executor(request)
 
                 if (!lastResponse.is401UnauthorizedFailure()) {
                     return lastResponse
@@ -155,11 +150,9 @@ internal class TwitchAuthenticationRequestDecorator(
     companion object {
         internal const val MAX_COMMIT_FRESH_TOKEN_ATTEMPTS = 3
         private val dummyRequestExecutor = object : RequestExecutor {
-            override suspend fun <T : Any> invoke(
-                endpoint: String,
-                query: ApicalypseQuery,
-                successResponseParser: (ApicalypseQuery, InputStream) -> T,
-            ): IgdbResult<T, Nothing> = UnknownFailure(null)
+            override suspend fun <T : Any> invoke(request: IgdbRequest): IgdbResult<T, IgdbHttpErrorResponse> {
+                return UnknownFailure(null)
+            }
         }
 
         @Suppress("MagicNumber")

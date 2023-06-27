@@ -18,19 +18,27 @@ package ru.pixnews.library.igdb.internal
 import ru.pixnews.library.igdb.IgdbClient
 import ru.pixnews.library.igdb.IgdbEndpoint
 import ru.pixnews.library.igdb.IgdbResult
+import ru.pixnews.library.igdb.IgdbWebhookApi
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
+import ru.pixnews.library.igdb.internal.IgdbRequest.ApicalypsePostRequest
 
 @Suppress("TooManyFunctions")
 internal class IgdbClientImplementation(
     private val requestExecutor: RequestExecutor,
 ) : IgdbClient {
+    override val webhookApi: IgdbWebhookApi by lazy {
+        IgdbWebhookApiImplementation(requestExecutor)
+    }
+
     override suspend fun <T : Any> execute(
         endpoint: IgdbEndpoint<T>,
         query: ApicalypseQuery,
     ): IgdbResult<T, IgdbHttpErrorResponse> = requestExecutor.invoke(
-        path = endpoint.protobufPath,
-        query = query,
-        successResponseParser = endpoint.resultParser,
+        ApicalypsePostRequest(
+            path = endpoint.protobufPath,
+            query = query,
+            successResponseParser = endpoint.resultParser,
+        ),
     )
 }

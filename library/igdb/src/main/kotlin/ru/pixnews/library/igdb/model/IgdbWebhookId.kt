@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.library.igdb.multiquery
+package ru.pixnews.library.igdb.model
 
-public data class UnpackedMultiQueryResult<out R : Any>(
-    public val name: String = "",
-    public val count: Long = 0L,
-    public val results: List<R>? = null,
-)
+@JvmInline
+public value class IgdbWebhookId(public val value: String)

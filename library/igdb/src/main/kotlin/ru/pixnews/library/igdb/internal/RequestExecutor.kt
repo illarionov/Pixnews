@@ -22,8 +22,33 @@ import java.io.InputStream
 
 internal interface RequestExecutor {
     suspend operator fun <T : Any> invoke(
-        path: String,
-        query: ApicalypseQuery,
-        successResponseParser: (ApicalypseQuery, InputStream) -> T,
+        request: IgdbRequest,
     ): IgdbResult<T, IgdbHttpErrorResponse>
+}
+
+internal sealed class IgdbRequest {
+    internal class ApicalypsePostRequest<out T : Any>(
+        val path: String,
+        val query: ApicalypseQuery,
+        val successResponseParser: (ApicalypseQuery, InputStream) -> T,
+    ) : IgdbRequest()
+
+    internal class FormUrlEncodedPostRequest<out T : Any>(
+        val path: String,
+        val queryParameters: Map<String, String> = mapOf(),
+        val formUrlEncodedParameters: Map<String, String> = mapOf(),
+        val successResponseParser: (InputStream) -> T,
+    ) : IgdbRequest()
+
+    internal class GetRequest<out T : Any>(
+        val path: String,
+        val queryParameters: Map<String, String> = mapOf(),
+        val successResponseParser: (InputStream) -> T,
+    ) : IgdbRequest()
+
+    internal class DeleteRequest<out T : Any>(
+        val path: String,
+        val queryParameters: Map<String, String> = mapOf(),
+        val successResponseParser: (InputStream) -> T,
+    ) : IgdbRequest()
 }

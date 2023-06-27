@@ -64,6 +64,7 @@ import ru.pixnews.library.igdb.model.GameVideo
 import ru.pixnews.library.igdb.model.GameVideoResult
 import ru.pixnews.library.igdb.model.Genre
 import ru.pixnews.library.igdb.model.GenreResult
+import ru.pixnews.library.igdb.model.IgdbWebhookId
 import ru.pixnews.library.igdb.model.InvolvedCompany
 import ru.pixnews.library.igdb.model.InvolvedCompanyResult
 import ru.pixnews.library.igdb.model.Keyword
@@ -105,9 +106,9 @@ import ru.pixnews.library.igdb.model.Search
 import ru.pixnews.library.igdb.model.SearchResult
 import ru.pixnews.library.igdb.model.Theme
 import ru.pixnews.library.igdb.model.ThemeResult
+import ru.pixnews.library.igdb.model.UnpackedMultiQueryResult
 import ru.pixnews.library.igdb.model.Website
 import ru.pixnews.library.igdb.model.WebsiteResult
-import ru.pixnews.library.igdb.multiquery.UnpackedMultiQueryResult
 import java.io.InputStream
 
 /**
@@ -126,12 +127,10 @@ public open class IgdbEndpoint<out R : Any>(
     public open val jsonPath: String
         get() = endpoint
 
-    public open val webhookPath: String?
+    public open val webhookPath: String
         get() = "$endpoint/webhooks"
 
-    public open fun getTestWebhookPath(entityId: String): String = "$endpoint/webhooks/test/$entityId"
-
-    public open fun getRemoveWebhookEndpoint(webhookId: String): String = "$webhookPath/$webhookId"
+    public open fun getTestWebhookPath(webhookId: IgdbWebhookId): String = "$endpoint/webhooks/test/${webhookId.value}"
 
     public companion object {
         /**

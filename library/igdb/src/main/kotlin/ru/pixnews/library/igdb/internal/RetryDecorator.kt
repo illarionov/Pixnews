@@ -16,10 +16,10 @@
 package ru.pixnews.library.igdb.internal
 
 import kotlinx.coroutines.delay
+import ru.pixnews.library.igdb.IgdbResult
+import ru.pixnews.library.igdb.IgdbResult.Failure.HttpFailure
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
-import ru.pixnews.library.igdb.internal.model.IgdbResult
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.HttpFailure
 import java.io.InputStream
 import kotlin.random.Random
 import kotlin.time.Duration
@@ -53,16 +53,16 @@ internal class RetryDecorator(
     )
 
     override suspend fun <T : Any> invoke(
-        endpoint: String,
+        path: String,
         query: ApicalypseQuery,
-        successResponseParser: (InputStream) -> T,
+        successResponseParser: (ApicalypseQuery, InputStream) -> T,
     ): IgdbResult<T, IgdbHttpErrorResponse> {
         var lastResponse: IgdbResult<T, IgdbHttpErrorResponse>
         val sequenceIterator = delaySequenceFactory().iterator()
         var requestsCount = 0
         val maxRequests = maxRequests
         while (true) {
-            lastResponse = delegate.invoke(endpoint, query, successResponseParser)
+            lastResponse = delegate.invoke(path, query, successResponseParser)
             if (!lastResponse.is429TooMnyRequests()) {
                 return lastResponse
             }

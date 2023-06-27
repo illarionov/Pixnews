@@ -15,7 +15,7 @@
  */
 package ru.pixnews.library.igdb.error
 
-import ru.pixnews.library.igdb.internal.model.IgdbResult
+import ru.pixnews.library.igdb.IgdbResult
 
 public open class IgdbApiFailureException(
     message: String?,

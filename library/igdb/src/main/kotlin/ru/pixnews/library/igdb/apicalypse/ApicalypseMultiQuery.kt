@@ -15,7 +15,7 @@
  */
 package ru.pixnews.library.igdb.apicalypse
 
-import ru.pixnews.library.igdb.IgdbEndpoint.IgdbEndpoint
+import ru.pixnews.library.igdb.IgdbEndpoint
 import ru.pixnews.library.igdb.apicalypse.ApicalypseMultiQuery.Companion.apicalypseMultiQuery
 
 /**
@@ -29,8 +29,7 @@ public interface ApicalypseMultiQuery : ApicalypseQuery {
     override fun toString(): String
 
     public class Subquery(
-        @IgdbEndpoint
-        public val endpoint: String,
+        public val endpoint: IgdbEndpoint<*>,
         public val resultName: String = "",
         public val query: ApicalypseQuery,
     )

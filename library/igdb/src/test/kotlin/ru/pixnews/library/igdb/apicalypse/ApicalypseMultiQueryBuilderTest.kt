@@ -18,7 +18,9 @@ package ru.pixnews.library.igdb.apicalypse
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import ru.pixnews.library.igdb.IgdbEndpoint.GAME
+import ru.pixnews.library.igdb.IgdbEndpoint.Companion.GAME
+import ru.pixnews.library.igdb.IgdbEndpoint.Companion.PLATFORM
+import ru.pixnews.library.igdb.IgdbEndpoint.Companion.countEndpoint
 
 class ApicalypseMultiQueryBuilderTest {
     @ParameterizedTest
@@ -34,7 +36,7 @@ class ApicalypseMultiQueryBuilderTest {
             builderTest({}, ""),
             builderTest(
                 builder = {
-                    query("platforms/count", "Count of Platforms") {
+                    query(PLATFORM.countEndpoint(), "Count of Platforms") {
                     }
                     query(GAME, "Playstation Games") {
                         fields("name", "platforms.name")

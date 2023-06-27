@@ -13,54 +13,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.pixnews.library.igdb.internal.model
+package ru.pixnews.library.igdb
 
-internal sealed interface IgdbResult<out R : Any, out E : Any> {
+public sealed interface IgdbResult<out R : Any, out E : Any> {
     /**
      * 2xx response with successfully parsed body
      */
-    class Success<R : Any> internal constructor(
-        val value: R,
+    public class Success<R : Any> internal constructor(
+        public val value: R,
     ) : IgdbResult<R, Nothing>
 
-    sealed class Failure<E : Any> : IgdbResult<Nothing, E> {
+    public sealed class Failure<E : Any> : IgdbResult<Nothing, E> {
         /**
          * Any network error, no HTTP response received
          */
-        class NetworkFailure internal constructor(
-            val error: Throwable,
+        public class NetworkFailure internal constructor(
+            public val error: Throwable,
         ) : Failure<Nothing>()
 
         /**
          * 4xx - 5xx HTTP errors
          */
-        class HttpFailure<E : Any> internal constructor(
-            val httpCode: Int,
-            val httpMessage: String,
-            val response: E?,
-            val rawResponseHeaders: List<Pair<String, String>>?,
-            val rawResponseBody: ByteArray?,
+        public class HttpFailure<E : Any> internal constructor(
+            public val httpCode: Int,
+            public val httpMessage: String,
+            public val response: E?,
+            public val rawResponseHeaders: List<Pair<String, String>>?,
+            public val rawResponseBody: ByteArray?,
         ) : Failure<E>()
 
         /**
          * Other HTTP errors
          */
-        class UnknownHttpCodeFailure internal constructor(
-            val httpCode: Int,
-            val httpMessage: String,
-            val rawResponseBody: ByteArray?,
+        public class UnknownHttpCodeFailure internal constructor(
+            public val httpCode: Int,
+            public val httpMessage: String,
+            public val rawResponseBody: ByteArray?,
         ) : Failure<Nothing>()
 
         /**
          * 2xx HTTP response with unparsable body
          */
-        class ApiFailure internal constructor(
-            val error: Throwable?,
+        public class ApiFailure internal constructor(
+            public val error: Throwable?,
         ) : Failure<Nothing>()
 
         /**
          * Other failures
          */
-        class UnknownFailure(val error: Throwable?) : Failure<Nothing>()
+        public class UnknownFailure(
+            public val error: Throwable?,
+        ) : Failure<Nothing>()
     }
 }

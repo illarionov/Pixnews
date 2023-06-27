@@ -42,12 +42,17 @@ import ru.pixnews.library.igdb.Fixtures.MockIgdbResponseContent.createSuccessMoc
 import ru.pixnews.library.igdb.Fixtures.MockIgdbResponseContent.multiQueryPlatformsCountPsGames
 import ru.pixnews.library.igdb.IgdbClient
 import ru.pixnews.library.igdb.IgdbEndpoint
+import ru.pixnews.library.igdb.IgdbEndpoint.Companion.countEndpoint
+import ru.pixnews.library.igdb.ageRating
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
+import ru.pixnews.library.igdb.apicalypse.ApicalypseQueryBuilder
 import ru.pixnews.library.igdb.error.IgdbApiFailureException
 import ru.pixnews.library.igdb.error.IgdbException
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse.Message
 import ru.pixnews.library.igdb.error.IgdbHttpException
+import ru.pixnews.library.igdb.executeOrThrow
+import ru.pixnews.library.igdb.game
 import ru.pixnews.library.igdb.internal.IgdbConstants.Header.AUTHORIZATION
 import ru.pixnews.library.igdb.internal.IgdbConstants.Header.CLIENT_ID
 import ru.pixnews.library.igdb.internal.IgdbConstants.MediaType
@@ -56,6 +61,7 @@ import ru.pixnews.library.igdb.model.Platform
 import ru.pixnews.library.igdb.multiquery
 import ru.pixnews.library.igdb.multiquery.UnpackedMultiQueryResult
 import ru.pixnews.library.igdb.util.MockWebServerExt.createOkHttpClientBuilder
+import ru.pixnews.library.igdb.website
 import ru.pixnews.library.test.MainCoroutineExtension
 import ru.pixnews.library.test.TestingLoggers
 import ru.pixnews.library.test.okhttp.ConcatMockDispatcher
@@ -130,7 +136,8 @@ class OkhttpIgdbClientTest {
         }
 
         val exception: IgdbHttpException = shouldThrow {
-            api.alternativeName(
+            api.executeOrThrow(
+                IgdbEndpoint.ALTERNATIVE_NAME,
                 object : ApicalypseQuery {
                     override fun toString(): String = "search  'Diablo';f *;l 5;"
                 },
@@ -242,7 +249,7 @@ class OkhttpIgdbClientTest {
         }
 
         val response = api.multiquery {
-            query("platforms/count", "Count of Platforms") {}
+            query(IgdbEndpoint.PLATFORM.countEndpoint(), "Count of Platforms") {}
             query(IgdbEndpoint.GAME, "Playstation Games") {
                 fields("name", "category", "platforms.name")
                 where("platforms !=n ")
@@ -312,7 +319,7 @@ class OkhttpIgdbClientTest {
     }
 
     companion object {
-        fun createTestSuccessQuery() = ApicalypseQuery.apicalypseQuery {
+        fun createTestSuccessQuery(): ApicalypseQueryBuilder.() -> Unit = {
             search("Diablo")
             fields("*")
             limit(5)

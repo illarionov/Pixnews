@@ -21,25 +21,27 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.Response
-import ru.pixnews.library.igdb.internal.model.IgdbResult
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.ApiFailure
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.HttpFailure
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.NetworkFailure
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.UnknownFailure
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.UnknownHttpCodeFailure
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Success
+import ru.pixnews.library.igdb.IgdbResult
+import ru.pixnews.library.igdb.IgdbResult.Failure.ApiFailure
+import ru.pixnews.library.igdb.IgdbResult.Failure.HttpFailure
+import ru.pixnews.library.igdb.IgdbResult.Failure.NetworkFailure
+import ru.pixnews.library.igdb.IgdbResult.Failure.UnknownFailure
+import ru.pixnews.library.igdb.IgdbResult.Failure.UnknownHttpCodeFailure
+import ru.pixnews.library.igdb.IgdbResult.Success
+import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import java.io.ByteArrayInputStream
 import java.io.IOException
 import java.io.InputStream
 
 internal suspend fun <T : Any, E : Any> Result<Response>.toIgdbResult(
     backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
-    successResponseParser: (InputStream) -> T,
-    errorResponseParser: (InputStream) -> E,
+    query: ApicalypseQuery,
+    successResponseParser: (ApicalypseQuery, InputStream) -> T,
+    errorResponseParser: (ApicalypseQuery, InputStream) -> E,
 ) = this.fold(
     onSuccess = { response ->
         withContext(backgroundDispatcher) {
-            parseHttpResponse(response, successResponseParser, errorResponseParser)
+            parseHttpResponse(query, response, successResponseParser, errorResponseParser)
         }
     },
     onFailure = { error ->
@@ -53,12 +55,13 @@ internal suspend fun <T : Any, E : Any> Result<Response>.toIgdbResult(
 
 @Suppress("MagicNumber")
 private fun <T : Any, E : Any> parseHttpResponse(
+    query: ApicalypseQuery,
     response: Response,
-    successResponseParser: (InputStream) -> T,
-    errorResponseParser: (InputStream) -> E,
+    successResponseParser: (ApicalypseQuery, InputStream) -> T,
+    errorResponseParser: (ApicalypseQuery, InputStream) -> E,
 ): IgdbResult<T, E> = when (response.code) {
-    in 200..299 -> parseSuccessResponseBody(response, successResponseParser)
-    in 400..599 -> parseErrorResponseBody(response, errorResponseParser)
+    in 200..299 -> parseSuccessResponseBody(query, response, successResponseParser)
+    in 400..599 -> parseErrorResponseBody(query, response, errorResponseParser)
     else -> UnknownHttpCodeFailure(
         httpCode = response.code,
         httpMessage = response.message,
@@ -67,12 +70,13 @@ private fun <T : Any, E : Any> parseHttpResponse(
 }
 
 private fun <T : Any> parseSuccessResponseBody(
+    query: ApicalypseQuery,
     response: Response,
-    parser: (InputStream) -> T,
+    parser: (ApicalypseQuery, InputStream) -> T,
 ): IgdbResult<T, Nothing> = try {
     val result = response.body!!.use { responseBody ->
         responseBody.byteStream().use {
-            parser(it)
+            parser(query, it)
         }
     }
     Success(result)
@@ -81,8 +85,9 @@ private fun <T : Any> parseSuccessResponseBody(
 }
 
 private fun <E : Any> parseErrorResponseBody(
+    query: ApicalypseQuery,
     response: Response,
-    httpErrorParser: (InputStream) -> E,
+    httpErrorParser: (ApicalypseQuery, InputStream) -> E,
 ): HttpFailure<E> {
     val rawResponseBody = try {
         response.body?.bytes()
@@ -91,7 +96,7 @@ private fun <E : Any> parseErrorResponseBody(
     }
     val errorMessage = rawResponseBody?.let { rawResponse ->
         try {
-            httpErrorParser(ByteArrayInputStream(rawResponse))
+            httpErrorParser(query, ByteArrayInputStream(rawResponse))
         } catch (@Suppress("SwallowedException") exception: Exception) {
             null
         }

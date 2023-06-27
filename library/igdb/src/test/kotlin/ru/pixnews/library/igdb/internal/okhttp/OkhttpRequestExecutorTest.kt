@@ -54,7 +54,7 @@ class OkhttpRequestExecutorTest {
             ),
         )
 
-        executor.invoke("endpoint", apicalypseQuery { }, { "" })
+        executor.invoke("endpoint", apicalypseQuery { }, { _, _ -> "" })
 
         server.takeRequest().run {
             headers.values("Client-Id") shouldBe listOf(Fixtures.TEST_CLIENT_ID)

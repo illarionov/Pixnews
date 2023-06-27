@@ -19,10 +19,10 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
+import ru.pixnews.library.igdb.IgdbResult.Failure.HttpFailure
+import ru.pixnews.library.igdb.IgdbResult.Success
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery.Companion.apicalypseQuery
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.HttpFailure
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Success
 import ru.pixnews.library.igdb.util.TracingRequestExecutor
 import ru.pixnews.library.test.MainCoroutineExtension
 import kotlin.time.Duration
@@ -42,7 +42,7 @@ class RetryDecoratorTest {
             delegate = igdbExecutor,
         )
 
-        val result = decorator("endpoint", apicalypseQuery { }, { "" })
+        val result = decorator("endpoint", apicalypseQuery { }, { _, _ -> "" })
 
         (result as? Success<String>)?.value shouldBe "Test Response"
         igdbExecutor.invokeCount shouldBe 1
@@ -61,7 +61,7 @@ class RetryDecoratorTest {
             delegate = igdbExecutor,
         )
 
-        val result = decorator("endpoint", apicalypseQuery { }, { "" })
+        val result = decorator("endpoint", apicalypseQuery { }, { _, _ -> "" })
 
         (result as? Success<String>)?.value shouldBe "Test Response"
         igdbExecutor.invokeCount shouldBe 3
@@ -80,7 +80,7 @@ class RetryDecoratorTest {
             delegate = igdbExecutor,
         )
 
-        val result = decorator("endpoint", apicalypseQuery { }, { "" })
+        val result = decorator("endpoint", apicalypseQuery { }, { _, _ -> "" })
 
         (result as? Success<String>)?.value shouldBe "Test Response"
         igdbExecutor.invokeCount shouldBe 5
@@ -96,7 +96,7 @@ class RetryDecoratorTest {
             maxRequests = 10,
         )
 
-        val result = decorator("endpoint", apicalypseQuery { }, { "" })
+        val result = decorator("endpoint", apicalypseQuery { }, { _, _ -> "" })
 
         result.shouldBeInstanceOf<HttpFailure<*>>()
         igdbExecutor.invokeCount shouldBe 10
@@ -118,7 +118,7 @@ class RetryDecoratorTest {
             delegate = igdbExecutor,
         )
 
-        val result = decorator("endpoint", apicalypseQuery { }, { "" })
+        val result = decorator("endpoint", apicalypseQuery { }, { _, _ -> "" })
 
         (result as? Success<String>)?.value shouldBe "Test Response"
         testScheduler.currentTime shouldBe 123.seconds.inWholeMilliseconds

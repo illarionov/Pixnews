@@ -19,6 +19,7 @@ import io.kotest.matchers.collections.shouldContainInOrder
 import org.junit.jupiter.api.Test
 import ru.pixnews.library.igdb.Fixtures.MockIgdbResponseContent
 import ru.pixnews.library.igdb.IgdbEndpoint
+import ru.pixnews.library.igdb.IgdbEndpoint.Companion.countEndpoint
 import ru.pixnews.library.igdb.apicalypse.ApicalypseMultiQuery.Companion.apicalypseMultiQuery
 import ru.pixnews.library.igdb.model.Game
 import ru.pixnews.library.igdb.model.Platform
@@ -28,7 +29,7 @@ class MultiQueryArrayParserTest {
     @Test
     fun `MultiQueryArrayParser should parse multi-query responses`() {
         val query = apicalypseMultiQuery {
-            query("platforms/count", "Count of Platforms") {}
+            query(IgdbEndpoint.PLATFORM.countEndpoint(), "Count of Platforms") {}
             query(IgdbEndpoint.GAME, "Playstation Games") {
                 fields("name", "category", "platforms.name")
                 where("platforms !=n ")
@@ -36,11 +37,10 @@ class MultiQueryArrayParserTest {
             }
         }
 
-        val parser = MultiQueryArrayParser(
-            multiQueryRequest = query,
-        )
+        val parser = MultiQueryArrayParser()
 
         val result = parser.invoke(
+            query,
             MockIgdbResponseContent.multiQueryPlatformsCountPsGames.inputStream(),
         )
 

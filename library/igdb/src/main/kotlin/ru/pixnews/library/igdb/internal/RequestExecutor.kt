@@ -15,15 +15,15 @@
  */
 package ru.pixnews.library.igdb.internal
 
+import ru.pixnews.library.igdb.IgdbResult
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
-import ru.pixnews.library.igdb.internal.model.IgdbResult
 import java.io.InputStream
 
 internal interface RequestExecutor {
     suspend operator fun <T : Any> invoke(
-        endpoint: String,
+        path: String,
         query: ApicalypseQuery,
-        successResponseParser: (InputStream) -> T,
+        successResponseParser: (ApicalypseQuery, InputStream) -> T,
     ): IgdbResult<T, IgdbHttpErrorResponse>
 }

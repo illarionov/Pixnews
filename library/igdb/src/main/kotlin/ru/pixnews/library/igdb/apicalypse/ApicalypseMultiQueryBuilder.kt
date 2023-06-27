@@ -15,7 +15,7 @@
  */
 package ru.pixnews.library.igdb.apicalypse
 
-import ru.pixnews.library.igdb.IgdbEndpoint.IgdbEndpoint
+import ru.pixnews.library.igdb.IgdbEndpoint
 import ru.pixnews.library.igdb.apicalypse.ApicalypseMultiQuery.Subquery
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery.Companion.apicalypseQuery
 
@@ -29,7 +29,7 @@ public class ApicalypseMultiQueryBuilder {
     private val subqueries: MutableList<Subquery> = mutableListOf()
 
     public fun query(
-        @IgdbEndpoint endpoint: String,
+        endpoint: IgdbEndpoint<*>,
         resultName: String,
         builder: ApicalypseQueryBuilder.() -> Unit,
     ) {
@@ -45,7 +45,7 @@ public class ApicalypseMultiQueryBuilder {
 
     public fun build(): ApicalypseMultiQuery {
         val query = subqueries.joinToString(separator = "\n") { subQuery ->
-            """query ${subQuery.endpoint} "${subQuery.resultName}" {${subQuery.query}};"""
+            """query ${subQuery.endpoint.endpoint} "${subQuery.resultName}" {${subQuery.query}};"""
         }
         return object : ApicalypseMultiQuery {
             override val subqueries: List<Subquery> = this@ApicalypseMultiQueryBuilder.subqueries.toList()

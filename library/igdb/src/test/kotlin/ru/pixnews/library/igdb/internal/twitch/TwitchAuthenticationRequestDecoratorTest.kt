@@ -27,6 +27,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
+import ru.pixnews.library.igdb.IgdbResult
+import ru.pixnews.library.igdb.IgdbResult.Failure
+import ru.pixnews.library.igdb.IgdbResult.Failure.HttpFailure
+import ru.pixnews.library.igdb.IgdbResult.Success
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery.Companion.apicalypseQuery
 import ru.pixnews.library.igdb.auth.model.TwitchToken
@@ -37,10 +41,6 @@ import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse
 import ru.pixnews.library.igdb.error.IgdbHttpErrorResponse.Message
 import ru.pixnews.library.igdb.internal.RequestExecutor
 import ru.pixnews.library.igdb.internal.model.IgdbAuthToken
-import ru.pixnews.library.igdb.internal.model.IgdbResult
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Failure.HttpFailure
-import ru.pixnews.library.igdb.internal.model.IgdbResult.Success
 import ru.pixnews.library.igdb.internal.twitch.TwitchAuthenticationRequestDecorator.Companion.MAX_COMMIT_FRESH_TOKEN_ATTEMPTS
 import ru.pixnews.library.igdb.util.TracingRequestExecutor
 import ru.pixnews.library.test.MainCoroutineExtension
@@ -369,7 +369,7 @@ internal class TwitchAuthenticationRequestDecoratorTest {
         suspend operator fun invoke(
             endpoint: String = "endpoint",
             query: ApicalypseQuery = apicalypseQuery { },
-            successResponseParser: (InputStream) -> String = { "" },
+            successResponseParser: (ApicalypseQuery, InputStream) -> String = { _, _ -> "" },
         ): IgdbResult<String, IgdbHttpErrorResponse> = authDecorator.invoke(endpoint, query, successResponseParser)
     }
 

@@ -38,6 +38,9 @@ internal object Fixtures {
         val multiQueryPlatformsCountPsGames: Buffer
             get() = readResourceAsBuffer("$MOCK_RESPONSES_PATH/multiquery/multiquery_count_ps_games.pb")
 
+        val countGames: Buffer
+            get() = Buffer().apply { write(byteArrayOf(0x08, 0x22)) }
+
         fun createSuccessMockResponse() = MockResponse()
             .setResponseCode(200)
             .setHeader("Content-Type", MediaType.APPLICATION_PROTOBUF)

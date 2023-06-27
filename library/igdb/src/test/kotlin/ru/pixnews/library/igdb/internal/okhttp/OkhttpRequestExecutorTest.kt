@@ -62,6 +62,17 @@ class OkhttpRequestExecutorTest {
         }
     }
 
+    @Test
+    fun `Executor should not encode slashes in path`() = coroutinesExt.runTest {
+        val executor = startServerPrepareApi()
+
+        executor.invoke("games/count", apicalypseQuery { }, { _, _ -> "" })
+
+        server.takeRequest().run {
+            path shouldBe "/v4/games/count"
+        }
+    }
+
     @AfterEach
     fun tearDown() {
         server.shutdown()

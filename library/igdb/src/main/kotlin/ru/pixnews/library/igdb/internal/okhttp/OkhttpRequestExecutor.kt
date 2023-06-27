@@ -45,7 +45,7 @@ internal class OkhttpRequestExecutor(
         query: ApicalypseQuery,
         successResponseParser: (ApicalypseQuery, InputStream) -> T,
     ): IgdbResult<T, IgdbHttpErrorResponse> {
-        val url = baseUrl.newBuilder().addPathSegment(path).build()
+        val url = baseUrl.newBuilder().addPathSegments(path).build()
         val body = query.toString().toRequestBody(MediaType.TEXT_PLAIN)
 
         val okhttpRequest = Builder().apply {

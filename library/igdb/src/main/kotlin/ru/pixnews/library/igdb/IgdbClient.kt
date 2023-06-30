@@ -112,6 +112,13 @@ public fun IgdbClient(
 public interface IgdbClient {
     public val webhookApi: IgdbWebhookApi
 
+    /**
+     * General method for making requests to the igdb server.
+     *
+     * For the given [endpoint] and [query], executes a network request and returns the result or error
+     * as an [IgdbResult] object
+     *
+     */
     public suspend fun <T : Any> execute(
         endpoint: IgdbEndpoint<T>,
         query: ApicalypseQuery,

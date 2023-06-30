@@ -73,5 +73,6 @@ public class IgdbClientConfig {
 
     public companion object {
         public const val IGDB_BASE_URL: String = "https://api.igdb.com/v4/"
+        public const val IGDB_IMAGE_URL: String = "https://images.igdb.com/igdb/image/upload/"
     }
 }

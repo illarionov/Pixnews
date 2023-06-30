@@ -25,13 +25,16 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 import ru.pixnews.library.igdb.Fixtures
+import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery.Companion.apicalypseQuery
 import ru.pixnews.library.igdb.internal.IgdbConstants.Header.AUTHORIZATION
 import ru.pixnews.library.igdb.internal.IgdbConstants.Header.CLIENT_ID
+import ru.pixnews.library.igdb.internal.IgdbRequest.ApicalypsePostRequest
 import ru.pixnews.library.igdb.internal.model.IgdbAuthToken
 import ru.pixnews.library.igdb.util.MockWebServerExt
 import ru.pixnews.library.test.MainCoroutineExtension
 import ru.pixnews.library.test.okhttp.ConcatMockDispatcher
+import java.io.InputStream
 
 class OkhttpRequestExecutorTest {
     @JvmField
@@ -54,7 +57,9 @@ class OkhttpRequestExecutorTest {
             ),
         )
 
-        executor.invoke("endpoint", apicalypseQuery { }, { _, _ -> "" })
+        executor.invoke<Any>(
+            ApicalypsePostRequest("endpoint", apicalypseQuery { }, { _: ApicalypseQuery, _: InputStream -> "" }),
+        )
 
         server.takeRequest().run {
             headers.values("Client-Id") shouldBe listOf(Fixtures.TEST_CLIENT_ID)
@@ -66,7 +71,9 @@ class OkhttpRequestExecutorTest {
     fun `Executor should not encode slashes in path`() = coroutinesExt.runTest {
         val executor = startServerPrepareApi()
 
-        executor.invoke("games/count", apicalypseQuery { }, { _, _ -> "" })
+        executor.invoke<Any>(
+            ApicalypsePostRequest("games/count", apicalypseQuery { }, { _: ApicalypseQuery, _: InputStream -> "" }),
+        )
 
         server.takeRequest().run {
             path shouldBe "/v4/games/count"

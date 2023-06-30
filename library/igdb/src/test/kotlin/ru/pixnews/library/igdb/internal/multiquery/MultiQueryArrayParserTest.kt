@@ -23,7 +23,7 @@ import ru.pixnews.library.igdb.IgdbEndpoint.Companion.countEndpoint
 import ru.pixnews.library.igdb.apicalypse.ApicalypseMultiQuery.Companion.apicalypseMultiQuery
 import ru.pixnews.library.igdb.model.Game
 import ru.pixnews.library.igdb.model.Platform
-import ru.pixnews.library.igdb.multiquery.UnpackedMultiQueryResult
+import ru.pixnews.library.igdb.model.UnpackedMultiQueryResult
 
 class MultiQueryArrayParserTest {
     @Test

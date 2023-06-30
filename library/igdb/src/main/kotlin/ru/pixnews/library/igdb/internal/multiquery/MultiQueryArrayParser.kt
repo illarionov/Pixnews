@@ -19,7 +19,7 @@ import ru.pixnews.library.igdb.apicalypse.ApicalypseMultiQuery
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
 import ru.pixnews.library.igdb.model.MultiQueryResult
 import ru.pixnews.library.igdb.model.MultiQueryResultArray
-import ru.pixnews.library.igdb.multiquery.UnpackedMultiQueryResult
+import ru.pixnews.library.igdb.model.UnpackedMultiQueryResult
 import java.io.InputStream
 
 internal class MultiQueryArrayParser(

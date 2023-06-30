@@ -78,8 +78,8 @@ import ru.pixnews.library.igdb.model.ReleaseDateStatusResult
 import ru.pixnews.library.igdb.model.ScreenshotResult
 import ru.pixnews.library.igdb.model.SearchResult
 import ru.pixnews.library.igdb.model.ThemeResult
+import ru.pixnews.library.igdb.model.UnpackedMultiQueryResult
 import ru.pixnews.library.igdb.model.WebsiteResult
-import ru.pixnews.library.igdb.multiquery.UnpackedMultiQueryResult
 
 /**
  * Creates a [IgdbClient] with the specified [block] configuration.
@@ -110,6 +110,8 @@ public fun IgdbClient(
  * IGDB Client which allows you to call the [IGDB API](https://api-docs.igdb.com/#endpoints) methods.
  */
 public interface IgdbClient {
+    public val webhookApi: IgdbWebhookApi
+
     public suspend fun <T : Any> execute(
         endpoint: IgdbEndpoint<T>,
         query: ApicalypseQuery,

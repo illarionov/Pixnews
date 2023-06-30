@@ -29,16 +29,28 @@ import ru.pixnews.library.igdb.IgdbResult.Failure.UnknownFailure
 import ru.pixnews.library.igdb.IgdbResult.Failure.UnknownHttpCodeFailure
 import ru.pixnews.library.igdb.IgdbResult.Success
 import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery
+import ru.pixnews.library.igdb.apicalypse.ApicalypseQuery.Companion.apicalypseQuery
 import java.io.ByteArrayInputStream
 import java.io.IOException
 import java.io.InputStream
 
 internal suspend fun <T : Any, E : Any> Result<Response>.toIgdbResult(
     backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
+    successResponseParser: (InputStream) -> T,
+    errorResponseParser: (InputStream) -> E,
+): IgdbResult<T, E> = toIgdbResult(
+    backgroundDispatcher = backgroundDispatcher,
+    query = apicalypseQuery { },
+    successResponseParser = { _, stream -> successResponseParser(stream) },
+    errorResponseParser = { _, stream -> errorResponseParser(stream) },
+)
+
+internal suspend fun <T : Any, E : Any> Result<Response>.toIgdbResult(
+    backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
     query: ApicalypseQuery,
     successResponseParser: (ApicalypseQuery, InputStream) -> T,
     errorResponseParser: (ApicalypseQuery, InputStream) -> E,
-) = this.fold(
+): IgdbResult<T, E> = this.fold(
     onSuccess = { response ->
         withContext(backgroundDispatcher) {
             parseHttpResponse(query, response, successResponseParser, errorResponseParser)

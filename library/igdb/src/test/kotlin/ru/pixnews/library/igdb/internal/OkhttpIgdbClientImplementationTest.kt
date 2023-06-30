@@ -60,8 +60,8 @@ import ru.pixnews.library.igdb.internal.IgdbConstants.Header.CLIENT_ID
 import ru.pixnews.library.igdb.internal.IgdbConstants.MediaType
 import ru.pixnews.library.igdb.model.Game
 import ru.pixnews.library.igdb.model.Platform
+import ru.pixnews.library.igdb.model.UnpackedMultiQueryResult
 import ru.pixnews.library.igdb.multiquery
-import ru.pixnews.library.igdb.multiquery.UnpackedMultiQueryResult
 import ru.pixnews.library.igdb.util.MockWebServerExt.createOkHttpClientBuilder
 import ru.pixnews.library.igdb.website
 import ru.pixnews.library.test.MainCoroutineExtension
@@ -70,7 +70,7 @@ import ru.pixnews.library.test.okhttp.ConcatMockDispatcher
 import java.util.concurrent.TimeUnit.MILLISECONDS
 import java.util.concurrent.atomic.AtomicBoolean
 
-class OkhttpIgdbClientTest {
+class OkhttpIgdbClientImplementationTest {
     private val logger = TestingLoggers.consoleLogger.withTag("okhttp")
 
     @JvmField

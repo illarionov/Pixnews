@@ -43,6 +43,7 @@
          <trusted-key id="0785b3eff60b1b1bea94e0bb7c25280eae63ebe5" group="org.apache.httpcomponents"/>
          <trusted-key id="08f0aab4d0c1a4bdde340765b341ddb020fcb6ab" group="org.bouncycastle"/>
          <trusted-key id="0d35d3f60078655126908e8af3d1600878e85a3d" group="io.netty"/>
+         <trusted-key id="120d6f34e627ed3a772ebbfe55c7e5e701832382" group="org.snakeyaml"/>
          <trusted-key id="19beab2d799c020f17c69126b16698a4adf4d638" group="org.checkerframework"/>
          <trusted-key id="1de48a38424721249780c6a8c7dff5a8dbc5381c" group="io.arrow-kt"/>
          <trusted-key id="2db4f1ef0fa761ecc4ea935c86fdc7e2a11262cb" group="commons-codec"/>
@@ -64,6 +65,7 @@
          <trusted-key id="835a685c8c6f49c54980e5caf406f31bc1468eba" group="org.jcodec"/>
          <trusted-key id="8461efa0e74abae010de66994eb27db2a3b88b8b">
             <trusting group="androidx.benchmark"/>
+            <trusting group="androidx.core"/>
             <trusting group="androidx.emoji2"/>
          </trusted-key>
          <trusted-key id="8756c4f765c9ac3cb6b85d62379ce192d401ab61" group="com.diffplug.durian"/>
@@ -85,6 +87,7 @@
          <trusted-key id="ce8075a251547bee249bc151a2115ae15f6b8b72" group="org.apache.commons" name="commons-compress"/>
          <trusted-key id="dbd744ace7ade6aa50dd591f66b50994442d2d40" group="^com[.]squareup($|([.].*))" regex="true"/>
          <trusted-key id="df25d3c4868fec177182fad64d176dc503fb4267" group="io.coil-kt"/>
+         <trusted-key id="e01ed293981ae484403b65d7da70bcba6d76ad03" group="com.charleskorn.kaml" name="kaml-jvm"/>
          <trusted-key id="e77417ac194160a3fabd04969a259c7ee636c5ed" group="^com[.]google($|([.].*))" regex="true"/>
          <trusted-key id="e7bd012a1e173975f48aea6f07e1ff7760ef6f64" group="io.github.aakira"/>
          <trusted-key id="e7dc75fc24fb3c8dfe8086ad3d5839a2262cbbfb" group="org.jetbrains.kotlinx"/>

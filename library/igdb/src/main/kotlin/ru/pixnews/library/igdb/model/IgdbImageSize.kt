@@ -67,5 +67,4 @@ public enum class IgdbImageSize(
      * Size: 1920 x 1080 (16:9), Scale type: Fit, Center gravity
      */
     H1080P("t_1080p"),
-    ;
 }

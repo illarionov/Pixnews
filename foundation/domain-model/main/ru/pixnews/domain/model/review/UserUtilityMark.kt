@@ -19,5 +19,4 @@ public enum class UserUtilityMark {
     UNSET,
     USEFUL,
     USELESS,
-    ;
 }

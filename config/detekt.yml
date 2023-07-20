@@ -45,7 +45,6 @@ naming:
   BooleanPropertyNaming:
     active: true
     allowedPattern: '^(is|has|are)'
-    ignoreOverridden: true
   FunctionNaming:
     active: true
     ignoreAnnotated: ['Composable', 'ParameterizedTest']

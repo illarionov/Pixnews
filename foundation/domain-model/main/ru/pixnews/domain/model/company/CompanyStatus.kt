@@ -19,5 +19,4 @@ public enum class CompanyStatus {
     ACTIVE,
     INACTIVE,
     UNKNOWN,
-    ;
 }

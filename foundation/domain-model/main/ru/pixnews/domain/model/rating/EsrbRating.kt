@@ -23,5 +23,4 @@ public enum class EsrbRating {
     ADULTS_ONLY_18PLUS,
     RATING_PENDING,
     RATING_PENDING_LIKELY_MATURE_17PLUS,
-    ;
 }

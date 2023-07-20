@@ -53,7 +53,6 @@ public class SystemNavigationRule(
     public enum class NavigationMode {
         GESTURAL,
         THREE_BUTTON,
-        ;
     }
 
     private class RequestSystemNavigationStatement(

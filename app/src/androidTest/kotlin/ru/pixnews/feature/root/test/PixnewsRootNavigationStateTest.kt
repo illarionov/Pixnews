@@ -71,7 +71,7 @@ class PixnewsRootNavigationStateTest : BaseInstrumentedTest() {
     fun topLevelDestinationShouldReflectDestinationChanges() = runTest {
         val testComplete: CompletableJob = Job()
 
-        composeTestRule.setContent() {
+        composeTestRule.setContent {
             navController = rememberTestNavController()
             navState = rememberPixnewsRootNavigationState(navController)
 

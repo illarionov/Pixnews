@@ -20,5 +20,4 @@ public enum class UnitTestEngine {
     JUNIT4,
     JUNIT5,
     KOTEST,
-    ;
 }

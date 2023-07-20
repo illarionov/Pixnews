@@ -120,10 +120,18 @@ public class FakeImageLoader private constructor(
         override fun clear() = Unit
 
         @ExperimentalCoilApi
+        @Deprecated("")
         override fun edit(key: String): Editor? = null
 
         @ExperimentalCoilApi
+        @Deprecated("")
         override fun get(key: String): Snapshot? = null
+
+        @ExperimentalCoilApi
+        override fun openEditor(key: String): Editor? = null
+
+        @ExperimentalCoilApi
+        override fun openSnapshot(key: String): Snapshot? = null
 
         @ExperimentalCoilApi
         override fun remove(key: String): Boolean = true

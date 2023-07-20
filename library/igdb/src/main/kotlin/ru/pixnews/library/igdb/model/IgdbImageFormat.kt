@@ -22,5 +22,4 @@ public enum class IgdbImageFormat(
     PNG("png"),
     GIF("gif"),
     WEBP("webp"),
-    ;
 }

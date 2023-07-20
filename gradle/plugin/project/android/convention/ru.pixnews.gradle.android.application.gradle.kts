@@ -76,7 +76,7 @@ extensions.configure<ApplicationExtension>("android") {
         }
     }
 
-    packagingOptions.resources.excludes += listOf(
+    packaging.resources.excludes += listOf(
         "**/*.properties",
         "**/*.proto",
         "*.properties",

@@ -26,7 +26,7 @@ plugins {
     id("app.cash.paparazzi")
 }
 
-plugins.withType<LibraryPlugin>() {
+plugins.withType<LibraryPlugin> {
     extensions.configure<LibraryExtension>("android") {
         buildFeatures {
             // https://github.com/cashapp/paparazzi/issues/472

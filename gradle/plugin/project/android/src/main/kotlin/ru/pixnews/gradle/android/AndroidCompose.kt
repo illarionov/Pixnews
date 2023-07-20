@@ -16,7 +16,6 @@
 package ru.pixnews.gradle.android
 
 import com.android.build.api.dsl.CommonExtension
-import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
@@ -29,11 +28,6 @@ internal fun Project.configureCompose(
     commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     commonExtension.apply {
-        @Suppress("MagicNumber")
-        if (this is LibraryExtension) {
-            // https://issuetracker.google.com/u/1/issues/267458965
-            defaultConfig.targetSdk = versionCatalog.findVersion("targetSdk").get().displayName.toInt()
-        }
         buildFeatures {
             compose = true
         }

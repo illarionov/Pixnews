@@ -26,7 +26,6 @@ import com.android.build.gradle.LibraryPlugin
 import com.android.build.gradle.TestPlugin
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-import ru.pixnews.gradle.android.agp.workarounds.AndroidGradlePluginWorkarounds
 import ru.pixnews.gradle.base.pixnews
 import ru.pixnews.gradle.base.versionCatalog
 
@@ -93,10 +92,6 @@ fun configureTestManagedDevices(
                 targetDevices += listOf(pixel5api33, pixel2api30)
             }
         }
-    }
-    // https://issuetracker.google.com/issues/262270582
-    with(AndroidGradlePluginWorkarounds) {
-        initializeManagedDeviceTestEnvironment()
     }
 }
 

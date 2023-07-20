@@ -19,7 +19,6 @@ import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.DynamicFeaturePlugin
 import com.android.build.gradle.LibraryPlugin
 import com.android.build.gradle.TestPlugin
-import ru.pixnews.gradle.android.agp.workarounds.AndroidGradlePluginWorkarounds
 import ru.pixnews.gradle.lint.configureCommonAndroidLint
 
 /**
@@ -31,10 +30,6 @@ project.plugins.withType(AppPlugin::class.java) {
             configureCommonAndroidLint()
             checkDependencies = true
         }
-    }
-
-    with(AndroidGradlePluginWorkarounds) {
-        disableProjectAsExternalDependencyLintTaskWarning()
     }
 }
 

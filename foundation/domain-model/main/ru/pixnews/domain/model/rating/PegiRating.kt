@@ -22,5 +22,4 @@ public enum class PegiRating {
     PEGI_12,
     PEGI_16,
     PEGI_18,
-    ;
 }

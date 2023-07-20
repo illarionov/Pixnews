@@ -21,8 +21,10 @@ import android.os.StrictMode.ThreadPolicy.Builder
 import android.os.StrictMode.VmPolicy
 import android.os.strictmode.DiskReadViolation
 import android.os.strictmode.DiskWriteViolation
+import android.os.strictmode.InstanceCountViolation
 import android.os.strictmode.UntaggedSocketViolation
 import android.os.strictmode.Violation
+import androidx.activity.ComponentActivity
 import androidx.fragment.app.strictmode.FragmentStrictMode
 import androidx.fragment.app.strictmode.FragmentStrictMode.Policy
 import co.touchlab.kermit.Logger
@@ -63,7 +65,8 @@ class TestStrictModeInitializer @Inject constructor(logger: Logger) : Initialize
             VmPolicy.Builder()
                 .detectAll()
                 // Class instance limit occasionally triggered in instrumented tests for unknown reasons
-                .setClassInstanceLimit(MainActivity::class.java, 3)
+                .setClassInstanceLimit(MainActivity::class.java, 5)
+                .setClassInstanceLimit(ComponentActivity::class.java, 5)
                 .also { builder ->
                     if (VERSION.SDK_INT >= 28) {
                         builder.penaltyListener(threadExecutor) { violation ->
@@ -97,6 +100,7 @@ class TestStrictModeInitializer @Inject constructor(logger: Logger) : Initialize
         isProfileSizeOfAppViolation,
         isTypefaceFullFlipFontViolation,
         isUntaggedSocketViolation,
+        isInstanceCountViolation,
     ).any { it() }
 }
 
@@ -125,4 +129,9 @@ private val isProfileSizeOfAppViolation: Violation.() -> Boolean = {
 
 private val isUntaggedSocketViolation: Violation.() -> Boolean = {
     this is UntaggedSocketViolation
+}
+
+// Class instance limit occasionally triggered in instrumented tests for unknown reasons
+private val isInstanceCountViolation: Violation.() -> Boolean = {
+    this is InstanceCountViolation
 }

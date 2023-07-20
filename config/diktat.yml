@@ -20,6 +20,8 @@
 # Enabled in Detekt
 - name: EMPTY_BLOCK_STRUCTURE_ERROR
   enabled: false
+- name: ENUMS_SEPARATED
+  enabled: false
 - name: EXTENSION_FUNCTION_WITH_CLASS
   enabled: false
 # "MatchingDeclarationName" rule in Detekt

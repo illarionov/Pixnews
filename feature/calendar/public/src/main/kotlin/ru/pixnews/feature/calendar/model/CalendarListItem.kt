@@ -52,7 +52,6 @@ internal data class CalendarListPixnewsGameUi(
 internal enum class CalendarListItemContentType {
     TITLE,
     GAME,
-    ;
 }
 
 @Parcelize

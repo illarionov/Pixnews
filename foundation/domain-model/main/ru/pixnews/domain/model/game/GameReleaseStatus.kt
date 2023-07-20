@@ -25,5 +25,4 @@ public enum class GameReleaseStatus {
     CANCELLED,
     RUMORED,
     DELISTED,
-    ;
 }

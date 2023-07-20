@@ -73,6 +73,5 @@ public class NightModeRule(
         LIGHT("no"),
         CUSTOM_SCHEDULE("custom_schedule"),
         CUSTOM_BEDTIME("custom_bedtime"),
-        ;
     }
 }

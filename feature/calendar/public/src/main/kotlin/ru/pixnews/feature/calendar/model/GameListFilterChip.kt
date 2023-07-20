@@ -26,5 +26,4 @@ public data class GameListFilterChip(
 public enum class GameListFilterChipStyle {
     SELECTED,
     UNSELECTED,
-    ;
 }

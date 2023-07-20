@@ -46,7 +46,6 @@ public data class DebugRulerMeasureUnit(
          * Inches
          */
         INCHES,
-        ;
     }
 
     public companion object {

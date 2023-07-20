@@ -378,7 +378,8 @@ internal class TwitchAuthenticationRequestDecoratorTest {
 
     @Suppress("MaxLineLength")
     private class TracingTwitchTokenFetcher(
-        val delegate: suspend (credentials: TwitchCredentials, requestNo: Long) -> IgdbResult<TwitchToken, TwitchErrorResponse>,
+        val delegate:
+            suspend (credentials: TwitchCredentials, requestNo: Long) -> IgdbResult<TwitchToken, TwitchErrorResponse>,
     ) : suspend (TwitchCredentials) -> IgdbResult<TwitchToken, TwitchErrorResponse> {
         private val _invokeCount: AtomicLong = AtomicLong(0)
         val invokeCount: Long

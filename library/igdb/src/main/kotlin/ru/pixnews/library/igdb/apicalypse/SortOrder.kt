@@ -18,5 +18,4 @@ package ru.pixnews.library.igdb.apicalypse
 public enum class SortOrder(internal val igdbToken: String) {
     ASC("asc"),
     DESC("desc"),
-    ;
 }

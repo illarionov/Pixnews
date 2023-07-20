@@ -24,7 +24,7 @@ import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.composable
 import androidx.navigation.createGraph
 import androidx.navigation.testing.TestNavHostController
-import app.cash.turbine.testIn
+import app.cash.turbine.turbineScope
 import kotlinx.coroutines.CompletableJob
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.test.runTest
@@ -69,32 +69,34 @@ class PixnewsRootNavigationStateTest : BaseInstrumentedTest() {
 
     @Test
     fun topLevelDestinationShouldReflectDestinationChanges() = runTest {
-        val testComplete: CompletableJob = Job()
+            val testComplete: CompletableJob = Job()
 
-        composeTestRule.setContent() {
-            navController = rememberTestNavController()
-            navState = rememberPixnewsRootNavigationState(navController)
+            composeTestRule.setContent {
+                navController = rememberTestNavController()
+                navState = rememberPixnewsRootNavigationState(navController)
 
-            LaunchedEffect(Unit) {
-                val topLevelFlow = navState.currentTopLevelDestinationFlow
-                    .testIn(
-                        scope = backgroundScope,
-                        timeout = 10.milliseconds,
-                    )
+                LaunchedEffect(Unit) {
+                    turbineScope {
+                        val topLevelFlow = navState.currentTopLevelDestinationFlow
+                            .testIn(
+                                scope = backgroundScope,
+                                timeout = 10.milliseconds,
+                            )
 
-                Assert.assertEquals(CALENDAR, topLevelFlow.awaitItem())
+                        Assert.assertEquals(CALENDAR, topLevelFlow.awaitItem())
 
-                listOf(PROFILE, COLLECTIONS, CALENDAR).onEach { nextDestination ->
-                    navState.navigateToTopLevelDestination(nextDestination)
-                    Assert.assertEquals(nextDestination, topLevelFlow.expectMostRecentItem())
+                        listOf(PROFILE, COLLECTIONS, CALENDAR).onEach { nextDestination ->
+                            navState.navigateToTopLevelDestination(nextDestination)
+                            Assert.assertEquals(nextDestination, topLevelFlow.expectMostRecentItem())
+                        }
+                        testComplete.complete()
+                    }
                 }
-                testComplete.complete()
             }
-        }
 
-        withTimeout(10_000) {
-            testComplete.join()
-        }
+            withTimeout(10_000) {
+                testComplete.join()
+            }
     }
 }
 

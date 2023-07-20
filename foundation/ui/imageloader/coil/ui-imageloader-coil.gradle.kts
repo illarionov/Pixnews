@@ -36,7 +36,6 @@ dependencies {
 
     api(libs.kermit)
     api(libs.dagger)
-    api(libs.coil.bom)
     api(libs.coil.base)
     api(libs.coil.compose.base)
     api(libs.androidx.compose.ui.graphics)

@@ -27,7 +27,6 @@ android {
 
 dependencies {
     api(projects.foundation.ui.imageloader.coil)
-    api(libs.coil.bom)
     api(libs.coil.base)
     api(libs.coil.compose.base)
     implementation(libs.coil.test)

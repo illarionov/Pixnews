@@ -29,7 +29,9 @@ import ru.pixnews.foundation.ui.theme.PixnewsTheme
 class CalendarScreenHeaderScreenshotTest {
     @get:Rule
     val paparazzi = Paparazzi(
-        deviceConfig = DeviceConfig.PIXEL_5,
+        deviceConfig = DeviceConfig.PIXEL_5.copy(
+            locale = "en",
+        ),
         theme = "android:Theme.Material.Light.NoActionBar",
         renderingMode = SHRINK,
         showSystemUi = false,

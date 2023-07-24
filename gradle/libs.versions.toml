@@ -55,6 +55,7 @@ auto-service = "1.1.1"
 coil = "2.4.0"
 firebase-bom = "32.2.0"
 firebase-crashlytics-plugin = "2.9.7"
+igdbclient = "0.1"
 guava = "31.1-jre"
 kermit = "1.2.2"
 kotest = "5.6.2"
@@ -68,7 +69,6 @@ paparazzi = "1.2.0"
 retrofit = "2.9.0"
 radiography = "2.4.1"
 turbine = "1.0.0"
-orgjson = "20230618"
 
 junit4 = "4.13.2"
 junit5 = "5.9.3"
@@ -188,6 +188,7 @@ firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics
 firebase-config = { group = "com.google.firebase", name = "firebase-config-ktx" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 guava-bom = { group = "com.google.guava", name = "guava-bom", version.ref = "guava" }
+igdbclient-okhttp = { group = "ru.pixnews.igdbclient", name = "igdbclient-okhttp", version.ref = "igdbclient" }
 inject = { group = "javax.inject", name = "javax.inject", version = "1" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit5" }
@@ -222,7 +223,6 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor" }
 okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver" }
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
-org-json = { group = "org.json", name = "json", version.ref = "orgjson" }
 protobuf-java = { group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf" }
 protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf" }
 protobuf-kotlinlite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }

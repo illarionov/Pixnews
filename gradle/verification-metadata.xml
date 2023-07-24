@@ -74,6 +74,7 @@
          </trusted-key>
          <trusted-key id="8569c95cadc508b09fe90f3002216ed811210daa" group="io.github.detekt.sarif4k"/>
          <trusted-key id="8756c4f765c9ac3cb6b85d62379ce192d401ab61" group="com.diffplug.durian"/>
+         <trusted-key id="8ab4b1ab3f0067ed73e00f0062c98ba8fcf62075" group="ru.pixnews.igdbclient"/>
          <trusted-key id="8e3a02905a1ae67e7b0f9acd3967d4eda591b991" group="org.jetbrains.kotlinx" name="kotlinx-html-jvm"/>
          <trusted-key id="90ee19787a7bcf6fd37a1e9180c08b1c29100955">
             <trusting group="com.squareup" name="javawriter"/>

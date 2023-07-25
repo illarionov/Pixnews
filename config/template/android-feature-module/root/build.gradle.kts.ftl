@@ -7,7 +7,7 @@ plugins {
 }
 
 pixnews {
-    compose.set(${enableCompose?string('true', 'fale')})
+    compose.set(${enableCompose?string('true', 'false')})
 }
 
 android {

@@ -11,7 +11,7 @@ detekt = "1.23.0"
 dagger = "2.47"
 kotlin = "1.9.0"
 ksp = "1.8.21-1.0.11"
-spotless = "6.19.0"
+spotless = "6.20.0"
 
 accompanist = "0.31.5-beta"
 androidx-activity = "1.7.2"
@@ -71,7 +71,7 @@ radiography = "2.4.1"
 turbine = "1.0.0"
 
 junit4 = "4.13.2"
-junit5 = "5.9.3"
+junit5 = "5.10.0"
 kotlinx-coroutines = "1.7.2"
 kotlinx-collections-immutable = "0.3.5"
 kotlinx-dateime = "0.4.0"
@@ -245,7 +245,7 @@ kotlin-jvm-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jv
 kotlinx-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
-detekt-compose-rules = { group = "io.nlopez.compose.rules", name = "detekt", version = "0.1.5" }
+detekt-compose-rules = { group = "io.nlopez.compose.rules", name = "detekt", version = "0.1.12" }
 firebase-crashlitycs-plugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-plugin" }
 protobuf-plugin = { group = "com.google.protobuf", name = "protobuf-gradle-plugin", version.ref = "protobuf-plugin" }
 paparazzi-plugin = { group = "app.cash.paparazzi", name = "paparazzi-gradle-plugin", version.ref = "paparazzi" }

@@ -49,7 +49,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '19'
+          java-version: '20'
 
       - name: Unpack pixnews.properties
         env:
@@ -130,7 +130,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '19'
+          java-version: '20'
 
       - name: Run dprint
         run: dprint check

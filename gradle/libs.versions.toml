@@ -11,7 +11,7 @@ detekt = "1.23.0"
 dagger = "2.47"
 kotlin = "1.9.0"
 ksp = "1.8.21-1.0.11"
-spotless = "6.19.0"
+spotless = "6.20.0"
 
 accompanist = "0.31.5-beta"
 androidx-activity = "1.7.2"

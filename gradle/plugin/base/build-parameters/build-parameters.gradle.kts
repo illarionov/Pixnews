@@ -8,12 +8,6 @@ plugins {
 
 group = "ru.pixnews.gradle.base"
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
-}
-
 buildParameters {
     pluginId("ru.pixnews.gradle.base.build-parameters")
     enableValidation.set(false)

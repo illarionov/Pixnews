@@ -11,10 +11,6 @@ plugins {
 
 group = "ru.pixnews.gradle.base"
 
-kotlin {
-    jvmToolchain(17)
-}
-
 dependencies {
     implementation("org.gradle.kotlin:gradle-kotlin-dsl-plugins:$expectedKotlinDslPluginsVersion")
 }

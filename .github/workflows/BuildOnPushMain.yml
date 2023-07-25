@@ -141,15 +141,6 @@ jobs:
           PIXNEWS_CONFIG: ${{ secrets.PIXNEWS_CONFIG }}
         run: echo "$PIXNEWS_CONFIG" | base64 -d | zstd -d  -o config/pixnews.properties
 
-      - name: Clean unused managed devices
-        run: >
-          ./gradlew
-          -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
-          -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
-          -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
-          cleanManagedDevices --unused-only
-          --continue
-
       - name: Run instrumented tests
         run: >
           ./gradlew

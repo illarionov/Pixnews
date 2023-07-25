@@ -56,6 +56,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
+        with:
+          dependency-graph: generate
 
       - name: Unpack sign keys and secrets
         env:
@@ -127,6 +129,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
+        with:
+          dependency-graph: generate
 
       - name: Accept licenses
         run: |

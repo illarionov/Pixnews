@@ -48,6 +48,10 @@
          <trusted-key id="19beab2d799c020f17c69126b16698a4adf4d638" group="org.checkerframework"/>
          <trusted-key id="1de48a38424721249780c6a8c7dff5a8dbc5381c" group="io.arrow-kt"/>
          <trusted-key id="2db4f1ef0fa761ecc4ea935c86fdc7e2a11262cb" group="commons-codec"/>
+          <trusted-key id="314fe82e5a4c5377bca2edec5208812e1e4a6db0">
+              <trusting group="com.gradle" name="gradle-enterprise-gradle-plugin"/>
+              <trusting group="org.gradle" name="github-dependency-graph-gradle-plugin"/>
+          </trusted-key>
          <trusted-key id="3e46916ed513befdeaa9a14aa6bc6a2c25a6479c">
             <trusting group="app.cash.paparazzi"/>
             <trusting group="app.cash.turbine"/>
@@ -257,11 +261,6 @@
       <component group="com.googlecode.juniversalchardet" name="juniversalchardet" version="1.0.3">
          <artifact name="juniversalchardet-1.0.3.jar">
             <pgp value="31bae2e51d95e0f8ad9b7bcc40a3c4432bd7308c"/>
-         </artifact>
-      </component>
-      <component group="com.gradle" name="gradle-enterprise-gradle-plugin" version="3.13">
-         <artifact name="gradle-enterprise-gradle-plugin-3.13.jar">
-            <pgp value="314fe82e5a4c5377bca2edec5208812e1e4a6db0"/>
          </artifact>
       </component>
       <component group="com.squareup" name="javapoet" version="1.13.0">

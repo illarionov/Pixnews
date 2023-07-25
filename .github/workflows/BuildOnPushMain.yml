@@ -81,7 +81,7 @@ jobs:
           path: app/build/outputs
 
       - name: Bundle the build report and lint outputs
-        if: ${{ always() }}
+        if: ${{ !cancelled() }}
         run: >
           find . \(
           -name .idea -o -path '*build/intermediates' -o -path '*build/.transforms' -o -path '*build/generated'
@@ -91,7 +91,7 @@ jobs:
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
-        if: ${{ always() }}
+        if: ${{ !cancelled() }}
         with:
           name: test-reports
           path: test-reports.tar.zst
@@ -128,20 +128,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Get pip cache dir
-        id: pip-cache
-        run: |
-          echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache PIP Packages for EnricoMi/publish-unit-test-result-action/composite
-        uses: actions/cache@v3
-        id: cache
-        with:
-          path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt', 'composite/action.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
       - name: Accept licenses
         run: |
           yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses
@@ -177,7 +163,7 @@ jobs:
 
       - name: Publish instrumented test results
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
-        if: ${{ always() }}
+        if: ${{ !cancelled() }}
         with:
           comment_mode: off
           junit_files: '**/build/outputs/androidTest-results/**/*.xml'
@@ -190,7 +176,7 @@ jobs:
           -o -path '*/build/outputs/androidTest-results'
           -o -path '*/build/outputs/managed_*'
           -o -path '*/build/reports/androidTests' \) -print0
-          |  xargs -0 tar -c -I 'zstd -19 -T0' -f instrumented-tests.tar.zst
+          |  xargs -0 tar -c --zstd --options zstd:compression-level=20 -f instrumented-tests.tar.zst
 
       - name: Upload test reports
         if: ${{ failure() }}

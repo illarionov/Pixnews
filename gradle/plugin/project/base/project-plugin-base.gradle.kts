@@ -8,10 +8,6 @@ plugins {
 
 group = "ru.pixnews.gradle"
 
-kotlin {
-    jvmToolchain(17)
-}
-
 dependencies {
     implementation(gradleKotlinDsl())
     implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))

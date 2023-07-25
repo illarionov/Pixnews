@@ -8,10 +8,6 @@ plugins {
 
 group = "ru.pixnews.gradle.config"
 
-kotlin {
-    jvmToolchain(17)
-}
-
 tasks.withType<Test> {
     useJUnitPlatform()
     maxHeapSize = "1G"

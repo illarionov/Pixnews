@@ -9,10 +9,6 @@ plugins {
 
 group = "ru.pixnews.gradle.lint"
 
-kotlin {
-    jvmToolchain(17)
-}
-
 dependencies {
     implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
     implementation(projects.base)

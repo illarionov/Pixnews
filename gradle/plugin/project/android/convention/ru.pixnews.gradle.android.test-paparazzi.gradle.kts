@@ -41,8 +41,3 @@ plugins.withType<LibraryPlugin> {
         "testImplementation"(versionCatalog.findLibrary("junit-jupiter-vintage-engine").get())
     }
 }
-
-tasks.withType<Test> {
-    // https://github.com/cashapp/paparazzi/pull/739
-    systemProperty("kotlinx.coroutines.main.delay", true)
-}

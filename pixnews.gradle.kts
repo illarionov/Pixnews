@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.anvil) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
     alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.protobuf) apply false
+    alias(libs.plugins.wire) apply false
     alias(libs.plugins.ben.manes.versions)
     id("ru.pixnews.gradle.lint.detekt")
     id("ru.pixnews.gradle.lint.spotless")

@@ -6,7 +6,7 @@
 plugins {
     id("ru.pixnews.gradle.android.library")
     id("ru.pixnews.gradle.di.anvil-factories")
-    id("ru.pixnews.gradle.protobuf-lite")
+    id("ru.pixnews.gradle.protobuf-wire")
 }
 
 pixnews {

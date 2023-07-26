@@ -108,7 +108,7 @@ public class OverridesDataSource constructor(
         overrides: Overrides,
         experimentKey: ExperimentKey,
     ): Either<FeatureToggleDataSourceError, ExperimentVariant> {
-        val variant = overrides.getTogglesOrDefault(experimentKey.stringValue, null)
+        val variant = overrides.toggles[experimentKey.stringValue]
             ?: return ExperimentNotFound.completeFailure()
         return try {
             variant.deserialize(experimentKey).right()
@@ -118,7 +118,7 @@ public class OverridesDataSource constructor(
     }
 
     private fun Overrides.deserialize(): Map<ExperimentKey, ExperimentVariant> {
-        return this.togglesMap
+        return this.toggles
             .map { (key, value) ->
                 val experimentKey = ExperimentKey(key)
                 experimentKey to value.deserialize(experimentKey)
@@ -136,19 +136,19 @@ public class OverridesDataSource constructor(
             if (variant != null) {
                 val payload: String = serializers[experimentKey]?.toString(experimentKey, variant)
                     ?: throw FeatureToggleException("No serializer for experiment `$experimentKey` found")
-                overrides.toBuilder()
-                    .putToggles(experimentKey.stringValue, VariantPayload.newBuilder().setPayload(payload).build())
-                    .build()
+                overrides.copy(
+                    toggles = overrides.toggles + (experimentKey.stringValue to VariantPayload(payload)),
+                )
             } else {
-                overrides.toBuilder()
-                    .removeToggles(experimentKey.stringValue)
-                    .build()
+                overrides.copy(
+                    toggles = overrides.toggles - experimentKey.stringValue,
+                )
             }
         }
     }
 
     public suspend fun clearOverrides() {
-        dataStore.updateData { Overrides.getDefaultInstance() }
+        dataStore.updateData { Overrides() }
     }
 
     override suspend fun awaitUntilInitialized() {

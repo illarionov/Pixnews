@@ -76,8 +76,6 @@ kotlinx-coroutines = "1.7.2"
 kotlinx-collections-immutable = "0.3.5"
 kotlinx-dateime = "0.4.0"
 kotlinx-serialization = "1.5.1"
-protobuf-plugin = "0.9.4"
-protobuf = "3.23.4"
 wire = "4.8.0"
 
 [libraries]
@@ -223,13 +221,8 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor" }
 okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver" }
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
-protobuf-java = { group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf" }
-protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf" }
-protobuf-kotlinlite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
-protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
 radiography = { group = "com.squareup.radiography", name = "radiography", version.ref = "radiography" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-retrofit-converter-protobuf = { group = "com.squareup.retrofit2", name = "converter-protobuf", version.ref = "retrofit" }
 retrofit-converter-scalars = { group = "com.squareup.retrofit2", name = "converter-scalars", version.ref = "retrofit" }
 retrofit-converter-wire = { group = "com.squareup.retrofit2", name = "converter-wire", version.ref = "retrofit" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
@@ -247,7 +240,6 @@ detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-p
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 detekt-compose-rules = { group = "io.nlopez.compose.rules", name = "detekt", version = "0.1.12" }
 firebase-crashlitycs-plugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-plugin" }
-protobuf-plugin = { group = "com.google.protobuf", name = "protobuf-gradle-plugin", version.ref = "protobuf-plugin" }
 paparazzi-plugin = { group = "app.cash.paparazzi", name = "paparazzi-gradle-plugin", version.ref = "paparazzi" }
 spotless-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 wire-plugin = { group = "com.squareup.wire", name = "wire-gradle-plugin", version.ref = "wire" }
@@ -282,6 +274,5 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ben-manes-versions = { id = "com.github.ben-manes.versions", version.ref = "bmversions" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
-protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 wire = { id = "com.squareup.wire", version.ref = "wire" }

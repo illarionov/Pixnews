@@ -5,22 +5,22 @@
 package ru.pixnews.foundation.featuretoggles.datasource.overrides
 
 import androidx.datastore.core.Serializer
-import com.google.protobuf.InvalidProtocolBufferException
+import okio.IOException
 import ru.pixnews.foundation.featuretoggles.serializers.SerializationException
 import java.io.InputStream
 import java.io.OutputStream
 
 internal object OverridesSerializer : Serializer<Overrides> {
-    override val defaultValue: Overrides = Overrides.getDefaultInstance()
+    override val defaultValue: Overrides = Overrides()
 
     override suspend fun readFrom(input: InputStream): Overrides {
         try {
-            return Overrides.parseFrom(input)
-        } catch (exception: InvalidProtocolBufferException) {
+            return Overrides.ADAPTER.decode(input)
+        } catch (exception: IOException) {
             throw SerializationException("Cannot read proto.", exception)
         }
     }
 
     @Suppress("IDENTIFIER_LENGTH")
-    override suspend fun writeTo(t: Overrides, output: OutputStream) = t.writeTo(output)
+    override suspend fun writeTo(t: Overrides, output: OutputStream) = t.encode(output)
 }

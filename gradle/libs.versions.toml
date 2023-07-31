@@ -5,7 +5,7 @@ targetSdk = "33"
 
 agp = "8.2.0-alpha14"
 android-tools-common = "31.2.0-alpha14"
-anvil = "2.4.6"
+anvil = "2.4.7-1-8"
 bmversions = "0.47.0"
 detekt = "1.23.0"
 dagger = "2.47"

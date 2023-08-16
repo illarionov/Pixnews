@@ -13,14 +13,15 @@ public interface ImageUrl {
     public val prevailingColor: Color
         get() = Color.Unspecified
 
-    public fun getUrl(): String
-    public fun getUrl(width: Dimension, height: Dimension): String
+    public fun getUrl(
+        width: Dimension = Dimension.Undefined,
+        height: Dimension = Dimension.Undefined,
+    ): String
 }
 
 public data class DefaultImageUrl(
     val rawUrl: String,
     override val size: CanvasSize? = null,
 ) : ImageUrl {
-    override fun getUrl(): String = rawUrl
     override fun getUrl(width: Dimension, height: Dimension): String = rawUrl
 }

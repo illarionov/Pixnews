@@ -9,13 +9,14 @@ package ru.pixnews.domain.model.util
 public interface VideoUrl {
     public val size: CanvasSize?
         get() = null
-    public fun getUrl(): String
-    public fun getUrl(width: Dimension, height: Dimension): String
+    public fun getUrl(
+        width: Dimension = Dimension.Undefined,
+        height: Dimension = Dimension.Undefined,
+    ): String
 }
 
 public data class DefaultVideoUrl(
     val rawUrl: String,
 ) : VideoUrl {
-    override fun getUrl(): String = rawUrl
     override fun getUrl(width: Dimension, height: Dimension): String = rawUrl
 }

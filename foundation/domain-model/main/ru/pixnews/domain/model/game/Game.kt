@@ -6,6 +6,8 @@ package ru.pixnews.domain.model.game
 
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableSet
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.persistentSetOf
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.datasource.DataSource
 import ru.pixnews.domain.model.links.ExternalLink
@@ -19,41 +21,75 @@ import ru.pixnews.library.kotlin.utils.isNotWhitespaceOnly
 
 public data class Game(
     val id: GameId,
-    val name: Localized<String>,
-    val summary: Localized<RichText>,
-    val description: Localized<RichText>,
+    val name: Localized<String> = Localized.EMPTY_STRING,
+    val summary: Localized<RichText> = Localized.EMPTY_RICH_TEXT,
+    val description: Localized<RichText> = Localized.EMPTY_RICH_TEXT,
 
-    val videoUrls: ImmutableList<VideoUrl>,
-    val screenshots: ImmutableList<ImageUrl>,
+    val videoUrls: ImmutableList<VideoUrl> = persistentListOf(),
+    val screenshots: ImmutableList<ImageUrl> = persistentListOf(),
 
-    val developer: Company?,
-    val publisher: Company?,
+    val developer: Company? = null,
+    val publisher: Company? = null,
 
-    val releaseDate: ApproximateDate,
-    val releaseStatus: GameReleaseStatus?,
+    val releaseDate: ApproximateDate = ApproximateDate.Unknown(),
+    val releaseStatus: GameReleaseStatus? = null,
 
-    val genres: ImmutableSet<GameGenre>,
-    val tags: ImmutableSet<GameTag>,
+    val genres: ImmutableSet<GameGenre> = persistentSetOf(),
+    val tags: ImmutableSet<GameTag> = persistentSetOf(),
 
-    val ratings: RatingsSummary,
-    val links: ImmutableList<ExternalLink>,
+    val ratings: RatingsSummary? = null,
+    val links: ImmutableList<ExternalLink> = persistentListOf(),
 
-    val category: GameReleaseCategory?,
-    val parentGame: GameId?,
-    val series: GameSeriesSummary?,
+    val category: GameReleaseCategory? = null,
+    val parentGame: GameId? = null,
+    val series: GameSeriesSummary? = null,
 
-    val platforms: ImmutableSet<GamePlatform>,
-    val ageRanking: AgeRating?,
+    val platforms: ImmutableSet<GamePlatform> = persistentSetOf(),
+    val ageRanking: AgeRating? = null,
 
-    val localizations: GameLocalizations?,
-    val gameMode: ImmutableSet<GameMode>,
-    val playerPerspectives: ImmutableSet<PlayerPerspective>,
-    val systemRequirements: GameSystemRequirements?,
+    val localizations: GameLocalizations? = null,
+    val gameMode: ImmutableSet<GameMode> = persistentSetOf(),
+    val playerPerspectives: ImmutableSet<PlayerPerspective> = persistentSetOf(),
+    val systemRequirements: GameSystemRequirements? = null,
 
-    val dataSources: DataSource,
+    val dataSources: ImmutableList<DataSource> = persistentListOf(),
 ) {
     init {
         require(name.value.isNotWhitespaceOnly())
         require(description.value.raw.isNotWhitespaceOnly())
+    }
+
+    public companion object {
+        public enum class GameField {
+            ID,
+            NAME,
+            SUMMARY,
+            DESCRIPTION,
+            VIDE_URLS,
+            SCREENSHOTS,
+            DEVELOPER,
+            PUBLISHER,
+            RELEASE_DATE,
+            RELEASE_STATUS,
+            GENRES,
+            TAGS,
+            RATINGS,
+            LINKS,
+            CATEGORY,
+            PARENT_GAME,
+            SERIES,
+            PLATFORMS,
+            AGE_RANKING,
+            LOCALIZATIONS,
+            GAME_MODE,
+            PLAYER_PERSPECTIVES,
+            SYSTEM_REQUIREMENTS,
+            ;
+
+            public companion object {
+                @Suppress("SpreadOperator")
+                public val all: Set<GameField> = setOf(*GameField.values())
+            }
+        }
     }
 }

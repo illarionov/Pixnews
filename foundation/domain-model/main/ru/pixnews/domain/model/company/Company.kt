@@ -26,7 +26,7 @@ public data class Company(
     val country: CountryCode?,
     val parentCompany: CompanyId?,
 
-    val dataSources: DataSource,
+    val dataSources: ImmutableList<DataSource>,
     val links: ImmutableList<ExternalLink>,
 ) {
     val url: Url? = links.firstOrNull { it.type == OFFICIAL }?.url

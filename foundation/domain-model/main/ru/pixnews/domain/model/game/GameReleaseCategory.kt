@@ -8,7 +8,7 @@ public sealed interface GameReleaseCategory {
     public val parentGame: GameId?
         get() = null
 
-    public object MainGame : GameReleaseCategory
+    public data object MainGame : GameReleaseCategory
     public data class DlcAddon(override val parentGame: GameId? = null) : GameReleaseCategory
     public data class Expansion(override val parentGame: GameId? = null) : GameReleaseCategory
     public data class Bundle(override val parentGame: GameId? = null) : GameReleaseCategory

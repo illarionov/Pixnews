@@ -97,7 +97,6 @@ public val GameFixtures.starWarsEclipse: Game
         series = GameSeriesSummaryFixtures.beyondGoodEvil,
         platforms = persistentSetOf(PlayStation5, Windows),
         ageRanking = AgeRating(
-            gameId = starWarsEclipseGameId,
             esrbRating = RATING_PENDING,
             pegiRating = null,
         ),

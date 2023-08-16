@@ -31,6 +31,7 @@ private val excludedDirectories = setOf(
     ".git",
     ".gradle",
     ".idea",
+    ".run",
     "build",
     "generated",
     "out",

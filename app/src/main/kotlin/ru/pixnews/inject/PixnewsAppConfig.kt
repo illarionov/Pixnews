@@ -9,6 +9,8 @@ import com.squareup.anvil.annotations.ContributesBinding
 import ru.pixnews.BuildConfig
 import ru.pixnews.config.GeneratedIgdbClientConfig
 import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.appconfig.HttpLoggingLevel
+import ru.pixnews.foundation.appconfig.HttpLoggingLevel.HEADERS
 import ru.pixnews.foundation.appconfig.IgdbClientConfig
 import ru.pixnews.foundation.appconfig.NetworkConfig
 import ru.pixnews.foundation.di.base.scopes.AppScope
@@ -25,6 +27,8 @@ public object PixnewsAppConfig : AppConfig {
     override val sdkInt: Int = Build.VERSION.SDK_INT
     override val networkConfig: NetworkConfig by lazy(NONE) {
         object : NetworkConfig {
+            override val httpLoggingLevel: HttpLoggingLevel
+                get() = if (BuildConfig.DEBUG) HEADERS else HttpLoggingLevel.NONE
         }
     }
     override val igdbClientConfig: IgdbClientConfig = GeneratedIgdbClientConfig

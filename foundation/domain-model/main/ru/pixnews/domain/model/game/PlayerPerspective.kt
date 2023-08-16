@@ -15,5 +15,5 @@ public sealed class PlayerPerspective(
     public object Text : PlayerPerspective("Text")
     public object Vr : PlayerPerspective("VR (Virtual Reality)")
 
-    public data class Other(override val name: String) : GameMode(name)
+    public data class Other(override val name: String) : PlayerPerspective(name)
 }

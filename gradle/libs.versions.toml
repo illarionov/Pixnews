@@ -187,6 +187,7 @@ firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics
 firebase-config = { group = "com.google.firebase", name = "firebase-config-ktx" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 guava-bom = { group = "com.google.guava", name = "guava-bom", version.ref = "guava" }
+igdbclient = { group = "ru.pixnews.igdbclient", name = "igdbclient-core", version.ref = "igdbclient" }
 igdbclient-okhttp = { group = "ru.pixnews.igdbclient", name = "igdbclient-okhttp", version.ref = "igdbclient" }
 inject = { group = "javax.inject", name = "javax.inject", version = "1" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }

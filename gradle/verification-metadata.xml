@@ -24,18 +24,22 @@
          <trust group="com.google.testing.platform" regex="true" reason="not signed"/>
       </trusted-artifacts>
       <trusted-keys>
+         <trusted-key id="015479e1055341431b4545ab72475fd306b9cab7" group="com.googlecode.javaewah"/>
          <trusted-key id="04543577d6a9cc626239c50c7ecbd740ff06aeb5">
             <trusting group="org.glassfish.jaxb"/>
             <trusting group="^com[.]sun($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="04e9b2e1f06ecbbe0ed0aac562ba9c275d14234e" group="^com[.]squareup($|([.].*))" regex="true"/>
+         <trusted-key id="050a37a2e0577f4baa095b52602ec18d20c4661c" group="com.thoughtworks.xstream"/>
          <trusted-key id="0785b3eff60b1b1bea94e0bb7c25280eae63ebe5" group="org.apache.httpcomponents"/>
          <trusted-key id="08f0aab4d0c1a4bdde340765b341ddb020fcb6ab" group="org.bouncycastle"/>
          <trusted-key id="0d35d3f60078655126908e8af3d1600878e85a3d" group="io.netty"/>
          <trusted-key id="120d6f34e627ed3a772ebbfe55c7e5e701832382" group="org.snakeyaml"/>
          <trusted-key id="187366a3ffe6bf8f94b9136a9987b20c8f6a3064" group="com.google.protobuf"/>
          <trusted-key id="19beab2d799c020f17c69126b16698a4adf4d638" group="org.checkerframework"/>
+         <trusted-key id="1d2c7ef8ada0f794b58c7c63436902af59edf60e" group="dev.equo.ide" name="solstice"/>
          <trusted-key id="1de48a38424721249780c6a8c7dff5a8dbc5381c" group="io.arrow-kt"/>
+         <trusted-key id="1f47744c9b6e14f2049c2857f1f111af65925306" group="io.github.classgraph"/>
          <trusted-key id="2db4f1ef0fa761ecc4ea935c86fdc7e2a11262cb" group="commons-codec"/>
          <trusted-key id="314fe82e5a4c5377bca2edec5208812e1e4a6db0">
             <trusting group="com.gradle" name="gradle-enterprise-gradle-plugin"/>
@@ -60,6 +64,8 @@
          <trusted-key id="696b6199a2a9d8c29ce78cc0d041cad2e452550f" group="com.google.protobuf"/>
          <trusted-key id="6f538074ccebf35f28af9b066a0975f8b1127b83" group="org.jetbrains.kotlin"/>
          <trusted-key id="70731c2ffb496dc4e8105aa3604f437c1682dde5" group="app.cash.paparazzi"/>
+         <trusted-key id="719f7c29985a8e95f58f47194d8159d6a1159b69" group="dev.zacsweers.kctfork"/>
+         <trusted-key id="7c669810892cbd3148fa92995b05ccde140c2876" group="org.eclipse.jgit"/>
          <trusted-key id="7e22d50a7ebd9d2cd269b2d4056aca74d46000bf" group="io.netty"/>
          <trusted-key id="835a685c8c6f49c54980e5caf406f31bc1468eba" group="org.jcodec"/>
          <trusted-key id="837b2cbb1d966c80643a2d6527f164f945828c4c" group="^com[.]willowtreeapps($|([.].*))" regex="true"/>
@@ -67,6 +73,9 @@
             <trusting group="androidx.benchmark"/>
             <trusting group="androidx.core"/>
             <trusting group="androidx.emoji2"/>
+            <trusting group="androidx.navigation"/>
+            <trusting group="androidx.tracing"/>
+            <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="8569c95cadc508b09fe90f3002216ed811210daa" group="io.github.detekt.sarif4k"/>
          <trusted-key id="8756c4f765c9ac3cb6b85d62379ce192d401ab61" group="com.diffplug.durian"/>
@@ -77,11 +86,15 @@
             <trusting group="com.squareup.retrofit2"/>
          </trusted-key>
          <trusted-key id="95115197c5227c0887299d000f9fe62f88e938d8" group="com.google.dagger"/>
+         <trusted-key id="9e3044071b758ebcb7e45673700e4f39bc05364b" group="org.eclipse.platform" name="org.eclipse.osgi"/>
          <trusted-key id="a5bd02b93e7a40482eb1d66a5f69ad087600b22c" group="org.ow2.asm"/>
          <trusted-key id="a6d6c97108b8585f91b158748671a8df71296252" group="^com[.]squareup($|([.].*))" regex="true"/>
          <trusted-key id="a7892505cf1a58076453e52d7999befba1039e8b" group="net.bytebuddy"/>
          <trusted-key id="adbc987d1a7b91db6b0aaa81995efbf4a3d20beb" group="com.pinterest.ktlint"/>
-         <trusted-key id="b02335aa54ccf21e52bbf9abd9c565aa72ba2fdd" group="io.grpc"/>
+         <trusted-key id="b02335aa54ccf21e52bbf9abd9c565aa72ba2fdd">
+            <trusting group="com.google.protobuf" name="protobuf-gradle-plugin"/>
+            <trusting group="io.grpc"/>
+         </trusted-key>
          <trusted-key id="b2f967b67dadc1f07172dbdade453e55dc86fc9b" group="co.touchlab"/>
          <trusted-key id="b879179229681ad9e8d23a0812dc99973c2318fd" group="org.cqfn.diktat"/>
          <trusted-key id="bdb5fa4fe719d787fb3d3197f6d4a1d411e9d1ae" group="com.google.guava"/>
@@ -104,9 +117,11 @@
          <trusted-key id="fa7929f83ad44c4590f6cc6815c71c0a4e0b8edd" group="net.java.dev.jna"/>
          <trusted-key id="ff6e2c001948c5f2f38b0cc385911f425ec61b51">
             <trusting group="junit"/>
+            <trusting group="org.apiguardian" name="apiguardian-api"/>
             <trusting group="org.junit"/>
             <trusting group="org.junit.jupiter"/>
             <trusting group="org.junit.platform"/>
+            <trusting group="org.junit.vintage"/>
             <trusting group="org.opentest4j"/>
          </trusted-key>
       </trusted-keys>
@@ -227,16 +242,6 @@
             <pgp value="eb1b3de71713c9ec2e87cc26ee92349ad86de446"/>
          </artifact>
       </component>
-      <component group="com.google.protobuf" name="protobuf-gradle-plugin" version="0.9.3">
-         <artifact name="protobuf-gradle-plugin-0.9.3.jar">
-            <pgp value="b02335aa54ccf21e52bbf9abd9c565aa72ba2fdd"/>
-         </artifact>
-      </component>
-      <component group="com.google.protobuf" name="protobuf-gradle-plugin" version="0.9.4">
-         <artifact name="protobuf-gradle-plugin-0.9.4.jar">
-            <pgp value="b02335aa54ccf21e52bbf9abd9c565aa72ba2fdd"/>
-         </artifact>
-      </component>
       <component group="com.google.truth" name="truth" version="1.1.3">
          <artifact name="truth-1.1.3.jar">
             <pgp value="41cd49b4ef5876f9e9f691dabac30622339994c4"/>
@@ -245,16 +250,6 @@
       <component group="com.googlecode.concurrent-trees" name="concurrent-trees" version="2.6.1">
          <artifact name="concurrent-trees-2.6.1.jar">
             <pgp value="a9789342f598ad5b1175ef357eb97d110dfadd60"/>
-         </artifact>
-      </component>
-      <component group="com.googlecode.javaewah" name="JavaEWAH" version="1.1.13">
-         <artifact name="JavaEWAH-1.1.13.jar">
-            <pgp value="015479e1055341431b4545ab72475fd306b9cab7"/>
-         </artifact>
-      </component>
-      <component group="com.googlecode.javaewah" name="JavaEWAH" version="1.2.3">
-         <artifact name="JavaEWAH-1.2.3.jar">
-            <pgp value="015479e1055341431b4545ab72475fd306b9cab7"/>
          </artifact>
       </component>
       <component group="com.googlecode.juniversalchardet" name="juniversalchardet" version="1.0.3">
@@ -270,16 +265,6 @@
       <component group="com.sun.activation" name="javax.activation" version="1.2.0">
          <artifact name="javax.activation-1.2.0.jar">
             <pgp value="4f7e32d440ef90a83011a8fc6425559c47cc79c4"/>
-         </artifact>
-      </component>
-      <component group="com.thoughtworks.xstream" name="xstream" version="1.4.19">
-         <artifact name="xstream-1.4.19.jar">
-            <pgp value="050a37a2e0577f4baa095b52602ec18d20c4661c"/>
-         </artifact>
-      </component>
-      <component group="com.thoughtworks.xstream" name="xstream" version="1.4.20">
-         <artifact name="xstream-1.4.20.jar">
-            <pgp value="050a37a2e0577f4baa095b52602ec18d20c4661c"/>
          </artifact>
       </component>
       <component group="commons-cli" name="commons-cli" version="1.5.0">
@@ -300,26 +285,6 @@
       <component group="dev.chrisbanes.snapper" name="snapper" version="0.2.2">
          <artifact name="snapper-0.2.2.aar">
             <pgp value="da60f5c2597d381ac8fde387dec39f479e7a86f4"/>
-         </artifact>
-      </component>
-      <component group="dev.equo.ide" name="solstice" version="1.0.3">
-         <artifact name="solstice-1.0.3.jar">
-            <pgp value="1d2c7ef8ada0f794b58c7c63436902af59edf60e"/>
-         </artifact>
-      </component>
-      <component group="dev.equo.ide" name="solstice" version="1.3.1">
-         <artifact name="solstice-1.3.1.jar">
-            <pgp value="1d2c7ef8ada0f794b58c7c63436902af59edf60e"/>
-         </artifact>
-      </component>
-      <component group="dev.zacsweers.kctfork" name="core" version="0.2.1">
-         <artifact name="core-0.2.1.jar">
-            <pgp value="719f7c29985a8e95f58f47194d8159d6a1159b69"/>
-         </artifact>
-      </component>
-      <component group="io.github.classgraph" name="classgraph" version="4.8.153">
-         <artifact name="classgraph-4.8.153.jar">
-            <pgp value="1f47744c9b6e14f2049c2857f1f111af65925306"/>
          </artifact>
       </component>
       <component group="io.github.davidburstrom.contester" name="contester-breakpoint" version="0.2.0">
@@ -407,11 +372,6 @@
             <pgp value="842afb86375d805422835bfd82b5574242c20d6f"/>
          </artifact>
       </component>
-      <component group="org.apiguardian" name="apiguardian-api" version="1.1.2">
-         <artifact name="apiguardian-api-1.1.2.jar">
-            <pgp value="ff6e2c001948c5f2f38b0cc385911f425ec61b51"/>
-         </artifact>
-      </component>
       <component group="org.bitbucket.b_c" name="jose4j" version="0.7.0">
          <artifact name="jose4j-0.7.0.jar">
             <pgp value="3051d45031e13516a6e8faff280d66a55f5316c5"/>
@@ -430,26 +390,6 @@
       <component group="org.ec4j.core" name="ec4j-core" version="0.3.0">
          <artifact name="ec4j-core-0.3.0.jar">
             <pgp value="2e92113263fc31c74ccbaab20e91c2de43b72bb1"/>
-         </artifact>
-      </component>
-      <component group="org.eclipse.jgit" name="org.eclipse.jgit" version="6.5.0.202303070854-r">
-         <artifact name="org.eclipse.jgit-6.5.0.202303070854-r.jar">
-            <pgp value="7c669810892cbd3148fa92995b05ccde140c2876"/>
-         </artifact>
-      </component>
-      <component group="org.eclipse.jgit" name="org.eclipse.jgit" version="6.6.0.202305301015-r">
-         <artifact name="org.eclipse.jgit-6.6.0.202305301015-r.jar">
-            <pgp value="7c669810892cbd3148fa92995b05ccde140c2876"/>
-         </artifact>
-      </component>
-      <component group="org.eclipse.platform" name="org.eclipse.osgi" version="3.18.200">
-         <artifact name="org.eclipse.osgi-3.18.200.jar">
-            <pgp value="9e3044071b758ebcb7e45673700e4f39bc05364b"/>
-         </artifact>
-      </component>
-      <component group="org.eclipse.platform" name="org.eclipse.osgi" version="3.18.300">
-         <artifact name="org.eclipse.osgi-3.18.300.jar">
-            <pgp value="9e3044071b758ebcb7e45673700e4f39bc05364b"/>
          </artifact>
       </component>
       <component group="org.gradle.kotlin" name="gradle-kotlin-dsl-plugins" version="4.0.14">
@@ -507,16 +447,6 @@
             <pgp value="fb35c8d02b4724dada23de0afd116c1969fccff3"/>
          </artifact>
       </component>
-      <component group="org.junit.vintage" name="junit-vintage-engine" version="5.10.0">
-         <artifact name="junit-vintage-engine-5.10.0.jar">
-            <pgp value="ff6e2c001948c5f2f38b0cc385911f425ec61b51"/>
-         </artifact>
-      </component>
-      <component group="org.junit.vintage" name="junit-vintage-engine" version="5.9.3">
-         <artifact name="junit-vintage-engine-5.9.3.jar">
-            <pgp value="ff6e2c001948c5f2f38b0cc385911f425ec61b51"/>
-         </artifact>
-      </component>
       <component group="org.jvnet.staxex" name="stax-ex" version="1.8.1">
          <artifact name="stax-ex-1.8.1.jar">
             <pgp value="04543577d6a9cc626239c50c7ecbd740ff06aeb5"/>
@@ -530,16 +460,6 @@
       <component group="org.slf4j" name="slf4j-api" version="2.0.5">
          <artifact name="slf4j-api-2.0.5.jar">
             <pgp value="60200ac4ae761f1614d6c46766d68daa073be985"/>
-         </artifact>
-      </component>
-      <component group="org.snakeyaml" name="snakeyaml-engine" version="2.3">
-         <artifact name="snakeyaml-engine-2.3.jar">
-            <pgp value="120d6f34e627ed3a772ebbfe55c7e5e701832382"/>
-         </artifact>
-      </component>
-      <component group="org.snakeyaml" name="snakeyaml-engine" version="2.6">
-         <artifact name="snakeyaml-engine-2.6.jar">
-            <pgp value="120d6f34e627ed3a772ebbfe55c7e5e701832382"/>
          </artifact>
       </component>
       <component group="org.tensorflow" name="tensorflow-lite-metadata" version="0.1.0-rc2">

@@ -98,7 +98,6 @@ fun configureAndroidTestDependencies() {
             ).forEach { testDependency ->
                 add("androidTestImplementation", testDependency) {
                     version {
-                        strictly("1.6.4")
                         reject("1.7.0")
                         because("https://github.com/Kotlin/kotlinx.coroutines/issues/3673")
                     }

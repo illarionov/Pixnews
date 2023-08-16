@@ -11,6 +11,7 @@ import ru.pixnews.foundation.redux.MiddlewareApi
 import ru.pixnews.foundation.redux.State
 
 public abstract class SimpleMiddleware<S : State> : Middleware<S> {
+    @Suppress("Wrapping")
     override fun invoke(api: MiddlewareApi<S>): (next: Dispatch) -> Dispatch = { next ->
         { action ->
             interfere(api, next, action)

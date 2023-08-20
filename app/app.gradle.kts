@@ -9,6 +9,7 @@ plugins {
     id("ru.pixnews.gradle.android.test-instrumented")
     id("ru.pixnews.gradle.di.anvil-kapt")
     id("ru.pixnews.gradle.config.firebase")
+    id("ru.pixnews.gradle.config.igdb")
 }
 
 pixnews {

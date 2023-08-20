@@ -4,7 +4,7 @@
  */
 package ru.pixnews.gradle.config.firebase
 
-import java.io.StringReader
+import ru.pixnews.gradle.config.util.toProperties
 import java.util.Properties
 
 internal class FirebaseConfigReader(
@@ -36,13 +36,9 @@ internal class FirebaseConfigReader(
         operator fun invoke(
             configFileContext: String,
             applicationId: String?,
-        ): FirebaseConfigReader {
-            val properties = Properties().apply {
-                StringReader(configFileContext).use {
-                    load(it)
-                }
-            }
-            return FirebaseConfigReader(properties, applicationId)
-        }
+        ): FirebaseConfigReader = FirebaseConfigReader(
+            configFileContext.toProperties(),
+            applicationId,
+        )
     }
 }

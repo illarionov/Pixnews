@@ -7,7 +7,9 @@ package ru.pixnews.inject
 import android.os.Build
 import com.squareup.anvil.annotations.ContributesBinding
 import ru.pixnews.BuildConfig
+import ru.pixnews.config.GeneratedIgdbClientConfig
 import ru.pixnews.foundation.appconfig.AppConfig
+import ru.pixnews.foundation.appconfig.IgdbClientConfig
 import ru.pixnews.foundation.appconfig.NetworkConfig
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import kotlin.LazyThreadSafetyMode.NONE
@@ -25,4 +27,5 @@ public object PixnewsAppConfig : AppConfig {
         object : NetworkConfig {
         }
     }
+    override val igdbClientConfig: IgdbClientConfig = GeneratedIgdbClientConfig
 }

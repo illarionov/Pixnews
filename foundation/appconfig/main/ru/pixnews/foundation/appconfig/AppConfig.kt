@@ -17,6 +17,7 @@ public interface AppConfig {
     public val timestamp: String
     public val sdkInt: Int
     public val networkConfig: NetworkConfig
+    public val igdbClientConfig: IgdbClientConfig
 }
 
 public interface NetworkConfig {
@@ -31,6 +32,22 @@ public interface NetworkConfig {
     public val connectionPoolKeepAliveTimeout: Duration get() = 2.minutes
 
     public val maxConnectionsPerHost: UInt get() = 10U
+}
+
+public interface IgdbClientConfig {
+    public val baseUrl: String get() = "https://api.igdb.com/v4/"
+    public val apiKey: String get() = ""
+
+    /**
+     * Twitch auth (debug only)
+     */
+    public val twitchAuth: TwitchAuth? get() = null
+
+    public interface TwitchAuth {
+        public val clientId: String get() = ""
+        public val clientSecret: String get() = ""
+        public val token: String? get() = null
+    }
 }
 
 public enum class HttpLoggingLevel {
@@ -53,5 +70,7 @@ public open class DefaultAppConfig : AppConfig {
     override val sdkInt: Int
         get() = throw NotImplementedError()
     override val networkConfig: NetworkConfig
+        get() = throw NotImplementedError()
+    override val igdbClientConfig: IgdbClientConfig
         get() = throw NotImplementedError()
 }

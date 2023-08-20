@@ -1,23 +1,47 @@
-### Firebase configuration
-# {YOUR_CLIENT}/client_info/mobilesdk_app_id in google-services.json
+###### Igdb configuration
+
+# Base url for the igdb requests
+igdb_base_url = https://api.igdb.com/v4/
+
+# Authentication key for the igdb_base_url.
+# The value of the `x-api-key` HTTP header that will be sent in network requests to the igdb_base_url. Optional.
+# igdb_api_key = test_token_api_key
+
+# Specifying the following `igdb_twitch_*` parameters activates authentication using Twitch.
+# This authentication method can only be used in development and should not be enabled in release builds.
+# See https://api-docs.igdb.com/#account-creation for instructions on how to create a Сlient Id and Client Secret.
+
+# Twitch Client ID
+# igdb_twitch_client_id = Client ID
+
+# Twitch client secret
+# igdb_twitch_client_secret = Client Secret
+
+# Initial Twitch token (Optional)
+# igdb_twitch_token =
+
+
+###### Firebase configuration
+
+# Value of the {YOUR_CLIENT}/client_info/mobilesdk_app_id in google-services.json
 # firebase_google_app_id = 1:1035469437089:android:73a4fb8297b2cd4f
 
-# project_info/project_number in google-services.json
+# Value of the project_info/project_number in google-services.json
 # firebase_gcm_default_sender_id = 1035469437089
 
-# {YOUR_CLIENT}/services/analytics-service/analytics_property/tracking_id in google-services.json
+# Value of the {YOUR_CLIENT}/services/analytics-service/analytics_property/tracking_id in google-services.json
 # firebase_ga_tracking_id = UA-65557217-3
 
-# project_info/firebase_url in google-services.json
+# Value of the project_info/firebase_url in google-services.json
 # firebase_database_url = https://pixnews-ru.firebaseio.com
 
-# {YOUR_CLIENT}/api_key/current_key in google-services.json
+# Value of the {YOUR_CLIENT}/api_key/current_key in google-services.json
 # firebase_google_api_key = AIzbSyCILMsOuUKwN3qhtxrPq7FFemDJUAXTyZ8
 
-# project_info/project_id in google-services.json
+# Value of the project_info/project_id in google-services.json
 # firebase_project_id = pixnews-ru
 
-# project_info/storage_bucket in google-services.json
+# Value of the project_info/storage_bucket in google-services.json
 # firebase_storage_bucket = pixnews-ru.appspot.com
 
 # google_app_id for different build types

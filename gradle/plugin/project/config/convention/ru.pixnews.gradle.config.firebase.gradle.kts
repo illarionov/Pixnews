@@ -7,27 +7,17 @@ import buildparameters.BuildParametersExtension
 import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.ResValue
-import com.android.build.gradle.AppPlugin
-import com.android.build.gradle.DynamicFeaturePlugin
-import com.android.build.gradle.LibraryPlugin
-import com.android.build.gradle.TestPlugin
 import ru.pixnews.gradle.config.firebase.FirebaseConfigReader
 import ru.pixnews.gradle.config.firebase.GenerateFirebaseOptionsTask
+import ru.pixnews.gradle.config.util.withAnyOfAndroidPlugins
 
 /**
  * Convention plugin that generates GeneratedFirebaseOptions.firebaseOptions using values from
  * configuration file and prepares required resource values.
  */
-listOf(
-    AppPlugin::class.java,
-    LibraryPlugin::class.java,
-    DynamicFeaturePlugin::class.java,
-    TestPlugin::class.java,
-).forEach { agpPlugin ->
-    project.plugins.withType(agpPlugin) {
-        project.extensions.configure(AndroidComponentsExtension::class.java) {
-            registerFirebaseOptionsTask()
-        }
+project.withAnyOfAndroidPlugins { _, androidComponentsExtension ->
+    with(androidComponentsExtension) {
+        registerFirebaseOptionsTask()
     }
 }
 
@@ -44,20 +34,13 @@ fun AndroidComponentsExtension<*, *, *>.registerFirebaseOptionsTask() {
         } else {
             providers.provider { "" }
         }
-        val firebaseOptionsProvider = pixnewsConfigFileContent.asText.flatMap { configFileText ->
-            if (variant is ApplicationVariant) {
-                variant.applicationId
-            } else {
-                providers.provider { "" }
-            }
-
-            applicationIdProvider.map { applicationId ->
+        val firebaseOptionsProvider =
+            pixnewsConfigFileContent.asText.zip(applicationIdProvider) { configFileText, applicationId ->
                 FirebaseConfigReader(
                     configFileText,
                     applicationId.ifEmpty { null },
                 ).read()
             }
-        }
 
         @Suppress("GENERIC_VARIABLE_WRONG_DECLARATION")
         val firebaseOptionsTaskProvider = project.tasks.register<GenerateFirebaseOptionsTask>(

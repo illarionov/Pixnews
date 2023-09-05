@@ -3,9 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-import com.diffplug.gradle.spotless.SpotlessTask
 import com.diffplug.spotless.FormatterStep
-import com.diffplug.spotless.LineEnding
 import com.diffplug.spotless.generic.LicenseHeaderStep
 import ru.pixnews.gradle.lint.configRootDir
 import ru.pixnews.gradle.lint.lintedFileTree
@@ -19,10 +17,6 @@ plugins {
 
 spotless {
     isEnforceCheck = false
-
-    // https://github.com/diffplug/spotless/issues/1527
-    // https://github.com/diffplug/spotless/issues/1644
-    lineEndings = LineEnding.PLATFORM_NATIVE
 
     val rootDir = lintedFileTree
 
@@ -137,8 +131,4 @@ spotless {
 
         endWithNewline()
     }
-}
-
-tasks.withType<SpotlessTask>().configureEach {
-    notCompatibleWithConfigurationCache("https://github.com/diffplug/spotless/issues/987")
 }

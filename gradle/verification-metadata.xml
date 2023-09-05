@@ -207,6 +207,11 @@
             <pgp value="24d04176586361fda94ee0315f7786df73e61f56"/>
          </artifact>
       </component>
+      <component group="com.google.devtools.ksp" name="symbol-processing-api" version="1.9.0-1.0.12">
+         <artifact name="symbol-processing-api-1.9.0-1.0.12.jar">
+            <pgp value="24d04176586361fda94ee0315f7786df73e61f56"/>
+         </artifact>
+      </component>
       <component group="com.google.errorprone" name="error_prone_annotations" version="2.9.0">
          <artifact name="error_prone_annotations-2.9.0.jar">
             <pgp value="6f656b7f6bfb238d38acf81f3c27d97b0c83a85c"/>

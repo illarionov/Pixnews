@@ -7,12 +7,12 @@ package ru.pixnews.inject
 import android.content.Context
 import com.google.firebase.FirebaseApp
 import com.squareup.anvil.annotations.ContributesTo
+import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
 import dagger.Provides
 import ru.pixnews.firebase.GeneratedFirebaseOptions
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 
 @ContributesTo(AppScope::class)
 @Module

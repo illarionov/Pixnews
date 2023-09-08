@@ -7,7 +7,7 @@ package ru.pixnews.foundation.di.ui.base.fragment
 import androidx.annotation.RestrictTo
 import androidx.fragment.app.Fragment
 import com.squareup.anvil.annotations.ContributesSubcomponent
-import ru.pixnews.foundation.di.base.scopes.SingleIn
+import com.squareup.anvil.annotations.optional.SingleIn
 import ru.pixnews.foundation.di.ui.base.activity.ActivityScope
 import javax.inject.Provider
 

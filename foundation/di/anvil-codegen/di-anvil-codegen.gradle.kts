@@ -33,6 +33,7 @@ dependencies {
     compileOnly(libs.auto.service.annotations)
     kapt(libs.auto.service.compiler)
 
-    testImplementation(libs.kotest.assertions.core)
+    testImplementation(libs.anvil.annotations.optional)
     testImplementation(testFixtures(libs.anvil.compiler.utils))
+    testImplementation(libs.kotest.assertions.core)
 }

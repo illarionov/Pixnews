@@ -13,6 +13,7 @@ plugins {
 }
 
 anvil {
+    addOptionalAnnotations.set(true)
     generateDaggerFactories.set(true)
 }
 

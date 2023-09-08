@@ -19,6 +19,10 @@ dependencies {
     add("kapt", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
 }
 
+anvil {
+    addOptionalAnnotations.set(true)
+}
+
 kapt {
     javacOptions {
         option("-Adagger.fastInit=enabled")

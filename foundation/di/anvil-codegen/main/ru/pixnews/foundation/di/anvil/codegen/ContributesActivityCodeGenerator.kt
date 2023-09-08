@@ -90,7 +90,7 @@ public class ContributesActivityCodeGenerator : CodeGenerator {
             .addAnnotation(
                 AnnotationSpec
                     .builder(ClassNames.singleIn)
-                    .addMember("clazz = %T::class", ClassNames.activityScope)
+                    .addMember("%T::class", ClassNames.activityScope)
                     .build(),
             )
             .addParameter("target", ClassNames.Dagger.membersInjector.parameterizedBy(activityClass))

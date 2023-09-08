@@ -8,6 +8,7 @@ import android.content.Context
 import co.touchlab.kermit.Logger
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.squareup.anvil.annotations.ContributesTo
+import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
 import dagger.Provides
 import ru.pixnews.foundation.appconfig.AppConfig
@@ -17,7 +18,6 @@ import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer

@@ -7,13 +7,13 @@ package ru.pixnews.feature.featuretoggles.inject
 import android.content.Context
 import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesTo
+import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
 import dagger.Provides
 import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.coroutines.RootCoroutineScope
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.di.ui.base.viewmodel.ViewModelScope
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer

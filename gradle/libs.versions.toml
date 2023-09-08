@@ -162,6 +162,7 @@ android-desugar-jdk-libs = { group = "com.android.tools", name = "desugar_jdk_li
 accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist" }
 accompanist-placeholder-material3 = { group = "com.google.accompanist", name = "accompanist-placeholder-material3", version.ref = "accompanist" }
 accompanist-test-harness = { group = "com.google.accompanist", name = "accompanist-testharness", version.ref = "accompanist" }
+anvil-annotations-optional = { group = "com.squareup.anvil", name = "annotations-optional", version.ref = "anvil" }
 anvil-compiler-api = { group = "com.squareup.anvil", name = "compiler-api", version.ref = "anvil" }
 anvil-compiler-utils = { group = "com.squareup.anvil", name = "compiler-utils", version.ref = "anvil" }
 arrow-bom = { group = "io.arrow-kt", name = "arrow-stack", version.ref = "arrow" }

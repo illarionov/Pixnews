@@ -8,9 +8,9 @@ import android.app.Activity
 import androidx.annotation.RestrictTo
 import com.squareup.anvil.annotations.ContributesSubcomponent
 import com.squareup.anvil.annotations.ContributesTo
+import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.BindsInstance
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 
 @SingleIn(ActivityScope::class)
 @ContributesSubcomponent(scope = ActivityScope::class, parentScope = AppScope::class)

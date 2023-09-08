@@ -5,6 +5,7 @@
 package ru.pixnews.foundation.di.anvil.codegen
 
 import com.squareup.anvil.annotations.ContributesTo
+import com.squareup.anvil.annotations.optional.SingleIn
 import com.squareup.anvil.compiler.internal.testing.compileAnvil
 import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation.ExitCode.OK
@@ -24,7 +25,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle
 import org.junit.jupiter.api.fail
 import ru.pixnews.foundation.di.anvil.codegen.util.ClassNames
 import ru.pixnews.foundation.di.anvil.codegen.util.loadClass
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 
 @OptIn(ExperimentalCompilerApi::class)
 @TestInstance(Lifecycle.PER_CLASS)

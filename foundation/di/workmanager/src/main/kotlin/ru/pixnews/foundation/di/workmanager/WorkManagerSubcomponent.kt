@@ -7,9 +7,9 @@ package ru.pixnews.foundation.di.workmanager
 import androidx.annotation.RestrictTo
 import androidx.work.CoroutineWorker
 import com.squareup.anvil.annotations.ContributesSubcomponent
+import com.squareup.anvil.annotations.optional.SingleIn
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 
 @SingleIn(WorkManagerScope::class)
 @ContributesSubcomponent(scope = WorkManagerScope::class, parentScope = AppScope::class)

@@ -7,7 +7,7 @@ package ru.pixnews.foundation.di.anvil.codegen
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.compiler.internal.testing.compileAnvil
 import com.squareup.kotlinpoet.ClassName
-import com.tschuchort.compiletesting.KotlinCompilation
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation.ExitCode.OK
 import dagger.Provides
 import dagger.multibindings.IntoMap
@@ -29,7 +29,7 @@ import ru.pixnews.foundation.di.anvil.codegen.util.loadClass
 class ContributesViewModelCodeGeneratorTest {
     private val generatedModuleName = "com.test.TestViewModel_FactoryModule"
     private val featureManagerClass = ClassName("ru.pixnews.foundation.featuretoggles", "FeatureManager")
-    private lateinit var compilationResult: KotlinCompilation.Result
+    private lateinit var compilationResult: JvmCompilationResult
 
     @BeforeAll
     @Suppress("LOCAL_VARIABLE_EARLY_DECLARATION")

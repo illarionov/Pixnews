@@ -17,8 +17,7 @@ import ru.pixnews.gradle.testing.configureCommonUnitTestingOptions
 plugins {
     kotlin("jvm")
     id("ru.pixnews.gradle.base.build-parameters")
-    // TODO Uncomment when circular dependency will be fixed: :generateJvmLintModel
-    // id("ru.pixnews.gradle.lint.android-lint-noagp")
+    id("ru.pixnews.gradle.lint.android-lint-noagp")
 }
 
 createPixnewsExtension()

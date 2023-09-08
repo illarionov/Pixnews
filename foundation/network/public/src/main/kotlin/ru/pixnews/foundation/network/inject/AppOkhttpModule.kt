@@ -6,6 +6,7 @@ package ru.pixnews.foundation.network.inject
 
 import android.content.Context
 import com.squareup.anvil.annotations.ContributesTo
+import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -14,7 +15,6 @@ import okhttp3.OkHttpClient
 import ru.pixnews.foundation.appconfig.NetworkConfig
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.network.OkHttpClientProvider
 import ru.pixnews.foundation.network.RootOkHttpClientProvider
 import ru.pixnews.library.android.utils.precondition.checkNotMainThread

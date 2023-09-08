@@ -5,8 +5,9 @@
 package ru.pixnews.foundation.di.anvil.codegen
 
 import com.squareup.anvil.annotations.ContributesTo
+import com.squareup.anvil.annotations.optional.SingleIn
 import com.squareup.anvil.compiler.internal.testing.compileAnvil
-import com.tschuchort.compiletesting.KotlinCompilation
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation.ExitCode.OK
 import dagger.MembersInjector
 import dagger.Provides
@@ -24,13 +25,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle
 import org.junit.jupiter.api.fail
 import ru.pixnews.foundation.di.anvil.codegen.util.ClassNames
 import ru.pixnews.foundation.di.anvil.codegen.util.loadClass
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 
 @OptIn(ExperimentalCompilerApi::class)
 @TestInstance(Lifecycle.PER_CLASS)
 class ContributesTestCodeGeneratorTest {
     private val generatedModuleName = "com.test.MainTest_TestModule"
-    private lateinit var compilationResult: KotlinCompilation.Result
+    private lateinit var compilationResult: JvmCompilationResult
 
     @BeforeAll
     @Suppress("LOCAL_VARIABLE_EARLY_DECLARATION")

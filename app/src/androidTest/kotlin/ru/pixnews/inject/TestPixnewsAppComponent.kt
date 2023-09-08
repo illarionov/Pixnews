@@ -6,12 +6,12 @@ package ru.pixnews.inject
 
 import android.content.Context
 import com.squareup.anvil.annotations.MergeComponent
+import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.BindsInstance
 import dagger.Component
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.inject.experiments.ExperimentsComponent
 
 @MergeComponent(

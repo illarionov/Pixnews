@@ -5,6 +5,7 @@
 package ru.pixnews.foundation.network.inject
 
 import com.squareup.anvil.annotations.ContributesTo
+import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -15,7 +16,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import ru.pixnews.foundation.appconfig.NetworkConfig
 import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.network.RootOkHttpClientProvider
 import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientEventListener
 import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientInterceptor

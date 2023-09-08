@@ -21,6 +21,7 @@ import coil.memory.MemoryCache
 import coil.request.CachePolicy.DISABLED
 import coil.request.CachePolicy.ENABLED
 import com.squareup.anvil.annotations.ContributesTo
+import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.ElementsIntoSet
@@ -34,7 +35,6 @@ import ru.pixnews.foundation.coroutines.MainCoroutineDispatcherProvider
 import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 import ru.pixnews.foundation.network.RootOkHttpClientProvider
 import ru.pixnews.foundation.ui.imageloader.coil.DelegatingImageLoader
 import ru.pixnews.foundation.ui.imageloader.coil.ImageLoader

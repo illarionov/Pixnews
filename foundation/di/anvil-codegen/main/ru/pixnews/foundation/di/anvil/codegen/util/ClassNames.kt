@@ -19,11 +19,10 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.foundation.di.base.scopes.SingleIn
 
 internal object ClassNames {
     val applicationContext = ApplicationContext::class.asClassName()
-    val singleIn = SingleIn::class.asClassName()
+    val singleIn = ClassName("com.squareup.anvil.annotations.optional", "SingleIn")
     val activityMapKey = ClassName("ru.pixnews.foundation.di.ui.base.activity", "ActivityMapKey")
     val coroutineWorkerMapKey = ClassName("ru.pixnews.foundation.di.workmanager", "CoroutineWorkerMapKey")
     val activityScope = ClassName("ru.pixnews.foundation.di.ui.base.activity", "ActivityScope")

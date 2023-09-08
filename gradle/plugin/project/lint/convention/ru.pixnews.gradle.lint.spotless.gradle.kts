@@ -132,3 +132,7 @@ spotless {
         endWithNewline()
     }
 }
+
+tasks.withType<com.diffplug.gradle.spotless.SpotlessTask>().configureEach {
+    notCompatibleWithConfigurationCache("https://github.com/diffplug/spotless/issues/987")
+}

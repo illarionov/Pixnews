@@ -40,6 +40,7 @@
          <trusted-key id="1d2c7ef8ada0f794b58c7c63436902af59edf60e" group="dev.equo.ide" name="solstice"/>
          <trusted-key id="1de48a38424721249780c6a8c7dff5a8dbc5381c" group="io.arrow-kt"/>
          <trusted-key id="1f47744c9b6e14f2049c2857f1f111af65925306" group="io.github.classgraph"/>
+         <trusted-key id="24d04176586361fda94ee0315f7786df73e61f56" group="com.google.devtools.ksp"/>
          <trusted-key id="2db4f1ef0fa761ecc4ea935c86fdc7e2a11262cb" group="commons-codec"/>
          <trusted-key id="314fe82e5a4c5377bca2edec5208812e1e4a6db0">
             <trusting group="com.gradle" name="gradle-enterprise-gradle-plugin"/>

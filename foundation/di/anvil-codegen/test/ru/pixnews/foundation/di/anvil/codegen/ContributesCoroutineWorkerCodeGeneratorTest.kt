@@ -6,7 +6,7 @@ package ru.pixnews.foundation.di.anvil.codegen
 
 import com.squareup.anvil.annotations.ContributesMultibinding
 import com.squareup.anvil.compiler.internal.testing.compileAnvil
-import com.tschuchort.compiletesting.KotlinCompilation
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation.ExitCode.OK
 import dagger.assisted.AssistedFactory
 import io.kotest.matchers.collections.shouldContainExactly
@@ -27,7 +27,7 @@ import ru.pixnews.foundation.di.anvil.codegen.util.loadClass
 @TestInstance(Lifecycle.PER_CLASS)
 class ContributesCoroutineWorkerCodeGeneratorTest {
     private val generatedFactoryName = "com.test.TestWorker_AssistedFactory"
-    private lateinit var compilationResult: KotlinCompilation.Result
+    private lateinit var compilationResult: JvmCompilationResult
 
     @BeforeAll
     @Suppress("LOCAL_VARIABLE_EARLY_DECLARATION", "LongMethod")

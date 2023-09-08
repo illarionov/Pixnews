@@ -5,6 +5,7 @@
 package ru.pixnews.gradle.config.firebase
 
 import com.squareup.kotlinpoet.ClassName
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.KotlinCompilation.ExitCode.OK
 import com.tschuchort.compiletesting.SourceFile
@@ -40,7 +41,7 @@ class FirebaseOptionsGeneratorTest {
     private fun compileFirebaseOptions(
         options: LocalFirebaseOptions,
         codeGenDir: File,
-    ): KotlinCompilation.Result {
+    ): JvmCompilationResult {
         FirebaseOptionsGenerator(
             options = options,
             codeGenDir = codeGenDir,

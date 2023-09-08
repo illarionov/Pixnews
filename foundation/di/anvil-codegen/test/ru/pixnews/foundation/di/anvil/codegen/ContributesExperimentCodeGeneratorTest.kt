@@ -6,7 +6,7 @@ package ru.pixnews.foundation.di.anvil.codegen
 
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.compiler.internal.testing.compileAnvil
-import com.tschuchort.compiletesting.KotlinCompilation
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation.ExitCode.OK
 import dagger.Provides
 import dagger.multibindings.IntoMap
@@ -27,7 +27,7 @@ import ru.pixnews.foundation.di.anvil.codegen.util.loadClass
 @TestInstance(Lifecycle.PER_CLASS)
 class ContributesExperimentCodeGeneratorTest {
     private val generatedModuleName = "com.test.TestExperiment_Experiments_Module"
-    private lateinit var compilationResult: KotlinCompilation.Result
+    private lateinit var compilationResult: JvmCompilationResult
 
     @BeforeAll
     fun setup() {

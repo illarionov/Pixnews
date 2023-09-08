@@ -5,6 +5,7 @@
 package ru.pixnews.gradle.config.igdb
 
 import com.squareup.kotlinpoet.ClassName
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.KotlinCompilation.ExitCode.OK
 import com.tschuchort.compiletesting.SourceFile
@@ -39,7 +40,7 @@ class IgdbOptionsGeneratorTest {
     private fun compileFirebaseOptions(
         options: LocalIgdbOptions,
         codeGenDir: File,
-    ): KotlinCompilation.Result {
+    ): JvmCompilationResult {
         IgdbOptionsGenerator(
             options = options,
             codeGenDir = codeGenDir,

@@ -6,7 +6,7 @@ package ru.pixnews.foundation.di.anvil.codegen
 
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.compiler.internal.testing.compileAnvil
-import com.tschuchort.compiletesting.KotlinCompilation
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation.ExitCode.OK
 import dagger.Module
 import dagger.Provides
@@ -90,7 +90,7 @@ class ContributesInitializerCodeGeneratorTest {
             }
         }
     """.trimIndent()
-    private lateinit var compilationResult: KotlinCompilation.Result
+    private lateinit var compilationResult: JvmCompilationResult
 
     @Nested
     @TestInstance(Lifecycle.PER_CLASS)

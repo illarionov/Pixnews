@@ -6,7 +6,7 @@ package ru.pixnews.foundation.di.anvil.codegen
 
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.compiler.internal.testing.compileAnvil
-import com.tschuchort.compiletesting.KotlinCompilation
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation.ExitCode.OK
 import dagger.MembersInjector
 import dagger.Provides
@@ -30,7 +30,7 @@ import ru.pixnews.foundation.di.base.scopes.SingleIn
 @TestInstance(Lifecycle.PER_CLASS)
 class ContributesTestCodeGeneratorTest {
     private val generatedModuleName = "com.test.MainTest_TestModule"
-    private lateinit var compilationResult: KotlinCompilation.Result
+    private lateinit var compilationResult: JvmCompilationResult
 
     @BeforeAll
     @Suppress("LOCAL_VARIABLE_EARLY_DECLARATION")

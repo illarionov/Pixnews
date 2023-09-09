@@ -7,23 +7,24 @@ package ru.pixnews.domain.model.company.company
 import kotlinx.collections.immutable.persistentListOf
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.company.CompanyFixtures
-import ru.pixnews.domain.model.company.CompanyId
 import ru.pixnews.domain.model.company.CompanyStatus.ACTIVE
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType.OFFICIAL
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITTER
+import ru.pixnews.domain.model.id.DefaultCompanyId
 import ru.pixnews.domain.model.locale.CountryCode
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
+import ru.pixnews.domain.model.url.DefaultImageUrl
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.CanvasSize
-import ru.pixnews.domain.model.util.DefaultImageUrl
+import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
 
-private val quanticDreamCompanyId = CompanyId("quantic-dream")
+private val quanticDreamCompanyId = DefaultCompanyId("quantic-dream")
 
 public val CompanyFixtures.quanticDream: Company
     get() = Company(
@@ -48,7 +49,7 @@ public val CompanyFixtures.quanticDream: Company
         foundingDate = ApproximateDate.Year(1997),
         status = ACTIVE,
         country = CountryCode("FR"),
-        parentCompany = CompanyId("netease-games"),
+        parentCompany = Ref.Id(DefaultCompanyId("netease-games")),
         dataSources = DataSourceFixtures.igdb,
         links = persistentListOf(
             ExternalLink(OFFICIAL, Url("http://www.quanticdream.com/")),

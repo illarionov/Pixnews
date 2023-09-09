@@ -6,9 +6,9 @@ package ru.pixnews.foundation.ui.design.card
 
 import androidx.compose.runtime.Immutable
 import kotlinx.collections.immutable.ImmutableSet
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GamePlatform
-import ru.pixnews.domain.model.util.ImageUrl
+import ru.pixnews.domain.model.id.GameId
+import ru.pixnews.domain.model.url.ImageUrl
 
 @Immutable
 public interface PixnewsGameCardUiModel {

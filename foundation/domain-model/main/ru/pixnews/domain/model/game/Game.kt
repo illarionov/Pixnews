@@ -10,13 +10,15 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.datasource.DataSource
-import ru.pixnews.domain.model.links.ExternalLink
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ImageUrl
+import ru.pixnews.domain.model.url.VideoUrl
 import ru.pixnews.domain.model.util.ApproximateDate
-import ru.pixnews.domain.model.util.ImageUrl
+import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.VideoUrl
 import ru.pixnews.library.kotlin.utils.isNotWhitespaceOnly
 
 public data class Game(
@@ -41,15 +43,15 @@ public data class Game(
     val links: ImmutableList<ExternalLink> = persistentListOf(),
 
     val category: GameReleaseCategory? = null,
-    val parentGame: GameId? = null,
-    val series: GameSeriesSummary? = null,
+    val parentGame: Ref<Game>? = null,
+    val series: Ref<GameSeriesSummary>? = null,
 
-    val platforms: ImmutableSet<GamePlatform> = persistentSetOf(),
+    val platforms: ImmutableSet<Ref<GamePlatform>> = persistentSetOf(),
     val ageRanking: AgeRating? = null,
 
     val localizations: GameLocalizations? = null,
-    val gameMode: ImmutableSet<GameMode> = persistentSetOf(),
-    val playerPerspectives: ImmutableSet<PlayerPerspective> = persistentSetOf(),
+    val gameMode: ImmutableSet<Ref<GameMode>> = persistentSetOf(),
+    val playerPerspectives: ImmutableSet<Ref<PlayerPerspective>> = persistentSetOf(),
     val systemRequirements: GameSystemRequirements? = null,
 
     val dataSources: ImmutableList<DataSource> = persistentListOf(),
@@ -84,12 +86,6 @@ public data class Game(
             GAME_MODE,
             PLAYER_PERSPECTIVES,
             SYSTEM_REQUIREMENTS,
-            ;
-
-            public companion object {
-                @Suppress("SpreadOperator")
-                public val all: Set<GameField> = setOf(*GameField.values())
-            }
         }
     }
 }

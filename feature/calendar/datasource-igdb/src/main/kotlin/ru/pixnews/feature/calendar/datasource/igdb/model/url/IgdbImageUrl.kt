@@ -2,12 +2,12 @@
  * Copyright (c) 2023, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
-package ru.pixnews.feature.calendar.datasource.igdb.model
+package ru.pixnews.feature.calendar.datasource.igdb.model.url
 
+import ru.pixnews.domain.model.url.ImageUrl
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Dimension
 import ru.pixnews.domain.model.util.Dimension.Undefined
-import ru.pixnews.domain.model.util.ImageUrl
 import ru.pixnews.igdbclient.model.IgdbImageFormat.WEBP
 import ru.pixnews.igdbclient.model.IgdbImageSize.H1080P
 import ru.pixnews.igdbclient.model.IgdbImageSize.THUMB

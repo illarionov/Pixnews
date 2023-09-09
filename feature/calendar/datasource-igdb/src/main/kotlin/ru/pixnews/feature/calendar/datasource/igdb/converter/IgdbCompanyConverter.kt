@@ -10,17 +10,19 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toKotlinInstant
 import kotlinx.datetime.toLocalDateTime
 import ru.pixnews.domain.model.company.Company
-import ru.pixnews.domain.model.company.CompanyId
 import ru.pixnews.domain.model.company.CompanyStatus.UNKNOWN
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType
+import ru.pixnews.domain.model.id.CompanyId
 import ru.pixnews.domain.model.locale.CountryCode
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.locale.fromNumeric3Code
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate
+import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
+import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbCompanyId
 import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
 import ru.pixnews.igdbclient.model.CompanyWebsite
 import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum
@@ -35,6 +37,12 @@ import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ4
 import com.squareup.wire.Instant as WireInstant
 import ru.pixnews.igdbclient.model.Company as IgdbCompany
 
+internal fun IgdbCompany.toCompanyRef(): Ref<Company> = when {
+    name.isNotEmpty() -> Ref.FullObject(this.toCompany())
+    id != 0L -> Ref.Id(getIgdbCompanyId(id))
+    else -> errorFieldNotRequested("company.id")
+}
+
 internal fun IgdbCompany.toCompany(): Company {
     val id = getIgdbCompanyId(requireFieldInitialized("company.id", id))
     val name = requireFieldInitialized("company.name", name)
@@ -47,7 +55,7 @@ internal fun IgdbCompany.toCompany(): Company {
         foundingDate = start_date?.let { parseIgdbStartDate(it, start_date_category) },
         status = UNKNOWN,
         country = if (country != 0) CountryCode.fromNumeric3Code(country) else null,
-        parentCompany = parent?.let { getIgdbCompanyId(it.id) },
+        parentCompany = parent?.toCompanyRef(),
         dataSources = persistentListOf(igdbDataSource),
         links = run {
             val urlLink = if (url.isNotEmpty()) {
@@ -61,7 +69,7 @@ internal fun IgdbCompany.toCompany(): Company {
     )
 }
 
-private fun getIgdbCompanyId(id: Long): CompanyId = CompanyId(stringValue = id.toString())
+private fun getIgdbCompanyId(id: Long): CompanyId = IgdbCompanyId(id)
 
 private fun CompanyWebsite.toExternalLink(): ExternalLink = ExternalLink(
     type = this.category.toExternalLinkType() ?: errorFieldNotRequested("websites.category"),

@@ -6,7 +6,7 @@ package ru.pixnews.foundation.ui.imageloader.coil.tooling
 
 import android.graphics.drawable.Drawable
 import androidx.compose.runtime.Immutable
-import ru.pixnews.domain.model.util.ImageUrl
+import ru.pixnews.domain.model.url.ImageUrl
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.ZERO
 

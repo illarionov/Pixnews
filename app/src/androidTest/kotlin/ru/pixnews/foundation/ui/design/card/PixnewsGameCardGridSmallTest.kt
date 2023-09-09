@@ -12,11 +12,15 @@ import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.width
+import kotlinx.collections.immutable.toImmutableSet
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.domain.model.game.GameFixtures
+import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.game.game.hytale
+import ru.pixnews.domain.model.util.Ref
+import ru.pixnews.domain.model.util.getObjectOrThrow
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import ru.pixnews.foundation.ui.design.card.element.PixnewsGameCardGridSmallElement
 import ru.pixnews.foundation.ui.imageloader.coil.test.FakeImageLoaderRule
@@ -35,6 +39,8 @@ class PixnewsGameCardGridSmallTest : BaseInstrumentedTest() {
         override val title = GameFixtures.hytale.name.value
         override val cover = GameFixtures.hytale.screenshots.firstOrNull()
         override val platforms = GameFixtures.hytale.platforms
+            .map(Ref<GamePlatform>::getObjectOrThrow)
+            .toImmutableSet()
         override val favourite = false
     }
 

@@ -15,8 +15,8 @@ import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.performScrollToNode
 import ru.pixnews.domain.model.game.GameFixtures
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.game.slimeRancher2
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
 import ru.pixnews.foundation.ui.design.GameIdKey
 

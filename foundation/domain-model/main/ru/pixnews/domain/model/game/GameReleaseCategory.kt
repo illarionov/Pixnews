@@ -4,6 +4,8 @@
  */
 package ru.pixnews.domain.model.game
 
+import ru.pixnews.domain.model.id.GameId
+
 public sealed interface GameReleaseCategory {
     public val parentGame: GameId?
         get() = null

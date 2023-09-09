@@ -5,7 +5,7 @@
 package ru.pixnews.domain.model.review
 
 import kotlinx.datetime.Instant
-import ru.pixnews.domain.model.game.GameId
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.review.UserUtilityMark.UNSET
 import ru.pixnews.domain.model.util.RichText

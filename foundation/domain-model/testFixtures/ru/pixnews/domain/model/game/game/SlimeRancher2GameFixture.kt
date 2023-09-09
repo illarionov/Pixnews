@@ -7,6 +7,7 @@ package ru.pixnews.domain.model.game.game
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.company.CompanyFixtures
 import ru.pixnews.domain.model.company.company.monomiPark
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
@@ -15,7 +16,6 @@ import ru.pixnews.domain.model.game.AverageRating
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GameLocalizations
 import ru.pixnews.domain.model.game.GameMode.SinglePlayer
 import ru.pixnews.domain.model.game.GamePlatform.Windows
@@ -33,28 +33,30 @@ import ru.pixnews.domain.model.game.indie
 import ru.pixnews.domain.model.game.shooter
 import ru.pixnews.domain.model.game.simulator
 import ru.pixnews.domain.model.game.slimeRancher
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType.DISCORD
-import ru.pixnews.domain.model.links.ExternalLinkType.EPICGAMES_STORE
-import ru.pixnews.domain.model.links.ExternalLinkType.FACEBOOK
-import ru.pixnews.domain.model.links.ExternalLinkType.INSTAGRAM
-import ru.pixnews.domain.model.links.ExternalLinkType.OFFICIAL
-import ru.pixnews.domain.model.links.ExternalLinkType.REDDIT
-import ru.pixnews.domain.model.links.ExternalLinkType.STEAM
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITTER
-import ru.pixnews.domain.model.links.ExternalLinkType.WIKIPEDIA
-import ru.pixnews.domain.model.links.ExternalLinkType.YOUTUBE
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
 import ru.pixnews.domain.model.rating.EsrbRating.EVERYONE_10PLUS
 import ru.pixnews.domain.model.rating.PegiRating.PEGI_7
+import ru.pixnews.domain.model.url.DefaultImageUrl
+import ru.pixnews.domain.model.url.DefaultVideoUrl
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType.DISCORD
+import ru.pixnews.domain.model.url.ExternalLinkType.EPICGAMES_STORE
+import ru.pixnews.domain.model.url.ExternalLinkType.FACEBOOK
+import ru.pixnews.domain.model.url.ExternalLinkType.INSTAGRAM
+import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.url.ExternalLinkType.REDDIT
+import ru.pixnews.domain.model.url.ExternalLinkType.STEAM
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
+import ru.pixnews.domain.model.url.ExternalLinkType.WIKIPEDIA
+import ru.pixnews.domain.model.url.ExternalLinkType.YOUTUBE
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.CanvasSize
-import ru.pixnews.domain.model.util.DefaultImageUrl
-import ru.pixnews.domain.model.util.DefaultVideoUrl
+import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
 
 private val slimeRancher2GameId = GameId("slime-rancher-2")
 
@@ -136,8 +138,8 @@ public val GameFixtures.slimeRancher2: Game
         ),
         category = MainGame,
         parentGame = null,
-        series = GameSeriesSummaryFixtures.slimeRancher,
-        platforms = persistentSetOf(XboxOne, Windows, XboxSeriesXs),
+        series = FullObject(GameSeriesSummaryFixtures.slimeRancher),
+        platforms = listOf(XboxOne, Windows, XboxSeriesXs).map { FullObject(it) }.toImmutableSet(),
         ageRanking = AgeRating(
             esrbRating = EVERYONE_10PLUS,
             pegiRating = PEGI_7,
@@ -156,8 +158,8 @@ public val GameFixtures.slimeRancher2: Game
                 LanguageCode.GERMAN,
             ),
         ),
-        gameMode = persistentSetOf(SinglePlayer),
-        playerPerspectives = persistentSetOf(FirstPerson),
+        gameMode = persistentSetOf(FullObject(SinglePlayer)),
+        playerPerspectives = persistentSetOf(FullObject(FirstPerson)),
         systemRequirements = null,
         dataSources = DataSourceFixtures.igdb,
     )

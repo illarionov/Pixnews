@@ -4,7 +4,7 @@
  */
 package ru.pixnews.domain.model.news
 
-import ru.pixnews.domain.model.util.ImageUrl
+import ru.pixnews.domain.model.url.ImageUrl
 
 public data class NewsAuthor(
     val name: String,

@@ -43,7 +43,6 @@ import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameter
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.ImmutableSet
 import ru.pixnews.domain.model.game.GameFixtures
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.game.game.beyondGoodEvil2
 import ru.pixnews.domain.model.game.game.gta6
@@ -55,6 +54,7 @@ import ru.pixnews.domain.model.game.game.slimeRancher2
 import ru.pixnews.domain.model.game.game.smalland
 import ru.pixnews.domain.model.game.game.starWarsEclipse
 import ru.pixnews.domain.model.game.game.theLostWild
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.foundation.ui.assets.icons.image.ImagePlaceholders
 import ru.pixnews.foundation.ui.design.gameId
 import ru.pixnews.foundation.ui.design.icon.PixnewsGameCardFavouriteIcon

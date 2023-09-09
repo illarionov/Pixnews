@@ -13,7 +13,6 @@ import ru.pixnews.domain.model.datasource.igdb
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GameLocalizations
 import ru.pixnews.domain.model.game.GamePlatform.Windows
 import ru.pixnews.domain.model.game.GameReleaseCategory.MainGame
@@ -24,20 +23,22 @@ import ru.pixnews.domain.model.game.RatingsSummary
 import ru.pixnews.domain.model.game.adventure
 import ru.pixnews.domain.model.game.indie
 import ru.pixnews.domain.model.game.shooter
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType.OFFICIAL
-import ru.pixnews.domain.model.links.ExternalLinkType.STEAM
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITCH
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITTER
-import ru.pixnews.domain.model.links.ExternalLinkType.YOUTUBE
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
+import ru.pixnews.domain.model.url.DefaultImageUrl
+import ru.pixnews.domain.model.url.DefaultVideoUrl
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.url.ExternalLinkType.STEAM
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITCH
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
+import ru.pixnews.domain.model.url.ExternalLinkType.YOUTUBE
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.CanvasSize
-import ru.pixnews.domain.model.util.DefaultImageUrl
-import ru.pixnews.domain.model.util.DefaultVideoUrl
+import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
 
 internal val theLostWildGameId = GameId("the-lost-wild")
 
@@ -144,7 +145,7 @@ public val GameFixtures.theLostWild: Game
         category = MainGame,
         parentGame = null,
         series = null,
-        platforms = persistentSetOf(Windows),
+        platforms = persistentSetOf(FullObject(Windows)),
         ageRanking = null,
         localizations = GameLocalizations(
             sound = persistentSetOf(
@@ -166,7 +167,7 @@ public val GameFixtures.theLostWild: Game
             ),
         ),
         gameMode = persistentSetOf(),
-        playerPerspectives = persistentSetOf(FirstPerson),
+        playerPerspectives = persistentSetOf(FullObject(FirstPerson)),
         systemRequirements = null,
         dataSources = DataSourceFixtures.igdb,
     )

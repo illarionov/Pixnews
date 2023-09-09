@@ -4,8 +4,12 @@
  */
 package ru.pixnews.foundation.ui.design.card
 
+import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameGenre
+import ru.pixnews.domain.model.game.GamePlatform
+import ru.pixnews.domain.model.util.Ref
+import ru.pixnews.domain.model.util.getObjectOrThrow
 
 public fun Game.toGameCardItem(favourite: Boolean = false): PixnewsGameCardUiModel {
     return object : PixnewsGameCardUiModel {
@@ -14,6 +18,8 @@ public fun Game.toGameCardItem(favourite: Boolean = false): PixnewsGameCardUiMod
         override val description = summary.value.asPlainText()
         override val cover = screenshots.firstOrNull()
         override val platforms = this@toGameCardItem.platforms
+            .map(Ref<GamePlatform>::getObjectOrThrow)
+            .toImmutableSet()
         override val favourite = favourite
         override val genres = this@toGameCardItem.genres.map(GameGenre::name).joinToString()
     }
@@ -25,6 +31,8 @@ public fun Game.toGameCardGridMajorReleasesUiItem(favourite: Boolean = false): P
         override val title = name.value
         override val cover = screenshots.firstOrNull()
         override val platforms = this@toGameCardGridMajorReleasesUiItem.platforms
+            .map(Ref<GamePlatform>::getObjectOrThrow)
+            .toImmutableSet()
         override val favourite = favourite
     }
 }

@@ -15,7 +15,6 @@ import ru.pixnews.domain.model.datasource.igdb
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GameMode
 import ru.pixnews.domain.model.game.GamePlatform.PlayStation4
 import ru.pixnews.domain.model.game.GamePlatform.Windows
@@ -28,23 +27,25 @@ import ru.pixnews.domain.model.game.PlayerPerspective
 import ru.pixnews.domain.model.game.RatingsSummary
 import ru.pixnews.domain.model.game.adventure
 import ru.pixnews.domain.model.game.beyondGoodEvil
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType.FACEBOOK
-import ru.pixnews.domain.model.links.ExternalLinkType.INSTAGRAM
-import ru.pixnews.domain.model.links.ExternalLinkType.OFFICIAL
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITCH
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITTER
-import ru.pixnews.domain.model.links.ExternalLinkType.WIKIPEDIA
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
 import ru.pixnews.domain.model.rating.EsrbRating.RATING_PENDING
+import ru.pixnews.domain.model.url.DefaultImageUrl
+import ru.pixnews.domain.model.url.DefaultVideoUrl
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType.FACEBOOK
+import ru.pixnews.domain.model.url.ExternalLinkType.INSTAGRAM
+import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITCH
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
+import ru.pixnews.domain.model.url.ExternalLinkType.WIKIPEDIA
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.CanvasSize
-import ru.pixnews.domain.model.util.DefaultImageUrl
-import ru.pixnews.domain.model.util.DefaultVideoUrl
+import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
 
 internal val beyondGoodEvil2GameId = GameId("beyond-good-evil-2")
 
@@ -139,15 +140,16 @@ public val GameFixtures.beyondGoodEvil2: Game
         ),
         category = MainGame,
         parentGame = null,
-        series = GameSeriesSummaryFixtures.beyondGoodEvil,
-        platforms = persistentSetOf(XboxOne, PlayStation4, Windows),
+        series = FullObject(GameSeriesSummaryFixtures.beyondGoodEvil),
+        platforms = persistentSetOf(FullObject(XboxOne), FullObject(PlayStation4), FullObject(Windows)),
         ageRanking = AgeRating(
             esrbRating = RATING_PENDING,
             pegiRating = null,
         ),
         localizations = null,
-        gameMode = persistentSetOf(GameMode.SinglePlayer, GameMode.CoOperative),
-        playerPerspectives = persistentSetOf(PlayerPerspective.ThirdPerson),
+        gameMode = listOf(GameMode.SinglePlayer, GameMode.CoOperative)
+            .map(::FullObject).toImmutableSet(),
+        playerPerspectives = persistentSetOf(FullObject(PlayerPerspective.ThirdPerson)),
         systemRequirements = null,
         dataSources = DataSourceFixtures.igdb,
     )

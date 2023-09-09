@@ -41,6 +41,7 @@ class MockDataInterceptor(
                         .toResponseBody("text/plain".toMediaType()),
                 )
                 .code(405)
+                .message("Unsupported method `${request.method}`")
                 .addHeader("Allow", "GET")
                 .protocol(HTTP_1_1)
                 .build()

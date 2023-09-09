@@ -7,6 +7,7 @@ package ru.pixnews.domain.model.game.game
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.company.CompanyFixtures
 import ru.pixnews.domain.model.company.company.hypixelStudios
 import ru.pixnews.domain.model.company.company.riotGames
@@ -15,7 +16,6 @@ import ru.pixnews.domain.model.datasource.igdb
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GameLocalizations
 import ru.pixnews.domain.model.game.GameMode
 import ru.pixnews.domain.model.game.GamePlatform.Android
@@ -33,23 +33,25 @@ import ru.pixnews.domain.model.game.RatingsSummary
 import ru.pixnews.domain.model.game.adventure
 import ru.pixnews.domain.model.game.indie
 import ru.pixnews.domain.model.game.rpg
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType.FACEBOOK
-import ru.pixnews.domain.model.links.ExternalLinkType.INSTAGRAM
-import ru.pixnews.domain.model.links.ExternalLinkType.OFFICIAL
-import ru.pixnews.domain.model.links.ExternalLinkType.REDDIT
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITCH
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITTER
-import ru.pixnews.domain.model.links.ExternalLinkType.WIKIPEDIA
-import ru.pixnews.domain.model.links.ExternalLinkType.YOUTUBE
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
+import ru.pixnews.domain.model.url.DefaultImageUrl
+import ru.pixnews.domain.model.url.DefaultVideoUrl
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType.FACEBOOK
+import ru.pixnews.domain.model.url.ExternalLinkType.INSTAGRAM
+import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.url.ExternalLinkType.REDDIT
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITCH
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
+import ru.pixnews.domain.model.url.ExternalLinkType.WIKIPEDIA
+import ru.pixnews.domain.model.url.ExternalLinkType.YOUTUBE
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.CanvasSize
-import ru.pixnews.domain.model.util.DefaultImageUrl
-import ru.pixnews.domain.model.util.DefaultVideoUrl
+import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
 
 private val hytaleGameId = GameId("hytale")
 
@@ -130,20 +132,21 @@ public val GameFixtures.hytale: Game
         category = GameReleaseCategory.MainGame,
         parentGame = null,
         series = null,
-        platforms = persistentSetOf(Android, Macos, Ios, PlayStation5, Windows, NintendoSwitch, XboxSeriesXs),
+        platforms = listOf(Android, Macos, Ios, PlayStation5, Windows, NintendoSwitch, XboxSeriesXs)
+            .map { FullObject(it) }.toImmutableSet(),
         ageRanking = null,
         localizations = GameLocalizations(
             sound = persistentSetOf(LanguageCode.ENGLISH, LanguageCode.KOREAN),
             text = persistentSetOf(LanguageCode.ENGLISH, LanguageCode.KOREAN),
         ),
         gameMode = persistentSetOf(
-            GameMode.BattleRoyale,
-            GameMode.Multiplayer,
-            GameMode.SinglePlayer,
+            FullObject(GameMode.BattleRoyale),
+            FullObject(GameMode.Multiplayer),
+            FullObject(GameMode.SinglePlayer),
         ),
         playerPerspectives = persistentSetOf(
-            PlayerPerspective.FirstPerson,
-            PlayerPerspective.ThirdPerson,
+            FullObject(PlayerPerspective.FirstPerson),
+            FullObject(PlayerPerspective.ThirdPerson),
         ),
         systemRequirements = null,
         dataSources = DataSourceFixtures.igdb,

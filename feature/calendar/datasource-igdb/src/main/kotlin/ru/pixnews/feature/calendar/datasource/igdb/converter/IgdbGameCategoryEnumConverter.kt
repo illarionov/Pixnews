@@ -4,8 +4,8 @@
  */
 package ru.pixnews.feature.calendar.datasource.igdb.converter
 
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GameReleaseCategory
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.igdbclient.model.GameCategoryEnum as IgdbCategory
 
 @Suppress("CyclomaticComplexMethod")

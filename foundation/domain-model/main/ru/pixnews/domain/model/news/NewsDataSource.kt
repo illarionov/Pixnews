@@ -4,9 +4,9 @@
  */
 package ru.pixnews.domain.model.news
 
-import ru.pixnews.domain.model.util.ImageUrl
+import ru.pixnews.domain.model.url.ImageUrl
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
 
 public class NewsDataSource(
     public val name: String,

@@ -26,8 +26,7 @@ internal fun <E : Any> IgdbResult.Failure<E>.toNetworkRequestFailure(): NetworkR
             response = response,
             rawResponseHeaders = rawResponseHeaders,
             rawResponseBody = rawResponseBody,
-
-            )
+        )
 
         is IgdbResult.Failure.UnknownHttpCodeFailure -> NetworkRequestFailure.UnknownHttpCodeFailure(
             httpCode = httpCode,

@@ -4,9 +4,9 @@
  */
 package ru.pixnews.feature.calendar.datasource.igdb.converter
 
+import ru.pixnews.domain.model.url.ImageUrl
 import ru.pixnews.domain.model.util.CanvasSize
-import ru.pixnews.domain.model.util.ImageUrl
-import ru.pixnews.feature.calendar.datasource.igdb.model.IgdbImageUrl
+import ru.pixnews.feature.calendar.datasource.igdb.model.url.IgdbImageUrl
 import ru.pixnews.igdbclient.model.CompanyLogo as IgdbCompanyLogo
 
 internal fun IgdbCompanyLogo.toIgdbImageUrl(): ImageUrl = IgdbImageUrl(

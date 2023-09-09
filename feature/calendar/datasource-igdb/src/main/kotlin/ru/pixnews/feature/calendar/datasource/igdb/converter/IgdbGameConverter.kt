@@ -13,22 +13,23 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.game.AverageRating
 import ru.pixnews.domain.model.game.Game
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GameLocalizations
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.game.RatingsSummary
-import ru.pixnews.domain.model.game.gameId
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.LanguageCode.Companion.ENGLISH
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.url.ImageUrl
+import ru.pixnews.domain.model.url.Url
+import ru.pixnews.domain.model.url.VideoUrl
 import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.ApproximateDate.Unknown
-import ru.pixnews.domain.model.util.ImageUrl
+import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
-import ru.pixnews.domain.model.util.VideoUrl
+import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameId
 import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
 import ru.pixnews.igdbclient.model.Game as IgdbGame
 import ru.pixnews.igdbclient.model.GameVideo as IgdbGameVideo
@@ -38,9 +39,15 @@ import ru.pixnews.igdbclient.model.ReleaseDate as IgdbReleaseDate
 import ru.pixnews.igdbclient.model.Screenshot as IgdbScreenshot
 import ru.pixnews.igdbclient.model.Theme as IgdbTheme
 
+internal fun IgdbGame.toGameRef(): Ref<Game> = when {
+    name.isNotEmpty() -> Ref.FullObject(this.toGame())
+    id != 0L -> Ref.Id(IgdbGameId(id))
+    else -> errorFieldNotRequested("game.id")
+}
+
 internal fun IgdbGame.toGame(): Game {
-    @Suppress("NULLABLE_PROPERTY_TYPE")
-    val parentGameId: GameId? = parent_game?.gameId
+    val parentGameId = parent_game?.gameId
+    val parentGame = parent_game?.toGameRef()
     requireFieldInitialized("game.id", this.id)
     requireFieldInitialized("game.name", this.name)
 
@@ -60,8 +67,8 @@ internal fun IgdbGame.toGame(): Game {
         ratings = convertRatingsSummary(),
         links = convertExternalLinks(),
         category = category.toGameReleaseCategory(parentGameId),
-        parentGame = parentGameId,
-        series = collection?.toGamesSeriesSummary(),
+        parentGame = parentGame,
+        series = collection?.toGamesSeriesSummaryRef(),
         platforms = convertGamePlatforms(),
         ageRanking = convertAgeRating(),
         localizations = convertLocalizations(),
@@ -72,7 +79,7 @@ internal fun IgdbGame.toGame(): Game {
     )
 }
 
-private val IgdbGame.gameId: GameId get() = id.toString().gameId()
+private val IgdbGame.gameId: GameId get() = IgdbGameId(id)
 
 private fun IgdbGame.convertVideoUrls(): ImmutableList<VideoUrl> = videos
     .asSequence()
@@ -133,8 +140,8 @@ private fun IgdbGame.convertExternalLinks() = sequence {
     websites.forEach { yield(it.toExternalLink()) }
 }.toImmutableList()
 
-private fun IgdbGame.convertGamePlatforms(): ImmutableSet<GamePlatform> = platforms
-    .map(IgdbPlatform::toGamePlatform)
+private fun IgdbGame.convertGamePlatforms(): ImmutableSet<Ref<GamePlatform>> = platforms
+    .map(IgdbPlatform::toGamePlatformRef)
     .toImmutableSet()
 
 private fun IgdbGame.convertAgeRating(): AgeRating? = age_ratings.toAgeRating()

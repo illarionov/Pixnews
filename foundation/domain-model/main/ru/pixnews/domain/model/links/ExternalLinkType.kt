@@ -29,4 +29,5 @@ public enum class ExternalLinkType {
     XBOX_COM,
     YOUTUBE,
     WIKIPEDIA,
+    OTHER,
 }

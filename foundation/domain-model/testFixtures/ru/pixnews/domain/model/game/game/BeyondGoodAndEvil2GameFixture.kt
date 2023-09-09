@@ -142,7 +142,6 @@ public val GameFixtures.beyondGoodEvil2: Game
         series = GameSeriesSummaryFixtures.beyondGoodEvil,
         platforms = persistentSetOf(XboxOne, PlayStation4, Windows),
         ageRanking = AgeRating(
-            gameId = beyondGoodEvil2GameId,
             esrbRating = RATING_PENDING,
             pegiRating = null,
         ),

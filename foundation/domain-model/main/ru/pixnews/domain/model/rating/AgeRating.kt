@@ -4,12 +4,9 @@
  */
 package ru.pixnews.domain.model.rating
 
-import ru.pixnews.domain.model.game.GameId
-
 public data class AgeRating(
-    val gameId: GameId,
-    val esrbRating: EsrbRating?,
-    val pegiRating: PegiRating?,
+    val esrbRating: EsrbRating? = null,
+    val pegiRating: PegiRating? = null,
 ) {
     init {
         require(esrbRating != null || pegiRating != null)

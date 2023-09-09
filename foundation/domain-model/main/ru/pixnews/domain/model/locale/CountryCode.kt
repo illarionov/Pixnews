@@ -16,4 +16,6 @@ public value class CountryCode(
         require(iso31661Code.all { it in 'A'..'Z' })
     }
     override fun toString(): String = iso31661Code
+
+    public companion object
 }

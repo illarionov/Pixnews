@@ -67,6 +67,9 @@ potential-bugs:
 style:
   active: true
 
+  ForbiddenComment:
+    active: true
+    comments: ['FIXME:', 'STOPSHIP:']
   ForbiddenMethodCall:
     active: true
     methods:

@@ -9,12 +9,13 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.Month
 import ru.pixnews.domain.model.locale.Localized
+import ru.pixnews.domain.model.locale.Localized.Companion
 
 private const val YEAR_MIN = 1958
 
 public sealed class ApproximateDate {
     public data class Unknown(
-        val description: Localized<String>? = null,
+        val description: Localized<String> = Localized.EMPTY_STRING,
     ) : ApproximateDate()
 
     public data class Year(val year: Int) : ApproximateDate() {
@@ -27,6 +28,7 @@ public sealed class ApproximateDate {
         init {
             require(date.year > YEAR_MIN)
         }
+
         public constructor(year: Int, month: Month) : this(
             LocalDate(
                 year = year,
@@ -34,12 +36,13 @@ public sealed class ApproximateDate {
                 dayOfMonth = 1,
             ),
         )
-}
+    }
 
     public data class YearMonthDay(val date: LocalDate) : ApproximateDate() {
         init {
             require(date.year > YEAR_MIN)
         }
+
         public constructor(year: Int, month: Month, dayOfMonth: Int) : this(
             LocalDate(
                 year = year,
@@ -47,7 +50,16 @@ public sealed class ApproximateDate {
                 dayOfMonth = dayOfMonth,
             ),
         )
-}
+    }
+
+    public data class Quarter(
+        val quarter: Int,
+    ) : ApproximateDate() {
+        init {
+            @Suppress("MagicNumber")
+            require(quarter in 1..4)
+        }
+    }
 
     public data class ExactDateTime(val date: LocalDateTime) : ApproximateDate()
 
@@ -61,10 +73,13 @@ public sealed class ApproximateDate {
     }
 
     public data class ToBeDeterminedQuarter(
+        val year: Int,
         val quarter: Int,
         val description: Localized<String>,
     ) : ApproximateDate() {
         init {
+            @Suppress("MagicNumber")
+            require(year > YEAR_MIN)
             @Suppress("MagicNumber")
             require(quarter in 1..4)
         }
@@ -72,6 +87,6 @@ public sealed class ApproximateDate {
 
     public data class ToBeDetermined(
         val expected: Pair<Instant, Instant?>?,
-        val description: Localized<String>,
+        val description: Localized<String> = Companion.EMPTY_STRING,
     ) : ApproximateDate()
 }

@@ -37,6 +37,8 @@ dependencies {
     implementation(projects.feature.root.public)
 
     implementation(projects.feature.calendar.public)
+    implementation(projects.feature.calendar.data)
+    implementation(projects.feature.calendar.datasourceIgdb)
     implementation(projects.feature.collections.public)
     debugImplementation(projects.feature.featuretoggles.public)
     implementation(projects.feature.profile.public)

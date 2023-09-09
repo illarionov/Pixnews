@@ -22,6 +22,7 @@ android {
 
 dependencies {
     implementation(projects.feature.calendar.testConstants)
+    implementation(projects.feature.calendar.data)
     implementation(projects.foundation.appconfig)
     implementation(projects.foundation.di.uiBase)
     implementation(projects.foundation.domainModel)
@@ -30,6 +31,7 @@ dependencies {
     implementation(projects.foundation.ui.design)
     implementation(projects.foundation.ui.imageloader.coil)
     implementation(projects.library.composeUtils)
+    implementation(projects.library.functional)
     implementation(projects.library.kotlinUtils)
 
     implementation(libs.accompanist.pager)

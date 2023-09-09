@@ -139,7 +139,6 @@ public val GameFixtures.slimeRancher2: Game
         series = GameSeriesSummaryFixtures.slimeRancher,
         platforms = persistentSetOf(XboxOne, Windows, XboxSeriesXs),
         ageRanking = AgeRating(
-            gameId = slimeRancher2GameId,
             esrbRating = EVERYONE_10PLUS,
             pegiRating = PEGI_7,
         ),

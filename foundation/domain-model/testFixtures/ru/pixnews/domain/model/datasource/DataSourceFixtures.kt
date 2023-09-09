@@ -4,17 +4,21 @@
  */
 package ru.pixnews.domain.model.datasource
 
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.RichText
 
 public object DataSourceFixtures
 
-public val DataSourceFixtures.igdb: DataSource
-    get() = DataSource(
-        source = DataSourceType.Igdb,
-        attributionText = Localized(
-            value = RichText("https://www.igdb.com/"),
-            language = LanguageCode.ENGLISH,
+public val DataSourceFixtures.igdb: ImmutableList<DataSource>
+    get() = persistentListOf(
+        DataSource(
+            source = DataSourceType.Igdb,
+            attributionText = Localized(
+                value = RichText("https://www.igdb.com/"),
+                language = LanguageCode.ENGLISH,
+            ),
         ),
     )

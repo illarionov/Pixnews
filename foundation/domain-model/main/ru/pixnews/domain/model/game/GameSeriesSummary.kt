@@ -12,6 +12,6 @@ public data class GameSeriesSummary(
     val id: GameSeriesId,
     val name: Localized<String>,
     val totalGamesCount: UInt?,
-    val games: ImmutableList<Game>?,
-    val attribution: DataSource,
+    val games: ImmutableList<GameId>,
+    val attribution: ImmutableList<DataSource>,
 )

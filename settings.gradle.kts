@@ -59,6 +59,9 @@ listOf(
 
 listOf(
     "calendar:public",
+    "calendar:data",
+    "calendar:data-public",
+    "calendar:datasource-igdb",
     "calendar:test",
     "calendar:test-constants",
     "collections:public",

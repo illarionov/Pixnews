@@ -4,7 +4,14 @@
  */
 package ru.pixnews.domain.model.locale
 
+import ru.pixnews.domain.model.util.RichText
+
 public data class Localized<out L>(
     public val value: L,
     public val language: LanguageCode,
-)
+) {
+    public companion object {
+        public val EMPTY_STRING: Localized<String> = Localized("", LanguageCode.ENGLISH)
+        public val EMPTY_RICH_TEXT: Localized<RichText> = Localized(RichText(""), LanguageCode.ENGLISH)
+    }
+}

@@ -9,7 +9,9 @@ import io.kotest.matchers.equals.shouldBeEqual
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import org.junit.jupiter.api.Test
+import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameSeriesSummary
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.Ref
@@ -41,7 +43,7 @@ class IgdbCollectionConverterTest {
                     144038L,
                     144040L,
                     146428L,
-                ).map { Ref.Id(IgdbGameId(it)) }.toImmutableList(),
+                ).map { Ref.Id<Game, GameId>(IgdbGameId(it)) }.toImmutableList(),
                 attribution = persistentListOf(igdbDataSource),
             ),
         )

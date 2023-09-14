@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import ru.pixnews.domain.model.game.PlayerPerspective
-import ru.pixnews.domain.model.id.PlayerPerspectiveId
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbPlayerPerspectiveFixtures
@@ -28,7 +27,7 @@ class IgdbPlayerPerspectivesConverterTest {
     @ParameterizedTest
     @MethodSource("toPlayerPerspectiveTestSource")
     fun `toPlayerPerspectiveRef should convert player perspectives`(
-        testData: Pair<IgdbPlayerPerspective, Ref<PlayerPerspective, PlayerPerspectiveId>>,
+        testData: Pair<IgdbPlayerPerspective, Ref<PlayerPerspective>>,
     ) {
         val result = testData.first.toPlayerPerspectiveRef()
         result shouldBeEqual testData.second
@@ -44,7 +43,7 @@ class IgdbPlayerPerspectivesConverterTest {
     internal companion object {
         @JvmStatic
         @Suppress("MaxLineLength")
-        fun toPlayerPerspectiveTestSource(): List<Pair<IgdbPlayerPerspective, Ref<PlayerPerspective, PlayerPerspectiveId>>> {
+        fun toPlayerPerspectiveTestSource(): List<Pair<IgdbPlayerPerspective, Ref<PlayerPerspective>>> {
             val fullObjects = listOf(
                 IgdbPlayerPerspectiveFixtures.firstPerson to FullObject(PlayerPerspective.FirstPerson),
                 IgdbPlayerPerspectiveFixtures.thirdPerson to FullObject(PlayerPerspective.ThirdPerson),

@@ -7,19 +7,17 @@ package ru.pixnews.feature.calendar.datasource.igdb.converter
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.game.PlayerPerspective
-import ru.pixnews.domain.model.id.PlayerPerspectiveId
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbPlayerPerspectiveId
 import ru.pixnews.igdbclient.model.PlayerPerspective as IgdbPlayerPerspective
 
-internal fun Collection<IgdbPlayerPerspective>.toPlayerPerspectives():
-        ImmutableSet<Ref<PlayerPerspective, PlayerPerspectiveId>> = this
-    .asSequence()
-    .map(IgdbPlayerPerspective::toPlayerPerspectiveRef)
-    .toImmutableSet()
+internal fun Collection<IgdbPlayerPerspective>.toPlayerPerspectives(): ImmutableSet<Ref<PlayerPerspective>> =
+    this.asSequence()
+        .map(IgdbPlayerPerspective::toPlayerPerspectiveRef)
+        .toImmutableSet()
 
-internal fun IgdbPlayerPerspective.toPlayerPerspectiveRef(): Ref<PlayerPerspective, PlayerPerspectiveId> {
+internal fun IgdbPlayerPerspective.toPlayerPerspectiveRef(): Ref<PlayerPerspective> {
     val byId = findPlayerPerspectiveById(id)
     if (byId != null) {
         return FullObject(byId)

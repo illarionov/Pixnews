@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import ru.pixnews.domain.model.game.GamePlatform
-import ru.pixnews.domain.model.id.GamePlatformId
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbPlatformFixtures
@@ -33,7 +32,7 @@ import ru.pixnews.igdbclient.model.Platform as IgdbPlatform
 class IgdbPlatformConverterTest {
     @ParameterizedTest
     @MethodSource("platformConverterTestSource")
-    fun `toGamePlatformRef should convert platforms`(testData: Pair<IgdbPlatform, Ref<GamePlatform, GamePlatformId>>) {
+    fun `toGamePlatformRef should convert platforms`(testData: Pair<IgdbPlatform, Ref<GamePlatform>>) {
         val result = testData.first.toGamePlatformRef()
         result shouldBeEqual testData.second
     }
@@ -61,7 +60,7 @@ class IgdbPlatformConverterTest {
 
     internal companion object {
         @JvmStatic
-        fun platformConverterTestSource(): List<Pair<IgdbPlatform, Ref<GamePlatform, GamePlatformId>>> {
+        fun platformConverterTestSource(): List<Pair<IgdbPlatform, Ref<GamePlatform>>> {
             val fullObjects = listOf(
                 IgdbPlatformFixtures.win to GamePlatform.Windows,
                 IgdbPlatformFixtures.mac to GamePlatform.Macos,

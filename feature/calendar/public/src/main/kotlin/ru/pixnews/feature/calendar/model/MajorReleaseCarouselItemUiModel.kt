@@ -27,7 +27,7 @@ internal fun Game.toMajorReleaseCarouselItemUiModel(): MajorReleaseCarouselItemU
         gameId = id,
         title = name.value,
         cover = screenshots.firstOrNull(),
-        platforms = platforms.map(Ref<GamePlatform, *>::getObjectOrThrow).toImmutableSet(),
+        platforms = platforms.map(Ref<GamePlatform>::getObjectOrThrow).toImmutableSet(),
         favourite = false,
     )
 }

@@ -27,7 +27,7 @@ public data class Company(
     val foundingDate: ApproximateDate?,
     val status: CompanyStatus = UNKNOWN,
     val country: CountryCode?,
-    val parentCompany: Ref<Company, CompanyId>?,
+    val parentCompany: Ref<Company>?,
 
     val dataSources: ImmutableList<DataSource>,
     val links: ImmutableList<ExternalLink>,

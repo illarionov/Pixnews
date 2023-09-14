@@ -5,13 +5,12 @@
 package ru.pixnews.feature.calendar.datasource.igdb.converter
 
 import ru.pixnews.domain.model.game.GamePlatform
-import ru.pixnews.domain.model.id.GamePlatformId
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGamePlatformId
 import ru.pixnews.igdbclient.model.Platform
 
-internal fun Platform.toGamePlatformRef(): Ref<GamePlatform, GamePlatformId> {
+internal fun Platform.toGamePlatformRef(): Ref<GamePlatform> {
     val byId = findGamePlatformById(id)
     if (byId != null) {
         return FullObject(byId)

@@ -10,23 +10,23 @@ import ru.pixnews.domain.model.util.Ref.FullObject
 /**
  * Object or reference to object
  */
-public sealed interface Ref<out T : HasId<I>, out I : ExternalId> {
+public sealed interface Ref<out T : HasId<*>> {
     /**
      * Fully loaded object
      */
     @JvmInline
     public value class FullObject<out T : HasId<I>, out I : ExternalId>(
         public val value: T,
-    ) : Ref<T, I>
+    ) : Ref<T>
 
     /**
      * A reference that can be used to download the full object
      */
     @JvmInline
-    public value class Id<I : ExternalId>(
+    public value class Id<out T : HasId<I>, out I : ExternalId>(
         public val id: I,
-    ) : Ref<Nothing, I>
+    ) : Ref<T>
 }
 
-public fun <T : HasId<*>> Ref<T, *>.getObjectOrThrow(): T =
-    (this as? FullObject)?.value ?: error("Ref `$this` not loaded")
+public fun <T : HasId<*>> Ref<T>.getObjectOrThrow(): T =
+    (this as? FullObject<T, *>)?.value ?: error("Ref `$this` not loaded")

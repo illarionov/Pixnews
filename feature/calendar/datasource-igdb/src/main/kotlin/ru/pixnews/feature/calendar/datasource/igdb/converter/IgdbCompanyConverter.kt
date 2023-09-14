@@ -37,7 +37,7 @@ import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ4
 import com.squareup.wire.Instant as WireInstant
 import ru.pixnews.igdbclient.model.Company as IgdbCompany
 
-internal fun IgdbCompany.toCompanyRef(): Ref<Company, CompanyId> = when {
+internal fun IgdbCompany.toCompanyRef(): Ref<Company> = when {
     name.isNotEmpty() -> Ref.FullObject(this.toCompany())
     id != 0L -> Ref.Id(getIgdbCompanyId(id))
     else -> errorFieldNotRequested("company.id")

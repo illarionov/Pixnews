@@ -27,7 +27,7 @@ import ru.pixnews.igdbclient.model.GameMode as IgdbGameMode
 class IgdbGameModeConverterTest {
     @ParameterizedTest
     @MethodSource("gameModeTestSource")
-    fun `toGameModeRef() should convert platforms`(testData: Pair<IgdbGameMode, Ref<GameMode, GameModeId>>) {
+    fun `toGameModeRef() should convert platforms`(testData: Pair<IgdbGameMode, Ref<GameMode>>) {
         val result = testData.first.toGameModeRef()
         result shouldBeEqual testData.second
     }
@@ -47,7 +47,7 @@ class IgdbGameModeConverterTest {
 
     companion object {
         @JvmStatic
-        fun gameModeTestSource(): List<Pair<IgdbGameMode, Ref<GameMode, GameModeId>>> {
+        fun gameModeTestSource(): List<Pair<IgdbGameMode, Ref<GameMode>>> {
             val fullObjects = listOf(
                 IgdbGameModeFixtures.singlePlayer to FullObject(SinglePlayer),
                 IgdbGameModeFixtures.multiplayer to FullObject(GameMode.Multiplayer),
@@ -70,7 +70,7 @@ class IgdbGameModeConverterTest {
             }
 
             val referencesWithUnknownIds = listOf(
-                IgdbGameMode(id = 110) to Ref.Id(IgdbGameModeId(110)),
+                IgdbGameMode(id = 110) to Ref.Id<GameMode, GameModeId>(IgdbGameModeId(110)),
             )
 
             return fullObjects + ids + slugs + referencesWithUnknownIds + listOf(

@@ -7,18 +7,17 @@ package ru.pixnews.feature.calendar.datasource.igdb.converter
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.game.GameMode
-import ru.pixnews.domain.model.id.GameModeId
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameModeId
 import ru.pixnews.igdbclient.model.GameMode as IgdbGameMode
 
-internal fun Collection<IgdbGameMode>.toGameModes(): ImmutableSet<Ref<GameMode, GameModeId>> = this
+internal fun Collection<IgdbGameMode>.toGameModes(): ImmutableSet<Ref<GameMode>> = this
     .asSequence()
     .map(IgdbGameMode::toGameModeRef)
     .toImmutableSet()
 
-internal fun IgdbGameMode.toGameModeRef(): Ref<GameMode, GameModeId> {
+internal fun IgdbGameMode.toGameModeRef(): Ref<GameMode> {
     val byId = findGameModeById(id)
     if (byId != null) {
         return FullObject(byId)

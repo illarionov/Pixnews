@@ -9,10 +9,11 @@ import io.kotest.matchers.collections.shouldContainInOrder
 import io.kotest.matchers.shouldBe
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
-import kotlinx.collections.immutable.toPersistentList
+import kotlinx.collections.immutable.toImmutableList
 import org.junit.jupiter.api.Test
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.game.AverageRating
+import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameGenre
 import ru.pixnews.domain.model.game.GameLocalizations
 import ru.pixnews.domain.model.game.GameMode
@@ -23,6 +24,7 @@ import ru.pixnews.domain.model.game.GameSeriesSummary
 import ru.pixnews.domain.model.game.GameTag
 import ru.pixnews.domain.model.game.PlayerPerspective
 import ru.pixnews.domain.model.game.RatingsSummary
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
@@ -144,7 +146,7 @@ class IgdbGameConverterTest {
                     124786,
                     210699,
                     243015,
-                ).map { Ref.Id(IgdbGameId(it)) }.toPersistentList(),
+                ).map { Ref.Id<Game, GameId>(IgdbGameId(it)) }.toImmutableList(),
                 attribution = persistentListOf(igdbDataSource),
             ),
         )

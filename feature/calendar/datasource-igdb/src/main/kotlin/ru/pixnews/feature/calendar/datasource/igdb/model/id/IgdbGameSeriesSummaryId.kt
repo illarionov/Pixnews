@@ -4,9 +4,9 @@
  */
 package ru.pixnews.feature.calendar.datasource.igdb.model.id
 
-import ru.pixnews.domain.model.id.GameSeriesId
+import ru.pixnews.domain.model.id.GameSeriesSummaryId
 
 @JvmInline
-internal value class IgdbGameSeriesId(
+internal value class IgdbGameSeriesSummaryId(
     val igdbId: Long,
-) : GameSeriesId
+) : GameSeriesSummaryId

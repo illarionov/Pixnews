@@ -68,7 +68,7 @@ internal fun Game.toCalendarListItem(): CalendarListPixnewsGameUi {
         title = name.value,
         description = summary.value.asPlainText(),
         cover = screenshots.firstOrNull(),
-        platforms = platforms.map(Ref<GamePlatform>::getObjectOrThrow).toImmutableSet(),
+        platforms = platforms.map(Ref<GamePlatform, *>::getObjectOrThrow).toImmutableSet(),
         favourite = false,
         genres = genres.map(GameGenre::name).joinToString(),
     )

@@ -17,6 +17,7 @@ import ru.pixnews.domain.model.game.GameLocalizations
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.game.RatingsSummary
 import ru.pixnews.domain.model.id.GameId
+import ru.pixnews.domain.model.id.GamePlatformId
 import ru.pixnews.domain.model.locale.LanguageCode.Companion.ENGLISH
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
@@ -39,7 +40,7 @@ import ru.pixnews.igdbclient.model.ReleaseDate as IgdbReleaseDate
 import ru.pixnews.igdbclient.model.Screenshot as IgdbScreenshot
 import ru.pixnews.igdbclient.model.Theme as IgdbTheme
 
-internal fun IgdbGame.toGameRef(): Ref<Game> = when {
+internal fun IgdbGame.toGameRef(): Ref<Game, GameId> = when {
     name.isNotEmpty() -> Ref.FullObject(this.toGame())
     id != 0L -> Ref.Id(IgdbGameId(id))
     else -> errorFieldNotRequested("game.id")
@@ -140,7 +141,7 @@ private fun IgdbGame.convertExternalLinks() = sequence {
     websites.forEach { yield(it.toExternalLink()) }
 }.toImmutableList()
 
-private fun IgdbGame.convertGamePlatforms(): ImmutableSet<Ref<GamePlatform>> = platforms
+private fun IgdbGame.convertGamePlatforms(): ImmutableSet<Ref<GamePlatform, GamePlatformId>> = platforms
     .map(IgdbPlatform::toGamePlatformRef)
     .toImmutableSet()
 

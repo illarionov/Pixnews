@@ -4,13 +4,14 @@
  */
 package ru.pixnews.domain.model.id
 
-public interface GameSeriesId : ExternalId {
+public interface GameSeriesSummaryId : ExternalId {
     public companion object {
-        public operator fun invoke(stringValue: String): GameSeriesId = DefaultGameSeriesId(stringValue)
+        public operator fun invoke(stringValue: String): GameSeriesSummaryId =
+            DefaultGameSeriesSummaryId(stringValue)
     }
 }
 
 @JvmInline
-public value class DefaultGameSeriesId(
+public value class DefaultGameSeriesSummaryId(
     public val stringValue: String,
-) : GameSeriesId
+) : GameSeriesSummaryId

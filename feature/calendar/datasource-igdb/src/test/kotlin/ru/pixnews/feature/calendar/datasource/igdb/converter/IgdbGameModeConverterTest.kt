@@ -11,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import ru.pixnews.domain.model.game.GameMode
 import ru.pixnews.domain.model.game.GameMode.SinglePlayer
+import ru.pixnews.domain.model.id.GameModeId
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbGameModeFixtures
@@ -26,7 +27,7 @@ import ru.pixnews.igdbclient.model.GameMode as IgdbGameMode
 class IgdbGameModeConverterTest {
     @ParameterizedTest
     @MethodSource("gameModeTestSource")
-    fun `toGameModeRef() should convert platforms`(testData: Pair<IgdbGameMode, Ref<GameMode>>) {
+    fun `toGameModeRef() should convert platforms`(testData: Pair<IgdbGameMode, Ref<GameMode, GameModeId>>) {
         val result = testData.first.toGameModeRef()
         result shouldBeEqual testData.second
     }
@@ -46,7 +47,7 @@ class IgdbGameModeConverterTest {
 
     companion object {
         @JvmStatic
-        fun gameModeTestSource(): List<Pair<IgdbGameMode, Ref<GameMode>>> {
+        fun gameModeTestSource(): List<Pair<IgdbGameMode, Ref<GameMode, GameModeId>>> {
             val fullObjects = listOf(
                 IgdbGameModeFixtures.singlePlayer to FullObject(SinglePlayer),
                 IgdbGameModeFixtures.multiplayer to FullObject(GameMode.Multiplayer),

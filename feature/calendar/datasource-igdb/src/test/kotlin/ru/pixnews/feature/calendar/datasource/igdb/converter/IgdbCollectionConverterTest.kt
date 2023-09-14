@@ -17,7 +17,7 @@ import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbCollectionFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.collection.finalFantasyCollection
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameId
-import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameSeriesId
+import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameSeriesSummaryId
 import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
 import ru.pixnews.igdbclient.model.Collection as IgdbCollection
 
@@ -28,7 +28,7 @@ class IgdbCollectionConverterTest {
 
         result shouldBeEqual FullObject(
             GameSeriesSummary(
-                id = IgdbGameSeriesId(5134),
+                id = IgdbGameSeriesSummaryId(5134),
                 name = Localized("Compilation of Final Fantasy VII", LanguageCode.ENGLISH),
                 totalGamesCount = 9U,
                 games = listOf(
@@ -57,7 +57,7 @@ class IgdbCollectionConverterTest {
         val result = collection.toGamesSeriesSummaryRef()
         result shouldBeEqual FullObject(
             GameSeriesSummary(
-                id = IgdbGameSeriesId(5134),
+                id = IgdbGameSeriesSummaryId(5134),
                 name = Localized("Compilation of Final Fantasy VII", LanguageCode.ENGLISH),
                 totalGamesCount = null,
                 games = persistentListOf(),

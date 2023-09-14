@@ -11,6 +11,10 @@ import kotlinx.collections.immutable.persistentSetOf
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.datasource.DataSource
 import ru.pixnews.domain.model.id.GameId
+import ru.pixnews.domain.model.id.GameModeId
+import ru.pixnews.domain.model.id.GamePlatformId
+import ru.pixnews.domain.model.id.GameSeriesSummaryId
+import ru.pixnews.domain.model.id.PlayerPerspectiveId
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
 import ru.pixnews.domain.model.url.ExternalLink
@@ -43,15 +47,15 @@ public data class Game(
     val links: ImmutableList<ExternalLink> = persistentListOf(),
 
     val category: GameReleaseCategory? = null,
-    val parentGame: Ref<Game>? = null,
-    val series: Ref<GameSeriesSummary>? = null,
+    val parentGame: Ref<Game, GameId>? = null,
+    val series: Ref<GameSeriesSummary, GameSeriesSummaryId>? = null,
 
-    val platforms: ImmutableSet<Ref<GamePlatform>> = persistentSetOf(),
+    val platforms: ImmutableSet<Ref<GamePlatform, GamePlatformId>> = persistentSetOf(),
     val ageRanking: AgeRating? = null,
 
     val localizations: GameLocalizations? = null,
-    val gameMode: ImmutableSet<Ref<GameMode>> = persistentSetOf(),
-    val playerPerspectives: ImmutableSet<Ref<PlayerPerspective>> = persistentSetOf(),
+    val gameMode: ImmutableSet<Ref<GameMode, GameModeId>> = persistentSetOf(),
+    val playerPerspectives: ImmutableSet<Ref<PlayerPerspective, PlayerPerspectiveId>> = persistentSetOf(),
     val systemRequirements: GameSystemRequirements? = null,
 
     val dataSources: ImmutableList<DataSource> = persistentListOf(),

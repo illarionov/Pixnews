@@ -45,7 +45,7 @@ class PixnewsGameCardTest {
         override val description = GameFixtures.slimeRancher2.summary.value.asPlainText()
         override val cover = GameFixtures.slimeRancher2.screenshots.firstOrNull()
         override val platforms = GameFixtures.slimeRancher2.platforms
-            .map(Ref<GamePlatform>::getObjectOrThrow)
+            .map(Ref<GamePlatform, *>::getObjectOrThrow)
             .toImmutableSet()
         override val favourite = true
         override val genres = GameFixtures.slimeRancher2.genres.map(GameGenre::name).joinToString()

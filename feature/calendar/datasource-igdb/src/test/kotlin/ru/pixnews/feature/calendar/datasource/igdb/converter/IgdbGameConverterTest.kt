@@ -38,7 +38,7 @@ import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbGameFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.game.baldursGate3
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbCompanyId
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameId
-import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameSeriesId
+import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameSeriesSummaryId
 import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
 import java.time.Month.AUGUST
 
@@ -124,7 +124,7 @@ class IgdbGameConverterTest {
         result.parentGame shouldBe null
         result.series shouldBe FullObject(
             GameSeriesSummary(
-                id = IgdbGameSeriesId(7),
+                id = IgdbGameSeriesSummaryId(7),
                 name = Localized(value = "Baldur's Gate", language = LanguageCode.ENGLISH),
                 totalGamesCount = 16U,
                 games = sequenceOf(

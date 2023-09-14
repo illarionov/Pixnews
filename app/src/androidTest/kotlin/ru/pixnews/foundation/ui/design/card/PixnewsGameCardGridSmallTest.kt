@@ -39,7 +39,7 @@ class PixnewsGameCardGridSmallTest : BaseInstrumentedTest() {
         override val title = GameFixtures.hytale.name.value
         override val cover = GameFixtures.hytale.screenshots.firstOrNull()
         override val platforms = GameFixtures.hytale.platforms
-            .map(Ref<GamePlatform>::getObjectOrThrow)
+            .map(Ref<GamePlatform, *>::getObjectOrThrow)
             .toImmutableSet()
         override val favourite = false
     }

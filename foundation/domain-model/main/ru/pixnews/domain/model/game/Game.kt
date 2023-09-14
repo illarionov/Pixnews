@@ -21,12 +21,13 @@ import ru.pixnews.domain.model.url.ExternalLink
 import ru.pixnews.domain.model.url.ImageUrl
 import ru.pixnews.domain.model.url.VideoUrl
 import ru.pixnews.domain.model.util.ApproximateDate
+import ru.pixnews.domain.model.util.HasId
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
 import ru.pixnews.library.kotlin.utils.isNotWhitespaceOnly
 
 public data class Game(
-    val id: GameId,
+    override val id: GameId,
     val name: Localized<String> = Localized.EMPTY_STRING,
     val summary: Localized<RichText> = Localized.EMPTY_RICH_TEXT,
     val description: Localized<RichText> = Localized.EMPTY_RICH_TEXT,
@@ -59,7 +60,7 @@ public data class Game(
     val systemRequirements: GameSystemRequirements? = null,
 
     val dataSources: ImmutableList<DataSource> = persistentListOf(),
-) {
+) : HasId<GameId> {
     init {
         require(name.value.isNotWhitespaceOnly())
         require(description.value.raw.isNotWhitespaceOnly())

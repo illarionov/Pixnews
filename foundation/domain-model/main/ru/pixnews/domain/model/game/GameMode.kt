@@ -4,14 +4,21 @@
  */
 package ru.pixnews.domain.model.game
 
+import ru.pixnews.domain.model.id.GameModeId
+import ru.pixnews.domain.model.util.HasId
+
 public sealed class GameMode(
     public open val name: String,
-) {
-    public object SinglePlayer : GameMode("Single Player")
-    public object Multiplayer : GameMode("Multiplayer")
-    public object SplitScreen : GameMode("Split Screen")
-    public object CoOperative : GameMode("Co-operative")
-    public object BattleRoyale : GameMode("Battle royale")
-    public object Mmo : GameMode("MMO")
-    public data class Other(override val name: String) : GameMode(name)
+    public override val id: GameModeId = GameModeId(name),
+) : HasId<GameModeId> {
+    public data object SinglePlayer : GameMode("Single Player")
+    public data object Multiplayer : GameMode("Multiplayer")
+    public data object SplitScreen : GameMode("Split Screen")
+    public data object CoOperative : GameMode("Co-operative")
+    public data object BattleRoyale : GameMode("Battle royale")
+    public data object Mmo : GameMode("MMO")
+    public data class Other(
+        override val name: String,
+        public override val id: GameModeId = GameModeId(name),
+    ) : GameMode(name)
 }

@@ -15,11 +15,12 @@ import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
 import ru.pixnews.domain.model.url.ImageUrl
 import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate
+import ru.pixnews.domain.model.util.HasId
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
 
 public data class Company(
-    val id: CompanyId,
+    override val id: CompanyId,
     val name: String,
     val description: Localized<RichText>,
     val avatar: ImageUrl?,
@@ -30,6 +31,6 @@ public data class Company(
 
     val dataSources: ImmutableList<DataSource>,
     val links: ImmutableList<ExternalLink>,
-) {
+) : HasId<CompanyId> {
     val url: Url? = links.firstOrNull { it.type == OFFICIAL }?.url
 }

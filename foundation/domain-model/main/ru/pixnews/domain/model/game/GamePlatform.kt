@@ -4,9 +4,13 @@
  */
 package ru.pixnews.domain.model.game
 
+import ru.pixnews.domain.model.id.GamePlatformId
+import ru.pixnews.domain.model.util.HasId
+
 public sealed class GamePlatform(
     public open val name: String,
-) {
+    public override val id: GamePlatformId = GamePlatformId(name),
+) : HasId<GamePlatformId> {
     public data object Windows : GamePlatform("Windows")
     public data object Macos : GamePlatform("MacOS")
     public data object Linux : GamePlatform("Linux")
@@ -19,5 +23,8 @@ public sealed class GamePlatform(
     public data object Nintendo3Ds : GamePlatform("Nintendo 3DS")
     public data object Ios : GamePlatform("IOS")
     public data object Android : GamePlatform("Android")
-    public data class Other(override val name: String) : GamePlatform(name)
+    public data class Other(
+        override val name: String,
+        override val id: GamePlatformId = GamePlatformId(name),
+    ) : GamePlatform(name)
 }

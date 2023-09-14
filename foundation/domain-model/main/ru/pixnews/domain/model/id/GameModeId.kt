@@ -6,11 +6,11 @@ package ru.pixnews.domain.model.id
 
 public interface GameModeId : ExternalId {
     public companion object {
-        public operator fun invoke(id: String): GameId = DefaultGameModeId(id)
+        public operator fun invoke(id: String): GameModeId = DefaultGameModeId(id)
     }
 }
 
 @JvmInline
 public value class DefaultGameModeId(
     public val id: String,
-) : GameId
+) : GameModeId

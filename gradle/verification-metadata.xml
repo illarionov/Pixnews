@@ -50,7 +50,10 @@
             <trusting group="app.cash.paparazzi"/>
             <trusting group="app.cash.turbine"/>
          </trusted-key>
-         <trusted-key id="475f3b8e59e6e63aa78067482c7b12f2a511e325" group="org.slf4j" name="slf4j-api"/>
+         <trusted-key id="475f3b8e59e6e63aa78067482c7b12f2a511e325">
+            <trusting group="ch.qos.logback"/>
+            <trusting group="org.slf4j" name="slf4j-api"/>
+         </trusted-key>
          <trusted-key id="4797b4f5dcc46cea61059071a1ae06236ca2ba62" group="com.diffplug.spotless"/>
          <trusted-key id="47eb6836245d2d40e89dfb4136d4e9618f3adab5" group="io.github.microutils" name="kotlin-logging-jvm"/>
          <trusted-key id="4db1a49729b053caf015cee9a6adfc93ef34893e" group="org.hamcrest"/>
@@ -185,6 +188,11 @@
             <pgp value="90493b3b543cb717f9dd6eee10c81b79dbff09ea"/>
          </artifact>
       </component>
+      <component group="com.github.shyiko.klob" name="klob" version="0.2.1">
+         <artifact name="klob-0.2.1.jar">
+            <pgp value="160a7a9cf46221a56b06ad64461a804f2609fd89"/>
+         </artifact>
+      </component>
       <component group="com.google.android" name="annotations" version="4.1.1.4">
          <artifact name="annotations-4.1.1.4.jar">
             <pgp value="0f07d1201bddab67cfb84eb479752db6c966f0b8"/>
@@ -270,6 +278,11 @@
             <pgp value="31bae2e51d95e0f8ad9b7bcc40a3c4432bd7308c"/>
          </artifact>
       </component>
+      <component group="com.pinterest" name="ktlint" version="0.46.1">
+         <artifact name="ktlint-0.46.1.jar">
+            <pgp value="adbc987d1a7b91db6b0aaa81995efbf4a3d20beb"/>
+         </artifact>
+      </component>
       <component group="com.squareup" name="javapoet" version="1.13.0">
          <artifact name="javapoet-1.13.0.jar">
             <pgp value="1d0a8b5e77c678a7c724445abf984b4145ea13f7"/>
@@ -298,6 +311,11 @@
       <component group="dev.chrisbanes.snapper" name="snapper" version="0.2.2">
          <artifact name="snapper-0.2.2.aar">
             <pgp value="da60f5c2597d381ac8fde387dec39f479e7a86f4"/>
+         </artifact>
+      </component>
+      <component group="info.picocli" name="picocli" version="4.6.3">
+         <artifact name="picocli-4.6.3.jar">
+            <pgp value="aa417737bd805456db3cbdde6601e5c08dccbb96"/>
          </artifact>
       </component>
       <component group="io.github.davidburstrom.contester" name="contester-breakpoint" version="0.2.0">

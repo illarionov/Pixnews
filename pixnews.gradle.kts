@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.wire) apply false
     alias(libs.plugins.ben.manes.versions)
     id("ru.pixnews.gradle.lint.detekt")
+    id("ru.pixnews.gradle.lint.diktat")
     id("ru.pixnews.gradle.lint.spotless")
 }
 
@@ -26,8 +27,8 @@ tasks.named("clean").configure {
     }
 }
 
-val styleCheck = tasks.register("styleCheck") {
+tasks.register("styleCheck") {
     group = "Verification"
     description = "Runs code style checking tools (excluding tests and Android Lint)"
-    dependsOn(tasks.named("detektCheck"), tasks.named("spotlessCheck"))
+    dependsOn("detektCheck", "spotlessCheck", "diktatCheck")
 }

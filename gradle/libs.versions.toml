@@ -8,6 +8,7 @@ android-tools-common = "31.3.0-alpha03"
 anvil = "2.4.8"
 bmversions = "0.48.0"
 detekt = "1.23.1"
+diktat = "1.2.5"
 detekt-compose-rules = "0.2.2"
 dagger = "2.48"
 kotlin = "1.9.10"
@@ -240,6 +241,7 @@ kermit-plugin = { group = "co.touchlab", name = "kermit-gradle-plugin", version.
 kotlin-jvm-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 kotlinx-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
+diktat-plugin = { group = "org.cqfn.diktat", name = "diktat-gradle-plugin", version.ref = "diktat" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 detekt-compose-rules = { group = "io.nlopez.compose.rules", name = "detekt", version.ref = "detekt-compose-rules" }
 firebase-crashlitycs-plugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-plugin" }
@@ -271,6 +273,7 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+diktat = { id = "org.cqfn.diktat.diktat-gradle-plugin", version.ref = "diktat" }
 kermit = { id = "co.touchlab.kermit", version.ref = "kermit" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

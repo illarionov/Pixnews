@@ -20,18 +20,6 @@ spotless {
 
     val rootDir = lintedFileTree
 
-    kotlin {
-        target(rootDir.filter { it.name.endsWith(".kt") })
-
-        diktat().configFile(configRootDir.file("diktat.yml"))
-        licenseHeaderFile(configRootDir.file("copyright/copyright.kt"))
-    }
-    kotlinGradle {
-        target(rootDir.filter { it.name.endsWith(".gradle.kts") })
-
-        diktat().configFile(configRootDir.file("diktat.yml"))
-        licenseHeaderFile(configRootDir.file("copyright/copyright.kt"), "(^(?![\\/ ]\\*).*$)")
-    }
     java {
         target(rootDir.filter { it.name.endsWith(".java") })
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"))

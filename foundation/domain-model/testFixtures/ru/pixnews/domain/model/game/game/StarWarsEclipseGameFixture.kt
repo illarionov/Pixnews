@@ -7,6 +7,7 @@ package ru.pixnews.domain.model.game.game
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.collections.immutable.toImmutableList
+import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.company.CompanyFixtures
 import ru.pixnews.domain.model.company.company.quanticDream
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
@@ -14,7 +15,6 @@ import ru.pixnews.domain.model.datasource.igdb
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GamePlatform.PlayStation5
 import ru.pixnews.domain.model.game.GamePlatform.Windows
 import ru.pixnews.domain.model.game.GameReleaseCategory.MainGame
@@ -23,18 +23,20 @@ import ru.pixnews.domain.model.game.GameSeriesSummaryFixtures
 import ru.pixnews.domain.model.game.RatingsSummary
 import ru.pixnews.domain.model.game.adventure
 import ru.pixnews.domain.model.game.beyondGoodEvil
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
 import ru.pixnews.domain.model.rating.EsrbRating.RATING_PENDING
+import ru.pixnews.domain.model.url.DefaultImageUrl
+import ru.pixnews.domain.model.url.DefaultVideoUrl
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.CanvasSize
-import ru.pixnews.domain.model.util.DefaultImageUrl
-import ru.pixnews.domain.model.util.DefaultVideoUrl
+import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
 
 internal val starWarsEclipseGameId = GameId("star-wars-eclipse")
 
@@ -94,8 +96,8 @@ public val GameFixtures.starWarsEclipse: Game
         ),
         category = MainGame,
         parentGame = null,
-        series = GameSeriesSummaryFixtures.beyondGoodEvil,
-        platforms = persistentSetOf(PlayStation5, Windows),
+        series = FullObject(GameSeriesSummaryFixtures.beyondGoodEvil),
+        platforms = persistentSetOf(PlayStation5, Windows).map { FullObject(it) }.toImmutableSet(),
         ageRanking = AgeRating(
             esrbRating = RATING_PENDING,
             pegiRating = null,

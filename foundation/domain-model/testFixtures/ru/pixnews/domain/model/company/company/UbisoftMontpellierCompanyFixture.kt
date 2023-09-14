@@ -7,22 +7,23 @@ package ru.pixnews.domain.model.company.company
 import kotlinx.collections.immutable.persistentListOf
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.company.CompanyFixtures
-import ru.pixnews.domain.model.company.CompanyId
 import ru.pixnews.domain.model.company.CompanyStatus.ACTIVE
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType.OFFICIAL
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITTER
+import ru.pixnews.domain.model.id.DefaultCompanyId
 import ru.pixnews.domain.model.locale.CountryCode
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
+import ru.pixnews.domain.model.url.DefaultImageUrl
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate
-import ru.pixnews.domain.model.util.DefaultImageUrl
+import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
 
-private val ubisoftMontpellierCompanyId = CompanyId("ubisoft-montpellier")
+private val ubisoftMontpellierCompanyId = DefaultCompanyId("ubisoft-montpellier")
 
 public val CompanyFixtures.ubisoftMontpellier: Company
     get() = Company(
@@ -45,7 +46,7 @@ public val CompanyFixtures.ubisoftMontpellier: Company
         foundingDate = ApproximateDate.Year(1994),
         status = ACTIVE,
         country = CountryCode("FR"),
-        parentCompany = CompanyFixtures.ubisoftEntertainment.id,
+        parentCompany = Ref.Id(CompanyFixtures.ubisoftEntertainment.id),
         dataSources = DataSourceFixtures.igdb,
         links = persistentListOf(
             ExternalLink(OFFICIAL, Url("https://www.ubisoft.com/en-US/studio/montpellier.aspx")),

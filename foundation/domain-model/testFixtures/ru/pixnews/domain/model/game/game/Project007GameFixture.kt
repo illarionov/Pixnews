@@ -6,13 +6,13 @@ package ru.pixnews.domain.model.game.game
 
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
+import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.company.CompanyFixtures
 import ru.pixnews.domain.model.company.company.ioInteractive
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GamePlatform.PlayStation5
 import ru.pixnews.domain.model.game.GamePlatform.Windows
 import ru.pixnews.domain.model.game.GamePlatform.XboxSeriesXs
@@ -21,12 +21,14 @@ import ru.pixnews.domain.model.game.GameReleaseStatus.NOT_YET_RELEASED
 import ru.pixnews.domain.model.game.GameSeriesSummaryFixtures
 import ru.pixnews.domain.model.game.RatingsSummary
 import ru.pixnews.domain.model.game.jamesBond
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
+import ru.pixnews.domain.model.url.DefaultImageUrl
+import ru.pixnews.domain.model.url.DefaultVideoUrl
 import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.CanvasSize
-import ru.pixnews.domain.model.util.DefaultImageUrl
-import ru.pixnews.domain.model.util.DefaultVideoUrl
+import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
 
 private val project007GameId = GameId("project-007")
@@ -61,8 +63,8 @@ public val GameFixtures.project007: Game
         links = persistentListOf(),
         category = MainGame,
         parentGame = null,
-        series = GameSeriesSummaryFixtures.jamesBond,
-        platforms = persistentSetOf(PlayStation5, Windows, XboxSeriesXs),
+        series = FullObject(GameSeriesSummaryFixtures.jamesBond),
+        platforms = listOf(PlayStation5, Windows, XboxSeriesXs).map { FullObject(it) }.toImmutableSet(),
         ageRanking = null,
         localizations = null,
         gameMode = persistentSetOf(),

@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITCH
-import ru.pixnews.domain.model.links.ExternalLinkType.WIKIPEDIA
-import ru.pixnews.domain.model.util.Url
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITCH
+import ru.pixnews.domain.model.url.ExternalLinkType.WIKIPEDIA
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbWebsiteFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.website.gtaWikipedia
 import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_TWITCH

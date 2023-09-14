@@ -4,6 +4,7 @@
  */
 package ru.pixnews.domain.model.game
 
+import ru.pixnews.domain.model.id.GameId
 import java.math.BigDecimal
 import java.math.RoundingMode.HALF_UP
 import java.util.Locale

@@ -7,28 +7,29 @@ package ru.pixnews.domain.model.company.company
 import kotlinx.collections.immutable.persistentListOf
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.company.CompanyFixtures
-import ru.pixnews.domain.model.company.CompanyId
 import ru.pixnews.domain.model.company.CompanyStatus.ACTIVE
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType.FACEBOOK
-import ru.pixnews.domain.model.links.ExternalLinkType.OFFICIAL
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITCH
-import ru.pixnews.domain.model.links.ExternalLinkType.TWITTER
-import ru.pixnews.domain.model.links.ExternalLinkType.WIKIPEDIA
-import ru.pixnews.domain.model.links.ExternalLinkType.YOUTUBE
+import ru.pixnews.domain.model.id.DefaultCompanyId
 import ru.pixnews.domain.model.locale.CountryCodeFixtures
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.locale.us
+import ru.pixnews.domain.model.url.DefaultImageUrl
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType.FACEBOOK
+import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITCH
+import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
+import ru.pixnews.domain.model.url.ExternalLinkType.WIKIPEDIA
+import ru.pixnews.domain.model.url.ExternalLinkType.YOUTUBE
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.CanvasSize
-import ru.pixnews.domain.model.util.DefaultImageUrl
+import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
 
-private val rockstarGamesCompanyId = CompanyId("rockstar-games")
+private val rockstarGamesCompanyId = DefaultCompanyId("rockstar-games")
 
 public val CompanyFixtures.rockstarGames: Company
     get() = Company(
@@ -45,7 +46,7 @@ public val CompanyFixtures.rockstarGames: Company
         foundingDate = ApproximateDate.Year(1998),
         status = ACTIVE,
         country = CountryCodeFixtures.us,
-        parentCompany = CompanyId("take-two-interactive"),
+        parentCompany = Ref.Id(DefaultCompanyId("take-two-interactive")),
         dataSources = DataSourceFixtures.igdb,
         links = persistentListOf(
             ExternalLink(

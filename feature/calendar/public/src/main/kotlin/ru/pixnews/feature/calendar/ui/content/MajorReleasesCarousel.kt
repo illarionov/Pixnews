@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import ru.pixnews.domain.model.game.GameId
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.feature.calendar.PreviewFixtures.MajorRelease
 import ru.pixnews.feature.calendar.model.MajorReleaseCarouselItemUiModel
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCardGridSmall

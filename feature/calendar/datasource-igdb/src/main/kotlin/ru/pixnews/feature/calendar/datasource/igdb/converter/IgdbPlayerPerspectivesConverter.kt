@@ -7,27 +7,42 @@ package ru.pixnews.feature.calendar.datasource.igdb.converter
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.game.PlayerPerspective
+import ru.pixnews.domain.model.util.Ref
+import ru.pixnews.domain.model.util.Ref.FullObject
+import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbPlayerPerspectiveId
 import ru.pixnews.igdbclient.model.PlayerPerspective as IgdbPlayerPerspective
 
-internal fun Collection<IgdbPlayerPerspective>.toPlayerPerspectives(): ImmutableSet<PlayerPerspective> =
+internal fun Collection<IgdbPlayerPerspective>.toPlayerPerspectives(): ImmutableSet<Ref<PlayerPerspective>> =
     this.asSequence()
-        .map(IgdbPlayerPerspective::toPlayerPerspective)
+        .map(IgdbPlayerPerspective::toPlayerPerspectiveRef)
         .toImmutableSet()
 
-@Suppress("MagicNumber")
-internal fun IgdbPlayerPerspective.toPlayerPerspective(): PlayerPerspective {
-    val id = requireFieldInitialized("player_perspectives.id", id)
-
-    return when (id) {
-        1L -> PlayerPerspective.FirstPerson
-        2L -> PlayerPerspective.ThirdPerson
-        3L -> PlayerPerspective.Isometric
-        4L -> PlayerPerspective.SideView
-        5L -> PlayerPerspective.Text
-        6L -> PlayerPerspective.Auditory
-        7L -> PlayerPerspective.Vr
-        else -> findPlayerPerspectiveBySlug(slug) ?: PlayerPerspective.Other(name)
+internal fun IgdbPlayerPerspective.toPlayerPerspectiveRef(): Ref<PlayerPerspective> {
+    val byId = findPlayerPerspectiveById(id)
+    if (byId != null) {
+        return FullObject(byId)
     }
+
+    return if (name.isNotEmpty() || slug.isNotEmpty()) {
+        val bySlug = findPlayerPerspectiveBySlug(slug)
+            ?: PlayerPerspective.Other(requireFieldInitialized("player_perspectives.name", name))
+        FullObject(bySlug)
+    } else {
+        Ref.Id(IgdbPlayerPerspectiveId(this.id))
+    }
+}
+
+@Suppress("MagicNumber")
+private fun findPlayerPerspectiveById(igdbId: Long): PlayerPerspective? = when (igdbId) {
+    0L -> errorFieldNotRequested("player_perspectives.id")
+    1L -> PlayerPerspective.FirstPerson
+    2L -> PlayerPerspective.ThirdPerson
+    3L -> PlayerPerspective.Isometric
+    4L -> PlayerPerspective.SideView
+    5L -> PlayerPerspective.Text
+    6L -> PlayerPerspective.Auditory
+    7L -> PlayerPerspective.Vr
+    else -> null
 }
 
 private fun findPlayerPerspectiveBySlug(slug: String): PlayerPerspective? = when (slug) {

@@ -7,6 +7,7 @@ package ru.pixnews.domain.model.game
 import kotlinx.collections.immutable.persistentListOf
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.id.GameSeriesSummaryId
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 
@@ -14,7 +15,7 @@ public object GameSeriesSummaryFixtures
 
 public val GameSeriesSummaryFixtures.halfLife: GameSeriesSummary
     get() = GameSeriesSummary(
-        id = GameSeriesId(stringValue = "half-life"),
+        id = GameSeriesSummaryId(stringValue = "half-life"),
         name = Localized(
             value = "half-life",
             language = LanguageCode.ENGLISH,
@@ -26,7 +27,7 @@ public val GameSeriesSummaryFixtures.halfLife: GameSeriesSummary
 
 public val GameSeriesSummaryFixtures.gta: GameSeriesSummary
     get() = GameSeriesSummary(
-        id = GameSeriesId("grand-theft-auto"),
+        id = GameSeriesSummaryId("grand-theft-auto"),
         name = Localized("Grand Theft Auto", LanguageCode.ENGLISH),
         totalGamesCount = 20U,
         games = persistentListOf(),
@@ -35,7 +36,7 @@ public val GameSeriesSummaryFixtures.gta: GameSeriesSummary
 
 public val GameSeriesSummaryFixtures.sims: GameSeriesSummary
     get() = GameSeriesSummary(
-        id = GameSeriesId("the-sims"),
+        id = GameSeriesSummaryId("the-sims"),
         name = Localized("The Sims", LanguageCode.ENGLISH),
         totalGamesCount = 84U,
         games = persistentListOf(),
@@ -44,7 +45,7 @@ public val GameSeriesSummaryFixtures.sims: GameSeriesSummary
 
 public val GameSeriesSummaryFixtures.beyondGoodEvil: GameSeriesSummary
     get() = GameSeriesSummary(
-        id = GameSeriesId("beyond-good-evil"),
+        id = GameSeriesSummaryId("beyond-good-evil"),
         name = Localized("Beyond Good & Evil", LanguageCode.ENGLISH),
         totalGamesCount = 3U,
         games = persistentListOf(),
@@ -53,7 +54,7 @@ public val GameSeriesSummaryFixtures.beyondGoodEvil: GameSeriesSummary
 
 public val GameSeriesSummaryFixtures.slimeRancher: GameSeriesSummary
     get() = GameSeriesSummary(
-        id = GameSeriesId("slime-rancher"),
+        id = GameSeriesSummaryId("slime-rancher"),
         name = Localized("Slime Rancher", LanguageCode.ENGLISH),
         totalGamesCount = 3U,
         games = persistentListOf(),
@@ -62,7 +63,7 @@ public val GameSeriesSummaryFixtures.slimeRancher: GameSeriesSummary
 
 public val GameSeriesSummaryFixtures.jamesBond: GameSeriesSummary
     get() = GameSeriesSummary(
-        id = GameSeriesId("james-bond"),
+        id = GameSeriesSummaryId("james-bond"),
         name = Localized("James Bond", LanguageCode.ENGLISH),
         totalGamesCount = 37U,
         games = persistentListOf(),

@@ -4,7 +4,7 @@
  */
 package ru.pixnews.feature.calendar.datasource.igdb.converter
 
-import ru.pixnews.feature.calendar.datasource.igdb.model.IgdbVideoUrl
+import ru.pixnews.feature.calendar.datasource.igdb.model.url.IgdbVideoUrl
 import ru.pixnews.igdbclient.model.GameVideo as IgdbGameVideo
 
 internal fun IgdbGameVideo.toIgdbVideoUrl(): IgdbVideoUrl = IgdbVideoUrl(

@@ -6,13 +6,16 @@ package ru.pixnews.feature.calendar.model
 
 import android.os.Parcelable
 import kotlinx.collections.immutable.ImmutableSet
+import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.parcelize.Parcelize
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.Game.Companion.GameField
 import ru.pixnews.domain.model.game.GameGenre
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GamePlatform
-import ru.pixnews.domain.model.util.ImageUrl
+import ru.pixnews.domain.model.id.GameId
+import ru.pixnews.domain.model.url.ImageUrl
+import ru.pixnews.domain.model.util.Ref
+import ru.pixnews.domain.model.util.getObjectOrThrow
 import ru.pixnews.feature.calendar.model.CalendarListItemContentType.GAME
 import ru.pixnews.feature.calendar.model.CalendarListItemContentType.TITLE
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCardUiModel
@@ -65,7 +68,7 @@ internal fun Game.toCalendarListItem(): CalendarListPixnewsGameUi {
         title = name.value,
         description = summary.value.asPlainText(),
         cover = screenshots.firstOrNull(),
-        platforms = platforms,
+        platforms = platforms.map(Ref<GamePlatform>::getObjectOrThrow).toImmutableSet(),
         favourite = false,
         genres = genres.map(GameGenre::name).joinToString(),
     )

@@ -27,7 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.ImmutableList
-import ru.pixnews.domain.model.game.GameId
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.feature.calendar.PreviewFixtures
 import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi

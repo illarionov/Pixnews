@@ -10,7 +10,6 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.datetime.LocalDate
 import ru.pixnews.domain.model.game.GameFixtures
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GamePlatform.PlayStation4
 import ru.pixnews.domain.model.game.GamePlatform.Windows
 import ru.pixnews.domain.model.game.GamePlatform.XboxOne
@@ -24,8 +23,9 @@ import ru.pixnews.domain.model.game.game.slimeRancher2
 import ru.pixnews.domain.model.game.game.smalland
 import ru.pixnews.domain.model.game.game.starWarsEclipse
 import ru.pixnews.domain.model.game.game.theLostWild
+import ru.pixnews.domain.model.id.GameId
+import ru.pixnews.domain.model.url.DefaultImageUrl
 import ru.pixnews.domain.model.util.CanvasSize
-import ru.pixnews.domain.model.util.DefaultImageUrl
 import ru.pixnews.feature.calendar.model.CalendarListTitle
 import ru.pixnews.feature.calendar.model.CalendarScreenState
 import ru.pixnews.feature.calendar.model.GameListFilterChip

@@ -10,7 +10,7 @@ import coil.intercept.Interceptor
 import coil.intercept.Interceptor.Chain
 import coil.request.ImageRequest
 import coil.request.ImageResult
-import ru.pixnews.domain.model.util.ImageUrl
+import ru.pixnews.domain.model.url.ImageUrl
 import ru.pixnews.foundation.ui.imageloader.coil.mapper.toDimensionModel
 
 @RestrictTo(LIBRARY_GROUP)

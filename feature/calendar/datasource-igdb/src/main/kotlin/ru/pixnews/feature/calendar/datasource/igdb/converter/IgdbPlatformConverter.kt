@@ -5,31 +5,47 @@
 package ru.pixnews.feature.calendar.datasource.igdb.converter
 
 import ru.pixnews.domain.model.game.GamePlatform
+import ru.pixnews.domain.model.util.Ref
+import ru.pixnews.domain.model.util.Ref.FullObject
+import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGamePlatformId
 import ru.pixnews.igdbclient.model.Platform
 
-@Suppress("MagicNumber", "CyclomaticComplexMethod")
-internal fun Platform.toGamePlatform(): GamePlatform {
-    val id = requireFieldInitialized("platform.id", id)
-    val slug = requireFieldInitialized("platform.slug", slug)
+internal fun Platform.toGamePlatformRef(): Ref<GamePlatform> {
+    val byId = findGamePlatformById(id)
+    if (byId != null) {
+        return FullObject(byId)
+    }
 
-    return when (id) {
-        6L -> GamePlatform.Windows
-        14L -> GamePlatform.Macos
-        3L -> GamePlatform.Linux
-        48L -> GamePlatform.PlayStation4
-        167L -> GamePlatform.PlayStation5
-        46L -> GamePlatform.PsVita
-        49L -> GamePlatform.XboxOne
-        169L -> GamePlatform.XboxSeriesXs
-        130L -> GamePlatform.NintendoSwitch
-        37L -> GamePlatform.Nintendo3Ds
-        39L -> GamePlatform.Ios
-        34L -> GamePlatform.Android
-        else -> getGamePlatformBySlug(slug) ?: GamePlatform.Other(this.name)
+    return if (slug.isNotEmpty() || name.isNotEmpty()) {
+        val bySlug = findGamePlatformBySlug(slug)
+            ?: GamePlatform.Other(requireFieldInitialized("platform.name", name))
+        FullObject(bySlug)
+    } else {
+        Ref.Id(IgdbGamePlatformId(this.id))
     }
 }
 
-private fun getGamePlatformBySlug(slug: String): GamePlatform? = when (slug) {
+@Suppress("MagicNumber", "CyclomaticComplexMethod")
+private fun findGamePlatformById(igdbId: Long): GamePlatform? = when (igdbId) {
+    0L -> errorFieldNotRequested("platform.id")
+    6L -> GamePlatform.Windows
+    14L -> GamePlatform.Macos
+    3L -> GamePlatform.Linux
+    48L -> GamePlatform.PlayStation4
+    167L -> GamePlatform.PlayStation5
+    46L -> GamePlatform.PsVita
+    49L -> GamePlatform.XboxOne
+    169L -> GamePlatform.XboxSeriesXs
+    130L -> GamePlatform.NintendoSwitch
+    37L -> GamePlatform.Nintendo3Ds
+    39L -> GamePlatform.Ios
+    34L -> GamePlatform.Android
+    else -> null
+}
+
+@Suppress("CyclomaticComplexMethod")
+private fun findGamePlatformBySlug(slug: String): GamePlatform? = when (slug) {
+    "" -> errorFieldNotRequested("platform.slug")
     "win" -> GamePlatform.Windows
     "mac" -> GamePlatform.Macos
     "linux" -> GamePlatform.Linux

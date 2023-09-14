@@ -4,7 +4,12 @@
  */
 @file:Suppress("WRONG_OVERLOADING_FUNCTION_ARGUMENTS")
 
-package ru.pixnews.domain.model.util
+package ru.pixnews.domain.model.url
+
+import ru.pixnews.domain.model.util.CanvasSize
+import ru.pixnews.domain.model.util.Color
+import ru.pixnews.domain.model.util.Dimension
+import ru.pixnews.domain.model.util.Dimension.Undefined
 
 public interface ImageUrl {
     public val size: CanvasSize?
@@ -14,8 +19,8 @@ public interface ImageUrl {
         get() = Color.Unspecified
 
     public fun getUrl(
-        width: Dimension = Dimension.Undefined,
-        height: Dimension = Dimension.Undefined,
+        width: Dimension = Undefined,
+        height: Dimension = Undefined,
     ): String
 }
 

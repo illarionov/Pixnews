@@ -7,19 +7,20 @@ package ru.pixnews.domain.model.company.company
 import kotlinx.collections.immutable.persistentListOf
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.company.CompanyFixtures
-import ru.pixnews.domain.model.company.CompanyId
 import ru.pixnews.domain.model.company.CompanyStatus.INACTIVE
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.id.DefaultCompanyId
 import ru.pixnews.domain.model.locale.CountryCodeFixtures
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.locale.us
+import ru.pixnews.domain.model.url.DefaultImageUrl
 import ru.pixnews.domain.model.util.ApproximateDate
-import ru.pixnews.domain.model.util.DefaultImageUrl
+import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
 
-private val theSimsStudioCompanyId = CompanyId("the-sims-studio")
+private val theSimsStudioCompanyId = DefaultCompanyId("the-sims-studio")
 
 public val CompanyFixtures.theSimsStudio: Company
     get() = Company(
@@ -41,7 +42,7 @@ public val CompanyFixtures.theSimsStudio: Company
         foundingDate = ApproximateDate.Year(2006),
         status = INACTIVE,
         country = CountryCodeFixtures.us,
-        parentCompany = CompanyFixtures.electronicArts.id,
+        parentCompany = Ref.Id(CompanyFixtures.electronicArts.id),
         dataSources = DataSourceFixtures.igdb,
         links = persistentListOf(),
     )

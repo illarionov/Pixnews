@@ -2,13 +2,13 @@
  * Copyright (c) 2023, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
-package ru.pixnews.feature.calendar.datasource.igdb.model
+package ru.pixnews.feature.calendar.datasource.igdb.model.url
 
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import ru.pixnews.domain.model.url.VideoUrl
 import ru.pixnews.domain.model.util.Dimension
-import ru.pixnews.domain.model.util.VideoUrl
 import kotlin.LazyThreadSafetyMode.PUBLICATION
 
 @Suppress("WRONG_OVERLOADING_FUNCTION_ARGUMENTS")

@@ -5,10 +5,13 @@
 package ru.pixnews.feature.calendar.model
 
 import kotlinx.collections.immutable.ImmutableSet
+import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.game.Game
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GamePlatform
-import ru.pixnews.domain.model.util.ImageUrl
+import ru.pixnews.domain.model.id.GameId
+import ru.pixnews.domain.model.url.ImageUrl
+import ru.pixnews.domain.model.util.Ref
+import ru.pixnews.domain.model.util.getObjectOrThrow
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCardGridSmallUiModel
 
 internal data class MajorReleaseCarouselItemUiModel(
@@ -24,7 +27,7 @@ internal fun Game.toMajorReleaseCarouselItemUiModel(): MajorReleaseCarouselItemU
         gameId = id,
         title = name.value,
         cover = screenshots.firstOrNull(),
-        platforms = platforms,
+        platforms = platforms.map(Ref<GamePlatform>::getObjectOrThrow).toImmutableSet(),
         favourite = false,
     )
 }

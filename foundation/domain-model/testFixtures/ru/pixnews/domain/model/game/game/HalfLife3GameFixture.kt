@@ -17,7 +17,6 @@ import ru.pixnews.domain.model.datasource.igdb
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
-import ru.pixnews.domain.model.game.GameId
 import ru.pixnews.domain.model.game.GameMode.SinglePlayer
 import ru.pixnews.domain.model.game.GamePlatform.Windows
 import ru.pixnews.domain.model.game.GameReleaseCategory.MainGame
@@ -27,11 +26,13 @@ import ru.pixnews.domain.model.game.PlayerPerspective.FirstPerson
 import ru.pixnews.domain.model.game.RatingsSummary
 import ru.pixnews.domain.model.game.halfLife
 import ru.pixnews.domain.model.game.shooter
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
+import ru.pixnews.domain.model.url.DefaultImageUrl
 import ru.pixnews.domain.model.util.ApproximateDate.ToBeDetermined
 import ru.pixnews.domain.model.util.CanvasSize
-import ru.pixnews.domain.model.util.DefaultImageUrl
+import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
 
 internal val halflife3GameId = GameId("half-life-3")
@@ -90,12 +91,12 @@ public val GameFixtures.halfLife3: Game
         links = persistentListOf(),
         category = MainGame,
         parentGame = null,
-        series = GameSeriesSummaryFixtures.halfLife,
-        platforms = persistentSetOf(Windows),
+        series = FullObject(GameSeriesSummaryFixtures.halfLife),
+        platforms = persistentSetOf(FullObject(Windows)),
         ageRanking = null,
         localizations = null,
-        gameMode = persistentSetOf(SinglePlayer),
-        playerPerspectives = persistentSetOf(FirstPerson),
+        gameMode = persistentSetOf(FullObject(SinglePlayer)),
+        playerPerspectives = persistentSetOf(FullObject(FirstPerson)),
         systemRequirements = null,
         dataSources = DataSourceFixtures.igdb,
     )

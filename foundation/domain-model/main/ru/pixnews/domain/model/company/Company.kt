@@ -7,27 +7,30 @@ package ru.pixnews.domain.model.company
 import kotlinx.collections.immutable.ImmutableList
 import ru.pixnews.domain.model.company.CompanyStatus.UNKNOWN
 import ru.pixnews.domain.model.datasource.DataSource
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.links.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.id.CompanyId
 import ru.pixnews.domain.model.locale.CountryCode
 import ru.pixnews.domain.model.locale.Localized
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
+import ru.pixnews.domain.model.url.ImageUrl
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate
-import ru.pixnews.domain.model.util.ImageUrl
+import ru.pixnews.domain.model.util.HasId
+import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.domain.model.util.Url
 
 public data class Company(
-    val id: CompanyId,
+    override val id: CompanyId,
     val name: String,
     val description: Localized<RichText>,
     val avatar: ImageUrl?,
     val foundingDate: ApproximateDate?,
     val status: CompanyStatus = UNKNOWN,
     val country: CountryCode?,
-    val parentCompany: CompanyId?,
+    val parentCompany: Ref<Company>?,
 
     val dataSources: ImmutableList<DataSource>,
     val links: ImmutableList<ExternalLink>,
-) {
+) : HasId<CompanyId> {
     val url: Url? = links.firstOrNull { it.type == OFFICIAL }?.url
 }

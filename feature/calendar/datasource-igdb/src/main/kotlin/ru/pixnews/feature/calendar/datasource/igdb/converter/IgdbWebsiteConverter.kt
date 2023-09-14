@@ -4,8 +4,8 @@
  */
 package ru.pixnews.feature.calendar.datasource.igdb.converter
 
-import ru.pixnews.domain.model.links.ExternalLink
-import ru.pixnews.domain.model.util.Url
+import ru.pixnews.domain.model.url.ExternalLink
+import ru.pixnews.domain.model.url.Url
 import ru.pixnews.igdbclient.model.Website as IgdbWebsite
 
 internal fun IgdbWebsite.toExternalLink(): ExternalLink = ExternalLink(

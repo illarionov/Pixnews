@@ -11,7 +11,7 @@ import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.onChild
 import androidx.compose.ui.test.onChildren
-import ru.pixnews.domain.model.game.GameId
+import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.foundation.ui.design.GameIdKey
 import ru.pixnews.foundation.ui.design.test.constants.card.PixnewsGameCardTestTags
 

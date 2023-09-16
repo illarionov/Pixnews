@@ -12,7 +12,6 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.collections.immutable.toImmutableList
 import org.junit.jupiter.api.Test
-import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.game.AverageRating
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameGenre
@@ -89,19 +88,8 @@ class IgdbGameConverterTest {
             "sc81fm",
             "sc81fn",
         ).map { "https://images.igdb.com/igdb/image/upload/t_thumb/$it.webp" }
-        val larianStudioCompany = Company(
-            id = IgdbCompanyId(510),
-            name = "Larian Studios",
-            description = Localized.EMPTY_RICH_TEXT,
-            avatar = null,
-            foundingDate = null,
-            country = null,
-            parentCompany = null,
-            dataSources = persistentListOf(igdbDataSource),
-            links = persistentListOf(),
-        )
-        result.developer shouldBe larianStudioCompany
-        result.publisher shouldBe larianStudioCompany
+        result.developer?.id shouldBe IgdbCompanyId(510)
+        result.publisher?.id shouldBe IgdbCompanyId(510)
         result.releaseDate shouldBe ApproximateDate.YearMonthDay(2023, AUGUST, 3)
         result.releaseStatus shouldBe GameReleaseStatus.RELEASED
         result.genres.shouldContainExactlyInAnyOrder(

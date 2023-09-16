@@ -18,7 +18,6 @@ import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.locale.fromNumeric3Code
 import ru.pixnews.domain.model.url.ExternalLink
-import ru.pixnews.domain.model.url.ExternalLinkType
 import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.Ref
@@ -58,15 +57,7 @@ internal fun IgdbCompany.toCompany(): Company {
         country = if (country != 0) CountryCode.fromNumeric3Code(country) else null,
         parentCompany = parent?.toCompanyRef(),
         dataSources = persistentListOf(igdbDataSource),
-        links = run {
-            val urlLink = if (url.isNotEmpty()) {
-                sequenceOf(ExternalLink(ExternalLinkType.OFFICIAL, Url(url)))
-            } else {
-                emptySequence()
-            }
-            val websitesLinks = websites.asSequence().map(CompanyWebsite::toExternalLink)
-            (urlLink + websitesLinks).toImmutableList()
-        },
+        links = websites.asSequence().map(CompanyWebsite::toExternalLink).toImmutableList(),
     )
 }
 

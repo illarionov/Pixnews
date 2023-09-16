@@ -7,11 +7,14 @@ package ru.pixnews.feature.calendar.datasource.igdb.fixtures.game
 
 import com.squareup.wire.Instant
 import com.squareup.wire.ofEpochSecond
+import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbCompanyFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbGameFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbGameModeFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbGenreFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbPlatformFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbThemeFixtures
+import ru.pixnews.feature.calendar.datasource.igdb.fixtures.company.larianStudios
+import ru.pixnews.feature.calendar.datasource.igdb.fixtures.company.wushuStudios
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.gamemode.coOperative
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.gamemode.multiplayer
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.gamemode.singlePlayer
@@ -32,7 +35,6 @@ import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.USK_18
 import ru.pixnews.igdbclient.model.AlternativeName
 import ru.pixnews.igdbclient.model.Artwork
 import ru.pixnews.igdbclient.model.Collection
-import ru.pixnews.igdbclient.model.Company
 import ru.pixnews.igdbclient.model.Cover
 import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMMDD
 import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ4
@@ -163,10 +165,7 @@ private val baldursGate3Instance = Game(
             publisher = true,
             porting = false,
             supporting = false,
-            company = Company(
-                id = 510,
-                name = "Larian Studios",
-            ),
+            company = IgdbCompanyFixtures.larianStudios,
         ),
         InvolvedCompany(
             id = 214383L,
@@ -174,10 +173,7 @@ private val baldursGate3Instance = Game(
             publisher = false,
             porting = false,
             supporting = true,
-            company = Company(
-                id = 47197,
-                name = "Wushu Studios",
-            ),
+            company = IgdbCompanyFixtures.wushuStudios,
         ),
     ),
     keywords = listOf(182L, 4272L, 4823L, 27054L).map { Keyword(id = it) },

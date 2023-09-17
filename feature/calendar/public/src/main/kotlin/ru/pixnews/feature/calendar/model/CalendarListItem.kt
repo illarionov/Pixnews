@@ -10,7 +10,7 @@ import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.parcelize.Parcelize
 import ru.pixnews.domain.model.game.Game
-import ru.pixnews.domain.model.game.Game.Companion.GameField
+import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.domain.model.game.GameGenre
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.id.GameId
@@ -55,12 +55,12 @@ internal data class CalendarListItemId(
 ) : Parcelable
 
 internal val CALENDAR_LIST_ITEM_GAME_FIELDS = setOf(
-    GameField.ID,
-    GameField.NAME,
-    GameField.SUMMARY,
-    GameField.SCREENSHOTS,
-    GameField.PLATFORMS,
-    GameField.GENRES,
+    GameField.Id,
+    GameField.Name,
+    GameField.Summary,
+    GameField.Screenshots,
+    GameField.Platforms(),
+    GameField.Genres,
 )
 
 internal fun Game.toCalendarListItem(): CalendarListPixnewsGameUi {

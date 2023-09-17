@@ -14,7 +14,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.todayIn
 import ru.pixnews.domain.model.game.Game
-import ru.pixnews.domain.model.game.Game.Companion.GameField
+import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.library.functional.network.NetworkRequestStatus
 import javax.inject.Inject

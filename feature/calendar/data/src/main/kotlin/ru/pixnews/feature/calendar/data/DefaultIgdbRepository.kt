@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.datetime.Instant
 import ru.pixnews.domain.model.game.Game
-import ru.pixnews.domain.model.game.Game.Companion.GameField
+import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.feature.calendar.domain.DefaultObserveUpcomingReleasesByDateUseCase.Companion.IgdbRepository
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.library.functional.network.NetworkRequestStatus

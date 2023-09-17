@@ -7,7 +7,7 @@ package ru.pixnews.feature.calendar.data
 
 import kotlinx.datetime.Instant
 import ru.pixnews.domain.model.game.Game
-import ru.pixnews.domain.model.game.Game.Companion.GameField
+import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.library.functional.network.NetworkResult
 
 public interface IgdbDataSource {

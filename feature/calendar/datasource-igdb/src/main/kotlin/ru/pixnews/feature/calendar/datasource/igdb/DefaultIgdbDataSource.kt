@@ -14,30 +14,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import ru.pixnews.domain.model.game.Game
-import ru.pixnews.domain.model.game.Game.Companion.GameField
-import ru.pixnews.domain.model.game.Game.Companion.GameField.AGE_RANKING
-import ru.pixnews.domain.model.game.Game.Companion.GameField.CATEGORY
-import ru.pixnews.domain.model.game.Game.Companion.GameField.DESCRIPTION
-import ru.pixnews.domain.model.game.Game.Companion.GameField.DEVELOPER
-import ru.pixnews.domain.model.game.Game.Companion.GameField.GAME_MODE
-import ru.pixnews.domain.model.game.Game.Companion.GameField.GENRES
-import ru.pixnews.domain.model.game.Game.Companion.GameField.ID
-import ru.pixnews.domain.model.game.Game.Companion.GameField.LINKS
-import ru.pixnews.domain.model.game.Game.Companion.GameField.LOCALIZATIONS
-import ru.pixnews.domain.model.game.Game.Companion.GameField.NAME
-import ru.pixnews.domain.model.game.Game.Companion.GameField.PARENT_GAME
-import ru.pixnews.domain.model.game.Game.Companion.GameField.PLATFORMS
-import ru.pixnews.domain.model.game.Game.Companion.GameField.PLAYER_PERSPECTIVES
-import ru.pixnews.domain.model.game.Game.Companion.GameField.PUBLISHER
-import ru.pixnews.domain.model.game.Game.Companion.GameField.RATINGS
-import ru.pixnews.domain.model.game.Game.Companion.GameField.RELEASE_DATE
-import ru.pixnews.domain.model.game.Game.Companion.GameField.RELEASE_STATUS
-import ru.pixnews.domain.model.game.Game.Companion.GameField.SCREENSHOTS
-import ru.pixnews.domain.model.game.Game.Companion.GameField.SERIES
-import ru.pixnews.domain.model.game.Game.Companion.GameField.SUMMARY
-import ru.pixnews.domain.model.game.Game.Companion.GameField.SYSTEM_REQUIREMENTS
-import ru.pixnews.domain.model.game.Game.Companion.GameField.TAGS
-import ru.pixnews.domain.model.game.Game.Companion.GameField.VIDE_URLS
+import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.feature.calendar.data.IgdbDataSource
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toGame
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toNetworkResult
@@ -108,12 +85,12 @@ public class DefaultIgdbDataSource(
 
     @Suppress("CyclomaticComplexMethod", "LongMethod")
     private fun GameField.toIgdbRequestFields(): Collection<String> = when (this) {
-        ID -> listOf("id", "slug")
-        NAME -> listOf("name")
-        DESCRIPTION -> listOf("storyline")
-        SUMMARY -> listOf("summary")
-        VIDE_URLS -> listOf("videos.video_id")
-        SCREENSHOTS -> listOf(
+        GameField.Id -> listOf("id", "slug")
+        GameField.Name -> listOf("name")
+        GameField.Description -> listOf("storyline")
+        GameField.Summary -> listOf("summary")
+        GameField.VideoUrls -> listOf("videos.video_id")
+        GameField.Screenshots -> listOf(
             "cover.image_id",
             "cover.animated",
             "cover.width",
@@ -124,7 +101,7 @@ public class DefaultIgdbDataSource(
             "screenshots.height",
         )
 
-        DEVELOPER, PUBLISHER -> listOf(
+        GameField.Developer, GameField.Publisher -> listOf(
             "involved_companies.developer",
             "involved_companies.company.id",
             "involved_companies.company.name",
@@ -144,7 +121,7 @@ public class DefaultIgdbDataSource(
             "involved_companies.company.websites.url",
         )
 
-        RELEASE_DATE -> listOf(
+        GameField.ReleaseDate -> listOf(
             "release_dates.category",
             "release_dates.date",
             "release_dates.y",
@@ -152,32 +129,32 @@ public class DefaultIgdbDataSource(
             "release_dates.human",
         )
 
-        RELEASE_STATUS -> listOf(
+        GameField.ReleaseStatus -> listOf(
             "status",
         )
 
-        GENRES -> listOf("genres.name")
-        TAGS -> listOf("themes.name")
-        RATINGS -> listOf(
+        GameField.Genres -> listOf("genres.name")
+        GameField.Tags -> listOf("themes.name")
+        GameField.Ratings -> listOf(
             "rating_count",
             "rating",
             "aggregated_rating",
             "aggregated_rating_count",
         )
 
-        LINKS -> listOf(
+        GameField.Links -> listOf(
             "url",
             "websites.category",
             "websites.url",
         )
 
-        CATEGORY -> listOf(
+        GameField.Category -> listOf(
             "parent_game",
             "category",
         )
 
-        PARENT_GAME -> listOf("parent_game")
-        SERIES -> listOf(
+        is GameField.ParentGame -> listOf("parent_game")
+        is GameField.Series -> listOf(
             "collection.id",
             "collection.name",
             "collection.games.id",
@@ -185,34 +162,33 @@ public class DefaultIgdbDataSource(
             "parent_game",
         )
 
-        PLATFORMS -> listOf(
+        is GameField.Platforms -> listOf(
             "platforms.id",
             "platforms.slug",
             "platforms.name",
         )
 
-        AGE_RANKING -> listOf(
+        GameField.AgeRanking -> listOf(
             "age_ratings.id",
             "age_ratings.category",
             "age_ratings.rating",
         )
 
-        LOCALIZATIONS -> listOf(
+        GameField.Localizations -> listOf(
             "language_supports.language_support_type",
             "language_supports.language.locale",
         )
 
-        GAME_MODE -> listOf(
+        is GameField.GameMode -> listOf(
             "game_modes.id",
             "game_modes.slug",
             "game_modes.name",
         )
 
-        PLAYER_PERSPECTIVES -> listOf(
+        is GameField.PlayerPerspective -> listOf(
             "player_perspectives.id",
         )
 
-        SYSTEM_REQUIREMENTS,
-        -> error("$this not supported")
+        GameField.SystemRequirements -> error("$this not supported")
     }
 }

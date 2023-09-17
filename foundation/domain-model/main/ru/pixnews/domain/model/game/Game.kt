@@ -62,32 +62,4 @@ public data class Game(
         require(name.value.isNotWhitespaceOnly())
         require(description.value.raw.isNotWhitespaceOnly())
     }
-
-    public companion object {
-        public enum class GameField {
-            ID,
-            NAME,
-            SUMMARY,
-            DESCRIPTION,
-            VIDE_URLS,
-            SCREENSHOTS,
-            DEVELOPER,
-            PUBLISHER,
-            RELEASE_DATE,
-            RELEASE_STATUS,
-            GENRES,
-            TAGS,
-            RATINGS,
-            LINKS,
-            CATEGORY,
-            PARENT_GAME,
-            SERIES,
-            PLATFORMS,
-            AGE_RANKING,
-            LOCALIZATIONS,
-            GAME_MODE,
-            PLAYER_PERSPECTIVES,
-            SYSTEM_REQUIREMENTS,
-        }
-    }
 }

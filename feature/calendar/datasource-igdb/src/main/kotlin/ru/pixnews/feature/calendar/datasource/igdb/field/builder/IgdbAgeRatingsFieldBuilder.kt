@@ -7,7 +7,6 @@ package ru.pixnews.feature.calendar.datasource.igdb.field.builder
 
 import ru.pixnews.feature.calendar.datasource.igdb.field.IgdbFieldDsl
 import ru.pixnews.feature.calendar.datasource.igdb.field.IgdbRequestField
-import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.IgdbAgeRatingField
 import ru.pixnews.igdbclient.model.AgeRating
 
 public fun AgeRating.Companion.field(): IgdbAgeRatingsFieldBuilder = IgdbAgeRatingsFieldBuilder()
@@ -17,19 +16,17 @@ public fun AgeRating.Companion.field(): IgdbAgeRatingsFieldBuilder = IgdbAgeRati
 public class IgdbAgeRatingsFieldBuilder internal constructor(
     parent: IgdbRequestField<*>? = null,
 ) : IgdbRequestFieldBuilder<AgeRating>(parent) {
-    public val id: IgdbRequestField<AgeRating> get() = IgdbRequestField(IgdbAgeRatingField.ID, parent)
-    public val category: IgdbRequestField<AgeRating> get() = IgdbRequestField(IgdbAgeRatingField.CATEGORY, parent)
-    public val content_descriptions: IgdbRequestField<AgeRating>
-        get() = IgdbRequestField(
-            IgdbAgeRatingField.CONTENT_DESCRIPTIONS,
-            parent,
-        )
-    public val rating: IgdbRequestField<AgeRating> get() = IgdbRequestField(IgdbAgeRatingField.RATING, parent)
-    public val rating_cover_url: IgdbRequestField<AgeRating>
-        get() = IgdbRequestField(
-            IgdbAgeRatingField.RATING_COVER_URL,
-            parent,
-        )
-    public val synopsis: IgdbRequestField<AgeRating> get() = IgdbRequestField(IgdbAgeRatingField.SYNOPSIS, parent)
-    public val checksum: IgdbRequestField<AgeRating> get() = IgdbRequestField(IgdbAgeRatingField.CHECKSUM, parent)
+    public val id: IgdbRequestField<AgeRating> get() = named("id")
+    public val category: IgdbRequestField<AgeRating> = named("category")
+    public val content_descriptions: IgdbRequestField<AgeRating> = named("content_descriptions")
+    public val rating: IgdbRequestField<AgeRating> get() = named("rating")
+    public val rating_cover_url: IgdbRequestField<AgeRating> get() = named("rating_cover_url")
+    public val synopsis: IgdbRequestField<AgeRating> get() = named("synopsis")
+    public val checksum: IgdbRequestField<AgeRating> get() = named("checksum")
+
+    private fun named(igdbFieldName: String): IgdbRequestField<AgeRating> = IgdbRequestField(
+        igdbFieldName,
+        AgeRating::class,
+        parent,
+    )
 }

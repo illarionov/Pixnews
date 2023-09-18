@@ -21,7 +21,6 @@ import ru.pixnews.feature.calendar.datasource.igdb.converter.toNetworkResult
 import ru.pixnews.feature.calendar.datasource.igdb.field.IgdbRequestField
 import ru.pixnews.feature.calendar.datasource.igdb.field.builder.field
 import ru.pixnews.feature.calendar.datasource.igdb.field.child
-import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.IgdbFieldTemp
 import ru.pixnews.foundation.coroutines.ComputationCoroutineDispatcherProvider
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.igdbclient.IgdbClient
@@ -142,15 +141,13 @@ public class DefaultIgdbDataSource(
             "y",
             "m",
             "human",
-        ).map { IgdbRequestField(IgdbFieldTemp(it), IgdbGame.field.release_dates) }
+        ).map { IgdbGame.field.release_dates.child(it) }
 
         GameField.ReleaseStatus -> listOf(IgdbGame.field.status)
 
-        GameField.Genres -> listOf("name")
-            .map { IgdbRequestField(IgdbFieldTemp(it), IgdbGame.field.genres) }
+        GameField.Genres -> listOf(IgdbGame.field.genres.child("name"))
 
-        GameField.Tags -> listOf("name")
-            .map { IgdbRequestField(IgdbFieldTemp(it), IgdbGame.field.themes) }
+        GameField.Tags -> listOf(IgdbGame.field.themes.child("name"))
 
         GameField.Ratings -> listOf(
             IgdbGame.field.rating_count,

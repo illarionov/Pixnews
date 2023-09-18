@@ -5,18 +5,18 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.field
 
-import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.IgdbField
-import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.IgdbFieldTemp
+import kotlin.reflect.KClass
 
 public data class IgdbRequestField<O : Any>(
-    val field: IgdbField<O>,
+    val igdbFieldName: String,
+    val fieldClass: KClass<O>,
     val parent: IgdbRequestField<*>? = null,
 ) {
     public val igdbName: String
         get() = if (parent == null) {
-            this.field.igdbName
+            this.igdbFieldName
         } else {
-            parent.igdbName + "." + this.field.igdbName
+            parent.igdbName + "." + this.igdbFieldName
         }
 
     override fun toString(): String {
@@ -25,6 +25,7 @@ public data class IgdbRequestField<O : Any>(
 }
 
 public fun IgdbRequestField<*>.child(name: String): IgdbRequestField<Nothing> = IgdbRequestField(
-    IgdbFieldTemp(name),
+    name,
+    Nothing::class,
     this,
 )

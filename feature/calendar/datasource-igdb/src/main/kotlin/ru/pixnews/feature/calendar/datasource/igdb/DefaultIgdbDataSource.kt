@@ -18,9 +18,9 @@ import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.feature.calendar.data.IgdbDataSource
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toGame
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toNetworkResult
-import ru.pixnews.feature.calendar.datasource.igdb.field.IgdbRequestField
-import ru.pixnews.feature.calendar.datasource.igdb.field.builder.field
-import ru.pixnews.feature.calendar.datasource.igdb.field.child
+import ru.pixnews.feature.calendar.datasource.igdb.dsl.IgdbRequestField
+import ru.pixnews.feature.calendar.datasource.igdb.dsl.child
+import ru.pixnews.feature.calendar.datasource.igdb.field.field
 import ru.pixnews.foundation.coroutines.ComputationCoroutineDispatcherProvider
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.igdbclient.IgdbClient

@@ -3,10 +3,10 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 plugins {
-    id("ru.pixnews.gradle.base.kotlindsl")
+    alias(libs.plugins.kotlin.jvm)
 }
 
-group = "ru.pixnews.gradle.config"
+group = "ru.pixnews.gradle"
 
 tasks.withType<Test> {
     useJUnitPlatform()
@@ -16,10 +16,12 @@ tasks.withType<Test> {
     }
 }
 
+
 dependencies {
+    implementation(gradleKotlinDsl())
     implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
-    implementation("ru.pixnews.gradle.base:gradle-build-parameters")
-    implementation(libs.agp.plugin.api)
+    implementation(libs.wire.plugin)
+    api(libs.wire.schema)
     implementation(libs.kotlinpoet) {
         exclude(module = "kotlin-reflect")
     }

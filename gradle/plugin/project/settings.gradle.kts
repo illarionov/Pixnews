@@ -27,6 +27,7 @@ includeSubproject("di")
 includeSubproject("kotlin")
 includeSubproject("lint")
 includeSubproject("protobuf")
+includeSubproject("protobuf-igdb")
 includeSubproject("testing")
 
 fun includeSubproject(path: String) {

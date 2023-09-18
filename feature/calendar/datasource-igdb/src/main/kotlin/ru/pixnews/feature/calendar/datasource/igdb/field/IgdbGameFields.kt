@@ -3,25 +3,25 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.feature.calendar.datasource.igdb.field.builder
+package ru.pixnews.feature.calendar.datasource.igdb.field
 
-import ru.pixnews.feature.calendar.datasource.igdb.field.IgdbFieldDsl
-import ru.pixnews.feature.calendar.datasource.igdb.field.IgdbRequestField
+import ru.pixnews.feature.calendar.datasource.igdb.dsl.IgdbFieldDsl
+import ru.pixnews.feature.calendar.datasource.igdb.dsl.IgdbRequestField
 import ru.pixnews.igdbclient.model.Game
 import ru.pixnews.igdbclient.model.Game as IgdbGame
 
-private val rootIgdbGameFieldBuilder: IgdbGameFieldBuilder = IgdbGameFieldBuilder()
-public val IgdbGame.Companion.field: IgdbGameFieldBuilder
-    get() = rootIgdbGameFieldBuilder
+private val rootIgdbGameFields: IgdbGameFields = IgdbGameFields()
+public val IgdbGame.Companion.field: IgdbGameFields
+    get() = rootIgdbGameFields
 
 @Suppress("VariableNaming")
 @IgdbFieldDsl
-public class IgdbGameFieldBuilder internal constructor(
+public class IgdbGameFields internal constructor(
     parent: IgdbRequestField<*>? = null,
-) : IgdbRequestFieldBuilder<IgdbGame>(parent) {
+) : IgdbRequestFields<IgdbGame>(parent) {
     public val id: IgdbRequestField<IgdbGame> get() = named("id")
-    public val age_ratings: IgdbAgeRatingsFieldBuilder
-        get() = IgdbAgeRatingsFieldBuilder(named("age_ratings"))
+    public val age_ratings: AgeRatingFields
+        get() = AgeRatingFields(named("age_ratings"))
     public val aggregated_rating: IgdbRequestField<IgdbGame> = named("aggregated_rating")
     public val aggregated_rating_count: IgdbRequestField<IgdbGame> = named("aggregated_rating_count")
     public val alternative_names: IgdbRequestField<IgdbGame> = named("alternative_names")
@@ -79,5 +79,5 @@ public class IgdbGameFieldBuilder internal constructor(
     public val game_localizations: IgdbRequestField<IgdbGame> get() = named("game_localizations")
 
     private fun named(igdbFieldName: String): IgdbRequestField<Game> =
-        IgdbRequestField(igdbFieldName, Game::class, parent)
+        IgdbRequestField(igdbFieldName, Game::class, parentIgdbField)
 }

@@ -231,6 +231,7 @@ retrofit-converter-scalars = { group = "com.squareup.retrofit2", name = "convert
 retrofit-converter-wire = { group = "com.squareup.retrofit2", name = "converter-wire", version.ref = "retrofit" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 wire-runtime-jvm = { group = "com.squareup.wire", name = "wire-runtime-jvm", version.ref = "wire" }
+wire-schema = { group = "com.squareup.wire", name = "wire-schema", version.ref = "wire" }
 
 # Dependencies of the included build-logic
 agp-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }

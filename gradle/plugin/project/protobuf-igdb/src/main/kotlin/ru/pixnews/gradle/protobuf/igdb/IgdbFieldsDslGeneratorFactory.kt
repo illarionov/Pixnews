@@ -10,10 +10,12 @@ import com.squareup.wire.schema.Extend
 import com.squareup.wire.schema.Field
 import com.squareup.wire.schema.ProtoType
 import com.squareup.wire.schema.SchemaHandler
+import com.squareup.wire.schema.Service
 import com.squareup.wire.schema.Type
 import okio.Path
 
 public class IgdbFieldsDslGeneratorFactory : SchemaHandler.Factory {
+    @Deprecated("Deprecated in parent")
     override fun create(): SchemaHandler = error("Should not be called")
 
     override fun create(
@@ -30,13 +32,13 @@ private class IgdbFieldsDslGenerator : SchemaHandler() {
         return null
     }
 
-    override fun handle(service: com.squareup.wire.schema.Service, context: Context): List<Path> {
+    override fun handle(service: Service, context: Context): List<Path> {
         return listOf()
     }
 
     override fun handle(type: Type, context: Context): Path? {
         if ((type is EnumType)
-            || (type.type.simpleName == "Count")
+            || (type.name in EXCLUDED_MESSAGES)
             || (type.type.simpleName.endsWith("Result"))
         ) return null
 
@@ -50,7 +52,7 @@ private class IgdbFieldsDslGenerator : SchemaHandler() {
     private fun writeFieldsDslFileFile(
         protoType: ProtoType,
         fileContent: String,
-        context: SchemaHandler.Context,
+        context: Context,
     ): Path {
         val outDirectory = context.outDirectory
         val fileSystem = context.fileSystem
@@ -65,5 +67,13 @@ private class IgdbFieldsDslGenerator : SchemaHandler() {
         val result = protoType.toString().split(".").toMutableList()
         result[result.lastIndex] += "Fields.kt"
         return result
+    }
+
+    private companion object {
+        val EXCLUDED_MESSAGES: Set<String> = setOf(
+            "Count",
+            "MultiQueryResult",
+            "MultiQueryResultArray"
+        )
     }
 }

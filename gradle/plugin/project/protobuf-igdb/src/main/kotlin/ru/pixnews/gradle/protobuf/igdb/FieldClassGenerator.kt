@@ -16,6 +16,7 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.STAR
 import com.squareup.kotlinpoet.STRING
+import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.wire.schema.EnclosingType
 import com.squareup.wire.schema.Field
@@ -25,11 +26,11 @@ import com.squareup.wire.schema.Type
 internal class FieldClassGenerator(
     private val type: Type,
 ) : () -> String {
-    private val outputFieldsClassName: ClassName = ClassName(PACKAGE_NAME, type.name + "Fields")
+    private val outputFieldsClassName: ClassName = outputFieldsClassName(type.name)
     private val outputFileName = outputFieldsClassName.simpleName
-    private val igdbclientModelClass = ClassName(IGDBCLIENT_MODEL_PACKAGE_NAME, type.name)
-    private val igdbclientModelClassCompanion = ClassName(IGDBCLIENT_MODEL_PACKAGE_NAME, type.name, "Companion")
-    private val fieldsReturnType = IGDB_REQUEST_FIELD_CLASS.parameterizedBy(igdbclientModelClass)
+    private val igdbclientModel = ClassName(IGDBCLIENT_MODEL_PACKAGE_NAME, type.name)
+    private val igdbclientModelCompanion = ClassName(IGDBCLIENT_MODEL_PACKAGE_NAME, type.name, "Companion")
+    private val fieldsReturnType = IGDB_REQUEST_FIELD_CLASS.parameterizedBy(igdbclientModel)
 
     private val parentConstructorParameter = ParameterSpec.builder(
         "parentIgdbField",
@@ -43,7 +44,7 @@ internal class FieldClassGenerator(
      * private fun named(igdbFieldName: String): IgdbRequestField<Game> = IgdbRequestField(...
      * ```
      */
-    private val namedFunction: FunSpec = run {
+    private val namedFunc: FunSpec = run {
         val igdbFieldNameParameter = ParameterSpec.builder("igdbFieldName", STRING).build()
         FunSpec.builder("named")
             .addModifiers(PRIVATE)
@@ -57,7 +58,7 @@ internal class FieldClassGenerator(
         )""".trimIndent(),
                 IGDB_REQUEST_FIELD_CLASS,
                 igdbFieldNameParameter,
-                igdbclientModelClass,
+                igdbclientModel,
                 parentConstructorParameter
             )
             .build()
@@ -65,7 +66,7 @@ internal class FieldClassGenerator(
 
     override fun invoke(): String = FileSpec
         .builder(PACKAGE_NAME, outputFileName)
-        .addFunction(generateClassCompanionFieldMethod())
+        .addFunction(generateClassCompanionFieldFactory())
         .addType(generateFieldsClass())
         .build()
         .toString()
@@ -75,8 +76,8 @@ internal class FieldClassGenerator(
      * public fun Game.Companion.field(): GameFields = GameFields()
      * ```
      */
-    private fun generateClassCompanionFieldMethod(): FunSpec = FunSpec.builder("field")
-        .receiver(igdbclientModelClassCompanion)
+    private fun generateClassCompanionFieldFactory(): FunSpec = FunSpec.builder("field")
+        .receiver(igdbclientModelCompanion)
         .addModifiers(PUBLIC)
         .returns(outputFieldsClassName)
         .addStatement("return %T()", outputFieldsClassName)
@@ -84,11 +85,10 @@ internal class FieldClassGenerator(
 
     /**
      * ```
-     * public class GameFields...
+     * public class GameFields internal constructor()...
      * ```
      */
     private fun generateFieldsClass(): TypeSpec {
-
         val primaryConstructor = FunSpec.constructorBuilder()
             .addModifiers(INTERNAL)
             .addParameter(parentConstructorParameter)
@@ -98,37 +98,43 @@ internal class FieldClassGenerator(
             .addModifiers(PUBLIC)
             .addAnnotation(IGDB_FIELD_DSL_CLASS)
             .primaryConstructor(primaryConstructor)
-            .superclass(IGDB_REQUEST_FIELDS_BASE_CLASS.parameterizedBy(igdbclientModelClass))
+            .superclass(IGDB_REQUEST_FIELDS_BASE_CLASS.parameterizedBy(igdbclientModel))
             .addSuperclassConstructorParameter("%N", parentConstructorParameter)
 
         when (type) {
-            is MessageType -> classBuilder.addDeclaredFields(type)
-            is EnclosingType -> Unit //TODO
+            is MessageType -> classBuilder.addProperties(type.declaredFields.map(::generateProperty))
+            is EnclosingType -> Unit
             else -> Unit
         }
 
-        classBuilder.addFunction(namedFunction)
+        classBuilder.addFunction(namedFunc)
         return classBuilder.build()
     }
 
     /**
      * ```
      * public val id: IgdbRequestField<Game> get() = named("id")
+     * public val age_ratings: AgeRatingFields<Game> get() = AgeRatingFields(named("age_ratings"))
      * ```
      */
-    private fun TypeSpec.Builder.addDeclaredFields(messageType: MessageType) {
-        val properties = messageType.declaredFields
-            .map { field ->
-                PropertySpec.builder(field.name, fieldsReturnType, PUBLIC)
-                    .getter(generateGetterForField(field))
-                    .build()
-            }
-        this.addProperties(properties)
-    }
+    private fun generateProperty(field: Field): PropertySpec {
+        val returnType: TypeName
+        val getter: FunSpec
+        if (field.isIgdbObjectModel()) {
+            val fieldFieldsClass = outputFieldsClassName(field.type?.simpleName ?: error("field.type not set"))
+            returnType = fieldFieldsClass
+            getter = FunSpec.getterBuilder()
+                .addStatement("return %T(%N(%S))", fieldFieldsClass, namedFunc, field.name)
+                .build()
+        } else {
+            returnType = fieldsReturnType
+            getter = FunSpec.getterBuilder()
+                .addStatement("return %N(%S)", namedFunc, field.name)
+                .build()
+        }
 
-    private fun generateGetterForField(field: Field): FunSpec {
-        return FunSpec.getterBuilder()
-            .addStatement("return %N(%S)", namedFunction, field.name)
+        return PropertySpec.builder(field.name, returnType, PUBLIC)
+            .getter(getter)
             .build()
     }
 
@@ -141,7 +147,16 @@ internal class FieldClassGenerator(
             "ru.pixnews.feature.calendar.datasource.igdb.field",
             "IgdbRequestFields",
         )
+
+        private fun outputFieldsClassName(typeName: String) : ClassName = ClassName(PACKAGE_NAME, typeName + "Fields")
+
+        private fun Field.isIgdbObjectModel(): Boolean = this.type?.let { type ->
+            when {
+                type.toString().endsWith("Enum") -> false
+                type.enclosingTypeOrPackage == IGDBCLIENT_MODEL_PACKAGE_NAME -> true
+                else -> false
+            }
+        } ?: false
     }
 }
-
 

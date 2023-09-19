@@ -19,9 +19,7 @@ public data class IgdbRequestField<O : Any>(
             parent.igdbName + "." + this.igdbFieldName
         }
 
-    override fun toString(): String {
-        return "IgdbRequestField('$igdbName')"
-    }
+    override fun toString(): String = igdbName
 }
 
 public fun IgdbRequestField<*>.child(name: String): IgdbRequestField<Nothing> = IgdbRequestField(

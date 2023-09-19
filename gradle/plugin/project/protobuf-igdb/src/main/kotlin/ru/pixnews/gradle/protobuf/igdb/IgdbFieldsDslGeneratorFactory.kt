@@ -15,6 +15,7 @@ import com.squareup.wire.schema.Type
 import okio.Path
 
 public class IgdbFieldsDslGeneratorFactory : SchemaHandler.Factory {
+    @Suppress("WRONG_OVERLOADING_FUNCTION_ARGUMENTS")
     @Deprecated("Deprecated in parent")
     override fun create(): SchemaHandler = error("Should not be called")
 
@@ -37,10 +38,12 @@ private class IgdbFieldsDslGenerator : SchemaHandler() {
     }
 
     override fun handle(type: Type, context: Context): Path? {
-        if ((type is EnumType)
-            || (type.name in EXCLUDED_MESSAGES)
-            || (type.type.simpleName.endsWith("Result"))
-        ) return null
+        if ((type is EnumType) ||
+            (type.name in EXCLUDED_MESSAGES) ||
+            (type.type.simpleName.endsWith("Result"))
+        ) {
+            return null
+        }
 
         return writeFieldsDslFileFile(
             type.type,
@@ -73,7 +76,7 @@ private class IgdbFieldsDslGenerator : SchemaHandler() {
         val EXCLUDED_MESSAGES: Set<String> = setOf(
             "Count",
             "MultiQueryResult",
-            "MultiQueryResultArray"
+            "MultiQueryResultArray",
         )
     }
 }

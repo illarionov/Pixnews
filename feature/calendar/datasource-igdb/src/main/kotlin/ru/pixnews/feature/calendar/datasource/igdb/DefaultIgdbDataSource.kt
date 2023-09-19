@@ -19,7 +19,6 @@ import ru.pixnews.feature.calendar.data.IgdbDataSource
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toGame
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toNetworkResult
 import ru.pixnews.feature.calendar.datasource.igdb.dsl.IgdbRequestField
-import ru.pixnews.feature.calendar.datasource.igdb.dsl.child
 import ru.pixnews.feature.calendar.datasource.igdb.field.field
 import ru.pixnews.foundation.coroutines.ComputationCoroutineDispatcherProvider
 import ru.pixnews.foundation.di.base.scopes.AppScope
@@ -53,7 +52,7 @@ public class DefaultIgdbDataSource(
         requiredFields: Set<GameField>,
     ): NetworkResult<List<Game>> {
         val igdbFields = requiredFields.toIgdbRequestFields() + setOf(
-            IgdbGame.field.release_dates.child("*"),
+            IgdbGame.field.release_dates.all,
         )
         logger.i { "request fields: $igdbFields" }
 
@@ -98,56 +97,60 @@ public class DefaultIgdbDataSource(
         GameField.Description -> listOf(IgdbGame.field.storyline)
         GameField.Summary -> listOf(IgdbGame.field.summary)
         GameField.VideoUrls -> listOf(
-            IgdbGame.field.videos.child("video_id"),
+            IgdbGame.field.videos.video_id,
         )
 
         GameField.Screenshots -> listOf(
-            "image_id",
-            "animated",
-            "width",
-            "height",
-        ).map { IgdbGame.field.cover.child(it) } + listOf(
-            "image_id",
-            "animated",
-            "width",
-            "height",
-        ).map { IgdbGame.field.screenshots.child(it) }
+            IgdbGame.field.cover.image_id,
+            IgdbGame.field.cover.animated,
+            IgdbGame.field.cover.width,
+            IgdbGame.field.cover.height,
+            IgdbGame.field.screenshots.image_id,
+            IgdbGame.field.screenshots.animated,
+            IgdbGame.field.screenshots.width,
+            IgdbGame.field.screenshots.height,
+        )
 
-        GameField.Developer, GameField.Publisher -> listOf(
-            IgdbGame.field.involved_companies.child("developer"),
-        ) + listOf(
-            "id",
-            "name",
-            "developer",
-            "publisher",
-            "description",
-            "start_date",
-            "start_date_category",
-            "country",
-            "parent",
-            "url",
-            "websites.category",
-            "websites.url",
-        ).map { IgdbGame.field.involved_companies.child("company").child(it) } + listOf(
-            "image_id",
-            "animated",
-            "width",
-            "height",
-        ).map { IgdbGame.field.involved_companies.child("company").child("logo").child(it) }
+        GameField.Developer, GameField.Publisher -> IgdbGame.field.involved_companies.let {
+            listOf(
+                it.developer,
+                it.company.id,
+                it.company.name,
+                it.developer,
+                it.publisher,
+            )
+        } + IgdbGame.field.involved_companies.company.let { company ->
+            listOf(
+                company.description,
+                company.start_date,
+                company.start_date_category,
+                company.country,
+                company.parent.id,
+                company.url,
+                company.websites.category,
+                company.websites.url,
+                company.logo.image_id,
+                company.logo.animated,
+                company.logo.width,
+                company.logo.height,
+            )
+        }
 
-        GameField.ReleaseDate -> listOf(
-            "category",
-            "date",
-            "y",
-            "m",
-            "human",
-        ).map { IgdbGame.field.release_dates.child(it) }
+        GameField.ReleaseDate -> IgdbGame.field.release_dates.let {
+            listOf(
+                it.category,
+                it.date,
+                it.y,
+                it.m,
+                it.human,
+            )
+        }
 
         GameField.ReleaseStatus -> listOf(IgdbGame.field.status)
 
-        GameField.Genres -> listOf(IgdbGame.field.genres.child("name"))
+        GameField.Genres -> listOf(IgdbGame.field.genres.name)
 
-        GameField.Tags -> listOf(IgdbGame.field.themes.child("name"))
+        GameField.Tags -> listOf(IgdbGame.field.themes.name)
 
         GameField.Ratings -> listOf(
             IgdbGame.field.rating_count,
@@ -158,49 +161,51 @@ public class DefaultIgdbDataSource(
 
         GameField.Links -> listOf(
             IgdbGame.field.url,
-        ) + listOf(
-            "category",
-            "url",
-        ).map { IgdbGame.field.websites.child(it) }
+            IgdbGame.field.websites.category,
+            IgdbGame.field.websites.url,
+        )
 
         GameField.Category -> listOf(
-            IgdbGame.field.parent_game,
+            IgdbGame.field.parent_game.id,
             IgdbGame.field.category,
         )
 
-        is GameField.ParentGame -> listOf(IgdbGame.field.parent_game)
+        is GameField.ParentGame -> listOf(
+            IgdbGame.field.parent_game.id,
+        )
+
         is GameField.Series -> listOf(
-            IgdbGame.field.collection.child("id"),
-            IgdbGame.field.collection.child("name"),
-            IgdbGame.field.collection.child("games").child("id"),
-            IgdbGame.field.collection.child("games").child("name"),
-        ) + listOf(
-            IgdbGame.field.parent_game,
+            IgdbGame.field.collection.id,
+            IgdbGame.field.collection.name,
+            IgdbGame.field.collection.games.id,
+            IgdbGame.field.collection.games.name,
+            IgdbGame.field.parent_game.id,
         )
 
         is GameField.Platforms -> listOf(
-            "id",
-            "slug",
-            "name",
-        ).map { IgdbGame.field.platforms.child(it) }
+            IgdbGame.field.platforms.id,
+            IgdbGame.field.platforms.slug,
+            IgdbGame.field.platforms.name,
+        )
 
         GameField.AgeRanking -> IgdbGame.field.age_ratings.let {
             listOf(it.id, it.category, it.rating)
         }
 
         GameField.Localizations -> listOf(
-            IgdbGame.field.language_supports.child("language_support_type"),
-            IgdbGame.field.language_supports.child("language").child("locale"),
+            IgdbGame.field.language_supports.language_support_type.id,
+            IgdbGame.field.language_supports.language_support_type.name,
+            IgdbGame.field.language_supports.language.locale,
         )
 
         is GameField.GameMode -> listOf(
-            IgdbGame.field.game_modes.child("id"),
-            IgdbGame.field.game_modes.child("slug"),
-            IgdbGame.field.game_modes.child("name"),
+            IgdbGame.field.game_modes.id,
+            IgdbGame.field.game_modes.slug,
+            IgdbGame.field.game_modes.name,
         )
 
         is GameField.PlayerPerspective -> listOf(
-            IgdbGame.field.player_perspectives.child("id"),
+            IgdbGame.field.player_perspectives.id,
         )
 
         GameField.SystemRequirements -> error("$this not supported")

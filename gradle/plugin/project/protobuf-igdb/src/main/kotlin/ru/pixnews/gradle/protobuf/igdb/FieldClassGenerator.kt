@@ -39,8 +39,8 @@ internal class FieldClassGenerator(
      * ```
      */
     private val backingInstance: PropertySpec = PropertySpec.builder(
-        "_" + outputFieldsClassName.simpleName.replaceFirstChar { it.lowercase(Locale.ROOT) } + "Instance",
-        outputFieldsClassName
+        "_${outputFieldsClassName.simpleName.replaceFirstChar { it.lowercase(Locale.ROOT) }}Instance",
+        outputFieldsClassName,
     )
         .addModifiers(PRIVATE)
         .initializer("%T()", outputFieldsClassName)
@@ -54,17 +54,18 @@ internal class FieldClassGenerator(
     private val classCompanionFieldFactory: PropertySpec = PropertySpec.builder("field", outputFieldsClassName)
         .receiver(igdbclientModelCompanion)
         .addModifiers(PUBLIC)
-        .getter(FunSpec.getterBuilder()
-            .addStatement("return %N", backingInstance)
-            .build())
+        .getter(
+            FunSpec.getterBuilder()
+                .addStatement("return %N", backingInstance)
+                .build(),
+        )
         .build()
-
     private val parentConstructorParameter = ParameterSpec.builder(
         "parentIgdbField",
-        IGDB_REQUEST_FIELD_CLASS.parameterizedBy(STAR).copy(nullable = true)
+        IGDB_REQUEST_FIELD_CLASS.parameterizedBy(STAR).copy(nullable = true),
     )
-            .defaultValue("null")
-            .build()
+        .defaultValue("null")
+        .build()
 
     /***
      * ```
@@ -77,11 +78,12 @@ internal class FieldClassGenerator(
             .addModifiers(PRIVATE)
             .returns(fieldsReturnType)
             .addParameter(igdbFieldNameParameter)
-            .addStatement("return %T(%N, %T::class, %N)",
+            .addStatement(
+                "return %T(%N, %T::class, %N)",
                 IGDB_REQUEST_FIELD_CLASS,
                 igdbFieldNameParameter,
                 igdbclientModel,
-                parentConstructorParameter
+                parentConstructorParameter,
             )
             .build()
     }
@@ -159,7 +161,7 @@ internal class FieldClassGenerator(
             "IgdbRequestFields",
         )
 
-        private fun outputFieldsClassName(typeName: String) : ClassName = ClassName(PACKAGE_NAME, typeName + "Fields")
+        private fun outputFieldsClassName(typeName: String): ClassName = ClassName(PACKAGE_NAME, typeName + "Fields")
 
         private fun Field.isIgdbObjectModel(): Boolean = this.type?.let { type ->
             when {
@@ -170,4 +172,3 @@ internal class FieldClassGenerator(
         } ?: false
     }
 }
-

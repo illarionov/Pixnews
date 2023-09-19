@@ -7,10 +7,10 @@ package ru.pixnews.feature.calendar.datasource.igdb.dsl
 
 import kotlin.reflect.KClass
 
-public data class IgdbRequestField<O : Any>(
-    val igdbFieldName: String,
-    val fieldClass: KClass<O>,
-    val parent: IgdbRequestField<*>? = null,
+public data class IgdbRequestField<O : Any> internal constructor(
+    public val igdbFieldName: String,
+    public val fieldClass: KClass<O>,
+    public val parent: IgdbRequestField<*>? = null,
 ) {
     public val igdbName: String
         get() = if (parent == null) {
@@ -21,9 +21,3 @@ public data class IgdbRequestField<O : Any>(
 
     override fun toString(): String = igdbName
 }
-
-public fun IgdbRequestField<*>.child(name: String): IgdbRequestField<Nothing> = IgdbRequestField(
-    name,
-    Nothing::class,
-    this,
-)

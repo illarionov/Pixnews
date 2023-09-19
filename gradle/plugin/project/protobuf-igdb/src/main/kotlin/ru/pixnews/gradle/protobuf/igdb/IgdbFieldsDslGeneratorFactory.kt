@@ -13,6 +13,7 @@ import com.squareup.wire.schema.SchemaHandler
 import com.squareup.wire.schema.Service
 import com.squareup.wire.schema.Type
 import okio.Path
+import ru.pixnews.gradle.protobuf.igdb.FieldClassGenerator.Companion.getFieldsClassPath
 
 public class IgdbFieldsDslGeneratorFactory : SchemaHandler.Factory {
     @Suppress("WRONG_OVERLOADING_FUNCTION_ARGUMENTS")
@@ -28,14 +29,12 @@ public class IgdbFieldsDslGeneratorFactory : SchemaHandler.Factory {
     ): SchemaHandler = IgdbFieldsDslGenerator()
 }
 
-private class IgdbFieldsDslGenerator : SchemaHandler() {
-    override fun handle(extend: Extend, field: Field, context: Context): Path? {
-        return null
-    }
+private class IgdbFieldsDslGenerator(
+    val fieldClassGenerator: (Type, Context) -> String = { type, _ -> FieldClassGenerator(type).invoke() },
+) : SchemaHandler() {
+    override fun handle(extend: Extend, field: Field, context: Context): Path? = null
 
-    override fun handle(service: Service, context: Context): List<Path> {
-        return listOf()
-    }
+    override fun handle(service: Service, context: Context): List<Path> = listOf()
 
     override fun handle(type: Type, context: Context): Path? {
         if ((type is EnumType) ||
@@ -47,7 +46,7 @@ private class IgdbFieldsDslGenerator : SchemaHandler() {
 
         return writeFieldsDslFileFile(
             type.type,
-            FieldClassGenerator(type).invoke(),
+            fieldClassGenerator(type, context),
             context,
         )
     }
@@ -59,20 +58,13 @@ private class IgdbFieldsDslGenerator : SchemaHandler() {
     ): Path {
         val outDirectory = context.outDirectory
         val fileSystem = context.fileSystem
-        val path = outDirectory / toPath(protoType).joinToString(separator = "/")
+        val path = outDirectory / getFieldsClassPath(protoType).joinToString(separator = "/")
         fileSystem.createDirectories(path.parent!!)
         fileSystem.write(path) { writeUtf8(fileContent) }
         return path
     }
 
-    /** Returns a path like `igdb/field/GameFields.kt`. */
-    private fun toPath(protoType: ProtoType): List<String> {
-        val result = protoType.toString().split(".").toMutableList()
-        result[result.lastIndex] += "Fields.kt"
-        return result
-    }
-
-    private companion object {
+    internal companion object {
         val EXCLUDED_MESSAGES: Set<String> = setOf(
             "Count",
             "MultiQueryResult",

@@ -31,4 +31,5 @@ dependencies {
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.kotest.assertions.core)
     testImplementation(libs.kotlin.compile.testing)
+    testImplementation(kotlin("scripting-compiler"))
 }

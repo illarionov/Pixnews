@@ -468,6 +468,11 @@
             <pgp value="8e3a02905a1ae67e7b0f9acd3967d4eda591b991"/>
          </artifact>
       </component>
+      <component group="org.jline" name="jline" version="3.3.1">
+         <artifact name="jline-3.3.1.jar">
+            <pgp value="ea23db1360d9029481e7f2efecdfea3cb4493b94"/>
+         </artifact>
+      </component>
       <component group="org.json" name="json" version="20230227">
          <artifact name="json-20230227.jar">
             <pgp value="86616cd3c4f0803e73374a434dbf5995d492505d"/>

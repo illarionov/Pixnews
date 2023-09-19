@@ -21,6 +21,7 @@ import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.wire.schema.EnclosingType
 import com.squareup.wire.schema.Field
 import com.squareup.wire.schema.MessageType
+import com.squareup.wire.schema.ProtoType
 import com.squareup.wire.schema.Type
 import java.util.Locale
 
@@ -151,7 +152,7 @@ internal class FieldClassGenerator(
             .build()
     }
 
-    private companion object {
+    internal companion object {
         const val PACKAGE_NAME = "ru.pixnews.feature.calendar.datasource.igdb.field"
         const val IGDBCLIENT_MODEL_PACKAGE_NAME = "ru.pixnews.igdbclient.model"
         val IGDB_FIELD_DSL_CLASS = ClassName("ru.pixnews.feature.calendar.datasource.igdb.dsl", "IgdbFieldDsl")
@@ -160,6 +161,13 @@ internal class FieldClassGenerator(
             "ru.pixnews.feature.calendar.datasource.igdb.field",
             "IgdbRequestFields",
         )
+
+        /** Returns a path like `igdb/field/GameFields.kt`. */
+        fun getFieldsClassPath(protoType: ProtoType): List<String> {
+            val result = protoType.toString().split(".").toMutableList()
+            result[result.lastIndex] += "Fields.kt"
+            return result
+        }
 
         private fun outputFieldsClassName(typeName: String): ClassName = ClassName(PACKAGE_NAME, typeName + "Fields")
 

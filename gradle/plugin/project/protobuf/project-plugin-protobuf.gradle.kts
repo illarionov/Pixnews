@@ -11,5 +11,6 @@ group = "ru.pixnews.gradle.protobuf"
 dependencies {
     implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
     implementation(projects.base)
+    api(projects.protobufIgdb)
     implementation(libs.wire.plugin)
 }

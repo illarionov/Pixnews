@@ -22,6 +22,7 @@ import com.squareup.wire.schema.EnclosingType
 import com.squareup.wire.schema.Field
 import com.squareup.wire.schema.MessageType
 import com.squareup.wire.schema.Type
+import java.util.Locale
 
 internal class FieldClassGenerator(
     private val type: Type,
@@ -31,6 +32,32 @@ internal class FieldClassGenerator(
     private val igdbclientModel = ClassName(IGDBCLIENT_MODEL_PACKAGE_NAME, type.name)
     private val igdbclientModelCompanion = ClassName(IGDBCLIENT_MODEL_PACKAGE_NAME, type.name, "Companion")
     private val fieldsReturnType = IGDB_REQUEST_FIELD_CLASS.parameterizedBy(igdbclientModel)
+
+    /**
+     * ```
+     * private val _gameFieldsInstance = IgdbGameFields()
+     * ```
+     */
+    private val backingInstance: PropertySpec = PropertySpec.builder(
+        "_" + outputFieldsClassName.simpleName.replaceFirstChar { it.lowercase(Locale.ROOT) } + "Instance",
+        outputFieldsClassName
+    )
+        .addModifiers(PRIVATE)
+        .initializer("%T()", outputFieldsClassName)
+        .build()
+
+    /**
+     * ```
+     * public val Game.Companion.field: IgdbGameFields get() = _gameFieldsInstance
+     * ```
+     */
+    private val classCompanionFieldFactory: PropertySpec = PropertySpec.builder("field", outputFieldsClassName)
+        .receiver(igdbclientModelCompanion)
+        .addModifiers(PUBLIC)
+        .getter(FunSpec.getterBuilder()
+            .addStatement("return %N", backingInstance)
+            .build())
+        .build()
 
     private val parentConstructorParameter = ParameterSpec.builder(
         "parentIgdbField",
@@ -50,12 +77,7 @@ internal class FieldClassGenerator(
             .addModifiers(PRIVATE)
             .returns(fieldsReturnType)
             .addParameter(igdbFieldNameParameter)
-            .addStatement(
-                """return %T(
-            %N,
-            %T::class,
-            %N,
-        )""".trimIndent(),
+            .addStatement("return %T(%N, %T::class, %N)",
                 IGDB_REQUEST_FIELD_CLASS,
                 igdbFieldNameParameter,
                 igdbclientModel,
@@ -66,22 +88,11 @@ internal class FieldClassGenerator(
 
     override fun invoke(): String = FileSpec
         .builder(PACKAGE_NAME, outputFileName)
-        .addFunction(generateClassCompanionFieldFactory())
+        .addProperty(backingInstance)
+        .addProperty(classCompanionFieldFactory)
         .addType(generateFieldsClass())
         .build()
         .toString()
-
-    /**
-     * ```
-     * public fun Game.Companion.field(): GameFields = GameFields()
-     * ```
-     */
-    private fun generateClassCompanionFieldFactory(): FunSpec = FunSpec.builder("field")
-        .receiver(igdbclientModelCompanion)
-        .addModifiers(PUBLIC)
-        .returns(outputFieldsClassName)
-        .addStatement("return %T()", outputFieldsClassName)
-        .build()
 
     /**
      * ```

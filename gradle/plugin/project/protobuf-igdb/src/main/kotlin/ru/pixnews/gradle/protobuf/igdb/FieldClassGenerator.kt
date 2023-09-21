@@ -22,7 +22,13 @@ import com.squareup.wire.schema.Field
 import com.squareup.wire.schema.MessageType
 import com.squareup.wire.schema.ProtoType
 import com.squareup.wire.schema.Type
-import ru.pixnews.gradle.protobuf.igdb.SchemeEnumClassGenerator.Companion.SCHEME_PACKAGE_NAME
+import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.FEATURE_FLAG_WITH_BACKING_INSTANCE
+import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.IGDBCLIENT_MODEL_PACKAGE_NAME
+import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.IGDB_FIELD_DSL_CLASS
+import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.IGDB_REQUEST_FIELDS_BASE_CLASS
+import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.IGDB_REQUEST_FIELD_CLASS
+import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.PACKAGE_NAME
+import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.SCHEME_PACKAGE_NAME
 import java.util.Locale
 import kotlin.LazyThreadSafetyMode.NONE
 
@@ -173,16 +179,6 @@ internal class FieldClassGenerator(
     }
 
     internal companion object {
-        const val FEATURE_FLAG_WITH_BACKING_INSTANCE = false
-        const val PACKAGE_NAME = "ru.pixnews.feature.calendar.datasource.igdb.field"
-        const val IGDBCLIENT_MODEL_PACKAGE_NAME = "ru.pixnews.igdbclient.model"
-        val IGDB_FIELD_DSL_CLASS = ClassName("ru.pixnews.feature.calendar.datasource.igdb.dsl", "IgdbFieldDsl")
-        val IGDB_REQUEST_FIELD_CLASS = ClassName("ru.pixnews.feature.calendar.datasource.igdb.dsl", "IgdbRequestField")
-        val IGDB_REQUEST_FIELDS_BASE_CLASS = ClassName(
-            "ru.pixnews.feature.calendar.datasource.igdb.field",
-            "IgdbRequestFields",
-        )
-
         /** Returns a path like `igdb/field/GameFields.kt`. */
         private fun getFieldsClassPath(protoType: ProtoType): List<String> = PACKAGE_NAME.split(".") + listOf(
             protoType.simpleName + "Fields.kt",

@@ -19,6 +19,9 @@ import com.squareup.wire.schema.Field
 import com.squareup.wire.schema.MessageType
 import com.squareup.wire.schema.ProtoType
 import com.squareup.wire.schema.Type
+import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.IGDBCLIENT_MODEL_PACKAGE_NAME
+import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.IGDB_FIELD_INTERFACE
+import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.SCHEME_PACKAGE_NAME
 import java.util.Locale
 
 internal class SchemeEnumClassGenerator(
@@ -26,7 +29,7 @@ internal class SchemeEnumClassGenerator(
 ) : () -> GeneratedFileContent {
     private val outputClassName: ClassName = outputEnumSchemeClassName(type.name)
     private val outputFileName = outputClassName.simpleName
-    private val igdbclientModel = ClassName(FieldClassGenerator.IGDBCLIENT_MODEL_PACKAGE_NAME, type.name)
+    private val igdbclientModel = ClassName(IGDBCLIENT_MODEL_PACKAGE_NAME, type.name)
 
     override fun invoke(): GeneratedFileContent = GeneratedFileContent(
         filePath = getEnumSchemeClassPath(type.type),
@@ -81,9 +84,6 @@ internal class SchemeEnumClassGenerator(
     }
 
     internal companion object {
-        const val SCHEME_PACKAGE_NAME = "ru.pixnews.feature.calendar.datasource.igdb.field.scheme"
-        val IGDB_FIELD_INTERFACE = ClassName("ru.pixnews.feature.calendar.datasource.igdb.field.scheme", "IgdbField")
-
         /** Returns a path like `igdb/field/scheme/GameField.kt`. */
         private fun getEnumSchemeClassPath(protoType: ProtoType): List<String> =
             SCHEME_PACKAGE_NAME.split(".") + listOf(

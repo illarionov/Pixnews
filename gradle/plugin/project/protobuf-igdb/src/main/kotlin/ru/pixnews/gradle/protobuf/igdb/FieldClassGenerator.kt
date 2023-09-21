@@ -15,7 +15,6 @@ import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.STAR
-import com.squareup.kotlinpoet.STRING
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.wire.schema.EnclosingType
@@ -23,11 +22,12 @@ import com.squareup.wire.schema.Field
 import com.squareup.wire.schema.MessageType
 import com.squareup.wire.schema.ProtoType
 import com.squareup.wire.schema.Type
+import ru.pixnews.gradle.protobuf.igdb.SchemeEnumClassGenerator.Companion.SCHEME_PACKAGE_NAME
 import java.util.Locale
 
 internal class FieldClassGenerator(
     private val type: Type,
-) : () -> String {
+) : () -> GeneratedFileContent {
     private val outputFieldsClassName: ClassName = outputFieldsClassName(type.name)
     private val outputFileName = outputFieldsClassName.simpleName
     private val igdbclientModel = ClassName(IGDBCLIENT_MODEL_PACKAGE_NAME, type.name)
@@ -68,34 +68,16 @@ internal class FieldClassGenerator(
         .defaultValue("null")
         .build()
 
-    /***
-     * ```
-     * private fun named(igdbFieldName: String): IgdbRequestField<Game> = IgdbRequestField(...
-     * ```
-     */
-    private val namedFunc: FunSpec = run {
-        val igdbFieldNameParameter = ParameterSpec.builder("igdbFieldName", STRING).build()
-        FunSpec.builder("named")
-            .addModifiers(PRIVATE)
-            .returns(fieldsReturnType)
-            .addParameter(igdbFieldNameParameter)
-            .addStatement(
-                "return %T(%N, %T::class, %N)",
-                IGDB_REQUEST_FIELD_CLASS,
-                igdbFieldNameParameter,
-                igdbclientModel,
-                parentConstructorParameter,
-            )
+    override fun invoke(): GeneratedFileContent = GeneratedFileContent(
+        filePath = getFieldsClassPath(type.type),
+        content = FileSpec
+            .builder(PACKAGE_NAME, outputFileName)
+            .addProperty(backingInstance)
+            .addProperty(classCompanionFieldFactory)
+            .addType(generateFieldsClass())
             .build()
-    }
-
-    override fun invoke(): String = FileSpec
-        .builder(PACKAGE_NAME, outputFileName)
-        .addProperty(backingInstance)
-        .addProperty(classCompanionFieldFactory)
-        .addType(generateFieldsClass())
-        .build()
-        .toString()
+            .toString(),
+    )
 
     /**
      * ```
@@ -121,29 +103,47 @@ internal class FieldClassGenerator(
             else -> Unit
         }
 
-        classBuilder.addFunction(namedFunc)
         return classBuilder.build()
     }
 
     /**
      * ```
-     * public val id: IgdbRequestField<Game> get() = named("id")
-     * public val age_ratings: AgeRatingFields<Game> get() = AgeRatingFields(named("age_ratings"))
+     * public val id: IgdbRequestField<Game> get() = IgdbRequestField(GameField.ID, parentIgdbField)
+     * public val age_ratings: AgeRatingFields<Game> get() =
+     *     AgeRatingFields(IgdbRequestField(GameField.AGE_RATINGS, parentIgdbField))
      * ```
      */
     private fun generateProperty(field: Field): PropertySpec {
         val returnType: TypeName
         val getter: FunSpec
+
+        val enumFieldRef = ClassName(
+            SCHEME_PACKAGE_NAME,
+            type.name + "Field",
+            field.name.uppercase(),
+        )
+
         if (field.isIgdbObjectModel()) {
             val fieldFieldsClass = outputFieldsClassName(field.type?.simpleName ?: error("field.type not set"))
             returnType = fieldFieldsClass
             getter = FunSpec.getterBuilder()
-                .addStatement("return %T(%N(%S))", fieldFieldsClass, namedFunc, field.name)
+                .addStatement(
+                    "return %T(%T(%T, %N))",
+                    fieldFieldsClass,
+                    IGDB_REQUEST_FIELD_CLASS,
+                    enumFieldRef,
+                    parentConstructorParameter,
+                )
                 .build()
         } else {
             returnType = fieldsReturnType
             getter = FunSpec.getterBuilder()
-                .addStatement("return %N(%S)", namedFunc, field.name)
+                .addStatement(
+                    "return %T(%T, %N)",
+                    IGDB_REQUEST_FIELD_CLASS,
+                    enumFieldRef,
+                    parentConstructorParameter,
+                )
                 .build()
         }
 
@@ -163,11 +163,9 @@ internal class FieldClassGenerator(
         )
 
         /** Returns a path like `igdb/field/GameFields.kt`. */
-        fun getFieldsClassPath(protoType: ProtoType): List<String> {
-            val result = protoType.toString().split(".").toMutableList()
-            result[result.lastIndex] += "Fields.kt"
-            return result
-        }
+        private fun getFieldsClassPath(protoType: ProtoType): List<String> = PACKAGE_NAME.split(".") + listOf(
+            protoType.simpleName + "Fields.kt",
+        )
 
         private fun outputFieldsClassName(typeName: String): ClassName = ClassName(PACKAGE_NAME, typeName + "Fields")
 

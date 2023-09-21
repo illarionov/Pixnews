@@ -7,32 +7,30 @@ package ru.pixnews.feature.calendar.datasource.igdb.dsl
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import ru.pixnews.igdbclient.model.AgeRating
-import ru.pixnews.igdbclient.model.AgeRatingContentDescription
-import ru.pixnews.igdbclient.model.Game
+import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.AgeRatingField
+import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.GameField
+import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.IgdbField
 
 class IgdbRequestFieldTest {
     @Test
     fun `getIgdbName() should return correct path on field with no parent`() {
-        val field = IgdbRequestField("*", Nothing::class)
+        val field = IgdbRequestField(IgdbField.ALL, null)
 
-        field.igdbName shouldBe "*"
+        field.igdbFullName shouldBe "*"
     }
 
     @Test
     fun `getIgdbName() should return correct path on field with parents`() {
-        val gameField = IgdbRequestField("id", Game::class)
+        val gameField = IgdbRequestField(GameField.ID)
         val ageRatingField = IgdbRequestField(
-            "age_rating",
-            AgeRating::class,
+            GameField.AGE_RATINGS,
             gameField,
         )
         val contentDescription = IgdbRequestField(
-            "content_descriptions",
-            AgeRatingContentDescription::class,
+            AgeRatingField.CONTENT_DESCRIPTIONS,
             ageRatingField,
         )
 
-        contentDescription.igdbName shouldBe "id.age_rating.content_descriptions"
+        contentDescription.igdbFullName shouldBe "id.age_ratings.content_descriptions"
     }
 }

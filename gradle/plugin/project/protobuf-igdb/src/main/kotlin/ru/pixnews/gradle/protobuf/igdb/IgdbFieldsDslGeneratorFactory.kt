@@ -41,7 +41,7 @@ private class IgdbFieldsDslGenerator(
 
     override fun handle(type: Type, context: Context): Path? {
         if ((type is EnumType) ||
-            (type.name in EXCLUDED_MESSAGES) ||
+            (type.name in IgdbFieldsDslGeneratorPaths.EXCLUDED_MESSAGES) ||
             (type.type.simpleName.endsWith("Result"))
         ) {
             return null
@@ -67,13 +67,5 @@ private class IgdbFieldsDslGenerator(
         fileSystem.createDirectories(path.parent!!)
         fileSystem.write(path) { writeUtf8(generatedFile.content) }
         return path
-    }
-
-    internal companion object {
-        val EXCLUDED_MESSAGES: Set<String> = setOf(
-            "Count",
-            "MultiQueryResult",
-            "MultiQueryResultArray",
-        )
     }
 }

@@ -24,6 +24,7 @@ import com.squareup.wire.schema.ProtoType
 import com.squareup.wire.schema.Type
 import ru.pixnews.gradle.protobuf.igdb.SchemeEnumClassGenerator.Companion.SCHEME_PACKAGE_NAME
 import java.util.Locale
+import kotlin.LazyThreadSafetyMode.NONE
 
 internal class FieldClassGenerator(
     private val type: Type,
@@ -52,15 +53,28 @@ internal class FieldClassGenerator(
      * public val Game.Companion.field: IgdbGameFields get() = _gameFieldsInstance
      * ```
      */
-    private val classCompanionFieldFactory: PropertySpec = PropertySpec.builder("field", outputFieldsClassName)
-        .receiver(igdbclientModelCompanion)
-        .addModifiers(PUBLIC)
-        .getter(
-            FunSpec.getterBuilder()
-                .addStatement("return %N", backingInstance)
-                .build(),
-        )
-        .build()
+    private val classCompanionFieldFactory: PropertySpec by lazy(NONE) {
+        PropertySpec.builder("field", outputFieldsClassName)
+            .receiver(igdbclientModelCompanion)
+            .addModifiers(PUBLIC)
+            .getter(
+                FunSpec.getterBuilder()
+                    .addStatement("return %N", backingInstance)
+                    .build(),
+            )
+            .build()
+    }
+    private val classCompanionFieldFactoryNoBackingField: PropertySpec by lazy(NONE) {
+        PropertySpec.builder("field", outputFieldsClassName)
+            .receiver(igdbclientModelCompanion)
+            .addModifiers(PUBLIC)
+            .getter(
+                FunSpec.getterBuilder()
+                    .addStatement("return %T()", outputFieldsClassName)
+                    .build(),
+            )
+            .build()
+    }
     private val parentConstructorParameter = ParameterSpec.builder(
         "parentIgdbField",
         IGDB_REQUEST_FIELD_CLASS.parameterizedBy(STAR).copy(nullable = true),
@@ -72,8 +86,14 @@ internal class FieldClassGenerator(
         filePath = getFieldsClassPath(type.type),
         content = FileSpec
             .builder(PACKAGE_NAME, outputFileName)
-            .addProperty(backingInstance)
-            .addProperty(classCompanionFieldFactory)
+            .apply {
+                if (FEATURE_FLAG_WITH_BACKING_INSTANCE) {
+                    addProperty(backingInstance)
+                    addProperty(classCompanionFieldFactory)
+                } else {
+                    addProperty(classCompanionFieldFactoryNoBackingField)
+                }
+            }
             .addType(generateFieldsClass())
             .build()
             .toString(),
@@ -153,6 +173,7 @@ internal class FieldClassGenerator(
     }
 
     internal companion object {
+        const val FEATURE_FLAG_WITH_BACKING_INSTANCE = false
         const val PACKAGE_NAME = "ru.pixnews.feature.calendar.datasource.igdb.field"
         const val IGDBCLIENT_MODEL_PACKAGE_NAME = "ru.pixnews.igdbclient.model"
         val IGDB_FIELD_DSL_CLASS = ClassName("ru.pixnews.feature.calendar.datasource.igdb.dsl", "IgdbFieldDsl")

@@ -60,7 +60,7 @@ public class DefaultIgdbDataSource(
         val igdbGameResult = igdbClient.execute(
             endpoint = IgdbEndpoint.GAME,
             query = apicalypseQuery {
-                fields(fieldList = igdbFields.map { it.igdbName }.toTypedArray())
+                fields(fieldList = igdbFields.map { it.igdbFullName }.toTypedArray())
                 where("release_dates.date > ${startDate.epochSeconds}")
                 limit(10)
                 sort("id", DESC)

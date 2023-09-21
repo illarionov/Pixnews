@@ -68,12 +68,11 @@ class FieldClassGeneratorTest {
     private fun compileFieldsClass(vararg types: Type): JvmCompilationResult {
         val generatedSources = types
             .map { type ->
-                val path = FieldClassGenerator.getFieldsClassPath(type.type)
                 val generatedSourceText = FieldClassGenerator(type).invoke()
 
                 SourceFile.kotlin(
-                    path.last(),
-                    generatedSourceText,
+                    generatedSourceText.filePath.last(),
+                    generatedSourceText.content,
                 )
             }
 

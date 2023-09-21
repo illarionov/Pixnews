@@ -8,12 +8,10 @@ package ru.pixnews.gradle.protobuf.igdb
 import com.squareup.wire.schema.EnumType
 import com.squareup.wire.schema.Extend
 import com.squareup.wire.schema.Field
-import com.squareup.wire.schema.ProtoType
 import com.squareup.wire.schema.SchemaHandler
 import com.squareup.wire.schema.Service
 import com.squareup.wire.schema.Type
 import okio.Path
-import ru.pixnews.gradle.protobuf.igdb.FieldClassGenerator.Companion.getFieldsClassPath
 
 public class IgdbFieldsDslGeneratorFactory : SchemaHandler.Factory {
     @Suppress("WRONG_OVERLOADING_FUNCTION_ARGUMENTS")
@@ -30,7 +28,12 @@ public class IgdbFieldsDslGeneratorFactory : SchemaHandler.Factory {
 }
 
 private class IgdbFieldsDslGenerator(
-    val fieldClassGenerator: (Type, Context) -> String = { type, _ -> FieldClassGenerator(type).invoke() },
+    val fieldClassGenerator: (Type, Context) -> GeneratedFileContent = { type, _ ->
+        FieldClassGenerator(type).invoke()
+    },
+    val enumSchemeClassGenerator: (Type, Context) -> GeneratedFileContent = { type, _ ->
+        SchemeEnumClassGenerator(type).invoke()
+    },
 ) : SchemaHandler() {
     override fun handle(extend: Extend, field: Field, context: Context): Path? = null
 
@@ -43,24 +46,26 @@ private class IgdbFieldsDslGenerator(
         ) {
             return null
         }
+        val generatedSchemeEnumClass = enumSchemeClassGenerator(type, context)
+        val generatedFieldsDslClass = fieldClassGenerator(type, context)
 
-        return writeFieldsDslFileFile(
-            type.type,
-            fieldClassGenerator(type, context),
-            context,
-        )
+        val enumClassPath = writeGeneratedFile(context, generatedSchemeEnumClass)
+        val fieldsDslPath = writeGeneratedFile(context, generatedFieldsDslClass)
+
+        context.claimedPaths.claim(enumClassPath, type)
+
+        return fieldsDslPath
     }
 
-    private fun writeFieldsDslFileFile(
-        protoType: ProtoType,
-        fileContent: String,
+    private fun writeGeneratedFile(
         context: Context,
+        generatedFile: GeneratedFileContent,
     ): Path {
         val outDirectory = context.outDirectory
         val fileSystem = context.fileSystem
-        val path = outDirectory / getFieldsClassPath(protoType).joinToString(separator = "/")
+        val path = outDirectory / generatedFile.filePath.joinToString(separator = "/")
         fileSystem.createDirectories(path.parent!!)
-        fileSystem.write(path) { writeUtf8(fileContent) }
+        fileSystem.write(path) { writeUtf8(generatedFile.content) }
         return path
     }
 

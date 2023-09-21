@@ -7,6 +7,7 @@ package ru.pixnews.feature.featuretoggles.ui
 
 import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -44,6 +45,7 @@ internal fun FeatureToggleListScreen(
 }
 
 @VisibleForTesting
+@ExperimentalMaterial3Api
 @Composable
 internal fun FeatureToggleListScreen(
     state: FeatureTogglesScreenState,

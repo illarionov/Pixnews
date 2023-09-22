@@ -24,6 +24,9 @@ import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.IGDB_FIELD_IN
 import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.SCHEME_PACKAGE_NAME
 import java.util.Locale
 
+/**
+ * Generator of enum class with all fields of the Igdb object type
+ */
 internal class SchemeEnumClassGenerator(
     private val type: Type,
 ) : () -> GeneratedFileContent {
@@ -90,6 +93,6 @@ internal class SchemeEnumClassGenerator(
                 protoType.simpleName + "Field.kt",
             )
 
-        private fun outputEnumSchemeClassName(typeName: String) = ClassName(SCHEME_PACKAGE_NAME, typeName + "Field")
+        internal fun outputEnumSchemeClassName(typeName: String) = ClassName(SCHEME_PACKAGE_NAME, typeName + "Field")
     }
 }

@@ -26,7 +26,7 @@ import ru.pixnews.gradle.protobuf.igdb.FieldsTestFixtures.IGDB_REQUEST_FIELD_STU
 import ru.pixnews.gradle.protobuf.igdb.FieldsTestFixtures.forceSetType
 
 @OptIn(ExperimentalCompilerApi::class)
-class FieldClassGeneratorTest {
+class RequestFieldsDslClassGenerator {
     @Test
     fun `generated field class should compile`() {
         val gameType = DEFAULT_MESSAGE_TYPE.copy(

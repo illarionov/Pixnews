@@ -23,19 +23,20 @@ import com.squareup.wire.schema.MessageType
 import com.squareup.wire.schema.ProtoType
 import com.squareup.wire.schema.Type
 import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.FEATURE_FLAG_WITH_BACKING_INSTANCE
+import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.FIELD_FIELD_ID_METHOD_NAME
 import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.IGDBCLIENT_MODEL_PACKAGE_NAME
 import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.IGDB_FIELD_DSL_CLASS
 import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.IGDB_REQUEST_FIELDS_BASE_CLASS
 import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.IGDB_REQUEST_FIELD_CLASS
 import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.PACKAGE_NAME
-import ru.pixnews.gradle.protobuf.igdb.IgdbFieldsDslGeneratorPaths.SCHEME_PACKAGE_NAME
 import java.util.Locale
 import kotlin.LazyThreadSafetyMode.NONE
 
-internal class FieldClassGenerator(
+internal class RequestFieldsDslClassGenerator(
     private val type: Type,
 ) : () -> GeneratedFileContent {
     private val outputFieldsClassName: ClassName = outputFieldsClassName(type.name)
+    private val fieldsClassName: ClassName = SchemeEnumClassGenerator.outputEnumSchemeClassName(type.name)
     private val outputFileName = outputFieldsClassName.simpleName
     private val igdbclientModel = ClassName(IGDBCLIENT_MODEL_PACKAGE_NAME, type.name)
     private val igdbclientModelCompanion = ClassName(IGDBCLIENT_MODEL_PACKAGE_NAME, type.name, "Companion")
@@ -120,7 +121,10 @@ internal class FieldClassGenerator(
             .addModifiers(PUBLIC)
             .addAnnotation(IGDB_FIELD_DSL_CLASS)
             .primaryConstructor(primaryConstructor)
-            .superclass(IGDB_REQUEST_FIELDS_BASE_CLASS.parameterizedBy(igdbclientModel))
+            .superclass(
+                IGDB_REQUEST_FIELDS_BASE_CLASS
+                    .parameterizedBy(fieldsClassName, igdbclientModel),
+            )
             .addSuperclassConstructorParameter("%N", parentConstructorParameter)
 
         when (type) {
@@ -143,32 +147,26 @@ internal class FieldClassGenerator(
         val returnType: TypeName
         val getter: FunSpec
 
-        val enumFieldRef = ClassName(
-            SCHEME_PACKAGE_NAME,
-            type.name + "Field",
-            field.name.uppercase(),
-        )
+        val enumFieldRef = fieldsClassName.nestedClass(field.name.uppercase())
 
         if (field.isIgdbObjectModel()) {
             val fieldFieldsClass = outputFieldsClassName(field.type?.simpleName ?: error("field.type not set"))
             returnType = fieldFieldsClass
             getter = FunSpec.getterBuilder()
                 .addStatement(
-                    "return %T(%T(%T, %N))",
+                    "return %T(%L(%T))",
                     fieldFieldsClass,
-                    IGDB_REQUEST_FIELD_CLASS,
+                    FIELD_FIELD_ID_METHOD_NAME,
                     enumFieldRef,
-                    parentConstructorParameter,
                 )
                 .build()
         } else {
             returnType = fieldsReturnType
             getter = FunSpec.getterBuilder()
                 .addStatement(
-                    "return %T(%T, %N)",
-                    IGDB_REQUEST_FIELD_CLASS,
+                    "return %L(%T)",
+                    FIELD_FIELD_ID_METHOD_NAME,
                     enumFieldRef,
-                    parentConstructorParameter,
                 )
                 .build()
         }

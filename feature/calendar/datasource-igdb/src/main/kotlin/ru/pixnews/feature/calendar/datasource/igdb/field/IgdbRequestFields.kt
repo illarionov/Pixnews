@@ -10,8 +10,10 @@ import ru.pixnews.feature.calendar.datasource.igdb.dsl.IgdbRequestField
 import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.IgdbField
 
 @IgdbFieldDsl
-public sealed class IgdbRequestFields<out T : Any>(
+public sealed class IgdbRequestFields<F : IgdbField<T>, out T : Any>(
     protected val parentIgdbField: IgdbRequestField<*>? = null,
 ) {
-    public val all: IgdbRequestField<T> get() = IgdbRequestField(IgdbField.ALL, parentIgdbField)
+    public val all: IgdbRequestField<F> get() = IgdbRequestField(IgdbField.ALL, parentIgdbField)
+
+    public fun fieldWithId(fieldId: F): IgdbRequestField<T> = IgdbRequestField(fieldId, parentIgdbField)
 }

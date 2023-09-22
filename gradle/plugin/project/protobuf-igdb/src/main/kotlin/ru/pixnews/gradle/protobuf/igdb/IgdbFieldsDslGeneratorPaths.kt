@@ -12,6 +12,7 @@ internal object IgdbFieldsDslGeneratorPaths {
     const val PACKAGE_NAME = "ru.pixnews.feature.calendar.datasource.igdb.field"
     const val SCHEME_PACKAGE_NAME = "ru.pixnews.feature.calendar.datasource.igdb.field.scheme"
     const val IGDBCLIENT_MODEL_PACKAGE_NAME = "ru.pixnews.igdbclient.model"
+    const val FIELD_FIELD_ID_METHOD_NAME = "fieldWithId"
     val IGDB_FIELD_DSL_CLASS = ClassName("ru.pixnews.feature.calendar.datasource.igdb.dsl", "IgdbFieldDsl")
     val IGDB_REQUEST_FIELD_CLASS = ClassName("ru.pixnews.feature.calendar.datasource.igdb.dsl", "IgdbRequestField")
     val IGDB_FIELD_INTERFACE = ClassName("ru.pixnews.feature.calendar.datasource.igdb.field.scheme", "IgdbField")

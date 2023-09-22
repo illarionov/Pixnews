@@ -29,7 +29,7 @@ public class IgdbFieldsDslGeneratorFactory : SchemaHandler.Factory {
 
 private class IgdbFieldsDslGenerator(
     val fieldClassGenerator: (Type, Context) -> GeneratedFileContent = { type, _ ->
-        FieldClassGenerator(type).invoke()
+        RequestFieldsDslClassGenerator(type).invoke()
     },
     val enumSchemeClassGenerator: (Type, Context) -> GeneratedFileContent = { type, _ ->
         SchemeEnumClassGenerator(type).invoke()

@@ -19,7 +19,13 @@ import ru.pixnews.feature.calendar.data.IgdbDataSource
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toGame
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toNetworkResult
 import ru.pixnews.feature.calendar.datasource.igdb.dsl.IgdbRequestField
+import ru.pixnews.feature.calendar.datasource.igdb.field.IgdbRequestFields
 import ru.pixnews.feature.calendar.datasource.igdb.field.field
+import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.CompanyLogoField
+import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.CoverField
+import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.IgdbField
+import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.ReleaseDateField
+import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.ScreenshotField
 import ru.pixnews.foundation.coroutines.ComputationCoroutineDispatcherProvider
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.igdbclient.IgdbClient
@@ -96,24 +102,13 @@ public class DefaultIgdbDataSource(
         GameField.Name -> listOf(IgdbGame.field.name)
         GameField.Description -> listOf(IgdbGame.field.storyline)
         GameField.Summary -> listOf(IgdbGame.field.summary)
-        GameField.VideoUrls -> listOf(
-            IgdbGame.field.videos.video_id,
-        )
+        GameField.VideoUrls -> listOf(IgdbGame.field.videos.video_id)
 
-        GameField.Screenshots -> listOf(
-            IgdbGame.field.cover.image_id,
-            IgdbGame.field.cover.animated,
-            IgdbGame.field.cover.width,
-            IgdbGame.field.cover.height,
-            IgdbGame.field.screenshots.image_id,
-            IgdbGame.field.screenshots.animated,
-            IgdbGame.field.screenshots.width,
-            IgdbGame.field.screenshots.height,
-        )
+        GameField.Screenshots -> IgdbGame.field.cover.fieldsWithId(COVER_REQUESTED_FIELDS) +
+                IgdbGame.field.screenshots.fieldsWithId(SCREENSHOT_REQUESTED_FIELDS)
 
         GameField.Developer, GameField.Publisher -> IgdbGame.field.involved_companies.let {
             listOf(
-                it.developer,
                 it.company.id,
                 it.company.name,
                 it.developer,
@@ -129,22 +124,10 @@ public class DefaultIgdbDataSource(
                 company.url,
                 company.websites.category,
                 company.websites.url,
-                company.logo.image_id,
-                company.logo.animated,
-                company.logo.width,
-                company.logo.height,
-            )
+            ) + company.logo.fieldsWithId(COMPANY_LOGO_REQUESTED_FIELDS)
         }
 
-        GameField.ReleaseDate -> IgdbGame.field.release_dates.let {
-            listOf(
-                it.category,
-                it.date,
-                it.y,
-                it.m,
-                it.human,
-            )
-        }
+        GameField.ReleaseDate -> IgdbGame.field.release_dates.fieldsWithId(RELEASE_DATES_REQUESTED_FIELDS)
 
         GameField.ReleaseStatus -> listOf(IgdbGame.field.status)
 
@@ -209,5 +192,37 @@ public class DefaultIgdbDataSource(
         )
 
         GameField.SystemRequirements -> error("$this not supported")
+    }
+
+    private companion object {
+        private val COVER_REQUESTED_FIELDS: List<CoverField> = listOf(
+            CoverField.IMAGE_ID,
+            CoverField.ANIMATED,
+            CoverField.WIDTH,
+            CoverField.HEIGHT,
+        )
+        private val COMPANY_LOGO_REQUESTED_FIELDS: List<CompanyLogoField> = listOf(
+            CompanyLogoField.IMAGE_ID,
+            CompanyLogoField.ANIMATED,
+            CompanyLogoField.WIDTH,
+            CompanyLogoField.HEIGHT,
+        )
+        private val SCREENSHOT_REQUESTED_FIELDS: List<ScreenshotField> = listOf(
+            ScreenshotField.IMAGE_ID,
+            ScreenshotField.ANIMATED,
+            ScreenshotField.WIDTH,
+            ScreenshotField.HEIGHT,
+        )
+        private val RELEASE_DATES_REQUESTED_FIELDS: List<ReleaseDateField> = listOf(
+            ReleaseDateField.CATEGORY,
+            ReleaseDateField.DATE,
+            ReleaseDateField.Y,
+            ReleaseDateField.M,
+            ReleaseDateField.HUMAN,
+        )
+
+        private fun <F : IgdbField<*>> IgdbRequestFields<F, *>.fieldsWithId(
+            fields: Collection<F>,
+        ): List<IgdbRequestField<*>> = fields.map(this::fieldWithId)
     }
 }

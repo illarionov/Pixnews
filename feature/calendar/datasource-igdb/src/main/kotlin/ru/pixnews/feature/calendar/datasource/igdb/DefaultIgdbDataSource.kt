@@ -18,20 +18,20 @@ import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.feature.calendar.data.IgdbDataSource
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toGame
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toNetworkResult
-import ru.pixnews.feature.calendar.datasource.igdb.dsl.IgdbRequestField
-import ru.pixnews.feature.calendar.datasource.igdb.field.IgdbRequestFields
-import ru.pixnews.feature.calendar.datasource.igdb.field.field
-import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.CompanyLogoField
-import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.CoverField
-import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.IgdbField
-import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.ReleaseDateField
-import ru.pixnews.feature.calendar.datasource.igdb.field.scheme.ScreenshotField
 import ru.pixnews.foundation.coroutines.ComputationCoroutineDispatcherProvider
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.igdbclient.IgdbClient
 import ru.pixnews.igdbclient.IgdbEndpoint
 import ru.pixnews.igdbclient.apicalypse.SortOrder.DESC
 import ru.pixnews.igdbclient.apicalypse.apicalypseQuery
+import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
+import ru.pixnews.igdbclient.dsl.field.IgdbRequestFieldDsl
+import ru.pixnews.igdbclient.dsl.field.field
+import ru.pixnews.igdbclient.scheme.field.CompanyLogoField
+import ru.pixnews.igdbclient.scheme.field.CoverField
+import ru.pixnews.igdbclient.scheme.field.IgdbField
+import ru.pixnews.igdbclient.scheme.field.ReleaseDateField
+import ru.pixnews.igdbclient.scheme.field.ScreenshotField
 import ru.pixnews.library.functional.network.NetworkRequestFailure
 import ru.pixnews.library.functional.network.NetworkResult
 import javax.inject.Inject
@@ -66,7 +66,7 @@ public class DefaultIgdbDataSource(
         val igdbGameResult = igdbClient.execute(
             endpoint = IgdbEndpoint.GAME,
             query = apicalypseQuery {
-                fields(fieldList = igdbFields.map { it.igdbFullName }.toTypedArray())
+                fields(fieldList = igdbFields.toTypedArray())
                 where("release_dates.date > ${startDate.epochSeconds}")
                 limit(10)
                 sort("id", DESC)
@@ -221,7 +221,7 @@ public class DefaultIgdbDataSource(
             ReleaseDateField.HUMAN,
         )
 
-        private fun <F : IgdbField<*>> IgdbRequestFields<F, *>.fieldsWithId(
+        private fun <F : IgdbField<*>> IgdbRequestFieldDsl<F, *>.fieldsWithId(
             fields: Collection<F>,
         ): List<IgdbRequestField<*>> = fields.map(this::fieldWithId)
     }

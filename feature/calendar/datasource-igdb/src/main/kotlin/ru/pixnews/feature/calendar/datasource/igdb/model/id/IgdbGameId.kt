@@ -10,4 +10,8 @@ import ru.pixnews.domain.model.id.GameId
 @JvmInline
 internal value class IgdbGameId(
     val id: Long,
-) : GameId
+) : GameId {
+    internal companion object {
+        internal fun Long.asIgdbGameId(): GameId = IgdbGameId(this)
+    }
+}

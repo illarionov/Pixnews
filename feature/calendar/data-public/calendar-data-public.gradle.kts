@@ -14,5 +14,6 @@ pixnews {
 group = "ru.pixnews.feature.calendar.data"
 
 dependencies {
+    api(projects.library.coroutines)
     implementation(projects.foundation.domainModel)
 }

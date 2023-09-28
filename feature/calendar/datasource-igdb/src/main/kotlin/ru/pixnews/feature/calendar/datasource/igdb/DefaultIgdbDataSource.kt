@@ -26,7 +26,6 @@ import ru.pixnews.igdbclient.IgdbEndpoint
 import ru.pixnews.igdbclient.apicalypse.SortOrder.DESC
 import ru.pixnews.igdbclient.apicalypse.apicalypseQuery
 import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.dsl.field.field
 import ru.pixnews.library.functional.network.NetworkRequestFailure
 import ru.pixnews.library.functional.network.NetworkResult
 import javax.inject.Inject
@@ -52,9 +51,7 @@ public class DefaultIgdbDataSource(
         startDate: Instant,
         requiredFields: Set<GameField>,
     ): NetworkResult<List<Game>> {
-        val igdbFields = requiredFields.toIgdbRequestFields() + setOf(
-            IgdbGame.field.release_dates.all,
-        )
+        val igdbFields = requiredFields.toIgdbRequestFields()
         logger.i { "request fields: $igdbFields" }
 
         @Suppress("MagicNumber")

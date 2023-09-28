@@ -9,8 +9,8 @@ import kotlinx.collections.immutable.persistentListOf
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
 import ru.pixnews.domain.model.id.GameSeriesSummaryId
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 public object GameSeriesSummaryFixtures
 

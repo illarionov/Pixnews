@@ -2,12 +2,16 @@
  * Copyright (c) 2023, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
+plugins {
+    id("ru.pixnews.gradle.kotlin.library")
+}
 
-package ru.pixnews.domain.model.locale
+pixnews {
+    compose.set(true)
+}
 
-import ru.pixnews.library.internationalization.country.CountryCode
+group = "ru.pixnews.library.internationalization"
 
-public object CountryCodeFixtures
-
-public val CountryCodeFixtures.us: CountryCode
-    get() = CountryCode("US")
+dependencies {
+    testImplementation(libs.junit.jupiter.params)
+}

@@ -22,11 +22,11 @@ import ru.pixnews.domain.model.game.adventure
 import ru.pixnews.domain.model.game.gta
 import ru.pixnews.domain.model.game.shooter
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal val gta6GameId = GameId("grand-theft-auto-vi")
 

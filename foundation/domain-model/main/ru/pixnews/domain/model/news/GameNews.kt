@@ -7,8 +7,8 @@ package ru.pixnews.domain.model.news
 
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.datetime.Instant
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 public data class GameNews(
     val id: GameNewsId,

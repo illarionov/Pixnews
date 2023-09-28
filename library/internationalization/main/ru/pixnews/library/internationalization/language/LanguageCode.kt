@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.domain.model.locale
+package ru.pixnews.library.internationalization.language
 
 /**
  * ISO 639-3 language code - https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes

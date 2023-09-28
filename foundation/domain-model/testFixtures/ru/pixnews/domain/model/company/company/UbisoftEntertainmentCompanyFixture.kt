@@ -13,7 +13,6 @@ import ru.pixnews.domain.model.company.CompanyStatus.ACTIVE
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
 import ru.pixnews.domain.model.id.DefaultCompanyId
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.DefaultImageUrl
 import ru.pixnews.domain.model.url.ExternalLink
@@ -22,6 +21,7 @@ import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
 import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 private val ubisoftEntertainmentCompanyId = DefaultCompanyId("ubisoft-entertainment")
 

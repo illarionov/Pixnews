@@ -9,7 +9,6 @@ import kotlinx.datetime.Month
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toKotlinInstant
 import kotlinx.datetime.toLocalDateTime
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.ApproximateDate.Unknown
@@ -26,6 +25,7 @@ import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ3
 import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ4
 import ru.pixnews.igdbclient.model.Game
 import ru.pixnews.igdbclient.model.ReleaseDate
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal object IgdbGameReleaseDateConverter : IgdbGameFieldConverter<ApproximateDate> {
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> {

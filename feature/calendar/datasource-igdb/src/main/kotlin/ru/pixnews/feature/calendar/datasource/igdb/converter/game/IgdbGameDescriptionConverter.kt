@@ -5,12 +5,12 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.RichText
 import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
 import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
 import ru.pixnews.igdbclient.model.Game
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal object IgdbGameDescriptionConverter : IgdbGameFieldConverter<Localized<RichText>> {
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> = listOf(from.storyline)

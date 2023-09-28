@@ -6,7 +6,7 @@
 package ru.pixnews.domain.model.url
 
 import kotlinx.collections.immutable.ImmutableList
-import ru.pixnews.domain.model.locale.LanguageCode
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 public data class ExternalLinks<out I>(
     val id: I,

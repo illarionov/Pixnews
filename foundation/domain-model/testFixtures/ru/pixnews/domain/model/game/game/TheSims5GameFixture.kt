@@ -25,7 +25,6 @@ import ru.pixnews.domain.model.game.rpg
 import ru.pixnews.domain.model.game.sims
 import ru.pixnews.domain.model.game.simulator
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.ExternalLink
 import ru.pixnews.domain.model.url.ExternalLinkType.TWITCH
@@ -33,6 +32,7 @@ import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 private val sims5GameId = GameId("the-sims-5")
 

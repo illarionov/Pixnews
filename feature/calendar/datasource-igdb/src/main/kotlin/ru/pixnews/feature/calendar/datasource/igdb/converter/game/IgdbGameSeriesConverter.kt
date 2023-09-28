@@ -8,7 +8,6 @@ package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import ru.pixnews.domain.model.game.GameSeriesSummary
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.errorFieldNotRequested
@@ -19,6 +18,7 @@ import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
 import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
 import ru.pixnews.igdbclient.model.Collection
 import ru.pixnews.igdbclient.model.Game
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal object IgdbGameSeriesConverter : IgdbGameFieldConverter<Ref<GameSeriesSummary>?> {
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> = listOf(

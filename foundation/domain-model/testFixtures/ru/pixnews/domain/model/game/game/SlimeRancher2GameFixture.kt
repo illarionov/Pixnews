@@ -35,7 +35,6 @@ import ru.pixnews.domain.model.game.shooter
 import ru.pixnews.domain.model.game.simulator
 import ru.pixnews.domain.model.game.slimeRancher
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
 import ru.pixnews.domain.model.rating.EsrbRating.EVERYONE_10PLUS
@@ -58,6 +57,7 @@ import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 private val slimeRancher2GameId = GameId("slime-rancher-2")
 

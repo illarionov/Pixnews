@@ -106,7 +106,7 @@ style:
     active: false
   UnusedPrivateMember:
     active: true
-    ignoreAnnotated: ['Preview', '*Previews']
+    ignoreAnnotated: ['Preview', 'Preview*']
 
 formatting:
   active: true

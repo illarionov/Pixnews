@@ -38,7 +38,7 @@ import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCard
 import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.library.ui.tooling.DevicePreviews
+import ru.pixnews.library.ui.tooling.PreviewDevices
 import ru.pixnews.library.ui.tooling.debuglayout.DebugLayout.Companion.debugLayout
 import ru.pixnews.library.ui.tooling.debuglayout.mediumLaptopScreen12Columns
 
@@ -132,7 +132,7 @@ internal fun GameSubheader(
     )
 }
 
-@DevicePreviews
+@PreviewDevices
 @Composable
 private fun PreviewCalendarScreenContent() {
     PixnewsTheme(

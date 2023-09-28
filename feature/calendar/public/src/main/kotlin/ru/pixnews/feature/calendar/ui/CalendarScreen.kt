@@ -25,7 +25,7 @@ import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
 import ru.pixnews.foundation.di.ui.base.viewmodel.injectedViewModel
 import ru.pixnews.foundation.ui.design.overlay.PixnewsLoadingOverlay
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.library.ui.tooling.PhonePreviews
+import ru.pixnews.library.ui.tooling.PreviewPhones
 
 @Composable
 internal fun CalendarScreen(
@@ -68,7 +68,7 @@ internal fun CalendarScreen(
     }
 }
 
-@PhonePreviews
+@PreviewPhones
 @Composable
 private fun CalendarScreenPreview() {
     PixnewsTheme {

@@ -22,7 +22,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.pixnews.feature.featuretoggles.R
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.library.ui.tooling.CompletePreviews
+import ru.pixnews.library.ui.tooling.PreviewComplete
 
 @Composable
 internal fun LoadingScreen(
@@ -47,7 +47,7 @@ internal fun LoadingScreen(
     }
 }
 
-@CompletePreviews
+@PreviewComplete
 @Composable
 private fun FeatureTogglesComposablePreviewLoading() {
     PixnewsTheme {

@@ -63,7 +63,7 @@ public const val DEVICE_SAMSUNG_S10_LITE: String = "spec:shape=Normal,width=412,
 )
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
-public annotation class PhonePreviews
+public annotation class PreviewPhones
 
 @Preview(
     name = "phone w360dp",
@@ -88,7 +88,7 @@ public annotation class PhonePreviews
 )
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
-public annotation class DevicePreviews
+public annotation class PreviewDevices
 
 @Preview(
     name = "Portrait Phone",
@@ -104,7 +104,7 @@ public annotation class DevicePreviews
 )
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
-public annotation class DeviceShapePreviews
+public annotation class PreviewDeviceShapes
 
 @Preview(
     name = "dark theme",
@@ -116,11 +116,11 @@ public annotation class DeviceShapePreviews
     group = "themes",
     uiMode = UI_MODE_NIGHT_NO,
 )
-@DevicePreviews
-public annotation class ThemePreviews
+@PreviewDevices
+public annotation class PreviewThemes
 
-@DevicePreviews
-@PhonePreviews
-@ThemePreviews
-@DeviceShapePreviews
-public annotation class CompletePreviews
+@PreviewDevices
+@PreviewPhones
+@PreviewThemes
+@PreviewDeviceShapes
+public annotation class PreviewComplete

@@ -50,6 +50,7 @@ listOf(
     "coroutines",
     "functional",
     "instrumented-test",
+    "internationalization",
     "kotlin-utils",
     "test",
     "ui-tooling",

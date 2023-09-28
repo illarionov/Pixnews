@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import ru.pixnews.domain.model.game.GameLocalizations
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.feature.calendar.datasource.igdb.converter.game.IgdbGameLocalizationsConverter.convert
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbLanguageSupportFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.languagesupport.englishSubtitlesSupport
@@ -24,6 +23,7 @@ import ru.pixnews.igdbclient.model.Game
 import ru.pixnews.igdbclient.model.Language
 import ru.pixnews.igdbclient.model.LanguageSupport
 import ru.pixnews.igdbclient.model.LanguageSupportType
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 class IgdbGameLocalizationsConverterTest {
     @ParameterizedTest

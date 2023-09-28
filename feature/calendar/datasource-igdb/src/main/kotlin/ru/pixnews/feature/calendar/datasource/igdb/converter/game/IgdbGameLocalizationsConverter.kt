@@ -7,7 +7,6 @@ package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
 import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.game.GameLocalizations
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.feature.calendar.datasource.igdb.converter.game.IgdbGameLocalizationsConverter.LanguageSupportType.SOUND
 import ru.pixnews.feature.calendar.datasource.igdb.converter.game.IgdbGameLocalizationsConverter.LanguageSupportType.TEXT
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireFieldInitialized
@@ -15,6 +14,7 @@ import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
 import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
 import ru.pixnews.igdbclient.model.Game
 import ru.pixnews.igdbclient.model.LanguageSupport
+import ru.pixnews.library.internationalization.language.LanguageCode
 import java.util.Locale
 import java.util.MissingResourceException
 

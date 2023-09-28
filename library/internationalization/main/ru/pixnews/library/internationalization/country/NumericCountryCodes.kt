@@ -3,10 +3,12 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.domain.model.locale
+package ru.pixnews.library.internationalization.country
+
+import ru.pixnews.library.internationalization.country.CountryCode.Companion
 
 @Suppress("MagicNumber", "LongMethod", "CyclomaticComplexMethod")
-public fun CountryCode.Companion.fromNumeric3Code(numeric3Code: Int): CountryCode {
+public fun Companion.fromNumeric3Code(numeric3Code: Int): CountryCode {
     val alpha2Code = when (numeric3Code) {
         4 -> "AF"
         8 -> "AL"

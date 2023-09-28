@@ -14,8 +14,6 @@ import org.junit.jupiter.params.provider.MethodSource
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.company.CompanyStatus.UNKNOWN
 import ru.pixnews.domain.model.id.CompanyId
-import ru.pixnews.domain.model.locale.CountryCode
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.ExternalLink
 import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
@@ -32,6 +30,8 @@ import ru.pixnews.feature.calendar.datasource.igdb.fixtures.company.wushuStudios
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbCompanyId
 import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
 import ru.pixnews.feature.calendar.datasource.igdb.model.url.IgdbImageUrl
+import ru.pixnews.library.internationalization.country.CountryCode
+import ru.pixnews.library.internationalization.language.LanguageCode
 import ru.pixnews.igdbclient.model.Company as IgdbCompany
 
 class IgdbCompanyConverterTest {

@@ -6,6 +6,7 @@
 package ru.pixnews.domain.model.locale
 
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 public data class Localized<out L>(
     public val value: L,

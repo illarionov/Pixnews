@@ -6,7 +6,7 @@
 package ru.pixnews.domain.model.game
 
 import kotlinx.collections.immutable.ImmutableMap
-import ru.pixnews.domain.model.locale.LanguageCode
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 public data class GameSystemRequirements(
     val requirements: ImmutableMap<GamePlatform, PlatformSystemRequirementsByType>,

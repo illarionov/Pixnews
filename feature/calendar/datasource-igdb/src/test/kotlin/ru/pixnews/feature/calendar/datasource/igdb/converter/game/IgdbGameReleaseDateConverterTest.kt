@@ -10,7 +10,6 @@ import io.kotest.matchers.equals.shouldBeEqual
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.ApproximateDate.ToBeDetermined
@@ -34,6 +33,7 @@ import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMM
 import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ3
 import ru.pixnews.igdbclient.model.Game
 import ru.pixnews.igdbclient.model.ReleaseDate
+import ru.pixnews.library.internationalization.language.LanguageCode
 import java.time.Instant
 import java.time.Month.JUNE
 import java.time.Month.MARCH

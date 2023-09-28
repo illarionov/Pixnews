@@ -9,7 +9,6 @@ import kotlinx.collections.immutable.ImmutableList
 import ru.pixnews.domain.model.company.CompanyStatus.UNKNOWN
 import ru.pixnews.domain.model.datasource.DataSource
 import ru.pixnews.domain.model.id.CompanyId
-import ru.pixnews.domain.model.locale.CountryCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.ExternalLink
 import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
@@ -19,6 +18,7 @@ import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.HasId
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.country.CountryCode
 
 public data class Company(
     override val id: CompanyId,

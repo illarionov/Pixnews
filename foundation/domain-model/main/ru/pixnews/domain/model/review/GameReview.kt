@@ -7,9 +7,9 @@ package ru.pixnews.domain.model.review
 
 import kotlinx.datetime.Instant
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.review.UserUtilityMark.UNSET
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 public data class GameReview(
     val id: GameReviewId,

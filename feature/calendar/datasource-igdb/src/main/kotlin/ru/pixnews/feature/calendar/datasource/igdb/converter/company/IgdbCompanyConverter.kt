@@ -14,10 +14,7 @@ import kotlinx.datetime.toLocalDateTime
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.company.CompanyStatus.UNKNOWN
 import ru.pixnews.domain.model.id.CompanyId
-import ru.pixnews.domain.model.locale.CountryCode
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
-import ru.pixnews.domain.model.locale.fromNumeric3Code
 import ru.pixnews.domain.model.url.ExternalLink
 import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate
@@ -48,6 +45,9 @@ import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ1
 import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ2
 import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ3
 import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ4
+import ru.pixnews.library.internationalization.country.CountryCode
+import ru.pixnews.library.internationalization.country.fromNumeric3Code
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal object IgdbCompanyConverter {
     fun getRequiredFields(from: CompanyFieldDsl): List<IgdbRequestField<*>> = with(from) {

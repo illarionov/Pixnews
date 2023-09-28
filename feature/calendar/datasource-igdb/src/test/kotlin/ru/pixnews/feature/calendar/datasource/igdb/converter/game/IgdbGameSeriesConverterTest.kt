@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameSeriesSummary
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.Ref.Id
@@ -23,6 +22,7 @@ import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameId
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameSeriesSummaryId
 import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
 import ru.pixnews.igdbclient.model.Collection
+import ru.pixnews.library.internationalization.language.LanguageCode
 import ru.pixnews.igdbclient.model.Game as IgdbGame
 
 class IgdbGameSeriesConverterTest {

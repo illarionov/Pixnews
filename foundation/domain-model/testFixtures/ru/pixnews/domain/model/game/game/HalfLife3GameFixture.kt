@@ -28,13 +28,13 @@ import ru.pixnews.domain.model.game.RatingsSummary
 import ru.pixnews.domain.model.game.halfLife
 import ru.pixnews.domain.model.game.shooter
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.DefaultImageUrl
 import ru.pixnews.domain.model.util.ApproximateDate.ToBeDetermined
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal val halflife3GameId = GameId("half-life-3")
 

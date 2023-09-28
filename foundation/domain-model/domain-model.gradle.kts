@@ -15,6 +15,7 @@ dependencies {
     api(projects.library.functional)
     api(libs.kotlinx.datetime)
     api(libs.androidx.annotation)
+    api(projects.library.internationalization)
     implementation(projects.library.kotlinUtils)
 
     testImplementation(libs.junit.jupiter.params)

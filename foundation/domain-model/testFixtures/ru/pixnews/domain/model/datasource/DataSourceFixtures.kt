@@ -7,9 +7,9 @@ package ru.pixnews.domain.model.datasource
 
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 public object DataSourceFixtures
 

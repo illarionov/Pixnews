@@ -14,7 +14,6 @@ import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
 import ru.pixnews.domain.model.id.DefaultCompanyId
 import ru.pixnews.domain.model.locale.CountryCodeFixtures
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.locale.us
 import ru.pixnews.domain.model.url.DefaultImageUrl
@@ -25,6 +24,7 @@ import ru.pixnews.domain.model.url.Url
 import ru.pixnews.domain.model.util.ApproximateDate.YearMonthDay
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 private val riotGamesCompanyId = DefaultCompanyId("riot-games")
 

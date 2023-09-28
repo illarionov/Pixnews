@@ -7,9 +7,9 @@ package ru.pixnews.feature.calendar.datasource.igdb.model
 
 import ru.pixnews.domain.model.datasource.DataSource
 import ru.pixnews.domain.model.datasource.DataSourceType
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.RichText
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal val igdbDataSource: DataSource = DataSource(
     source = DataSourceType.Igdb,

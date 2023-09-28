@@ -31,7 +31,6 @@ import ru.pixnews.domain.model.game.GameTag
 import ru.pixnews.domain.model.game.PlayerPerspective.Isometric
 import ru.pixnews.domain.model.game.RatingsSummary
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.domain.model.locale.LanguageCode
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
 import ru.pixnews.domain.model.rating.EsrbRating.MATURE_17PLUS
@@ -48,6 +47,7 @@ import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbCompanyId
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameId
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameSeriesSummaryId
 import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
+import ru.pixnews.library.internationalization.language.LanguageCode
 import java.time.Month.AUGUST
 
 class IgdbGameConverterTest {

@@ -78,7 +78,7 @@ kotlinx-coroutines = "1.7.3"
 kotlinx-collections-immutable = "0.3.5"
 kotlinx-dateime = "0.4.1"
 kotlinx-serialization = "1.6.0"
-wire = "4.9.0"
+wire = "4.9.1"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidx-activity" }

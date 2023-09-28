@@ -16,13 +16,13 @@ internal fun getWeekDays(date: LocalDate, firstDayOfWeek: DayOfWeek): List<Local
     val week: ArrayDeque<LocalDate> = ArrayDeque(7)
     var day = date
     while (day.dayOfWeek != firstDayOfWeek) {
-        day = day.minus(DateTimeUnit.DAY)
+        day = day.minus(1, DateTimeUnit.DAY)
         week.addFirst(day)
     }
     day = date
     do {
         week.addLast(day)
-        day = day.plus(DateTimeUnit.DAY)
+        day = day.plus(1, DateTimeUnit.DAY)
     } while (day.dayOfWeek != firstDayOfWeek)
     return week
 }

@@ -47,7 +47,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.isContainer
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.selected
@@ -113,7 +113,7 @@ internal fun WeekDaysRow(
                     .union(WindowInsets(left = 16.dp, right = 16.dp)),
             )
             .semantics {
-                isContainer = true
+                isTraversalGroup = true
                 testTag = CalendarTestTag.HEADER_WEEK_DAYS_ROW
             }
             .fillMaxWidth(),

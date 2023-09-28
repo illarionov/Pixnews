@@ -29,7 +29,7 @@ import ru.pixnews.feature.featuretoggles.R.string
 import ru.pixnews.feature.featuretoggles.model.PermanentErrorMessage
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.library.compose.utils.fillMinHeight
-import ru.pixnews.library.ui.tooling.CompletePreviews
+import ru.pixnews.library.ui.tooling.PreviewComplete
 
 @Composable
 @Suppress("MagicNumber")
@@ -79,7 +79,7 @@ internal fun PermanentErrorScreen(
     }
 }
 
-@CompletePreviews
+@PreviewComplete
 @Composable
 @Suppress("MagicNumber")
 private fun FeatureTogglesComposablePreviewError() {

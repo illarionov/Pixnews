@@ -24,7 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.library.ui.tooling.CompletePreviews
+import ru.pixnews.library.ui.tooling.PreviewComplete
 
 @Composable
 public fun PixnewsApp(
@@ -65,7 +65,7 @@ public fun PixnewsApp(
 }
 
 @Composable
-@CompletePreviews
+@PreviewComplete
 private fun PreviewApp() {
     PixnewsTheme(
         useDynamicColor = false,

@@ -8,7 +8,6 @@ package ru.pixnews.inject
 import android.os.Build
 import com.squareup.anvil.annotations.ContributesBinding
 import ru.pixnews.BuildConfig
-import ru.pixnews.config.GeneratedIgdbClientConfig
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.appconfig.HttpLoggingLevel
 import ru.pixnews.foundation.appconfig.IgdbClientConfig
@@ -30,5 +29,7 @@ public object TestPixnewsAppConfig : AppConfig {
             override val httpLoggingLevel: HttpLoggingLevel = HttpLoggingLevel.HEADERS
         }
     }
-    override val igdbClientConfig: IgdbClientConfig = GeneratedIgdbClientConfig
+    override val igdbClientConfig: IgdbClientConfig = object : IgdbClientConfig {
+        override val baseUrl: String = "https://localhost:1020/v4/"
+    }
 }

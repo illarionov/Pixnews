@@ -5,7 +5,7 @@
 
 package ru.pixnews.feature.calendar.domain
 
-import com.squareup.anvil.annotations.optional.SingleIn
+import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
@@ -15,16 +15,17 @@ import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.todayIn
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameField
+import ru.pixnews.feature.calendar.data.domain.ObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.library.functional.network.NetworkRequestStatus
 import javax.inject.Inject
 
-@SingleIn(AppScope::class)
+@ContributesBinding(boundType = ObserveUpcomingReleasesByDateUseCase::class, scope = AppScope::class)
 public class DefaultObserveUpcomingReleasesByDateUseCase(
     private val igdbRepository: IgdbRepository,
     private val clock: Clock,
     private val tzProvider: () -> TimeZone,
-) {
+) : ObserveUpcomingReleasesByDateUseCase {
     @Inject
     public constructor(
         igdbRepository: IgdbRepository,
@@ -34,7 +35,7 @@ public class DefaultObserveUpcomingReleasesByDateUseCase(
         tzProvider = TimeZone.Companion::currentSystemDefault,
     )
 
-    public fun createUpcomingReleasesObservable(
+    public override fun createUpcomingReleasesObservable(
         requiredFields: Set<GameField>,
     ): Flow<NetworkRequestStatus<List<Game>>> {
         return igdbRepository.createUpcomingReleasesObservable(

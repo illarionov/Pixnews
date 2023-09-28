@@ -9,14 +9,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import ru.pixnews.domain.model.game.Game
-import ru.pixnews.feature.calendar.domain.DefaultObserveUpcomingReleasesByDateUseCase
+import ru.pixnews.feature.calendar.data.domain.ObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.feature.calendar.model.CALENDAR_LIST_ITEM_GAME_FIELDS
 import ru.pixnews.feature.calendar.model.CalendarScreenState
 import ru.pixnews.feature.calendar.model.toCalendarListItem
@@ -32,7 +31,7 @@ import ru.pixnews.library.functional.network.NetworkRequestFailure
 internal class CalendarViewModel(
     featureManager: FeatureManager,
     // loadReleasesUseCase: LoadReleasesUseCase,
-    getUpcomingReleasesByDateUseCase: DefaultObserveUpcomingReleasesByDateUseCase,
+    getUpcomingReleasesByDateUseCase: ObserveUpcomingReleasesByDateUseCase,
     logger: Logger,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
@@ -61,7 +60,7 @@ internal class CalendarViewModel(
             },
             ifRight = { games ->
                 CalendarScreenState.Success(
-                    majorReleases = persistentListOf(),
+                    majorReleases = PreviewFixtures.previewSuccessState.majorReleases,
                     games = games.map(Game::toCalendarListItem).toImmutableList(),
                 )
             },

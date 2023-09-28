@@ -44,7 +44,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
-import ru.pixnews.feature.calendar.PreviewFixtures.FilterChip
+import ru.pixnews.feature.calendar.PreviewFixtures
 import ru.pixnews.feature.calendar.model.GameListFilterChip
 import ru.pixnews.feature.calendar.model.GameListFilterChipStyle.SELECTED
 import ru.pixnews.feature.calendar.model.GameListViewMode
@@ -159,7 +159,7 @@ private fun ChipsRowPreview() {
         val viewMode = remember { mutableStateOf(GRID) }
         Surface {
             ChipsRow(
-                chips = FilterChip.sampleChips.toImmutableList(),
+                chips = PreviewFixtures.FilterChip.sampleChips.toImmutableList(),
                 viewMode = remember { mutableStateOf(GRID) },
                 onOpenFilterClick = {},
                 onViewModeClick = { viewMode.value = viewMode.value.next() },

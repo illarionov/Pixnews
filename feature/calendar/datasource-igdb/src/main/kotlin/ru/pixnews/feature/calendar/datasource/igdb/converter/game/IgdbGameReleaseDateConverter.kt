@@ -5,13 +5,11 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
-import kotlinx.datetime.Month
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toKotlinInstant
-import kotlinx.datetime.toLocalDateTime
+import kotlinx.datetime.LocalDate
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.ApproximateDate.Unknown
+import ru.pixnews.feature.calendar.datasource.igdb.converter.util.asLocalDate
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireField
 import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
 import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
@@ -28,14 +26,15 @@ import ru.pixnews.igdbclient.model.ReleaseDate
 import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal object IgdbGameReleaseDateConverter : IgdbGameFieldConverter<ApproximateDate> {
+    private val ReleaseDate.dateAsLocalDate: LocalDate
+        get() = requireNotNull(this.date) { "release_date.date field should be set" }.asLocalDate
+
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> {
         return listOf(
             from.release_dates.id,
             from.release_dates.date,
             from.release_dates.updated_at,
             from.release_dates.category,
-            from.release_dates.y,
-            from.release_dates.m,
             from.release_dates.human,
         )
     }
@@ -54,39 +53,29 @@ internal object IgdbGameReleaseDateConverter : IgdbGameFieldConverter<Approximat
     private fun convertIgdbReleaseDateToApproximateDate(igdbReleaseDate: ReleaseDate): ApproximateDate =
         with(igdbReleaseDate) {
             when (this.category) {
-                YYYYMMMMDD -> ApproximateDate.YearMonthDay(
-                    date = requireNotNull(this.date) { "release_date.date field should be set" }
-                        .toKotlinInstant()
-                        .toLocalDateTime(TimeZone.UTC)
-                        .date,
-                )
-
-                YYYYMMMM -> ApproximateDate.YearMonth(
-                    year = this.y,
-                    month = Month(this.m),
-                )
-
-                YYYY -> ApproximateDate.Year(year = this.y)
+                YYYYMMMMDD -> ApproximateDate.YearMonthDay(dateAsLocalDate)
+                YYYYMMMM -> ApproximateDate.YearMonth(dateAsLocalDate)
+                YYYY -> ApproximateDate.Year(dateAsLocalDate.year)
                 YYYYQ1 -> ApproximateDate.ToBeDeterminedQuarter(
-                    year = this.y,
+                    year = dateAsLocalDate.year,
                     quarter = 1,
                     description = Localized(this.human, LanguageCode.ENGLISH),
                 )
 
                 YYYYQ2 -> ApproximateDate.ToBeDeterminedQuarter(
-                    year = this.y,
+                    year = dateAsLocalDate.year,
                     quarter = 2,
                     description = Localized(this.human, LanguageCode.ENGLISH),
                 )
 
                 YYYYQ3 -> ApproximateDate.ToBeDeterminedQuarter(
-                    year = this.y,
+                    year = dateAsLocalDate.year,
                     quarter = 3,
                     description = Localized(this.human, LanguageCode.ENGLISH),
                 )
 
                 YYYYQ4 -> ApproximateDate.ToBeDeterminedQuarter(
-                    year = this.y,
+                    year = dateAsLocalDate.year,
                     quarter = 4,
                     description = Localized(this.human, LanguageCode.ENGLISH),
                 )

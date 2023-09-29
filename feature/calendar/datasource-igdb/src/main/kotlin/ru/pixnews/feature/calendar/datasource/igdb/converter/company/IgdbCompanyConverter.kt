@@ -8,9 +8,6 @@ package ru.pixnews.feature.calendar.datasource.igdb.converter.company
 import com.squareup.wire.Instant
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toKotlinInstant
-import kotlinx.datetime.toLocalDateTime
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.company.CompanyStatus.UNKNOWN
 import ru.pixnews.domain.model.id.CompanyId
@@ -28,6 +25,7 @@ import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.Ref.Id
 import ru.pixnews.domain.model.util.RichText
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toExternalLinkType
+import ru.pixnews.feature.calendar.datasource.igdb.converter.util.asLocalDate
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.errorFieldNotRequested
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireFieldInitialized
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbCompanyId
@@ -104,17 +102,14 @@ internal object IgdbCompanyConverter {
     private fun parseIgdbStartDate(
         date: Instant,
         changeDateCategory: DateFormatChangeDateCategoryEnum,
-    ): ApproximateDate {
-        val instant = date.toKotlinInstant()
-        return when (changeDateCategory) {
-            YYYYMMMMDD -> YearMonthDay(instant.toLocalDateTime(TimeZone.UTC).date)
-            YYYYMMMM -> YearMonth(instant.toLocalDateTime(TimeZone.UTC).date)
-            YYYY -> Year(instant.toLocalDateTime(TimeZone.UTC).date.year)
-            YYYYQ1 -> Quarter(1)
-            YYYYQ2 -> Quarter(2)
-            YYYYQ3 -> Quarter(3)
-            YYYYQ4 -> Quarter(4)
-            TBD -> Unknown()
-        }
+    ): ApproximateDate = when (changeDateCategory) {
+        YYYYMMMMDD -> YearMonthDay(date.asLocalDate)
+        YYYYMMMM -> YearMonth(date.asLocalDate)
+        YYYY -> Year(date.asLocalDate.year)
+        YYYYQ1 -> Quarter(1)
+        YYYYQ2 -> Quarter(2)
+        YYYYQ3 -> Quarter(3)
+        YYYYQ4 -> Quarter(4)
+        TBD -> Unknown()
     }
 }

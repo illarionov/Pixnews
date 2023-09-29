@@ -12,9 +12,6 @@ import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
 import ru.pixnews.igdbclient.model.Game as IgdbGame
 
 internal object IgdbGameParentGameConverter : IgdbGameFieldConverter<Ref<Game>?> {
-    override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> = listOf(
-        from.id,
-    )
-
+    override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> = listOf(from.id)
     override fun convert(game: IgdbGame): Ref<Game>? = game.parent_game?.toGameRef()
 }

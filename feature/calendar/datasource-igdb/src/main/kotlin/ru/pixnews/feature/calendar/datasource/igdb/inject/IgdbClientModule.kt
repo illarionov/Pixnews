@@ -59,15 +59,16 @@ public object IgdbClientModule {
                     callFactory = rootOkhttpClient.get()
                 }
                 headers {
-                    append("x-api-key", config.apiKey)
+                    if (config.apiKey.isNotEmpty()) {
+                        append("x-api-key", config.apiKey)
+                    }
                 }
                 config.twitchAuth?.let { configTwitchAuth ->
                     twitchAuth {
                         clientId = configTwitchAuth.clientId
                         clientSecret = configTwitchAuth.clientSecret
                         configTwitchAuth.token?.let { debugToken ->
-                            this.storage =
-                                InMemoryTwitchTokenStorage(TwitchTokenPayload(debugToken))
+                            storage = InMemoryTwitchTokenStorage(TwitchTokenPayload(debugToken))
                         }
                     }
                 }

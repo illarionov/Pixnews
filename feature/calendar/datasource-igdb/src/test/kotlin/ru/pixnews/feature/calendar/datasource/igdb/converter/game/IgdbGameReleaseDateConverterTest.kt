@@ -53,8 +53,6 @@ class IgdbGameReleaseDateConverterTest {
         val date = ReleaseDate(
             category = YYYYQ3,
             date = Instant.ofEpochSecond(16_9603_2000),
-            y = 2023,
-            m = 9,
             updated_at = Instant.ofEpochSecond(16_9603_2000),
         )
 
@@ -78,12 +76,10 @@ class IgdbGameReleaseDateConverterTest {
             ReleaseDate(
                 date = Instant.ofEpochSecond(16_9603_2000),
                 category = YYYYMMMM,
-                m = 1,
             ),
             ReleaseDate(
                 date = Instant.ofEpochSecond(16_9603_2000),
                 category = YYYYMMMM,
-                y = 2000,
             ),
         ).forEach {
             shouldThrow<IllegalArgumentException> { convert(Game(release_dates = listOf(it))) }

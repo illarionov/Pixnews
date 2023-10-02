@@ -6,9 +6,13 @@
 package ru.pixnews.inject.data
 
 import com.squareup.anvil.annotations.ContributesBinding
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import ru.pixnews.domain.model.game.Game
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.beyondGoodEvil2
@@ -21,10 +25,22 @@ import ru.pixnews.domain.model.game.game.slimeRancher2
 import ru.pixnews.domain.model.game.game.smalland
 import ru.pixnews.domain.model.game.game.starWarsEclipse
 import ru.pixnews.domain.model.game.game.theLostWild
-import ru.pixnews.feature.calendar.data.domain.ObserveUpcomingReleasesByDateUseCase
-import ru.pixnews.feature.calendar.domain.DefaultObserveUpcomingReleasesByDateUseCase
+import ru.pixnews.domain.model.locale.Localized
+import ru.pixnews.domain.model.util.ApproximateDate
+import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_QUARTER
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_YEAR
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.TBD
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleasesResponse
+import ru.pixnews.feature.calendar.domain.upcoming.DefaultObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.library.functional.network.NetworkRequestStatus
+import java.time.Month.AUGUST
+import java.time.Month.JUNE
+import java.time.Month.MAY
 import javax.inject.Inject
 
 @ContributesBinding(
@@ -35,22 +51,72 @@ import javax.inject.Inject
 class MockObserveUpcomingReleasesByDateUseCase @Inject constructor() : ObserveUpcomingReleasesByDateUseCase {
     override fun createUpcomingReleasesObservable(
         requiredFields: Set<GameField>,
-    ): Flow<NetworkRequestStatus<List<Game>>> {
+    ): Flow<NetworkRequestStatus<UpcomingReleasesResponse>> {
         return flowOf(
             NetworkRequestStatus.completeSuccess(
-                listOf(
-                    GameFixtures.slimeRancher2,
-                    GameFixtures.hytale,
-                    GameFixtures.gta6,
-                    GameFixtures.theLostWild,
-                    GameFixtures.sims5,
-                    GameFixtures.beyondGoodEvil2,
-                    GameFixtures.starWarsEclipse,
-                    GameFixtures.halfLife3,
-                    GameFixtures.smalland,
-                    GameFixtures.project007,
+                UpcomingReleasesResponse(
+                    requestTime = currentTime.toInstant(currentTimeZone),
+                    requestedFields = requiredFields.toImmutableSet(),
+                    games = releases,
                 ),
             ),
         )
+    }
+
+    companion object UpcomingReleasesDateFixtures {
+        val currentTime = LocalDateTime(2023, 5, 17, 10, 0, 0, 0)
+        val currentTimeZone = TimeZone.of("UTC+3")
+
+        // TODO
+        val releases = persistentListOf(
+            // 17 May 2023
+            UpcomingRelease(
+                // TODO: loading with debug
+                game = GameFixtures.slimeRancher2.copy(
+                    releaseDate = CurrentMonth.exactDateToday,
+                ),
+                group = FEW_DAYS,
+            ),
+            UpcomingRelease(GameFixtures.hytale.copy(releaseDate = CurrentMonth.exactDateToday), FEW_DAYS),
+
+            // 18 May 2023
+            UpcomingRelease(GameFixtures.gta6.copy(releaseDate = CurrentMonth.exactDateTomorrow), FEW_DAYS),
+            UpcomingRelease(GameFixtures.theLostWild.copy(releaseDate = CurrentMonth.exactDateTomorrow), FEW_DAYS),
+
+            // TBD May 2023
+            UpcomingRelease(GameFixtures.starWarsEclipse.copy(releaseDate = CurrentMonth.approxDate), CURRENT_MONTH),
+
+            // TBD 1 Quarter 2023
+            UpcomingRelease(GameFixtures.sims5.copy(releaseDate = CurrentQuarter.exactDate), CURRENT_QUARTER),
+            UpcomingRelease(
+                GameFixtures.beyondGoodEvil2.copy(releaseDate = CurrentQuarter.approxDateMonth),
+                CURRENT_QUARTER,
+            ),
+
+            // TODO: Current year
+            UpcomingRelease(GameFixtures.halfLife3.copy(releaseDate = CurrentQuarter.approxDateMonth), CURRENT_YEAR),
+
+            // Tbd
+            UpcomingRelease(GameFixtures.smalland, TBD),
+            UpcomingRelease(GameFixtures.project007, TBD),
+        )
+
+        object CurrentMonth {
+            val exactDateToday = ApproximateDate.YearMonthDay(2023, MAY, 17)
+            val exactDateTomorrow = ApproximateDate.YearMonthDay(2023, MAY, 18)
+            val exactDateLater = ApproximateDate.YearMonthDay(2023, MAY, 25)
+            val approxDate = ApproximateDate.YearMonth(2023, MAY)
+        }
+
+        object NextMonth {
+            val exactDate = ApproximateDate.YearMonthDay(2023, JUNE, 10)
+            val approxDate = ApproximateDate.YearMonth(2023, JUNE)
+        }
+
+        object CurrentQuarter {
+            val exactDate = ApproximateDate.YearMonthDay(2023, AUGUST, 11)
+            val approxDateMonth = ApproximateDate.YearMonth(2023, AUGUST)
+            val approxDateQuarter = ApproximateDate.ToBeDeterminedQuarter(2023, 2, Localized.EMPTY_STRING)
+        }
     }
 }

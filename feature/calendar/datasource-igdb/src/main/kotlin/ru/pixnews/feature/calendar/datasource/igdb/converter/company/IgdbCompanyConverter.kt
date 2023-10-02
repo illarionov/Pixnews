@@ -106,10 +106,10 @@ internal object IgdbCompanyConverter {
         YYYYMMMMDD -> YearMonthDay(date.asLocalDate)
         YYYYMMMM -> YearMonth(date.asLocalDate)
         YYYY -> Year(date.asLocalDate.year)
-        YYYYQ1 -> Quarter(1)
-        YYYYQ2 -> Quarter(2)
-        YYYYQ3 -> Quarter(3)
-        YYYYQ4 -> Quarter(4)
+        YYYYQ1 -> Quarter(date.asLocalDate.year, 1)
+        YYYYQ2 -> Quarter(date.asLocalDate.year, 2)
+        YYYYQ3 -> Quarter(date.asLocalDate.year, 3)
+        YYYYQ4 -> Quarter(date.asLocalDate.year, 4)
         TBD -> Unknown()
     }
 }

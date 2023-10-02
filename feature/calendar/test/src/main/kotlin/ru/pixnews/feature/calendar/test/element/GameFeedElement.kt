@@ -7,18 +7,22 @@ package ru.pixnews.feature.calendar.test.element
 
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.SemanticsMatcher.Companion.expectValue
+import androidx.compose.ui.test.SemanticsMatcher.Companion.keyIsDefined
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.SemanticsNodeInteractionCollection
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasTestTag
-import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.performScrollToNode
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.slimeRancher2
 import ru.pixnews.domain.model.id.GameId
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
+import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
+import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupIdKey
 import ru.pixnews.foundation.ui.design.GameIdKey
 
 public class GameFeedElement(
@@ -31,9 +35,9 @@ public class GameFeedElement(
     }
 
     public fun dateSubheader(
-        title: String = firstCalendarTitle,
+        group: UpcomingReleaseGroupId = firstUpcomingReleaseGroupId,
     ): SemanticsNodeInteraction {
-        return composeTestRule.onNode(dateSubheaderMatcher(title))
+        return composeTestRule.onNode(dateSubheaderMatcher(group))
     }
 
     public fun gameCard(
@@ -43,9 +47,9 @@ public class GameFeedElement(
     }
 
     public fun scrollToDateSubheader(
-        title: String = firstCalendarTitle,
+        group: UpcomingReleaseGroupId = firstUpcomingReleaseGroupId,
     ) {
-        root().performScrollToNode(dateSubheaderMatcher(title))
+        root().performScrollToNode(dateSubheaderMatcher(group))
     }
 
     public fun scrollToGameCard(
@@ -72,10 +76,7 @@ public class GameFeedElement(
         }
 
         public fun gameCards(): SemanticsNodeInteractionCollection {
-            return composeTestRule.onAllNodes(
-                SemanticsMatcher.keyIsDefined(GameIdKey)
-                    .and(hasAnyAncestor(rootMatcher)),
-            )
+            return composeTestRule.onAllNodes(keyIsDefined(GameIdKey).and(hasAnyAncestor(rootMatcher)))
         }
 
         @OptIn(ExperimentalTestApi::class)
@@ -84,25 +85,25 @@ public class GameFeedElement(
         }
 
         public companion object {
-            public val rootMatcher: SemanticsMatcher = hasTestTag(CalendarTestTag.CONTENT_GAME_SUBHEADER)
+            public val rootMatcher: SemanticsMatcher = hasTestTag(CalendarTestTag.CONTENT_MAJOR_RELEASES_CAROUSEL)
             public val titleMatcher: SemanticsMatcher = isHeading().and(hasAnyAncestor(rootMatcher))
         }
     }
 
     public companion object {
         @Suppress("CONSTANT_UPPERCASE")
-        public const val firstCalendarTitle: String = "1 January 2024"
+        public val firstUpcomingReleaseGroupId: UpcomingReleaseGroupId = UpcomingReleaseGroupId.YearMonthDay(
+            FEW_DAYS,
+            2023,
+            5,
+            17,
+        )
         public val firstGameId: GameId = GameFixtures.slimeRancher2.id
         public val rootMatcher: SemanticsMatcher = hasTestTag(CalendarTestTag.CONTENT_LAZY_LIST)
 
-        public fun dateSubheaderMatcher(title: String? = null): SemanticsMatcher {
-            val matcher = isHeading().and(hasTestTag(CalendarTestTag.CONTENT_GAME_SUBHEADER))
-            return if (title != null) {
-                hasText(title).and(matcher)
-            } else {
-                matcher
-            }
-        }
+        public fun dateSubheaderMatcher(date: UpcomingReleaseGroupId): SemanticsMatcher = isHeading().and(
+            expectValue(UpcomingReleaseGroupIdKey, date),
+        )
 
         public fun gameCardMatcher(gameId: GameId): SemanticsMatcher = gameId.matcher
             .and(hasAnyAncestor(MajorReleasesElement.rootMatcher).not())

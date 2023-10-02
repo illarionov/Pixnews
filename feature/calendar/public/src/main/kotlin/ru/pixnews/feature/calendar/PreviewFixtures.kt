@@ -10,6 +10,9 @@ import kotlinx.collections.immutable.persistentHashMapOf
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform.PlayStation4
 import ru.pixnews.domain.model.game.GamePlatform.Windows
@@ -27,6 +30,12 @@ import ru.pixnews.domain.model.game.game.theLostWild
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.url.DefaultImageUrl
 import ru.pixnews.domain.model.util.CanvasSize
+import ru.pixnews.feature.calendar.converter.UpcomingGameListConverter.toCalendarListItem
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_QUARTER
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_YEAR
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_MONTH
 import ru.pixnews.feature.calendar.model.CalendarListTitle
 import ru.pixnews.feature.calendar.model.CalendarScreenState
 import ru.pixnews.feature.calendar.model.GameListFilterChip
@@ -34,8 +43,8 @@ import ru.pixnews.feature.calendar.model.GameListFilterChipStyle.SELECTED
 import ru.pixnews.feature.calendar.model.GameListFilterChipStyle.UNSELECTED
 import ru.pixnews.feature.calendar.model.GamesOnDay
 import ru.pixnews.feature.calendar.model.MajorReleaseCarouselItemUiModel
-import ru.pixnews.feature.calendar.model.toCalendarListItem
 import ru.pixnews.feature.calendar.model.toMajorReleaseCarouselItemUiModel
+import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.foundation.ui.imageloader.coil.tooling.OverrideResult
 import ru.pixnews.foundation.ui.imageloader.coil.tooling.withDebug
 import kotlin.time.Duration.Companion.seconds
@@ -77,41 +86,67 @@ internal object PreviewFixtures {
             MajorRelease.project007,
         ),
         games = persistentListOf(
-            CalendarDateGroup.jan1st2024,
+            CalendarListTitle(CalendarDateGroup.jan1st2024),
             Release.slimerancher2.copy(
                 cover = Release.slimerancher2.cover?.withDebug(loadingDelay = 10.seconds),
             ),
             Release.hytale,
-            CalendarDateGroup.jan2st2024,
+            CalendarListTitle(CalendarDateGroup.jan2st2024),
             Release.gta6,
             Release.thelostwild,
-            CalendarDateGroup.tbdJan2024,
+            CalendarListTitle(CalendarDateGroup.tbdJan2024),
             Release.thesims5,
             Release.beyondgoodandevil2,
             Release.starwarseclipse,
-            CalendarDateGroup.tbdFeb2024,
-            CalendarDateGroup.tbdMar2024,
-            CalendarDateGroup.tbdEarly2024,
+            CalendarListTitle(CalendarDateGroup.tbdFeb2024),
+            CalendarListTitle(CalendarDateGroup.tbdMar2024),
+            CalendarListTitle(CalendarDateGroup.tbdEarly2024),
             Release.halflife3.copy(
                 cover = Release.halflife3.cover?.withDebug(
                     loadingDelay = 5.seconds,
                     overrideResult = OverrideResult.Error(),
                 ),
             ),
-            CalendarDateGroup.tbd,
+            CalendarListTitle(UpcomingReleaseGroupId.Tbd()),
             Release.smalland,
             Release.project007,
         ),
     )
 
     object CalendarDateGroup {
-        val jan1st2024 = CalendarListTitle(title = "1 January 2024")
-        val jan2st2024 = CalendarListTitle(title = "2 January 2024")
-        val tbdJan2024 = CalendarListTitle(title = "TBD January 2024")
-        val tbdFeb2024 = CalendarListTitle(title = "TBD February 2024")
-        val tbdMar2024 = CalendarListTitle(title = "TBD March 2024")
-        val tbdEarly2024 = CalendarListTitle(title = "TBD Early 2024")
-        val tbd = CalendarListTitle(title = "TBD")
+        @Suppress("UnusedPrivateProperty")
+        private val requestTimeLocalJun1 = LocalDateTime(2024, 1, 1, 22, 23, 24, 0)
+            .toInstant(TimeZone.of("UTC+3"))
+
+        // title = "1 January 2024"
+        val jan1st2024 = UpcomingReleaseGroupId.YearMonthDay(
+            category = FEW_DAYS,
+            date = LocalDate(2024, 1, 1),
+        )
+        val jan2st2024 = UpcomingReleaseGroupId.YearMonthDay(
+            category = FEW_DAYS,
+            date = LocalDate(2024, 1, 2),
+        )
+        val tbdJan2024 = UpcomingReleaseGroupId.YearMonth(
+            category = CURRENT_MONTH,
+            2024,
+            1,
+        )
+        val tbdFeb2024 = UpcomingReleaseGroupId.YearMonth(
+            category = NEXT_MONTH,
+            2024,
+            2,
+        )
+        val tbdMar2024 = UpcomingReleaseGroupId.YearQuarter(
+            category = CURRENT_QUARTER,
+            year = 2024,
+            quarter = 1,
+        )
+        val tbdEarly2024 = UpcomingReleaseGroupId.Year(
+            category = CURRENT_YEAR,
+            year = 2024,
+        )
+        val tbd = UpcomingReleaseGroupId.Tbd()
     }
 
     object FilterChip {

@@ -23,6 +23,7 @@ dependencies {
     implementation(projects.foundation.domainModel)
     implementation(projects.foundation.network.public)
     implementation(projects.library.functional)
+    implementation(projects.library.kotlinDatetimeUtils)
     implementation(projects.library.kotlinUtils)
 
     api(libs.inject)

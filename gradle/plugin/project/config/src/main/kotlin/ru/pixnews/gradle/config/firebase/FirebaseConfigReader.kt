@@ -5,7 +5,6 @@
 
 package ru.pixnews.gradle.config.firebase
 
-import ru.pixnews.gradle.config.util.toProperties
 import java.util.Properties
 
 internal class FirebaseConfigReader(
@@ -31,15 +30,5 @@ internal class FirebaseConfigReader(
         return applicationIdPrefix?.let {
             properties.getProperty("firebase_${applicationIdPrefix}_$key", null)
         } ?: properties.getProperty("firebase_$key", null)
-    }
-
-    companion object {
-        operator fun invoke(
-            configFileContext: String,
-            applicationId: String?,
-        ): FirebaseConfigReader = FirebaseConfigReader(
-            configFileContext.toProperties(),
-            applicationId,
-        )
     }
 }

@@ -5,11 +5,9 @@
 
 package ru.pixnews.gradle.config.util
 
-import java.io.StringReader
+import java.io.File
 import java.util.Properties
 
-internal fun String.toProperties(): Properties = Properties().apply {
-    StringReader(this@toProperties).use {
-        load(it)
-    }
+internal fun File.toProperties(): Properties = Properties().apply {
+    this@toProperties.bufferedReader().use { load(it) }
 }

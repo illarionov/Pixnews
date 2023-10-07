@@ -9,5 +9,5 @@ plugins {
 group = "ru.pixnews.gradle.settings"
 
 dependencies {
-    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.13")
+    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.14.1")
 }

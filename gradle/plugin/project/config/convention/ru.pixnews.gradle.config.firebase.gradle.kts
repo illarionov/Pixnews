@@ -9,6 +9,7 @@ import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.ResValue
 import ru.pixnews.gradle.config.firebase.FirebaseConfigReader
 import ru.pixnews.gradle.config.firebase.GenerateFirebaseOptionsTask
+import ru.pixnews.gradle.config.firebase.LocalFirebaseOptions
 import ru.pixnews.gradle.config.util.withAnyOfAndroidPlugins
 
 /**
@@ -58,14 +59,21 @@ fun AndroidComponentsExtension<*, *, *>.registerFirebaseOptionsTask() {
 
         // Manually add google_app_id for Firebase Analytics
         // Cannot use put() here: https://github.com/gradle/gradle/issues/13364
+        val googleAppIdKey = variant.makeResValueKey("string", "google_app_id")
         variant.resValues.putAll(
             firebaseOptionsProvider
-                .map { options ->
-                    options.applicationId?.let {
-                        mapOf(variant.makeResValueKey("string", "google_app_id") to ResValue(it))
-                    } ?: emptyMap()
-                }
+                .map(ApplicationIdToMapOfValuesTransformer(googleAppIdKey))
                 .orElse(emptyMap()),
         )
+    }
+}
+
+internal class ApplicationIdToMapOfValuesTransformer(
+    private val googleApiKey: ResValue.Key,
+) : Transformer<Map<ResValue.Key, ResValue>, LocalFirebaseOptions> {
+    override fun transform(options: LocalFirebaseOptions): Map<ResValue.Key, ResValue> {
+        return options.applicationId?.let {
+            mapOf(googleApiKey to ResValue(it))
+        } ?: emptyMap()
     }
 }

@@ -69,7 +69,7 @@ fun AndroidComponentsExtension<*, *, *>.registerFirebaseOptionsTask() {
 }
 
 internal class ApplicationIdToMapOfValuesTransformer(
-    private val googleApiKey: ResValue.Key
+    private val googleApiKey: ResValue.Key,
 ) : Transformer<Map<ResValue.Key, ResValue>, LocalFirebaseOptions> {
     override fun transform(options: LocalFirebaseOptions): Map<ResValue.Key, ResValue> {
         return options.applicationId?.let {

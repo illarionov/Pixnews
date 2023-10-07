@@ -5,11 +5,8 @@
 
 import buildparameters.BuildParametersExtension
 import com.android.build.api.variant.AndroidComponentsExtension
-import org.gradle.kotlin.dsl.getByType
-import org.gradle.kotlin.dsl.register
 import ru.pixnews.gradle.config.igdb.GenerateIgdbOptionsTask
-import ru.pixnews.gradle.config.igdb.IgdbConfigReader
-import ru.pixnews.gradle.config.util.toProperties
+import ru.pixnews.gradle.config.igdb.LocalIgdbOptionsValueSource
 import ru.pixnews.gradle.config.util.withAnyOfAndroidPlugins
 
 /**
@@ -23,17 +20,17 @@ project.withAnyOfAndroidPlugins { _, androidComponentsExtension ->
 }
 
 fun AndroidComponentsExtension<*, *, *>.registerIgdbOptionsTask() {
-    val pixnewsConfigFileContent = providers.fileContents(
-        rootProject.layout.projectDirectory.file(
-            providers.provider { extensions.getByType<BuildParametersExtension>().config },
-        ),
-    )
+    val igdbOptionsProvider = providers.of(LocalIgdbOptionsValueSource::class) {
+        parameters {
+            configFilePath.set(
+                rootProject.layout.projectDirectory.file(
+                    providers.provider { extensions.getByType<BuildParametersExtension>().config },
+                ),
+            )
+        }
+    }
 
     onVariants { variant ->
-        val igdbOptionsProvider = pixnewsConfigFileContent.asText.map { configFileText ->
-            IgdbConfigReader(configFileText.toProperties()).read()
-        }
-
         @Suppress("GENERIC_VARIABLE_WRONG_DECLARATION")
         val igdbOptionsTaskProvider = project.tasks.register<GenerateIgdbOptionsTask>(
             "${variant.name}GenerateIgdbOptions",

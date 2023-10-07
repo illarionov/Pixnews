@@ -7,9 +7,9 @@ import buildparameters.BuildParametersExtension
 import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.ResValue
-import ru.pixnews.gradle.config.firebase.FirebaseConfigReader
 import ru.pixnews.gradle.config.firebase.GenerateFirebaseOptionsTask
 import ru.pixnews.gradle.config.firebase.LocalFirebaseOptions
+import ru.pixnews.gradle.config.firebase.LocalFirebaseOptionsValueSource
 import ru.pixnews.gradle.config.util.withAnyOfAndroidPlugins
 
 /**
@@ -23,10 +23,8 @@ project.withAnyOfAndroidPlugins { _, androidComponentsExtension ->
 }
 
 fun AndroidComponentsExtension<*, *, *>.registerFirebaseOptionsTask() {
-    val pixnewsConfigFileContent = providers.fileContents(
-        rootProject.layout.projectDirectory.file(
-            providers.provider { extensions.getByType<BuildParametersExtension>().config },
-        ),
+    val pixnewsConfigFile = rootProject.layout.projectDirectory.file(
+        providers.provider { extensions.getByType<BuildParametersExtension>().config },
     )
 
     onVariants { variant ->
@@ -35,13 +33,13 @@ fun AndroidComponentsExtension<*, *, *>.registerFirebaseOptionsTask() {
         } else {
             providers.provider { "" }
         }
-        val firebaseOptionsProvider =
-            pixnewsConfigFileContent.asText.zip(applicationIdProvider) { configFileText, applicationId ->
-                FirebaseConfigReader(
-                    configFileText,
-                    applicationId.ifEmpty { null },
-                ).read()
+
+        val firebaseOptionsProvider = providers.of(LocalFirebaseOptionsValueSource::class) {
+            parameters {
+                applicationId.set(applicationIdProvider)
+                configFilePath.set(pixnewsConfigFile)
             }
+        }
 
         @Suppress("GENERIC_VARIABLE_WRONG_DECLARATION")
         val firebaseOptionsTaskProvider = project.tasks.register<GenerateFirebaseOptionsTask>(

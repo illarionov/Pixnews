@@ -420,6 +420,11 @@
             <pgp value="842afb86375d805422835bfd82b5574242c20d6f"/>
          </artifact>
       </component>
+       <component group="org.gradle" name="github-dependency-graph-gradle-plugin" version="0.4.1">
+           <artifact name="github-dependency-graph-gradle-plugin-0.4.1.jar">
+               <pgp value="7b79add11f8a779fe90fd3d0893a028475557671"/>
+           </artifact>
+       </component>
       <component group="org.bitbucket.b_c" name="jose4j" version="0.7.0">
          <artifact name="jose4j-0.7.0.jar">
             <pgp value="3051d45031e13516a6e8faff280d66a55f5316c5"/>

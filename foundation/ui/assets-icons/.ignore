@@ -1,0 +1,4 @@
+# List of ignored files for tools like scc, ripgrep, ag, tokei
+
+src/main/kotlin/ru/pixnews/foundation/ui/assets/
+

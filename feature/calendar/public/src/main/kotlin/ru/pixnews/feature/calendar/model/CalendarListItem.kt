@@ -7,18 +7,15 @@ package ru.pixnews.feature.calendar.model
 
 import android.os.Parcelable
 import kotlinx.collections.immutable.ImmutableSet
-import kotlinx.collections.immutable.toImmutableSet
+import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.parcelize.Parcelize
-import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameField
-import ru.pixnews.domain.model.game.GameGenre
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.url.ImageUrl
-import ru.pixnews.domain.model.util.Ref
-import ru.pixnews.domain.model.util.getObjectOrThrow
 import ru.pixnews.feature.calendar.model.CalendarListItemContentType.GAME
 import ru.pixnews.feature.calendar.model.CalendarListItemContentType.TITLE
+import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCardUiModel
 
 internal sealed interface CalendarListItem {
@@ -26,9 +23,9 @@ internal sealed interface CalendarListItem {
 }
 
 internal data class CalendarListTitle(
-    val title: String,
+    val groupId: UpcomingReleaseGroupId,
 ) : CalendarListItem {
-    override val uniqueId = CalendarListItemId(TITLE, title)
+    override val uniqueId: CalendarListItemId = CalendarListItemId.Title(groupId)
 }
 
 internal data class CalendarListPixnewsGameUi(
@@ -40,7 +37,7 @@ internal data class CalendarListPixnewsGameUi(
     override val favourite: Boolean,
     override val genres: String,
 ) : PixnewsGameCardUiModel, CalendarListItem {
-    override val uniqueId = CalendarListItemId(GAME, gameId.toString())
+    override val uniqueId = CalendarListItemId.GameId(gameId.toString())
 }
 
 internal enum class CalendarListItemContentType {
@@ -49,12 +46,19 @@ internal enum class CalendarListItemContentType {
 }
 
 @Parcelize
-internal data class CalendarListItemId(
+internal sealed class CalendarListItemId(
     val contentType: CalendarListItemContentType,
-    val id: String,
-) : Parcelable
+) : Parcelable {
+    internal data class GameId(
+        val gameId: String,
+    ) : CalendarListItemId(GAME)
 
-internal val CALENDAR_LIST_ITEM_GAME_FIELDS = setOf(
+    internal data class Title(
+        val groupId: UpcomingReleaseGroupId,
+    ) : CalendarListItemId(TITLE)
+}
+
+internal val CALENDAR_LIST_ITEM_GAME_FIELDS = persistentSetOf(
     GameField.Id,
     GameField.Name,
     GameField.Summary,
@@ -62,15 +66,3 @@ internal val CALENDAR_LIST_ITEM_GAME_FIELDS = setOf(
     GameField.Platforms(),
     GameField.Genres,
 )
-
-internal fun Game.toCalendarListItem(): CalendarListPixnewsGameUi {
-    return CalendarListPixnewsGameUi(
-        gameId = id,
-        title = name.value,
-        description = summary.value.asPlainText(),
-        cover = screenshots.firstOrNull(),
-        platforms = platforms.map(Ref<GamePlatform>::getObjectOrThrow).toImmutableSet(),
-        favourite = false,
-        genres = genres.map(GameGenre::name).joinToString(),
-    )
-}

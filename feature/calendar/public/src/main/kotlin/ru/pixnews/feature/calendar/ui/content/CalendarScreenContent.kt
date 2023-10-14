@@ -5,6 +5,7 @@
 
 package ru.pixnews.feature.calendar.ui.content
 
+import android.content.res.Resources
 import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -23,9 +24,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.ImmutableList
 import ru.pixnews.domain.model.id.GameId
@@ -35,12 +40,17 @@ import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi
 import ru.pixnews.feature.calendar.model.CalendarListTitle
 import ru.pixnews.feature.calendar.model.MajorReleaseCarouselItemUiModel
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
+import ru.pixnews.feature.calendar.test.constants.CalendarTestTag.CONTENT_GAME_SUBHEADER
+import ru.pixnews.feature.calendar.test.constants.upcomingReleaseGroup
+import ru.pixnews.feature.calendar.util.CalendarScreenSubheaderLocalization
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCard
 import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
+import ru.pixnews.library.compose.utils.defaultLocale
 import ru.pixnews.library.ui.tooling.PreviewDevices
 import ru.pixnews.library.ui.tooling.debuglayout.DebugLayout.Companion.debugLayout
 import ru.pixnews.library.ui.tooling.debuglayout.mediumLaptopScreen12Columns
+import java.util.Locale
 
 internal val feedMaxWidth = 552.dp
 
@@ -97,13 +107,18 @@ internal fun CalendarScreenContent(
             }
 
             when (currentItem) {
-                is CalendarListTitle ->
-                    GameSubheader(
-                        modifier = Modifier
-                            .widthIn(max = feedMaxWidth)
-                            .padding(listItemsPadding),
-                        title = currentItem.title,
-                    )
+                is CalendarListTitle -> PixnewsGameListSubheader(
+                    title = currentItem.getLocalizedGroupTitle(),
+                    modifier = Modifier
+                        .widthIn(max = feedMaxWidth)
+                        .padding(listItemsPadding)
+                        .fillMaxWidth()
+                        .padding(top = 8.dp)
+                        .semantics {
+                            upcomingReleaseGroup = currentItem.groupId
+                            testTag = CONTENT_GAME_SUBHEADER
+                        },
+                )
 
                 is CalendarListPixnewsGameUi -> PixnewsGameCard(
                     modifier = Modifier
@@ -119,17 +134,14 @@ internal fun CalendarScreenContent(
 }
 
 @Composable
-internal fun GameSubheader(
-    title: String,
-    modifier: Modifier = Modifier,
-) {
-    PixnewsGameListSubheader(
-        title = title,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp)
-            .testTag(CalendarTestTag.CONTENT_GAME_SUBHEADER),
-    )
+private fun CalendarListTitle.getLocalizedGroupTitle(
+    locale: Locale = defaultLocale(),
+    resources: Resources = LocalContext.current.resources,
+): String {
+    val groupSubheaderLocalization = remember(locale, resources) {
+        CalendarScreenSubheaderLocalization(locale, resources)
+    }
+    return groupSubheaderLocalization.localize(this.groupId)
 }
 
 @PreviewDevices

@@ -8,15 +8,19 @@ package ru.pixnews.inject
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Binds
 import dagger.Module
-import dagger.Reusable
-import ru.pixnews.foundation.analytics.Analytics
-import ru.pixnews.foundation.analytics.NoOpAnalytics
+import dagger.Provides
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
 import ru.pixnews.foundation.di.base.scopes.AppScope
 
 @ContributesTo(AppScope::class)
 @Module
-interface AnalyticsModule {
+interface SystemTimeModule {
     @Binds
-    @Reusable
-    fun provideAnalytics(analytics: NoOpAnalytics): Analytics
+    fun bindsClock(clock: Clock.System): Clock
+
+    companion object {
+        @Provides
+        fun provideTimezone(): Function0<TimeZone> = TimeZone.Companion::currentSystemDefault
+    }
 }

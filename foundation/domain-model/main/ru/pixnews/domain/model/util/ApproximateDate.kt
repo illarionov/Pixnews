@@ -54,9 +54,11 @@ public sealed class ApproximateDate {
     }
 
     public data class Quarter(
+        val year: Int,
         val quarter: Int,
     ) : ApproximateDate() {
         init {
+            require(year > YEAR_MIN)
             @Suppress("MagicNumber")
             require(quarter in 1..4)
         }

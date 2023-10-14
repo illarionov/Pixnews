@@ -10,7 +10,7 @@ public object CalendarTestTag {
     public const val LOADING_OVERLAY: String = "calendar:loading_overlay"
     public const val CONTENT_LAZY_LIST: String = "calendar:content:lazy_list"
     public const val CONTENT_MAJOR_RELEASES_CAROUSEL: String = "calendar:content:major_releases_carousel"
-    public const val CONTENT_GAME_SUBHEADER: String = "calendar:content:major_releases_carousel"
+    public const val CONTENT_GAME_SUBHEADER: String = "calendar:content:lazy_list:game_subheader"
     public const val HEADER_SEARCH_BOX: String = "calendar:header:search_box"
     public const val HEADER_CHIPS_LAZY_ROW: String = "calendar:header:chips_lazy_row"
     public const val HEADER_YEAR_MONTH_PICKER_BUTTON: String = "calendar:header:year_month_picker_button"

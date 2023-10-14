@@ -28,7 +28,6 @@ import androidx.core.view.WindowInsetsCompat.Type.systemGestures
 import co.touchlab.kermit.Logger
 import org.junit.Assume.assumeTrue
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -93,7 +92,6 @@ class CalendarScreenVerticalPaddingsTest(
     }
 
     @Test
-    @Ignore("TODO: should be fixed")
     fun calendarScreen_mainElements_shouldHaveCorrectPaddings() {
         with(gameFeed.majorReleases) {
             waitTitle()

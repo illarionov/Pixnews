@@ -9,16 +9,16 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
-import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import ru.pixnews.domain.model.game.Game
-import ru.pixnews.feature.calendar.data.domain.ObserveUpcomingReleasesByDateUseCase
+import kotlinx.datetime.TimeZone
+import ru.pixnews.feature.calendar.converter.UpcomingGameListConverter
+import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleasesResponse
 import ru.pixnews.feature.calendar.model.CALENDAR_LIST_ITEM_GAME_FIELDS
 import ru.pixnews.feature.calendar.model.CalendarScreenState
-import ru.pixnews.feature.calendar.model.toCalendarListItem
 import ru.pixnews.foundation.di.ui.base.viewmodel.ContributesViewModel
 import ru.pixnews.foundation.featuretoggles.FeatureManager
 import ru.pixnews.library.functional.RequestStatus
@@ -33,6 +33,7 @@ internal class CalendarViewModel(
     // loadReleasesUseCase: LoadReleasesUseCase,
     getUpcomingReleasesByDateUseCase: ObserveUpcomingReleasesByDateUseCase,
     logger: Logger,
+    tzProvider: Function0<@JvmSuppressWildcards TimeZone>,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val log = logger.withTag("CalendarViewModel")
@@ -40,7 +41,7 @@ internal class CalendarViewModel(
         getUpcomingReleasesByDateUseCase.createUpcomingReleasesObservable(
             requiredFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
         )
-            .map { status: RequestStatus<NetworkRequestFailure<*>, List<Game>> ->
+            .map { status: RequestStatus<NetworkRequestFailure<*>, UpcomingReleasesResponse> ->
                 when (status) {
                     Loading -> CalendarScreenState.Loading
                     is Complete -> status.toCalendarState()
@@ -52,16 +53,16 @@ internal class CalendarViewModel(
                 initialValue = CalendarScreenState.Loading,
             )
 
-    private fun Complete<NetworkRequestFailure<*>, List<Game>>.toCalendarState(): CalendarScreenState {
+    private fun Complete<*, UpcomingReleasesResponse>.toCalendarState(): CalendarScreenState {
         return this.result.fold(
             ifLeft = { failure ->
                 // TODO:
                 CalendarScreenState.Loading
             },
-            ifRight = { games ->
+            ifRight = { response ->
                 CalendarScreenState.Success(
                     majorReleases = PreviewFixtures.previewSuccessState.majorReleases,
-                    games = games.map(Game::toCalendarListItem).toImmutableList(),
+                    games = UpcomingGameListConverter.convert(response),
                 )
             },
         )

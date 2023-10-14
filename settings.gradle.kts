@@ -51,6 +51,7 @@ listOf(
     "functional",
     "instrumented-test",
     "internationalization",
+    "kotlin-datetime-utils",
     "kotlin-utils",
     "test",
     "ui-tooling",

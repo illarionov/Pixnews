@@ -54,7 +54,9 @@ dependencies {
     }
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(projects.library.uiTooling)
+    implementation(projects.library.kotlinDatetimeUtils)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
+    testImplementation(projects.library.test)
     testImplementation(libs.junit.jupiter.params)
 }

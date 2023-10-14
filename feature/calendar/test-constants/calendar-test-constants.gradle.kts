@@ -4,8 +4,21 @@
  */
 
 plugins {
-    id("ru.pixnews.gradle.kotlin.library")
-    id("ru.pixnews.gradle.kotlin.compose-compiler")
+    id("ru.pixnews.gradle.android.library")
+    id("kotlin-parcelize")
 }
 
-group = "ru.pixnews.feature.calendar.test.constants"
+pixnews {
+    compose.set(true)
+}
+
+android {
+    namespace = "ru.pixnews.feature.calendar.test.constants"
+}
+
+dependencies {
+    api(libs.androidx.compose.ui)
+    api(projects.feature.calendar.dataPublic)
+    api(libs.kotlinx.datetime)
+    implementation(projects.library.kotlinDatetimeUtils)
+}

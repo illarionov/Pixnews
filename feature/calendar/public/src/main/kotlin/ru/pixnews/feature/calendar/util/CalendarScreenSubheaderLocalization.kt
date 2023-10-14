@@ -7,6 +7,7 @@ package ru.pixnews.feature.calendar.util
 
 import android.content.res.Resources
 import kotlinx.datetime.LocalDate
+import org.jetbrains.annotations.VisibleForTesting
 import ru.pixnews.feature.calendar.R.string
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.Tbd
@@ -15,11 +16,13 @@ import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearMon
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearMonthDay
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearQuarter
 import ru.pixnews.feature.calendar.util.DateLocalization.createBestDatePatternFormatter
+import ru.pixnews.feature.calendar.util.DateLocalization.createLocalDateBestDatePatternSystemFormatter
 import ru.pixnews.feature.calendar.util.DateLocalization.createLocalDateSystemFormatter
 import java.util.Locale
 import kotlin.LazyThreadSafetyMode.NONE
 
-internal class CalendarScreenSubheaderLocalization(
+@VisibleForTesting
+public class CalendarScreenSubheaderLocalization(
     private val locale: Locale,
     private val resources: Resources,
 ) {
@@ -27,10 +30,10 @@ internal class CalendarScreenSubheaderLocalization(
      * Format a selected day and month
      *
      * * **Example:** Saturday, March 27
-     * * **Example:** 27 марта, cуббота
+     * * **Example:** Суббота, 27 марта
      */
     private val monthDayWeekDayFormatter by lazy(NONE) {
-        createBestDatePatternFormatter(MONTH_WEEKDAY_DAY_SKELETON, locale)
+        createLocalDateBestDatePatternSystemFormatter(MONTH_WEEKDAY_DAY_SKELETON, locale)
     }
 
     /**
@@ -64,7 +67,7 @@ internal class CalendarScreenSubheaderLocalization(
     }
 
     @Suppress("MagicNumber")
-    fun localize(
+    public fun localize(
         groupId: UpcomingReleaseGroupId,
     ): String = when (groupId) {
         is YearMonthDay -> monthDayWeekDayFormatter(

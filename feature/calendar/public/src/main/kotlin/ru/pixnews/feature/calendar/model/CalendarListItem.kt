@@ -61,6 +61,7 @@ internal sealed class CalendarListItemId(
 internal val CALENDAR_LIST_ITEM_GAME_FIELDS = persistentSetOf(
     GameField.Id,
     GameField.Name,
+    GameField.ReleaseDate,
     GameField.Summary,
     GameField.Screenshots,
     GameField.Platforms(),

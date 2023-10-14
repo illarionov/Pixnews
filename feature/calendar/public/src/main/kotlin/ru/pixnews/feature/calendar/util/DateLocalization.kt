@@ -104,6 +104,20 @@ public object DateLocalization {
         ).capitalize(locale)
     }
 
+    internal fun createLocalDateBestDatePatternSystemFormatter(
+        skeleton: String,
+        locale: Locale,
+    ): (LocalDate) -> String = object : (LocalDate) -> String {
+        val betterPattern = DateFormat.getBestDateTimePattern(locale, skeleton)
+        val formatter = SimpleDateFormat(betterPattern, locale).apply {
+            timeZone = java.util.TimeZone.getTimeZone("UTC")
+        }
+
+        override fun invoke(date: LocalDate): String = formatter.format(
+            Date(date.atStartOfDayIn(TimeZone.UTC).toEpochMilliseconds()),
+        ).capitalize(locale)
+    }
+
     internal fun createBestDatePatternFormatter(
         skeleton: String,
         locale: Locale,

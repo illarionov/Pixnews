@@ -10,6 +10,7 @@ import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.datetime.LocalDate
 import ru.pixnews.domain.model.game.Game
+import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.domain.model.game.GameGenre
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.util.ApproximateDate
@@ -47,6 +48,7 @@ import java.util.EnumMap
 
 internal object UpcomingGameListConverter {
     fun convert(response: UpcomingReleasesResponse): ImmutableList<CalendarListItem> {
+        require(GameField.ReleaseDate in response.requestedFields)
         val grouped: Map<UpcomingReleaseTimeCategory, List<Game>> = response.games.groupByTo(
             EnumMap(UpcomingReleaseTimeCategory::class.java),
             UpcomingRelease::group,

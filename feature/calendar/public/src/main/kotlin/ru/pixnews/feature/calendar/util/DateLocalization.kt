@@ -6,6 +6,8 @@
 package ru.pixnews.feature.calendar.util
 
 import android.icu.text.DateFormatSymbols
+import android.icu.text.SimpleDateFormat
+import android.icu.util.TimeZone.GMT_ZONE
 import android.os.Build
 import android.text.format.DateFormat
 import kotlinx.datetime.DayOfWeek
@@ -14,7 +16,6 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toJavaLocalDate
 import ru.pixnews.library.kotlin.utils.capitalize
-import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.time.format.DecimalStyle
 import java.time.temporal.WeekFields
@@ -96,7 +97,7 @@ public object DateLocalization {
         locale: Locale,
     ): (LocalDate) -> String = object : (LocalDate) -> String {
         val formatter = SimpleDateFormat(skeleton, locale).apply {
-            timeZone = java.util.TimeZone.getTimeZone("UTC")
+            timeZone = GMT_ZONE
         }
 
         override fun invoke(date: LocalDate): String = formatter.format(
@@ -110,7 +111,7 @@ public object DateLocalization {
     ): (LocalDate) -> String = object : (LocalDate) -> String {
         val betterPattern = DateFormat.getBestDateTimePattern(locale, skeleton)
         val formatter = SimpleDateFormat(betterPattern, locale).apply {
-            timeZone = java.util.TimeZone.getTimeZone("UTC")
+            timeZone = GMT_ZONE
         }
 
         override fun invoke(date: LocalDate): String = formatter.format(

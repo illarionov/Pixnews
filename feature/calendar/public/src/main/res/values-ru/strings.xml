@@ -5,4 +5,5 @@
 -->
 <resources>
     <string name="calendar_screen_feed_subheader_to_be_determined">Дата ещё не определена</string>
+    <string name="calendar_screen_feed_subheader_year_x">%1$s год</string>
 </resources>

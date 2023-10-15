@@ -6,20 +6,24 @@
 package ru.pixnews.feature.calendar.util
 
 import android.content.res.Resources
+import arrow.core.andThen
 import kotlinx.datetime.LocalDate
-import ru.pixnews.feature.calendar.R.string
+import kotlinx.datetime.toJavaLocalDate
+import org.jetbrains.annotations.VisibleForTesting
+import ru.pixnews.feature.calendar.R
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.Tbd
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.Year
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearMonth
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearMonthDay
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearQuarter
-import ru.pixnews.feature.calendar.util.DateLocalization.createBestDatePatternFormatter
-import ru.pixnews.feature.calendar.util.DateLocalization.createLocalDateSystemFormatter
+import ru.pixnews.feature.calendar.util.DateLocalization.createLocalDateBestDatePatternSystemFormatter
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.LazyThreadSafetyMode.NONE
 
-internal class CalendarScreenSubheaderLocalization(
+@VisibleForTesting
+public class CalendarScreenSubheaderLocalization(
     private val locale: Locale,
     private val resources: Resources,
 ) {
@@ -27,20 +31,21 @@ internal class CalendarScreenSubheaderLocalization(
      * Format a selected day and month
      *
      * * **Example:** Saturday, March 27
-     * * **Example:** 27 марта, cуббота
+     * * **Example:** Суббота, 27 марта
      */
     private val monthDayWeekDayFormatter by lazy(NONE) {
-        createBestDatePatternFormatter(MONTH_WEEKDAY_DAY_SKELETON, locale)
+        createLocalDateBestDatePatternSystemFormatter(MONTH_WEEKDAY_DAY_SKELETON, locale)
     }
 
     /**
      * Format a selected month for release group subheader
      *
-     * * **Example:** December, 2025
-     * * **Example:** Декабрь, 2025
+     * * **Example:** December 2025
+     * * **Example:** Декабрь 2025
      */
-    private val yearMonthFormatter by lazy(NONE) {
-        createLocalDateSystemFormatter(YEAR_MONTH_SKELETON, locale)
+    private val yearMonthFormatter: (LocalDate) -> String by lazy(NONE) {
+        val formatter = createLocalDateBestDatePatternSystemFormatter(YEAR_MONTH_SKELETON, locale)
+        formatter andThen ::cleanupYear
     }
 
     /**
@@ -50,7 +55,8 @@ internal class CalendarScreenSubheaderLocalization(
      * * **Example:** 2 квартал, 2025
      */
     private val quarterFormatter by lazy(NONE) {
-        createBestDatePatternFormatter(QUARTER_YEAR_SKELETON, locale)
+        val formatter = createLocalDateBestDatePatternSystemFormatter(QUARTER_YEAR_SKELETON, locale)
+        formatter andThen ::cleanupYear
     }
 
     /**
@@ -59,12 +65,12 @@ internal class CalendarScreenSubheaderLocalization(
      * * **Example:** year 2025
      * * **Example:** 2025 год
      */
-    private val yearFormatter by lazy(NONE) {
-        createBestDatePatternFormatter(YEAR_SKELETON, locale)
-    }
+    private val yearFormatter by lazy(NONE) { YearFormatter(locale, resources) }
+
+    private fun cleanupYear(year: String): String = year.removeSuffix(" г.")
 
     @Suppress("MagicNumber")
-    fun localize(
+    public fun localize(
         groupId: UpcomingReleaseGroupId,
     ): String = when (groupId) {
         is YearMonthDay -> monthDayWeekDayFormatter(
@@ -83,7 +89,19 @@ internal class CalendarScreenSubheaderLocalization(
             LocalDate(groupId.year, 1, 1),
         )
 
-        is Tbd -> resources.getString(string.calendar_screen_feed_subheader_to_be_determined)
+        is Tbd -> resources.getString(R.string.calendar_screen_feed_subheader_to_be_determined)
+    }
+
+    private class YearFormatter(
+        locale: Locale,
+        private val resources: Resources,
+    ) : (LocalDate) -> String {
+        private val yearDateTimeFormat = DateTimeFormatter.ofPattern(YEAR_SKELETON, locale)
+
+        override fun invoke(date: LocalDate): String {
+            val year = date.toJavaLocalDate().format(yearDateTimeFormat)
+            return resources.getString(R.string.calendar_screen_feed_subheader_year_x, year)
+        }
     }
 
     private companion object {
@@ -95,7 +113,7 @@ internal class CalendarScreenSubheaderLocalization(
         /**
          * A date format skeleton used to format a selected month for release group subheader
          */
-        private const val YEAR_MONTH_SKELETON: String = "LLLL, yyyy"
+        private const val YEAR_MONTH_SKELETON: String = "yyyy LLLL"
 
         /**
          * A date format skeleton used to format a selected quarter for release group subheader

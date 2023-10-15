@@ -4,5 +4,6 @@
    Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 -->
 <resources>
-    <string name="calendar_screen_feed_subheader_to_be_determined">To be determined</string>
+    <string name="calendar_screen_feed_subheader_to_be_determined">Дата ещё не определена</string>
+    <string name="calendar_screen_feed_subheader_year_x">%1$s год</string>
 </resources>

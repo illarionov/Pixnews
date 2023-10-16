@@ -9,20 +9,23 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.number
+import ru.pixnews.domain.model.datetime.Date
+import ru.pixnews.domain.model.datetime.Date.ExactDateTime
+import ru.pixnews.domain.model.datetime.Date.Unknown
+import ru.pixnews.domain.model.datetime.Date.Year
+import ru.pixnews.domain.model.datetime.Date.YearMonth
+import ru.pixnews.domain.model.datetime.Date.YearMonthDay
+import ru.pixnews.domain.model.datetime.Date.YearQuarter
+import ru.pixnews.domain.model.datetime.HasYear
+import ru.pixnews.domain.model.datetime.HasYearMonth
+import ru.pixnews.domain.model.datetime.HasYearMonthDay
+import ru.pixnews.domain.model.datetime.HasYearQuarter
+import ru.pixnews.domain.model.datetime.localDate
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.domain.model.game.GameGenre
 import ru.pixnews.domain.model.game.GamePlatform
-import ru.pixnews.domain.model.util.ApproximateDate
-import ru.pixnews.domain.model.util.ApproximateDate.ExactDateTime
-import ru.pixnews.domain.model.util.ApproximateDate.Quarter
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDetermined
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedQuarter
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
-import ru.pixnews.domain.model.util.ApproximateDate.Unknown
-import ru.pixnews.domain.model.util.ApproximateDate.Year
-import ru.pixnews.domain.model.util.ApproximateDate.YearMonth
-import ru.pixnews.domain.model.util.ApproximateDate.YearMonthDay
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.getObjectOrThrow
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
@@ -40,9 +43,6 @@ import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi
 import ru.pixnews.feature.calendar.model.CalendarListTitle
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
-import ru.pixnews.feature.calendar.test.constants.asYear
-import ru.pixnews.feature.calendar.test.constants.asYearMonth
-import ru.pixnews.feature.calendar.test.constants.asYearQuarter
 import ru.pixnews.library.kotlin.datetime.utils.hasDifferentDayFrom
 import java.util.EnumMap
 
@@ -83,7 +83,7 @@ internal object UpcomingGameListConverter {
                 }
                 .forEach { game ->
                     val gameReleaseDate = game.releaseDate
-                    val groupDate = gameReleaseDate.getExactDateYearMothDay()
+                    val groupDate = (gameReleaseDate as HasYearMonthDay).localDate
                     if (groupDate.hasDifferentDayFrom(currentGroupDate)) {
                         currentGroupDate = groupDate
                         yield(CalendarListTitle(gameReleaseDate.toUpcomingReleaseGroupId(category)))
@@ -99,11 +99,8 @@ internal object UpcomingGameListConverter {
 
             listOf(
                 YearMonth::class,
-                Quarter::class,
-                ToBeDeterminedQuarter::class,
+                YearQuarter::class,
                 Year::class,
-                ToBeDeterminedYear::class,
-                ToBeDetermined::class,
                 Unknown::class,
             ).forEach { group ->
                 tbdGames[group]?.let { yieldAll(convertReleasesSingleGroup(category, it)) }
@@ -137,48 +134,51 @@ internal object UpcomingGameListConverter {
     }
 
     @Suppress("CyclomaticComplexMethod")
-    private fun ApproximateDate.toUpcomingReleaseGroupId(
+    private fun Date.toUpcomingReleaseGroupId(
         category: UpcomingReleaseTimeCategory,
     ): UpcomingReleaseGroupId {
-        val groupIdByCategory = toGroupIdByReleaseDate(category)
         return when (category) {
-            FEW_DAYS, CURRENT_MONTH -> groupIdByCategory
-            NEXT_MONTH -> when (groupIdByCategory) {
-                is UpcomingReleaseGroupId.YearMonthDay -> groupIdByCategory.asYearMonth
-                else -> groupIdByCategory
+            FEW_DAYS, CURRENT_MONTH -> if (this is HasYearMonthDay) {
+                UpcomingReleaseGroupId.YearMonthDay(category, localDate)
+            } else {
+                toUpcomingReleaseDate(category)
             }
-            CURRENT_QUARTER, NEXT_QUARTER -> when (groupIdByCategory) {
-                is UpcomingReleaseGroupId.YearMonthDay -> groupIdByCategory.asYearQuarter
-                is UpcomingReleaseGroupId.YearMonth -> groupIdByCategory.asYearQuarter
-                else -> groupIdByCategory
+
+            NEXT_MONTH -> if (this is HasYearMonth) {
+                UpcomingReleaseGroupId.YearMonth(category, year, month)
+            } else {
+                toUpcomingReleaseDate(category)
             }
-            CURRENT_YEAR, NEXT_YEAR -> when (groupIdByCategory) {
-                is UpcomingReleaseGroupId.YearMonthDay -> groupIdByCategory.asYear
-                is UpcomingReleaseGroupId.YearMonth -> groupIdByCategory.asYear
-                is UpcomingReleaseGroupId.YearQuarter -> groupIdByCategory.asYear
-                else -> groupIdByCategory
+
+            CURRENT_QUARTER, NEXT_QUARTER -> if (this is HasYearQuarter) {
+                UpcomingReleaseGroupId.YearQuarter(category, year, quarter)
+            } else {
+                toUpcomingReleaseDate(category)
             }
+
+            CURRENT_YEAR, NEXT_YEAR -> if (this is HasYear) {
+                UpcomingReleaseGroupId.Year(category, year)
+            } else {
+                toUpcomingReleaseDate(category)
+            }
+
             TBD -> UpcomingReleaseGroupId.Tbd(category)
         }
     }
 
-    private fun ApproximateDate.toGroupIdByReleaseDate(
+    private fun Date.toUpcomingReleaseDate(
         category: UpcomingReleaseTimeCategory,
     ): UpcomingReleaseGroupId = when (this) {
-        is ExactDateTime -> UpcomingReleaseGroupId.YearMonthDay(category, this.date.date)
-        is YearMonthDay -> UpcomingReleaseGroupId.YearMonthDay(category, this.date)
-        is YearMonth -> UpcomingReleaseGroupId.YearMonth(category, this.date.year, this.date.monthNumber)
-        is Quarter -> UpcomingReleaseGroupId.YearQuarter(category, this.year, this.quarter)
-        is ToBeDeterminedQuarter -> UpcomingReleaseGroupId.YearQuarter(category, this.year, this.quarter)
-        is ToBeDeterminedYear -> UpcomingReleaseGroupId.Year(category, this.year)
-        is Year -> UpcomingReleaseGroupId.Year(category, this.year)
-        is ToBeDetermined -> UpcomingReleaseGroupId.Tbd(category)
+        is ExactDateTime -> UpcomingReleaseGroupId.YearMonthDay(
+            category,
+            date.year,
+            date.month.number,
+            date.dayOfMonth,
+        )
+        is YearMonthDay -> UpcomingReleaseGroupId.YearMonthDay(category, date)
+        is YearMonth -> UpcomingReleaseGroupId.YearMonth(category, date.year, date.monthNumber)
+        is YearQuarter -> UpcomingReleaseGroupId.YearQuarter(category, year, quarter)
+        is Year -> UpcomingReleaseGroupId.Year(category, year)
         is Unknown -> UpcomingReleaseGroupId.Tbd(category)
-    }
-
-    private fun ApproximateDate.getExactDateYearMothDay(): LocalDate = when (this) {
-        is ExactDateTime -> this.date.date
-        is YearMonthDay -> this.date
-        else -> error("Can not get exact date on `$this`")
     }
 }

@@ -10,13 +10,13 @@ import io.kotest.matchers.equals.shouldBeEqual
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
+import ru.pixnews.domain.model.datetime.Date
+import ru.pixnews.domain.model.datetime.Date.Unknown
+import ru.pixnews.domain.model.datetime.Date.Year
+import ru.pixnews.domain.model.datetime.Date.YearMonth
+import ru.pixnews.domain.model.datetime.Date.YearMonthDay
+import ru.pixnews.domain.model.datetime.Date.YearQuarter
 import ru.pixnews.domain.model.locale.Localized
-import ru.pixnews.domain.model.util.ApproximateDate
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDetermined
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedQuarter
-import ru.pixnews.domain.model.util.ApproximateDate.Year
-import ru.pixnews.domain.model.util.ApproximateDate.YearMonth
-import ru.pixnews.domain.model.util.ApproximateDate.YearMonthDay
 import ru.pixnews.feature.calendar.datasource.igdb.converter.game.IgdbGameReleaseDateConverter.convert
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbReleaseDateFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.releasedate.belowTheStoneTbdCategory6
@@ -42,7 +42,7 @@ import java.time.Month.OCTOBER
 class IgdbGameReleaseDateConverterTest {
     @ParameterizedTest
     @MethodSource("toApproximateDateTestSource")
-    fun `should convert dates`(testData: Pair<ReleaseDate, ApproximateDate>) {
+    fun `should convert dates`(testData: Pair<ReleaseDate, Date>) {
         val game = Game(release_dates = listOf(testData.first))
         val result = convert(game)
         result shouldBeEqual testData.second
@@ -62,10 +62,9 @@ class IgdbGameReleaseDateConverterTest {
             ),
         )
 
-        result shouldBeEqual ToBeDeterminedQuarter(
+        result shouldBeEqual YearQuarter(
             year = 2023,
             quarter = 3,
-            description = Localized.EMPTY_STRING,
         )
     }
 
@@ -88,31 +87,36 @@ class IgdbGameReleaseDateConverterTest {
 
     internal companion object {
         @JvmStatic
-        fun toApproximateDateTestSource(): List<Pair<ReleaseDate, ApproximateDate>> = listOf(
+        fun toApproximateDateTestSource(): List<Pair<ReleaseDate, Date>> = listOf(
             IgdbReleaseDateFixtures.gta21Oct1997 to YearMonthDay(1997, OCTOBER, 21),
             IgdbReleaseDateFixtures.gtaCategory1YyyyMmmm to YearMonth(2003, MARCH),
             IgdbReleaseDateFixtures.thief2Category2Yyyy to Year(2000),
-            IgdbReleaseDateFixtures.xxComCategory3Q1 to ToBeDeterminedQuarter(
-                1994, 1,
-                Localized("Q1 1994", LanguageCode.ENGLISH),
+            IgdbReleaseDateFixtures.xxComCategory3Q1 to YearQuarter(
+                year = 1994,
+                quarter = 1,
+                description = Localized("Q1 1994", LanguageCode.ENGLISH),
             ),
-            IgdbReleaseDateFixtures.xxComCategory4Q2 to ToBeDeterminedQuarter(
-                1994, 2,
-                Localized("Q2 1994", LanguageCode.ENGLISH),
+            IgdbReleaseDateFixtures.xxComCategory4Q2 to YearQuarter(
+                year = 1994,
+                quarter = 2,
+                description = Localized("Q2 1994", LanguageCode.ENGLISH),
             ),
-            IgdbReleaseDateFixtures.zooTycoonCategory5Q3 to ToBeDeterminedQuarter(
-                2001, 3,
-                Localized("Q3 2001", LanguageCode.ENGLISH),
+            IgdbReleaseDateFixtures.zooTycoonCategory5Q3 to YearQuarter(
+                year = 2001,
+                quarter = 3,
+                description = Localized("Q3 2001", LanguageCode.ENGLISH),
             ),
-            IgdbReleaseDateFixtures.nightShiftCategory6Q4 to ToBeDeterminedQuarter(
-                1990, 4,
-                Localized("Q4 1990", LanguageCode.ENGLISH),
+            IgdbReleaseDateFixtures.nightShiftCategory6Q4 to YearQuarter(
+                year = 1990,
+                quarter = 4,
+                description = Localized("Q4 1990", LanguageCode.ENGLISH),
             ),
-            IgdbReleaseDateFixtures.belowTheStoneTbdCategory6 to ToBeDeterminedQuarter(
-                2023, 4,
-                Localized("Q4 2023", LanguageCode.ENGLISH),
+            IgdbReleaseDateFixtures.belowTheStoneTbdCategory6 to YearQuarter(
+                year = 2023,
+                quarter = 4,
+                description = Localized("Q4 2023", LanguageCode.ENGLISH),
             ),
-            IgdbReleaseDateFixtures.starWarsCategory7Tbd to ToBeDetermined(
+            IgdbReleaseDateFixtures.starWarsCategory7Tbd to Unknown(
                 expected = null,
                 description = Localized(value = "TBD", LanguageCode.ENGLISH),
             ),

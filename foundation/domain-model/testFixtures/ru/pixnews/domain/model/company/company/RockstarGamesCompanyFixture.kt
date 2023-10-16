@@ -11,6 +11,7 @@ import ru.pixnews.domain.model.company.CompanyFixtures
 import ru.pixnews.domain.model.company.CompanyStatus.ACTIVE
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.id.DefaultCompanyId
 import ru.pixnews.domain.model.locale.CountryCodeFixtures
 import ru.pixnews.domain.model.locale.Localized
@@ -24,7 +25,6 @@ import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
 import ru.pixnews.domain.model.url.ExternalLinkType.WIKIPEDIA
 import ru.pixnews.domain.model.url.ExternalLinkType.YOUTUBE
 import ru.pixnews.domain.model.url.Url
-import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
@@ -44,7 +44,7 @@ public val CompanyFixtures.rockstarGames: Company
             rawUrl = "https://images.igdb.com/igdb/image/upload/t_logo_med/wcqgg7udjjtzxjsqfnfi.png",
             size = CanvasSize(width = 174U, height = 160U),
         ),
-        foundingDate = ApproximateDate.Year(1998),
+        foundingDate = Date.Year(1998),
         status = ACTIVE,
         country = CountryCodeFixtures.us,
         parentCompany = Ref.Id(DefaultCompanyId("take-two-interactive")),

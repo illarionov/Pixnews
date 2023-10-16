@@ -12,6 +12,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.collections.immutable.toImmutableList
 import org.junit.jupiter.api.Test
+import ru.pixnews.domain.model.datetime.Date.YearMonthDay
 import ru.pixnews.domain.model.game.AverageRating
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameGenre
@@ -37,7 +38,6 @@ import ru.pixnews.domain.model.rating.EsrbRating.MATURE_17PLUS
 import ru.pixnews.domain.model.rating.PegiRating.PEGI_18
 import ru.pixnews.domain.model.url.ImageUrl
 import ru.pixnews.domain.model.url.VideoUrl
-import ru.pixnews.domain.model.util.ApproximateDate.YearMonthDay
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.Ref.Id
 import ru.pixnews.domain.model.util.RichText

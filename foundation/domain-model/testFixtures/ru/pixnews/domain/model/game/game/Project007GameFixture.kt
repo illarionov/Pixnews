@@ -12,6 +12,7 @@ import ru.pixnews.domain.model.company.CompanyFixtures
 import ru.pixnews.domain.model.company.company.ioInteractive
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.datetime.Date.Year
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform.PlayStation5
@@ -26,7 +27,6 @@ import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.DefaultImageUrl
 import ru.pixnews.domain.model.url.DefaultVideoUrl
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
@@ -51,7 +51,7 @@ public val GameFixtures.project007: Game
         ),
         developer = CompanyFixtures.ioInteractive,
         publisher = CompanyFixtures.ioInteractive,
-        releaseDate = ToBeDeterminedYear(2024, Localized("", LanguageCode.ENGLISH)),
+        releaseDate = Year(2024),
         releaseStatus = NOT_YET_RELEASED,
         genres = persistentSetOf(),
         tags = persistentSetOf(),

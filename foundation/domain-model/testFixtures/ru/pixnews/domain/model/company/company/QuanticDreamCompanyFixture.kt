@@ -11,6 +11,7 @@ import ru.pixnews.domain.model.company.CompanyFixtures
 import ru.pixnews.domain.model.company.CompanyStatus.ACTIVE
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.id.DefaultCompanyId
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.DefaultImageUrl
@@ -18,7 +19,6 @@ import ru.pixnews.domain.model.url.ExternalLink
 import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
 import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
 import ru.pixnews.domain.model.url.Url
-import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
@@ -47,7 +47,7 @@ public val CompanyFixtures.quanticDream: Company
             rawUrl = "https://images.igdb.com/igdb/image/upload/t_logo_med/cl4xg.png",
             size = CanvasSize(284U, 71U),
         ),
-        foundingDate = ApproximateDate.Year(1997),
+        foundingDate = Date.Year(1997),
         status = ACTIVE,
         country = CountryCode("FR"),
         parentCompany = Ref.Id(DefaultCompanyId("netease-games")),

@@ -7,14 +7,13 @@ package ru.pixnews.domain.model.game.game
 
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toInstant
 import ru.pixnews.domain.model.company.CompanyFixtures
 import ru.pixnews.domain.model.company.company.vale
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.datetime.Date.Unknown
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
@@ -30,7 +29,6 @@ import ru.pixnews.domain.model.game.shooter
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.DefaultImageUrl
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDetermined
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
@@ -66,16 +64,12 @@ public val GameFixtures.halfLife3: Game
         ),
         developer = CompanyFixtures.vale,
         publisher = CompanyFixtures.vale,
-        releaseDate = ToBeDetermined(
-            expected = LocalDateTime(
+        releaseDate = Unknown(
+            expected = LocalDate(
                 year = 2024,
                 month = Month.JANUARY,
                 dayOfMonth = 1,
-                hour = 0,
-                minute = 0,
-                second = 0,
-                nanosecond = 0,
-            ).toInstant(TimeZone.UTC) to null,
+            ) to null,
             description = Localized("", LanguageCode.ENGLISH),
         ),
         releaseStatus = RUMORED,

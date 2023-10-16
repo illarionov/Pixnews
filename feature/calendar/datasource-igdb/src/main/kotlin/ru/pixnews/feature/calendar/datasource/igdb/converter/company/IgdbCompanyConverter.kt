@@ -10,16 +10,16 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.company.CompanyStatus.UNKNOWN
+import ru.pixnews.domain.model.datetime.Date
+import ru.pixnews.domain.model.datetime.Date.Unknown
+import ru.pixnews.domain.model.datetime.Date.Year
+import ru.pixnews.domain.model.datetime.Date.YearMonth
+import ru.pixnews.domain.model.datetime.Date.YearMonthDay
+import ru.pixnews.domain.model.datetime.Date.YearQuarter
 import ru.pixnews.domain.model.id.CompanyId
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.ExternalLink
 import ru.pixnews.domain.model.url.Url
-import ru.pixnews.domain.model.util.ApproximateDate
-import ru.pixnews.domain.model.util.ApproximateDate.Quarter
-import ru.pixnews.domain.model.util.ApproximateDate.Unknown
-import ru.pixnews.domain.model.util.ApproximateDate.Year
-import ru.pixnews.domain.model.util.ApproximateDate.YearMonth
-import ru.pixnews.domain.model.util.ApproximateDate.YearMonthDay
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.Ref.Id
@@ -102,14 +102,14 @@ internal object IgdbCompanyConverter {
     private fun parseIgdbStartDate(
         date: Instant,
         changeDateCategory: DateFormatChangeDateCategoryEnum,
-    ): ApproximateDate = when (changeDateCategory) {
+    ): Date = when (changeDateCategory) {
         YYYYMMMMDD -> YearMonthDay(date.asLocalDate)
         YYYYMMMM -> YearMonth(date.asLocalDate)
         YYYY -> Year(date.asLocalDate.year)
-        YYYYQ1 -> Quarter(date.asLocalDate.year, 1)
-        YYYYQ2 -> Quarter(date.asLocalDate.year, 2)
-        YYYYQ3 -> Quarter(date.asLocalDate.year, 3)
-        YYYYQ4 -> Quarter(date.asLocalDate.year, 4)
+        YYYYQ1 -> YearQuarter(date.asLocalDate.year, 1)
+        YYYYQ2 -> YearQuarter(date.asLocalDate.year, 2)
+        YYYYQ3 -> YearQuarter(date.asLocalDate.year, 3)
+        YYYYQ4 -> YearQuarter(date.asLocalDate.year, 4)
         TBD -> Unknown()
     }
 }

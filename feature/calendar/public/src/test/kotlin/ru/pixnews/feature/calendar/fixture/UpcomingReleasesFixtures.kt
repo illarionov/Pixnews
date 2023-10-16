@@ -6,12 +6,12 @@
 package ru.pixnews.feature.calendar.fixture
 
 import arrow.atomic.AtomicInt
+import ru.pixnews.domain.model.datetime.Date
+import ru.pixnews.domain.model.datetime.Date.Unknown
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.halfLife3
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.Localized
-import ru.pixnews.domain.model.util.ApproximateDate
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDetermined
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
@@ -87,17 +87,17 @@ object UpcomingReleasesFixtures {
     }
 
     object ReleasesTbd {
-        val tdbGame1 by upcomingRelease(ToBeDetermined(null), TBD)
-        val tbdGame2 by upcomingRelease(ToBeDetermined(null), TBD)
+        val tdbGame1 by upcomingRelease(Unknown(), TBD)
+        val tbdGame2 by upcomingRelease(Unknown(), TBD)
     }
 
     private fun upcomingRelease(
-        releaseDate: ApproximateDate,
+        releaseDate: Date,
         category: UpcomingReleaseTimeCategory,
     ): UpcomingReleaseFixture = UpcomingReleaseFixture(releaseDate, category)
 
     private class UpcomingReleaseFixture(
-        private val releaseDate: ApproximateDate,
+        private val releaseDate: Date,
         private val category: UpcomingReleaseTimeCategory,
     ) {
         private var release: UpcomingRelease? = null

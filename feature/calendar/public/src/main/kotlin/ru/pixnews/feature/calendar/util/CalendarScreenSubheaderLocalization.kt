@@ -67,7 +67,8 @@ public class CalendarScreenSubheaderLocalization(
      */
     private val yearFormatter by lazy(NONE) { YearFormatter(locale, resources) }
 
-    private fun cleanupYear(year: String): String = year.removeSuffix(" г.")
+    private fun cleanupYear(year: String): String = year
+        .replace(CLEANUP_YEAR_REGEX, "")
 
     @Suppress("MagicNumber")
     public fun localize(
@@ -124,5 +125,6 @@ public class CalendarScreenSubheaderLocalization(
          * A date format skeleton used to format a selected year for release group subheader
          */
         private const val YEAR_SKELETON: String = "y"
-    }
+        private val CLEANUP_YEAR_REGEX = Regex("""\s+г\.$""")
+}
 }

@@ -13,6 +13,7 @@ import ru.pixnews.domain.model.company.CompanyFixtures
 import ru.pixnews.domain.model.company.company.monomiPark
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.datetime.Date.Year
 import ru.pixnews.domain.model.game.AverageRating
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
@@ -53,7 +54,6 @@ import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
 import ru.pixnews.domain.model.url.ExternalLinkType.WIKIPEDIA
 import ru.pixnews.domain.model.url.ExternalLinkType.YOUTUBE
 import ru.pixnews.domain.model.url.Url
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
@@ -100,7 +100,7 @@ public val GameFixtures.slimeRancher2: Game
                 ).toImmutableList(),
         developer = CompanyFixtures.monomiPark,
         publisher = CompanyFixtures.monomiPark,
-        releaseDate = ToBeDeterminedYear(2024, Localized("", LanguageCode.ENGLISH)),
+        releaseDate = Year(2024),
         releaseStatus = EARLY_ACCESS,
         genres = persistentSetOf(
             GameGenreFixtures.adventure,

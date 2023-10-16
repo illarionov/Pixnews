@@ -8,11 +8,10 @@ package ru.pixnews.feature.calendar.fixture
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
-import ru.pixnews.domain.model.locale.Localized
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedQuarter
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
-import ru.pixnews.domain.model.util.ApproximateDate.YearMonth
-import ru.pixnews.domain.model.util.ApproximateDate.YearMonthDay
+import ru.pixnews.domain.model.datetime.Date.Year
+import ru.pixnews.domain.model.datetime.Date.YearMonth
+import ru.pixnews.domain.model.datetime.Date.YearMonthDay
+import ru.pixnews.domain.model.datetime.Date.YearQuarter
 import java.time.Month.APRIL
 import java.time.Month.AUGUST
 import java.time.Month.JULY
@@ -49,26 +48,26 @@ object UpcomingReleaseDateFixtures {
     object CurrentQuarter {
         val exactDate = YearMonthDay(2023, JUNE, 11)
         val approxDateMonth = YearMonth(2023, JUNE)
-        val approxDateQuarter = ToBeDeterminedQuarter(2023, 2, Localized.EMPTY_STRING)
+        val approxDateQuarter = YearQuarter(2023, 2)
     }
 
     object NextQuarter {
         val exactDate = YearMonthDay(2023, JULY, 2)
         val approxDateMonth = YearMonth(2023, AUGUST)
-        val approxDate3Quarter = ToBeDeterminedQuarter(2023, 3, Localized.EMPTY_STRING)
+        val approxDate3Quarter = YearQuarter(2023, 3)
     }
 
     object CurrentYear {
         val exactDate2Oct = YearMonthDay(2023, OCTOBER, 2)
         val approxDateOctober = YearMonth(2023, OCTOBER)
-        val approxDate4Quarter = ToBeDeterminedQuarter(2023, 4, Localized.EMPTY_STRING)
-        val approxDateYear = ToBeDeterminedYear(2023, Localized.EMPTY_STRING)
+        val approxDate4Quarter = YearQuarter(2023, 4)
+        val approxDateYear = Year(2023)
     }
 
     object NextYear {
         val exactDate1jun = YearMonthDay(2024, JUNE, 1)
         val approxDateApril = YearMonth(2024, APRIL)
-        val approxDateQuarter = ToBeDeterminedQuarter(2024, 1, Localized.EMPTY_STRING)
-        val approxDateYear = ToBeDeterminedYear(2024, Localized.EMPTY_STRING)
+        val approxDateQuarter = YearQuarter(2024, 1)
+        val approxDateYear = Year(2024)
     }
 }

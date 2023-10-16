@@ -14,6 +14,7 @@ import ru.pixnews.domain.model.company.company.hypixelStudios
 import ru.pixnews.domain.model.company.company.riotGames
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
@@ -48,7 +49,6 @@ import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
 import ru.pixnews.domain.model.url.ExternalLinkType.WIKIPEDIA
 import ru.pixnews.domain.model.url.ExternalLinkType.YOUTUBE
 import ru.pixnews.domain.model.url.Url
-import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
@@ -103,7 +103,7 @@ public val GameFixtures.hytale: Game
                 ).toImmutableList(),
         developer = CompanyFixtures.hypixelStudios,
         publisher = CompanyFixtures.riotGames,
-        releaseDate = ApproximateDate.ToBeDeterminedYear(2024, Localized("", LanguageCode.ENGLISH)),
+        releaseDate = Date.Year(2024),
         releaseStatus = NOT_YET_RELEASED,
         genres = persistentSetOf(
             GameGenreFixtures.adventure,

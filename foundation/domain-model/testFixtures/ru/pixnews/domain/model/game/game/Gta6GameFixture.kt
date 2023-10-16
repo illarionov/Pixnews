@@ -11,6 +11,7 @@ import ru.pixnews.domain.model.company.CompanyFixtures
 import ru.pixnews.domain.model.company.company.rockstarGames
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
@@ -23,7 +24,6 @@ import ru.pixnews.domain.model.game.gta
 import ru.pixnews.domain.model.game.shooter
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.Localized
-import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
 import ru.pixnews.library.internationalization.language.LanguageCode
@@ -49,7 +49,7 @@ public val GameFixtures.gta6: Game
         screenshots = persistentListOf(),
         developer = CompanyFixtures.rockstarGames,
         publisher = CompanyFixtures.rockstarGames,
-        releaseDate = ApproximateDate.ToBeDeterminedYear(2024, Localized("", LanguageCode.ENGLISH)),
+        releaseDate = Date.Year(2024),
         releaseStatus = NOT_YET_RELEASED,
         genres = persistentSetOf(
             GameGenreFixtures.adventure,

@@ -12,6 +12,7 @@ import ru.pixnews.domain.model.company.company.electronicArts
 import ru.pixnews.domain.model.company.company.theSimsStudio
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.datetime.Date.Year
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
@@ -29,7 +30,6 @@ import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.ExternalLink
 import ru.pixnews.domain.model.url.ExternalLinkType.TWITCH
 import ru.pixnews.domain.model.url.Url
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
 import ru.pixnews.library.internationalization.language.LanguageCode
@@ -46,7 +46,7 @@ public val GameFixtures.sims5: Game
         screenshots = persistentListOf(),
         developer = CompanyFixtures.theSimsStudio,
         publisher = CompanyFixtures.electronicArts,
-        releaseDate = ToBeDeterminedYear(2024, Localized("", LanguageCode.ENGLISH)),
+        releaseDate = Year(2024),
         releaseStatus = NOT_YET_RELEASED,
         genres = persistentSetOf(
             GameGenreFixtures.rpg,

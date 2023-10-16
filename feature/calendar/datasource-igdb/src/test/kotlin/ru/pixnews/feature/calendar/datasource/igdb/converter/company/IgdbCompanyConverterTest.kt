@@ -13,12 +13,12 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.company.CompanyStatus.UNKNOWN
+import ru.pixnews.domain.model.datetime.Date.Year
 import ru.pixnews.domain.model.id.CompanyId
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.ExternalLink
 import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
 import ru.pixnews.domain.model.url.Url
-import ru.pixnews.domain.model.util.ApproximateDate.Year
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.Ref.FullObject

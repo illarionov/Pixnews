@@ -6,8 +6,8 @@
 package ru.pixnews.feature.calendar.converter
 
 import kotlinx.datetime.LocalDate
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.TBD
@@ -18,7 +18,7 @@ import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearMonth
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearMonthDay
 import ru.pixnews.library.kotlin.datetime.utils.quarter
-import ru.pixnews.domain.model.util.ApproximateDate.YearMonth as ApYearMonth
+import ru.pixnews.domain.model.datetime.Date.YearMonth as ApYearMonth
 
 internal sealed class ListOrderTestExpectedItem {
     data class ListItemTitle(
@@ -45,7 +45,7 @@ internal sealed class ListOrderTestExpectedItem {
 
         internal fun MutableList<ListOrderTestExpectedItem>.titleYearMonthDay(
             category: UpcomingReleaseTimeCategory,
-            date: ApproximateDate.YearMonthDay,
+            date: Date.YearMonthDay,
         ) = add(ListItemTitle(YearMonthDay(category, date.date)))
 
         internal fun MutableList<ListOrderTestExpectedItem>.titleYearMonth(

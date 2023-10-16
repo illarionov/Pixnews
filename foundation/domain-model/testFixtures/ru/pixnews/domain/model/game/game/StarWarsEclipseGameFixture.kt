@@ -13,6 +13,7 @@ import ru.pixnews.domain.model.company.CompanyFixtures
 import ru.pixnews.domain.model.company.company.quanticDream
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.datetime.Date.Year
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
@@ -33,7 +34,6 @@ import ru.pixnews.domain.model.url.DefaultVideoUrl
 import ru.pixnews.domain.model.url.ExternalLink
 import ru.pixnews.domain.model.url.ExternalLinkType.OFFICIAL
 import ru.pixnews.domain.model.url.Url
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
@@ -82,7 +82,7 @@ public val GameFixtures.starWarsEclipse: Game
                 ).toImmutableList(),
         developer = CompanyFixtures.quanticDream,
         publisher = null,
-        releaseDate = ToBeDeterminedYear(2024, Localized("", LanguageCode.ENGLISH)),
+        releaseDate = Year(2024),
         releaseStatus = NOT_YET_RELEASED,
         genres = persistentSetOf(GameGenreFixtures.adventure),
         tags = persistentSetOf(),

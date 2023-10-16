@@ -13,6 +13,7 @@ import ru.pixnews.domain.model.company.company.ubisoftEntertainment
 import ru.pixnews.domain.model.company.company.ubisoftMontpellier
 import ru.pixnews.domain.model.datasource.DataSourceFixtures
 import ru.pixnews.domain.model.datasource.igdb
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenreFixtures
@@ -42,7 +43,6 @@ import ru.pixnews.domain.model.url.ExternalLinkType.TWITCH
 import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
 import ru.pixnews.domain.model.url.ExternalLinkType.WIKIPEDIA
 import ru.pixnews.domain.model.url.Url
-import ru.pixnews.domain.model.util.ApproximateDate.ToBeDeterminedYear
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.domain.model.util.RichText
@@ -107,7 +107,7 @@ public val GameFixtures.beyondGoodEvil2: Game
         ),
         developer = CompanyFixtures.ubisoftEntertainment,
         publisher = CompanyFixtures.ubisoftMontpellier,
-        releaseDate = ToBeDeterminedYear(2024, Localized("", LanguageCode.ENGLISH)),
+        releaseDate = Date.Year(2024),
         releaseStatus = NOT_YET_RELEASED,
         genres = persistentSetOf(GameGenreFixtures.adventure),
         tags = listOf(

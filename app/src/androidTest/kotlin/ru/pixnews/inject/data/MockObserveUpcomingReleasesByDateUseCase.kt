@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.beyondGoodEvil2
@@ -25,8 +26,6 @@ import ru.pixnews.domain.model.game.game.slimeRancher2
 import ru.pixnews.domain.model.game.game.smalland
 import ru.pixnews.domain.model.game.game.starWarsEclipse
 import ru.pixnews.domain.model.game.game.theLostWild
-import ru.pixnews.domain.model.locale.Localized
-import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
@@ -93,7 +92,7 @@ class MockObserveUpcomingReleasesByDateUseCase @Inject constructor() : ObserveUp
                 CURRENT_QUARTER,
             ),
 
-            // TODO: Current year
+            // TBD: Current year
             UpcomingRelease(GameFixtures.halfLife3.copy(releaseDate = CurrentQuarter.approxDateMonth), CURRENT_YEAR),
 
             // Tbd
@@ -102,21 +101,21 @@ class MockObserveUpcomingReleasesByDateUseCase @Inject constructor() : ObserveUp
         )
 
         object CurrentMonth {
-            val exactDateToday = ApproximateDate.YearMonthDay(2023, MAY, 17)
-            val exactDateTomorrow = ApproximateDate.YearMonthDay(2023, MAY, 18)
-            val exactDateLater = ApproximateDate.YearMonthDay(2023, MAY, 25)
-            val approxDate = ApproximateDate.YearMonth(2023, MAY)
+            val exactDateToday = Date.YearMonthDay(2023, MAY, 17)
+            val exactDateTomorrow = Date.YearMonthDay(2023, MAY, 18)
+            val exactDateLater = Date.YearMonthDay(2023, MAY, 25)
+            val approxDate = Date.YearMonth(2023, MAY)
         }
 
         object NextMonth {
-            val exactDate = ApproximateDate.YearMonthDay(2023, JUNE, 10)
-            val approxDate = ApproximateDate.YearMonth(2023, JUNE)
+            val exactDate = Date.YearMonthDay(2023, JUNE, 10)
+            val approxDate = Date.YearMonth(2023, JUNE)
         }
 
         object CurrentQuarter {
-            val exactDate = ApproximateDate.YearMonthDay(2023, AUGUST, 11)
-            val approxDateMonth = ApproximateDate.YearMonth(2023, AUGUST)
-            val approxDateQuarter = ApproximateDate.ToBeDeterminedQuarter(2023, 2, Localized.EMPTY_STRING)
+            val exactDate = Date.YearMonthDay(2023, AUGUST, 11)
+            val approxDateMonth = Date.YearMonth(2023, AUGUST)
+            val approxDateQuarter = Date.YearQuarter(2023, 2)
         }
     }
 }

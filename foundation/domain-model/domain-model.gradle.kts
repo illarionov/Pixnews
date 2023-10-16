@@ -17,6 +17,7 @@ dependencies {
     api(libs.androidx.annotation)
     api(projects.library.internationalization)
     implementation(projects.library.kotlinUtils)
+    implementation(projects.library.kotlinDatetimeUtils)
 
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.kotest.property)

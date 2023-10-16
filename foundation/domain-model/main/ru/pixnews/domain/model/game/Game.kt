@@ -11,13 +11,13 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
 import ru.pixnews.domain.model.company.Company
 import ru.pixnews.domain.model.datasource.DataSource
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.rating.AgeRating
 import ru.pixnews.domain.model.url.ExternalLink
 import ru.pixnews.domain.model.url.ImageUrl
 import ru.pixnews.domain.model.url.VideoUrl
-import ru.pixnews.domain.model.util.ApproximateDate
 import ru.pixnews.domain.model.util.HasId
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.RichText
@@ -35,7 +35,7 @@ public data class Game(
     val developer: Company? = null,
     val publisher: Company? = null,
 
-    val releaseDate: ApproximateDate = ApproximateDate.Unknown(),
+    val releaseDate: Date = Date.Unknown(),
     val releaseStatus: GameReleaseStatus? = null,
 
     val genres: ImmutableSet<GameGenre> = persistentSetOf(),

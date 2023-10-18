@@ -42,6 +42,6 @@ object LoggingModule {
             minSeverity = Severity.Info,
             logWriterList = listOf(logWriter),
         )
-        return Logger(config).withTag("Pixnews")
+        return Logger(config).withTag("PixnewsBenchmark")
     }
 }

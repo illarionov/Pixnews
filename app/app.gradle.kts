@@ -90,6 +90,7 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.junit.jupiter.params)
 
+    androidTestImplementation(projects.test.appMock)
     androidTestImplementation(projects.foundation.instrumentedTest)
     androidTestImplementation(projects.foundation.ui.imageloader.coilTest)
     androidTestImplementation(projects.foundation.ui.designTestConstants)

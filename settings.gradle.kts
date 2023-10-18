@@ -14,6 +14,7 @@ rootProject.name = "Pixnews"
 rootProject.buildFileName = "pixnews.gradle.kts"
 
 includeSubproject(":app")
+includeSubproject(":test:app-mock")
 includeSubproject(":test:benchmark")
 
 listOf(

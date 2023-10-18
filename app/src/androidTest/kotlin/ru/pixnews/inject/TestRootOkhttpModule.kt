@@ -15,7 +15,7 @@ import okhttp3.Interceptor
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.instrumented.test.di.InstrumentationAppContext
 import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientInterceptor
-import ru.pixnews.test.mockokhttp.MockDataInterceptor
+import ru.pixnews.test.app.mock.mockokhttp.MockDataInterceptor
 import javax.inject.Provider
 
 @ContributesTo(AppScope::class)

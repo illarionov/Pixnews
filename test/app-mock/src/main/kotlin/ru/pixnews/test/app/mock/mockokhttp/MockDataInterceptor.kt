@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.test.mockokhttp
+package ru.pixnews.test.app.mock.mockokhttp
 
 import android.content.Context
 import co.touchlab.kermit.Logger
@@ -13,13 +13,14 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.Protocol.HTTP_1_1
 import okhttp3.Request
 import okhttp3.Response
+import okhttp3.Response.Builder
 import okhttp3.ResponseBody.Companion.asResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okio.buffer
 import okio.source
 import javax.inject.Provider
 
-class MockDataInterceptor(
+public class MockDataInterceptor(
     private val context: Provider<Context>,
     logger: Logger,
     ) : Interceptor {
@@ -35,7 +36,7 @@ class MockDataInterceptor(
 
         return when (request.method) {
             "GET" -> formatGetResponse(request)
-            else -> Response.Builder()
+            else -> Builder()
                 .request(request)
                 .body(
                     "Unsupported method `${request.method}` on `${request.url}`"
@@ -64,7 +65,7 @@ class MockDataInterceptor(
                 contentLength = contentLength,
             )
 
-        return Response.Builder()
+        return Builder()
             .request(request)
             .body(source)
             .message("OK")

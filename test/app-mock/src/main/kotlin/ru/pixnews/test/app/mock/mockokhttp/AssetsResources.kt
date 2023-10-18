@@ -3,25 +3,25 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.test.mockokhttp
+package ru.pixnews.test.app.mock.mockokhttp
 
 import okhttp3.HttpUrl
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import java.net.URLConnection
 
-internal object AssetsResources {
-    fun getResource(url: HttpUrl): AssetsResource {
+public object AssetsResources {
+    public fun getResource(url: HttpUrl): AssetsResource {
         return AssetsResource.forUrl(url)
     }
 
-    internal data class AssetsResource(
+    public data class AssetsResource(
         val url: HttpUrl,
         val assetsPrefix: String,
         val mediaType: MediaType = "image/png".toMediaType(),
     ) {
-        companion object {
-            fun forUrl(httpUrl: HttpUrl): AssetsResource {
+        public companion object {
+            public fun forUrl(httpUrl: HttpUrl): AssetsResource {
                 var segments = httpUrl.pathSegments
                 if (segments.last().isEmpty()) {
                     segments = segments.dropLast(1) + "index.html"

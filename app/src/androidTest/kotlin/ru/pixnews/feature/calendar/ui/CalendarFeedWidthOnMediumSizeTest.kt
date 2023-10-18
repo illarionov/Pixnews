@@ -27,6 +27,7 @@ import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
+import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions
 import javax.inject.Inject
 
 @ContributesTest
@@ -38,6 +39,9 @@ class CalendarFeedWidthOnMediumSizeTest : BaseInstrumentedTest() {
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private val gameFeed = GameFeedElement(composeTestRule)
     private var screenWidth: Dp = (-1).dp
+
+    @get:Rule
+    val upcomingReleaseUseCaseAssumptions = UpcomingReleaseUseCaseAssumptions()
 
     @Inject
     lateinit var logger: Logger

@@ -16,6 +16,7 @@ import ru.pixnews.feature.root.TopLevelDestination.CALENDAR
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
+import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions
 import javax.inject.Inject
 
 @ContributesTest
@@ -25,6 +26,9 @@ class FirstScreenTest : BaseInstrumentedTest() {
 
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
+
+    @get:Rule
+    val upcomingReleaseUseCaseAssumptions = UpcomingReleaseUseCaseAssumptions()
 
     @Inject
     lateinit var logger: Logger

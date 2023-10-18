@@ -91,7 +91,6 @@ public class GameFeedElement(
     }
 
     public companion object {
-        @Suppress("CONSTANT_UPPERCASE")
         public val firstUpcomingReleaseGroupId: UpcomingReleaseGroupId = UpcomingReleaseGroupId.YearMonthDay(
             FEW_DAYS,
             2023,

@@ -15,11 +15,15 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.MainActivity
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.beyondGoodEvil2
+import ru.pixnews.domain.model.game.game.gta6
 import ru.pixnews.domain.model.game.game.hytale
 import ru.pixnews.domain.model.game.game.sims5
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_QUARTER
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_MONTH
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
@@ -29,8 +33,10 @@ import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
-import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase.UpcomingReleasesDateFixtures.CurrentMonth
 import ru.pixnews.library.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
+import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions
+import java.time.Month.AUGUST
+import java.time.Month.MAY
 import javax.inject.Inject
 
 @ContributesTest
@@ -42,6 +48,9 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
     val composeTestRule = createAndroidComposeRule<MainActivity>()
     private val calendarHeader = CalendarHeaderElement(composeTestRule)
     private val gameFeed = GameFeedElement(composeTestRule)
+
+    @get:Rule
+    val upcomingReleaseUseCaseAssumptions = UpcomingReleaseUseCaseAssumptions()
 
     @Inject
     lateinit var logger: Logger
@@ -93,8 +102,17 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
 
     @Test
     fun calendarScreen_adjacent_gameCard_gameSubheader_shouldHaveCorrectPadding() {
+        val dateToday = Date.YearMonthDay(2023, MAY, 17)
+        val dateTomorrow = Date.YearMonthDay(2023, MAY, 18)
+
+        upcomingReleaseUseCaseAssumptions.assumeUpcomingReleasesSuccessfully(
+            releases = listOf(
+                UpcomingRelease(GameFixtures.hytale.copy(releaseDate = dateToday), FEW_DAYS),
+                UpcomingRelease(GameFixtures.gta6.copy(releaseDate = dateTomorrow), FEW_DAYS),
+            ),
+        )
         val gameId = GameFixtures.hytale.id
-        val dateSubheader = UpcomingReleaseGroupId.YearMonthDay(FEW_DAYS, CurrentMonth.exactDateTomorrow.date)
+        val dateSubheader = UpcomingReleaseGroupId.YearMonthDay(FEW_DAYS, dateTomorrow.date)
 
         with(gameFeed) {
             scrollToGameCard(gameId)
@@ -113,6 +131,22 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
     fun calendarScreen_adjacent_gameCard_gameCard_shouldHaveCorrectPadding() {
         Assume.assumeTrue("Too far scrolling on small screens", Build.VERSION.SDK_INT > 24)
 
+        upcomingReleaseUseCaseAssumptions.assumeUpcomingReleasesSuccessfully(
+            releases = listOf(
+                UpcomingRelease(
+                    GameFixtures.sims5.copy(
+                        releaseDate = Date.YearMonthDay(2023, AUGUST, 11),
+                    ),
+                    CURRENT_QUARTER,
+                ),
+                UpcomingRelease(
+                    GameFixtures.beyondGoodEvil2.copy(
+                        releaseDate = Date.YearMonth(2023, AUGUST),
+                    ),
+                    CURRENT_QUARTER,
+                ),
+            ),
+        )
         val game1Id = GameFixtures.sims5.id
         val game2Id = GameFixtures.beyondGoodEvil2.id
         with(gameFeed) {

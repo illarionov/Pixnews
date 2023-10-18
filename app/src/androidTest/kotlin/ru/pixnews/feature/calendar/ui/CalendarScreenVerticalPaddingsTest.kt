@@ -44,6 +44,7 @@ import ru.pixnews.library.instrumented.test.rule.SystemNavigationRule
 import ru.pixnews.library.instrumented.test.rule.SystemNavigationRule.NavigationMode
 import ru.pixnews.library.instrumented.test.rule.SystemNavigationRule.NavigationMode.GESTURAL
 import ru.pixnews.library.instrumented.test.rule.SystemNavigationRule.NavigationMode.THREE_BUTTON
+import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions
 import javax.inject.Inject
 import kotlin.LazyThreadSafetyMode.NONE
 
@@ -70,6 +71,9 @@ class CalendarScreenVerticalPaddingsTest(
     private var calendarHeader = CalendarHeaderElement(composeTestRule)
     private var gameFeed = GameFeedElement(composeTestRule)
 
+    @get:Rule
+    val releasesAssumptions = UpcomingReleaseUseCaseAssumptions()
+
     @Inject
     lateinit var logger: Logger
 
@@ -82,6 +86,8 @@ class CalendarScreenVerticalPaddingsTest(
             "Device width ${screenWidth}dp outside the tested range ${testSpec.screenWidthDp}",
             screenWidth in testSpec.screenWidthDp,
         )
+
+        releasesAssumptions.assumeUpcomingGamesResponseDefaultGame()
 
         ViewCompat.getRootWindowInsets(composeTestRule.activity.rootView)!!.also { insets ->
             val expectedPadding = testSpec.expectedHorizontalPadding(insets, composeTestRule.density)

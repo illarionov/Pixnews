@@ -31,7 +31,10 @@ import ru.pixnews.library.functional.network.NetworkRequestFailure
 import ru.pixnews.library.functional.network.NetworkRequestStatus
 import javax.inject.Inject
 
-@ContributesBinding(boundType = ObserveUpcomingReleasesByDateUseCase::class, scope = AppScope::class)
+@ContributesBinding(
+    boundType = ObserveUpcomingReleasesByDateUseCase::class,
+    scope = AppScope::class,
+)
 public class DefaultObserveUpcomingReleasesByDateUseCase(
     private val igdbRepository: IgdbRepository,
     private val clock: Clock,

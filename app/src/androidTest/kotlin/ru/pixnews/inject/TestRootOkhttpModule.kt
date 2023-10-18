@@ -8,14 +8,17 @@ package ru.pixnews.inject
 import android.content.Context
 import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesTo
+import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoSet
-import okhttp3.Interceptor
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.instrumented.test.di.InstrumentationAppContext
+import ru.pixnews.foundation.network.InterceptorWithPriority
 import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientInterceptor
 import ru.pixnews.test.app.mock.mockokhttp.MockDataInterceptor
+import ru.pixnews.test.app.mock.mockokhttp.NetworkBehavior
+import ru.pixnews.test.app.mock.mockokhttp.NetworkBehaviorDataInterceptor
 import javax.inject.Provider
 
 @ContributesTo(AppScope::class)
@@ -27,5 +30,17 @@ public object TestRootOkhttpModule {
     fun provideMockingInterceptor(
         @InstrumentationAppContext context: Provider<Context>,
         logger: Logger,
-    ): Interceptor = MockDataInterceptor(context, logger)
+    ): InterceptorWithPriority = MockDataInterceptor(context, logger)
+
+    @Provides
+    @SingleIn(AppScope::class)
+    fun providesNetworkBehavior(): NetworkBehavior = NetworkBehavior()
+
+    @Provides
+    @IntoSet
+    @RootHttpClientInterceptor
+    fun providesNetworkBehaviorDataInterceptor(
+        networkBehavior: NetworkBehavior,
+        logger: Logger,
+    ): InterceptorWithPriority = NetworkBehaviorDataInterceptor(networkBehavior, logger)
 }

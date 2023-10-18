@@ -7,7 +7,6 @@ package ru.pixnews.test.app.mock.mockokhttp
 
 import android.content.Context
 import co.touchlab.kermit.Logger
-import okhttp3.Interceptor
 import okhttp3.Interceptor.Chain
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.Protocol.HTTP_1_1
@@ -18,13 +17,16 @@ import okhttp3.ResponseBody.Companion.asResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okio.buffer
 import okio.source
+import ru.pixnews.foundation.network.InterceptorWithPriority
+import ru.pixnews.foundation.network.InterceptorWithPriority.InterceptorPriority
 import javax.inject.Provider
 
 public class MockDataInterceptor(
     private val context: Provider<Context>,
     logger: Logger,
-    ) : Interceptor {
+    ) : InterceptorWithPriority {
     private val log = logger.withTag("MockDataInterceptor")
+    override val priority: InterceptorPriority = InterceptorPriority(-2)
 
     init {
         log.i { "MockDataInterceptor initialized" }

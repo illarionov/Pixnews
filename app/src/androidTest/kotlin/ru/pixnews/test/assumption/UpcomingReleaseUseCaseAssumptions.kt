@@ -5,9 +5,6 @@
 
 package ru.pixnews.test.assumption
 
-import androidx.annotation.RestrictTo
-import androidx.annotation.RestrictTo.Scope.LIBRARY
-import com.squareup.anvil.annotations.ContributesTo
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.collections.immutable.toPersistentList
@@ -28,7 +25,7 @@ import ru.pixnews.domain.model.game.game.slimeRancher2
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleasesResponse
-import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.inject.MockResourcesHolder
 import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase.UpcomingReleasesDateFixtures.NOT_INITIALIZED
 import ru.pixnews.library.functional.network.NetworkRequestStatus
@@ -37,7 +34,7 @@ class UpcomingReleaseUseCaseAssumptions : ExternalResource() {
     private lateinit var mockUseCase: MockObserveUpcomingReleasesByDateUseCase
 
     override fun apply(base: Statement?, description: Description?): Statement {
-        mockUseCase = (PixnewsRootComponentHolder.appComponent as MockUseCaseHolder).mockUseCase
+        mockUseCase = (PixnewsRootComponentHolder.appComponent as MockResourcesHolder).mockUseCase
         return super.apply(base, description)
     }
 
@@ -110,11 +107,5 @@ class UpcomingReleaseUseCaseAssumptions : ExternalResource() {
             ),
             group = FEW_DAYS,
         )
-
-        @ContributesTo(AppScope::class)
-        @RestrictTo(LIBRARY)
-        interface MockUseCaseHolder {
-            val mockUseCase: MockObserveUpcomingReleasesByDateUseCase
-        }
     }
 }

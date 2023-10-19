@@ -10,7 +10,7 @@ import org.junit.runner.Description
 import org.junit.runners.model.Statement
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
 import ru.pixnews.inject.MockResourcesHolder
-import ru.pixnews.test.app.mock.mockokhttp.NetworkBehavior
+import ru.pixnews.test.app.mock.NetworkBehavior
 
 class NetworkAssumptions : ExternalResource() {
     private lateinit var networkBehavior: NetworkBehavior

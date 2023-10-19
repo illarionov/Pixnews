@@ -310,6 +310,11 @@
             <pgp value="4f7e32d440ef90a83011a8fc6425559c47cc79c4"/>
          </artifact>
       </component>
+      <component group="com.yandex.classifieds" name="mockwebserver-dsl" version="1.0.0">
+         <artifact name="mockwebserver-dsl-1.0.0.jar">
+            <pgp value="3696ea5bc51d66e7069198df31427746fad4265b"/>
+         </artifact>
+      </component>
       <component group="commons-cli" name="commons-cli" version="1.5.0">
          <artifact name="commons-cli-1.5.0.jar">
             <pgp value="b6e73d84ea4fcc47166087253faad2cd5ecbb314"/>

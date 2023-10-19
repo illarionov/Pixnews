@@ -10,7 +10,7 @@ import androidx.annotation.RestrictTo.Scope.LIBRARY
 import com.squareup.anvil.annotations.ContributesTo
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase
-import ru.pixnews.test.app.mock.mockokhttp.NetworkBehavior
+import ru.pixnews.test.app.mock.NetworkBehavior
 
 @ContributesTo(AppScope::class)
 @RestrictTo(LIBRARY)

@@ -13,10 +13,14 @@ import ru.pixnews.foundation.appconfig.HttpLoggingLevel
 import ru.pixnews.foundation.appconfig.IgdbClientConfig
 import ru.pixnews.foundation.appconfig.NetworkConfig
 import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.test.app.mock.igdb.IgdbMockWebServer
+import javax.inject.Inject
 import kotlin.LazyThreadSafetyMode.NONE
 
 @ContributesBinding(AppScope::class, replaces = [PixnewsAppConfig::class])
-public object TestPixnewsAppConfig : AppConfig {
+public class TestPixnewsAppConfig @Inject constructor(
+    val igdbMockWebServer: IgdbMockWebServer,
+) : AppConfig {
     override val isDebug: Boolean = BuildConfig.DEBUG
     override val applicationId: String = BuildConfig.APPLICATION_ID
     override val buildType: String = BuildConfig.BUILD_TYPE
@@ -30,6 +34,7 @@ public object TestPixnewsAppConfig : AppConfig {
         }
     }
     override val igdbClientConfig: IgdbClientConfig = object : IgdbClientConfig {
-        override val baseUrl: String = "https://localhost:1020/v4/"
+        override val baseUrl: String
+            get() = igdbMockWebServer.webServer.url("/v4/").toString()
     }
 }

@@ -3,13 +3,14 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.test.app.mock.mockokhttp
+package ru.pixnews.test.app.mock.interceptor
 
 import co.touchlab.kermit.Logger
 import okhttp3.Interceptor.Chain
 import okhttp3.Response
 import ru.pixnews.foundation.network.InterceptorWithPriority
 import ru.pixnews.foundation.network.InterceptorWithPriority.InterceptorPriority
+import ru.pixnews.test.app.mock.NetworkBehavior
 import java.net.NoRouteToHostException
 
 public class NetworkBehaviorDataInterceptor(

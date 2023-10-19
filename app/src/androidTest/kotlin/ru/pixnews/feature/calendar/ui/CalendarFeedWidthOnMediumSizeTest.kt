@@ -27,6 +27,7 @@ import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
+import ru.pixnews.test.assumption.NetworkAssumptions
 import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions
 import javax.inject.Inject
 
@@ -36,6 +37,9 @@ class CalendarFeedWidthOnMediumSizeTest : BaseInstrumentedTest() {
     val injectDependencies = InjectDependenciesRule(this)
 
     @get:Rule(order = 20)
+    val networkAssumptions = NetworkAssumptions()
+
+    @get:Rule(order = 30)
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private val gameFeed = GameFeedElement(composeTestRule)
     private var screenWidth: Dp = (-1).dp
@@ -51,6 +55,7 @@ class CalendarFeedWidthOnMediumSizeTest : BaseInstrumentedTest() {
 
     @Before
     fun setup() {
+        networkAssumptions.assumeNetworkDisconnected()
         composeTestRule.setContent {
             TestHarness(
                 size = DpSize(width = 768.dp, height = 1024.dp),

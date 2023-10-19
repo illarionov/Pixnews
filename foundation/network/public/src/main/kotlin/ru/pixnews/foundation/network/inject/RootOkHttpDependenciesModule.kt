@@ -12,7 +12,6 @@ import dagger.Provides
 import dagger.multibindings.ElementsIntoSet
 import dagger.multibindings.Multibinds
 import okhttp3.EventListener
-import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import ru.pixnews.foundation.appconfig.AppConfig
@@ -23,21 +22,23 @@ import ru.pixnews.foundation.appconfig.HttpLoggingLevel.NONE
 import ru.pixnews.foundation.appconfig.NetworkConfig
 import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.foundation.network.InterceptorWithPriority
 import ru.pixnews.foundation.network.KermitOkhttpLogger
 import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientEventListener
 import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientInterceptor
 import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientNetworkInterceptor
+import ru.pixnews.foundation.network.withPriority
 
 @ContributesTo(AppScope::class)
 @Module
 public abstract class RootOkHttpDependenciesModule {
     @Multibinds
     @RootHttpClientInterceptor
-    internal abstract fun provideRootHttpClientInterceptors(): Set<Interceptor>
+    internal abstract fun provideRootHttpClientInterceptors(): Set<InterceptorWithPriority>
 
     @Multibinds
     @RootHttpClientNetworkInterceptor
-    internal abstract fun provideRootHttpClientNetworkInterceptors(): Set<Interceptor>
+    internal abstract fun provideRootHttpClientNetworkInterceptors(): Set<InterceptorWithPriority>
 
     @Multibinds
     @RootHttpClientEventListener
@@ -50,7 +51,7 @@ public abstract class RootOkHttpDependenciesModule {
         internal fun provideOkhttpLoggingInterceptor(
             appConfig: AppConfig,
             logger: Logger,
-        ): DaggerSet<Interceptor> {
+        ): DaggerSet<InterceptorWithPriority> {
             if (appConfig.networkConfig.httpLoggingLevel == NONE) {
                 return emptySet()
             }
@@ -62,7 +63,8 @@ public abstract class RootOkHttpDependenciesModule {
                     BODY -> Level.BODY
                 }
             }
-            return setOf(loggingInterceptor)
+            @Suppress("MagicNumber")
+            return setOf(loggingInterceptor.withPriority(18))
         }
 
         @Provides

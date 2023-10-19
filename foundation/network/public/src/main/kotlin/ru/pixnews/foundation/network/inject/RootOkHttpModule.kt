@@ -11,12 +11,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import okhttp3.EventListener
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import ru.pixnews.foundation.appconfig.NetworkConfig
 import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.di.base.scopes.AppScope
+import ru.pixnews.foundation.network.InterceptorWithPriority
 import ru.pixnews.foundation.network.RootOkHttpClientProvider
 import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientEventListener
 import ru.pixnews.foundation.network.inject.qualifier.RootHttpClientInterceptor
@@ -42,15 +41,15 @@ public object RootOkHttpModule {
     @SingleIn(AppScope::class)
     public fun provideRootOkhttpClient(
         networkConfig: NetworkConfig,
-        @RootHttpClientInterceptor interceptors: DaggerSet<Interceptor>,
-        @RootHttpClientNetworkInterceptor networkInterceptors: DaggerSet<Interceptor>,
+        @RootHttpClientInterceptor interceptors: DaggerSet<InterceptorWithPriority>,
+        @RootHttpClientNetworkInterceptor networkInterceptors: DaggerSet<InterceptorWithPriority>,
         @RootHttpClientEventListener eventListener: EventListener?,
     ): OkHttpClient {
         checkNotMainThread()
         return OkHttpClient.Builder().apply {
             applyNetworkConfig(networkConfig)
-            interceptors().addAll(interceptors.setupOrder())
-            networkInterceptors().addAll(networkInterceptors.setupOrder())
+            interceptors().addAll(interceptors.sortByPriority())
+            networkInterceptors().addAll(networkInterceptors.sortByPriority())
             if (eventListener != null) {
                 this.eventListener(eventListener)
             }
@@ -58,14 +57,8 @@ public object RootOkHttpModule {
             .build()
     }
 
-    private fun Set<Interceptor>.setupOrder(): Set<Interceptor> {
-        val loggingInterceptor = this.firstOrNull { it is HttpLoggingInterceptor }
-        return if (loggingInterceptor != null) {
-            setOf(loggingInterceptor) + (this - loggingInterceptor)
-        } else {
-            this
-        }
-    }
+    private fun Set<InterceptorWithPriority>.sortByPriority(): List<InterceptorWithPriority> =
+        sortedBy(InterceptorWithPriority::priority)
 
     @Qualifier
     internal annotation class RootOkHttpClient

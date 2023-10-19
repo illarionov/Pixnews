@@ -9,6 +9,7 @@ import android.content.res.AssetManager
 import co.touchlab.kermit.Logger
 import okhttp3.HttpUrl
 import okhttp3.mockwebserver.MockWebServer
+import ru.auto.mockwebserver.dsl.RootRouting
 import ru.auto.mockwebserver.dsl.RootRoutingDefinition
 import ru.auto.mockwebserver.dsl.RoutingDispatcher
 import ru.auto.mockwebserver.dsl.get
@@ -27,6 +28,8 @@ public class IgdbMockWebServer(
     public val webServer: MockWebServer = MockWebServer()
     private val logger = logger.withTag("IgdbMockWebServer")
     private val dispatcher = RoutingDispatcher()
+    public val rootRouting: RootRouting
+        get() = dispatcher.routing
     private val pendingDispatcherInit: PendingDispatcherInitialization = PendingDispatcherInitialization(dispatcher)
     private val igdbImagesFromAssetsReader = ResponseFromAssetsReader(
         assets = assets,

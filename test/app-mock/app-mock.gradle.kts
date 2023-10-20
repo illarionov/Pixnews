@@ -19,5 +19,10 @@ dependencies {
     api(projects.foundation.network.public)
     api(libs.okhttp)
     api(libs.okhttp.logging.interceptor)
+    api(libs.okhttp.mockwebserver)
+    api(libs.mockwebserver.dsl)
     implementation(libs.androidx.compose.runtime)
+
+    testImplementation(projects.library.test)
+    testImplementation(libs.junit.jupiter.params)
 }

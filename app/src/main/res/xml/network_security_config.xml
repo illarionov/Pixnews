@@ -12,6 +12,9 @@
             <certificates src="system"/>
         </trust-anchors>
     </domain-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">localhost</domain>
+    </domain-config>
     <debug-overrides>
         <trust-anchors>
             <certificates src="system" overridePins="true"/>

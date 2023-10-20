@@ -315,6 +315,11 @@
             <pgp value="b6e73d84ea4fcc47166087253faad2cd5ecbb314"/>
          </artifact>
       </component>
+      <component group="commons-io" name="commons-io" version="2.13.0">
+         <artifact name="commons-io-2.13.0.jar">
+            <pgp value="2db4f1ef0fa761ecc4ea935c86fdc7e2a11262cb"/>
+         </artifact>
+      </component>
       <component group="commons-io" name="commons-io" version="2.4">
          <artifact name="commons-io-2.4.jar">
             <pgp value="2db4f1ef0fa761ecc4ea935c86fdc7e2a11262cb"/>
@@ -420,11 +425,6 @@
             <pgp value="842afb86375d805422835bfd82b5574242c20d6f"/>
          </artifact>
       </component>
-       <component group="org.gradle" name="github-dependency-graph-gradle-plugin" version="0.4.1">
-           <artifact name="github-dependency-graph-gradle-plugin-0.4.1.jar">
-               <pgp value="7b79add11f8a779fe90fd3d0893a028475557671"/>
-           </artifact>
-       </component>
       <component group="org.bitbucket.b_c" name="jose4j" version="0.7.0">
          <artifact name="jose4j-0.7.0.jar">
             <pgp value="3051d45031e13516a6e8faff280d66a55f5316c5"/>
@@ -443,6 +443,11 @@
       <component group="org.ec4j.core" name="ec4j-core" version="0.3.0">
          <artifact name="ec4j-core-0.3.0.jar">
             <pgp value="2e92113263fc31c74ccbaab20e91c2de43b72bb1"/>
+         </artifact>
+      </component>
+      <component group="org.gradle" name="github-dependency-graph-gradle-plugin" version="0.4.1">
+         <artifact name="github-dependency-graph-gradle-plugin-0.4.1.jar">
+            <pgp value="7b79add11f8a779fe90fd3d0893a028475557671"/>
          </artifact>
       </component>
       <component group="org.gradle.kotlin" name="gradle-kotlin-dsl-plugins" version="4.0.14">
@@ -548,6 +553,11 @@
       <component group="xerces" name="xercesImpl" version="2.12.0">
          <artifact name="xercesImpl-2.12.0.jar">
             <pgp value="51b52dc5dd452f92be342cc2858fc4c4f43856a3"/>
+         </artifact>
+      </component>
+      <component group="xerces" name="xercesImpl" version="2.12.2">
+         <artifact name="xercesImpl-2.12.2.jar">
+            <pgp value="6cb87b18a453990eac9453f87d713008cc07e9ad"/>
          </artifact>
       </component>
       <component group="xml-apis" name="xml-apis" version="1.4.01">

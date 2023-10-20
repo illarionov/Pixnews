@@ -9,15 +9,19 @@ import com.squareup.anvil.annotations.MergeComponent
 import com.squareup.anvil.annotations.optional.SingleIn
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.foundation.initializers.inject.AppInitializersScope
+import ru.pixnews.inject.MockWebServerHolder
 
 @SingleIn(AppInitializersScope::class)
 @MergeComponent(
     scope = AppInitializersScope::class,
-    dependencies = [PixnewsAppComponent::class],
+    dependencies = [PixnewsAppComponent::class, MockWebServerHolder::class],
 )
 interface TestPixnewsAppInitializerComponent : PixnewsAppInitializerComponent {
     @dagger.Component.Factory
     fun interface Factory {
-        fun create(appComponent: PixnewsAppComponent): TestPixnewsAppInitializerComponent
+        fun create(
+            appComponent: PixnewsAppComponent,
+            mockWebServerHolder: MockWebServerHolder,
+        ): TestPixnewsAppInitializerComponent
     }
 }

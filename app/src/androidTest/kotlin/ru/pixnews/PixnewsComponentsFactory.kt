@@ -8,6 +8,7 @@ package ru.pixnews
 import android.content.Context
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.inject.DaggerTestPixnewsAppComponent
+import ru.pixnews.inject.MockWebServerHolder
 import ru.pixnews.inject.experiments.ExperimentsComponent
 import ru.pixnews.inject.initializer.DaggerTestPixnewsAppInitializerComponent
 import ru.pixnews.inject.initializer.PixnewsAppInitializerComponent
@@ -23,6 +24,9 @@ internal object PixnewsComponentsFactory {
     fun createInitializersComponent(
         appComponent: PixnewsAppComponent,
     ): PixnewsAppInitializerComponent {
-        return DaggerTestPixnewsAppInitializerComponent.factory().create(appComponent)
+        return DaggerTestPixnewsAppInitializerComponent.factory().create(
+            appComponent,
+            appComponent as MockWebServerHolder,
+        )
     }
 }

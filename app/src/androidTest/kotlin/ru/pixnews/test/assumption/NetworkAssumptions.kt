@@ -22,7 +22,7 @@ import ru.auto.mockwebserver.dsl.post
 import ru.auto.mockwebserver.dsl.route
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
 import ru.pixnews.igdbclient.IgdbEndpoint
-import ru.pixnews.inject.MockResourcesHolder
+import ru.pixnews.inject.MockWebServerHolder
 import ru.pixnews.test.app.mock.NetworkBehavior
 import ru.pixnews.test.app.mock.igdb.IgdbMockWebServer
 import ru.pixnews.test.app.mock.igdb.mockIgdbResponse
@@ -35,7 +35,7 @@ class NetworkAssumptions : ExternalResource() {
     private lateinit var igdbRouteRegistry: RouteRegistry
 
     override fun apply(base: Statement?, description: Description?): Statement {
-        (PixnewsRootComponentHolder.appComponent as MockResourcesHolder).let {
+        (PixnewsRootComponentHolder.appComponent as MockWebServerHolder).let {
             networkBehavior = it.networkBehavior
             igdbMockWebServer = it.igdbMockWebServer
             igdbRouteRegistry = RouteRegistry(igdbMockWebServer.rootRouting)

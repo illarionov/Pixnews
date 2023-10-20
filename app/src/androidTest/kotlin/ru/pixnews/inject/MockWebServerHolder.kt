@@ -9,10 +9,12 @@ import androidx.annotation.RestrictTo
 import androidx.annotation.RestrictTo.Scope.LIBRARY
 import com.squareup.anvil.annotations.ContributesTo
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase
+import ru.pixnews.test.app.mock.NetworkBehavior
+import ru.pixnews.test.app.mock.igdb.IgdbMockWebServer
 
 @ContributesTo(AppScope::class)
 @RestrictTo(LIBRARY)
-interface MockResourcesHolder {
-    val mockUseCase: MockObserveUpcomingReleasesByDateUseCase
+interface MockWebServerHolder {
+    val networkBehavior: NetworkBehavior
+    val igdbMockWebServer: IgdbMockWebServer
 }

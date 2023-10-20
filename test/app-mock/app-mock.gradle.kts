@@ -22,4 +22,7 @@ dependencies {
     api(libs.okhttp.mockwebserver)
     api(libs.mockwebserver.dsl)
     implementation(libs.androidx.compose.runtime)
+
+    testImplementation(projects.library.test)
+    testImplementation(libs.junit.jupiter.params)
 }

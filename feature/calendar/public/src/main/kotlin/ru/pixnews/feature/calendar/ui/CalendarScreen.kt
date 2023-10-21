@@ -19,8 +19,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ru.pixnews.feature.calendar.CalendarViewModel
 import ru.pixnews.feature.calendar.PreviewFixtures
 import ru.pixnews.feature.calendar.model.CalendarScreenState
-import ru.pixnews.feature.calendar.model.CalendarScreenState.Loading
-import ru.pixnews.feature.calendar.model.CalendarScreenState.Success
+import ru.pixnews.feature.calendar.model.CalendarScreenStateLoaded
+import ru.pixnews.feature.calendar.model.InitialLoad
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
 import ru.pixnews.foundation.di.ui.base.viewmodel.injectedViewModel
 import ru.pixnews.foundation.ui.design.overlay.PixnewsLoadingOverlay
@@ -46,13 +46,14 @@ internal fun CalendarScreen(
     modifier: Modifier = Modifier,
 ) {
     when (state) {
-        Loading -> Unit
-        is Success -> CalendarScreenSuccessContent(state)
+        InitialLoad -> CalendarScreenInitialLoadingPlaceholder(state)
+        is CalendarScreenStateLoaded.Failure -> CalendarScreenFailureContent(state)
+        is CalendarScreenStateLoaded.Success -> CalendarScreenSuccessContent(state)
     }
 
     AnimatedVisibility(
         modifier = modifier,
-        visible = state is Loading,
+        visible = state is InitialLoad,
         enter = EnterTransition.None,
     ) {
         Box(

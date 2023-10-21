@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import ru.pixnews.feature.calendar.PreviewFixtures
 import ru.pixnews.feature.calendar.model.CalendarScreenState
+import ru.pixnews.feature.calendar.model.CalendarScreenStateLoaded
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
 import ru.pixnews.feature.calendar.ui.content.CalendarScreenContent
 import ru.pixnews.feature.calendar.ui.header.CalendarScreenHeader
@@ -23,7 +24,7 @@ import ru.pixnews.foundation.ui.theme.PixnewsTheme
 
 @Composable
 internal fun CalendarScreenSuccessContent(
-    state: CalendarScreenState.Success,
+    state: CalendarScreenStateLoaded.Success,
     modifier: Modifier = Modifier,
 ) {
     Column(

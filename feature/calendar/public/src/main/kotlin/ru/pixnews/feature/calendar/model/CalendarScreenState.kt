@@ -7,10 +7,35 @@ package ru.pixnews.feature.calendar.model
 
 import kotlinx.collections.immutable.ImmutableList
 
-internal sealed class CalendarScreenState {
-    object Loading : CalendarScreenState()
-    internal data class Success(
+internal sealed interface CalendarScreenState
+
+@Suppress("ConvertObjectToDataObject")
+internal object InitialLoad : CalendarScreenState
+
+internal sealed interface CalendarScreenStateLoaded : CalendarScreenState {
+    val isRefreshing: Boolean
+    fun withIsRefreshing(isRefreshing: Boolean): CalendarScreenState
+
+    sealed interface Failure : CalendarScreenStateLoaded {
+        data class NoInternet(
+            override val isRefreshing: Boolean = false,
+        ) : Failure {
+            override fun withIsRefreshing(isRefreshing: Boolean): CalendarScreenState = copy(isRefreshing = isRefreshing)
+        }
+
+        data class OtherNetworkError(
+            override val isRefreshing: Boolean = false,
+        ) : Failure {
+            override fun withIsRefreshing(isRefreshing: Boolean): CalendarScreenState = copy(isRefreshing = isRefreshing)
+        }
+    }
+
+    data class Success(
         val majorReleases: ImmutableList<MajorReleaseCarouselItemUiModel>,
         val games: ImmutableList<CalendarListItem>,
-    ) : CalendarScreenState()
+        override val isRefreshing: Boolean = false,
+        val showNoInternetError: Boolean = false,
+    ) : CalendarScreenStateLoaded {
+        override fun withIsRefreshing(isRefreshing: Boolean): CalendarScreenState = copy(isRefreshing = isRefreshing)
+    }
 }

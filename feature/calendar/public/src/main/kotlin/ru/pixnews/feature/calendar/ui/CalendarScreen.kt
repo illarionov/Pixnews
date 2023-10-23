@@ -7,16 +7,15 @@ package ru.pixnews.feature.calendar.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ru.pixnews.feature.calendar.CalendarViewModel
 import ru.pixnews.feature.calendar.PreviewFixtures
@@ -103,8 +102,7 @@ internal fun CalendarScreen(
         ) {
             Box(
                 modifier = Modifier
-                    .testTag(CalendarTestTag.LOADING_OVERLAY)
-                    .background(MaterialTheme.colorScheme.surface),
+                    .testTag(CalendarTestTag.LOADING_OVERLAY),
             ) {
                 PixnewsLoadingOverlay(
                     modifier = Modifier
@@ -122,6 +120,19 @@ private fun CalendarScreenPreview() {
         Surface {
             CalendarScreen(
                 state = PreviewFixtures.previewSuccessState,
+                onRefreshRequested = {},
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun CalendarScreenPreviewInitialLoadPlaceholder() {
+    PixnewsTheme {
+        Surface {
+            CalendarScreen(
+                state = InitialLoad,
                 onRefreshRequested = {},
             )
         }

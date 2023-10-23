@@ -56,15 +56,13 @@ public object DebugLayoutDefaults {
     }
 
     public object Ruler {
-        public val step: DebugRulerMeasureUnit = 16.rulerDp()
+        public val step: DebugRulerMeasureUnit = 16.rulerDp
         public val horizontalRulerHeight: Dp = 16.dp
         public val verticalRulerWidth: Dp = 16.dp
         public val tickColor: Color = Color(0xFF767680)
         public val minorTickSize: Dp = 1.5.dp
         public val majorTickSize: Dp = 4.dp
         public val tickStrokeWidth: Dp = 1.dp
-
-        @Suppress("DEPRECATION")
         public val textStyle: TextStyle = TextStyle.Default.copy(
             color = tickColor,
             fontSize = 6.sp,

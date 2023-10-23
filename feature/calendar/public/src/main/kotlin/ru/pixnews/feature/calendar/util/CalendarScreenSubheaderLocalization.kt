@@ -6,10 +6,11 @@
 package ru.pixnews.feature.calendar.util
 
 import android.content.res.Resources
+import androidx.annotation.RestrictTo
+import androidx.annotation.RestrictTo.Scope.LIBRARY
 import arrow.core.andThen
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.toJavaLocalDate
-import org.jetbrains.annotations.VisibleForTesting
 import ru.pixnews.feature.calendar.R
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.Tbd
@@ -22,7 +23,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.LazyThreadSafetyMode.NONE
 
-@VisibleForTesting
+@RestrictTo(LIBRARY)
 public class CalendarScreenSubheaderLocalization(
     private val locale: Locale,
     private val resources: Resources,

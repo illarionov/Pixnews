@@ -25,11 +25,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.pixnews.feature.featuretoggles.R.string
 import ru.pixnews.feature.featuretoggles.model.PermanentErrorMessage
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.library.compose.utils.fillMinHeight
 import ru.pixnews.library.ui.tooling.PreviewComplete
+import ru.pixnews.foundation.ui.design.R as designR
 
 @Composable
 @Suppress("MagicNumber")
@@ -61,7 +61,7 @@ internal fun PermanentErrorScreen(
                         .size(72.dp),
                 )
                 Text(
-                    text = stringResource(string.title_error),
+                    text = stringResource(designR.string.title_error),
                     style = MaterialTheme.typography.titleLarge,
                 )
 

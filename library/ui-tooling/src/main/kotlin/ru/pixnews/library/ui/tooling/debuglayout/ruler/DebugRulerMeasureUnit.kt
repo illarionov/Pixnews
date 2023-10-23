@@ -43,13 +43,13 @@ public data class DebugRulerMeasureUnit(
     }
 }
 
-public fun Int.rulerPx(): DebugRulerMeasureUnit = DebugRulerMeasureUnit(this, PX)
+public val Int.rulerPx: DebugRulerMeasureUnit get() = DebugRulerMeasureUnit(this, PX)
 
-public fun Int.rulerMm(): DebugRulerMeasureUnit = DebugRulerMeasureUnit(this, MM)
+public val Int.rulerMm: DebugRulerMeasureUnit get() = DebugRulerMeasureUnit(this, MM)
 
-public fun Int.rulerDp(): DebugRulerMeasureUnit = DebugRulerMeasureUnit(this, DP)
+public val Int.rulerDp: DebugRulerMeasureUnit get() = DebugRulerMeasureUnit(this, DP)
 
-public fun Int.rulerInches(): DebugRulerMeasureUnit = DebugRulerMeasureUnit(this, INCHES)
+public val Int.rulerInches: DebugRulerMeasureUnit get() = DebugRulerMeasureUnit(this, INCHES)
 
 internal enum class RulerOrientation {
     HORIZONTAL, VERTICAL

@@ -11,6 +11,8 @@
     <string name="platforms_content_description">
         Platforms: <xliff:g example="Windows, PlayStation 5, " id="platforms">%1$s</xliff:g>
     </string>
+    <string name="title_error">Error</string>
+    <string name="button_refresh">Refresh</string>
 
     <!-- Calendar header -->
     <string name="yeas_selection_show_date_picker_content_description">Show date picker</string>

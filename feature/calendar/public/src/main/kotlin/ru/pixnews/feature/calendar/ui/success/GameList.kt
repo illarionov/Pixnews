@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.feature.calendar.ui.content
+package ru.pixnews.feature.calendar.ui.success
 
 import android.content.res.Resources
 import androidx.compose.foundation.layout.Arrangement.spacedBy
@@ -53,9 +53,16 @@ import ru.pixnews.library.ui.tooling.debuglayout.mediumLaptopScreen12Columns
 import java.util.Locale
 
 internal val feedMaxWidth = 552.dp
+internal val gameListContentPaddings = PaddingValues(top = 8.dp, bottom = 24.dp)
+
+internal val WindowInsets.Companion.safeContentHorizontalMin16dp: WindowInsets
+    @Composable
+    get() = safeContent
+        .only(WindowInsetsSides.Horizontal)
+        .union(WindowInsets(left = 16.dp, right = 16.dp))
 
 @Composable
-internal fun CalendarScreenContent(
+internal fun GameList(
     majorReleases: ImmutableList<MajorReleaseCarouselItemUiModel>,
     games: ImmutableList<CalendarListItem>,
     onMajorReleaseClick: (GameId) -> Unit,
@@ -64,16 +71,13 @@ internal fun CalendarScreenContent(
     modifier: Modifier = Modifier,
 ) {
     val state = rememberLazyListState()
-    val contentPaddings = PaddingValues(top = 8.dp, bottom = 24.dp)
-    val listItemsPadding = WindowInsets.safeContent.only(WindowInsetsSides.Horizontal)
-        .union(WindowInsets(left = 16.dp, right = 16.dp))
-        .asPaddingValues()
+    val listItemsPadding = WindowInsets.safeContentHorizontalMin16dp.asPaddingValues()
 
     LazyColumn(
         modifier = modifier
             .testTag(CalendarTestTag.CONTENT_LAZY_LIST)
             .fillMaxWidth(),
-        contentPadding = contentPaddings,
+        contentPadding = gameListContentPaddings,
         state = state,
         verticalArrangement = spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -134,7 +138,7 @@ internal fun CalendarScreenContent(
 }
 
 @Composable
-private fun CalendarListTitle.getLocalizedGroupTitle(
+internal fun CalendarListTitle.getLocalizedGroupTitle(
     locale: Locale = defaultLocale(),
     resources: Resources = LocalContext.current.resources,
 ): String {
@@ -158,7 +162,7 @@ private fun PreviewCalendarScreenContent() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                CalendarScreenContent(
+                GameList(
                     majorReleases = PreviewFixtures.previewSuccessState.majorReleases,
                     games = PreviewFixtures.previewSuccessState.games,
                     onMajorReleaseClick = {},

@@ -7,6 +7,9 @@ package ru.pixnews.feature.calendar.test.constants
 
 public object CalendarTestTag {
     public const val SUCCESS_CONTENT: String = "calendar:success_content"
+    public const val FAILURE_NO_INTERNET: String = "calendar:failure_no_internet"
+    public const val FAILURE_OTHER_NETWORK_ERROR: String = "calendar:failure_other_network_error"
+    public const val INITIAL_LOADING_PLACEHOLDER: String = "calendar:initial_loading_placeholder"
     public const val LOADING_OVERLAY: String = "calendar:loading_overlay"
     public const val CONTENT_LAZY_LIST: String = "calendar:content:lazy_list"
     public const val CONTENT_MAJOR_RELEASES_CAROUSEL: String = "calendar:content:major_releases_carousel"

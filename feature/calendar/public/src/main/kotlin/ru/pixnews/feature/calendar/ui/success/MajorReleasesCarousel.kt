@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.feature.calendar.ui.content
+package ru.pixnews.feature.calendar.ui.success
 
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
@@ -12,15 +12,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContent
-import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -41,14 +37,14 @@ import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.foundation.ui.design.R as uiDesignR
 
+internal val majorReleasesMinHeight = 187.dp
+
 @Composable
 internal fun MajorReleasesCarousel(
     releases: ImmutableList<MajorReleaseCarouselItemUiModel>,
     onReleaseClick: (GameId) -> Unit,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = WindowInsets.safeContent.only(WindowInsetsSides.Horizontal)
-        .union(WindowInsets(left = 16.dp, right = 16.dp))
-        .asPaddingValues(),
+    contentPadding: PaddingValues = WindowInsets.safeContentHorizontalMin16dp.asPaddingValues(),
 ) {
     Column(
         modifier = modifier,
@@ -67,7 +63,7 @@ internal fun MajorReleasesCarousel(
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(min = 187.dp),
+                .heightIn(min = majorReleasesMinHeight),
             contentPadding = contentPadding,
             flingBehavior = rememberSnapFlingBehavior(lazyListState = state),
             horizontalArrangement = Arrangement.spacedBy(16.dp),

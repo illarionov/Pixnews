@@ -37,7 +37,7 @@ import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCateg
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_MONTH
 import ru.pixnews.feature.calendar.model.CalendarListTitle
-import ru.pixnews.feature.calendar.model.CalendarScreenState
+import ru.pixnews.feature.calendar.model.CalendarScreenStateLoaded
 import ru.pixnews.feature.calendar.model.GameListFilterChip
 import ru.pixnews.feature.calendar.model.GameListFilterChipStyle.SELECTED
 import ru.pixnews.feature.calendar.model.GameListFilterChipStyle.UNSELECTED
@@ -68,7 +68,7 @@ internal object PreviewFixtures {
             hasReleases = true,
         ),
     )
-    val previewSuccessState: CalendarScreenState.Success = CalendarScreenState.Success(
+    val previewSuccessState: CalendarScreenStateLoaded.Success = CalendarScreenStateLoaded.Success(
         majorReleases = persistentListOf(
             MajorRelease.slimerancher2.copy(
                 cover = Release.slimerancher2.cover?.withDebug(loadingDelay = 10.seconds),

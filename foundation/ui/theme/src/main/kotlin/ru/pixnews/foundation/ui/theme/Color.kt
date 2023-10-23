@@ -40,6 +40,7 @@ public val md_theme_light_scrim: Color = Color(0xFF000000)
 
 public val md_theme_palette_tertiary70: Color = Color(0xFFA5B40D)
 public val md_theme_palette_primary30: Color = Color(0xFF283C9F)
+public val md_theme_palette_primary95: Color = Color(0xFFF0EFFF)
 
 public val md_theme_palette_neutral_variant_40: Color = Color(0xFF5D5E67)
 public val md_theme_palette_neutral_variant_90: Color = Color(0xFFE3E1EC)

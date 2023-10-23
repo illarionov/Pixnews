@@ -43,6 +43,12 @@ public object ContentIcons {
     public val Sync: ImageVector
         get() = SynRoundedUnfilled400w0g24dp
 
+    public val Refresh: ImageVector
+        get() = RefreshUnfilled400w0g24dp
+
+    public val ErrorOutline: ImageVector
+        get() = ErrorOutlineUnfilled400w0g24dp
+
     public object GridView {
         public val Filled: ImageVector
             get() = GridViewRoundedFilled400w0g24dp
@@ -77,5 +83,7 @@ private fun ContentIconsPreview() = IconsPreview(
         ContentIcons.RateReview,
         ContentIcons.AddPhoto,
         ContentIcons.AddLink,
+        ContentIcons.Refresh,
+        ContentIcons.ErrorOutline,
     ),
 )

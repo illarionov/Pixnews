@@ -39,31 +39,38 @@ internal class CalendarViewModel(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val log = logger.withTag("CalendarViewModel")
+
     // TODO: test
     val viewState: StateFlow<CalendarScreenState> = getUpcomingReleasesByDateUseCase.createUpcomingReleasesObservable(
-            requiredFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-        )
-            .filterIsInstance<Complete<NetworkRequestFailure<*>, UpcomingReleasesResponse>>()
-            .runningFold(InitialLoad) { _: CalendarScreenState, completeStatus ->
-                completeStatus.result.fold(
-                    ifLeft = ::errorToCalendarScreenState,
-                    ifRight = ::upcomingReleasesResponseToScreenState,
-                )
-            }
-            .stateIn(
-                scope = viewModelScope,
-                started = WhileSubscribed(5_000, replayExpirationMillis = 0),
-                initialValue = InitialLoad,
-            )
-
-    private fun errorToCalendarScreenState(failure: NetworkRequestFailure<*>): CalendarScreenState = if (failure is NetworkFailure) {
-        CalendarScreenStateLoaded.Failure.NoInternet()
-    } else {
-        CalendarScreenStateLoaded.Failure.OtherNetworkError()
-    }
-
-    private fun upcomingReleasesResponseToScreenState(response: UpcomingReleasesResponse) = CalendarScreenStateLoaded.Success(
-        majorReleases = PreviewFixtures.previewSuccessState.majorReleases,
-        games = UpcomingGameListConverter.convert(response),
+        requiredFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
     )
+        .filterIsInstance<Complete<NetworkRequestFailure<*>, UpcomingReleasesResponse>>()
+        .runningFold(InitialLoad) { _: CalendarScreenState, completeStatus ->
+            completeStatus.result.fold(
+                ifLeft = ::errorToCalendarScreenState,
+                ifRight = ::upcomingReleasesResponseToScreenState,
+            )
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = WhileSubscribed(5_000, replayExpirationMillis = 0),
+            initialValue = InitialLoad,
+        )
+
+    private fun errorToCalendarScreenState(failure: NetworkRequestFailure<*>): CalendarScreenState =
+        if (failure is NetworkFailure) {
+            CalendarScreenStateLoaded.Failure.NoInternet()
+        } else {
+            CalendarScreenStateLoaded.Failure.OtherNetworkError()
+        }
+
+    private fun upcomingReleasesResponseToScreenState(response: UpcomingReleasesResponse) =
+        CalendarScreenStateLoaded.Success(
+            majorReleases = PreviewFixtures.previewSuccessState.majorReleases,
+            games = UpcomingGameListConverter.convert(response),
+        )
+
+    fun refreshReleaseCalendarList() {
+        TODO("Not yet implemented")
+    }
 }

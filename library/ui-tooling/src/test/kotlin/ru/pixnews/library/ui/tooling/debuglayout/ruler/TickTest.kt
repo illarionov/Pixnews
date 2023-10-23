@@ -53,18 +53,18 @@ internal class TickTest {
         )
 
         val horizontalPositions = getTicksPositions(
-            step = 10.rulerMm(),
+            step = 10.rulerMm,
             screenSize = 60f,
             displayMetrics = testDisplayMetrics,
-            zeroOffset = ZeroOffset(CENTER, 2.rulerMm()),
+            zeroOffset = ZeroOffset(CENTER, 2.rulerMm),
             orientation = HORIZONTAL,
         )
 
         val verticalPositions = getTicksPositions(
-            step = 10.rulerMm(),
+            step = 10.rulerMm,
             screenSize = 60f,
             displayMetrics = testDisplayMetrics,
-            zeroOffset = ZeroOffset(CENTER, 1.rulerMm()),
+            zeroOffset = ZeroOffset(CENTER, 1.rulerMm),
             orientation = VERTICAL,
         )
 
@@ -99,7 +99,7 @@ internal class TickTest {
     @Test
     fun `getTicksPositions should return correct sequences for inches`() {
         val horizontalPositions = getTicksPositions(
-            step = 1.rulerInches(),
+            step = 1.rulerInches,
             screenSize = 200f,
             displayMetrics = testDisplayMetrics,
             zeroOffset = ZeroOffset.ZERO,
@@ -107,7 +107,7 @@ internal class TickTest {
         )
 
         val verticalPositions = getTicksPositions(
-            step = 1.rulerInches(),
+            step = 1.rulerInches,
             screenSize = 200f,
             displayMetrics = testDisplayMetrics,
             zeroOffset = ZeroOffset.ZERO,
@@ -162,7 +162,7 @@ internal class TickTest {
         fun getTicksPositionsDpTest(): List<GetTickPositionsTestCase> {
             val testCase = GetTickPositionsTestCase(
                 comment = "",
-                step = 10.rulerDp(),
+                step = 10.rulerDp,
                 screenSize = 30f,
                 expectedTicks = listOf(),
             )
@@ -177,7 +177,7 @@ internal class TickTest {
                 ),
                 testCase.copy(
                     comment = "Offset from left",
-                    zeroOffset = ZeroOffset(LEFT_TOP, 14.rulerDp()),
+                    zeroOffset = ZeroOffset(LEFT_TOP, 14.rulerDp),
                     expectedTicks = Tick(position = 8f, markerValue = -10f).withSubsequentTicks(
                         markerStep = 5,
                         positions = listOf(18, 28),
@@ -185,7 +185,7 @@ internal class TickTest {
                 ),
                 testCase.copy(
                     comment = "Offset from center",
-                    zeroOffset = ZeroOffset(CENTER, 2.rulerDp()),
+                    zeroOffset = ZeroOffset(CENTER, 2.rulerDp),
                     expectedTicks = Tick(position = 9f, type = MINOR, markerValue = -5f).withSubsequentTicks(
                         markerStep = 5,
                         positions = listOf(19, 29),
@@ -193,7 +193,7 @@ internal class TickTest {
                 ),
                 testCase.copy(
                     comment = "Offset from right",
-                    zeroOffset = ZeroOffset(RIGHT_BOTTOM, 5.rulerDp()),
+                    zeroOffset = ZeroOffset(RIGHT_BOTTOM, 5.rulerDp),
                     expectedTicks = Tick(position = 0f, markerValue = -10f).withSubsequentTicks(
                         markerStep = 5,
                         positions = listOf(10, 20, 30),
@@ -201,7 +201,7 @@ internal class TickTest {
                 ),
                 testCase.copy(
                     comment = "Huge offset",
-                    zeroOffset = ZeroOffset(LEFT_TOP, (-5000).rulerDp()),
+                    zeroOffset = ZeroOffset(LEFT_TOP, (-5000).rulerDp),
                     expectedTicks = Tick(position = 0f, markerValue = 5000f).withSubsequentTicks(
                         markerStep = 5,
                         positions = listOf(10, 20, 30),

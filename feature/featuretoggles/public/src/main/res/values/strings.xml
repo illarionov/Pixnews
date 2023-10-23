@@ -5,7 +5,6 @@
 -->
 <resources>
     <string name="title_activity_featuretoggles">Pixnews Feature Toggles</string>
-    <string name="title_error">Error</string>
     <string name="message_feature_toggle_list_loading">Loading</string>
     <string name="more_options_button">More options</string>
     <string name="message_reset_overrides">Reset overrides</string>

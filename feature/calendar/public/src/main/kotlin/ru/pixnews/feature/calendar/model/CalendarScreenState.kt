@@ -20,13 +20,15 @@ internal sealed interface CalendarScreenStateLoaded : CalendarScreenState {
         data class NoInternet(
             override val isRefreshing: Boolean = false,
         ) : Failure {
-            override fun withIsRefreshing(isRefreshing: Boolean): CalendarScreenState = copy(isRefreshing = isRefreshing)
+            override fun withIsRefreshing(isRefreshing: Boolean): CalendarScreenState =
+                copy(isRefreshing = isRefreshing)
         }
 
         data class OtherNetworkError(
             override val isRefreshing: Boolean = false,
         ) : Failure {
-            override fun withIsRefreshing(isRefreshing: Boolean): CalendarScreenState = copy(isRefreshing = isRefreshing)
+            override fun withIsRefreshing(isRefreshing: Boolean): CalendarScreenState =
+                copy(isRefreshing = isRefreshing)
         }
     }
 

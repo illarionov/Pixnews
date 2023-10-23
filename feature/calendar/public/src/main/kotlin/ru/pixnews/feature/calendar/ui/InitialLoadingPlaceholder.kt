@@ -5,10 +5,15 @@
 
 package ru.pixnews.feature.calendar.ui
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
-import ru.pixnews.feature.calendar.model.CalendarScreenState
+import androidx.compose.ui.Modifier
 
 @Composable
-internal fun CalendarScreenInitialLoadingPlaceholder(state: CalendarScreenState) {
-    TODO("Not yet implemented")
+internal fun InitialLoadingPlaceholder(
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier,
+    ) {}
 }

@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.feature.calendar.ui.content
+package ru.pixnews.feature.calendar.ui.success
 
 import android.content.res.Resources
 import androidx.compose.foundation.layout.Arrangement.spacedBy
@@ -55,7 +55,7 @@ import java.util.Locale
 internal val feedMaxWidth = 552.dp
 
 @Composable
-internal fun CalendarScreenContent(
+internal fun GameList(
     majorReleases: ImmutableList<MajorReleaseCarouselItemUiModel>,
     games: ImmutableList<CalendarListItem>,
     onMajorReleaseClick: (GameId) -> Unit,
@@ -158,7 +158,7 @@ private fun PreviewCalendarScreenContent() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                CalendarScreenContent(
+                GameList(
                     majorReleases = PreviewFixtures.previewSuccessState.majorReleases,
                     games = PreviewFixtures.previewSuccessState.games,
                     onMajorReleaseClick = {},

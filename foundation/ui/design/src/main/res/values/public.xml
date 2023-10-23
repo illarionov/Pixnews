@@ -4,6 +4,8 @@
    Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 -->
 <resources>
+    <public type="string" name="title_error" />
+
     <public type="string" name="bottom_bar_title_calendar" />
     <public type="string" name="bottom_bar_content_description_calendar" />
     <public type="string" name="bottom_bar_title_collections" />

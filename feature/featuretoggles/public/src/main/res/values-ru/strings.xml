@@ -5,7 +5,6 @@
 -->
 <resources>
     <string name="title_activity_featuretoggles">Pixnews Фиче-тогглы</string>
-    <string name="title_error">Ошибка</string>
     <string name="message_feature_toggle_list_loading">Загрузка</string>
     <string name="more_options_button">Дополнительно</string>
     <string name="message_reset_overrides">Сбросить переопределения</string>

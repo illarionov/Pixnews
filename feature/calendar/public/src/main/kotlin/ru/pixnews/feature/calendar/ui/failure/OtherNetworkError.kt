@@ -23,12 +23,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.pixnews.feature.calendar.R
 import ru.pixnews.foundation.ui.assets.icons.PixnewsIcons
+import ru.pixnews.foundation.ui.design.R.string
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.foundation.ui.design.R as designR
 
 @Composable
 internal fun OtherNetworkError(
@@ -40,23 +41,28 @@ internal fun OtherNetworkError(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(32.dp, Alignment.CenterVertically),
-        modifier = modifier.padding(paddingValues),
+        modifier = modifier
+            .fillMaxSize()
+            .widthIn(max = 500.dp)
+            .padding(paddingValues),
     ) {
-        Icon(
-            imageVector = PixnewsIcons.content.ErrorOutline,
-            tint = MaterialTheme.colorScheme.primary,
-            contentDescription = null,
-            modifier = Modifier.size(100.dp),
-        )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.semantics(mergeDescendants = true) {},
         ) {
+            Icon(
+                imageVector = PixnewsIcons.content.ErrorOutline,
+                tint = MaterialTheme.colorScheme.primary,
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(bottom = 32.dp)
+                    .size(100.dp),
+            )
             Text(
-                text = stringResource(designR.string.title_error),
+                text = stringResource(string.title_error),
                 style = MaterialTheme.typography.titleMedium,
             )
             Text(
-                modifier = Modifier.widthIn(max = 500.dp),
                 text = stringResource(R.string.title_error_can_not_load_release_calendar),
                 style = MaterialTheme.typography.bodyMedium,
                 maxLines = 5,
@@ -74,7 +80,7 @@ internal fun OtherNetworkError(
                 modifier = Modifier.size(ButtonDefaults.IconSize),
             )
             Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-            Text(stringResource(designR.string.button_refresh))
+            Text(stringResource(string.button_refresh))
         }
     }
 }

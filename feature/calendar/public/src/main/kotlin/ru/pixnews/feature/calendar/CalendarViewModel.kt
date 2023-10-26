@@ -39,8 +39,6 @@ internal class CalendarViewModel(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val log = logger.withTag("CalendarViewModel")
-
-    // TODO: test
     val viewState: StateFlow<CalendarScreenState> = getUpcomingReleasesByDateUseCase.createUpcomingReleasesObservable(
         requiredFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
     )

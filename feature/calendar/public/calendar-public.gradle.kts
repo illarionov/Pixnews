@@ -57,6 +57,8 @@ dependencies {
     implementation(projects.library.kotlinDatetimeUtils)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    testImplementation(projects.library.test)
     testImplementation(libs.junit.jupiter.params)
+    testImplementation(libs.kotest.extensions.arrow)
+    testImplementation(libs.turbine)
+    testImplementation(projects.library.test)
 }

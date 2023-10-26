@@ -8,6 +8,7 @@ package ru.pixnews.test.assumption
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.collections.immutable.toPersistentList
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
@@ -28,7 +29,9 @@ import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleasesResponse
 import ru.pixnews.inject.MockResourcesHolder
 import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase.UpcomingReleasesDateFixtures.NOT_INITIALIZED
+import ru.pixnews.library.functional.network.NetworkRequestFailure
 import ru.pixnews.library.functional.network.NetworkRequestStatus
+import java.net.NoRouteToHostException
 
 class UpcomingReleaseUseCaseAssumptions : ExternalResource() {
     private lateinit var mockUseCase: MockObserveUpcomingReleasesByDateUseCase
@@ -80,6 +83,10 @@ class UpcomingReleaseUseCaseAssumptions : ExternalResource() {
         }
     }
 
+    fun assumeUpcomingGamesResponseInitialLoading() {
+        mockUseCase.createUpcomingReleasesObservableResponse = { requiredFields -> emptyFlow() }
+    }
+
     fun assumeUpcomingReleasesSuccessfully(
         releases: List<UpcomingRelease>,
         requestTime: Instant = Clock.System.now(),
@@ -97,7 +104,15 @@ class UpcomingReleaseUseCaseAssumptions : ExternalResource() {
         }
     }
 
-    public companion object {
+    fun assumeUpcomingGamesResponseFailure(
+        error: NetworkRequestFailure<*> = NetworkRequestFailure.NetworkFailure(NoRouteToHostException()),
+    ) {
+        mockUseCase.createUpcomingReleasesObservableResponse = { requiredFields ->
+            flowOf(NetworkRequestStatus.completeFailure(error))
+        }
+    }
+
+    companion object {
         val DEFAULT_TIME = LocalDateTime(2023, 5, 17, 10, 0, 0, 0)
         val DEFAULT_TIME_ZONE = TimeZone.of("UTC+3")
         val DEFAULT_UPCOMING_RELEASE = UpcomingRelease(

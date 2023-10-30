@@ -29,5 +29,8 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.kotlinx.coroutines.android)
 
+    testImplementation(testFixtures(projects.foundation.domainModel))
+    testImplementation(projects.library.test)
     testImplementation(libs.junit.jupiter.params)
+    testImplementation(libs.androidx.paging.testing)
 }

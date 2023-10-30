@@ -5,12 +5,10 @@
 
 package ru.pixnews.feature.calendar.data.domain.upcoming
 
+import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import ru.pixnews.domain.model.game.GameField
-import ru.pixnews.library.functional.network.NetworkRequestStatus
 
 public interface ObserveUpcomingReleasesByDateUseCase {
-    public fun createUpcomingReleasesObservable(
-        requiredFields: Set<GameField>,
-    ): Flow<NetworkRequestStatus<UpcomingReleasesResponse>>
+    public fun createUpcomingReleasesObservable(requiredFields: Set<GameField>): Flow<PagingData<UpcomingRelease>>
 }

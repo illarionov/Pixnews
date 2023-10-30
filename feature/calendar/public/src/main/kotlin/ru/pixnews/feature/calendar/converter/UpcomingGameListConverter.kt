@@ -38,7 +38,6 @@ import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCateg
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_QUARTER
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_YEAR
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.TBD
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleasesResponse
 import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi
 import ru.pixnews.feature.calendar.model.CalendarListTitle
@@ -47,9 +46,12 @@ import ru.pixnews.library.kotlin.datetime.utils.hasDifferentDayFrom
 import java.util.EnumMap
 
 internal object UpcomingGameListConverter {
-    fun convert(response: UpcomingReleasesResponse): ImmutableList<CalendarListItem> {
-        require(GameField.ReleaseDate in response.requestedFields)
-        val grouped: Map<UpcomingReleaseTimeCategory, List<Game>> = response.games.groupByTo(
+    fun convert(
+        games: List<UpcomingRelease>,
+        actualFields: Set<GameField>,
+    ): ImmutableList<CalendarListItem> {
+        require(GameField.ReleaseDate in actualFields)
+        val grouped: Map<UpcomingReleaseTimeCategory, List<Game>> = games.groupByTo(
             EnumMap(UpcomingReleaseTimeCategory::class.java),
             UpcomingRelease::group,
             UpcomingRelease::game,

@@ -5,6 +5,9 @@
 
 package ru.pixnews.feature.calendar
 
+import androidx.paging.LoadState
+import androidx.paging.LoadStates
+import androidx.paging.PagingData
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.persistentHashMapOf
 import kotlinx.collections.immutable.persistentListOf
@@ -36,6 +39,7 @@ import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCateg
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_YEAR
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_MONTH
+import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarListTitle
 import ru.pixnews.feature.calendar.model.CalendarScreenStateLoaded
 import ru.pixnews.feature.calendar.model.GameListFilterChip
@@ -85,7 +89,10 @@ internal object PreviewFixtures {
             MajorRelease.gta6,
             MajorRelease.project007,
         ),
-        games = persistentListOf(
+    )
+
+    object UpcomingReleases {
+        val list = persistentListOf(
             CalendarListTitle(CalendarDateGroup.jan1st2024),
             Release.slimerancher2.copy(
                 cover = Release.slimerancher2.cover?.withDebug(loadingDelay = 10.seconds),
@@ -110,8 +117,17 @@ internal object PreviewFixtures {
             CalendarListTitle(UpcomingReleaseGroupId.Tbd()),
             Release.smalland,
             Release.project007,
-        ),
-    )
+        )
+        val successPagingData = PagingData.from(list)
+        val initialLoadingPagingData: PagingData<CalendarListItem> = PagingData.from(
+            data = emptyList(),
+            sourceLoadStates = LoadStates(
+                refresh = LoadState.Loading,
+                prepend = LoadState.NotLoading(false),
+                append = LoadState.NotLoading(false),
+            ),
+        )
+    }
 
     object CalendarDateGroup {
         @Suppress("UnusedPrivateProperty")

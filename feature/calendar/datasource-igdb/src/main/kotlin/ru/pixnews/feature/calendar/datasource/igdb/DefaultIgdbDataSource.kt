@@ -11,7 +11,6 @@ import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameField
@@ -35,7 +34,6 @@ import ru.pixnews.igdbclient.model.Game as IgdbGame
 public class DefaultIgdbDataSource(
     private val igdbClient: IgdbClient,
     private val backgroundDispatcher: CoroutineDispatcher,
-    @Suppress("UnusedPrivateProperty") private val clock: Clock,
     logger: Logger,
 ) : IgdbDataSource {
     private val logger = logger.withTag("DefaultIgdbDataSource")
@@ -45,30 +43,34 @@ public class DefaultIgdbDataSource(
         igdbClient: IgdbClient,
         backgroundDispatcher: ComputationCoroutineDispatcherProvider,
         logger: Logger,
-    ) : this(igdbClient, backgroundDispatcher.get(), Clock.System, logger)
+    ) : this(igdbClient, backgroundDispatcher.get(), logger)
 
     override suspend fun fetchUpcomingReleases(
         startDate: Instant,
         requiredFields: Set<GameField>,
+        offset: Int,
+        limit: Int,
     ): NetworkResult<List<Game>> {
         val igdbFields = requiredFields.toIgdbRequestFields()
-        logger.i { "request fields: $igdbFields" }
 
-        @Suppress("MagicNumber")
+        val query = apicalypseQuery {
+            fields(fieldList = igdbFields.toTypedArray())
+            where("release_dates.date > ${startDate.epochSeconds}")
+            offset(offset)
+            limit(limit)
+            sort("id", DESC)
+        }
+        logger.d { "REQ IGDB query: '$query'" }
+
         val igdbGameResult = igdbClient.execute(
             endpoint = IgdbEndpoint.GAME,
-            query = apicalypseQuery {
-                fields(fieldList = igdbFields.toTypedArray())
-                where("release_dates.date > ${startDate.epochSeconds}")
-                limit(10)
-                sort("id", DESC)
-            },
+            query = query,
         ).toNetworkResult()
 
         val result: NetworkResult<List<Game>> = igdbGameResult.flatMap { gameResult ->
             withContext(backgroundDispatcher) {
                 catch {
-                    logger.d { "Received games: ${gameResult.games}" }
+                    logger.d { "Received games: ${gameResult.games.prettyPrint()}" }
                     gameResult.games.map(IgdbGame::toGame)
                 }.mapLeft { error ->
                     logger.e(error) { "Mapping error" }
@@ -83,4 +85,11 @@ public class DefaultIgdbDataSource(
     private fun Set<GameField>.toIgdbRequestFields(): Set<IgdbRequestField<*>> = this.flatMap {
         it.igdbFieldConverter.getRequiredFields()
     }.toSet()
+
+    private fun List<IgdbGame>.prettyPrint() = joinToString(",\n") { game ->
+        val releaseDates = game.release_dates.map {
+            "{release_date: ${it.category}-${it.date}}"
+        }
+        "[${game.id}: ${game.name} $releaseDates]"
+    }
 }

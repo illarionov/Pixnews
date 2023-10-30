@@ -14,5 +14,7 @@ public interface IgdbDataSource {
     public suspend fun fetchUpcomingReleases(
         startDate: Instant,
         requiredFields: Set<GameField>,
+        offset: Int = 0,
+        limit: Int = 100,
     ): NetworkResult<List<Game>>
 }

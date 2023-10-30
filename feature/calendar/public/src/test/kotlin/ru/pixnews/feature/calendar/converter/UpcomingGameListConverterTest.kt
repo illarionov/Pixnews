@@ -26,6 +26,7 @@ import ru.pixnews.feature.calendar.converter.ListOrderTestExpectedItem.Companion
 import ru.pixnews.feature.calendar.converter.ListOrderTestExpectedItem.Companion.titleYearMonthDay
 import ru.pixnews.feature.calendar.converter.ListOrderTestExpectedItem.Companion.toListOrderTestExpectedItem
 import ru.pixnews.feature.calendar.converter.UpcomingGameListConverter.toCalendarListItem
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_QUARTER
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_YEAR
@@ -33,8 +34,6 @@ import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCateg
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_MONTH
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_QUARTER
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_YEAR
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleasesResponse
-import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentMonth
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentMonth.exactDateLater25
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentMonth.exactDateLater26
@@ -59,40 +58,31 @@ import ru.pixnews.feature.calendar.model.CALENDAR_LIST_ITEM_GAME_FIELDS
 import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi
 
 internal class UpcomingGameListConverterTest {
-    internal val converter = UpcomingGameListConverter
+    private val converter = UpcomingGameListConverter
+
+    private fun convert(games: List<UpcomingRelease>) = converter.convert(games, CALENDAR_LIST_ITEM_GAME_FIELDS)
+        .map { it.toListOrderTestExpectedItem() }
 
     @Test
     fun `convert() should convert empty list`() {
-        val response = UpcomingReleasesResponse(
-            requestTime = UpcomingReleaseDateFixtures.currentDateTimestamp,
-            requestedFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-            games = persistentListOf(),
-        )
-
-        val result = converter.convert(response)
-
+        val result = convert(listOf())
         result.shouldBeEmpty()
     }
 
     @Test
     fun `convert() should convert extended full list in correct order`() {
-        val response = UpcomingReleasesResponse(
-            requestTime = UpcomingReleaseDateFixtures.currentDateTimestamp,
-            requestedFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-            games = persistentListOf(
-                ReleasesTbd.tbdGame2,
-                ReleasesNextYear.tbdNextYear,
-                ReleasesThisYear.tbdThisYear,
-                ReleasesInNextQuarter.nextQuarterExactDate,
-                ReleasesInThisQuarter.thisQuarterExactDate,
-                ReleasesInNextMonth.tbdNextMonth1,
-                ReleasesInCurrentMonth.thisMonthDay25,
-                ReleasesInNextFewDays.releasedToday,
-            ),
+        val upcomingReleases = listOf(
+            ReleasesTbd.tbdGame2,
+            ReleasesNextYear.tbdNextYear,
+            ReleasesThisYear.tbdThisYear,
+            ReleasesInNextQuarter.nextQuarterExactDate,
+            ReleasesInThisQuarter.thisQuarterExactDate,
+            ReleasesInNextMonth.tbdNextMonth1,
+            ReleasesInCurrentMonth.thisMonthDay25,
+            ReleasesInNextFewDays.releasedToday,
         )
 
-        val result = converter.convert(response)
-            .map { it.toListOrderTestExpectedItem() }
+        val result = convert(upcomingReleases)
 
         result shouldContainExactly buildList {
             // Today
@@ -149,21 +139,15 @@ internal class UpcomingGameListConverterTest {
     inner class FewDaysGroupTests {
         @Test
         fun `Few days group should be in correct order`() {
-            val nextFewDaysReleases = persistentListOf(
+            val nextFewDaysReleases = listOf(
                 ReleasesInNextFewDays.releasedAtStartOfWeek,
                 ReleasesInNextFewDays.releasedYesterday,
                 ReleasesInNextFewDays.releasedToday,
                 ReleasesInNextFewDays.releasedToday2,
                 ReleasesInNextFewDays.willBeReleasedTomorrow,
             )
-            val response = UpcomingReleasesResponse(
-                requestTime = UpcomingReleaseDateFixtures.currentDateTimestamp,
-                requestedFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-                games = nextFewDaysReleases,
-            )
 
-            val result = converter.convert(response)
-                .map { it.toListOrderTestExpectedItem() }
+            val result = convert(nextFewDaysReleases)
 
             result shouldContainExactly buildList {
                 // Start of week
@@ -187,20 +171,14 @@ internal class UpcomingGameListConverterTest {
     inner class CurrentMonthGroupTests {
         @Test
         fun `current month group should be in correct order`() {
-            val thisMonthReleases = persistentListOf(
+            val thisMonthReleases = listOf(
                 ReleasesInCurrentMonth.tbdThisMonth1,
                 ReleasesInCurrentMonth.thisMonthDay25,
                 ReleasesInCurrentMonth.tbdThisMonth2,
                 ReleasesInCurrentMonth.thisMonthDay26,
             )
-            val response = UpcomingReleasesResponse(
-                requestTime = UpcomingReleaseDateFixtures.currentDateTimestamp,
-                requestedFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-                games = thisMonthReleases,
-            )
 
-            val result = converter.convert(response)
-                .map { it.toListOrderTestExpectedItem() }
+            val result = convert(thisMonthReleases)
 
             result shouldContainExactly buildList {
                 // Current month
@@ -219,20 +197,14 @@ internal class UpcomingGameListConverterTest {
     inner class NextMonthGroupTests {
         @Test
         fun `next month group should be in correct order`() {
-            val nextMonthReleases = persistentListOf(
+            val nextMonthReleases = listOf(
                 ReleasesInNextMonth.tbdNextMonth1,
                 ReleasesInNextMonth.tbdNextMonth2,
                 ReleasesInNextMonth.nextMonthDay10,
                 ReleasesInNextMonth.nextMonthDay15,
             )
-            val response = UpcomingReleasesResponse(
-                requestTime = UpcomingReleaseDateFixtures.currentDateTimestamp,
-                requestedFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-                games = nextMonthReleases,
-            )
 
-            val result = converter.convert(response)
-                .map { it.toListOrderTestExpectedItem() }
+            val result = convert(nextMonthReleases)
 
             result shouldContainExactly buildList {
                 titleYearMonth(NEXT_MONTH, NextMonth.approxDate)
@@ -248,18 +220,13 @@ internal class UpcomingGameListConverterTest {
     inner class ThisQuarterGroupTests {
         @Test
         fun `this quarter group should be in correct order`() {
-            val thisQuarterReleases = persistentListOf(
+            val thisQuarterReleases = listOf(
                 ReleasesInThisQuarter.thisQuarterExactDate,
                 ReleasesInThisQuarter.tbdThisQuarterAug,
                 ReleasesInThisQuarter.tbdThisQuarter,
             )
-            val response = UpcomingReleasesResponse(
-                requestTime = UpcomingReleaseDateFixtures.currentDateTimestamp,
-                requestedFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-                games = thisQuarterReleases,
-            )
-            val result = converter.convert(response)
-                .map { it.toListOrderTestExpectedItem() }
+
+            val result = convert(thisQuarterReleases)
 
             result shouldContainExactly buildList {
                 titleQuarter(CURRENT_QUARTER, CurrentQuarter.exactDate.date)
@@ -279,13 +246,8 @@ internal class UpcomingGameListConverterTest {
                 ReleasesInNextQuarter.tbdNextQuarterOct,
                 ReleasesInNextQuarter.nextQuarterExactDate,
             )
-            val response = UpcomingReleasesResponse(
-                requestTime = UpcomingReleaseDateFixtures.currentDateTimestamp,
-                requestedFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-                games = nextQuarterReleases,
-            )
-            val result = converter.convert(response)
-                .map { it.toListOrderTestExpectedItem() }
+
+            val result = convert(nextQuarterReleases)
 
             result shouldContainExactly buildList {
                 titleQuarter(NEXT_QUARTER, NextQuarter.exactDate.date)
@@ -300,19 +262,14 @@ internal class UpcomingGameListConverterTest {
     inner class ThisYearGroupTests {
         @Test
         fun `This year group should be in correct order`() {
-            val thisYearReleases = persistentListOf(
+            val thisYearReleases = listOf(
                 ReleasesThisYear.thisYearExactDate,
                 ReleasesThisYear.tbdThisYearOct,
                 ReleasesThisYear.tbdThisYear4Quarter,
                 ReleasesThisYear.tbdThisYear,
             )
-            val response = UpcomingReleasesResponse(
-                requestTime = UpcomingReleaseDateFixtures.currentDateTimestamp,
-                requestedFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-                games = thisYearReleases,
-            )
-            val result = converter.convert(response)
-                .map { it.toListOrderTestExpectedItem() }
+
+            val result = convert(thisYearReleases)
 
             result shouldContainExactly buildList {
                 titleYear(CURRENT_YEAR, CurrentYear.exactDate2Oct.date.year)
@@ -334,13 +291,8 @@ internal class UpcomingGameListConverterTest {
                 ReleasesNextYear.tbdNextYear1Quarter,
                 ReleasesNextYear.tbdNextYear,
             )
-            val response = UpcomingReleasesResponse(
-                requestTime = UpcomingReleaseDateFixtures.currentDateTimestamp,
-                requestedFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-                games = nextYearReleases,
-            )
-            val result = converter.convert(response)
-                .map { it.toListOrderTestExpectedItem() }
+
+            val result = convert(nextYearReleases)
 
             result shouldContainExactly buildList {
                 titleYear(NEXT_YEAR, NextYear.approxDateYear.year)
@@ -360,13 +312,8 @@ internal class UpcomingGameListConverterTest {
                 ReleasesTbd.tdbGame1,
                 ReleasesTbd.tbdGame2,
             )
-            val response = UpcomingReleasesResponse(
-                requestTime = UpcomingReleaseDateFixtures.currentDateTimestamp,
-                requestedFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-                games = tbdReleases,
-            )
-            val result = converter.convert(response)
-                .map { it.toListOrderTestExpectedItem() }
+
+            val result = convert(tbdReleases)
 
             result shouldContainExactly buildList {
                 titleTbd()

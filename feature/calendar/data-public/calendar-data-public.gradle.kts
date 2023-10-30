@@ -15,5 +15,6 @@ group = "ru.pixnews.feature.calendar.data"
 
 dependencies {
     api(projects.library.coroutines)
+    api(libs.androidx.paging.common)
     implementation(projects.foundation.domainModel)
 }

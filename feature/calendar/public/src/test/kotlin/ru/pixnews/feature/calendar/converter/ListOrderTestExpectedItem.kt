@@ -84,9 +84,7 @@ internal sealed class ListOrderTestExpectedItem {
 
         internal fun MutableList<ListOrderTestExpectedItem>.titleTbd(
             category: UpcomingReleaseTimeCategory = TBD,
-        ) = add(
-            ListItemTitle(UpcomingReleaseGroupId.Tbd(category)),
-        )
+        ) = add(ListItemTitle(UpcomingReleaseGroupId.Tbd(category)))
 
         internal fun MutableList<ListOrderTestExpectedItem>.game(
             release: UpcomingRelease,

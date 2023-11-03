@@ -210,6 +210,11 @@
             <pgp value="47504b76cf89c15c0512d9afe16ab52d79fd224f"/>
          </artifact>
       </component>
+      <component group="com.google.api.grpc" name="proto-google-common-protos" version="2.17.0">
+         <artifact name="proto-google-common-protos-2.17.0.jar">
+            <pgp value="47504b76cf89c15c0512d9afe16ab52d79fd224f"/>
+         </artifact>
+      </component>
       <component group="com.google.code.findbugs" name="jsr305" version="2.0.2">
          <artifact name="jsr305-2.0.2.jar">
             <pgp value="a413f67d71beec23add0ce0acb43338e060cf9fa"/>
@@ -382,6 +387,11 @@
       </component>
       <component group="io.perfmark" name="perfmark-api" version="0.23.0">
          <artifact name="perfmark-api-0.23.0.jar">
+            <pgp value="c6f7d1c804c821f49af3bfc13ad93c3c677a106e"/>
+         </artifact>
+      </component>
+      <component group="io.perfmark" name="perfmark-api" version="0.26.0">
+         <artifact name="perfmark-api-0.26.0.jar">
             <pgp value="c6f7d1c804c821f49af3bfc13ad93c3c677a106e"/>
          </artifact>
       </component>

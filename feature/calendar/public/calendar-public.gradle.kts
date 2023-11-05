@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.paging.compose)
 
     api(libs.inject)
     implementation(libs.kermit)
@@ -57,6 +58,7 @@ dependencies {
     implementation(projects.library.kotlinDatetimeUtils)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
+    testImplementation(libs.androidx.paging.testing)
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.kotest.extensions.arrow)
     testImplementation(libs.turbine)

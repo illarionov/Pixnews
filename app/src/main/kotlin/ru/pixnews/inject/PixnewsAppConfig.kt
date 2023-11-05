@@ -11,7 +11,7 @@ import ru.pixnews.BuildConfig
 import ru.pixnews.config.GeneratedIgdbClientConfig
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.appconfig.HttpLoggingLevel
-import ru.pixnews.foundation.appconfig.HttpLoggingLevel.HEADERS
+import ru.pixnews.foundation.appconfig.HttpLoggingLevel.BASIC
 import ru.pixnews.foundation.appconfig.IgdbClientConfig
 import ru.pixnews.foundation.appconfig.NetworkConfig
 import ru.pixnews.foundation.di.base.scopes.AppScope
@@ -29,7 +29,7 @@ public object PixnewsAppConfig : AppConfig {
     override val networkConfig: NetworkConfig by lazy(NONE) {
         object : NetworkConfig {
             override val httpLoggingLevel: HttpLoggingLevel
-                get() = if (BuildConfig.DEBUG) HEADERS else HttpLoggingLevel.NONE
+                get() = if (BuildConfig.DEBUG) BASIC else HttpLoggingLevel.NONE
         }
     }
     override val igdbClientConfig: IgdbClientConfig = GeneratedIgdbClientConfig

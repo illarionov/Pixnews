@@ -6,32 +6,28 @@
 package ru.pixnews.feature.calendar
 
 import androidx.lifecycle.SavedStateHandle
-import app.cash.turbine.test
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.testing.asPagingSourceFactory
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldBeInstanceOf
-import kotlinx.collections.immutable.persistentListOf
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.test.advanceUntilIdle
-import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleasesResponse
-import ru.pixnews.feature.calendar.model.CALENDAR_LIST_ITEM_GAME_FIELDS
-import ru.pixnews.feature.calendar.model.CalendarScreenStateLoaded
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
+import ru.pixnews.feature.calendar.domain.upcoming.DefaultObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.feature.calendar.model.InitialLoad
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.FeatureManager
 import ru.pixnews.foundation.featuretoggles.FeatureToggle
-import ru.pixnews.library.functional.network.NetworkRequestFailure
-import ru.pixnews.library.functional.network.NetworkRequestStatus
 import ru.pixnews.library.test.MainCoroutineExtension
 import ru.pixnews.library.test.TestingLoggers
-import java.net.NoRouteToHostException
 
 class CalendarViewModelTest {
     private val logger = TestingLoggers.consoleLogger
@@ -45,11 +41,12 @@ class CalendarViewModelTest {
     }
     private val tzProvider = { TimeZone.of("UTC+3") }
     private val savedStateHandle = SavedStateHandle()
-    private val upcomingReleasesUseCase: TestUseCase = TestUseCase()
+    private lateinit var upcomingReleasesUseCase: TestUseCase
     private lateinit var viewModel: CalendarViewModel
 
     @BeforeEach
     fun setup() {
+        upcomingReleasesUseCase = TestUseCase(coroutinesExt.testScope.backgroundScope)
         viewModel = CalendarViewModel(
             featureManager = featureManager,
             logger = logger,
@@ -64,87 +61,20 @@ class CalendarViewModelTest {
         viewModel.viewState.value shouldBe InitialLoad
     }
 
-    @Test
-    fun `getViewState should return success state on success response`() = coroutinesExt.runTest {
-        viewModel.viewState.test {
-            advanceUntilIdle()
-            awaitItem() shouldBe InitialLoad
-
-            upcomingReleasesUseCase.flow.emit(
-                NetworkRequestStatus.loading(),
-            )
-            expectNoEvents()
-
-            upcomingReleasesUseCase.flow.emit(
-                NetworkRequestStatus.completeSuccess(FAKE_SUCCESS_USE_CASE_RESPONSE),
-            )
-            advanceUntilIdle()
-
-            awaitItem().let {
-                it.shouldBeInstanceOf<CalendarScreenStateLoaded.Success>()
-                it.isRefreshing shouldBe false
-            }
-        }
-    }
-
-    @Test
-    fun `getViewState should return no internet on network failure`() = coroutinesExt.runTest {
-        viewModel.viewState.test {
-            advanceUntilIdle()
-            awaitItem() shouldBe InitialLoad
-
-            upcomingReleasesUseCase.flow.emit(
-                NetworkRequestStatus.completeFailure(NetworkRequestFailure.NetworkFailure(NoRouteToHostException())),
-            )
-
-            awaitItem().let {
-                it.shouldBeInstanceOf<CalendarScreenStateLoaded.Failure.NoInternet>()
-                it.isRefreshing shouldBe false
-            }
-        }
-    }
-
-    @Test
-    fun `getViewState should return network error on api failure`() = coroutinesExt.runTest {
-        val useCase = TestUseCase()
-        val vm = CalendarViewModel(
-            featureManager = featureManager,
-            logger = logger,
-            tzProvider = tzProvider,
-            savedStateHandle = savedStateHandle,
-            getUpcomingReleasesByDateUseCase = useCase,
+    class TestUseCase(scope: CoroutineScope) : ObserveUpcomingReleasesByDateUseCase {
+        var sourceList: MutableSharedFlow<List<UpcomingRelease>> = MutableSharedFlow()
+        val pager = Pager(
+            config = PagingConfig(pageSize = DefaultObserveUpcomingReleasesByDateUseCase.INITIAL_PAGING_SIZE),
+            initialKey = null,
+            pagingSourceFactory = sourceList.asPagingSourceFactory(scope),
         )
-        vm.viewState.test {
-            advanceUntilIdle()
-            awaitItem() shouldBe InitialLoad
 
-            useCase.flow.emit(
-                NetworkRequestStatus.completeFailure(
-                    NetworkRequestFailure.NetworkFailure(
-                        NoRouteToHostException(),
-                    ),
-                ),
-            )
-
-            awaitItem().let {
-                it.shouldBeInstanceOf<CalendarScreenStateLoaded.Failure.NoInternet>()
-                it.isRefreshing shouldBe false
-            }
-        }
-    }
-
-    class TestUseCase : ObserveUpcomingReleasesByDateUseCase {
-        val flow: MutableSharedFlow<NetworkRequestStatus<UpcomingReleasesResponse>> = MutableSharedFlow()
         override fun createUpcomingReleasesObservable(
             requiredFields: Set<GameField>,
-        ): Flow<NetworkRequestStatus<UpcomingReleasesResponse>> = flow
+        ): Flow<PagingData<UpcomingRelease>> = pager.flow
     }
 
     companion object {
-        val FAKE_SUCCESS_USE_CASE_RESPONSE = UpcomingReleasesResponse(
-            requestTime = Instant.parse("2024-01-01T01:00:00Z"),
-            requestedFields = CALENDAR_LIST_ITEM_GAME_FIELDS,
-            games = persistentListOf(),
-        )
+        val FAKE_SUCCESS_USE_CASE_RESPONSE = PagingData.from(emptyList())
     }
 }

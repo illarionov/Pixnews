@@ -32,9 +32,15 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.unit.dp
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
 import kotlinx.collections.immutable.ImmutableList
+import kotlinx.coroutines.flow.flowOf
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.feature.calendar.PreviewFixtures
+import ru.pixnews.feature.calendar.PreviewFixtures.UpcomingReleases
 import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi
 import ru.pixnews.feature.calendar.model.CalendarListTitle
@@ -64,7 +70,7 @@ internal val WindowInsets.Companion.safeContentHorizontalMin16dp: WindowInsets
 @Composable
 internal fun GameList(
     majorReleases: ImmutableList<MajorReleaseCarouselItemUiModel>,
-    games: ImmutableList<CalendarListItem>,
+    games: LazyPagingItems<CalendarListItem>,
     onMajorReleaseClick: (GameId) -> Unit,
     onGameClick: (GameId) -> Unit,
     onFavouriteClick: (GameId) -> Unit,
@@ -92,11 +98,11 @@ internal fun GameList(
             )
         }
         items(
-            count = games.size,
-            contentType = { index -> games[index].uniqueId.contentType },
-            key = { index -> games[index].uniqueId },
+            count = games.itemCount,
+            contentType = games.itemContentType { it.uniqueId.contentType },
+            key = games.itemKey { it.uniqueId },
         ) { gameIndex ->
-            val currentItem = games[gameIndex]
+            val currentItem = games[gameIndex] ?: error("unexpected placeholder")
 
             if (gameIndex != 0) {
                 val predItem = games[gameIndex - 1]
@@ -164,7 +170,7 @@ private fun PreviewCalendarScreenContent() {
             ) {
                 GameList(
                     majorReleases = PreviewFixtures.previewSuccessState.majorReleases,
-                    games = PreviewFixtures.previewSuccessState.games,
+                    games = flowOf(UpcomingReleases.successPagingData).collectAsLazyPagingItems(),
                     onMajorReleaseClick = {},
                     onFavouriteClick = {},
                     onGameClick = {},

@@ -5,6 +5,7 @@
 
 package ru.pixnews.feature.calendar.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.foundation.layout.Box
@@ -12,16 +13,28 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.scan
 import ru.pixnews.feature.calendar.CalendarViewModel
 import ru.pixnews.feature.calendar.PreviewFixtures
+import ru.pixnews.feature.calendar.converter.mergeScreenWithPagerStates
+import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarScreenState
 import ru.pixnews.feature.calendar.model.CalendarScreenStateLoaded.Failure
 import ru.pixnews.feature.calendar.model.CalendarScreenStateLoaded.Success
+import ru.pixnews.feature.calendar.model.CalendarScreenStateWithPagingState
 import ru.pixnews.feature.calendar.model.InitialLoad
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
 import ru.pixnews.feature.calendar.ui.failure.NoInternet
@@ -38,11 +51,37 @@ internal fun CalendarScreen(
     modifier: Modifier = Modifier,
     viewModel: CalendarViewModel = injectedViewModel(),
 ) {
-    val state = viewModel.viewState.collectAsStateWithLifecycle()
+    val upcomingReleases: LazyPagingItems<CalendarListItem> = viewModel.upcomingReleasesFlow.collectAsLazyPagingItems()
+    CalendarScreen(
+        modifier = modifier,
+        calendarScreenState = viewModel.viewState,
+        upcomingReleases = upcomingReleases,
+        onRefreshRequested = { viewModel.refreshReleaseCalendarList() },
+    )
+}
+
+@Composable
+internal fun CalendarScreen(
+    calendarScreenState: StateFlow<CalendarScreenState>,
+    upcomingReleases: LazyPagingItems<CalendarListItem>,
+    onRefreshRequested: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    @SuppressLint("StateFlowValueCalledInComposition")
+    val mergedState = remember(calendarScreenState, upcomingReleases) {
+        val upcomingReleasesRefreshStatusFlow = snapshotFlow {
+            upcomingReleases.loadState.refresh
+        }
+        calendarScreenState
+            .combine(upcomingReleasesRefreshStatusFlow, ::CalendarScreenStateWithPagingState)
+            .scan(CalendarScreenStateWithPagingState(), ::mergeScreenWithPagerStates)
+            .map { it.screenState }
+    }.collectAsStateWithLifecycle(initialValue = calendarScreenState.value)
 
     CalendarScreen(
-        state = state.value,
-        onRefreshRequested = { viewModel.refreshReleaseCalendarList() },
+        state = mergedState.value,
+        upcomingReleases = upcomingReleases,
+        onRefreshRequested = onRefreshRequested,
         modifier = modifier,
     )
 }
@@ -50,6 +89,7 @@ internal fun CalendarScreen(
 @Composable
 internal fun CalendarScreen(
     state: CalendarScreenState,
+    upcomingReleases: LazyPagingItems<CalendarListItem>,
     onRefreshRequested: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -81,7 +121,7 @@ internal fun CalendarScreen(
             when (state) {
                 InitialLoad -> InitialLoadingPlaceholder()
                 is Success -> GameList(
-                    games = state.games,
+                    games = upcomingReleases,
                     majorReleases = state.majorReleases,
                     onMajorReleaseClick = {},
                     onGameClick = {},
@@ -120,6 +160,9 @@ private fun CalendarScreenPreview() {
         Surface {
             CalendarScreen(
                 state = PreviewFixtures.previewSuccessState,
+                upcomingReleases = flowOf(
+                    PreviewFixtures.UpcomingReleases.successPagingData,
+                ).collectAsLazyPagingItems(),
                 onRefreshRequested = {},
             )
         }
@@ -133,6 +176,8 @@ private fun CalendarScreenPreviewInitialLoadPlaceholder() {
         Surface {
             CalendarScreen(
                 state = InitialLoad,
+                upcomingReleases = flowOf(PreviewFixtures.UpcomingReleases.initialLoadingPagingData)
+                    .collectAsLazyPagingItems(),
                 onRefreshRequested = {},
             )
         }

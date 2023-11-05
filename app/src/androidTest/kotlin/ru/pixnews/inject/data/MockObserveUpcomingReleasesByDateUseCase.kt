@@ -5,15 +5,15 @@
 
 package ru.pixnews.inject.data
 
+import androidx.paging.PagingData
 import com.squareup.anvil.annotations.ContributesBinding
 import com.squareup.anvil.annotations.optional.SingleIn
 import kotlinx.coroutines.flow.Flow
 import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleasesResponse
+import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
 import ru.pixnews.feature.calendar.domain.upcoming.DefaultObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.library.functional.network.NetworkRequestStatus
 import javax.inject.Inject
 
 @ContributesBinding(
@@ -27,18 +27,18 @@ class MockObserveUpcomingReleasesByDateUseCase @Inject constructor() : ObserveUp
     @set:Synchronized
     internal var createUpcomingReleasesObservableResponse: (
         requiredFields: Set<GameField>,
-    ) -> Flow<NetworkRequestStatus<UpcomingReleasesResponse>> = NOT_INITIALIZED
+    ) -> Flow<PagingData<UpcomingRelease>> = NOT_INITIALIZED
 
     override fun createUpcomingReleasesObservable(
         requiredFields: Set<GameField>,
-    ): Flow<NetworkRequestStatus<UpcomingReleasesResponse>> {
+    ): Flow<PagingData<UpcomingRelease>> {
         return createUpcomingReleasesObservableResponse(requiredFields)
     }
 
     companion object UpcomingReleasesDateFixtures {
         internal val NOT_INITIALIZED: (
             requiredFields: Set<GameField>,
-        ) -> Flow<NetworkRequestStatus<UpcomingReleasesResponse>> = { _ ->
+        ) -> Flow<PagingData<UpcomingRelease>> = { _ ->
             error("MockObserveUpcomingReleasesByDateUseCase not initialized")
         }
     }

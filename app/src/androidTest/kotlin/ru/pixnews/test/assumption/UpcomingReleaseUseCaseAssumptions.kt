@@ -5,17 +5,15 @@
 
 package ru.pixnews.test.assumption
 
-import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toImmutableSet
-import kotlinx.collections.immutable.toPersistentList
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
+import androidx.paging.testing.asPagingSourceFactory
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.Month
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toInstant
 import org.junit.rules.ExternalResource
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
@@ -25,12 +23,11 @@ import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.slimeRancher2
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleasesResponse
 import ru.pixnews.inject.MockResourcesHolder
 import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase.UpcomingReleasesDateFixtures.NOT_INITIALIZED
 import ru.pixnews.library.functional.network.NetworkRequestFailure
-import ru.pixnews.library.functional.network.NetworkRequestStatus
+import ru.pixnews.library.functional.network.NetworkRequestFailureException
 import java.net.NoRouteToHostException
 
 class UpcomingReleaseUseCaseAssumptions : ExternalResource() {
@@ -52,16 +49,13 @@ class UpcomingReleaseUseCaseAssumptions : ExternalResource() {
     }
 
     fun assumeUpcomingGamesResponseDefaultGame() {
-        mockUseCase.createUpcomingReleasesObservableResponse = { requiredFields ->
-            flowOf(
-                NetworkRequestStatus.completeSuccess(
-                    UpcomingReleasesResponse(
-                        requestTime = DEFAULT_TIME.toInstant(DEFAULT_TIME_ZONE),
-                        requestedFields = requiredFields.toImmutableSet(),
-                        games = persistentListOf(DEFAULT_UPCOMING_RELEASE),
-                    ),
-                ),
+        mockUseCase.createUpcomingReleasesObservableResponse = { _ ->
+            val pager = Pager(
+                config = PagingConfig(10),
+                initialKey = null,
+                pagingSourceFactory = listOf(DEFAULT_UPCOMING_RELEASE).asPagingSourceFactory(),
             )
+            pager.flow
         }
     }
 
@@ -70,16 +64,12 @@ class UpcomingReleaseUseCaseAssumptions : ExternalResource() {
     }
 
     fun assumeUpcomingGamesResponseEmpty() {
-        mockUseCase.createUpcomingReleasesObservableResponse = { requiredFields ->
-            flowOf(
-                NetworkRequestStatus.completeSuccess(
-                    UpcomingReleasesResponse(
-                        requestTime = Clock.System.now(),
-                        requestedFields = requiredFields.toImmutableSet(),
-                        games = persistentListOf(),
-                    ),
-                ),
-            )
+        mockUseCase.createUpcomingReleasesObservableResponse = { _ ->
+            Pager(
+                config = PagingConfig(10),
+                initialKey = null,
+                pagingSourceFactory = listOf<UpcomingRelease>().asPagingSourceFactory(),
+            ).flow
         }
     }
 
@@ -89,26 +79,34 @@ class UpcomingReleaseUseCaseAssumptions : ExternalResource() {
 
     fun assumeUpcomingReleasesSuccessfully(
         releases: List<UpcomingRelease>,
-        requestTime: Instant = Clock.System.now(),
     ) {
-        mockUseCase.createUpcomingReleasesObservableResponse = { requiredFields ->
-            flowOf(
-                NetworkRequestStatus.completeSuccess(
-                    UpcomingReleasesResponse(
-                        requestTime = requestTime,
-                        requestedFields = requiredFields.toImmutableSet(),
-                        games = releases.toPersistentList(),
-                    ),
-                ),
-            )
+        mockUseCase.createUpcomingReleasesObservableResponse = { _ ->
+            Pager(
+                config = PagingConfig(10),
+                initialKey = null,
+                pagingSourceFactory = releases.asPagingSourceFactory(),
+            ).flow
         }
     }
 
     fun assumeUpcomingGamesResponseFailure(
         error: NetworkRequestFailure<*> = NetworkRequestFailure.NetworkFailure(NoRouteToHostException()),
     ) {
+        // TODO: better implementation
         mockUseCase.createUpcomingReleasesObservableResponse = { requiredFields ->
-            flowOf(NetworkRequestStatus.completeFailure(error))
+            Pager(
+                config = PagingConfig(10),
+                initialKey = null,
+                pagingSourceFactory = {
+                    object : PagingSource<Int, UpcomingRelease>() {
+                        override fun getRefreshKey(state: PagingState<Int, UpcomingRelease>): Int? = null
+
+                        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UpcomingRelease> {
+                            return LoadResult.Error(NetworkRequestFailureException(error))
+                        }
+                    }
+                },
+            ).flow
         }
     }
 

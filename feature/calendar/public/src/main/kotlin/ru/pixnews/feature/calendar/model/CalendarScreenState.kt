@@ -34,7 +34,6 @@ internal sealed interface CalendarScreenStateLoaded : CalendarScreenState {
 
     data class Success(
         val majorReleases: ImmutableList<MajorReleaseCarouselItemUiModel>,
-        val games: ImmutableList<CalendarListItem>,
         override val isRefreshing: Boolean = false,
         val showNoInternetError: Boolean = false,
     ) : CalendarScreenStateLoaded {

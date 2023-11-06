@@ -21,10 +21,10 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImagePainter.State
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.material3.fade
-import com.google.accompanist.placeholder.material3.placeholder
 import ru.pixnews.foundation.ui.imageloader.coil.compose.AsyncImage
+import ru.pixnews.library.compose.utils.placeholder.PlaceholderHighlight
+import ru.pixnews.library.compose.utils.placeholder.fade
+import ru.pixnews.library.compose.utils.placeholder.placeholder
 
 /**
  * [AsyncImage] with placeholder

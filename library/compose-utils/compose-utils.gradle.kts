@@ -18,4 +18,7 @@ android {
 dependencies {
     api(libs.androidx.core)
     api(libs.androidx.compose.foundation)
+
+    implementation(libs.androidx.compose.ui.util)
+    implementation(libs.androidx.compose.material3)
 }

@@ -5,11 +5,11 @@
 
 package ru.pixnews.feature.calendar.ui
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,14 +19,17 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory
@@ -41,6 +44,10 @@ import ru.pixnews.foundation.ui.design.R.string
 import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.foundation.ui.theme.md_theme_palette_primary95
+import ru.pixnews.library.compose.utils.placeholder.PlaceholderDefaults
+import ru.pixnews.library.compose.utils.placeholder.PlaceholderHighlight
+import ru.pixnews.library.compose.utils.placeholder.placeholder
+import ru.pixnews.library.compose.utils.placeholder.shimmer
 import ru.pixnews.library.ui.tooling.PreviewPhones
 
 private val majorReleasesCardWidth = 136.dp
@@ -74,11 +81,10 @@ internal fun InitialLoadingPlaceholder(
 @Composable
 private fun MajorReleasesCarouselPlaceholder(
     modifier: Modifier = Modifier,
-    color: Color = md_theme_palette_primary95,
 ) {
     Column(
         modifier = modifier
-            .widthIn(feedMaxWidth)
+            .widthIn(max = feedMaxWidth)
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
@@ -87,74 +93,61 @@ private fun MajorReleasesCarouselPlaceholder(
             modifier = Modifier
                 .align(Alignment.Start)
                 .widthIn(max = feedMaxWidth)
-                .drawWithContent {
-                    drawRect(color = color)
-                },
+                .shimmer(shape = RectangleShape),
         )
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(min = majorReleasesMinHeight),
+                .heightIn(min = majorReleasesMinHeight)
+                .wrapContentWidth(unbounded = true, align = Alignment.Start),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             @Suppress("MagicNumber")
             repeat(3) {
-                MajorReleasesCardPlaceholder(color = color)
+                Spacer(
+                    modifier = Modifier
+                        .size(width = majorReleasesCardWidth, height = 238.dp)
+                        .shimmer(shape = MaterialTheme.shapes.medium),
+                )
             }
         }
     }
 }
 
 @Composable
-private fun MajorReleasesCardPlaceholder(
-    modifier: Modifier = Modifier,
-    color: Color = md_theme_palette_primary95,
-) {
-    val cardShape = MaterialTheme.shapes.medium
-    Canvas(
-        modifier = modifier
-            .size(width = majorReleasesCardWidth, height = 238.dp),
-    ) {
-        drawRoundRect(
-            color = color,
-            size = this.size.copy(width = majorReleasesCardWidth.toPx()),
-            cornerRadius = CornerRadius(
-                cardShape.topStart.toPx(size, this),
-            ),
-        )
-    }
-}
-
-@Composable
-private fun ColumnScope.GameListPlaceholder(
-    color: Color = md_theme_palette_primary95,
-) {
-    val gameCardShape = MaterialTheme.shapes.large
-
+private fun ColumnScope.GameListPlaceholder() {
     PixnewsGameListSubheader(
         title = calendarListTitlePlaceholder.getLocalizedGroupTitle(),
         modifier = Modifier
             .align(Alignment.Start)
             .widthIn(max = feedMaxWidth)
             .padding(top = 8.dp)
-            .drawWithContent {
-                drawRect(color = color)
-            },
+            .shimmer(shape = RectangleShape),
     )
-    Canvas(
+    Spacer(
         modifier = Modifier
             .widthIn(max = feedMaxWidth)
             .fillMaxWidth()
-            .height(492.dp),
-    ) {
-        drawRoundRect(
-            color = color,
-            size = this.size.copy(height = 492.dp.toPx()),
-            cornerRadius = CornerRadius(
-                gameCardShape.topStart.toPx(size, this),
+            .wrapContentHeight(unbounded = true, align = Alignment.Top)
+            .height(492.dp)
+            .shimmer(shape = MaterialTheme.shapes.medium),
+    )
+}
+
+private fun Modifier.shimmer(
+    shape: Shape? = null,
+    color: Color = md_theme_palette_primary95,
+) = this.composed {
+    placeholder(
+        visible = true,
+        color = color,
+        highlight = PlaceholderHighlight.shimmer(
+            highlightColor = PlaceholderDefaults.shimmerHighlightColor(
+                backgroundColor = MaterialTheme.colorScheme.background,
             ),
-        )
-    }
+            progressForMaxAlpha = 0.8f,
+        ),
+        shape = shape,
+    )
 }
 
 @PreviewPhones

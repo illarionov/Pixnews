@@ -97,6 +97,7 @@ dependencies {
     androidTestImplementation(projects.foundation.ui.designTestConstants)
     androidTestImplementation(projects.feature.calendar.test)
     androidTestImplementation(projects.feature.calendar.testConstants)
+    androidTestImplementation(projects.library.composeUtils)
     androidTestImplementation(projects.library.instrumentedTest)
     androidTestImplementation(testFixtures(projects.foundation.domainModel))
     androidTestImplementation(libs.accompanist.test.harness)

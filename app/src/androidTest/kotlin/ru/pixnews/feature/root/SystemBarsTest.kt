@@ -20,10 +20,10 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import ru.pixnews.MainActivity
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
+import ru.pixnews.library.instrumented.test.assertion.isTransparent
 import ru.pixnews.library.instrumented.test.rule.NightModeRule
 import ru.pixnews.library.instrumented.test.rule.NightModeRule.NightMode.DARK
 import ru.pixnews.library.instrumented.test.rule.NightModeRule.NightMode.LIGHT
-import ru.pixnews.library.instrumented.test.util.isTransparent
 
 @RunWith(Enclosed::class)
 class SystemBarsTest : BaseInstrumentedTest() {

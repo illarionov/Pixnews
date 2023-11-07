@@ -9,7 +9,6 @@ import android.os.Build
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.unit.dp
-import co.touchlab.kermit.Logger
 import org.junit.Assume
 import org.junit.Ignore
 import org.junit.Rule
@@ -29,7 +28,6 @@ import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCateg
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
-import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
@@ -37,7 +35,6 @@ import ru.pixnews.library.instrumented.test.util.assertVerticalPaddingBetweenAdj
 import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions
 import java.time.Month.AUGUST
 import java.time.Month.MAY
-import javax.inject.Inject
 
 @ContributesTest
 class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
@@ -51,12 +48,6 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
 
     @get:Rule
     val upcomingReleaseUseCaseAssumptions = UpcomingReleaseUseCaseAssumptions()
-
-    @Inject
-    lateinit var logger: Logger
-
-    @Inject
-    lateinit var appConfig: AppConfig
 
     @Test
     fun calendarScreen_majorReleases_shouldHaveCorrectTopPadding() {

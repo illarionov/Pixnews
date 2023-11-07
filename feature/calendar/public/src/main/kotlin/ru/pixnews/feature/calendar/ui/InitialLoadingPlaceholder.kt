@@ -14,22 +14,17 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory
@@ -40,14 +35,11 @@ import ru.pixnews.feature.calendar.ui.success.gameListContentPaddings
 import ru.pixnews.feature.calendar.ui.success.getLocalizedGroupTitle
 import ru.pixnews.feature.calendar.ui.success.majorReleasesMinHeight
 import ru.pixnews.feature.calendar.ui.success.safeContentHorizontalMin16dp
+import ru.pixnews.feature.calendar.util.PixnewsGameCardPlaceholder
+import ru.pixnews.feature.calendar.util.shimmer
 import ru.pixnews.foundation.ui.design.R.string
 import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.foundation.ui.theme.md_theme_palette_primary95
-import ru.pixnews.library.compose.utils.placeholder.PlaceholderDefaults
-import ru.pixnews.library.compose.utils.placeholder.PlaceholderHighlight
-import ru.pixnews.library.compose.utils.placeholder.placeholder
-import ru.pixnews.library.compose.utils.placeholder.shimmer
 import ru.pixnews.library.ui.tooling.PreviewPhones
 
 private val majorReleasesCardWidth = 136.dp
@@ -123,30 +115,8 @@ private fun ColumnScope.GameListPlaceholder() {
             .padding(top = 8.dp)
             .shimmer(shape = RectangleShape),
     )
-    Spacer(
-        modifier = Modifier
-            .widthIn(max = feedMaxWidth)
-            .fillMaxWidth()
-            .wrapContentHeight(unbounded = true, align = Alignment.Top)
-            .height(492.dp)
-            .shimmer(shape = MaterialTheme.shapes.medium),
-    )
-}
-
-private fun Modifier.shimmer(
-    shape: Shape? = null,
-    color: Color = md_theme_palette_primary95,
-) = this.composed {
-    placeholder(
-        visible = true,
-        color = color,
-        highlight = PlaceholderHighlight.shimmer(
-            highlightColor = PlaceholderDefaults.shimmerHighlightColor(
-                backgroundColor = MaterialTheme.colorScheme.background,
-            ),
-            progressForMaxAlpha = 0.8f,
-        ),
-        shape = shape,
+    PixnewsGameCardPlaceholder(
+        modifier = Modifier.widthIn(max = feedMaxWidth),
     )
 }
 

@@ -5,6 +5,7 @@
 
 package ru.pixnews.feature.calendar.test.element
 
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsMatcher.Companion.expectValue
@@ -12,6 +13,7 @@ import androidx.compose.ui.test.SemanticsMatcher.Companion.keyIsDefined
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.SemanticsNodeInteractionCollection
 import androidx.compose.ui.test.hasAnyAncestor
+import androidx.compose.ui.test.hasProgressBarRangeInfo
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
@@ -107,6 +109,10 @@ public class GameFeedElement(
         public fun gameCardMatcher(gameId: GameId): SemanticsMatcher = gameId.matcher
             .and(hasAnyAncestor(MajorReleasesElement.rootMatcher).not())
             .and(hasAnyAncestor(rootMatcher))
+
+        public fun appendingIndicatorMatcher(): SemanticsMatcher =
+            hasProgressBarRangeInfo(ProgressBarRangeInfo.Indeterminate)
+                .and(hasAnyAncestor(rootMatcher))
     }
 }
 

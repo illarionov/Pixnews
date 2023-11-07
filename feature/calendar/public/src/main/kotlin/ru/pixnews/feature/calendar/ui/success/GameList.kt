@@ -7,6 +7,7 @@ package ru.pixnews.feature.calendar.ui.success
 
 import android.content.res.Resources
 import androidx.compose.foundation.layout.Arrangement.spacedBy
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -21,7 +22,9 @@ import androidx.compose.foundation.layout.safeContent
 import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -32,6 +35,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.unit.dp
+import androidx.paging.LoadState.Loading
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
@@ -49,6 +53,7 @@ import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag.CONTENT_GAME_SUBHEADER
 import ru.pixnews.feature.calendar.test.constants.upcomingReleaseGroup
 import ru.pixnews.feature.calendar.util.CalendarScreenSubheaderLocalization
+import ru.pixnews.feature.calendar.util.PixnewsGameCardPlaceholder
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCard
 import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
@@ -97,49 +102,93 @@ internal fun GameList(
                 contentPadding = listItemsPadding,
             )
         }
+
         items(
             count = games.itemCount,
             contentType = games.itemContentType { it.uniqueId.contentType },
             key = games.itemKey { it.uniqueId },
         ) { gameIndex ->
-            val currentItem = games[gameIndex] ?: error("unexpected placeholder")
+            val currentItem = games[gameIndex]
 
-            if (gameIndex != 0) {
-                val predItem = games[gameIndex - 1]
-                val height = when {
-                    currentItem is CalendarListTitle -> 8.dp
-                    predItem is CalendarListTitle && currentItem is CalendarListPixnewsGameUi -> 0.dp
-                    else -> 16.dp
+            if (currentItem != null) {
+                val predItemIsTitle = if (gameIndex != 0) {
+                    games[gameIndex - 1] is CalendarListTitle
+                } else {
+                    null
                 }
-                if (height != 0.dp) {
-                    Spacer(modifier = Modifier.height(height))
-                }
-            }
-
-            when (currentItem) {
-                is CalendarListTitle -> PixnewsGameListSubheader(
-                    title = currentItem.getLocalizedGroupTitle(),
-                    modifier = Modifier
-                        .widthIn(max = feedMaxWidth)
-                        .padding(listItemsPadding)
-                        .fillMaxWidth()
-                        .padding(top = 8.dp)
-                        .semantics {
-                            upcomingReleaseGroup = currentItem.groupId
-                            testTag = CONTENT_GAME_SUBHEADER
-                        },
+                UpcomingReleasesListItem(
+                    currentItem = currentItem,
+                    predItemIsTitle = predItemIsTitle,
+                    contentPadding = listItemsPadding,
+                    onGameClick = onGameClick,
+                    onFavouriteClick = onFavouriteClick,
                 )
-
-                is CalendarListPixnewsGameUi -> PixnewsGameCard(
+            } else {
+                PixnewsGameCardPlaceholder(
                     modifier = Modifier
                         .widthIn(max = feedMaxWidth)
                         .padding(listItemsPadding),
-                    game = currentItem,
-                    onClick = { onGameClick(currentItem.gameId) },
-                    onFavouriteClick = { onFavouriteClick(currentItem.gameId) },
                 )
             }
         }
+
+        if (games.loadState.append == Loading) {
+            item {
+                Box(
+                    Modifier
+                        .widthIn(max = feedMaxWidth)
+                        .fillMaxWidth()
+                        .padding(24.dp),
+                ) {
+                    CircularProgressIndicator(Modifier.align(Alignment.Center))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun LazyItemScope.UpcomingReleasesListItem(
+    currentItem: CalendarListItem,
+    predItemIsTitle: Boolean?,
+    contentPadding: PaddingValues,
+    onGameClick: (GameId) -> Unit,
+    onFavouriteClick: (GameId) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    if (predItemIsTitle != null) {
+        val height = when {
+            currentItem is CalendarListTitle -> 8.dp
+            predItemIsTitle && currentItem is CalendarListPixnewsGameUi -> 0.dp
+            else -> 16.dp
+        }
+        if (height != 0.dp) {
+            Spacer(modifier = Modifier.height(height))
+        }
+    }
+
+    when (currentItem) {
+        is CalendarListTitle -> PixnewsGameListSubheader(
+            title = currentItem.getLocalizedGroupTitle(),
+            modifier = modifier
+                .widthIn(max = feedMaxWidth)
+                .padding(contentPadding)
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+                .semantics {
+                    upcomingReleaseGroup = currentItem.groupId
+                    testTag = CONTENT_GAME_SUBHEADER
+                },
+        )
+
+        is CalendarListPixnewsGameUi -> PixnewsGameCard(
+            modifier = modifier
+                .widthIn(max = feedMaxWidth)
+                .padding(contentPadding),
+            game = currentItem,
+            onClick = { onGameClick(currentItem.gameId) },
+            onFavouriteClick = { onFavouriteClick(currentItem.gameId) },
+        )
     }
 }
 

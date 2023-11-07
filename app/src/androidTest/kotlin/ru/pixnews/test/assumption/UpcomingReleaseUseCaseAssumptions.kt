@@ -10,6 +10,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.paging.testing.asPagingSourceFactory
+import arrow.atomic.AtomicInt
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.Month
@@ -107,6 +109,33 @@ class UpcomingReleaseUseCaseAssumptions : ExternalResource() {
                     }
                 },
             ).flow
+        }
+    }
+
+    fun assumeUpcomingReleasesSuccessfullyThenLoading(
+        releases: List<UpcomingRelease>,
+    ) {
+        val successPagingSourceFactory = releases.asPagingSourceFactory()
+        mockUseCase.createUpcomingReleasesObservableResponse = { _ ->
+            Pager(
+                config = PagingConfig(2, enablePlaceholders = false),
+                initialKey = null,
+                pagingSourceFactory = { SuccessThenLoadingPagingSource(successPagingSourceFactory()) },
+            ).flow
+        }
+    }
+
+    private class SuccessThenLoadingPagingSource(
+        private val delegate: PagingSource<Int, UpcomingRelease>,
+    ) : PagingSource<Int, UpcomingRelease>() {
+        var requestNo = AtomicInt(0)
+        override fun getRefreshKey(state: PagingState<Int, UpcomingRelease>): Int? = delegate.getRefreshKey(state)
+
+        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UpcomingRelease> {
+            return when (requestNo.incrementAndGet()) {
+                1 -> delegate.load(params)
+                else -> awaitCancellation()
+            }
         }
     }
 

@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.feature.calendar.data.domain.upcoming
+package ru.pixnews.domain.model
 
 public enum class UpcomingReleaseTimeCategory {
     FEW_DAYS,

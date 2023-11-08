@@ -48,9 +48,10 @@ import ru.pixnews.feature.calendar.model.MajorReleaseCarouselItemUiModel
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag.CONTENT_GAME_SUBHEADER
 import ru.pixnews.feature.calendar.test.constants.upcomingReleaseGroup
-import ru.pixnews.feature.calendar.util.CalendarScreenSubheaderLocalization
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCard
+import ru.pixnews.foundation.ui.design.card.PixnewsGameCardVariant.TITLE_RELEASE_DATE
 import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
+import ru.pixnews.foundation.ui.design.util.UpcomingReleaseDateLocalization
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.library.compose.utils.defaultLocale
 import ru.pixnews.library.ui.tooling.PreviewDevices
@@ -135,6 +136,7 @@ internal fun GameList(
                         .widthIn(max = feedMaxWidth)
                         .padding(listItemsPadding),
                     game = currentItem,
+                    variant = TITLE_RELEASE_DATE,
                     onClick = { onGameClick(currentItem.gameId) },
                     onFavouriteClick = { onFavouriteClick(currentItem.gameId) },
                 )
@@ -149,7 +151,7 @@ internal fun CalendarListTitle.getLocalizedGroupTitle(
     resources: Resources = LocalContext.current.resources,
 ): String {
     val groupSubheaderLocalization = remember(locale, resources) {
-        CalendarScreenSubheaderLocalization(locale, resources)
+        UpcomingReleaseDateLocalization(locale, resources)
     }
     return groupSubheaderLocalization.localize(this.groupId)
 }

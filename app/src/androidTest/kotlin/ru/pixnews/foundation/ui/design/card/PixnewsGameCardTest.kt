@@ -50,6 +50,7 @@ class PixnewsGameCardTest {
             .toImmutableSet()
         override val favourite = true
         override val genres = GameFixtures.slimeRancher2.genres.map(GameGenre::name).joinToString()
+        override val releaseDate: UpcomingReleaseDateUiModel = GameFixtures.slimeRancher2.releaseDate.toUiModel()
     }
 
     @Before

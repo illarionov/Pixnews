@@ -18,11 +18,11 @@ import org.junit.rules.ExternalResource
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.slimeRancher2
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.inject.MockResourcesHolder
 import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase.UpcomingReleasesDateFixtures.NOT_INITIALIZED
@@ -74,7 +74,7 @@ class UpcomingReleaseUseCaseAssumptions : ExternalResource() {
     }
 
     fun assumeUpcomingGamesResponseInitialLoading() {
-        mockUseCase.createUpcomingReleasesObservableResponse = { requiredFields -> emptyFlow() }
+        mockUseCase.createUpcomingReleasesObservableResponse = { _ -> emptyFlow() }
     }
 
     fun assumeUpcomingReleasesSuccessfully(

@@ -19,11 +19,10 @@ import androidx.compose.ui.test.performScrollToNode
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.slimeRancher2
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupIdKey
 import ru.pixnews.foundation.ui.design.GameIdKey
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
 
 public class GameFeedElement(
     private val composeTestRule: AndroidComposeTestRule<*, *>,
@@ -35,7 +34,7 @@ public class GameFeedElement(
     }
 
     public fun dateSubheader(
-        group: UpcomingReleaseGroupId = firstUpcomingReleaseGroupId,
+        group: UpcomingReleaseDateUiModel = firstUpcomingReleaseGroupId,
     ): SemanticsNodeInteraction {
         return composeTestRule.onNode(dateSubheaderMatcher(group))
     }
@@ -47,7 +46,7 @@ public class GameFeedElement(
     }
 
     public fun scrollToDateSubheader(
-        group: UpcomingReleaseGroupId = firstUpcomingReleaseGroupId,
+        group: UpcomingReleaseDateUiModel = firstUpcomingReleaseGroupId,
     ) {
         root().performScrollToNode(dateSubheaderMatcher(group))
     }
@@ -91,8 +90,7 @@ public class GameFeedElement(
     }
 
     public companion object {
-        public val firstUpcomingReleaseGroupId: UpcomingReleaseGroupId = UpcomingReleaseGroupId.YearMonthDay(
-            FEW_DAYS,
+        public val firstUpcomingReleaseGroupId: UpcomingReleaseDateUiModel = UpcomingReleaseDateUiModel.YearMonthDay(
             2023,
             5,
             17,
@@ -100,7 +98,7 @@ public class GameFeedElement(
         public val firstGameId: GameId = GameFixtures.slimeRancher2.id
         public val rootMatcher: SemanticsMatcher = hasTestTag(CalendarTestTag.CONTENT_LAZY_LIST)
 
-        public fun dateSubheaderMatcher(date: UpcomingReleaseGroupId): SemanticsMatcher = isHeading().and(
+        public fun dateSubheaderMatcher(date: UpcomingReleaseDateUiModel): SemanticsMatcher = isHeading().and(
             expectValue(UpcomingReleaseGroupIdKey, date),
         )
 

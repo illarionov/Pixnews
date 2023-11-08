@@ -9,20 +9,18 @@ import kotlinx.datetime.LocalDate
 import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.TBD
 import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi
 import ru.pixnews.feature.calendar.model.CalendarListTitle
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearMonth
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearMonthDay
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.YearMonth
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.YearMonthDay
 import ru.pixnews.library.kotlin.datetime.utils.quarter
-import ru.pixnews.domain.model.datetime.Date.YearMonth as ApYearMonth
+import ru.pixnews.domain.model.datetime.Date.YearMonth as DomainYearMonth
 
 internal sealed class ListOrderTestExpectedItem {
     data class ListItemTitle(
-        val groupId: UpcomingReleaseGroupId,
+        val groupId: UpcomingReleaseDateUiModel,
     ) : ListOrderTestExpectedItem() {
         override fun toString(): String = "[Title $groupId]"
     }
@@ -40,21 +38,18 @@ internal sealed class ListOrderTestExpectedItem {
         }
 
         internal fun MutableList<ListOrderTestExpectedItem>.title(
-            groupId: UpcomingReleaseGroupId,
+            groupId: UpcomingReleaseDateUiModel,
         ) = add(ListItemTitle(groupId))
 
         internal fun MutableList<ListOrderTestExpectedItem>.titleYearMonthDay(
-            category: UpcomingReleaseTimeCategory,
             date: Date.YearMonthDay,
-        ) = add(ListItemTitle(YearMonthDay(category, date.date)))
+        ) = add(ListItemTitle(YearMonthDay(date.date)))
 
         internal fun MutableList<ListOrderTestExpectedItem>.titleYearMonth(
-            category: UpcomingReleaseTimeCategory,
-            date: ApYearMonth,
+            date: DomainYearMonth,
         ) = add(
             ListItemTitle(
                 YearMonth(
-                    category,
                     date.date.year,
                     date.date.monthNumber,
                 ),
@@ -62,29 +57,22 @@ internal sealed class ListOrderTestExpectedItem {
         )
 
         internal fun MutableList<ListOrderTestExpectedItem>.titleQuarter(
-            category: UpcomingReleaseTimeCategory,
             date: LocalDate,
         ) = add(
             ListItemTitle(
-                UpcomingReleaseGroupId.YearQuarter(category, date.year, date.quarter),
+                UpcomingReleaseDateUiModel.YearQuarter(date.year, date.quarter),
             ),
         )
 
         internal fun MutableList<ListOrderTestExpectedItem>.titleYear(
-            category: UpcomingReleaseTimeCategory,
             year: Int,
         ) = add(
-            ListItemTitle(
-                UpcomingReleaseGroupId.Year(
-                    category,
-                    year,
-                ),
-            ),
+            ListItemTitle(UpcomingReleaseDateUiModel.Year(year)),
         )
 
-        internal fun MutableList<ListOrderTestExpectedItem>.titleTbd(
-            category: UpcomingReleaseTimeCategory = TBD,
-        ) = add(ListItemTitle(UpcomingReleaseGroupId.Tbd(category)))
+        internal fun MutableList<ListOrderTestExpectedItem>.titleTbd() = add(
+            ListItemTitle(UpcomingReleaseDateUiModel.Tbd),
+        )
 
         internal fun MutableList<ListOrderTestExpectedItem>.game(
             release: UpcomingRelease,

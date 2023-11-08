@@ -23,6 +23,7 @@ public fun Game.toGameCardItem(favourite: Boolean = false): PixnewsGameCardUiMod
             .toImmutableSet()
         override val favourite = favourite
         override val genres = this@toGameCardItem.genres.map(GameGenre::name).joinToString()
+        override val releaseDate: UpcomingReleaseDateUiModel = this@toGameCardItem.releaseDate.toUiModel()
     }
 }
 

@@ -5,6 +5,7 @@
 
 package ru.pixnews.feature.calendar.data.domain.upcoming
 
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory
 import ru.pixnews.domain.model.game.Game
 
 public data class UpcomingRelease(

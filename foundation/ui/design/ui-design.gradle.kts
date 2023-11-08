@@ -6,6 +6,7 @@ plugins {
     id("ru.pixnews.gradle.android.library")
     id("ru.pixnews.gradle.android.test-paparazzi")
     id("ru.pixnews.gradle.di.anvil-factories")
+    id("kotlin-parcelize")
 }
 
 pixnews {

@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.feature.calendar.util
+package ru.pixnews.foundation.ui.design.util
 
 import androidx.test.platform.app.InstrumentationRegistry
 import assertk.assertThat
@@ -12,15 +12,11 @@ import org.junit.Test
 import org.junit.experimental.runners.Enclosed
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_QUARTER
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_YEAR
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
-import ru.pixnews.feature.calendar.util.TestCase.Companion.testYear
-import ru.pixnews.feature.calendar.util.TestCase.Companion.testYearMonth
-import ru.pixnews.feature.calendar.util.TestCase.Companion.testYearMonthDay
-import ru.pixnews.feature.calendar.util.TestCase.Companion.testYearQuarter
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
+import ru.pixnews.foundation.ui.design.util.TestCase.Companion.testYear
+import ru.pixnews.foundation.ui.design.util.TestCase.Companion.testYearMonth
+import ru.pixnews.foundation.ui.design.util.TestCase.Companion.testYearMonthDay
+import ru.pixnews.foundation.ui.design.util.TestCase.Companion.testYearQuarter
 import ru.pixnews.library.instrumented.test.util.getLocalizedResources
 import java.util.Locale
 import java.util.Locale.ENGLISH
@@ -28,14 +24,14 @@ import java.util.Locale.ENGLISH
 private val RUSSIAN = Locale("ru", "RU")
 
 @RunWith(Enclosed::class)
-class CalendarScreenSubheaderLocalizationTest {
+class UpcomingReleaseDateLocalizationTest {
     @RunWith(Parameterized::class)
     class CommonTests(
         private val test: TestCase,
     ) {
         @Test
         fun localizeShouldReturnCorrectResult() {
-            val localizer = CalendarScreenSubheaderLocalization(
+            val localizer = UpcomingReleaseDateLocalization(
                 locale = test.locale,
                 resources = InstrumentationRegistry.getInstrumentation().targetContext
                     .getLocalizedResources(test.locale),
@@ -62,7 +58,7 @@ class CalendarScreenSubheaderLocalizationTest {
 }
 
 class TestCase(
-    val groupId: UpcomingReleaseGroupId,
+    val groupId: UpcomingReleaseDateUiModel,
     val locale: Locale,
     val expectedResult: String,
 ) {
@@ -78,7 +74,7 @@ class TestCase(
             locale: Locale,
             expectedResult: String,
         ): TestCase = TestCase(
-            groupId = UpcomingReleaseGroupId.YearMonthDay(FEW_DAYS, year, monthNumber, dayOfMonth),
+            groupId = UpcomingReleaseDateUiModel.YearMonthDay(year, monthNumber, dayOfMonth),
             locale = locale,
             expectedResult = expectedResult,
         )
@@ -89,7 +85,7 @@ class TestCase(
             locale: Locale,
             expectedResult: String,
         ): TestCase = TestCase(
-            groupId = UpcomingReleaseGroupId.YearMonth(CURRENT_MONTH, year, monthNumber),
+            groupId = UpcomingReleaseDateUiModel.YearMonth(year, monthNumber),
             locale = locale,
             expectedResult = expectedResult,
         )
@@ -100,7 +96,7 @@ class TestCase(
             locale: Locale,
             expectedResult: String,
         ): TestCase = TestCase(
-            groupId = UpcomingReleaseGroupId.YearQuarter(CURRENT_QUARTER, year, quarter),
+            groupId = UpcomingReleaseDateUiModel.YearQuarter(year, quarter),
             locale = locale,
             expectedResult = expectedResult,
         )
@@ -110,7 +106,7 @@ class TestCase(
             locale: Locale,
             expectedResult: String,
         ): TestCase = TestCase(
-            groupId = UpcomingReleaseGroupId.Year(CURRENT_YEAR, year),
+            groupId = UpcomingReleaseDateUiModel.Year(year),
             locale = locale,
             expectedResult = expectedResult,
         )

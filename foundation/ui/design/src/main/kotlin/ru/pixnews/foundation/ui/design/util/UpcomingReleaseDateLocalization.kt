@@ -3,28 +3,30 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.feature.calendar.util
+package ru.pixnews.foundation.ui.design.util
 
 import android.content.res.Resources
-import androidx.annotation.RestrictTo
-import androidx.annotation.RestrictTo.Scope.LIBRARY
+import android.icu.text.SimpleDateFormat
+import android.icu.util.TimeZone
+import android.text.format.DateFormat
 import arrow.core.andThen
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toJavaLocalDate
-import ru.pixnews.feature.calendar.R
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.Tbd
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.Year
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearMonth
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearMonthDay
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId.YearQuarter
-import ru.pixnews.feature.calendar.util.DateLocalization.createLocalDateBestDatePatternSystemFormatter
+import ru.pixnews.foundation.ui.design.R
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.Tbd
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.Year
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.YearMonth
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.YearMonthDay
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.YearQuarter
+import ru.pixnews.library.kotlin.utils.capitalize
 import java.time.format.DateTimeFormatter
+import java.util.Date
 import java.util.Locale
 import kotlin.LazyThreadSafetyMode.NONE
 
-@RestrictTo(LIBRARY)
-public class CalendarScreenSubheaderLocalization(
+public class UpcomingReleaseDateLocalization(
     private val locale: Locale,
     private val resources: Resources,
 ) {
@@ -35,7 +37,7 @@ public class CalendarScreenSubheaderLocalization(
      * * **Example:** Суббота, 27 марта
      */
     private val monthDayWeekDayFormatter by lazy(NONE) {
-        createLocalDateBestDatePatternSystemFormatter(MONTH_WEEKDAY_DAY_SKELETON, locale)
+        createBestDateSystemFormatter(MONTH_WEEKDAY_DAY_SKELETON, locale)
     }
 
     /**
@@ -45,7 +47,7 @@ public class CalendarScreenSubheaderLocalization(
      * * **Example:** Декабрь 2025
      */
     private val yearMonthFormatter: (LocalDate) -> String by lazy(NONE) {
-        val formatter = createLocalDateBestDatePatternSystemFormatter(YEAR_MONTH_SKELETON, locale)
+        val formatter = createBestDateSystemFormatter(YEAR_MONTH_SKELETON, locale)
         formatter andThen ::cleanupYear
     }
 
@@ -56,7 +58,7 @@ public class CalendarScreenSubheaderLocalization(
      * * **Example:** 2 квартал, 2025
      */
     private val quarterFormatter by lazy(NONE) {
-        val formatter = createLocalDateBestDatePatternSystemFormatter(QUARTER_YEAR_SKELETON, locale)
+        val formatter = createBestDateSystemFormatter(QUARTER_YEAR_SKELETON, locale)
         formatter andThen ::cleanupYear
     }
 
@@ -68,12 +70,9 @@ public class CalendarScreenSubheaderLocalization(
      */
     private val yearFormatter by lazy(NONE) { YearFormatter(locale, resources) }
 
-    private fun cleanupYear(year: String): String = year
-        .replace(CLEANUP_YEAR_REGEX, "")
-
     @Suppress("MagicNumber")
     public fun localize(
-        groupId: UpcomingReleaseGroupId,
+        groupId: UpcomingReleaseDateUiModel,
     ): String = when (groupId) {
         is YearMonthDay -> monthDayWeekDayFormatter(
             LocalDate(groupId.year, groupId.monthNumber, groupId.dayOfMonth),
@@ -91,7 +90,24 @@ public class CalendarScreenSubheaderLocalization(
             LocalDate(groupId.year, 1, 1),
         )
 
-        is Tbd -> resources.getString(R.string.calendar_screen_feed_subheader_to_be_determined)
+        is Tbd -> resources.getString(R.string.upcoming_release_date_tbd)
+    }
+
+    private fun cleanupYear(year: String): String = year
+        .replace(CLEANUP_YEAR_REGEX, "")
+
+    private fun createBestDateSystemFormatter(
+        skeleton: String,
+        locale: Locale,
+    ): (LocalDate) -> String = object : (LocalDate) -> String {
+        val betterPattern = DateFormat.getBestDateTimePattern(locale, skeleton)
+        val formatter = SimpleDateFormat(betterPattern, locale).apply {
+            timeZone = TimeZone.GMT_ZONE
+        }
+
+        override fun invoke(date: LocalDate): String = formatter.format(
+            Date(date.atStartOfDayIn(kotlinx.datetime.TimeZone.UTC).toEpochMilliseconds()),
+        ).capitalize(locale)
     }
 
     private class YearFormatter(
@@ -102,7 +118,7 @@ public class CalendarScreenSubheaderLocalization(
 
         override fun invoke(date: LocalDate): String {
             val year = date.toJavaLocalDate().format(yearDateTimeFormat)
-            return resources.getString(R.string.calendar_screen_feed_subheader_year_x, year)
+            return resources.getString(R.string.upcoming_release_date_year_x, year)
         }
     }
 
@@ -127,5 +143,5 @@ public class CalendarScreenSubheaderLocalization(
          */
         private const val YEAR_SKELETON: String = "y"
         private val CLEANUP_YEAR_REGEX = Regex("""\s+г\.$""")
-}
+    }
 }

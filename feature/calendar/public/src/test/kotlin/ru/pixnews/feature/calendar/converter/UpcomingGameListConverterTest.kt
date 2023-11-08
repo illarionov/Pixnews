@@ -27,13 +27,6 @@ import ru.pixnews.feature.calendar.converter.ListOrderTestExpectedItem.Companion
 import ru.pixnews.feature.calendar.converter.ListOrderTestExpectedItem.Companion.toListOrderTestExpectedItem
 import ru.pixnews.feature.calendar.converter.UpcomingGameListConverter.toCalendarListItem
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_QUARTER
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_YEAR
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_MONTH
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_QUARTER
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_YEAR
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentMonth
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentMonth.exactDateLater25
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentMonth.exactDateLater26
@@ -56,6 +49,7 @@ import ru.pixnews.feature.calendar.fixture.UpcomingReleasesFixtures.ReleasesTbd
 import ru.pixnews.feature.calendar.fixture.UpcomingReleasesFixtures.ReleasesThisYear
 import ru.pixnews.feature.calendar.model.CALENDAR_LIST_ITEM_GAME_FIELDS
 import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
 
 internal class UpcomingGameListConverterTest {
     private val converter = UpcomingGameListConverter
@@ -86,25 +80,25 @@ internal class UpcomingGameListConverterTest {
 
         result shouldContainExactly buildList {
             // Today
-            titleYearMonthDay(FEW_DAYS, exactDateToday)
+            titleYearMonthDay(exactDateToday)
             game(ReleasesInNextFewDays.releasedToday)
             // This month
-            titleYearMonthDay(CURRENT_MONTH, exactDateLater25)
+            titleYearMonthDay(exactDateLater25)
             game(ReleasesInCurrentMonth.thisMonthDay25)
             // Next Month
-            titleYearMonth(NEXT_MONTH, NextMonth.approxDate)
+            titleYearMonth(NextMonth.approxDate)
             game(ReleasesInNextMonth.tbdNextMonth1)
             // This quarter
-            titleQuarter(CURRENT_QUARTER, CurrentQuarter.exactDate.date)
+            titleQuarter(CurrentQuarter.exactDate.date)
             game(ReleasesInThisQuarter.thisQuarterExactDate)
             // Next quarter
-            titleQuarter(NEXT_QUARTER, NextQuarter.exactDate.date)
+            titleQuarter(NextQuarter.exactDate.date)
             game(ReleasesInNextQuarter.nextQuarterExactDate)
             // This year
-            titleYear(CURRENT_YEAR, CurrentYear.approxDateYear.year)
+            titleYear(CurrentYear.approxDateYear.year)
             game(ReleasesThisYear.tbdThisYear)
             // Next year
-            titleYear(NEXT_YEAR, NextYear.approxDateYear.year)
+            titleYear(NextYear.approxDateYear.year)
             game(ReleasesNextYear.tbdNextYear)
             // TBD
             titleTbd()
@@ -131,6 +125,7 @@ internal class UpcomingGameListConverterTest {
                 platforms = persistentSetOf(GamePlatform.Windows),
                 favourite = false,
                 genres = "Shooter",
+                releaseDate = UpcomingReleaseDateUiModel.Tbd,
             )
         }
     }
@@ -151,17 +146,17 @@ internal class UpcomingGameListConverterTest {
 
             result shouldContainExactly buildList {
                 // Start of week
-                titleYearMonthDay(FEW_DAYS, exactDateStartOfWeek)
+                titleYearMonthDay(exactDateStartOfWeek)
                 game(ReleasesInNextFewDays.releasedAtStartOfWeek)
                 // Yesterday
-                titleYearMonthDay(FEW_DAYS, exactDateYesterday)
+                titleYearMonthDay(exactDateYesterday)
                 game(ReleasesInNextFewDays.releasedYesterday)
                 // Today
-                titleYearMonthDay(FEW_DAYS, exactDateToday)
+                titleYearMonthDay(exactDateToday)
                 game(ReleasesInNextFewDays.releasedToday)
                 game(ReleasesInNextFewDays.releasedToday2)
                 // Tomorrow
-                titleYearMonthDay(FEW_DAYS, exactDateTomorrow)
+                titleYearMonthDay(exactDateTomorrow)
                 game(ReleasesInNextFewDays.willBeReleasedTomorrow)
             }
         }
@@ -182,11 +177,11 @@ internal class UpcomingGameListConverterTest {
 
             result shouldContainExactly buildList {
                 // Current month
-                titleYearMonthDay(CURRENT_MONTH, exactDateLater25)
+                titleYearMonthDay(exactDateLater25)
                 game(ReleasesInCurrentMonth.thisMonthDay25)
-                titleYearMonthDay(CURRENT_MONTH, exactDateLater26)
+                titleYearMonthDay(exactDateLater26)
                 game(ReleasesInCurrentMonth.thisMonthDay26)
-                titleYearMonth(CURRENT_MONTH, CurrentMonth.approxDate)
+                titleYearMonth(CurrentMonth.approxDate)
                 game(ReleasesInCurrentMonth.tbdThisMonth1)
                 game(ReleasesInCurrentMonth.tbdThisMonth2)
             }
@@ -207,7 +202,7 @@ internal class UpcomingGameListConverterTest {
             val result = convert(nextMonthReleases)
 
             result shouldContainExactly buildList {
-                titleYearMonth(NEXT_MONTH, NextMonth.approxDate)
+                titleYearMonth(NextMonth.approxDate)
                 game(ReleasesInNextMonth.tbdNextMonth1)
                 game(ReleasesInNextMonth.tbdNextMonth2)
                 game(ReleasesInNextMonth.nextMonthDay10)
@@ -229,7 +224,7 @@ internal class UpcomingGameListConverterTest {
             val result = convert(thisQuarterReleases)
 
             result shouldContainExactly buildList {
-                titleQuarter(CURRENT_QUARTER, CurrentQuarter.exactDate.date)
+                titleQuarter(CurrentQuarter.exactDate.date)
                 game(ReleasesInThisQuarter.thisQuarterExactDate)
                 game(ReleasesInThisQuarter.tbdThisQuarterAug)
                 game(ReleasesInThisQuarter.tbdThisQuarter)
@@ -250,7 +245,7 @@ internal class UpcomingGameListConverterTest {
             val result = convert(nextQuarterReleases)
 
             result shouldContainExactly buildList {
-                titleQuarter(NEXT_QUARTER, NextQuarter.exactDate.date)
+                titleQuarter(NextQuarter.exactDate.date)
                 game(ReleasesInNextQuarter.tbdNextQuarter)
                 game(ReleasesInNextQuarter.tbdNextQuarterOct)
                 game(ReleasesInNextQuarter.nextQuarterExactDate)
@@ -272,7 +267,7 @@ internal class UpcomingGameListConverterTest {
             val result = convert(thisYearReleases)
 
             result shouldContainExactly buildList {
-                titleYear(CURRENT_YEAR, CurrentYear.exactDate2Oct.date.year)
+                titleYear(CurrentYear.exactDate2Oct.date.year)
                 game(ReleasesThisYear.thisYearExactDate)
                 game(ReleasesThisYear.tbdThisYearOct)
                 game(ReleasesThisYear.tbdThisYear4Quarter)
@@ -295,7 +290,7 @@ internal class UpcomingGameListConverterTest {
             val result = convert(nextYearReleases)
 
             result shouldContainExactly buildList {
-                titleYear(NEXT_YEAR, NextYear.approxDateYear.year)
+                titleYear(NextYear.approxDateYear.year)
                 game(ReleasesNextYear.nextYearExactDate)
                 game(ReleasesNextYear.tbdNextYearApril)
                 game(ReleasesNextYear.tbdNextYear1Quarter)

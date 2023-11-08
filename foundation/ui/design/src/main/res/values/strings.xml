@@ -26,4 +26,10 @@
     <string name="switch_display_mode_to_list_content_description">Switch display mode to list</string>
     <string name="switch_display_mode_to_grid_content_description">Switch display mode to grid</string>
     <string name="major_releases_title">Major releases</string>
+
+    <!-- Calendar feed -->
+    <string name="upcoming_release_date_tbd">To be determined</string>
+    <string name="upcoming_release_date_year_x">%1$s year</string>
+
+
 </resources>

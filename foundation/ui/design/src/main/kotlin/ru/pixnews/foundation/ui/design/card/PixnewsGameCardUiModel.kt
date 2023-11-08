@@ -20,4 +20,5 @@ public interface PixnewsGameCardUiModel {
     public val platforms: ImmutableSet<GamePlatform>
     public val favourite: Boolean
     public val genres: String
+    public val releaseDate: UpcomingReleaseDateUiModel
 }

@@ -9,7 +9,15 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.number
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.CURRENT_MONTH
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.CURRENT_QUARTER
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.CURRENT_YEAR
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.FEW_DAYS
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.NEXT_MONTH
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.NEXT_QUARTER
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.NEXT_YEAR
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.TBD
 import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.datetime.Date.ExactDateTime
 import ru.pixnews.domain.model.datetime.Date.Unknown
@@ -29,19 +37,11 @@ import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.getObjectOrThrow
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_QUARTER
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_YEAR
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_MONTH
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_QUARTER
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_YEAR
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.TBD
 import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi
 import ru.pixnews.feature.calendar.model.CalendarListTitle
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
+import ru.pixnews.foundation.ui.design.card.toUiModel
 import ru.pixnews.library.kotlin.datetime.utils.hasDifferentDayFrom
 import java.util.EnumMap
 
@@ -132,55 +132,40 @@ internal object UpcomingGameListConverter {
             platforms = platforms.map(Ref<GamePlatform>::getObjectOrThrow).toImmutableSet(),
             favourite = false,
             genres = genres.map(GameGenre::name).joinToString(),
+            releaseDate = releaseDate.toUiModel(),
         )
     }
 
     @Suppress("CyclomaticComplexMethod")
     private fun Date.toUpcomingReleaseGroupId(
         category: UpcomingReleaseTimeCategory,
-    ): UpcomingReleaseGroupId {
+    ): UpcomingReleaseDateUiModel {
         return when (category) {
             FEW_DAYS, CURRENT_MONTH -> if (this is HasYearMonthDay) {
-                UpcomingReleaseGroupId.YearMonthDay(category, localDate)
+                UpcomingReleaseDateUiModel.YearMonthDay(localDate)
             } else {
-                toUpcomingReleaseDate(category)
+                toUiModel()
             }
 
             NEXT_MONTH -> if (this is HasYearMonth) {
-                UpcomingReleaseGroupId.YearMonth(category, year, month)
+                UpcomingReleaseDateUiModel.YearMonth(year, month)
             } else {
-                toUpcomingReleaseDate(category)
+                toUiModel()
             }
 
             CURRENT_QUARTER, NEXT_QUARTER -> if (this is HasYearQuarter) {
-                UpcomingReleaseGroupId.YearQuarter(category, year, quarter)
+                UpcomingReleaseDateUiModel.YearQuarter(year, quarter)
             } else {
-                toUpcomingReleaseDate(category)
+                toUiModel()
             }
 
             CURRENT_YEAR, NEXT_YEAR -> if (this is HasYear) {
-                UpcomingReleaseGroupId.Year(category, year)
+                UpcomingReleaseDateUiModel.Year(year)
             } else {
-                toUpcomingReleaseDate(category)
+                toUiModel()
             }
 
-            TBD -> UpcomingReleaseGroupId.Tbd(category)
+            TBD -> UpcomingReleaseDateUiModel.Tbd
         }
-    }
-
-    private fun Date.toUpcomingReleaseDate(
-        category: UpcomingReleaseTimeCategory,
-    ): UpcomingReleaseGroupId = when (this) {
-        is ExactDateTime -> UpcomingReleaseGroupId.YearMonthDay(
-            category,
-            date.year,
-            date.month.number,
-            date.dayOfMonth,
-        )
-        is YearMonthDay -> UpcomingReleaseGroupId.YearMonthDay(category, date)
-        is YearMonth -> UpcomingReleaseGroupId.YearMonth(category, date.year, date.monthNumber)
-        is YearQuarter -> UpcomingReleaseGroupId.YearQuarter(category, year, quarter)
-        is Year -> UpcomingReleaseGroupId.Year(category, year)
-        is Unknown -> UpcomingReleaseGroupId.Tbd(category)
     }
 }

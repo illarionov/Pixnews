@@ -15,6 +15,8 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.MainActivity
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.CURRENT_QUARTER
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.beyondGoodEvil2
@@ -22,17 +24,13 @@ import ru.pixnews.domain.model.game.game.gta6
 import ru.pixnews.domain.model.game.game.hytale
 import ru.pixnews.domain.model.game.game.sims5
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_QUARTER
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_MONTH
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
+import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
 import ru.pixnews.library.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
 import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions
 import java.time.Month.AUGUST
@@ -112,7 +110,7 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
             ),
         )
         val gameId = GameFixtures.hytale.id
-        val dateSubheader = UpcomingReleaseGroupId.YearMonthDay(FEW_DAYS, dateTomorrow.date)
+        val dateSubheader = UpcomingReleaseDateUiModel.YearMonthDay(dateTomorrow.date)
 
         with(gameFeed) {
             scrollToGameCard(gameId)
@@ -165,8 +163,8 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
     @Test
     @Ignore("Adjacent date headers do not exist without games between them")
     fun calendarScreen_adjacent_dateSubheader_dateSubheader_shouldHaveCorrectPadding() {
-        val dateSubheader1Title = UpcomingReleaseGroupId.YearMonth(CURRENT_MONTH, 2024, 2)
-        val dateSubheader2Title = UpcomingReleaseGroupId.YearMonth(NEXT_MONTH, 2024, 3)
+        val dateSubheader1Title = UpcomingReleaseDateUiModel.YearMonth(2024, 2)
+        val dateSubheader2Title = UpcomingReleaseDateUiModel.YearMonth(2024, 3)
 
         with(gameFeed) {
             scrollToDateSubheader(dateSubheader1Title)

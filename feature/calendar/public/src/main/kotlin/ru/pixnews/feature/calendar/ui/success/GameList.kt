@@ -126,7 +126,7 @@ internal fun GameList(
                         .fillMaxWidth()
                         .padding(top = 8.dp)
                         .semantics {
-                            upcomingReleaseGroup = currentItem.groupId
+                            upcomingReleaseGroup = currentItem.uniqueId.groupId
                             testTag = CONTENT_GAME_SUBHEADER
                         },
                 )

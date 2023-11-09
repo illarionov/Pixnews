@@ -40,8 +40,6 @@ import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
 import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi
 import ru.pixnews.feature.calendar.model.CalendarListTitle
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
-import ru.pixnews.foundation.ui.design.card.toUiModel
 import ru.pixnews.library.kotlin.datetime.utils.hasDifferentDayFrom
 import java.util.EnumMap
 
@@ -88,7 +86,7 @@ internal object UpcomingGameListConverter {
                     val groupDate = (gameReleaseDate as HasYearMonthDay).localDate
                     if (groupDate.hasDifferentDayFrom(currentGroupDate)) {
                         currentGroupDate = groupDate
-                        yield(CalendarListTitle(gameReleaseDate.toUpcomingReleaseGroupId(category)))
+                        yield(CalendarListTitle(gameReleaseDate.roundToCategory(category)))
                     }
                     yield(game.toCalendarListItem())
                 }
@@ -118,7 +116,7 @@ internal object UpcomingGameListConverter {
             return emptySequence()
         }
 
-        val headerGroupId = releases[0].releaseDate.toUpcomingReleaseGroupId(category)
+        val headerGroupId = releases[0].releaseDate.roundToCategory(category)
         return sequenceOf(CalendarListTitle(headerGroupId)) +
                 releases.asSequence().map { it.toCalendarListItem() }
     }
@@ -132,40 +130,40 @@ internal object UpcomingGameListConverter {
             platforms = platforms.map(Ref<GamePlatform>::getObjectOrThrow).toImmutableSet(),
             favourite = false,
             genres = genres.map(GameGenre::name).joinToString(),
-            releaseDate = releaseDate.toUiModel(),
+            releaseDate = releaseDate,
         )
     }
 
     @Suppress("CyclomaticComplexMethod")
-    private fun Date.toUpcomingReleaseGroupId(
+    private fun Date.roundToCategory(
         category: UpcomingReleaseTimeCategory,
-    ): UpcomingReleaseDateUiModel {
+    ): Date {
         return when (category) {
-            FEW_DAYS, CURRENT_MONTH -> if (this is HasYearMonthDay) {
-                UpcomingReleaseDateUiModel.YearMonthDay(localDate)
+            FEW_DAYS, CURRENT_MONTH -> if (this is HasYearMonthDay && this !is YearMonthDay) {
+                YearMonthDay(localDate)
             } else {
-                toUiModel()
+                this
             }
 
-            NEXT_MONTH -> if (this is HasYearMonth) {
-                UpcomingReleaseDateUiModel.YearMonth(year, month)
+            NEXT_MONTH -> if (this is HasYearMonth && this !is YearMonth) {
+                YearMonth(year, month)
             } else {
-                toUiModel()
+                this
             }
 
-            CURRENT_QUARTER, NEXT_QUARTER -> if (this is HasYearQuarter) {
-                UpcomingReleaseDateUiModel.YearQuarter(year, quarter)
+            CURRENT_QUARTER, NEXT_QUARTER -> if (this is HasYearQuarter && this !is YearQuarter) {
+                YearQuarter(year, quarter)
             } else {
-                toUiModel()
+                this
             }
 
-            CURRENT_YEAR, NEXT_YEAR -> if (this is HasYear) {
-                UpcomingReleaseDateUiModel.Year(year)
+            CURRENT_YEAR, NEXT_YEAR -> if (this is HasYear && this !is Year) {
+                Year(year)
             } else {
-                toUiModel()
+                this
             }
 
-            TBD -> UpcomingReleaseDateUiModel.Tbd
+            TBD -> this
         }
     }
 }

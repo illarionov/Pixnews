@@ -7,8 +7,7 @@ package ru.pixnews.feature.calendar.test.constants
 
 import androidx.compose.ui.semantics.SemanticsPropertyKey
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
 
-public val UpcomingReleaseGroupIdKey: SemanticsPropertyKey<UpcomingReleaseDateUiModel> =
+public val UpcomingReleaseGroupIdKey: SemanticsPropertyKey<UpcomingReleaseGroupId> =
     SemanticsPropertyKey("UpcomingReleaseGroupKey")
-public var SemanticsPropertyReceiver.upcomingReleaseGroup: UpcomingReleaseDateUiModel by UpcomingReleaseGroupIdKey
+public var SemanticsPropertyReceiver.upcomingReleaseGroup: UpcomingReleaseGroupId by UpcomingReleaseGroupIdKey

@@ -10,12 +10,16 @@ import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentSetOf
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.Month
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.game.game.halfLife3
 import ru.pixnews.domain.model.id.GameId
+import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.url.DefaultImageUrl
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.feature.calendar.converter.ListOrderTestExpectedItem.Companion.game
@@ -49,7 +53,7 @@ import ru.pixnews.feature.calendar.fixture.UpcomingReleasesFixtures.ReleasesTbd
 import ru.pixnews.feature.calendar.fixture.UpcomingReleasesFixtures.ReleasesThisYear
 import ru.pixnews.feature.calendar.model.CALENDAR_LIST_ITEM_GAME_FIELDS
 import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
+import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal class UpcomingGameListConverterTest {
     private val converter = UpcomingGameListConverter
@@ -89,10 +93,10 @@ internal class UpcomingGameListConverterTest {
             titleYearMonth(NextMonth.approxDate)
             game(ReleasesInNextMonth.tbdNextMonth1)
             // This quarter
-            titleQuarter(CurrentQuarter.exactDate.date)
+            titleQuarter(CurrentQuarter.approxDateQuarter)
             game(ReleasesInThisQuarter.thisQuarterExactDate)
             // Next quarter
-            titleQuarter(NextQuarter.exactDate.date)
+            titleQuarter(NextQuarter.approxDate3Quarter)
             game(ReleasesInNextQuarter.nextQuarterExactDate)
             // This year
             titleYear(CurrentYear.approxDateYear.year)
@@ -125,7 +129,14 @@ internal class UpcomingGameListConverterTest {
                 platforms = persistentSetOf(GamePlatform.Windows),
                 favourite = false,
                 genres = "Shooter",
-                releaseDate = UpcomingReleaseDateUiModel.Tbd,
+                releaseDate = Date.Unknown(
+                    expected = LocalDate(
+                        year = 2024,
+                        month = Month.JANUARY,
+                        dayOfMonth = 1,
+                    ) to null,
+                    description = Localized("", LanguageCode.ENGLISH),
+                ),
             )
         }
     }
@@ -224,7 +235,7 @@ internal class UpcomingGameListConverterTest {
             val result = convert(thisQuarterReleases)
 
             result shouldContainExactly buildList {
-                titleQuarter(CurrentQuarter.exactDate.date)
+                titleQuarter(CurrentQuarter.approxDateQuarter)
                 game(ReleasesInThisQuarter.thisQuarterExactDate)
                 game(ReleasesInThisQuarter.tbdThisQuarterAug)
                 game(ReleasesInThisQuarter.tbdThisQuarter)
@@ -245,7 +256,7 @@ internal class UpcomingGameListConverterTest {
             val result = convert(nextQuarterReleases)
 
             result shouldContainExactly buildList {
-                titleQuarter(NextQuarter.exactDate.date)
+                titleQuarter(NextQuarter.approxDate3Quarter)
                 game(ReleasesInNextQuarter.tbdNextQuarter)
                 game(ReleasesInNextQuarter.tbdNextQuarterOct)
                 game(ReleasesInNextQuarter.nextQuarterExactDate)

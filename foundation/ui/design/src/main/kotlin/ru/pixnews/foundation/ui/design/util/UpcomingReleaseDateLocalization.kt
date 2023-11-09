@@ -13,16 +13,14 @@ import arrow.core.andThen
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toJavaLocalDate
+import ru.pixnews.domain.model.datetime.Date
+import ru.pixnews.domain.model.datetime.Date.ExactDateTime
+import ru.pixnews.domain.model.datetime.Date.Unknown
+import ru.pixnews.domain.model.datetime.localDate
 import ru.pixnews.foundation.ui.design.R
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.Tbd
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.Year
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.YearMonth
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.YearMonthDay
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel.YearQuarter
+import ru.pixnews.foundation.ui.design.R.string
 import ru.pixnews.library.kotlin.utils.capitalize
 import java.time.format.DateTimeFormatter
-import java.util.Date
 import java.util.Locale
 import kotlin.LazyThreadSafetyMode.NONE
 
@@ -72,25 +70,20 @@ public class UpcomingReleaseDateLocalization(
 
     @Suppress("MagicNumber")
     public fun localize(
-        groupId: UpcomingReleaseDateUiModel,
+        groupId: Date,
     ): String = when (groupId) {
-        is YearMonthDay -> monthDayWeekDayFormatter(
-            LocalDate(groupId.year, groupId.monthNumber, groupId.dayOfMonth),
+        is ExactDateTime -> monthDayWeekDayFormatter(groupId.localDate)
+        is Date.YearMonthDay -> monthDayWeekDayFormatter(groupId.localDate)
+        is Date.YearMonth -> yearMonthFormatter(
+            LocalDate(groupId.year, groupId.month, 1),
         )
-
-        is YearMonth -> yearMonthFormatter(
-            LocalDate(groupId.year, groupId.monthNumber, 1),
-        )
-
-        is YearQuarter -> quarterFormatter(
-            LocalDate(groupId.year, groupId.quarter * 3 - 2, 1),
-        )
-
-        is Year -> yearFormatter(
+        is Date.Year -> yearFormatter(
             LocalDate(groupId.year, 1, 1),
         )
-
-        is Tbd -> resources.getString(R.string.upcoming_release_date_tbd)
+        is Date.YearQuarter -> quarterFormatter(
+            LocalDate(groupId.year, groupId.quarter * 3 - 2, 1),
+        )
+        is Unknown -> resources.getString(string.upcoming_release_date_tbd)
     }
 
     private fun cleanupYear(year: String): String = year
@@ -106,7 +99,7 @@ public class UpcomingReleaseDateLocalization(
         }
 
         override fun invoke(date: LocalDate): String = formatter.format(
-            Date(date.atStartOfDayIn(kotlinx.datetime.TimeZone.UTC).toEpochMilliseconds()),
+            java.util.Date(date.atStartOfDayIn(kotlinx.datetime.TimeZone.UTC).toEpochMilliseconds()),
         ).capitalize(locale)
     }
 

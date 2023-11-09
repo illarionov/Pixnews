@@ -19,6 +19,7 @@ import kotlinx.collections.immutable.toImmutableSet
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenre
 import ru.pixnews.domain.model.game.GamePlatform
@@ -50,7 +51,7 @@ class PixnewsGameCardTest {
             .toImmutableSet()
         override val favourite = true
         override val genres = GameFixtures.slimeRancher2.genres.map(GameGenre::name).joinToString()
-        override val releaseDate: UpcomingReleaseDateUiModel = GameFixtures.slimeRancher2.releaseDate.toUiModel()
+        override val releaseDate: Date = GameFixtures.slimeRancher2.releaseDate
     }
 
     @Before

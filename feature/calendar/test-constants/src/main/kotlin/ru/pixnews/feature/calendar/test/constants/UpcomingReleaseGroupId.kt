@@ -5,7 +5,7 @@
 
 @file:Suppress("WRONG_ORDER_IN_CLASS_LIKE_STRUCTURES")
 
-package ru.pixnews.foundation.ui.design.card
+package ru.pixnews.feature.calendar.test.constants
 
 import android.os.Parcelable
 import kotlinx.datetime.LocalDate
@@ -21,12 +21,12 @@ import ru.pixnews.domain.model.datetime.Date.YearMonthDay
 import ru.pixnews.domain.model.datetime.Date.YearQuarter
 
 @Parcelize
-public sealed class UpcomingReleaseDateUiModel : Parcelable {
+public sealed class UpcomingReleaseGroupId : Parcelable {
     public data class YearMonthDay(
         val year: Int,
         val monthNumber: Int,
         val dayOfMonth: Int,
-    ) : UpcomingReleaseDateUiModel() {
+    ) : UpcomingReleaseGroupId() {
         public constructor(
             date: LocalDate,
         ) : this(date.year, date.monthNumber, date.dayOfMonth)
@@ -35,7 +35,7 @@ public sealed class UpcomingReleaseDateUiModel : Parcelable {
     public data class YearMonth(
         val year: Int,
         val monthNumber: Int,
-    ) : UpcomingReleaseDateUiModel() {
+    ) : UpcomingReleaseGroupId() {
         public constructor(
             year: Int,
             month: Month,
@@ -45,20 +45,20 @@ public sealed class UpcomingReleaseDateUiModel : Parcelable {
     public data class YearQuarter(
         val year: Int,
         val quarter: Int,
-    ) : UpcomingReleaseDateUiModel()
+    ) : UpcomingReleaseGroupId()
 
     public data class Year(
         val year: Int,
-    ) : UpcomingReleaseDateUiModel()
+    ) : UpcomingReleaseGroupId()
 
-    public data object Tbd : UpcomingReleaseDateUiModel()
+    public data object Tbd : UpcomingReleaseGroupId()
 }
 
-public fun Date.toUiModel(): UpcomingReleaseDateUiModel = when (this) {
-    is ExactDateTime -> UpcomingReleaseDateUiModel.YearMonthDay(date.year, date.month.number, date.dayOfMonth)
-    is YearMonthDay -> UpcomingReleaseDateUiModel.YearMonthDay(date)
-    is YearMonth -> UpcomingReleaseDateUiModel.YearMonth(date.year, date.monthNumber)
-    is YearQuarter -> UpcomingReleaseDateUiModel.YearQuarter(year, quarter)
-    is Year -> UpcomingReleaseDateUiModel.Year(year)
-    is Unknown -> UpcomingReleaseDateUiModel.Tbd
+public fun Date.toGroupId(): UpcomingReleaseGroupId = when (this) {
+    is ExactDateTime -> UpcomingReleaseGroupId.YearMonthDay(date.year, date.month.number, date.dayOfMonth)
+    is YearMonthDay -> UpcomingReleaseGroupId.YearMonthDay(date)
+    is YearMonth -> UpcomingReleaseGroupId.YearMonth(date.year, date.monthNumber)
+    is YearQuarter -> UpcomingReleaseGroupId.YearQuarter(year, quarter)
+    is Year -> UpcomingReleaseGroupId.Year(year)
+    is Unknown -> UpcomingReleaseGroupId.Tbd
 }

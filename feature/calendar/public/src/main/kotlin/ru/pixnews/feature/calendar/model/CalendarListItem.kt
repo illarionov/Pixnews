@@ -9,23 +9,25 @@ import android.os.Parcelable
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.persistentSetOf
 import kotlinx.parcelize.Parcelize
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.url.ImageUrl
 import ru.pixnews.feature.calendar.model.CalendarListItemContentType.GAME
 import ru.pixnews.feature.calendar.model.CalendarListItemContentType.TITLE
+import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
+import ru.pixnews.feature.calendar.test.constants.toGroupId
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCardUiModel
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
 
 internal sealed interface CalendarListItem {
     val uniqueId: CalendarListItemId
 }
 
 internal data class CalendarListTitle(
-    val groupId: UpcomingReleaseDateUiModel,
+    val groupId: Date,
 ) : CalendarListItem {
-    override val uniqueId: CalendarListItemId = CalendarListItemId.Title(groupId)
+    override val uniqueId: CalendarListItemId.Title = CalendarListItemId.Title(groupId)
 }
 
 internal data class CalendarListPixnewsGameUi(
@@ -36,7 +38,7 @@ internal data class CalendarListPixnewsGameUi(
     override val platforms: ImmutableSet<GamePlatform>,
     override val favourite: Boolean,
     override val genres: String,
-    override val releaseDate: UpcomingReleaseDateUiModel,
+    override val releaseDate: Date,
 ) : PixnewsGameCardUiModel, CalendarListItem {
     override val uniqueId = CalendarListItemId.GameId(gameId.toString())
 }
@@ -55,8 +57,10 @@ internal sealed class CalendarListItemId(
     ) : CalendarListItemId(GAME)
 
     internal data class Title(
-        val groupId: UpcomingReleaseDateUiModel,
-    ) : CalendarListItemId(TITLE)
+        val groupId: UpcomingReleaseGroupId,
+    ) : CalendarListItemId(TITLE) {
+        internal constructor(date: Date) : this(date.toGroupId())
+    }
 }
 
 internal val CALENDAR_LIST_ITEM_GAME_FIELDS = persistentSetOf(

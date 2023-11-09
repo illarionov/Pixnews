@@ -45,6 +45,7 @@ import coil.request.ImageRequest
 import coil.size.Scale.FILL
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.persistentSetOf
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.game.game.halfLife3
@@ -163,7 +164,7 @@ public fun PixnewsGameCard(
 private fun Headline(
     variant: PixnewsGameCardVariant,
     title: String,
-    releaseDate: UpcomingReleaseDateUiModel,
+    releaseDate: Date,
     genres: String,
     platforms: ImmutableSet<GamePlatform>,
     modifier: Modifier = Modifier,
@@ -222,7 +223,7 @@ private fun HeadlineGenresPlatforms(
 private fun HeadlineGenresReleaseDate(
     title: String,
     genres: String,
-    releaseDate: UpcomingReleaseDateUiModel,
+    releaseDate: Date,
     modifier: Modifier = Modifier,
 ) {
     val locale = defaultLocale()

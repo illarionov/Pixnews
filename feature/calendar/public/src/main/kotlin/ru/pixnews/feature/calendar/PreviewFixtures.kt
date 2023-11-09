@@ -16,6 +16,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform.PlayStation4
 import ru.pixnews.domain.model.game.GamePlatform.Windows
@@ -43,9 +44,10 @@ import ru.pixnews.feature.calendar.model.GameListFilterChipStyle.UNSELECTED
 import ru.pixnews.feature.calendar.model.GamesOnDay
 import ru.pixnews.feature.calendar.model.MajorReleaseCarouselItemUiModel
 import ru.pixnews.feature.calendar.model.toMajorReleaseCarouselItemUiModel
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
 import ru.pixnews.foundation.ui.imageloader.coil.tooling.OverrideResult
 import ru.pixnews.foundation.ui.imageloader.coil.tooling.withDebug
+import java.time.Month.FEBRUARY
+import java.time.Month.JANUARY
 import kotlin.time.Duration.Companion.seconds
 
 internal object PreviewFixtures {
@@ -109,7 +111,7 @@ internal object PreviewFixtures {
                     overrideResult = OverrideResult.Error(),
                 ),
             ),
-            CalendarListTitle(UpcomingReleaseDateUiModel.Tbd),
+            CalendarListTitle(CalendarDateGroup.tbd),
             Release.smalland,
             Release.project007,
         )
@@ -130,28 +132,13 @@ internal object PreviewFixtures {
             .toInstant(TimeZone.of("UTC+3"))
 
         // title = "1 January 2024"
-        val jan1st2024 = UpcomingReleaseDateUiModel.YearMonthDay(
-            date = LocalDate(2024, 1, 1),
-        )
-        val jan2st2024 = UpcomingReleaseDateUiModel.YearMonthDay(
-            date = LocalDate(2024, 1, 2),
-        )
-        val tbdJan2024 = UpcomingReleaseDateUiModel.YearMonth(
-            2024,
-            1,
-        )
-        val tbdFeb2024 = UpcomingReleaseDateUiModel.YearMonth(
-            2024,
-            2,
-        )
-        val tbdMar2024 = UpcomingReleaseDateUiModel.YearQuarter(
-            year = 2024,
-            quarter = 1,
-        )
-        val tbdEarly2024 = UpcomingReleaseDateUiModel.Year(
-            year = 2024,
-        )
-        val tbd = UpcomingReleaseDateUiModel.Tbd
+        val jan1st2024 = Date.YearMonthDay(2024, JANUARY, 1)
+        val jan2st2024 = Date.YearMonthDay(2024, JANUARY, 2)
+        val tbdJan2024 = Date.YearMonth(2024, JANUARY)
+        val tbdFeb2024 = Date.YearMonth(2024, FEBRUARY)
+        val tbdMar2024 = Date.YearQuarter(2024, 1)
+        val tbdEarly2024 = Date.Year(2024)
+        val tbd = Date.Unknown()
     }
 
     object FilterChip {

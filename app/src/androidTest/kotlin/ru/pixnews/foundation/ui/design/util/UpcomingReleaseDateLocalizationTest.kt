@@ -8,16 +8,19 @@ package ru.pixnews.foundation.ui.design.util
 import androidx.test.platform.app.InstrumentationRegistry
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import kotlinx.datetime.Month
 import org.junit.Test
 import org.junit.experimental.runners.Enclosed
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.foundation.ui.design.util.TestCase.Companion.testYear
 import ru.pixnews.foundation.ui.design.util.TestCase.Companion.testYearMonth
 import ru.pixnews.foundation.ui.design.util.TestCase.Companion.testYearMonthDay
 import ru.pixnews.foundation.ui.design.util.TestCase.Companion.testYearQuarter
 import ru.pixnews.library.instrumented.test.util.getLocalizedResources
+import java.time.Month.FEBRUARY
+import java.time.Month.JULY
 import java.util.Locale
 import java.util.Locale.ENGLISH
 
@@ -44,10 +47,10 @@ class UpcomingReleaseDateLocalizationTest {
             @JvmStatic
             @Parameterized.Parameters(name = "{0}")
             fun data(): Collection<TestCase> = listOf(
-                testYearMonthDay(2024, 2, 3, ENGLISH, "Saturday, February 3"),
-                testYearMonthDay(2024, 7, 23, RUSSIAN, "Вторник, 23 июля"),
-                testYearMonth(2024, 2, ENGLISH, "February 2024"),
-                testYearMonth(2024, 7, RUSSIAN, "Июль 2024"),
+                testYearMonthDay(2024, FEBRUARY, 3, ENGLISH, "Saturday, February 3"),
+                testYearMonthDay(2024, JULY, 23, RUSSIAN, "Вторник, 23 июля"),
+                testYearMonth(2024, FEBRUARY, ENGLISH, "February 2024"),
+                testYearMonth(2024, JULY, RUSSIAN, "Июль 2024"),
                 testYearQuarter(2024, 1, ENGLISH, "1st quarter 2024"),
                 testYearQuarter(2024, 2, RUSSIAN, "2-й квартал 2024"),
                 testYear(2024, ENGLISH, "2024 year"),
@@ -58,7 +61,7 @@ class UpcomingReleaseDateLocalizationTest {
 }
 
 class TestCase(
-    val groupId: UpcomingReleaseDateUiModel,
+    val groupId: Date,
     val locale: Locale,
     val expectedResult: String,
 ) {
@@ -69,23 +72,23 @@ class TestCase(
     companion object {
         fun testYearMonthDay(
             year: Int,
-            monthNumber: Int,
+            month: Month,
             dayOfMonth: Int,
             locale: Locale,
             expectedResult: String,
         ): TestCase = TestCase(
-            groupId = UpcomingReleaseDateUiModel.YearMonthDay(year, monthNumber, dayOfMonth),
+            groupId = Date.YearMonthDay(year, month, dayOfMonth),
             locale = locale,
             expectedResult = expectedResult,
         )
 
         fun testYearMonth(
             year: Int,
-            monthNumber: Int,
+            month: Month,
             locale: Locale,
             expectedResult: String,
         ): TestCase = TestCase(
-            groupId = UpcomingReleaseDateUiModel.YearMonth(year, monthNumber),
+            groupId = Date.YearMonth(year, month),
             locale = locale,
             expectedResult = expectedResult,
         )
@@ -96,7 +99,7 @@ class TestCase(
             locale: Locale,
             expectedResult: String,
         ): TestCase = TestCase(
-            groupId = UpcomingReleaseDateUiModel.YearQuarter(year, quarter),
+            groupId = Date.YearQuarter(year, quarter),
             locale = locale,
             expectedResult = expectedResult,
         )
@@ -106,7 +109,7 @@ class TestCase(
             locale: Locale,
             expectedResult: String,
         ): TestCase = TestCase(
-            groupId = UpcomingReleaseDateUiModel.Year(year),
+            groupId = Date.Year(year),
             locale = locale,
             expectedResult = expectedResult,
         )

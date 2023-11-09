@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.feature.calendar.model.CalendarListTitle
 import ru.pixnews.feature.calendar.ui.success.feedMaxWidth
 import ru.pixnews.feature.calendar.ui.success.gameListContentPaddings
@@ -39,7 +40,6 @@ import ru.pixnews.feature.calendar.ui.success.getLocalizedGroupTitle
 import ru.pixnews.feature.calendar.ui.success.majorReleasesMinHeight
 import ru.pixnews.feature.calendar.ui.success.safeContentHorizontalMin16dp
 import ru.pixnews.foundation.ui.design.R.string
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
 import ru.pixnews.foundation.ui.design.text.PixnewsGameListSubheader
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.foundation.ui.theme.md_theme_palette_primary95
@@ -48,15 +48,10 @@ import ru.pixnews.library.compose.utils.placeholder.PlaceholderHighlight
 import ru.pixnews.library.compose.utils.placeholder.placeholder
 import ru.pixnews.library.compose.utils.placeholder.shimmer
 import ru.pixnews.library.ui.tooling.PreviewPhones
+import java.time.Month.JANUARY
 
 private val majorReleasesCardWidth = 136.dp
-private val calendarListTitlePlaceholder = CalendarListTitle(
-    UpcomingReleaseDateUiModel.YearMonthDay(
-        year = 2020,
-        monthNumber = 1,
-        dayOfMonth = 1,
-    ),
-)
+private val calendarListTitlePlaceholder = CalendarListTitle(Date.YearMonthDay(2020, JANUARY, 1))
 
 @Composable
 internal fun InitialLoadingPlaceholder(

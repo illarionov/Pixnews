@@ -24,13 +24,14 @@ import ru.pixnews.domain.model.game.game.gta6
 import ru.pixnews.domain.model.game.game.hytale
 import ru.pixnews.domain.model.game.game.sims5
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
+import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
+import ru.pixnews.feature.calendar.test.constants.toGroupId
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
 import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
-import ru.pixnews.foundation.ui.design.card.UpcomingReleaseDateUiModel
 import ru.pixnews.library.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
 import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions
 import java.time.Month.AUGUST
@@ -48,7 +49,7 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
     private val gameFeed = GameFeedElement(composeTestRule)
 
     @get:Rule
-    val upcomingReleaseUseCaseAssumptions = UpcomingReleaseUseCaseAssumptions()
+    val upcomingReleaseUseCaseAssumptions = UpcomingReleaseUseCaseAssumptions(autoInitialize = false)
 
     @Inject
     lateinit var logger: Logger
@@ -58,6 +59,7 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
 
     @Test
     fun calendarScreen_majorReleases_shouldHaveCorrectTopPadding() {
+        upcomingReleaseUseCaseAssumptions.assumeUpcomingGamesResponseDefaultGame()
         assertVerticalPaddingBetweenAdjacentItems(
             subject = "padding between chips and major releases",
             expectedPadding = 16.dp,
@@ -68,6 +70,7 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
 
     @Test
     fun calendarScreen_majorReleases_to_card_shouldHaveCorrectTopPadding() {
+        upcomingReleaseUseCaseAssumptions.assumeUpcomingGamesResponseDefaultGame()
         assertVerticalPaddingBetweenAdjacentItems(
             subject = "padding between title and major game releases carousel",
             expectedPadding = 8.dp,
@@ -78,6 +81,7 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
 
     @Test
     fun calendarScreen_majorReleasesCard_to_calendarTitle_shouldHaveCorrectPadding() {
+        upcomingReleaseUseCaseAssumptions.assumeUpcomingGamesResponseDefaultGame()
         gameFeed.scrollToDateSubheader()
         assertVerticalPaddingBetweenAdjacentItems(
             subject = "padding between major releases card and first date subheader in feed",
@@ -89,6 +93,7 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
 
     @Test
     fun calendarScreen_adjacent_dateSubheader_gameCard_shouldHaveCorrectPadding() {
+        upcomingReleaseUseCaseAssumptions.assumeUpcomingGamesResponseDefaultGame()
         gameFeed.scrollToDateSubheader()
         assertVerticalPaddingBetweenAdjacentItems(
             subject = "padding between date subheader and game card",
@@ -110,7 +115,7 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
             ),
         )
         val gameId = GameFixtures.hytale.id
-        val dateSubheader = UpcomingReleaseDateUiModel.YearMonthDay(dateTomorrow.date)
+        val dateSubheader = Date.YearMonthDay(dateTomorrow.date).toGroupId()
 
         with(gameFeed) {
             scrollToGameCard(gameId)
@@ -163,8 +168,10 @@ class CalendarScreenFeedPaddingsTest : BaseInstrumentedTest() {
     @Test
     @Ignore("Adjacent date headers do not exist without games between them")
     fun calendarScreen_adjacent_dateSubheader_dateSubheader_shouldHaveCorrectPadding() {
-        val dateSubheader1Title = UpcomingReleaseDateUiModel.YearMonth(2024, 2)
-        val dateSubheader2Title = UpcomingReleaseDateUiModel.YearMonth(2024, 3)
+        val dateSubheader1Title = UpcomingReleaseGroupId.YearMonth(2024, 2)
+        val dateSubheader2Title = UpcomingReleaseGroupId.YearMonth(2024, 3)
+
+        upcomingReleaseUseCaseAssumptions.assumeUpcomingGamesResponseDefaultGame()
 
         with(gameFeed) {
             scrollToDateSubheader(dateSubheader1Title)

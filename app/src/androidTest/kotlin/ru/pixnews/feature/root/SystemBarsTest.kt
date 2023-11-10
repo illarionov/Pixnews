@@ -24,6 +24,7 @@ import ru.pixnews.library.instrumented.test.assertion.isTransparent
 import ru.pixnews.library.instrumented.test.rule.NightModeRule
 import ru.pixnews.library.instrumented.test.rule.NightModeRule.NightMode.DARK
 import ru.pixnews.library.instrumented.test.rule.NightModeRule.NightMode.LIGHT
+import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions
 
 @RunWith(Enclosed::class)
 class SystemBarsTest : BaseInstrumentedTest() {
@@ -36,6 +37,9 @@ class SystemBarsTest : BaseInstrumentedTest() {
 
         @get:Rule
         val nightModelRule = NightModeRule(uiMode)
+
+        @get:Rule
+        val upcomingReleaseUseCaseAssumptions = UpcomingReleaseUseCaseAssumptions()
         private lateinit var window: Window
 
         @Before
@@ -69,6 +73,9 @@ class SystemBarsTest : BaseInstrumentedTest() {
     class SystemBarsApi23Test {
         @get:Rule
         val composeTestRule = createAndroidComposeRule<MainActivity>()
+
+        @get:Rule
+        val upcomingReleaseUseCaseAssumptions = UpcomingReleaseUseCaseAssumptions()
         private lateinit var window: Window
 
         @Before

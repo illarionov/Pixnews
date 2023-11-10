@@ -8,13 +8,23 @@ package ru.pixnews.inject.data
 import androidx.paging.PagingData
 import com.squareup.anvil.annotations.ContributesBinding
 import com.squareup.anvil.annotations.optional.SingleIn
+import kotlinx.coroutines.CompletableJob
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
 import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
 import ru.pixnews.feature.calendar.domain.upcoming.DefaultObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import javax.inject.Inject
+
+typealias UpcomingReleasesUseCaseResponse = (requiredFields: Set<GameField>) -> Flow<PagingData<UpcomingRelease>>
+
+internal val NOT_INITIALIZED: UpcomingReleasesUseCaseResponse = { _ ->
+    error("MockObserveUpcomingReleasesByDateUseCase not initialized")
+}
 
 @ContributesBinding(
     boundType = ObserveUpcomingReleasesByDateUseCase::class,
@@ -25,21 +35,40 @@ import javax.inject.Inject
 class MockObserveUpcomingReleasesByDateUseCase @Inject constructor() : ObserveUpcomingReleasesByDateUseCase {
     @get:Synchronized
     @set:Synchronized
-    internal var createUpcomingReleasesObservableResponse: (
-        requiredFields: Set<GameField>,
-    ) -> Flow<PagingData<UpcomingRelease>> = NOT_INITIALIZED
+    private var createUpcomingReleasesObservableResponse: UpcomingReleasesUseCaseResponse = NOT_INITIALIZED
+
+    @get:Synchronized
+    @set:Synchronized
+    private var responseInitialized: CompletableJob = Job()
+
+    fun setInitializationComplete() {
+        responseInitialized.complete()
+    }
+
+    @Synchronized
+    fun reset(response: UpcomingReleasesUseCaseResponse = NOT_INITIALIZED) {
+        responseInitialized.complete()
+        createUpcomingReleasesObservableResponse = response
+        responseInitialized = Job()
+    }
+
+    @Synchronized
+    public fun setResponse(
+        response: UpcomingReleasesUseCaseResponse,
+        useCaseInitialized: Boolean = true,
+    ) {
+        createUpcomingReleasesObservableResponse = response
+        if (useCaseInitialized) {
+            setInitializationComplete()
+        }
+    }
 
     override fun createUpcomingReleasesObservable(
         requiredFields: Set<GameField>,
     ): Flow<PagingData<UpcomingRelease>> {
-        return createUpcomingReleasesObservableResponse(requiredFields)
-    }
-
-    companion object UpcomingReleasesDateFixtures {
-        internal val NOT_INITIALIZED: (
-            requiredFields: Set<GameField>,
-        ) -> Flow<PagingData<UpcomingRelease>> = { _ ->
-            error("MockObserveUpcomingReleasesByDateUseCase not initialized")
+        return flow {
+            responseInitialized.join()
+            emitAll(createUpcomingReleasesObservableResponse(requiredFields))
         }
     }
 }

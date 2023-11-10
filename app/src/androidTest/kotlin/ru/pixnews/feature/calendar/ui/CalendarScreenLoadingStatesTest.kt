@@ -37,7 +37,7 @@ class CalendarScreenLoadingStatesTest : BaseInstrumentedTest() {
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     @get:Rule
-    val upcomingReleaseUseCaseAssumptions = UpcomingReleaseUseCaseAssumptions()
+    val upcomingReleaseUseCaseAssumptions = UpcomingReleaseUseCaseAssumptions(autoInitialize = false)
     val header = CalendarHeaderElement(composeTestRule)
 
     @Inject

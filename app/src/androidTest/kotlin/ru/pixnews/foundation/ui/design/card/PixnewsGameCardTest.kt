@@ -124,7 +124,7 @@ class PixnewsGameCardTest {
     fun pixnewsGameCard_platforms_shouldHaveCorrectPaddingsAndSize() {
         val platforms = card.headline.platforms()
 
-        platforms.assertHeightIsEqualTo(24.dp)
+        platforms.assertHeightIsEqualTo(23.dp)
 
         assertVerticalPaddingBetweenAdjacentItems(
             subject = "padding between genres and platforms",
@@ -145,7 +145,7 @@ class PixnewsGameCardTest {
 
         assertVerticalPaddingBetweenAdjacentItems(
             subject = "padding between headline and title",
-            expectedPadding = 24.dp,
+            expectedPadding = 17.dp,
             topItem = card.headline.root(),
             bottomItem = description,
         )

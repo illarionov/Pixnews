@@ -6,6 +6,7 @@
 package ru.pixnews.foundation.ui.design.card
 
 import kotlinx.collections.immutable.toImmutableSet
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameGenre
 import ru.pixnews.domain.model.game.GamePlatform
@@ -23,6 +24,7 @@ public fun Game.toGameCardItem(favourite: Boolean = false): PixnewsGameCardUiMod
             .toImmutableSet()
         override val favourite = favourite
         override val genres = this@toGameCardItem.genres.map(GameGenre::name).joinToString()
+        override val releaseDate: Date = this@toGameCardItem.releaseDate
     }
 }
 

@@ -19,6 +19,7 @@ import kotlinx.collections.immutable.toImmutableSet
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GameGenre
 import ru.pixnews.domain.model.game.GamePlatform
@@ -50,6 +51,7 @@ class PixnewsGameCardTest {
             .toImmutableSet()
         override val favourite = true
         override val genres = GameFixtures.slimeRancher2.genres.map(GameGenre::name).joinToString()
+        override val releaseDate: Date = GameFixtures.slimeRancher2.releaseDate
     }
 
     @Before
@@ -122,7 +124,7 @@ class PixnewsGameCardTest {
     fun pixnewsGameCard_platforms_shouldHaveCorrectPaddingsAndSize() {
         val platforms = card.headline.platforms()
 
-        platforms.assertHeightIsEqualTo(24.dp)
+        platforms.assertHeightIsEqualTo(23.dp)
 
         assertVerticalPaddingBetweenAdjacentItems(
             subject = "padding between genres and platforms",
@@ -143,7 +145,7 @@ class PixnewsGameCardTest {
 
         assertVerticalPaddingBetweenAdjacentItems(
             subject = "padding between headline and title",
-            expectedPadding = 24.dp,
+            expectedPadding = 17.dp,
             topItem = card.headline.root(),
             bottomItem = description,
         )

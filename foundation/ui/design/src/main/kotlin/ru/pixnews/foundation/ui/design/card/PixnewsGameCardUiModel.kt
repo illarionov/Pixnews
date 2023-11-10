@@ -7,6 +7,7 @@ package ru.pixnews.foundation.ui.design.card
 
 import androidx.compose.runtime.Immutable
 import kotlinx.collections.immutable.ImmutableSet
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.url.ImageUrl
@@ -20,4 +21,5 @@ public interface PixnewsGameCardUiModel {
     public val platforms: ImmutableSet<GamePlatform>
     public val favourite: Boolean
     public val genres: String
+    public val releaseDate: Date
 }

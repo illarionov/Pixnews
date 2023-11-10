@@ -16,6 +16,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform.PlayStation4
 import ru.pixnews.domain.model.game.GamePlatform.Windows
@@ -34,11 +35,6 @@ import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.url.DefaultImageUrl
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.feature.calendar.converter.UpcomingGameListConverter.toCalendarListItem
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_QUARTER
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_YEAR
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_MONTH
 import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarListTitle
 import ru.pixnews.feature.calendar.model.CalendarScreenStateLoaded
@@ -48,9 +44,10 @@ import ru.pixnews.feature.calendar.model.GameListFilterChipStyle.UNSELECTED
 import ru.pixnews.feature.calendar.model.GamesOnDay
 import ru.pixnews.feature.calendar.model.MajorReleaseCarouselItemUiModel
 import ru.pixnews.feature.calendar.model.toMajorReleaseCarouselItemUiModel
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.foundation.ui.imageloader.coil.tooling.OverrideResult
 import ru.pixnews.foundation.ui.imageloader.coil.tooling.withDebug
+import java.time.Month.FEBRUARY
+import java.time.Month.JANUARY
 import kotlin.time.Duration.Companion.seconds
 
 internal object PreviewFixtures {
@@ -114,7 +111,7 @@ internal object PreviewFixtures {
                     overrideResult = OverrideResult.Error(),
                 ),
             ),
-            CalendarListTitle(UpcomingReleaseGroupId.Tbd()),
+            CalendarListTitle(CalendarDateGroup.tbd),
             Release.smalland,
             Release.project007,
         )
@@ -135,34 +132,13 @@ internal object PreviewFixtures {
             .toInstant(TimeZone.of("UTC+3"))
 
         // title = "1 January 2024"
-        val jan1st2024 = UpcomingReleaseGroupId.YearMonthDay(
-            category = FEW_DAYS,
-            date = LocalDate(2024, 1, 1),
-        )
-        val jan2st2024 = UpcomingReleaseGroupId.YearMonthDay(
-            category = FEW_DAYS,
-            date = LocalDate(2024, 1, 2),
-        )
-        val tbdJan2024 = UpcomingReleaseGroupId.YearMonth(
-            category = CURRENT_MONTH,
-            2024,
-            1,
-        )
-        val tbdFeb2024 = UpcomingReleaseGroupId.YearMonth(
-            category = NEXT_MONTH,
-            2024,
-            2,
-        )
-        val tbdMar2024 = UpcomingReleaseGroupId.YearQuarter(
-            category = CURRENT_QUARTER,
-            year = 2024,
-            quarter = 1,
-        )
-        val tbdEarly2024 = UpcomingReleaseGroupId.Year(
-            category = CURRENT_YEAR,
-            year = 2024,
-        )
-        val tbd = UpcomingReleaseGroupId.Tbd()
+        val jan1st2024 = Date.YearMonthDay(2024, JANUARY, 1)
+        val jan2st2024 = Date.YearMonthDay(2024, JANUARY, 2)
+        val tbdJan2024 = Date.YearMonth(2024, JANUARY)
+        val tbdFeb2024 = Date.YearMonth(2024, FEBRUARY)
+        val tbdMar2024 = Date.YearQuarter(2024, 1)
+        val tbdEarly2024 = Date.Year(2024)
+        val tbd = Date.Unknown()
     }
 
     object FilterChip {

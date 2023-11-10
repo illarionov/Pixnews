@@ -32,9 +32,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory
+import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.feature.calendar.model.CalendarListTitle
-import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.feature.calendar.ui.success.feedMaxWidth
 import ru.pixnews.feature.calendar.ui.success.gameListContentPaddings
 import ru.pixnews.feature.calendar.ui.success.getLocalizedGroupTitle
@@ -49,16 +48,10 @@ import ru.pixnews.library.compose.utils.placeholder.PlaceholderHighlight
 import ru.pixnews.library.compose.utils.placeholder.placeholder
 import ru.pixnews.library.compose.utils.placeholder.shimmer
 import ru.pixnews.library.ui.tooling.PreviewPhones
+import java.time.Month.JANUARY
 
 private val majorReleasesCardWidth = 136.dp
-private val calendarListTitlePlaceholder = CalendarListTitle(
-    UpcomingReleaseGroupId.YearMonthDay(
-        category = UpcomingReleaseTimeCategory.FEW_DAYS,
-        year = 2020,
-        monthNumber = 1,
-        dayOfMonth = 1,
-    ),
-)
+private val calendarListTitlePlaceholder = CalendarListTitle(Date.YearMonthDay(2020, JANUARY, 1))
 
 @Composable
 internal fun InitialLoadingPlaceholder(

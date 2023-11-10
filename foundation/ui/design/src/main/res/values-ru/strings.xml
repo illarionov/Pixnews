@@ -25,4 +25,8 @@
     <string name="switch_display_mode_to_list_content_description">Переключить на отображение списком</string>
     <string name="switch_display_mode_to_grid_content_description">Переключить на отображение сеткой</string>
     <string name="major_releases_title">Главные релизы</string>
+
+    <string name="upcoming_release_date_tbd">Дата ещё не определена</string>
+    <string name="upcoming_release_date_year_x">%1$s год</string>
+
 </resources>

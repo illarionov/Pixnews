@@ -16,7 +16,7 @@ dependencies {
     api(libs.kotlinx.datetime)
     api(libs.androidx.annotation)
     api(projects.library.internationalization)
-    implementation(projects.library.kotlinUtils)
+    api(projects.library.kotlinUtils) // temporary set to api for compose preview to work
     implementation(projects.library.kotlinDatetimeUtils)
 
     testImplementation(libs.junit.jupiter.params)

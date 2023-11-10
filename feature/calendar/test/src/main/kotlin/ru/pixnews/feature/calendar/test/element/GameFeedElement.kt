@@ -19,7 +19,6 @@ import androidx.compose.ui.test.performScrollToNode
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.slimeRancher2
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupIdKey
@@ -92,7 +91,6 @@ public class GameFeedElement(
 
     public companion object {
         public val firstUpcomingReleaseGroupId: UpcomingReleaseGroupId = UpcomingReleaseGroupId.YearMonthDay(
-            FEW_DAYS,
             2023,
             5,
             17,

@@ -6,6 +6,15 @@
 package ru.pixnews.feature.calendar.fixture
 
 import arrow.atomic.AtomicInt
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.CURRENT_MONTH
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.CURRENT_QUARTER
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.CURRENT_YEAR
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.FEW_DAYS
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.NEXT_MONTH
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.NEXT_QUARTER
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.NEXT_YEAR
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.TBD
 import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.datetime.Date.Unknown
 import ru.pixnews.domain.model.game.GameFixtures
@@ -13,15 +22,6 @@ import ru.pixnews.domain.model.game.game.halfLife3
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_MONTH
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_QUARTER
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.CURRENT_YEAR
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.FEW_DAYS
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_MONTH
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_QUARTER
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.NEXT_YEAR
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingReleaseTimeCategory.TBD
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentMonth
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentQuarter
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentYear

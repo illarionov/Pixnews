@@ -4,9 +4,6 @@
    Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 -->
 <resources>
-    <string name="calendar_screen_feed_subheader_to_be_determined">Дата ещё не определена</string>
-    <string name="calendar_screen_feed_subheader_year_x">%1$s год</string>
-
     <string name="title_error_can_not_load_release_calendar">Не удалось загрузить каледарь релизов</string>
     <string name="title_error_no_internet_connection">Нет доступа в Интернет</string>
 

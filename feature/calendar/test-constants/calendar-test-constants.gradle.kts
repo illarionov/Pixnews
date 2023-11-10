@@ -19,6 +19,7 @@ android {
 dependencies {
     api(libs.androidx.compose.ui)
     api(projects.feature.calendar.dataPublic)
+    api(projects.foundation.ui.design)
     api(libs.kotlinx.datetime)
     implementation(projects.library.kotlinDatetimeUtils)
 }

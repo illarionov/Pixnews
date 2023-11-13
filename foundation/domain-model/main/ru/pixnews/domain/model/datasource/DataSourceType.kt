@@ -5,10 +5,7 @@
 
 package ru.pixnews.domain.model.datasource
 
-public sealed class DataSourceType {
-    public object Rawg : DataSourceType()
-    public object Igdb : DataSourceType()
-    public data class Other(
-        val name: String,
-    ) : DataSourceType()
+public enum class DataSourceType {
+    IGDB,
+    RAWG,
 }

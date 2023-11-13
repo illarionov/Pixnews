@@ -12,7 +12,7 @@ import ru.pixnews.domain.model.util.RichText
 import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal val igdbDataSource: DataSource = DataSource(
-    source = DataSourceType.Igdb,
+    source = DataSourceType.IGDB,
     attributionText = Localized(
         RichText(
             """Information is provided by IGDB.com — Not an IGDB Official Product""".trimIndent(),

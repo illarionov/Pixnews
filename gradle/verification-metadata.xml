@@ -85,6 +85,8 @@
             <trusting group="androidx.lifecycle"/>
             <trusting group="androidx.navigation"/>
             <trusting group="androidx.paging"/>
+            <trusting group="androidx.room"/>
+            <trusting group="androidx.sqlite"/>
             <trusting group="androidx.tracing"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
          </trusted-key>
@@ -218,6 +220,11 @@
             <pgp value="47504B76CF89C15C0512D9AFE16AB52D79FD224F"/>
          </artifact>
       </component>
+      <component group="com.google.auto" name="auto-common" version="0.11">
+         <artifact name="auto-common-0.11.jar">
+            <pgp value="3288B8BE8512D6C0CA185268C51E6CBC7FF46F0B"/>
+         </artifact>
+      </component>
       <component group="com.google.code.findbugs" name="jsr305" version="2.0.2">
          <artifact name="jsr305-2.0.2.jar">
             <pgp value="A413F67D71BEEC23ADD0CE0ACB43338E060CF9FA"/>
@@ -298,6 +305,11 @@
             <pgp value="31BAE2E51D95E0F8AD9B7BCC40A3C4432BD7308C"/>
          </artifact>
       </component>
+      <component group="com.intellij" name="annotations" version="12.0">
+         <artifact name="annotations-12.0.jar">
+            <pgp value="FAABC3738B1F58DA2D776FA2EB380DC13C39F675"/>
+         </artifact>
+      </component>
       <component group="com.pinterest" name="ktlint" version="0.46.1">
          <artifact name="ktlint-0.46.1.jar">
             <pgp value="ADBC987D1A7B91DB6B0AAA81995EFBF4A3D20BEB"/>
@@ -331,6 +343,11 @@
       <component group="commons-cli" name="commons-cli" version="1.5.0">
          <artifact name="commons-cli-1.5.0.jar">
             <pgp value="B6E73D84EA4FCC47166087253FAAD2CD5ECBB314"/>
+         </artifact>
+      </component>
+      <component group="commons-codec" name="commons-codec" version="1.15">
+         <artifact name="commons-codec-1.15.jar">
+            <pgp value="BC87A3FD0A54480F0BADBEBD21939FF0CA2A6567"/>
          </artifact>
       </component>
       <component group="commons-io" name="commons-io" version="2.13.0">
@@ -571,6 +588,11 @@
       <component group="org.tukaani" name="xz" version="1.9">
          <artifact name="xz-1.9.jar">
             <pgp value="3690C240CE51B4670D30AD1C38EE757D69184620"/>
+         </artifact>
+      </component>
+      <component group="org.xerial" name="sqlite-jdbc" version="3.41.2.2">
+         <artifact name="sqlite-jdbc-3.41.2.2.jar">
+            <pgp value="C1CBA75EC9BD0BAF8061935459E05CE618187ED4"/>
          </artifact>
       </component>
       <component group="org.yaml" name="snakeyaml" version="1.33">

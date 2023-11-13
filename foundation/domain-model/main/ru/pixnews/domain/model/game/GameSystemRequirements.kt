@@ -17,7 +17,7 @@ public data class GameSystemRequirements(
 }
 
 public data class PlatformSystemRequirementsByType(
-    val minimum: PlatformSystemRequirements,
+    val minimum: PlatformSystemRequirements?,
     val recommended: PlatformSystemRequirements?,
 )
 

@@ -1,0 +1,16 @@
+/*
+ * Copyright (c) 2023, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ */
+syntax = "proto3";
+
+option java_package = "ru.pixnews.foundation.database.model.proto";
+option java_multiple_files = true;
+
+message VotesDistributionDb {
+    uint64 p1to2 = 1;
+    uint64 p3to4 = 2;
+    uint64 p5to6 = 3;
+    uint64 p7to8 = 4;
+    uint64 p9to10 = 5;
+}

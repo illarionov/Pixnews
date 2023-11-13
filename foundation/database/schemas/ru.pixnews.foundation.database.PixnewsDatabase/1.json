@@ -1,0 +1,2416 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "0f96119ff3ee19104e6062f5adaba7c7",
+    "entities": [
+      {
+        "tableName": "companyDescription",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `companyId` INTEGER NOT NULL, `language` TEXT NOT NULL, `text` TEXT NOT NULL COLLATE UNICODE, `dataSource_type` INTEGER NOT NULL, `dataSource_externalId` TEXT, `dataSource_updatedAt` INTEGER NOT NULL, `dataSource_metadata` BLOB, FOREIGN KEY(`companyId`) REFERENCES `company`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "companyId",
+            "columnName": "companyId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.type",
+            "columnName": "dataSource_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.externalId",
+            "columnName": "dataSource_externalId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dataSource.updatedAt",
+            "columnName": "dataSource_updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.metadata",
+            "columnName": "dataSource_metadata",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_companyDescription_companyId",
+            "unique": false,
+            "columnNames": [
+              "companyId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_companyDescription_companyId` ON `${TABLE_NAME}` (`companyId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "company",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "companyId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "company",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL COLLATE NOCASE, `status` TEXT NOT NULL, `countryCode` TEXT, `parentCompany` INTEGER, `foundingDate_type` INTEGER, `foundingDate_timestamp` INTEGER, `foundingDate_isToBeDetermined` INTEGER, `foundingDate_description` TEXT, `foundingDate_descriptionLanguageCode` TEXT, `foundingDate_expectedFrom` INTEGER, `foundingDate_expectedTo` INTEGER, `dataSource_type` INTEGER NOT NULL, `dataSource_externalId` TEXT, `dataSource_updatedAt` INTEGER NOT NULL, `dataSource_metadata` BLOB, FOREIGN KEY(`parentCompany`) REFERENCES `company`(`id`) ON UPDATE CASCADE ON DELETE SET NULL DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "countryCode",
+            "columnName": "countryCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "parentCompany",
+            "columnName": "parentCompany",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "foundingDate.type",
+            "columnName": "foundingDate_type",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "foundingDate.timestamp",
+            "columnName": "foundingDate_timestamp",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "foundingDate.isToBeDetermined",
+            "columnName": "foundingDate_isToBeDetermined",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "foundingDate.description",
+            "columnName": "foundingDate_description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "foundingDate.descriptionLanguageCode",
+            "columnName": "foundingDate_descriptionLanguageCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "foundingDate.expectedFrom",
+            "columnName": "foundingDate_expectedFrom",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "foundingDate.expectedTo",
+            "columnName": "foundingDate_expectedTo",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dataSource.type",
+            "columnName": "dataSource_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.externalId",
+            "columnName": "dataSource_externalId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dataSource.updatedAt",
+            "columnName": "dataSource_updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.metadata",
+            "columnName": "dataSource_metadata",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_company_parentCompany",
+            "unique": false,
+            "columnNames": [
+              "parentCompany"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_company_parentCompany` ON `${TABLE_NAME}` (`parentCompany`)"
+          },
+          {
+            "name": "index_company_dataSource_type_dataSource_externalId",
+            "unique": true,
+            "columnNames": [
+              "dataSource_type",
+              "dataSource_externalId"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_company_dataSource_type_dataSource_externalId` ON `${TABLE_NAME}` (`dataSource_type`, `dataSource_externalId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "company",
+            "onDelete": "SET NULL",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "parentCompany"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "companyExternalLink",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `companyId` INTEGER NOT NULL, `type` INTEGER NOT NULL, `url` TEXT NOT NULL, `language` TEXT, FOREIGN KEY(`companyId`) REFERENCES `company`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "companyId",
+            "columnName": "companyId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_companyExternalLink_companyId",
+            "unique": false,
+            "columnNames": [
+              "companyId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_companyExternalLink_companyId` ON `${TABLE_NAME}` (`companyId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "company",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "companyId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "companyScreenshot",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `companyId` INTEGER NOT NULL, `releasedAt` INTEGER NOT NULL, `url` TEXT NOT NULL, `width` INTEGER NOT NULL, `height` INTEGER NOT NULL, `prevailColor` INTEGER, `dataSource_type` INTEGER NOT NULL, `dataSource_externalId` TEXT, `dataSource_updatedAt` INTEGER NOT NULL, `dataSource_metadata` BLOB, FOREIGN KEY(`companyId`) REFERENCES `company`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "companyId",
+            "columnName": "companyId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.releasedAt",
+            "columnName": "releasedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.width",
+            "columnName": "width",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.height",
+            "columnName": "height",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.prevailColor",
+            "columnName": "prevailColor",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "screenshot.dataSource.type",
+            "columnName": "dataSource_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.dataSource.externalId",
+            "columnName": "dataSource_externalId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "screenshot.dataSource.updatedAt",
+            "columnName": "dataSource_updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.dataSource.metadata",
+            "columnName": "dataSource_metadata",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_companyScreenshot_companyId",
+            "unique": false,
+            "columnNames": [
+              "companyId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_companyScreenshot_companyId` ON `${TABLE_NAME}` (`companyId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "company",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "companyId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "externalGameId",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `dataSource_type` INTEGER NOT NULL, `dataSource_externalId` TEXT, `dataSource_updatedAt` INTEGER NOT NULL, `dataSource_metadata` BLOB, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.type",
+            "columnName": "dataSource_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.externalId",
+            "columnName": "dataSource_externalId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dataSource.updatedAt",
+            "columnName": "dataSource_updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.metadata",
+            "columnName": "dataSource_metadata",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_externalGameId_gameId",
+            "unique": false,
+            "columnNames": [
+              "gameId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_externalGameId_gameId` ON `${TABLE_NAME}` (`gameId`)"
+          },
+          {
+            "name": "index_externalGameId_dataSource_type_dataSource_externalId",
+            "unique": true,
+            "columnNames": [
+              "dataSource_type",
+              "dataSource_externalId"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_externalGameId_dataSource_type_dataSource_externalId` ON `${TABLE_NAME}` (`dataSource_type`, `dataSource_externalId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "favoriteGame",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`gameId` INTEGER NOT NULL, `isFavorite` INTEGER NOT NULL, PRIMARY KEY(`gameId`), FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE NO ACTION DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isFavorite",
+            "columnName": "isFavorite",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "gameId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "NO ACTION",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameCompany",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `companyId` INTEGER NOT NULL, `type` INTEGER NOT NULL, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED, FOREIGN KEY(`companyId`) REFERENCES `company`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "companyId",
+            "columnName": "companyId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameCompany_gameId_companyId_type",
+            "unique": true,
+            "columnNames": [
+              "gameId",
+              "companyId",
+              "type"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_gameCompany_gameId_companyId_type` ON `${TABLE_NAME}` (`gameId`, `companyId`, `type`)"
+          },
+          {
+            "name": "index_gameCompany_companyId",
+            "unique": false,
+            "columnNames": [
+              "companyId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameCompany_companyId` ON `${TABLE_NAME}` (`companyId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "company",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "companyId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "game",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `releaseStatus` INTEGER NOT NULL, `parentGameId` INTEGER, `releaseDate_type` INTEGER NOT NULL, `releaseDate_timestamp` INTEGER NOT NULL, `releaseDate_isToBeDetermined` INTEGER NOT NULL, `releaseDate_description` TEXT NOT NULL, `releaseDate_descriptionLanguageCode` TEXT, `releaseDate_expectedFrom` INTEGER, `releaseDate_expectedTo` INTEGER, `releaseCategory_type` INTEGER, `releaseCategory_parentGameId` INTEGER, `releaseCategory_description` TEXT, `ageRanking_esrbRating` INTEGER, `ageRanking_pegiRating` INTEGER, FOREIGN KEY(`parentGameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE SET NULL DEFERRABLE INITIALLY DEFERRED, FOREIGN KEY(`releaseCategory_parentGameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE SET NULL DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "releaseStatus",
+            "columnName": "releaseStatus",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parentGameId",
+            "columnName": "parentGameId",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "releaseDate.type",
+            "columnName": "releaseDate_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "releaseDate.timestamp",
+            "columnName": "releaseDate_timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "releaseDate.isToBeDetermined",
+            "columnName": "releaseDate_isToBeDetermined",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "releaseDate.description",
+            "columnName": "releaseDate_description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "releaseDate.descriptionLanguageCode",
+            "columnName": "releaseDate_descriptionLanguageCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "releaseDate.expectedFrom",
+            "columnName": "releaseDate_expectedFrom",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "releaseDate.expectedTo",
+            "columnName": "releaseDate_expectedTo",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gameReleaseCategory.type",
+            "columnName": "releaseCategory_type",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gameReleaseCategory.parentGameId",
+            "columnName": "releaseCategory_parentGameId",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gameReleaseCategory.description",
+            "columnName": "releaseCategory_description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ageRanking.esrbRating",
+            "columnName": "ageRanking_esrbRating",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ageRanking.pegiRating",
+            "columnName": "ageRanking_pegiRating",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_game_parentGameId",
+            "unique": false,
+            "columnNames": [
+              "parentGameId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_parentGameId` ON `${TABLE_NAME}` (`parentGameId`)"
+          },
+          {
+            "name": "index_game_releaseCategory_parentGameId",
+            "unique": false,
+            "columnNames": [
+              "releaseCategory_parentGameId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_releaseCategory_parentGameId` ON `${TABLE_NAME}` (`releaseCategory_parentGameId`)"
+          },
+          {
+            "name": "index_game_releaseDate_type_releaseDate_timestamp",
+            "unique": false,
+            "columnNames": [
+              "releaseDate_type",
+              "releaseDate_timestamp"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_releaseDate_type_releaseDate_timestamp` ON `${TABLE_NAME}` (`releaseDate_type`, `releaseDate_timestamp`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "SET NULL",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "parentGameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "game",
+            "onDelete": "SET NULL",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "releaseCategory_parentGameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameExternalLink",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `type` INTEGER NOT NULL, `url` TEXT NOT NULL, `language` TEXT, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "language",
+            "columnName": "language",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameExternalLink_gameId",
+            "unique": false,
+            "columnNames": [
+              "gameId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameExternalLink_gameId` ON `${TABLE_NAME}` (`gameId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameGameMode",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `gameModeId` INTEGER NOT NULL, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED, FOREIGN KEY(`gameModeId`) REFERENCES `gameMode`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameModeId",
+            "columnName": "gameModeId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameGameMode_gameId_gameModeId",
+            "unique": true,
+            "columnNames": [
+              "gameId",
+              "gameModeId"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_gameGameMode_gameId_gameModeId` ON `${TABLE_NAME}` (`gameId`, `gameModeId`)"
+          },
+          {
+            "name": "index_gameGameMode_gameModeId",
+            "unique": false,
+            "columnNames": [
+              "gameModeId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameGameMode_gameModeId` ON `${TABLE_NAME}` (`gameModeId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "gameMode",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameModeId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameGameSeries",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `gameSeriesId` INTEGER NOT NULL, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED, FOREIGN KEY(`gameSeriesId`) REFERENCES `gameGameSeries`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameSeriesId",
+            "columnName": "gameSeriesId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameGameSeries_gameId_gameSeriesId",
+            "unique": true,
+            "columnNames": [
+              "gameId",
+              "gameSeriesId"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_gameGameSeries_gameId_gameSeriesId` ON `${TABLE_NAME}` (`gameId`, `gameSeriesId`)"
+          },
+          {
+            "name": "index_gameGameSeries_gameSeriesId",
+            "unique": false,
+            "columnNames": [
+              "gameSeriesId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameGameSeries_gameSeriesId` ON `${TABLE_NAME}` (`gameSeriesId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "gameGameSeries",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameSeriesId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameGenre",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `genreId` INTEGER NOT NULL, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED, FOREIGN KEY(`genreId`) REFERENCES `company`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "genreId",
+            "columnName": "genreId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameGenre_gameId_genreId",
+            "unique": true,
+            "columnNames": [
+              "gameId",
+              "genreId"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_gameGenre_gameId_genreId` ON `${TABLE_NAME}` (`gameId`, `genreId`)"
+          },
+          {
+            "name": "index_gameGenre_genreId",
+            "unique": false,
+            "columnNames": [
+              "genreId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameGenre_genreId` ON `${TABLE_NAME}` (`genreId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "company",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "genreId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameLocalization",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `type` INTEGER NOT NULL, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "languageCode",
+            "columnName": "languageCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameLocalization_gameId",
+            "unique": false,
+            "columnNames": [
+              "gameId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameLocalization_gameId` ON `${TABLE_NAME}` (`gameId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameMode",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `slug` TEXT NOT NULL COLLATE NOCASE)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "slug",
+            "columnName": "slug",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameMode_slug",
+            "unique": true,
+            "columnNames": [
+              "slug"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_gameMode_slug` ON `${TABLE_NAME}` (`slug`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "gameModeName",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameModeId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL COLLATE UNICODE, FOREIGN KEY(`gameModeId`) REFERENCES `gameMode`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameModeId",
+            "columnName": "gameModeId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "languageCode",
+            "columnName": "languageCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameModeName_gameModeId_languageCode",
+            "unique": true,
+            "columnNames": [
+              "gameModeId",
+              "languageCode"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_gameModeName_gameModeId_languageCode` ON `${TABLE_NAME}` (`gameModeId`, `languageCode`)"
+          },
+          {
+            "name": "index_gameModeName_name",
+            "unique": false,
+            "columnNames": [
+              "name"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameModeName_name` ON `${TABLE_NAME}` (`name`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "gameMode",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameModeId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameName",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `isPrimary` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `dataSourceId` INTEGER NOT NULL, `text` TEXT NOT NULL, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isPrimary",
+            "columnName": "isPrimary",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "languageCode",
+            "columnName": "languageCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSourceId",
+            "columnName": "dataSourceId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameName_gameId",
+            "unique": false,
+            "columnNames": [
+              "gameId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameName_gameId` ON `${TABLE_NAME}` (`gameId`)"
+          },
+          {
+            "name": "index_gameName_dataSourceId",
+            "unique": false,
+            "columnNames": [
+              "dataSourceId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameName_dataSourceId` ON `${TABLE_NAME}` (`dataSourceId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gamePlatform",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `platformId` INTEGER NOT NULL, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED, FOREIGN KEY(`platformId`) REFERENCES `platform`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "platformId",
+            "columnName": "platformId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gamePlatform_gameId_platformId",
+            "unique": true,
+            "columnNames": [
+              "gameId",
+              "platformId"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_gamePlatform_gameId_platformId` ON `${TABLE_NAME}` (`gameId`, `platformId`)"
+          },
+          {
+            "name": "index_gamePlatform_platformId",
+            "unique": false,
+            "columnNames": [
+              "platformId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gamePlatform_platformId` ON `${TABLE_NAME}` (`platformId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "platform",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "platformId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gamePlayerPerspective",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `playerPerspectiveId` INTEGER NOT NULL, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED, FOREIGN KEY(`playerPerspectiveId`) REFERENCES `playerPerspective`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "playerPerspectiveId",
+            "columnName": "playerPerspectiveId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gamePlayerPerspective_gameId_playerPerspectiveId",
+            "unique": true,
+            "columnNames": [
+              "gameId",
+              "playerPerspectiveId"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_gamePlayerPerspective_gameId_playerPerspectiveId` ON `${TABLE_NAME}` (`gameId`, `playerPerspectiveId`)"
+          },
+          {
+            "name": "index_gamePlayerPerspective_playerPerspectiveId",
+            "unique": false,
+            "columnNames": [
+              "playerPerspectiveId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gamePlayerPerspective_playerPerspectiveId` ON `${TABLE_NAME}` (`playerPerspectiveId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "playerPerspective",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "playerPerspectiveId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameRating",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `numberOfVotes` INTEGER NOT NULL, `averageRating` REAL NOT NULL, `votesDistribution` BLOB, `type` INTEGER NOT NULL, `externalId` TEXT, `updatedAt` INTEGER NOT NULL, `metadata` BLOB, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numberOfVotes",
+            "columnName": "numberOfVotes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "averageRating",
+            "columnName": "averageRating",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "votesDistribution",
+            "columnName": "votesDistribution",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dataSource.type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.externalId",
+            "columnName": "externalId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dataSource.updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.metadata",
+            "columnName": "metadata",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameRating_gameId",
+            "unique": false,
+            "columnNames": [
+              "gameId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameRating_gameId` ON `${TABLE_NAME}` (`gameId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameScreenshot",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `releasedAt` INTEGER NOT NULL, `url` TEXT NOT NULL, `width` INTEGER NOT NULL, `height` INTEGER NOT NULL, `prevailColor` INTEGER, `dataSource_type` INTEGER NOT NULL, `dataSource_externalId` TEXT, `dataSource_updatedAt` INTEGER NOT NULL, `dataSource_metadata` BLOB, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.releasedAt",
+            "columnName": "releasedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.width",
+            "columnName": "width",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.height",
+            "columnName": "height",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.prevailColor",
+            "columnName": "prevailColor",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "screenshot.dataSource.type",
+            "columnName": "dataSource_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.dataSource.externalId",
+            "columnName": "dataSource_externalId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "screenshot.dataSource.updatedAt",
+            "columnName": "dataSource_updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshot.dataSource.metadata",
+            "columnName": "dataSource_metadata",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameScreenshot_gameId",
+            "unique": false,
+            "columnNames": [
+              "gameId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameScreenshot_gameId` ON `${TABLE_NAME}` (`gameId`)"
+          },
+          {
+            "name": "index_gameScreenshot_dataSource_type_dataSource_externalId",
+            "unique": true,
+            "columnNames": [
+              "dataSource_type",
+              "dataSource_externalId"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_gameScreenshot_dataSource_type_dataSource_externalId` ON `${TABLE_NAME}` (`dataSource_type`, `dataSource_externalId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameSeries",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `totalGamesCount` INTEGER NOT NULL, `type` INTEGER NOT NULL, `externalId` TEXT, `updatedAt` INTEGER NOT NULL, `metadata` BLOB)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalGamesCount",
+            "columnName": "totalGamesCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.externalId",
+            "columnName": "externalId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dataSource.updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.metadata",
+            "columnName": "metadata",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "gameSeriesName",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameSeriesId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL COLLATE UNICODE, FOREIGN KEY(`gameSeriesId`) REFERENCES `gameSeries`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameSeriesId",
+            "columnName": "gameSeriesId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "languageCode",
+            "columnName": "languageCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameSeriesName_gameSeriesId_languageCode",
+            "unique": true,
+            "columnNames": [
+              "gameSeriesId",
+              "languageCode"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_gameSeriesName_gameSeriesId_languageCode` ON `${TABLE_NAME}` (`gameSeriesId`, `languageCode`)"
+          },
+          {
+            "name": "index_gameSeriesName_name",
+            "unique": false,
+            "columnNames": [
+              "name"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameSeriesName_name` ON `${TABLE_NAME}` (`name`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "gameSeries",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameSeriesId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameSystemRequirements",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `gamePlatformId` INTEGER NOT NULL, `type` TEXT NOT NULL, `os` TEXT NOT NULL, `cpu` TEXT NOT NULL, `ram` TEXT NOT NULL, `video` TEXT NOT NULL, `disk` TEXT NOT NULL, `other` TEXT NOT NULL, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED, FOREIGN KEY(`gamePlatformId`) REFERENCES `platform`(`id`) ON UPDATE CASCADE ON DELETE NO ACTION DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gamePlatformId",
+            "columnName": "gamePlatformId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "os",
+            "columnName": "os",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cpu",
+            "columnName": "cpu",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ram",
+            "columnName": "ram",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "video",
+            "columnName": "video",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "disk",
+            "columnName": "disk",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "other",
+            "columnName": "other",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameSystemRequirements_gameId_gamePlatformId_type",
+            "unique": true,
+            "columnNames": [
+              "gameId",
+              "gamePlatformId",
+              "type"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_gameSystemRequirements_gameId_gamePlatformId_type` ON `${TABLE_NAME}` (`gameId`, `gamePlatformId`, `type`)"
+          },
+          {
+            "name": "index_gameSystemRequirements_gamePlatformId",
+            "unique": false,
+            "columnNames": [
+              "gamePlatformId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameSystemRequirements_gamePlatformId` ON `${TABLE_NAME}` (`gamePlatformId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "platform",
+            "onDelete": "NO ACTION",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gamePlatformId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameTag",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `tag` TEXT NOT NULL COLLATE NOCASE, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tag",
+            "columnName": "tag",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameTag_gameId",
+            "unique": false,
+            "columnNames": [
+              "gameId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameTag_gameId` ON `${TABLE_NAME}` (`gameId`)"
+          },
+          {
+            "name": "index_gameTag_tag",
+            "unique": false,
+            "columnNames": [
+              "tag"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameTag_tag` ON `${TABLE_NAME}` (`tag`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameText",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER NOT NULL, `type` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `text` TEXT NOT NULL, `dataSource_type` INTEGER NOT NULL, `dataSource_externalId` TEXT, `dataSource_updatedAt` INTEGER NOT NULL, `dataSource_metadata` BLOB, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "languageCode",
+            "columnName": "languageCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.type",
+            "columnName": "dataSource_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.externalId",
+            "columnName": "dataSource_externalId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dataSource.updatedAt",
+            "columnName": "dataSource_updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataSource.metadata",
+            "columnName": "dataSource_metadata",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameText_gameId_type",
+            "unique": false,
+            "columnNames": [
+              "gameId",
+              "type"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameText_gameId_type` ON `${TABLE_NAME}` (`gameId`, `type`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "gameVideo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameId` INTEGER, `releasedAt` INTEGER, `url` TEXT NOT NULL, FOREIGN KEY(`gameId`) REFERENCES `game`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "releasedAt",
+            "columnName": "releasedAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_gameVideo_gameId",
+            "unique": false,
+            "columnNames": [
+              "gameId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_gameVideo_gameId` ON `${TABLE_NAME}` (`gameId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gameId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "genre",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `slug` TEXT NOT NULL COLLATE NOCASE)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "slug",
+            "columnName": "slug",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_genre_slug",
+            "unique": true,
+            "columnNames": [
+              "slug"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_genre_slug` ON `${TABLE_NAME}` (`slug`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "genreName",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `genreId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL COLLATE UNICODE, FOREIGN KEY(`genreId`) REFERENCES `genre`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "genreId",
+            "columnName": "genreId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "languageCode",
+            "columnName": "languageCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_genreName_genreId",
+            "unique": false,
+            "columnNames": [
+              "genreId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_genreName_genreId` ON `${TABLE_NAME}` (`genreId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "genre",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "genreId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "platform",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `slug` TEXT NOT NULL COLLATE NOCASE)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "slug",
+            "columnName": "slug",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_platform_slug",
+            "unique": true,
+            "columnNames": [
+              "slug"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_platform_slug` ON `${TABLE_NAME}` (`slug`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "platformName",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gamePlatformId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL COLLATE UNICODE, FOREIGN KEY(`gamePlatformId`) REFERENCES `platform`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gamePlatformId",
+            "columnName": "gamePlatformId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "languageCode",
+            "columnName": "languageCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_platformName_gamePlatformId_languageCode",
+            "unique": true,
+            "columnNames": [
+              "gamePlatformId",
+              "languageCode"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_platformName_gamePlatformId_languageCode` ON `${TABLE_NAME}` (`gamePlatformId`, `languageCode`)"
+          },
+          {
+            "name": "index_platformName_name",
+            "unique": false,
+            "columnNames": [
+              "name"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_platformName_name` ON `${TABLE_NAME}` (`name`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "platform",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "gamePlatformId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "playerPerspective",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `slug` TEXT NOT NULL COLLATE NOCASE)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "slug",
+            "columnName": "slug",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_playerPerspective_slug",
+            "unique": true,
+            "columnNames": [
+              "slug"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_playerPerspective_slug` ON `${TABLE_NAME}` (`slug`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "playerPerspectiveName",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `playerPerspectiveId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL COLLATE UNICODE, FOREIGN KEY(`playerPerspectiveId`) REFERENCES `playerPerspective`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "playerPerspectiveId",
+            "columnName": "playerPerspectiveId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "languageCode",
+            "columnName": "languageCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_playerPerspectiveName_playerPerspectiveId_languageCode",
+            "unique": true,
+            "columnNames": [
+              "playerPerspectiveId",
+              "languageCode"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_playerPerspectiveName_playerPerspectiveId_languageCode` ON `${TABLE_NAME}` (`playerPerspectiveId`, `languageCode`)"
+          },
+          {
+            "name": "index_playerPerspectiveName_name",
+            "unique": false,
+            "columnNames": [
+              "name"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_playerPerspectiveName_name` ON `${TABLE_NAME}` (`name`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "playerPerspective",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "playerPerspectiveId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0f96119ff3ee19104e6062f5adaba7c7')"
+    ]
+  }
+}

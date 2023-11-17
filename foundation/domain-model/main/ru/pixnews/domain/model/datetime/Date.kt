@@ -18,12 +18,24 @@ public sealed class Date(
     public open val isToBeDetermined: Boolean,
 ) {
     public data class ExactDateTime(
-        val date: LocalDateTime,
+        override val year: Int,
+        override val month: Month,
+        override val dayOfMonth: Int,
+        val hour: Int = 0,
+        val minute: Int = 0,
+        val second: Int = 0,
         override val isToBeDetermined: Boolean = false,
     ) : Date(isToBeDetermined), HasYearMonthDay {
-        override val year: Int get() = date.year
-        override val month: Month get() = date.month
-        override val dayOfMonth: Int get() = date.dayOfMonth
+        public val date: LocalDateTime = LocalDateTime(year, month, dayOfMonth, hour, minute, second)
+
+        init {
+            require(year > YEAR_MIN)
+        }
+
+        public constructor(
+            date: LocalDateTime,
+            isToBeDetermined: Boolean = false,
+        ) : this(date.year, date.month, date.dayOfMonth, date.hour, date.minute, date.second, isToBeDetermined)
     }
 
     public data class YearMonthDay(
@@ -54,28 +66,20 @@ public sealed class Date(
     }
 
     public data class YearMonth(
-        public val date: LocalDate,
+        override val year: Int,
+        override val month: Month,
         override val isToBeDetermined: Boolean = true,
     ) : Date(isToBeDetermined), HasYearMonth {
-        override val year: Int get() = date.year
-        override val month: Month get() = date.month
+        public val date: LocalDate = LocalDate(year, month, 1)
 
         init {
-            require(date.year > YEAR_MIN)
+            require(year > YEAR_MIN)
         }
 
         public constructor(
-            year: Int,
-            month: Month,
+            date: LocalDate,
             isToBeDetermined: Boolean = true,
-        ) : this(
-            LocalDate(
-                year = year,
-                month = month,
-                dayOfMonth = 1,
-            ),
-            isToBeDetermined,
-        )
+        ) : this(date.year, date.month, isToBeDetermined)
     }
 
     public data class Year(

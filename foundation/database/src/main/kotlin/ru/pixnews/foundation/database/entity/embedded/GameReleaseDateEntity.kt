@@ -35,15 +35,15 @@ import ru.pixnews.foundation.database.util.lastSecondOfQuarter
 import ru.pixnews.foundation.database.util.lastSecondOfYear
 import ru.pixnews.library.internationalization.language.LanguageCode
 import ru.pixnews.library.kotlin.datetime.utils.quarter
+import ru.pixnews.library.kotlin.datetime.utils.truncateToSeconds
 import kotlin.LazyThreadSafetyMode.PUBLICATION
 
-// TODO: tests
 public fun GameReleaseDateEntity(
     date: Date,
 ): GameReleaseDateEntity = when (date) {
     is ExactDateTime -> GameReleaseDateEntity(
         type = EXACT_DATE_TIME,
-        timestamp = date.date.toInstant(TIMESTAMP_TIME_ZONE),
+        timestamp = date.date.toInstant(TIMESTAMP_TIME_ZONE).truncateToSeconds(),
         isToBeDetermined = date.isToBeDetermined,
     )
 
@@ -136,6 +136,7 @@ public data class GameReleaseDateEntity(
 
             YEAR -> Year(
                 year = timestampDateTime.year,
+                isToBeDetermined = isToBeDetermined,
                 description = localizedDescription,
             )
 
@@ -163,8 +164,8 @@ public data class GameReleaseDateEntity(
         EXACT_DATE_TIME(1),
         YEAR_MONTH_DAY(2),
         YEAR_MONTH(3),
-        YEAR(4),
-        YEAR_QUARTER(5),
+        YEAR_QUARTER(4),
+        YEAR(5),
         UNKNOWN(6),
     }
 

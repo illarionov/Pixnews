@@ -12,7 +12,7 @@ diktat = "1.2.5"
 detekt-compose-rules = "0.3.0"
 dagger = "2.48.1"
 kotlin = "1.9.20"
-ksp = "1.9.20-1.0.13"
+ksp = "1.9.20-1.0.14"
 spotless = "6.22.0"
 
 accompanist = "0.33.2-alpha"
@@ -244,10 +244,12 @@ wire-schema = { group = "com.squareup.wire", name = "wire-schema", version.ref =
 agp-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 agp-plugin-api = { module = "com.android.tools.build:gradle-api", version.ref = "agp" }
 anvil-plugin = { group = "com.squareup.anvil", name = "gradle-plugin", version.ref = "anvil" }
+androidx-room-plugin = { group = "androidx.room", name = "androidx.room.gradle.plugin", version.ref = "androidx-room" }
 com-android-tools-common = { group = "com.android.tools", name = "common", version.ref = "android-tools-common" }
 kermit-plugin = { group = "co.touchlab", name = "kermit-gradle-plugin", version.ref = "kermit" }
 kotlin-jvm-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 kotlinx-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+ksp-plugin = { group = "com.google.devtools.ksp", name = "symbol-processing-gradle-plugin", version.ref = "ksp" }
 detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 diktat-plugin = { group = "org.cqfn.diktat", name = "diktat-gradle-plugin", version.ref = "diktat" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
@@ -279,6 +281,7 @@ anvil = { id = "com.squareup.anvil", version.ref = "anvil" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
+androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 diktat = { id = "org.cqfn.diktat.diktat-gradle-plugin", version.ref = "diktat" }

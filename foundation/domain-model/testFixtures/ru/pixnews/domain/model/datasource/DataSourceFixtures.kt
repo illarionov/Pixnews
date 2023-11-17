@@ -16,7 +16,7 @@ public object DataSourceFixtures
 public val DataSourceFixtures.igdb: ImmutableList<DataSource>
     get() = persistentListOf(
         DataSource(
-            source = DataSourceType.Igdb,
+            source = DataSourceType.IGDB,
             attributionText = Localized(
                 value = RichText("https://www.igdb.com/"),
                 language = LanguageCode.ENGLISH,

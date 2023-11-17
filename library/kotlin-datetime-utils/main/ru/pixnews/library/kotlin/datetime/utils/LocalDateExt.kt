@@ -6,12 +6,17 @@
 package ru.pixnews.library.kotlin.datetime.utils
 
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.Month
+import kotlinx.datetime.number
 
 public val LocalDate.quarter: Int
-    get() = monthNumberToQuarter(monthNumber)
+    get() = month.quarter
 
 @Suppress("MagicNumber")
-public fun monthNumberToQuarter(monthNumber: Int): Int = (monthNumber + 2) / 3
+public val Month.quarter: Int get() = (number + 2) / 3
+
+@Suppress("MagicNumber")
+public fun firstMonthOfQuarter(quarter: Int): Month = Month(3 * quarter - 2)
 
 public fun LocalDate.hasDifferentDayFrom(date: LocalDate?): Boolean {
     if (date == null) {

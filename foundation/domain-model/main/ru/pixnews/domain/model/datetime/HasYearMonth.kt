@@ -6,12 +6,11 @@
 package ru.pixnews.domain.model.datetime
 
 import kotlinx.datetime.Month
-import kotlinx.datetime.number
-import ru.pixnews.library.kotlin.datetime.utils.monthNumberToQuarter
+import ru.pixnews.library.kotlin.datetime.utils.quarter
 
 public interface HasYearMonth : HasYearQuarter {
     public override val year: Int
     public val month: Month
 
-    override val quarter: Int get() = monthNumberToQuarter(month.number)
+    override val quarter: Int get() = month.quarter
 }

@@ -4,6 +4,7 @@
  */
 plugins {
     id("ru.pixnews.gradle.kotlin.library")
+    `java-test-fixtures`
 }
 
 group = "ru.pixnews.library.kotlin.datetime.utils"

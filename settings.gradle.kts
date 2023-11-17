@@ -20,6 +20,7 @@ includeSubproject(":test:benchmark")
 listOf(
     "analytics",
     "appconfig",
+    "database",
     "di:anvil-codegen",
     "di:base",
     "di:root-component",

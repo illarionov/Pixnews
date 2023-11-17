@@ -1,0 +1,3 @@
+# Ignored files for tools like scc / ripgrep / ag / tokei
+
+schemas/**/*.json

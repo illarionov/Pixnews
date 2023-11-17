@@ -62,7 +62,7 @@ jobs:
       - name: Assemble debug build, run tests
         run: >
           ./gradlew -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
-          assembleDebug test verifyPaparazzi --stacktrace
+          assembleDebug test verifyPaparazzi --scan --stacktrace
 
       - name: Cleanup secrets
         if: ${{ always() }}

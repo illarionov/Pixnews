@@ -67,7 +67,7 @@ jobs:
       - name: Assemble release build, run static-analysis, build release
         run: >
           ./gradlew -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
-          app:lintRelease assembleRelease --stacktrace
+          app:lintRelease assembleRelease --scan --stacktrace
 
       - name: Cleanup secrets
         if: ${{ always() }}
@@ -150,7 +150,7 @@ jobs:
           -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
           -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=""
           pixel2api30DebugAndroidTest
-          --continue
+          --scan --continue
 
       - name: Cleanup secrets
         if: ${{ always() }}

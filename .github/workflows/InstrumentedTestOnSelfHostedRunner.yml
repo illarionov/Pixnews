@@ -74,7 +74,7 @@ jobs:
           -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
           -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
           cleanManagedDevices --unused-only
-          --continue
+          --scan --continue
 
       - name: Run instrumented tests
         run: >
@@ -85,7 +85,7 @@ jobs:
           -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
           -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=""
           pixel2api30DebugAndroidTest
-          --continue
+          --scan --continue
 
       - name: Cleanup secrets
         if: ${{ always() }}

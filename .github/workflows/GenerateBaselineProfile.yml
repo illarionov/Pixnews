@@ -56,7 +56,7 @@ jobs:
           -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
           -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile
           :test:benchmark:pixel2api30BenchmarkAndroidTest
-          --continue
+          --scan --continue
 
       - name: Cleanup secrets
         if: ${{ always() }}

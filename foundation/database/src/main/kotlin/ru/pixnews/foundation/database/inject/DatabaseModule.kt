@@ -7,6 +7,7 @@ package ru.pixnews.foundation.database.inject
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
@@ -25,6 +26,8 @@ public object DatabaseModule {
             applicationContext,
             PixnewsDatabase::class.java,
             "pixnews",
-        ).build()
+        )
+            .setJournalMode(WRITE_AHEAD_LOGGING)
+            .build()
     }
 }

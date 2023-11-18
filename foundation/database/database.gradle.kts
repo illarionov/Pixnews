@@ -15,6 +15,17 @@ pixnews {
 
 android {
     namespace = "ru.pixnews.foundation.database"
+    buildTypes {
+        create("instrumentedTests") {
+            initWith(getByName("debug"))
+        }
+    }
+
+    sourceSets {
+        named("instrumentedTests") {
+            assets.srcDir(layout.projectDirectory.dir("schemas"))
+        }
+    }
 }
 
 dependencies {

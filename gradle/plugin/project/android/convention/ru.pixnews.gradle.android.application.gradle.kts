@@ -49,7 +49,7 @@ extensions.configure<ApplicationExtension>("android") {
         getByName("debug") {
             applicationIdSuffix = ".debug"
             signingConfig = signingConfigs.getByName("debug")
-            matchingFallbacks += "release"
+            matchingFallbacks += listOf("instrumentedTests", "release")
         }
         create("benchmark") {
             initWith(release)

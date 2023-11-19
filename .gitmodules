@@ -1,0 +1,3 @@
+[submodule "gradle/plugin/base/prefiller"]
+	path = gradle/plugin/base/prefiller
+	url = https://github.com/illarionov/prefiller-gradle-plugin.git

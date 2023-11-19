@@ -7,6 +7,7 @@ plugins {
     id("ru.pixnews.gradle.android.room")
     id("ru.pixnews.gradle.di.anvil-factories")
     id("ru.pixnews.gradle.protobuf-wire")
+    alias(libs.plugins.prefiller)
 }
 
 pixnews {
@@ -27,6 +28,16 @@ android {
         }
     }
 }
+
+@Suppress("COMMENTED_OUT_CODE")
+/*
+prefiller {
+    database("pixnews") {
+        classname = "ru.pixnews.foundation.database.PixnewsDatabase"
+        scripts.from(file("src/main/sql/setup.sql"))
+    }
+}
+*/
 
 dependencies {
     api(projects.foundation.coroutines)

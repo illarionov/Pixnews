@@ -17,6 +17,7 @@ pluginManagement {
     listOf(
         "project" to "gradle-project-plugins",
         "base/billofmaterials" to "gradle-billofmaterials",
+        "base/prefiller" to "gradle-prefiller-plugin",
     ).forEach { (path, gradleProjectsPluginName) ->
         if (File(rootDir, "gradle/plugin/$path").exists()) {
             includeBuild("gradle/plugin/$path") {

@@ -5,7 +5,6 @@
 
 package ru.pixnews.foundation.database.entity.company
 
-import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -47,7 +46,7 @@ public data class CompanyDescriptionEntity(
 
     val language: LanguageCodeWrapper = LanguageCodeWrapper(LanguageCode.ENGLISH),
 
-    @ColumnInfo(collate = ColumnInfo.UNICODE)
+    /* @ColumnInfo(collate = ColumnInfo.UNICODE) TODO: unsupported in prefiller */
     val text: String,
 
     @Embedded(prefix = "dataSource_")

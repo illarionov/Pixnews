@@ -34,6 +34,9 @@ public data class GameSeriesNameEntity(
     val id: Long = 0,
     val gameSeriesId: Long,
     val languageCode: LanguageCodeWrapper = LanguageCodeWrapper(LanguageCode.ENGLISH),
-    @ColumnInfo(collate = ColumnInfo.UNICODE, index = true)
+    @ColumnInfo(
+        /* collate = ColumnInfo.UNICODE, TODO: unsupported in prefiller */
+        index = true,
+    )
     val name: String,
 )

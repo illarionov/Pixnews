@@ -31,10 +31,6 @@ internal fun PatternFilterable.excludeNonLintedDirectories() {
         // mostly auto-generated
         it.isDirectory && it.relativePath.startsWith("foundation/ui/assets-icons/src/main/kotlin")
     }
-    exclude {
-        // Submodule
-        it.isDirectory && it.relativePath.startsWith("gradle/plugin/base/prefiller")
-    }
 }
 
 private val excludedDirectories = setOf(

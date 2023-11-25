@@ -30,6 +30,10 @@ tasks.withType<KotlinCompile>()
         compilerOptions {
             freeCompilerArgs.add("-Xallow-unstable-dependencies")
             freeCompilerArgs.addAll(metricsPrams)
+            freeCompilerArgs.addAll(
+                "-P",
+                "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.9.21",
+            )
         }
     }
 

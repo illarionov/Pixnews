@@ -41,7 +41,11 @@ prefiller {
 }
 
 tasks.matching {
-    it.name.startsWith("lintAnalyze") || it.name.endsWith("LintReportModel")
+    it.name.startsWith("lintAnalyze") ||
+    it.name.startsWith("lintVitalAnalyze") ||
+            it.name.endsWith("LintReportModel") ||
+            it.name.endsWith("LintModel") ||
+            it.name.endsWith("LintVitalModel")
 }.configureEach {
     mustRunAfter(tasks.withType<PrefillerTask>())
 }

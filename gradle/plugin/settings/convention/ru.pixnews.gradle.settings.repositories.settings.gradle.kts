@@ -11,6 +11,7 @@ pluginManagement {
         googleExclusiveContent()
         mavenCentral()
         gradlePluginPortal()
+        pixnewsMaven()
     }
 
     // Get our own convention plugins from 'gradle/plugin/project'
@@ -37,6 +38,7 @@ dependencyResolutionManagement {
         googleExclusiveContent()
         mavenCentral()
         sonatypeSnapshots()
+        pixnewsMaven()
     }
 }
 
@@ -45,6 +47,18 @@ fun RepositoryHandler.sonatypeSnapshots(): MavenArtifactRepository = maven {
     mavenContent {
         includeGroup("ru.pixnews.igdbclient")
         snapshotsOnly()
+    }
+}
+
+fun RepositoryHandler.pixnewsMaven(): Unit = exclusiveContent {
+    forRepository {
+        maven {
+            url = uri("https://maven.pixnews.ru")
+        }
+    }
+    filter {
+        includeGroup("io.github.simonschiller.prefiller")
+        includeGroup("io.github.simonschiller")
     }
 }
 

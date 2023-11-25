@@ -3,8 +3,6 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-import io.github.simonschiller.prefiller.PrefillerTask
-
 plugins {
     id("ru.pixnews.gradle.android.library")
     id("ru.pixnews.gradle.android.room")
@@ -38,16 +36,6 @@ prefiller {
         classname = "ru.pixnews.foundation.database.PixnewsDatabase"
         scripts.from(file("src/main/sql/setup.sql"))
     }
-}
-
-tasks.matching {
-    it.name.startsWith("lintAnalyze") ||
-    it.name.startsWith("lintVitalAnalyze") ||
-            it.name.endsWith("LintReportModel") ||
-            it.name.endsWith("LintModel") ||
-            it.name.endsWith("LintVitalModel")
-}.configureEach {
-    mustRunAfter(tasks.withType<PrefillerTask>())
 }
 
 dependencies {

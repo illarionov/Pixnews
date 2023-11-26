@@ -12,6 +12,9 @@ import androidx.room.PrimaryKey
 import ru.pixnews.domain.model.url.ExternalLinkType
 import ru.pixnews.foundation.database.model.LanguageCodeWrapper
 
+/**
+ * External URL's of the company
+ */
 @Entity(
     tableName = "companyExternalLink",
     foreignKeys = [

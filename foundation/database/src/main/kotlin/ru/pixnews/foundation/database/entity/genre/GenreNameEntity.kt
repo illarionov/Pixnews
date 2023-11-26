@@ -5,6 +5,7 @@
 
 package ru.pixnews.foundation.database.entity.genre
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
@@ -36,6 +37,6 @@ public data class GenreNameEntity(
     val genreId: Long,
     val languageCode: LanguageCodeWrapper,
 
-    /* @ColumnInfo(collate = ColumnInfo.UNICODE) TODO: unsupported in prefiller */
+    @ColumnInfo(collate = ColumnInfo.UNICODE)
     val name: String,
 )

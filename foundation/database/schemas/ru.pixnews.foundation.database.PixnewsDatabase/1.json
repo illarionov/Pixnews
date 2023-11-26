@@ -6,7 +6,7 @@
     "entities": [
       {
         "tableName": "companyDescription",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `companyId` INTEGER NOT NULL, `language` TEXT NOT NULL, `text` TEXT NOT NULL, `dataSource_type` INTEGER NOT NULL, `dataSource_externalId` TEXT, `dataSource_updatedAt` INTEGER NOT NULL, `dataSource_metadata` BLOB, FOREIGN KEY(`companyId`) REFERENCES `company`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `companyId` INTEGER NOT NULL, `language` TEXT NOT NULL, `text` TEXT NOT NULL COLLATE UNICODE, `dataSource_type` INTEGER NOT NULL, `dataSource_externalId` TEXT, `dataSource_updatedAt` INTEGER NOT NULL, `dataSource_metadata` BLOB, FOREIGN KEY(`companyId`) REFERENCES `company`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
         "fields": [
           {
             "fieldPath": "id",
@@ -1145,7 +1145,7 @@
       },
       {
         "tableName": "gameModeName",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameModeId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL, FOREIGN KEY(`gameModeId`) REFERENCES `gameMode`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameModeId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL COLLATE UNICODE, FOREIGN KEY(`gameModeId`) REFERENCES `gameMode`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
         "fields": [
           {
             "fieldPath": "id",
@@ -1698,7 +1698,7 @@
       },
       {
         "tableName": "gameSeriesName",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameSeriesId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL, FOREIGN KEY(`gameSeriesId`) REFERENCES `gameSeries`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gameSeriesId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL COLLATE UNICODE, FOREIGN KEY(`gameSeriesId`) REFERENCES `gameSeries`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
         "fields": [
           {
             "fieldPath": "id",
@@ -2136,7 +2136,7 @@
       },
       {
         "tableName": "genreName",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `genreId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL, FOREIGN KEY(`genreId`) REFERENCES `genre`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `genreId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL COLLATE UNICODE, FOREIGN KEY(`genreId`) REFERENCES `genre`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
         "fields": [
           {
             "fieldPath": "id",
@@ -2232,7 +2232,7 @@
       },
       {
         "tableName": "platformName",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gamePlatformId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL, FOREIGN KEY(`gamePlatformId`) REFERENCES `platform`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `gamePlatformId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL COLLATE UNICODE, FOREIGN KEY(`gamePlatformId`) REFERENCES `platform`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
         "fields": [
           {
             "fieldPath": "id",
@@ -2338,7 +2338,7 @@
       },
       {
         "tableName": "playerPerspectiveName",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `playerPerspectiveId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL, FOREIGN KEY(`playerPerspectiveId`) REFERENCES `playerPerspective`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `playerPerspectiveId` INTEGER NOT NULL, `languageCode` TEXT NOT NULL, `name` TEXT NOT NULL COLLATE UNICODE, FOREIGN KEY(`playerPerspectiveId`) REFERENCES `playerPerspective`(`id`) ON UPDATE CASCADE ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED)",
         "fields": [
           {
             "fieldPath": "id",

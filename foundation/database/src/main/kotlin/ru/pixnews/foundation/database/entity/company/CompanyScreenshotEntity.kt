@@ -12,6 +12,9 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import ru.pixnews.foundation.database.entity.embedded.ScreenshotEntity
 
+/**
+ * Screenshots of the company
+ */
 @Entity(
     tableName = "companyScreenshot",
     foreignKeys = [

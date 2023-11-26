@@ -106,7 +106,6 @@ public data class GameReleaseDateEntity(
     val expectedFrom: Int? = null,
     val expectedTo: Int? = null,
 ) {
-    // TODO: Test
     val date: Date by lazy(PUBLICATION) {
         when (type) {
             EXACT_DATE_TIME -> ExactDateTime(

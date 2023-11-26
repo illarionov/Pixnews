@@ -28,6 +28,7 @@ public object DatabaseModule {
             "pixnews",
         )
             .setJournalMode(WRITE_AHEAD_LOGGING)
+            .createFromAsset("pixnews.db")
             .build()
     }
 }

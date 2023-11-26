@@ -8,13 +8,17 @@ package ru.pixnews.foundation.database.migration
 import androidx.room.testing.MigrationTestHelper
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import co.touchlab.kermit.Logger
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import ru.pixnews.foundation.database.PixnewsDatabase
+import ru.pixnews.foundation.database.migration.DatabaseFixtures.prePopulateDatabase
 
 @RunWith(AndroidJUnit4::class)
 class PixnewsDatabaseMigrationTest {
+    val logger = Logger.withTag("PixnewsDatabaseMigrationTest")
+
     @get:Rule
     val helper: MigrationTestHelper = MigrationTestHelper(
         InstrumentationRegistry.getInstrumentation(),
@@ -23,9 +27,12 @@ class PixnewsDatabaseMigrationTest {
 
     @Test
     fun testDatabase() {
-        helper.createDatabase(TEST_DB, 1).apply {
-            close()
-        }
+        val database = helper.createDatabase(TEST_DB, 1)
+            .apply {
+                prePopulateDatabase()
+                close()
+            }
+        logger.i { "database path: ${database.path} " }
     }
 
     companion object {

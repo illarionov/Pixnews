@@ -385,6 +385,11 @@
             <pgp value="CB3190CA7842439E57F3712E44CE7BF2825EA2CD"/>
          </artifact>
       </component>
+      <component group="com.ibm.icu" name="icu4j" version="74.1">
+         <artifact name="icu4j-74.1.jar">
+            <pgp value="87DFB6E009B27CA622B9204EC730DCAEF653215C"/>
+         </artifact>
+      </component>
       <component group="com.intellij" name="annotations" version="12.0">
          <artifact name="annotations-12.0.jar">
             <pgp value="FAABC3738B1F58DA2D776FA2EB380DC13C39F675"/>

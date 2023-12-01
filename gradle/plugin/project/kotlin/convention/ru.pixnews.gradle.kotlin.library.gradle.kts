@@ -41,9 +41,6 @@ plugins.withId("java-test-fixtures") {
         kotlin.setSrcDirs(listOf("testFixtures"))
         resources.setSrcDirs(listOf("testFixtures_resources"))
     }
-    dependencies {
-        add("testFixturesImplementation", platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
-    }
 }
 
 java {
@@ -69,13 +66,6 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvm
             }
         }
     }
-
-dependencies {
-    val bom = platform("ru.pixnews.gradle.base:gradle-billofmaterials")
-    listOf("implementation", "testImplementation").forEach {
-        add(it, bom)
-    }
-}
 
 afterEvaluate {
     val unitTestEngine = project.pixnews.unitTestEngine.get()

@@ -9,7 +9,6 @@ plugins {
 group = "ru.pixnews.gradle.protobuf"
 
 dependencies {
-    implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
     implementation(projects.base)
     implementation(libs.wire.plugin)
 }

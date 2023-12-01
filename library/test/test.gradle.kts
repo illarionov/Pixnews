@@ -13,7 +13,10 @@ dependencies {
     api(libs.junit.jupiter.api)
     api(libs.kermit.jvm)
     api(libs.kotlinx.coroutines.test)
+    api(libs.okhttp.logging.interceptor)
+    api(platform(libs.junit.bom))
+    api(platform(libs.kotlinx.coroutines.bom))
+    api(platform(libs.okhttp.bom))
     implementation(libs.okhttp)
     implementation(libs.okhttp.mockwebserver)
-    api(libs.okhttp.logging.interceptor)
 }

@@ -15,7 +15,3 @@ apply<LintPlugin>()
 extensions.configure<Lint> {
     configureCommonAndroidLint()
 }
-
-dependencies {
-    add("lintChecks", platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
-}

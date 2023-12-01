@@ -68,7 +68,10 @@ fun createComposeRuntimeCompileClasspath(): FileCollection {
     }
 
     dependencies {
-        add(compileClasspathAarConfiguration.name, platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
+        add(
+            compileClasspathAarConfiguration.name,
+            platform(versionCatalog.findLibrary("androidx-compose-bom").get()),
+        )
         add(compileClasspathAarConfiguration.name, versionCatalog.findLibrary("androidx-compose-runtime").get())
 
         registerTransform(UnpackAarClassesTransform::class.java) {

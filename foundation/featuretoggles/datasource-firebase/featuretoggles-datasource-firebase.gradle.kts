@@ -24,8 +24,9 @@ dependencies {
     api(projects.foundation.featuretoggles.internal)
     implementation(projects.library.coroutines)
 
-    implementation(libs.firebase.analytics)
+    api(platform(libs.firebase.bom))
     api(libs.firebase.config)
+    implementation(libs.firebase.analytics)
     implementation(libs.kotlinx.coroutines.core)
 
     testImplementation(projects.library.test)

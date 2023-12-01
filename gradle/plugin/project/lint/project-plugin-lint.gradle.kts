@@ -10,7 +10,6 @@ plugins {
 group = "ru.pixnews.gradle.lint"
 
 dependencies {
-    implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
     implementation(projects.base)
     implementation(libs.agp.plugin.api)
     runtimeOnly(libs.agp.plugin)

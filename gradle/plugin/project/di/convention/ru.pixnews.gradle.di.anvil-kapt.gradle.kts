@@ -3,6 +3,9 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
+import com.google.devtools.ksp.gradle.KspTaskJvm
+import org.jetbrains.kotlin.gradle.tasks.KaptGenerateStubs
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import ru.pixnews.gradle.base.versionCatalog
 
 /**
@@ -28,5 +31,13 @@ kapt {
         option("-Adagger.fastInit=enabled")
         option("-Adagger.strictMultibindingValidation=enabled")
         option("-Adagger.experimentalDaggerErrorMessages=enabled")
+    }
+}
+
+// https://github.com/square/anvil/issues/693#issuecomment-1744013947
+tasks.withType<KotlinCompile>().configureEach {
+    if (this !is KspTaskJvm && this !is KaptGenerateStubs) {
+        val anvilSrcGenDir = layout.buildDirectory.dir(sourceSetName.map { "anvil/src-gen-$it/anvil" })
+        this.outputs.dir(anvilSrcGenDir)
     }
 }

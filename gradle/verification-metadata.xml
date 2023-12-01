@@ -76,6 +76,10 @@
          <trusted-key id="6F538074CCEBF35F28AF9B066A0975F8B1127B83" group="org.jetbrains.kotlin"/>
          <trusted-key id="70731C2FFB496DC4E8105AA3604F437C1682DDE5" group="app.cash.paparazzi"/>
          <trusted-key id="719F7C29985A8E95F58F47194D8159D6A1159B69" group="dev.zacsweers.kctfork"/>
+         <trusted-key id="7B79ADD11F8A779FE90FD3D0893A028475557671">
+            <trusting group="com.gradle" name="gradle-enterprise-gradle-plugin"/>
+            <trusting group="org.gradle" name="github-dependency-graph-gradle-plugin"/>
+         </trusted-key>
          <trusted-key id="7C669810892CBD3148FA92995B05CCDE140C2876" group="org.eclipse.jgit"/>
          <trusted-key id="7E22D50A7EBD9D2CD269B2D4056ACA74D46000BF" group="io.netty"/>
          <trusted-key id="835A685C8C6F49C54980E5CAF406F31BC1468EBA" group="org.jcodec"/>
@@ -633,11 +637,6 @@
       <component group="org.glassfish" name="javax.json" version="1.0.4">
          <artifact name="javax.json-1.0.4.jar">
             <pgp value="4F7E32D440EF90A83011A8FC6425559C47CC79C4"/>
-         </artifact>
-      </component>
-      <component group="org.gradle" name="github-dependency-graph-gradle-plugin" version="0.4.1">
-         <artifact name="github-dependency-graph-gradle-plugin-0.4.1.jar">
-            <pgp value="7B79ADD11F8A779FE90FD3D0893A028475557671"/>
          </artifact>
       </component>
       <component group="org.gradle.kotlin" name="gradle-kotlin-dsl-plugins" version="4.0.14">

@@ -7,6 +7,7 @@ package ru.pixnews.gradle.android
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
@@ -24,6 +25,11 @@ internal fun Project.configureCompose(
         composeOptions {
             kotlinCompilerExtensionVersion = versionCatalog.findVersion("androidx-compose-compiler").get().toString()
         }
+    }
+
+    dependencies {
+        val composeBom = platform(versionCatalog.findLibrary("androidx.compose.bom").orElseThrow())
+        add("implementation", composeBom)
     }
 
     tasks.withType<KotlinCompilationTask<KotlinJvmCompilerOptions>>()

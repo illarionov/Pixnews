@@ -10,6 +10,5 @@ group = "ru.pixnews.gradle"
 
 dependencies {
     implementation(gradleKotlinDsl())
-    implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
     implementation("ru.pixnews.gradle.base:gradle-build-parameters")
 }

@@ -35,7 +35,3 @@ listOf(
         }
     }
 }
-
-dependencies {
-    add("lintChecks", platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
-}

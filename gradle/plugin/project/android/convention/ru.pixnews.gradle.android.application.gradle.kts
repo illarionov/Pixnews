@@ -94,10 +94,3 @@ extensions.configure<ApplicationAndroidComponentsExtension> {
         project.pixnews.applyTo(project, it)
     }
 }
-
-dependencies {
-    val bom = platform("ru.pixnews.gradle.base:gradle-billofmaterials")
-    listOf("implementation", "testImplementation", "androidTestImplementation").forEach {
-        add(it, bom)
-    }
-}

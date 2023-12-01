@@ -28,6 +28,8 @@ dependencies {
     api(libs.coil.base)
     api(libs.coil.compose.base)
     api(libs.androidx.compose.ui.graphics)
+    api(platform(libs.coil.bom))
+    api(platform(libs.okhttp.bom))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.coil.gif)

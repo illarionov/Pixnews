@@ -62,10 +62,3 @@ androidComponents {
         }
     }
 }
-
-dependencies {
-    val bom = platform("ru.pixnews.gradle.base:gradle-billofmaterials")
-    listOf("implementation", "testImplementation").forEach {
-        add(it, bom)
-    }
-}

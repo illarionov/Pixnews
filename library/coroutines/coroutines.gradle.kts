@@ -11,4 +11,5 @@ group = "ru.pixnews.library.coroutines"
 dependencies {
     api(projects.library.functional)
     api(libs.kotlinx.coroutines.core)
+    api(platform(libs.kotlinx.coroutines.bom))
 }

@@ -10,4 +10,5 @@ group = "ru.pixnews.library.functional"
 
 dependencies {
     api(libs.arrow.core)
+    api(platform(libs.arrow.bom))
 }

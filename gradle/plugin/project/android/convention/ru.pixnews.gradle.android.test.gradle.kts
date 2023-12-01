@@ -44,8 +44,6 @@ androidComponents {
 }
 
 dependencies {
-    implementation(platform("ru.pixnews.gradle.base:gradle-billofmaterials"))
-
     listOf(
         "androidx-test-core",
         "androidx-test-rules",

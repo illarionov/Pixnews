@@ -12,6 +12,7 @@ group = "ru.pixnews.foundation.featuretoggles.internal"
 dependencies {
     api(projects.foundation.featuretoggles.public)
     implementation(projects.library.functional)
+    implementation(platform(libs.kotlinx.coroutines.bom))
     api(libs.kermit)
     api(libs.kotlinx.coroutines.core)
 

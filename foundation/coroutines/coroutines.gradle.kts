@@ -12,4 +12,5 @@ group = "ru.pixnews.foundation.coroutines"
 dependencies {
     api(libs.inject)
     api(libs.kotlinx.coroutines.android)
+    api(platform(libs.kotlinx.coroutines.bom))
 }

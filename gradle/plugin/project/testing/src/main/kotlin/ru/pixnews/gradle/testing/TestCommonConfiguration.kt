@@ -77,6 +77,13 @@ private fun Project.configureCommonKotest() {
 private fun Project.configureCommonJunit5Dependencies() {
     dependencies {
         listOf(
+            "kotest-bom",
+            "junit-bom",
+            "kotlinx-coroutines-bom",
+        ).forEach {
+            add("testImplementation", platform(versionCatalog.findLibrary(it).orElseThrow()))
+        }
+        listOf(
             "junit-jupiter-api",
             "kotest-assertions-core",
             "kotest-extensions-arrow",

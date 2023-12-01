@@ -86,23 +86,11 @@ fun configureTestManagedDevices(
 
 fun configureAndroidTestDependencies() {
     dependencies {
-        val bom = platform("ru.pixnews.gradle.base:gradle-billofmaterials")
-        add("androidTestImplementation", bom)
         add("androidTestImplementation", project(":foundation:instrumented-test"))
         add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
-
-        constraints {
-            listOf(
-                "org.jetbrains.kotlinx:kotlinx-coroutines-test",
-                "org.jetbrains.kotlinx:kotlinx-coroutines-test-jvm",
-            ).forEach { testDependency ->
-                add("androidTestImplementation", testDependency) {
-                    version {
-                        reject("1.7.0")
-                        because("https://github.com/Kotlin/kotlinx.coroutines/issues/3673")
-                    }
-                }
-            }
+        if (pixnews.compose.get()) {
+            val composeBom = platform(versionCatalog.findLibrary("androidx.compose.bom").orElseThrow())
+            add("androidTestImplementation", composeBom)
         }
     }
 

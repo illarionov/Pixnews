@@ -17,7 +17,6 @@ pluginManagement {
     // Get our own convention plugins from 'gradle/plugin/project'
     listOf(
         "project" to "gradle-project-plugins",
-        "base/billofmaterials" to "gradle-billofmaterials",
     ).forEach { (path, gradleProjectsPluginName) ->
         if (File(rootDir, "gradle/plugin/$path").exists()) {
             includeBuild("gradle/plugin/$path") {

@@ -12,12 +12,12 @@ public sealed class GameMode(
     public open val name: String,
     public override val id: GameModeId = GameModeId(name),
 ) : HasId<GameModeId> {
-    public data object SinglePlayer : GameMode("Single Player")
-    public data object Multiplayer : GameMode("Multiplayer")
-    public data object SplitScreen : GameMode("Split Screen")
-    public data object CoOperative : GameMode("Co-operative")
-    public data object BattleRoyale : GameMode("Battle royale")
-    public data object Mmo : GameMode("MMO")
+    public data object SinglePlayer : GameMode("Single Player", GameModeId("single-player"))
+    public data object Multiplayer : GameMode("Multiplayer", GameModeId("multiplayer"))
+    public data object SplitScreen : GameMode("Split Screen", GameModeId("split-screen"))
+    public data object CoOperative : GameMode("Co-operative", GameModeId("co-operative"))
+    public data object BattleRoyale : GameMode("Battle royale", GameModeId("battle-royale"))
+    public data object Mmo : GameMode("MMO", GameModeId("massively-multiplayer-online-mmo"))
     public data class Other(
         override val name: String,
         public override val id: GameModeId = GameModeId(name),

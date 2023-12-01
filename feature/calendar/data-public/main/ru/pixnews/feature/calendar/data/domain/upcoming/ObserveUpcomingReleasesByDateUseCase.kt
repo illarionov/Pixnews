@@ -7,8 +7,15 @@ package ru.pixnews.feature.calendar.data.domain.upcoming
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
+import ru.pixnews.domain.model.UpcomingReleaseTimeCategory
+import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameField
 
 public interface ObserveUpcomingReleasesByDateUseCase {
     public fun createUpcomingReleasesObservable(requiredFields: Set<GameField>): Flow<PagingData<UpcomingRelease>>
+
+    public data class UpcomingRelease(
+        val game: Game,
+        val group: UpcomingReleaseTimeCategory,
+    )
 }

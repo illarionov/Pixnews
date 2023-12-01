@@ -12,7 +12,7 @@
 
 - name: BACKTICKS_PROHIBITED
   enabled: true
-  ignoreAnnotated: [ Nested, ParameterizedTest ]
+  ignoreAnnotated: [ Nested, ParameterizedTest, TestFactory ]
 
 - name: COMMENTED_BY_KDOC
   enabled: false

@@ -30,7 +30,7 @@ import ru.pixnews.feature.calendar.converter.ListOrderTestExpectedItem.Companion
 import ru.pixnews.feature.calendar.converter.ListOrderTestExpectedItem.Companion.titleYearMonthDay
 import ru.pixnews.feature.calendar.converter.ListOrderTestExpectedItem.Companion.toListOrderTestExpectedItem
 import ru.pixnews.feature.calendar.converter.UpcomingGameListConverter.toCalendarListItem
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
+import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase.UpcomingRelease
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentMonth
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentMonth.exactDateLater25
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentMonth.exactDateLater26

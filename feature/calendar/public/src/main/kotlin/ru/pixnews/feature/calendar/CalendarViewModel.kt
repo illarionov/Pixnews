@@ -23,7 +23,7 @@ import kotlinx.datetime.TimeZone
 import ru.pixnews.anvil.codegen.viewmodel.inject.ContributesViewModel
 import ru.pixnews.feature.calendar.converter.UpcomingGameListConverter.toCalendarListItem
 import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
+import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase.UpcomingRelease
 import ru.pixnews.feature.calendar.model.CALENDAR_LIST_ITEM_GAME_FIELDS
 import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarScreenState

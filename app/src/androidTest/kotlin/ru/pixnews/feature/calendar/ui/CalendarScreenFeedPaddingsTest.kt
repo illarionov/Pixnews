@@ -24,7 +24,7 @@ import ru.pixnews.domain.model.game.game.beyondGoodEvil2
 import ru.pixnews.domain.model.game.game.gta6
 import ru.pixnews.domain.model.game.game.hytale
 import ru.pixnews.domain.model.game.game.sims5
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
+import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase.UpcomingRelease
 import ru.pixnews.feature.calendar.test.constants.UpcomingReleaseGroupId
 import ru.pixnews.feature.calendar.test.constants.toGroupId
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement

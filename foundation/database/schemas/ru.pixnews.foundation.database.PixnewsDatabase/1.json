@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0f96119ff3ee19104e6062f5adaba7c7",
+    "identityHash": "8b07b088df3afd4247059af7cc4d8f15",
     "entities": [
       {
         "tableName": "companyDescription",
@@ -2195,6 +2195,32 @@
         ]
       },
       {
+        "tableName": "igdbSyncStatus",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`key` TEXT NOT NULL, `value` TEXT NOT NULL, PRIMARY KEY(`key`))",
+        "fields": [
+          {
+            "fieldPath": "key",
+            "columnName": "key",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "key"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
         "tableName": "platform",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `slug` TEXT NOT NULL COLLATE NOCASE)",
         "fields": [
@@ -2410,7 +2436,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0f96119ff3ee19104e6062f5adaba7c7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8b07b088df3afd4247059af7cc4d8f15')"
     ]
   }
 }

@@ -5,11 +5,13 @@
 
 package ru.pixnews.feature.calendar.domain.upcoming
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.squareup.anvil.annotations.ContributesBinding
+import com.squareup.anvil.annotations.optional.SingleIn
 import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -22,8 +24,11 @@ import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toLocalDateTime
 import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.CURRENT_MONTH
 import ru.pixnews.domain.model.game.GameField
+import ru.pixnews.feature.calendar.data.DefaultRemoteMediator
 import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
+import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase.UpcomingRelease
+import ru.pixnews.feature.calendar.data.repository.upcoming.UpcomingReleaseRepository
+import ru.pixnews.feature.calendar.data.sync.SyncService
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import javax.inject.Inject
 
@@ -31,20 +36,25 @@ import javax.inject.Inject
     boundType = ObserveUpcomingReleasesByDateUseCase::class,
     scope = AppScope::class,
 )
+@SingleIn(AppScope::class)
 public class DefaultObserveUpcomingReleasesByDateUseCase(
-    private val igdbPagingSourceFactory: IgdbPagingSource.Factory,
+    private val upcomingReleaseRepository: UpcomingReleaseRepository,
+    private val syncService: SyncService,
     private val clock: Clock,
     private val tzProvider: () -> TimeZone,
 ) : ObserveUpcomingReleasesByDateUseCase {
     @Inject
     public constructor(
-        igdbPagingSourceFactory: IgdbPagingSource.Factory,
+        igdbPagingSourceFactory: UpcomingReleaseRepository,
+        syncService: SyncService,
     ) : this(
-        igdbPagingSourceFactory = igdbPagingSourceFactory,
+        upcomingReleaseRepository = igdbPagingSourceFactory,
+        syncService = syncService,
         clock = System,
         tzProvider = TimeZone.Companion::currentSystemDefault,
     )
 
+    @OptIn(ExperimentalPagingApi::class)
     public override fun createUpcomingReleasesObservable(
         requiredFields: Set<GameField>,
     ): Flow<PagingData<UpcomingRelease>> {
@@ -55,8 +65,13 @@ public class DefaultObserveUpcomingReleasesByDateUseCase(
         val pager = Pager(
             initialKey = null,
             config = PagingConfig(pageSize = INITIAL_PAGING_SIZE),
+            remoteMediator = DefaultRemoteMediator(
+                startDate = startDate,
+                requiredFields = requiredFields,
+                syncService = syncService,
+            ),
             pagingSourceFactory = {
-                igdbPagingSourceFactory.create(
+                upcomingReleaseRepository.createUpcomingReleasesPagingSource(
                     startDate = startDate,
                     requiredFields = requiredFieldsSet,
                 )

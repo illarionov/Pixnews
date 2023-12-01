@@ -8,6 +8,7 @@ package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.equals.shouldBeEqual
 import kotlinx.collections.immutable.persistentSetOf
+import kotlinx.datetime.Instant
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
@@ -22,7 +23,9 @@ import ru.pixnews.domain.model.game.GameMode.SplitScreen
 import ru.pixnews.domain.model.id.GameModeId
 import ru.pixnews.domain.model.util.Ref
 import ru.pixnews.domain.model.util.Ref.FullObject
+import ru.pixnews.feature.calendar.data.model.GameModeIgdbDto
 import ru.pixnews.feature.calendar.datasource.igdb.converter.game.IgdbGameGameModeConverter.convert
+import ru.pixnews.feature.calendar.datasource.igdb.converter.game.IgdbGameGameModeConverter.toGameModeIgdbDto
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbGameModeFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.gamemode.battleRoyale
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.gamemode.coOperative
@@ -37,7 +40,7 @@ import ru.pixnews.igdbclient.model.GameMode as IgdbGameMode
 class IgdbGameGameModeConverterTest {
     @ParameterizedTest
     @MethodSource("gameModeTestSource")
-    fun `should convert platforms`(testData: Pair<IgdbGameMode, Ref<GameMode>>) {
+    fun `should convert game modes`(testData: Pair<IgdbGameMode, Ref<GameMode>>) {
         val result = convert(
             Game(game_modes = listOf(testData.first)),
         )
@@ -69,6 +72,18 @@ class IgdbGameGameModeConverterTest {
                 ),
             )
         }
+    }
+
+    @Test
+    fun `toGameModeIgdbDto() should convert game modes`() {
+        val src = IgdbGameModeFixtures.singlePlayer
+        val result = toGameModeIgdbDto(src)
+
+        result shouldBeEqual GameModeIgdbDto(
+            mode = SinglePlayer,
+            igdbSlug = src.slug,
+            updatedAt = Instant.fromEpochSeconds(13_2321_6000),
+        )
     }
 
     companion object {
@@ -104,7 +119,7 @@ class IgdbGameGameModeConverterTest {
                     id = 100,
                     name = "Test Game Mode",
                     slug = "test-game-mode",
-                ) to FullObject(Other("Test Game Mode")),
+                ) to FullObject(Other("Test Game Mode", GameModeId("test-game-mode"))),
             )
         }
     }

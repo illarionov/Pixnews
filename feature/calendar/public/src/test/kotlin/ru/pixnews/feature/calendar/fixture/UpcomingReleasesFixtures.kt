@@ -21,7 +21,7 @@ import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.halfLife3
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.domain.model.locale.Localized
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
+import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase.UpcomingRelease
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentMonth
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentQuarter
 import ru.pixnews.feature.calendar.fixture.UpcomingReleaseDateFixtures.CurrentYear

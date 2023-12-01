@@ -7,7 +7,7 @@ package ru.pixnews.feature.calendar.converter
 
 import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
+import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase.UpcomingRelease
 import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarListPixnewsGameUi
 import ru.pixnews.feature.calendar.model.CalendarListTitle

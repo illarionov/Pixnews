@@ -12,4 +12,5 @@ dependencies {
     implementation(projects.base)
     implementation(libs.anvil.plugin)
     implementation(libs.kotlin.jvm.plugin)
+    implementation(libs.ksp.plugin)
 }

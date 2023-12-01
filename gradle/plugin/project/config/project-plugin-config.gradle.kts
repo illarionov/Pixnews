@@ -23,6 +23,7 @@ dependencies {
         exclude(module = "kotlin-reflect")
     }
 
+    testImplementation(platform(libs.junit.bom))
     testImplementation(platform(libs.kotest.bom))
     testImplementation(libs.junit.jupiter.api)
     testImplementation(libs.junit.jupiter.params)

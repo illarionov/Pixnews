@@ -12,6 +12,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         pixnewsMaven()
+        sonatypeSnapshots()
     }
 
     // Get our own convention plugins from 'gradle/plugin/project'
@@ -37,14 +38,23 @@ dependencyResolutionManagement {
         googleExclusiveContent()
         mavenCentral()
         sonatypeSnapshots()
+        sonatypeS01Snapshots()
         pixnewsMaven()
     }
 }
 
-fun RepositoryHandler.sonatypeSnapshots(): MavenArtifactRepository = maven {
+fun RepositoryHandler.sonatypeS01Snapshots(): MavenArtifactRepository = maven {
     url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     mavenContent {
         includeGroup("ru.pixnews.igdbclient")
+        snapshotsOnly()
+    }
+}
+
+fun RepositoryHandler.sonatypeSnapshots(): MavenArtifactRepository = maven {
+    url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+    mavenContent {
+        includeGroup("app.cash.paparazzi")
         snapshotsOnly()
     }
 }

@@ -18,6 +18,7 @@ pluginManagement {
     // Get our own convention plugins from 'gradle/plugin/project'
     listOf(
         "project" to "gradle-project-plugins",
+        "fbase-options-gradle-plugin" to "fbase-options-gradle-plugin",
     ).forEach { (path, gradleProjectsPluginName) ->
         if (File(rootDir, "gradle/plugin/$path").exists()) {
             includeBuild("gradle/plugin/$path") {
@@ -68,6 +69,7 @@ fun RepositoryHandler.pixnewsMaven(): Unit = exclusiveContent {
     filter {
         includeGroup("io.github.simonschiller.prefiller")
         includeGroup("io.github.simonschiller")
+        // includeGroup("ru.pixnews.gradle.fbase.options")
     }
 }
 

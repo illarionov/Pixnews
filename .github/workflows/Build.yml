@@ -38,6 +38,7 @@ jobs:
           clean: true
           fetch-depth: 0
           lfs: true
+          submodules: true
 
       - name: Check LFS files
         uses: actionsdesk/lfs-warning@v3.2
@@ -116,6 +117,7 @@ jobs:
         with:
           clean: false
           fetch-depth: 0
+          submodules: true
 
       - name: Install dprint
         shell: bash

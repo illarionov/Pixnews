@@ -49,6 +49,7 @@ jobs:
           clean: false
           fetch-depth: 0
           lfs: true
+          submodules: true
 
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1

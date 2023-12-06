@@ -34,5 +34,5 @@ fun includeSubproject(path: String) {
     project(":$path").buildFileName = "project-plugin-$path.gradle.kts"
 }
 
-rootProject.name = "gradle-project-plugins"
+rootProject.name = "gradle-project-plugins-pixnews"
 rootProject.buildFileName = "project-plugins.gradle.kts"

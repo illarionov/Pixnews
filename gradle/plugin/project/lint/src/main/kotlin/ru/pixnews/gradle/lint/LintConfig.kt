@@ -28,6 +28,9 @@ internal fun PatternFilterable.excludeNonLintedDirectories() {
         it.isDirectory && it.relativePath.startsWith("config/copyright")
     }
     exclude {
+        it.isDirectory && it.relativePath.startsWith("gradle/plugin/fbase-options-gradle-plugin")
+    }
+    exclude {
         // mostly auto-generated
         it.isDirectory && it.relativePath.startsWith("foundation/ui/assets-icons/src/main/kotlin")
     }

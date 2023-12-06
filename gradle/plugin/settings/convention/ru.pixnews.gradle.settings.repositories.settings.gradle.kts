@@ -17,7 +17,7 @@ pluginManagement {
 
     // Get our own convention plugins from 'gradle/plugin/project'
     listOf(
-        "project" to "gradle-project-plugins",
+        "project" to "gradle-project-plugins-pixnews",
         "fbase-options-gradle-plugin" to "fbase-options-gradle-plugin",
     ).forEach { (path, gradleProjectsPluginName) ->
         if (File(rootDir, "gradle/plugin/$path").exists()) {

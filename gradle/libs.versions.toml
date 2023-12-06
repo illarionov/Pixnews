@@ -57,6 +57,7 @@ assertk = "0.27.0"
 asm = "9.6"
 auto-service = "1.1.1"
 coil = "2.5.0"
+fbase-gradle-plugin = "0.1"
 firebase-bom = "32.6.0"
 firebase-crashlytics-plugin = "2.9.9"
 igdbclient = "0.4"
@@ -284,6 +285,7 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
+fbase-options-gradle-plugin = { id = "ru.pixnews.gradle.fbase.options", version.ref = "fbase-gradle-plugin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 diktat = { id = "org.cqfn.diktat.diktat-gradle-plugin", version.ref = "diktat" }
 kermit = { id = "co.touchlab.kermit", version.ref = "kermit" }

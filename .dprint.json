@@ -11,6 +11,7 @@
     "**/node_modules",
     "**/build/",
     "**/*-lock.json",
+    "gradle/plugin/fbase-options-gradle-plugin",
     "gradle/plugin/base/prefiller/"
   ],
   "plugins": [

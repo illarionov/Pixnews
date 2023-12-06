@@ -12,5 +12,5 @@ pluginManagement {
     includeBuild("../base/build-parameters")
 }
 
-rootProject.name = "gradle-settings-plugins"
+rootProject.name = "gradle-settings-plugins-pixnews"
 rootProject.buildFileName = "settings-plugins.gradle.kts"

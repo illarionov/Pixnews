@@ -789,6 +789,11 @@
             <pgp value="120D6F34E627ED3A772EBBFE55C7E5E701832382"/>
          </artifact>
       </component>
+      <component group="ru.pixnews.gradle.fbase" name="plugin" version="0.1-SNAPSHOT">
+         <artifact name="plugin-0.1-SNAPSHOT.jar">
+            <pgp value="8AB4B1AB3F0067ED73E00F0062C98BA8FCF62075"/>
+         </artifact>
+      </component>
       <component group="xerces" name="xercesImpl" version="2.12.0">
          <artifact name="xercesImpl-2.12.0.jar">
             <pgp value="51B52DC5DD452F92BE342CC2858FC4C4F43856A3"/>

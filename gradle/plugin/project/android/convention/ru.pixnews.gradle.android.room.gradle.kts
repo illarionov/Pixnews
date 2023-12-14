@@ -4,7 +4,6 @@
  */
 
 import com.android.build.api.dsl.CommonExtension
-import org.gradle.kotlin.dsl.apply
 import ru.pixnews.gradle.base.versionCatalog
 
 /**
@@ -21,7 +20,7 @@ room {
     schemaDirectory("$projectDir/schemas/")
 }
 
-extensions.configure<CommonExtension<*, *, *, *, *>>("android") {
+extensions.configure<CommonExtension<*, *, *, *, *, *>>("android") {
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {

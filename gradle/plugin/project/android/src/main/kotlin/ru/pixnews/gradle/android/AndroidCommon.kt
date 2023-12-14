@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import ru.pixnews.gradle.base.versionCatalog
 
 internal fun Project.configureCommonAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     commonExtension.apply {
         compileSdk = versionCatalog.findVersion("compileSdk").get().displayName.toInt()

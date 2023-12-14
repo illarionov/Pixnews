@@ -32,7 +32,7 @@ listOf(
     TestPlugin::class.java,
 ).forEach { agpPluginType ->
     plugins.withType(agpPluginType) {
-        extensions.configure<CommonExtension<*, *, *, *, *>>("android") {
+        extensions.configure<CommonExtension<*, *, *, *, *, *>>("android") {
             defaultConfig {
                 testInstrumentationRunner = "ru.pixnews.foundation.instrumented.test.PixnewsTestRunner"
             }
@@ -63,7 +63,7 @@ plugins.withType<LibraryPlugin> {
 }
 
 fun configureTestManagedDevices(
-    commonExtension: CommonExtension<*, *, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     commonExtension.testOptions.managedDevices {
         val pixel5api33 = devices.maybeCreate<ManagedVirtualDevice>("pixel5api33").apply {

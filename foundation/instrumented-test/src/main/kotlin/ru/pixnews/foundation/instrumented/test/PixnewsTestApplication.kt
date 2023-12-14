@@ -9,11 +9,10 @@ import android.app.Application
 import androidx.work.Configuration
 
 public class PixnewsTestApplication : Application(), Configuration.Provider {
-    private val workManagerConfiguration = Configuration.Builder().build()
+    private val _workManagerConfiguration = Configuration.Builder().build()
+    override val workManagerConfiguration: Configuration = _workManagerConfiguration
 
     override fun onCreate() {
         super.onCreate()
     }
-
-    override fun getWorkManagerConfiguration(): Configuration = workManagerConfiguration
 }

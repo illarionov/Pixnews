@@ -16,7 +16,7 @@ import ru.pixnews.gradle.base.compose.buildComposeMetricsParameters
 import ru.pixnews.gradle.base.versionCatalog
 
 internal fun Project.configureCompose(
-    commonExtension: CommonExtension<*, *, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     commonExtension.apply {
         buildFeatures {

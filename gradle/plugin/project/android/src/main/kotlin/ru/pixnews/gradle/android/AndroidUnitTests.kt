@@ -13,7 +13,7 @@ import ru.pixnews.gradle.testing.configureCommonUnitTestingOptions
 
 internal fun Project.configureUnitTesting(
     engine: UnitTestEngine,
-    commonExtension: CommonExtension<*, *, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     configureCommonUnitTesting(engine)
     commonExtension.testOptions {

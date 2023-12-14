@@ -11,7 +11,7 @@ import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
 import dagger.Provides
-import ru.pixnews.firebase.GeneratedFirebaseOptions
+import ru.pixnews.firebase.firebaseOptions
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
 
@@ -21,7 +21,7 @@ public object FirebaseModule {
     @Provides
     @SingleIn(AppScope::class)
     public fun provideFirebaseApp(@ApplicationContext context: Context): FirebaseApp {
-        return FirebaseApp.initializeApp(context, GeneratedFirebaseOptions.firebaseOptions)
+        return FirebaseApp.initializeApp(context, firebaseOptions)
     }
 
     @ContributesTo(AppScope::class)

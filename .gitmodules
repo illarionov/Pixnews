@@ -1,3 +1,0 @@
-[submodule "gradle/plugin/fbase-options-gradle-plugin"]
-	path = gradle/plugin/fbase-options-gradle-plugin
-	url = git@github.com:illarionov/fbase-options-gradle-plugin.git

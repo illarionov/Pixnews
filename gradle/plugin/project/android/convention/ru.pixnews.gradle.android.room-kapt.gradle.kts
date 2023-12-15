@@ -22,7 +22,7 @@ room {
     schemaDirectory("$projectDir/schemas/")
 }
 
-extensions.configure<CommonExtension<*, *, *, *, *>>("android") {
+extensions.configure<CommonExtension<*, *, *, *, *, *>>("android") {
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {

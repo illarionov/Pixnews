@@ -10,7 +10,7 @@ import com.android.build.api.dsl.TestedExtension
 import org.gradle.api.Project
 import ru.pixnews.gradle.base.PixnewsExtension
 
-internal fun PixnewsExtension.applyTo(project: Project, commonExtension: CommonExtension<*, *, *, *, *>) {
+internal fun PixnewsExtension.applyTo(project: Project, commonExtension: CommonExtension<*, *, *, *, *, *>) {
     if (compose.get()) {
         project.configureCompose(commonExtension)
     }

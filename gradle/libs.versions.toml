@@ -74,7 +74,7 @@ okio = "3.6.0"
 paparazzi = "1.3.2-SNAPSHOT"
 prefiller = "1.6.0-SNAPSHOT"
 retrofit = "2.9.0"
-radiography = "2.4.1"
+radiography = "2.5"
 turbine = "1.0.0"
 
 junit4 = "4.13.2"

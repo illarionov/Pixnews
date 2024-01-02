@@ -103,7 +103,10 @@
          </trusted-key>
          <trusted-key id="8569C95CADC508B09FE90F3002216ED811210DAA" group="io.github.detekt.sarif4k"/>
          <trusted-key id="8756C4F765C9AC3CB6B85D62379CE192D401AB61" group="com.diffplug.durian"/>
-         <trusted-key id="8AB4B1AB3F0067ED73E00F0062C98BA8FCF62075" group="ru.pixnews.igdbclient"/>
+         <trusted-key id="8AB4B1AB3F0067ED73E00F0062C98BA8FCF62075">
+             <trusting group="ru.pixnews.gradle.fbase" />
+             <trusting group="ru.pixnews.igdbclient" />
+         </trusted-key>
          <trusted-key id="8E3A02905A1AE67E7B0F9ACD3967D4EDA591B991" group="org.jetbrains.kotlinx" name="kotlinx-html-jvm"/>
          <trusted-key id="90EE19787A7BCF6FD37A1E9180C08B1C29100955">
             <trusting group="com.squareup" name="javawriter"/>
@@ -788,11 +791,6 @@
       <component group="org.yaml" name="snakeyaml" version="1.33">
          <artifact name="snakeyaml-1.33.jar">
             <pgp value="120D6F34E627ED3A772EBBFE55C7E5E701832382"/>
-         </artifact>
-      </component>
-      <component group="ru.pixnews.gradle.fbase" name="generator" version="0.1-SNAPSHOT">
-         <artifact name="generator-0.1-SNAPSHOT.jar">
-            <pgp value="8AB4B1AB3F0067ED73E00F0062C98BA8FCF62075"/>
          </artifact>
       </component>
       <component group="xerces" name="xercesImpl" version="2.12.0">

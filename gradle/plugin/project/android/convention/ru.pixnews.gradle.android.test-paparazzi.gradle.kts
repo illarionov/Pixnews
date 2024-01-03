@@ -30,3 +30,7 @@ plugins.withType<LibraryPlugin> {
         "testImplementation"(versionCatalog.findLibrary("junit-jupiter-vintage-engine").get())
     }
 }
+
+tasks.withType<Test>().configureEach {
+    forkEvery = 1
+}

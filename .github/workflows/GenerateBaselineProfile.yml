@@ -68,7 +68,7 @@ jobs:
           tar -c -I 'zstd -19 -T0' -f baseline-profile.tar.zst test/benchmark/build/outputs/managed_device_android_test_additional_output/benchmark/
 
       - name: Upload baseline profile
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: baseline-profile
           path: baseline-profile.tar.zst

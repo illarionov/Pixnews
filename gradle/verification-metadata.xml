@@ -90,6 +90,7 @@
             <trusting group="androidx.benchmark"/>
             <trusting group="androidx.collection"/>
             <trusting group="androidx.core"/>
+            <trusting group="androidx.datastore"/>
             <trusting group="androidx.emoji2"/>
             <trusting group="androidx.fragment"/>
             <trusting group="androidx.lifecycle"/>
@@ -100,12 +101,13 @@
             <trusting group="androidx.tracing"/>
             <trusting group="androidx.work"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
+            <trusting group="^androidx[.]test($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="8569C95CADC508B09FE90F3002216ED811210DAA" group="io.github.detekt.sarif4k"/>
          <trusted-key id="8756C4F765C9AC3CB6B85D62379CE192D401AB61" group="com.diffplug.durian"/>
          <trusted-key id="8AB4B1AB3F0067ED73E00F0062C98BA8FCF62075">
-             <trusting group="ru.pixnews.gradle.fbase" />
-             <trusting group="ru.pixnews.igdbclient" />
+            <trusting group="ru.pixnews.gradle.fbase"/>
+            <trusting group="ru.pixnews.igdbclient"/>
          </trusted-key>
          <trusted-key id="8E3A02905A1AE67E7B0F9ACD3967D4EDA591B991" group="org.jetbrains.kotlinx" name="kotlinx-html-jvm"/>
          <trusted-key id="90EE19787A7BCF6FD37A1E9180C08B1C29100955">
@@ -426,6 +428,11 @@
       <component group="com.squareup" name="kotlinpoet" version="1.8.0">
          <artifact name="kotlinpoet-1.8.0.jar">
             <pgp value="AFA2B1823FC021BFD08C211FD5F4C07A434AB3DA"/>
+         </artifact>
+      </component>
+      <component group="com.squareup.radiography" name="radiography" version="2.5">
+         <artifact name="radiography-2.5.aar">
+            <pgp value="DF3986523A6AD079C46B730BCA183FBA1E476C6E"/>
          </artifact>
       </component>
       <component group="com.squareup.wire" name="wire-kotlin-generator" version="4.9.0">

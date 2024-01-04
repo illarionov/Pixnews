@@ -61,8 +61,8 @@ extensions.configure<ApplicationExtension>("android") {
             matchingFallbacks += listOf("instrumentedTests", "release")
             manifestPlaceholders += listOf(
                 "firebase_crashlytics_collection_enabled" to "false",
-                "firebase_analytics_collection_deactivated" to "false",
-                "google_analytics_adid_collection_enabled" to "true",
+                "firebase_analytics_collection_deactivated" to "true",
+                "google_analytics_adid_collection_enabled" to "false",
             )
         }
         create("benchmark") {

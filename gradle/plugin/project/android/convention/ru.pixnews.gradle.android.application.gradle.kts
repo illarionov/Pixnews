@@ -32,7 +32,11 @@ extensions.configure<ApplicationExtension>("android") {
 
     defaultConfig {
         targetSdk = versionCatalog.findVersion("targetSdk").get().displayName.toInt()
-        manifestPlaceholders["firebase_crashlytics_collection_enabled"] = "false"
+        manifestPlaceholders += listOf(
+            "firebase_crashlytics_collection_enabled" to "false",
+            "firebase_analytics_collection_deactivated" to "true",
+            "google_analytics_adid_collection_enabled" to "false",
+        )
     }
 
     val releaseConfig = ReleaseConfig(project)
@@ -45,11 +49,21 @@ extensions.configure<ApplicationExtension>("android") {
             isCrunchPngs = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName(if (releaseConfig.useReleaseKeystore) "release" else "debug")
+            manifestPlaceholders += listOf(
+                "firebase_crashlytics_collection_enabled" to "true",
+                "firebase_analytics_collection_deactivated" to "false",
+                "google_analytics_adid_collection_enabled" to "true",
+            )
         }
         getByName("debug") {
             applicationIdSuffix = ".debug"
             signingConfig = signingConfigs.getByName("debug")
             matchingFallbacks += listOf("instrumentedTests", "release")
+            manifestPlaceholders += listOf(
+                "firebase_crashlytics_collection_enabled" to "false",
+                "firebase_analytics_collection_deactivated" to "false",
+                "google_analytics_adid_collection_enabled" to "true",
+            )
         }
         create("benchmark") {
             initWith(release)
@@ -62,6 +76,12 @@ extensions.configure<ApplicationExtension>("android") {
 
             proguardFiles("proguard-benchmark.pro")
             matchingFallbacks += "release"
+
+            manifestPlaceholders += listOf(
+                "firebase_crashlytics_collection_enabled" to "false",
+                "firebase_analytics_collection_deactivated" to "true",
+                "google_analytics_adid_collection_enabled" to "false",
+            )
         }
     }
 

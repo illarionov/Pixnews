@@ -5,9 +5,7 @@
 
 package ru.pixnews.foundation.analytics
 
-public class NoOpAnalytics : Analytics {
-    public override fun setCurrentScreenName(screenName: String, screenClass: String): Unit = Unit
-
+public object NoOpAnalytics : Analytics {
     public override fun setEnableAnalytics(enable: Boolean): Unit = Unit
 
     public override fun setUserId(userId: String?): Unit = Unit

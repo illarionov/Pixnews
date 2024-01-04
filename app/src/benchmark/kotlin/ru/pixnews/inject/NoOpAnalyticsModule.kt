@@ -6,17 +6,17 @@
 package ru.pixnews.inject
 
 import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.Reusable
 import ru.pixnews.foundation.analytics.Analytics
+import ru.pixnews.foundation.analytics.NoOpAnalytics
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.inject.analytics.LoggingAnalytics
 
-@ContributesTo(AppScope::class)
+@ContributesTo(AppScope::class, replaces = [AnalyticsModule::class])
 @Module
-interface AnalyticsModule {
-    @Binds
+object NoOpAnalyticsModule {
+    @Provides
     @Reusable
-    fun bindAnalytics(analytics: LoggingAnalytics): Analytics
+    fun provideAnalytics(): Analytics = NoOpAnalytics
 }

@@ -3,20 +3,21 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.inject
+package ru.pixnews.app.inject
 
 import com.squareup.anvil.annotations.ContributesTo
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.Reusable
 import ru.pixnews.foundation.analytics.Analytics
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.inject.analytics.LoggingAnalytics
+import ru.pixnews.inject.AnalyticsModule
+import ru.pixnews.inject.analytics.FirebaseAnalytics
 
-@ContributesTo(AppScope::class)
+@ContributesTo(AppScope::class, replaces = [AnalyticsModule::class])
 @Module
-interface AnalyticsModule {
-    @Binds
+public object FirebaseAnalyticsModule {
+    @Provides
     @Reusable
-    fun bindAnalytics(analytics: LoggingAnalytics): Analytics
+    fun bindsAnalytics(): Analytics = FirebaseAnalytics
 }

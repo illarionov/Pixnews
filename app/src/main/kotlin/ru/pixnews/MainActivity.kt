@@ -10,6 +10,7 @@ import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import co.touchlab.kermit.Logger
 import ru.pixnews.feature.root.PixnewsRootContent
+import ru.pixnews.foundation.analytics.Analytics
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.ui.base.activity.BaseActivity
 import ru.pixnews.foundation.di.ui.base.activity.ContributesActivity
@@ -32,12 +33,16 @@ class MainActivity : BaseActivity() {
     @Inject
     internal lateinit var appLoadingStatus: AppLoadingStatus
 
+    @Inject
+    internal lateinit var analytics: Analytics
+
     override fun onPostInjectPreCreate() {
         setupSplashScreen()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        analytics.logEvent("main_activity_created")
         setContent {
             PixnewsRootContent(
                 appConfig = appConfig,

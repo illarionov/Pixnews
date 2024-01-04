@@ -6,8 +6,6 @@
 package ru.pixnews.foundation.analytics
 
 public interface Analytics {
-    public fun setCurrentScreenName(screenName: String, screenClass: String)
-
     public fun setEnableAnalytics(enable: Boolean)
 
     public fun setUserId(userId: String?)

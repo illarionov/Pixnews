@@ -12,7 +12,8 @@ import ru.pixnews.inject.MainPixnewsAppComponent
 import javax.inject.Inject
 
 class PixnewsApplication : Application(), Configuration.Provider {
-    override val workManagerConfiguration = localWorkManagerConfiguration
+    override val workManagerConfiguration
+        get() = localWorkManagerConfiguration
 
     @field:Inject
     lateinit var localWorkManagerConfiguration: Configuration

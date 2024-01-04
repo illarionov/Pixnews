@@ -1473,6 +1473,22 @@ HMHzNl2z5YoW6IBhdlJ3MJuMknZWqcmdC1gc3tnmvfJKpsbvDetF6f4S23o9f0eu
 =8B+l
 -----END PGP PUBLIC KEY BLOCK-----
 
+pub    CA183FBA1E476C6E
+uid    Pierre Yves Ricau <py.ricau@gmail.com>
+
+sub    B2D8461AB7A7DF27
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: BCPG v1.68
+
+mDMEYo/OhhYJKwYBBAHaRw8BAQdAStj5losyChV0W0clNh6HwDgaGgmypqqVICtN
+K+Vy0oy0JlBpZXJyZSBZdmVzIFJpY2F1IDxweS5yaWNhdUBnbWFpbC5jb20+uDgE
+Yo/OhhIKKwYBBAGXVQEFAQEHQJ1jpD+bhAJK1NGEhf4EJrnjEzkauTfzo3ip1pNK
+wkcSAwEIB4h+BBgWCgAmFiEE3zmGUjpq0HnEa3MLyhg/uh5HbG4FAmKPzoYCGwwF
+CQPCZwAACgkQyhg/uh5HbG5xrAD+IUSqk2qmnFMHbtHVxKLQhuv+j0yAoP5U/UWc
+PuLYynMA/2pyRUn/29/YedDAHd6Hf397meCimOckzoDKVA8lqjwK
+=ZhSQ
+-----END PGP PUBLIC KEY BLOCK-----
+
 pub    CB43338E060CF9FA
 uid    Evgeny Mandrikov (CODE SIGNING KEY) <mandrikov@gmail.com>
 

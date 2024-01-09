@@ -45,6 +45,12 @@ import coil.request.ImageRequest
 import coil.size.Scale.FILL
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.persistentSetOf
+import ru.pixnews.debuglayout.DebugLayout.Companion.debugLayout
+import ru.pixnews.debuglayout.rowcolumn.DebugRowsArrangement
+import ru.pixnews.debuglayout.rowcolumn.RowsColumnsCount
+import ru.pixnews.debuglayout.ruler.DebugRulerVerticalZeroPoint
+import ru.pixnews.debuglayout.ruler.DebugRulerVerticalZeroPoint.Alignment.TOP
+import ru.pixnews.debuglayout.ruler.rulerDp
 import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform
@@ -65,12 +71,6 @@ import ru.pixnews.foundation.ui.design.util.uniqueIcons
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.foundation.ui.theme.md_theme_palette_neutral_variant_40
 import ru.pixnews.library.compose.utils.defaultLocale
-import ru.pixnews.library.ui.tooling.debuglayout.DebugLayout.Companion.debugLayout
-import ru.pixnews.library.ui.tooling.debuglayout.rowcolumn.DebugRowsArrangement
-import ru.pixnews.library.ui.tooling.debuglayout.rowcolumn.RowsColumnsCount
-import ru.pixnews.library.ui.tooling.debuglayout.ruler.DebugRulerVerticalZeroPoint
-import ru.pixnews.library.ui.tooling.debuglayout.ruler.DebugRulerVerticalZeroPoint.Alignment.TOP
-import ru.pixnews.library.ui.tooling.debuglayout.ruler.rulerDp
 
 @Suppress("FLOAT_IN_ACCURATE_CALCULATIONS")
 private const val GAME_CARD_IMAGE_ASPECT_RATIO = 4f / 3f

@@ -16,6 +16,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
+import ru.pixnews.debuglayout.DebugLayout.Companion.debugLayout
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.game.game.hytale
@@ -24,7 +25,6 @@ import ru.pixnews.foundation.ui.design.card.PixnewsGameCardVariant.TITLE_GENRES_
 import ru.pixnews.foundation.ui.design.card.PixnewsGameCardVariant.TITLE_RELEASE_DATE
 import ru.pixnews.foundation.ui.imageloader.coil.test.FakeImageLoaderRule
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
-import ru.pixnews.library.ui.tooling.debuglayout.DebugLayout.Companion.debugLayout
 
 @RunWith(Parameterized::class)
 class PixnewsGameCardScreenshotTest(

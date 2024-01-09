@@ -38,6 +38,8 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.flowOf
+import ru.pixnews.debuglayout.DebugLayout.Companion.debugLayout
+import ru.pixnews.debuglayout.mediumLaptopScreen12Columns
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.feature.calendar.PreviewFixtures
 import ru.pixnews.feature.calendar.PreviewFixtures.UpcomingReleases
@@ -55,8 +57,6 @@ import ru.pixnews.foundation.ui.design.util.UpcomingReleaseDateLocalization
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import ru.pixnews.library.compose.utils.defaultLocale
 import ru.pixnews.library.ui.tooling.PreviewDevices
-import ru.pixnews.library.ui.tooling.debuglayout.DebugLayout.Companion.debugLayout
-import ru.pixnews.library.ui.tooling.debuglayout.mediumLaptopScreen12Columns
 import java.util.Locale
 
 internal val feedMaxWidth = 552.dp

@@ -20,6 +20,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.text)
     implementation(libs.kermit)
     api(libs.androidx.compose.ui.tooling.preview)
+    api(libs.pixnews.debuglayout)
 
     testImplementation(libs.junit.jupiter.params)
 }

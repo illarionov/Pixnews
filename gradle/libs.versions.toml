@@ -54,6 +54,7 @@ androidx-tracing-perfetto = "1.0.0-alpha12"
 androidx-workmanager = "2.9.0"
 arrow = "1.2.1"
 assertk = "0.28.0"
+debuglayout = "0.1-SNAPSHOT"
 asm = "9.6"
 auto-service = "1.1.1"
 coil = "2.5.0"
@@ -234,6 +235,7 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor" }
 okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver" }
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
+pixnews-debuglayout = { group = "ru.pixnews.debuglayout", name = "core", version.ref = "debuglayout" }
 radiography = { group = "com.squareup.radiography", name = "radiography", version.ref = "radiography" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-scalars = { group = "com.squareup.retrofit2", name = "converter-scalars", version.ref = "retrofit" }

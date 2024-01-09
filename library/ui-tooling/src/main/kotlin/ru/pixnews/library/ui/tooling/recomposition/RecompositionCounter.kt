@@ -38,7 +38,7 @@ public fun Modifier.recompositionCounter(callingName: String): Modifier = this.t
         // as the key is really just to cause the timer to restart every composition).
         LaunchedEffect(totalCompositions[0]) {
             delay(RECOMPOSITION_COUNTER_TIMEOUT)
-            totalCompositionsAtLastTimeout.value = totalCompositions[0]
+            totalCompositionsAtLastTimeout.longValue = totalCompositions[0]
         }
 
         Modifier.drawWithCache {
@@ -46,7 +46,7 @@ public fun Modifier.recompositionCounter(callingName: String): Modifier = this.t
                 // Below is to draw the highlight, if necessary. A lot of the logic is copied from
                 // Modifier.border
                 val numCompositionsSinceTimeout =
-                    totalCompositions[0] - totalCompositionsAtLastTimeout.value
+                    totalCompositions[0] - totalCompositionsAtLastTimeout.longValue
                 if (numCompositionsSinceTimeout > 0) {
                     Logger.i("recompositionCounter") { "$callingName - $numCompositionsSinceTimeout" }
                 }

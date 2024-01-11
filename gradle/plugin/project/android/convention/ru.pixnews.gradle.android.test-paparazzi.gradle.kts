@@ -28,6 +28,16 @@ plugins.withType<LibraryPlugin> {
 
     dependencies {
         "testImplementation"(versionCatalog.findLibrary("junit-jupiter-vintage-engine").get())
+        constraints {
+            testImplementation("com.google.guava:guava") {
+                attributes {
+                    attribute(
+                        TargetJvmEnvironment.TARGET_JVM_ENVIRONMENT_ATTRIBUTE,
+                        objects.named(TargetJvmEnvironment.STANDARD_JVM),
+                    )
+                }
+            }
+        }
     }
 }
 

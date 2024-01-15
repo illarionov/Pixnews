@@ -14,4 +14,5 @@ group = "ru.pixnews.foundation.featuretoggles"
 dependencies {
     api(libs.dagger)
     api(projects.library.functional)
+    api(libs.pixnews.anvil.experiment.inject)
 }

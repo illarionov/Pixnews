@@ -7,12 +7,12 @@ package ru.pixnews.inject.experiments
 
 import com.squareup.anvil.annotations.MergeComponent
 import com.squareup.anvil.annotations.optional.SingleIn
+import ru.pixnews.anvil.codegen.experiment.inject.wiring.ExperimentScope
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
-import ru.pixnews.foundation.featuretoggles.inject.ExperimentScope
 
 @SingleIn(ExperimentScope::class)
 @MergeComponent(scope = ExperimentScope::class)

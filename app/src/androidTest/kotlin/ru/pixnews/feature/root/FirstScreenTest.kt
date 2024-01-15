@@ -11,10 +11,10 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.MainActivity
+import ru.pixnews.anvil.codegen.test.inject.ContributesTest
 import ru.pixnews.feature.navigation.BottomBarElement
 import ru.pixnews.feature.root.TopLevelDestination.CALENDAR
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
-import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
 import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions
 import javax.inject.Inject

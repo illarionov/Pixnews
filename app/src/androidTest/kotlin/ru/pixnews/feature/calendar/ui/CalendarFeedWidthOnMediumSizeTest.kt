@@ -21,11 +21,11 @@ import com.google.accompanist.testharness.TestHarness
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import ru.pixnews.anvil.codegen.test.inject.ContributesTest
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.feature.root.PixnewsRootContent
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
-import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
 import ru.pixnews.test.assumption.NetworkAssumptions
 import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions

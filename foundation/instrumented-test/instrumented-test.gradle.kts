@@ -26,6 +26,7 @@ dependencies {
     api(libs.androidx.test.runner)
     api(libs.assertk)
     api(libs.dagger)
+    api(libs.pixnews.anvil.test.inject)
     api(libs.junit4)
 
     implementation(libs.androidx.test.core)

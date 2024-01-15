@@ -34,10 +34,10 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
 import ru.pixnews.MainActivity
+import ru.pixnews.anvil.codegen.test.inject.ContributesTest
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
-import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
 import ru.pixnews.library.android.utils.rootView
 import ru.pixnews.library.instrumented.test.rule.SystemNavigationRule

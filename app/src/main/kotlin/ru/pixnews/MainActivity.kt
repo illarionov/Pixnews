@@ -9,11 +9,11 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import co.touchlab.kermit.Logger
+import ru.pixnews.anvil.codegen.activity.inject.ContributesActivity
 import ru.pixnews.feature.root.PixnewsRootContent
 import ru.pixnews.foundation.analytics.Analytics
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.ui.base.activity.BaseActivity
-import ru.pixnews.foundation.di.ui.base.activity.ContributesActivity
 import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.ui.experiments.DarkModeExperiment
 import ru.pixnews.loadingstatus.AppLoadingStatus

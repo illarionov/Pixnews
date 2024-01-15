@@ -18,6 +18,16 @@ plugins {
 
 dependencies {
     add("anvil", project(":foundation:di:anvil-codegen"))
+    listOf(
+        "pixnews-anvil-activity-generator",
+        "pixnews-anvil-experiment-generator",
+        "pixnews-anvil-initializer-generator",
+        "pixnews-anvil-test-generator",
+        "pixnews-anvil-viewmodel-generator",
+        "pixnews-anvil-workmanager-generator",
+    ).forEach {
+        add("anvil", versionCatalog.findLibrary(it).get())
+    }
     add("api", versionCatalog.findLibrary("dagger").orElseThrow())
     add("kapt", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
 }

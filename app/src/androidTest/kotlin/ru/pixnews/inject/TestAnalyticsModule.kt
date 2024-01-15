@@ -18,5 +18,5 @@ import ru.pixnews.foundation.di.base.scopes.AppScope
 object TestAnalyticsModule {
     @Provides
     @Reusable
-    fun provideAnalytics(): Analytics = NoOpAnalytics()
+    fun provideAnalytics(): Analytics = NoOpAnalytics
 }

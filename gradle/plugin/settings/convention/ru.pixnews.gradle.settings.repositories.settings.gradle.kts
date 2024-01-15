@@ -69,6 +69,7 @@ fun RepositoryHandler.pixnewsMaven(): Unit = exclusiveContent {
         includeGroup("io.github.simonschiller.prefiller")
         includeGroup("io.github.simonschiller")
         includeGroup("ru.pixnews.debuglayout")
+        includeGroupByRegex("""ru\.pixnews\.anvil\..+""")
     }
 }
 

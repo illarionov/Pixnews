@@ -19,8 +19,8 @@ import androidx.fragment.app.strictmode.FragmentStrictMode
 import androidx.fragment.app.strictmode.FragmentStrictMode.Policy
 import co.touchlab.kermit.Logger
 import ru.pixnews.MainActivity
+import ru.pixnews.anvil.codegen.initializer.inject.ContributesInitializer
 import ru.pixnews.foundation.initializers.Initializer
-import ru.pixnews.foundation.initializers.inject.ContributesInitializer
 import ru.pixnews.inject.DebugStrictModeInitializerModule
 import java.util.concurrent.Executors
 import javax.inject.Inject

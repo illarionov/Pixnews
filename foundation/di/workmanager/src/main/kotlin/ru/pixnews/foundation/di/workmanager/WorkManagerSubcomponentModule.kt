@@ -10,8 +10,8 @@ import androidx.work.CoroutineWorker
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.multibindings.Multibinds
+import ru.pixnews.anvil.codegen.workmanager.inject.WorkManagerScope
 import ru.pixnews.anvil.codegen.workmanager.inject.wiring.CoroutineWorkerFactory
-import ru.pixnews.anvil.codegen.workmanager.inject.wiring.WorkManagerScope
 import ru.pixnews.foundation.di.base.DaggerMap
 
 @ContributesTo(WorkManagerScope::class)

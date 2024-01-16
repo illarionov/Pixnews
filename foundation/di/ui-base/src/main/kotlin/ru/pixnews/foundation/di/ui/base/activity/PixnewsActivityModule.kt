@@ -13,8 +13,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.multibindings.Multibinds
+import ru.pixnews.anvil.codegen.activity.inject.ActivityScope
 import ru.pixnews.anvil.codegen.activity.inject.wiring.ActivityInjector
-import ru.pixnews.anvil.codegen.activity.inject.wiring.ActivityScope
 import ru.pixnews.anvil.codegen.activity.inject.wiring.DefaultActivityInjector
 import ru.pixnews.foundation.di.base.DaggerMap
 

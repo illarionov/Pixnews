@@ -11,7 +11,7 @@ import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
 import dagger.Provides
-import ru.pixnews.anvil.codegen.viewmodel.inject.wiring.ViewModelScope
+import ru.pixnews.anvil.codegen.viewmodel.inject.ViewModelScope
 import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.coroutines.RootCoroutineScope
 import ru.pixnews.foundation.di.base.DaggerMap

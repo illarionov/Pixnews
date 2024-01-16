@@ -17,7 +17,6 @@ plugins {
 }
 
 dependencies {
-    add("anvil", project(":foundation:di:anvil-codegen"))
     listOf(
         "pixnews-anvil-activity-generator",
         "pixnews-anvil-experiment-generator",
@@ -47,7 +46,7 @@ kapt {
 // https://github.com/square/anvil/issues/693#issuecomment-1744013947
 tasks.withType<KotlinCompile>().configureEach {
     if (this !is KspTaskJvm && this !is KaptGenerateStubs) {
-        val anvilSrcGenDir = layout.buildDirectory.dir(sourceSetName.map { "anvil/src-gen-$it/anvil" })
+        val anvilSrcGenDir = layout.buildDirectory.dir(sourceSetName.map { "anvil/src-gen-$it" })
         this.outputs.dir(anvilSrcGenDir)
     }
 }

@@ -21,7 +21,6 @@ listOf(
     "analytics",
     "appconfig",
     "database",
-    "di:anvil-codegen",
     "di:base",
     "di:root-component",
     "di:ui-base",

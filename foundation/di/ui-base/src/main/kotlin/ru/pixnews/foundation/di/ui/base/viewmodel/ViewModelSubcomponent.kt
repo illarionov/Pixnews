@@ -12,6 +12,8 @@ import com.squareup.anvil.annotations.ContributesSubcomponent
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.BindsInstance
+import ru.pixnews.anvil.codegen.viewmodel.inject.wiring.ViewModelFactory
+import ru.pixnews.anvil.codegen.viewmodel.inject.wiring.ViewModelScope
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import javax.inject.Provider

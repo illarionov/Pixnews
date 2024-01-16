@@ -32,6 +32,7 @@ dependencies {
     api(libs.androidx.lifecycle.viewmodel.savedstate)
     api(libs.androidx.lifecycle.viewmodel.compose)
     api(libs.pixnews.anvil.activity.inject)
+    api(libs.pixnews.anvil.viewmodel.inject)
 
     androidTestImplementation(libs.androidx.test.rules)
 }

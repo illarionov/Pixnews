@@ -7,18 +7,22 @@ package ru.pixnews.feature.featuretoggles
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import co.touchlab.kermit.Logger
 import ru.pixnews.anvil.codegen.activity.inject.ContributesActivity
+import ru.pixnews.di.root.component.PixnewsRootComponentHolder
 import ru.pixnews.feature.featuretoggles.ui.FeatureToggleListScreen
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.di.ui.base.activity.BaseActivity
-import ru.pixnews.foundation.di.ui.base.viewmodel.injectedViewModel
 import ru.pixnews.foundation.ui.theme.PixnewsTheme
 import javax.inject.Inject
 
 @ContributesActivity
 public class FeatureToggleListActivity : BaseActivity() {
-    private val viewModel by injectedViewModel<FeatureToggleListViewModel>()
+    private val viewModel: FeatureToggleListViewModel by viewModels<FeatureToggleListViewModel>(
+        null,
+        PixnewsRootComponentHolder.appComponent::viewModelFactory,
+    )
 
     @Inject
     internal lateinit var appConfig: AppConfig

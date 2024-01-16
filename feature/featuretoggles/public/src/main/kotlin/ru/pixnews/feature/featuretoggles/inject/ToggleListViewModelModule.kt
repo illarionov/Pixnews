@@ -11,11 +11,11 @@ import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
 import dagger.Provides
+import ru.pixnews.anvil.codegen.viewmodel.inject.wiring.ViewModelScope
 import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.coroutines.RootCoroutineScope
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
-import ru.pixnews.foundation.di.ui.base.viewmodel.ViewModelScope
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.datasource.overrides.OverridesDataSource

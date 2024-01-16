@@ -5,20 +5,12 @@
 
 package ru.pixnews.foundation.di.ui.base.viewmodel
 
-import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.squareup.anvil.annotations.ContributesBinding
-import dagger.Reusable
-import ru.pixnews.foundation.di.base.scopes.AppScope
-import javax.inject.Inject
 
-@Reusable
-@ContributesBinding(AppScope::class, boundType = ViewModelProvider.Factory::class)
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-public class PixnewsViewModelProviderFactory @Inject constructor(
+internal class PixnewsViewModelProviderFactory(
     private val vmSubcomponentFactory: ViewModelSubcomponent.Factory,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {

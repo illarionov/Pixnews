@@ -22,5 +22,6 @@ dependencies {
     api(projects.foundation.coroutines)
     api(projects.foundation.featuretoggles.public)
     api(projects.foundation.featuretoggles.datasourceOverrides)
+    api(libs.androidx.lifecycle.viewmodel)
     api(libs.kermit)
 }

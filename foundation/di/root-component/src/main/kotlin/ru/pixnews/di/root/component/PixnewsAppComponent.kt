@@ -10,4 +10,5 @@ public interface PixnewsAppComponent :
     RootCoroutineScopeHolder,
     LoggerHolder,
     FeatureManagerHolder,
-    AppConfigHolder
+    AppConfigHolder,
+    ViewModelProviderFactoryHolder

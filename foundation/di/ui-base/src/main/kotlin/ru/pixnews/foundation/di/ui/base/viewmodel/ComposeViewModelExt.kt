@@ -79,4 +79,10 @@ public fun <VM : ViewModel> injectedViewModel(
     } else {
         CreationExtras.Empty
     },
-): VM = viewModel(modelClass, viewModelStoreOwner, key, PixnewsRootComponentHolder.viewModelFactory, extras)
+): VM = viewModel(
+    modelClass,
+    viewModelStoreOwner,
+    key,
+    PixnewsRootComponentHolder.appComponent.viewModelFactory,
+    extras,
+)

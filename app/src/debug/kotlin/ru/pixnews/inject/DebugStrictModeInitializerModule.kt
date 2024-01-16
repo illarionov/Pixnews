@@ -9,8 +9,8 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoSet
+import ru.pixnews.anvil.codegen.initializer.inject.wiring.AppInitializersScope
 import ru.pixnews.foundation.initializers.Initializer
-import ru.pixnews.foundation.initializers.inject.AppInitializersScope
 import ru.pixnews.initializers.DebugStrictModeInitializer
 
 @ContributesTo(AppInitializersScope::class)

@@ -17,7 +17,7 @@ android {
 
 dependencies {
     implementation(projects.library.coroutines)
-    api(libs.inject)
+    api(libs.pixnews.anvil.initializer.inject)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.tracing)
 }

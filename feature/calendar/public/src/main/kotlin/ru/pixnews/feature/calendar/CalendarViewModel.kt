@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.runningFold
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.datetime.TimeZone
+import ru.pixnews.anvil.codegen.viewmodel.inject.ContributesViewModel
 import ru.pixnews.feature.calendar.converter.UpcomingGameListConverter.toCalendarListItem
 import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
@@ -28,7 +29,6 @@ import ru.pixnews.feature.calendar.model.CalendarListItem
 import ru.pixnews.feature.calendar.model.CalendarScreenState
 import ru.pixnews.feature.calendar.model.CalendarScreenStateLoaded
 import ru.pixnews.feature.calendar.model.InitialLoad
-import ru.pixnews.foundation.di.ui.base.viewmodel.ContributesViewModel
 import ru.pixnews.foundation.featuretoggles.FeatureManager
 
 @Suppress("UnusedPrivateMember", "UNUSED_PARAMETER")

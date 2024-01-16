@@ -8,7 +8,7 @@ package ru.pixnews.inject.ui
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
-import ru.pixnews.foundation.di.ui.base.activity.ActivityScope
+import ru.pixnews.anvil.codegen.activity.inject.wiring.ActivityScope
 import ru.pixnews.foundation.featuretoggles.FeatureManager
 import ru.pixnews.foundation.featuretoggles.FeatureToggle
 import ru.pixnews.foundation.featuretoggles.getFeatureToggle

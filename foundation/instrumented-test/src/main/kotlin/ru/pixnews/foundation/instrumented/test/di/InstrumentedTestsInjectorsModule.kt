@@ -12,6 +12,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.multibindings.Multibinds
+import ru.pixnews.anvil.codegen.test.inject.wiring.DefaultInstrumentedTestInjector
+import ru.pixnews.anvil.codegen.test.inject.wiring.InstrumentedTestInjector
+import ru.pixnews.anvil.codegen.test.inject.wiring.SingleInstrumentedTestInjector
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.scopes.AppScope
 

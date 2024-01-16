@@ -9,13 +9,13 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.Multibinds
+import ru.pixnews.anvil.codegen.initializer.inject.wiring.AppInitializersScope
 import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.coroutines.RootCoroutineScope
 import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.initializers.AppInitializer
 import ru.pixnews.foundation.initializers.AsyncInitializer
 import ru.pixnews.foundation.initializers.Initializer
-import ru.pixnews.foundation.initializers.inject.AppInitializersScope
 
 @ContributesTo(AppInitializersScope::class)
 @Module

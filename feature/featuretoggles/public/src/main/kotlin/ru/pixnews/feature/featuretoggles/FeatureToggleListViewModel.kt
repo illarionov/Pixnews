@@ -17,12 +17,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import ru.pixnews.anvil.codegen.viewmodel.inject.ContributesViewModel
 import ru.pixnews.feature.featuretoggles.model.FeatureTogglesScreenState
 import ru.pixnews.feature.featuretoggles.model.PermanentErrorMessage
 import ru.pixnews.feature.featuretoggles.model.VariantUiModel
 import ru.pixnews.feature.featuretoggles.model.toExperimentVariant
 import ru.pixnews.feature.featuretoggles.model.toUiModel
-import ru.pixnews.foundation.di.ui.base.viewmodel.ContributesViewModel
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant

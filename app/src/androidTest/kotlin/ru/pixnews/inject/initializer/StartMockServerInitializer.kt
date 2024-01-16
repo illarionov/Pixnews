@@ -5,12 +5,12 @@
 
 package ru.pixnews.inject.initializer
 
+import ru.pixnews.anvil.codegen.initializer.inject.ContributesInitializer
 import ru.pixnews.foundation.initializers.AsyncInitializer
-import ru.pixnews.foundation.initializers.inject.ContributesInitializer
 import ru.pixnews.test.app.mock.igdb.IgdbMockWebServer
 import javax.inject.Inject
 
-@ContributesInitializer()
+@ContributesInitializer
 class StartMockServerInitializer @Inject constructor(
     val igdbMockWebServer: IgdbMockWebServer,
 ) : AsyncInitializer {

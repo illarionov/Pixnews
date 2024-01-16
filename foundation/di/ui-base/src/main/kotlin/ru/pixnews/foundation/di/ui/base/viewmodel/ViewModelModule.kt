@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModel
 import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.multibindings.Multibinds
+import ru.pixnews.anvil.codegen.viewmodel.inject.wiring.ViewModelFactory
+import ru.pixnews.anvil.codegen.viewmodel.inject.wiring.ViewModelScope
 import ru.pixnews.foundation.di.base.DaggerMap
 
 @Module

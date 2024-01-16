@@ -15,6 +15,7 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.MainActivity
+import ru.pixnews.anvil.codegen.test.inject.ContributesTest
 import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.CURRENT_QUARTER
 import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.domain.model.datetime.Date
@@ -30,7 +31,6 @@ import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest
-import ru.pixnews.foundation.instrumented.test.di.ContributesTest
 import ru.pixnews.foundation.instrumented.test.di.rule.InjectDependenciesRule
 import ru.pixnews.library.instrumented.test.util.assertVerticalPaddingBetweenAdjacentItems
 import ru.pixnews.test.assumption.UpcomingReleaseUseCaseAssumptions

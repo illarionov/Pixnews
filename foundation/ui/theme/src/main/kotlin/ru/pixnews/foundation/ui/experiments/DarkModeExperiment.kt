@@ -5,6 +5,8 @@
 
 package ru.pixnews.foundation.ui.experiments
 
+import ru.pixnews.anvil.codegen.experiment.inject.ContributesExperiment
+import ru.pixnews.anvil.codegen.experiment.inject.ContributesExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant
@@ -12,8 +14,6 @@ import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariantKey.Companion.CONTROL_GROUP
 import ru.pixnews.foundation.featuretoggles.experimentKey
 import ru.pixnews.foundation.featuretoggles.experimentVariantKey
-import ru.pixnews.foundation.featuretoggles.inject.ContributesExperiment
-import ru.pixnews.foundation.featuretoggles.inject.ContributesExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.serializers.BooleanVariantSerializer
 
 @ContributesExperiment

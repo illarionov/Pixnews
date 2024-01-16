@@ -73,6 +73,7 @@ mockwebserver-dsl = "1.0.0"
 okhttp = "4.12.0"
 okio = "3.7.0"
 paparazzi = "1.3.2"
+pixnews-anvil-codegen = "0.1-SNAPSHOT"
 prefiller = "1.6.0-SNAPSHOT"
 retrofit = "2.9.0"
 radiography = "2.5"
@@ -235,6 +236,18 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor" }
 okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver" }
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
+pixnews-anvil-activity-generator = { group = "ru.pixnews.anvil.codegen.activity", name = "generator", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-activity-inject = { group = "ru.pixnews.anvil.codegen.activity", name = "inject", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-experiment-generator = { group = "ru.pixnews.anvil.codegen.experiment", name = "generator", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-experiment-inject = { group = "ru.pixnews.anvil.codegen.experiment", name = "inject", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-initializer-generator = { group = "ru.pixnews.anvil.codegen.initializer", name = "generator", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-initializer-inject = { group = "ru.pixnews.anvil.codegen.initializer", name = "inject", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-test-generator = { group = "ru.pixnews.anvil.codegen.test", name = "generator", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-test-inject = { group = "ru.pixnews.anvil.codegen.test", name = "inject", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-viewmodel-generator = { group = "ru.pixnews.anvil.codegen.viewmodel", name = "generator", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-viewmodel-inject = { group = "ru.pixnews.anvil.codegen.viewmodel", name = "inject", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-workmanager-generator = { group = "ru.pixnews.anvil.codegen.workmanager", name = "generator", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-workmanager-inject = { group = "ru.pixnews.anvil.codegen.workmanager", name = "inject", version.ref = "pixnews-anvil-codegen" }
 pixnews-debuglayout = { group = "ru.pixnews.debuglayout", name = "core", version.ref = "debuglayout" }
 radiography = { group = "com.squareup.radiography", name = "radiography", version.ref = "radiography" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }

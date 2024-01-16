@@ -7,8 +7,8 @@ package ru.pixnews.initializers
 
 import co.touchlab.kermit.Logger
 import com.google.firebase.FirebaseApp
+import ru.pixnews.anvil.codegen.initializer.inject.ContributesInitializer
 import ru.pixnews.foundation.initializers.AsyncInitializer
-import ru.pixnews.foundation.initializers.inject.ContributesInitializer
 import javax.inject.Provider
 
 @ContributesInitializer

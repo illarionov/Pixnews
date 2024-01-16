@@ -11,7 +11,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.annotation.MainThread
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
@@ -22,12 +21,4 @@ import ru.pixnews.di.root.component.PixnewsRootComponentHolder
 @MainThread
 public inline fun <reified VM : ViewModel> ComponentActivity.injectedViewModel(
     noinline extrasProducer: (() -> CreationExtras) = { defaultViewModelCreationExtras },
-): Lazy<VM> = ViewModelLazy(
-    viewModelClass = VM::class,
-    storeProducer = { viewModelStore },
-    factoryProducer = PixnewsRootComponentHolder::viewModelFactory,
-    extrasProducer = extrasProducer,
-)
-
-public val PixnewsRootComponentHolder.viewModelFactory: ViewModelProvider.Factory
-    get() = (this.appComponent as ViewModelProviderFactoryHolder).viewModelFactory
+): Lazy<VM> = viewModels(extrasProducer, PixnewsRootComponentHolder.appComponent::viewModelFactory)

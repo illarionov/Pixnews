@@ -24,6 +24,7 @@ dependencies {
     implementation(projects.foundation.di.rootComponent)
     api(libs.dagger)
 
+    api(libs.pixnews.anvil.workmanager.inject)
     api(libs.androidx.workmanager.ktx)
     api(libs.androidx.core)
 }

@@ -19,5 +19,5 @@ import ru.pixnews.foundation.di.base.DaggerMap
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public interface WorkManagerSubcomponentModule {
     @Multibinds
-    public fun workerProviders(): DaggerMap<Class<out CoroutineWorker>, CoroutineWorkerFactory>
+    public fun workerFactories(): DaggerMap<Class<out CoroutineWorker>, CoroutineWorkerFactory>
 }

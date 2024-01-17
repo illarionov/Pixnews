@@ -113,6 +113,7 @@
             <trusting group="^ru[.]pixnews[.]anvil[.]codegen($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="8E3A02905A1AE67E7B0F9ACD3967D4EDA591B991" group="org.jetbrains.kotlinx" name="kotlinx-html-jvm"/>
+         <trusted-key id="90B8183BCD9B95216B11C8EDA325BAA35D60E68F" group="com.squareup.anvil"/>
          <trusted-key id="90EE19787A7BCF6FD37A1E9180C08B1C29100955">
             <trusting group="com.squareup" name="javawriter"/>
             <trusting group="com.squareup.retrofit2"/>

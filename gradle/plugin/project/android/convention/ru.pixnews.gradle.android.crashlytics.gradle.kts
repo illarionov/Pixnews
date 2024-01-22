@@ -11,7 +11,6 @@ import ru.pixnews.gradle.base.versionCatalog
  * Convention plugin that configures crashlytics
  */
 plugins {
-    id("com.android.application") apply false
     id("ru.pixnews.gradle.base.build-parameters")
     id("com.google.firebase.crashlytics")
 }
@@ -33,6 +32,6 @@ extensions.configure<ApplicationExtension>("android") {
 }
 
 dependencies {
-    implementation(versionCatalog.findLibrary("firebase.analytics").get())
-    implementation(versionCatalog.findLibrary("firebase.crashlytics").get())
+    add("implementation", versionCatalog.findLibrary("firebase.analytics").get())
+    add("implementation", versionCatalog.findLibrary("firebase.crashlytics").get())
 }

@@ -33,16 +33,15 @@ internal fun Project.configureCommonAndroid(
         }
 
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
-            // https://issuetracker.google.com/u/1/issues/266687543
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
             isCoreLibraryDesugaringEnabled = true
         }
 
         tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask<KotlinJvmCompilerOptions>>()
             .configureEach {
                 compilerOptions {
-                    jvmTarget.set(JvmTarget.JVM_11)
+                    jvmTarget.set(JvmTarget.JVM_17)
                     // There are some plugins incompatible with K2 compiler:
                     // ComposeCompiler, R8
                     // languageVersion.set(KOTLIN_2_0)

@@ -4,7 +4,7 @@
  */
 
 plugins {
-    alias(libs.plugins.kotlin.jvm)
+    id("ru.pixnews.gradle.base.kotlindsl")
 }
 
 group = "ru.pixnews.gradle.testing"

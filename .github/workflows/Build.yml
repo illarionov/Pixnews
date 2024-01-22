@@ -16,13 +16,10 @@ env:
   CI: true
   TERM: dumb
   GRADLE_OPTS: >-
-    -Dorg.gradle.jvmargs="-Xmx3G -XX:MaxMetaspaceSize=1g -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC"
-    -Dorg.gradle.workers.max=2
-    -Dorg.gradle.vfs.watch=false
+    -Dorg.gradle.jvmargs="-Xmx3G -XX:MaxMetaspaceSize=1g -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC -XX:NewRatio=1"
     -Dorg.gradle.dependency.verification.console=verbose
-    -DwarningsAsErrors=false
   KOTLIN_DAEMON_JVMARGS: >-
-    -Xmx2G -XX:MaxMetaspaceSize=320M -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC -XX:NewRatio=1
+    -Xmx1G -XX:MaxMetaspaceSize=320M -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC -XX:NewRatio=1
 
 jobs:
   assemble:
@@ -50,7 +47,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '20'
+          java-version: '21'
 
       - name: Unpack pixnews.properties
         env:
@@ -132,7 +129,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '20'
+          java-version: '21'
 
       - name: Run dprint
         run: dprint check

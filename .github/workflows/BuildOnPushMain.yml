@@ -49,9 +49,6 @@ jobs:
           lfs: true
           submodules: true
 
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
-
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -122,9 +119,6 @@ jobs:
           fetch-depth: 0
           lfs: true
           submodules: true
-
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
 
       - name: Setup Java
         uses: actions/setup-java@v4

@@ -21,14 +21,10 @@ env:
   CI: true
   TERM: dumb
   GRADLE_OPTS: >-
-    -Dorg.gradle.jvmargs="-Xmx1536M -XX:MaxMetaspaceSize=1g -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC"
-    -Dorg.gradle.parallel=true
-    -Dorg.gradle.workers.max=2
-    -Dorg.gradle.vfs.watch=false
+    -Dorg.gradle.jvmargs="-Xmx4G -XX:MaxMetaspaceSize=1g -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC"
     -Dorg.gradle.dependency.verification.console=verbose
-    -DwarningsAsErrors=false
   KOTLIN_DAEMON_JVMARGS: >-
-    -Xmx1536M -XX:MaxMetaspaceSize=320M -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC -XX:NewRatio=1
+    -Xmx1G -XX:MaxMetaspaceSize=320M -XX:SoftRefLRUPolicyMSPerMB=10 -XX:+UseParallelGC -XX:NewRatio=1
 
 jobs:
   assemble:
@@ -46,14 +42,11 @@ jobs:
           lfs: true
           submodules: true
 
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
-
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '20'
+          java-version: '21'
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
@@ -107,11 +100,18 @@ jobs:
 
   instrumented-tests:
     name: Instrumented tests
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 60
     if: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
 
     steps:
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          ls /dev/kvm
+
       - name: Checkout sources
         uses: actions/checkout@v4
         with:
@@ -120,14 +120,11 @@ jobs:
           lfs: true
           submodules: true
 
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
-
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '20'
+          java-version: '21'
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
@@ -148,8 +145,6 @@ jobs:
           ./gradlew
           -Pkotlin.daemon.jvmargs="${{ env.KOTLIN_DAEMON_JVMARGS }}"
           -Dorg.gradle.workers.max=1
-          -Pandroid.testoptions.manageddevices.emulator.gpu=swiftshader_indirect
-          -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
           -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=""
           pixel2api30DebugAndroidTest
           --scan --continue
@@ -173,7 +168,7 @@ jobs:
           -o -path '*/build/outputs/androidTest-results'
           -o -path '*/build/outputs/managed_*'
           -o -path '*/build/reports/androidTests' \) -print0
-          |  xargs -0 tar -c --zstd --options zstd:compression-level=20 -f instrumented-tests.tar.zst
+          | xargs -0 tar -c -I 'zstd -19 -T0' -f instrumented-tests.tar.zst
 
       - name: Upload test reports
         if: ${{ failure() }}

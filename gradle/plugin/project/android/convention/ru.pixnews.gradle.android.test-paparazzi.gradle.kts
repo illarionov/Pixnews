@@ -11,7 +11,6 @@ import ru.pixnews.gradle.base.versionCatalog
  * Convention plugin with paparazzi configuration
  */
 plugins {
-    id("com.android.library") apply false
     id("app.cash.paparazzi")
 }
 
@@ -29,7 +28,7 @@ plugins.withType<LibraryPlugin> {
     dependencies {
         "testImplementation"(versionCatalog.findLibrary("junit-jupiter-vintage-engine").get())
         constraints {
-            testImplementation("com.google.guava:guava") {
+            add("testImplementation", "com.google.guava:guava") {
                 attributes {
                     attribute(
                         TargetJvmEnvironment.TARGET_JVM_ENVIRONMENT_ATTRIBUTE,

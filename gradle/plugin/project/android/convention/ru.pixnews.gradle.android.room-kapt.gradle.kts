@@ -3,6 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
+import androidx.room.gradle.RoomExtension
 import com.android.build.api.dsl.CommonExtension
 import ru.pixnews.gradle.base.versionCatalog
 
@@ -12,13 +13,12 @@ import ru.pixnews.gradle.base.versionCatalog
  * For cases when [ru.pixnews.gradle.android.room] doesn't work
  */
 plugins {
-    id("com.android.library") apply false
     id("androidx.room")
     id("ru.pixnews.gradle.base.build-parameters")
     kotlin("kapt")
 }
 
-room {
+extensions.configure<RoomExtension>() {
     schemaDirectory("$projectDir/schemas/")
 }
 
@@ -35,8 +35,8 @@ extensions.configure<CommonExtension<*, *, *, *, *, *>>("android") {
 }
 
 dependencies {
-    annotationProcessor(versionCatalog.findLibrary("androidx.room.compiler").get())
-    api(versionCatalog.findLibrary("androidx.room").get())
+    add("annotationProcessor", versionCatalog.findLibrary("androidx.room.compiler").get())
+    add("api", versionCatalog.findLibrary("androidx.room").get())
     add("kapt", versionCatalog.findLibrary("androidx.room.compiler").get())
-    testImplementation(versionCatalog.findLibrary("androidx.room.testing").get())
+    add("testImplementation", versionCatalog.findLibrary("androidx.room.testing").get())
 }

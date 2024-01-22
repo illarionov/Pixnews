@@ -4,5 +4,4 @@
  */
 plugins {
     id("ru.pixnews.gradle.base.kotlindsl") apply false
-    // alias(libs.plugins.kotlin.jvm) apply false
 }

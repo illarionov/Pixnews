@@ -272,7 +272,7 @@ private fun FeatureTogglesComposablePreviewPopulated(
 
 @Preview
 @Composable
-private fun FeatureTogglesDropdownMenu() {
+private fun PreviewFeatureTogglesDropdownMenu() {
     val variants = FeatureTogglePreviewFixtures.homeScreenGameCardModel.variants
     PixnewsTheme {
         Card(

@@ -429,6 +429,11 @@
             <pgp value="ADBC987D1A7B91DB6B0AAA81995EFBF4A3D20BEB"/>
          </artifact>
       </component>
+      <component group="com.saveourtool.diktat" name="diktat-gradle-plugin" version="2.0.0">
+         <artifact name="diktat-gradle-plugin-2.0.0.jar">
+            <pgp value="B879179229681AD9E8D23A0812DC99973C2318FD"/>
+         </artifact>
+      </component>
       <component group="com.squareup" name="javapoet" version="1.13.0">
          <artifact name="javapoet-1.13.0.jar">
             <pgp value="1D0A8B5E77C678A7C724445ABF984B4145EA13F7"/>

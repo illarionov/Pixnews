@@ -31,7 +31,7 @@ import ru.pixnews.feature.calendar.model.CalendarScreenStateLoaded
 import ru.pixnews.feature.calendar.model.InitialLoad
 import ru.pixnews.foundation.featuretoggles.FeatureManager
 
-@Suppress("UnusedPrivateMember", "UNUSED_PARAMETER")
+@Suppress("UnusedPrivateMember", "UNUSED_PARAMETER", "KDOC_NO_CONSTRUCTOR_PROPERTY_WITH_COMMENT")
 @ContributesViewModel
 internal class CalendarViewModel(
     featureManager: FeatureManager,

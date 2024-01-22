@@ -3,12 +3,11 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 plugins {
-    alias(libs.plugins.kotlin.jvm)
+    id("ru.pixnews.gradle.base.kotlindsl")
 }
 
 group = "ru.pixnews.gradle"
 
 dependencies {
-    implementation(gradleKotlinDsl())
     implementation("ru.pixnews.gradle.base:gradle-build-parameters")
 }

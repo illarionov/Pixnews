@@ -3,5 +3,6 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 plugins {
-    alias(libs.plugins.kotlin.jvm) apply false
+    id("ru.pixnews.gradle.base.kotlindsl") apply false
+    // alias(libs.plugins.kotlin.jvm) apply false
 }

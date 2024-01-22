@@ -56,7 +56,7 @@ private fun Test.configureCommonJunit5TestOptions() {
                 STANDARD_ERROR,
             )
         }
-        it.events = logEvents
+        events = logEvents
     }
 }
 

@@ -18,7 +18,7 @@ plugins {
     kotlin("kapt")
 }
 
-extensions.configure<RoomExtension>() {
+extensions.configure<RoomExtension> {
     schemaDirectory("$projectDir/schemas/")
 }
 

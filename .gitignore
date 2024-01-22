@@ -48,3 +48,5 @@ lint/tmp/
 
 # Mirakle
 mirakle_local.properties
+
+.android/

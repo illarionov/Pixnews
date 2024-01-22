@@ -10,7 +10,7 @@ import ru.pixnews.gradle.lint.excludeNonLintedDirectories
  * Convention plugin that configures Diktat
  */
 plugins {
-    id("org.cqfn.diktat.diktat-gradle-plugin")
+    id("com.saveourtool.diktat")
 }
 
 diktat {
@@ -20,10 +20,17 @@ diktat {
         include("**/*.gradle.kts")
         excludeNonLintedDirectories()
     }
-    githubActions = false
+    reporters {
+        plain()
+        sarif()
+    }
     debug = false
 }
 
-tasks.withType<org.cqfn.diktat.plugin.gradle.DiktatJavaExecTaskBase>().configureEach {
+tasks.withType<com.saveourtool.diktat.plugin.gradle.tasks.DiktatTaskBase>().configureEach {
     notCompatibleWithConfigurationCache("invocation of 'Task.project' at execution time is unsupported")
+}
+
+tasks.named("mergeDiktatReports").configure {
+    enabled = false
 }

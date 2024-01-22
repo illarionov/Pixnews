@@ -48,10 +48,7 @@ val detektCheck = tasks.register("detektCheck", Detekt::class) {
     }
 }
 
-// https://github.com/gradle/gradle/issues/22468
-if (project.name != "gradle-kotlin-dsl-accessors") {
-    dependencies {
-        detektPlugins(versionCatalog.findLibrary("detekt.formatting").get())
-        detektPlugins(versionCatalog.findLibrary("detekt.compose.rules").get())
-    }
+dependencies {
+    detektPlugins(versionCatalog.findLibrary("detekt.formatting").get())
+    detektPlugins(versionCatalog.findLibrary("detekt.compose.rules").get())
 }

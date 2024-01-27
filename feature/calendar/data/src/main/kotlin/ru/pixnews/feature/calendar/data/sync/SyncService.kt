@@ -6,6 +6,7 @@
 package ru.pixnews.feature.calendar.data.sync
 
 import co.touchlab.kermit.Logger
+import com.squareup.anvil.annotations.optional.SingleIn
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
@@ -16,14 +17,16 @@ import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.coroutines.RootCoroutineScope
 import ru.pixnews.foundation.database.PixnewsDatabase
+import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.library.coroutines.newChildSupervisorScope
 import javax.inject.Inject
 
-@Suppress("UnusedPrivateProperty")
+@SingleIn(AppScope::class)
 public class SyncService(
     private val database: PixnewsDatabase,
-    private val parentScope: CoroutineScope,
-    private val databaseDispatcher: CoroutineDispatcher,
+    parentScope: CoroutineScope,
+    databaseDispatcher: CoroutineDispatcher,
+    private val gameModeSyncService: IgdbGameModeSyncService,
     logger: Logger,
 ) {
     // TODO: remove scope?
@@ -31,6 +34,8 @@ public class SyncService(
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         log.e(throwable) { "Unhandled coroutine exception in $TAG" }
     }
+
+    @Suppress("UnusedPrivateProperty")
     private val scope: CoroutineScope = parentScope.newChildSupervisorScope(
         databaseDispatcher + exceptionHandler + CoroutineName("$TAG scope"),
     )
@@ -40,13 +45,25 @@ public class SyncService(
         database: PixnewsDatabase,
         rootScope: RootCoroutineScope,
         databaseDispatcher: IoCoroutineDispatcherProvider,
+        gameModeSyncService: IgdbGameModeSyncService,
         logger: Logger,
     ) : this(
         database = database,
         parentScope = rootScope.newChildSupervisorScope(databaseDispatcher.get()),
         databaseDispatcher = databaseDispatcher.get(),
+        gameModeSyncService = gameModeSyncService,
         logger = logger,
     )
+
+    public suspend fun syncGameModes(
+        forceSync: Boolean,
+        forceFullReload: Boolean = false,
+    ) {
+        val result = gameModeSyncService.sync(forceSync, forceFullReload)
+        result.onLeft { exception ->
+            log.e(exception) { "Sync game modes failed" }
+        }
+    }
 
     public suspend fun syncGames(
         fullRefresh: Boolean,
@@ -55,9 +72,6 @@ public class SyncService(
         earlierThanGameId: GameId?,
     ): SyncGamesResult {
         log.i { "syncGames($fullRefresh, $startDate, $minimumRequiredFields, $earlierThanGameId)" }
-
-        val dao = database.gameDao()
-        val games = dao.getAll()
 
         // TODO
         return SyncGamesResult(

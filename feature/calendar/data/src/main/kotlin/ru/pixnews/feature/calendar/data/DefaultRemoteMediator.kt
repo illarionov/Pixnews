@@ -59,6 +59,8 @@ internal class DefaultRemoteMediator(
             null
         }
         return try {
+            syncService.syncGameModes(false, true)
+
             val result = syncService.syncGames(
                 fullRefresh = loadType == REFRESH,
                 startDate = startDate,

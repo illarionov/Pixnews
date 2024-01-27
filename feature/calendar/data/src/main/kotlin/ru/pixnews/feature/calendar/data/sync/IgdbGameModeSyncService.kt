@@ -64,9 +64,10 @@ public class IgdbGameModeSyncService(
     )
 
     public suspend fun sync(
-        forceSync: Boolean,
+        forceSync: Boolean = false,
+        forceFullReload: Boolean = false,
     ): Result<Throwable, Unit> = try {
-        syncThrowable(forceSync)
+        syncThrowable(forceSync, forceFullReload)
         Unit.completeSuccess()
     } catch (cancellationException: CancellationException) {
         throw cancellationException
@@ -76,20 +77,25 @@ public class IgdbGameModeSyncService(
 
     private suspend fun syncThrowable(
         forceSync: Boolean,
+        forceFullReload: Boolean,
     ) {
+        logger.i { "Sync GameModes" }
         val lastUpdateMetaInfo = database.withTransaction {
             getLastUpdateMetaInfo()
         }
         val syncPolicyStatus = syncPolicy.isSyncRequired(
             lastSyncTime = lastUpdateMetaInfo.lastSyncTime,
             forceSync = forceSync,
+            forceFullReload = forceFullReload,
         )
         if (syncPolicyStatus !is SyncRequiredResult.Required) {
             logger.i { "Sync not required: $syncPolicyStatus" }
             return
         }
 
-        val newGameModes = downloadNewGameModes(lastUpdatedAt = lastUpdateMetaInfo.lastMaxUpdatedAt)
+        val newGameModes = downloadNewGameModes(
+            lastUpdatedAt = lastUpdateMetaInfo.lastMaxUpdatedAt.takeIf { !forceFullReload },
+        )
         if (newGameModes.isEmpty()) {
             logger.i { "No new game modes" }
             return
@@ -97,7 +103,9 @@ public class IgdbGameModeSyncService(
         upsertGameModes(newGameModes, lastUpdateMetaInfo)
     }
 
-    private suspend fun downloadNewGameModes(lastUpdatedAt: Instant): List<GameModeIgdbDto> {
+    private suspend fun downloadNewGameModes(
+        lastUpdatedAt: Instant?,
+    ): List<GameModeIgdbDto> {
         val result = igdbDataSource.getGameModes(
             updatedLaterThan = lastUpdatedAt,
             offset = 0,

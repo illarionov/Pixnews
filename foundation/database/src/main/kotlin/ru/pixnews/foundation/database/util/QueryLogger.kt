@@ -8,21 +8,24 @@ package ru.pixnews.foundation.database.util
 import androidx.room.RoomDatabase
 import co.touchlab.kermit.Logger
 import java.util.concurrent.Executor
-import java.util.concurrent.Executors
 
 internal class QueryLogger(
     logger: Logger,
 ) : RoomDatabase.QueryCallback {
     private val logger = logger.withTag("Pixnews SQL")
     override fun onQuery(sqlQuery: String, bindArgs: List<Any?>) {
-        logger.d { sqlQuery + "; ARGS: " + bindArgs.joinToString(", ") { "`$it`" } }
+        val msg = buildString {
+            append(sqlQuery)
+            append(";")
+            if (bindArgs.isNotEmpty()) {
+                append(" ARGS: ")
+                bindArgs.joinTo(this, ", ") { "`$it`" }
+            }
+        }
+        logger.d(msg)
     }
 
     internal companion object {
-        fun createLoggerExecutor(): Executor = Executors.newSingleThreadExecutor { runnable ->
-            Thread(runnable, "Pixnews database logger").apply {
-                isDaemon = true
-            }
-        }
+        fun createLoggerExecutor(): Executor = Executor { command -> command.run() }
     }
 }

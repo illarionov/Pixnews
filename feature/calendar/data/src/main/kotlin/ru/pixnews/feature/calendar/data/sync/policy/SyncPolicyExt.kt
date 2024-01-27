@@ -12,8 +12,9 @@ public fun SyncPolicy.isSyncRequired(
     lastSyncTime: Instant,
     currentTime: Instant = Clock.System.now(),
     forceSync: Boolean = false,
+    forceFullReload: Boolean = false,
 ): SyncRequiredResult {
-    if (forceSync) {
+    if (forceSync || forceFullReload) {
         return SyncRequiredResult.Required(isForced = true, reason = "Forced")
     }
 

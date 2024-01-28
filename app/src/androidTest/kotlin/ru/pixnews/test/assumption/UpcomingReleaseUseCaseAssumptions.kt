@@ -23,7 +23,7 @@ import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.slimeRancher2
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
+import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase.UpcomingRelease
 import ru.pixnews.inject.MockResourcesHolder
 import ru.pixnews.inject.data.MockObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.library.functional.network.NetworkRequestFailure

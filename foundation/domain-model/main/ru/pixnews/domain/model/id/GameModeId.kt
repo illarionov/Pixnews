@@ -14,4 +14,6 @@ public interface GameModeId : ExternalId {
 @JvmInline
 public value class DefaultGameModeId(
     public val id: String,
-) : GameModeId
+) : GameModeId {
+    override fun toString(): String = id
+}

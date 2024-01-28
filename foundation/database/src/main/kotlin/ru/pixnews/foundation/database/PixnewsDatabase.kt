@@ -25,6 +25,9 @@ import ru.pixnews.foundation.database.converter.LanguageCodeConverter
 import ru.pixnews.foundation.database.converter.PegiRatingConverter
 import ru.pixnews.foundation.database.converter.VotesDistributionConverter
 import ru.pixnews.foundation.database.dao.GameDao
+import ru.pixnews.foundation.database.dao.GameModeDao
+import ru.pixnews.foundation.database.dao.GameModeNameDao
+import ru.pixnews.foundation.database.dao.IgdbSyncStatusDao
 import ru.pixnews.foundation.database.entity.GameCompanyEntity
 import ru.pixnews.foundation.database.entity.GameGameModeEntity
 import ru.pixnews.foundation.database.entity.GameGameSeriesEntity
@@ -57,6 +60,7 @@ import ru.pixnews.foundation.database.entity.platform.PlatformEntity
 import ru.pixnews.foundation.database.entity.platform.PlatformNameEntity
 import ru.pixnews.foundation.database.entity.series.GameSeriesEntity
 import ru.pixnews.foundation.database.entity.series.GameSeriesNameEntity
+import ru.pixnews.foundation.database.entity.sync.IgdbSyncStatusEntity
 
 @Database(
     entities = [
@@ -88,6 +92,7 @@ import ru.pixnews.foundation.database.entity.series.GameSeriesNameEntity
         GameVideoEntity::class,
         GenreEntity::class,
         GenreNameEntity::class,
+        IgdbSyncStatusEntity::class,
         PlatformEntity::class,
         PlatformNameEntity::class,
         PlayerPerspectiveEntity::class,
@@ -115,5 +120,8 @@ import ru.pixnews.foundation.database.entity.series.GameSeriesNameEntity
 )
 public abstract class PixnewsDatabase : RoomDatabase() {
     public abstract fun gameDao(): GameDao
+    public abstract fun gameModeDao(): GameModeDao
+    public abstract fun gameModeNameDao(): GameModeNameDao
+    public abstract fun igdbSyncStatusDao(): IgdbSyncStatusDao
     public companion object
 }

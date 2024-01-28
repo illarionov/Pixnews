@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase
-import ru.pixnews.feature.calendar.data.domain.upcoming.UpcomingRelease
+import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase.UpcomingRelease
 import ru.pixnews.feature.calendar.domain.upcoming.DefaultObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import javax.inject.Inject

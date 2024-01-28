@@ -45,6 +45,7 @@ dependencies {
     api(projects.foundation.domainModel)
     api(libs.inject)
     api(libs.okio)
+    implementation(libs.androidx.core.ktx)
     implementation(projects.library.kotlinDatetimeUtils)
 
     testImplementation(projects.library.test)

@@ -1,12 +1,13 @@
 /*
- * Copyright (c) 2023, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
+ * Copyright (c) 2024, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.feature.calendar.data
+package ru.pixnews.feature.calendar.data.repository.upcoming
 
 import androidx.paging.PagingConfig
-import androidx.paging.PagingSource.LoadResult
+import androidx.paging.PagingSource.LoadResult.Error
+import androidx.paging.PagingSource.LoadResult.Page
 import androidx.paging.testing.TestPager
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldContainExactly
@@ -24,8 +25,9 @@ import ru.pixnews.domain.model.game.GameField.Id
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.game.halfLife3
 import ru.pixnews.domain.model.id.GameId
-import ru.pixnews.feature.calendar.data.UpcomingReleasePagingSourceFactoryTest.FakeTracingDataSource.FetchUpcomingReleasesRequest
-import ru.pixnews.feature.calendar.domain.upcoming.IgdbPagingSource.IgdbPagingSourceKey
+import ru.pixnews.feature.calendar.data.IgdbDataSource
+import ru.pixnews.feature.calendar.data.model.GameModeIgdbDto
+import ru.pixnews.feature.calendar.data.repository.upcoming.DefaultUpcomingReleaseRepositoryTest.FakeTracingDataSource.FetchUpcomingReleasesRequest
 import ru.pixnews.library.functional.completeFailure
 import ru.pixnews.library.functional.completeSuccess
 import ru.pixnews.library.functional.network.NetworkRequestFailure.ApiFailure
@@ -36,14 +38,14 @@ import ru.pixnews.library.test.MainCoroutineExtension
 import java.net.NoRouteToHostException
 import java.util.Collections
 
-class UpcomingReleasePagingSourceFactoryTest {
+class DefaultUpcomingReleaseRepositoryTest {
     @JvmField
     @RegisterExtension
     var coroutinesExt = MainCoroutineExtension()
     private val dataSource = FakeTracingDataSource()
     private val startDate = Instant.parse("2024-11-01T00:00:00Z")
-    private val pagingSource = DefaultUpcomingReleasePagingSourceFactory(dataSource)
-        .create(
+    private val pagingSource = DefaultUpcomingReleaseRepository(dataSource)
+        .createUpcomingReleasesPagingSource(
             startDate = startDate,
             requiredFields = GAME_LIST_REQUIRED_FIELDS,
         )
@@ -51,7 +53,7 @@ class UpcomingReleasePagingSourceFactoryTest {
 
     @Test
     fun `load() should load initial data`() = coroutinesExt.runTest {
-        val result = pager.refresh() as LoadResult.Page
+        val result = pager.refresh() as Page
 
         result.data.map { it.id.toString() }.shouldContainExactly((1..15).map { "igdb-$it" })
         result.nextKey shouldBe IgdbPagingSourceKey(15)
@@ -68,7 +70,7 @@ class UpcomingReleasePagingSourceFactoryTest {
             refresh()
             append()
             append()
-        } as LoadResult.Page
+        } as Page
 
         result.data.map { it.id.toString() }
             .shouldContainExactly((21..25).map { "igdb-$it" })
@@ -89,7 +91,7 @@ class UpcomingReleasePagingSourceFactoryTest {
             append()
             append()
             append()
-        } as LoadResult.Page
+        } as Page
 
         result.data.shouldBeEmpty()
         result.nextKey shouldBe null
@@ -131,7 +133,7 @@ class UpcomingReleasePagingSourceFactoryTest {
         dataSource.mockResponse = { _, _, _, _ ->
             NetworkFailure(NoRouteToHostException()).completeFailure()
         }
-        val result = pager.refresh() as LoadResult.Error
+        val result = pager.refresh() as Error
         result.throwable.run {
             shouldBeInstanceOf<NetworkRequestFailureException>()
             failure.shouldBeInstanceOf<NetworkFailure>()
@@ -146,7 +148,8 @@ class UpcomingReleasePagingSourceFactoryTest {
             offset: Int,
             limit: Int,
         ) -> NetworkResult<List<Game>> = DEFAULT_RESPONSE
-        val requests: MutableList<FetchUpcomingReleasesRequest> = Collections.synchronizedList(mutableListOf())
+        val requests: MutableList<FetchUpcomingReleasesRequest> =
+            Collections.synchronizedList(mutableListOf())
 
         override suspend fun fetchUpcomingReleases(
             startDate: Instant,
@@ -163,6 +166,14 @@ class UpcomingReleasePagingSourceFactoryTest {
                 ),
             )
             return mockResponse(startDate, requiredFields, offset, limit)
+        }
+
+        override suspend fun getGameModes(
+            updatedSince: Instant?,
+            offset: Int,
+            limit: Int,
+        ): NetworkResult<List<GameModeIgdbDto>> {
+            error("Not implemented")
         }
 
         data class FetchUpcomingReleasesRequest(

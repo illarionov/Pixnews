@@ -18,11 +18,14 @@ android {
 dependencies {
     api(projects.feature.calendar.dataPublic)
     implementation(projects.foundation.appconfig)
+    implementation(projects.foundation.database)
+    implementation(projects.foundation.coroutines)
     implementation(projects.foundation.di.base)
     implementation(projects.foundation.domainModel)
     implementation(projects.foundation.network.public)
     implementation(projects.library.functional)
     implementation(projects.library.kotlinUtils)
+    implementation(projects.library.coroutines)
 
     api(libs.inject)
     implementation(libs.kermit)

@@ -15,6 +15,8 @@ import kotlinx.datetime.Instant
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameField
 import ru.pixnews.feature.calendar.data.IgdbDataSource
+import ru.pixnews.feature.calendar.data.model.GameModeIgdbDto
+import ru.pixnews.feature.calendar.datasource.igdb.converter.game.IgdbGameGameModeConverter
 import ru.pixnews.feature.calendar.datasource.igdb.converter.game.igdbFieldConverter
 import ru.pixnews.feature.calendar.datasource.igdb.converter.game.toGame
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toNetworkResult
@@ -25,6 +27,8 @@ import ru.pixnews.igdbclient.IgdbEndpoint
 import ru.pixnews.igdbclient.apicalypse.SortOrder.DESC
 import ru.pixnews.igdbclient.apicalypse.apicalypseQuery
 import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
+import ru.pixnews.igdbclient.dsl.field.field
+import ru.pixnews.igdbclient.model.GameMode
 import ru.pixnews.library.functional.network.NetworkRequestFailure
 import ru.pixnews.library.functional.network.NetworkResult
 import javax.inject.Inject
@@ -67,26 +71,63 @@ public class DefaultIgdbDataSource(
             query = query,
         ).toNetworkResult()
 
-        val result: NetworkResult<List<Game>> = igdbGameResult.flatMap { gameResult ->
-            withContext(backgroundDispatcher) {
-                catch {
-                    logger.d { "Received games: ${gameResult.games.prettyPrint()}" }
-                    gameResult.games.map(IgdbGame::toGame)
-                }.mapLeft { error ->
-                    logger.e(error) { "Mapping error" }
-                    NetworkRequestFailure.ApiFailure(error)
-                }
-            }
+        val result: NetworkResult<List<Game>> = igdbGameResult.mapSuccessOnBackground { gameResult ->
+            logger.v { "Received games ${gameResult.games.prettyPrintGames()}" }
+            gameResult.games.map(IgdbGame::toGame)
         }
 
         return result
+    }
+
+    override suspend fun getGameModes(
+        updatedLaterThan: Instant?,
+        offset: Int,
+        limit: Int,
+    ): NetworkResult<List<GameModeIgdbDto>> {
+        val converter = IgdbGameGameModeConverter
+        val query = apicalypseQuery {
+            fields(
+                fieldList = (converter.getRequiredFields(GameMode.field) + GameMode.field.updated_at).toTypedArray(),
+            )
+            if (updatedLaterThan != null) {
+                where("updated_at > ${updatedLaterThan.epochSeconds}")
+            }
+            offset(offset)
+            limit(limit)
+        }
+        logger.d { "REQ IGDB query: '$query'" }
+
+        val igdbResult = igdbClient.execute(
+            endpoint = IgdbEndpoint.GAME_MODE,
+            query = query,
+        ).toNetworkResult()
+
+        val result: NetworkResult<List<GameModeIgdbDto>> = igdbResult.mapSuccessOnBackground { result ->
+            logger.v { "Received game modes ${result.gamemodes}" }
+            result.gamemodes.map(converter::toGameModeIgdbDto)
+        }
+
+        return result
+    }
+
+    private suspend fun <I : Any, O : Any> NetworkResult<I>.mapSuccessOnBackground(
+        mapper: (I) -> O,
+    ): NetworkResult<O> = flatMap { result ->
+        withContext(backgroundDispatcher) {
+            catch {
+                mapper(result)
+            }.mapLeft { error: Throwable ->
+                logger.v(error) { "Mapping error" }
+                NetworkRequestFailure.ApiFailure(error)
+            }
+        }
     }
 
     private fun Set<GameField>.toIgdbRequestFields(): Set<IgdbRequestField<*>> = this.flatMap {
         it.igdbFieldConverter.getRequiredFields()
     }.toSet()
 
-    private fun List<IgdbGame>.prettyPrint() = joinToString(",\n") { game ->
+    private fun List<IgdbGame>.prettyPrintGames() = joinToString(",\n") { game ->
         val releaseDates = game.release_dates.map {
             "{release_date: ${it.category}-${it.date}}"
         }

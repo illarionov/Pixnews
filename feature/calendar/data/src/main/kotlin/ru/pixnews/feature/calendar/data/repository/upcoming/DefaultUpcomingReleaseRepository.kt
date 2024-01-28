@@ -1,37 +1,43 @@
 /*
- * Copyright (c) 2023, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
+ * Copyright (c) 2024, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-package ru.pixnews.feature.calendar.data
+package ru.pixnews.feature.calendar.data.repository.upcoming
 
 import androidx.paging.PagingState
+import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.datetime.Instant
 import ru.pixnews.domain.model.game.Game
 import ru.pixnews.domain.model.game.GameField
-import ru.pixnews.feature.calendar.domain.upcoming.IgdbPagingSource
+import ru.pixnews.feature.calendar.data.IgdbDataSource
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.library.functional.network.NetworkRequestFailureException
 import javax.inject.Inject
 
 @ContributesBinding(AppScope::class)
-public class DefaultUpcomingReleasePagingSourceFactory @Inject constructor(
+public class DefaultUpcomingReleaseRepository @Inject constructor(
     private val igdbDataSource: IgdbDataSource,
-) : IgdbPagingSource.Factory {
-    override fun create(
+    private val logger: Logger = Logger,
+) : UpcomingReleaseRepository {
+    override fun createUpcomingReleasesPagingSource(
         startDate: Instant,
         requiredFields: Set<GameField>,
-    ): IgdbPagingSource = UpcomingReleasePagingSource(startDate, requiredFields, igdbDataSource)
+    ): UpcomingReleasesPagingSource = UpcomingReleasePagingSource(startDate, requiredFields, igdbDataSource, logger)
 
     private class UpcomingReleasePagingSource(
         private val startDate: Instant,
         private val requiredFields: Set<GameField>,
         private val igdbDataSource: IgdbDataSource,
-    ) : IgdbPagingSource() {
+        logger: Logger = Logger,
+    ) : UpcomingReleasesPagingSource() {
+        private val logger = logger.withTag("DefaultUpcomingReleasePagingSourceFactory")
+
         override fun getRefreshKey(
             state: PagingState<IgdbPagingSourceKey, Game>,
         ): IgdbPagingSourceKey? {
+            logger.i { "getRefreshKey(${state.anchorPosition})" }
             return state.anchorPosition?.let { anchorPosition ->
                 val anchorPage = state.closestPageToPosition(anchorPosition)
                     ?: return@let null
@@ -54,6 +60,8 @@ public class DefaultUpcomingReleasePagingSourceFactory @Inject constructor(
         ): LoadResult<IgdbPagingSourceKey, Game> {
             val offset = params.key?.offset ?: 0
             val limit = params.loadSize
+            logger.i { "load($offset / $limit)" }
+
             return igdbDataSource.fetchUpcomingReleases(
                 startDate = startDate,
                 requiredFields = requiredFields,

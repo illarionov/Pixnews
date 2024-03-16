@@ -112,6 +112,8 @@
             <trusting group="ru.pixnews.debuglayout"/>
             <trusting group="ru.pixnews.gradle.fbase"/>
             <trusting group="ru.pixnews.igdbclient"/>
+            <trusting group="ru.pixnews.sqlite.open.helper"/>
+            <trusting group="ru.pixnews.wasm-sqlite-open-helper"/>
             <trusting group="^ru[.]pixnews[.]anvil[.]codegen($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="8E3A02905A1AE67E7B0F9ACD3967D4EDA591B991" group="org.jetbrains.kotlinx" name="kotlinx-html-jvm"/>
@@ -155,6 +157,7 @@
             <trusting group="com.google.code.gson" name="gson"/>
             <trusting group="^com[.]google[.]auto($|([.].*))" regex="true"/>
          </trusted-key>
+         <trusted-key id="C8D37E9675158FF5B29B6D6452FC3551DA8DC57E" group="^org[.]graalvm($|([.].*))" regex="true"/>
          <trusted-key id="CB3190CA7842439E57F3712E44CE7BF2825EA2CD" group="com.ibm.icu" name="icu4j"/>
          <trusted-key id="CE8075A251547BEE249BC151A2115AE15F6B8B72" group="org.apache.commons" name="commons-compress"/>
          <trusted-key id="DBD744ACE7ADE6AA50DD591F66B50994442D2D40" group="^com[.]squareup($|([.].*))" regex="true"/>
@@ -433,6 +436,11 @@
       <component group="com.googlecode.juniversalchardet" name="juniversalchardet" version="1.0.3">
          <artifact name="juniversalchardet-1.0.3.jar">
             <pgp value="31BAE2E51D95E0F8AD9B7BCC40A3C4432BD7308C"/>
+         </artifact>
+      </component>
+      <component group="com.gradle" name="develocity-gradle-plugin" version="3.17.2">
+         <artifact name="develocity-gradle-plugin-3.17.2.jar">
+            <pgp value="7B79ADD11F8A779FE90FD3D0893A028475557671"/>
          </artifact>
       </component>
       <component group="com.gradle.publish" name="plugin-publish-plugin" version="0.21.0">
@@ -752,6 +760,11 @@
       </component>
       <component group="org.gradle.kotlin" name="gradle-kotlin-dsl-plugins" version="4.3.0">
          <artifact name="gradle-kotlin-dsl-plugins-4.3.0.jar">
+            <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
+         </artifact>
+      </component>
+      <component group="org.gradle.toolchains" name="foojay-resolver" version="0.8.0">
+         <artifact name="foojay-resolver-0.8.0.jar">
             <pgp value="1BD97A6A154E7810EE0BC832E2F38302C8075E3D"/>
          </artifact>
       </component>

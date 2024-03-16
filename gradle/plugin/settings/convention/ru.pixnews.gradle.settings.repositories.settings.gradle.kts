@@ -70,6 +70,7 @@ fun RepositoryHandler.pixnewsMaven(): Unit = exclusiveContent {
         includeGroup("io.github.simonschiller")
         includeGroup("ru.pixnews.anvil.codegen")
         includeGroup("ru.pixnews.debuglayout")
+        includeGroup("ru.pixnews.wasm-sqlite-open-helper")
     }
 }
 

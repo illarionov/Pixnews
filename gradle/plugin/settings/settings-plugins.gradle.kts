@@ -9,7 +9,9 @@ plugins {
 group = "ru.pixnews.gradle.settings"
 
 dependencies {
-    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.16.2")
+    // noinspection UseTomlInstead
+    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.17.2")
+    implementation("org.gradle.toolchains:foojay-resolver:0.8.0")
 }
 
 // Workaround for https://github.com/gradle/gradle/issues/26020

@@ -1,5 +1,5 @@
 [versions]
-minSdk = "24"
+minSdk = "26"
 compileSdk = "34"
 targetSdk = "33"
 
@@ -56,13 +56,13 @@ arrow = "1.2.4"
 assertk = "0.28.1"
 debuglayout = "0.1"
 asm = "9.6"
-auto-service = "1.1.1"
 coil = "2.6.0"
 fbase-gradle-plugin = "0.1"
 firebase-bom = "33.0.0"
 firebase-crashlytics-plugin = "2.9.0"
 igdbclient = "0.5"
 guava = "31.1-jre"
+graalvm = "24.0.1"
 kermit = "1.2.3"
 kotest = "5.9.0"
 kotest-assertions-arrow = "1.4.0"
@@ -78,6 +78,7 @@ prefiller = "1.6.0-SNAPSHOT"
 retrofit = "2.9.0"
 radiography = "2.6"
 turbine = "1.1.0"
+wasm-sqlite-open-helper = "0.1-alpha02"
 
 junit4 = "4.13.2"
 junit5 = "5.10.2"
@@ -158,6 +159,12 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-config = { group = "com.google.firebase", name = "firebase-config-ktx" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+graalvm-polyglot-js = { group = "org.graalvm.polyglot", name = "js-community", version.ref = "graalvm" }
+graalvm-polyglot-polyglot = { group = "org.graalvm.polyglot", name = "polyglot", version.ref = "graalvm" }
+graalvm-polyglot-wasm = { group = "org.graalvm.polyglot", name = "wasm-community", version.ref = "graalvm" }
+graalvm-truffle-api = { group = "org.graalvm.truffle", name = "truffle-api", version.ref = "graalvm" }
+graalvm-truffle-dsl-processor = { group = "org.graalvm.truffle", name = "truffle-dsl-processor", version.ref = "graalvm" }
+graalvm-wasm-language = { group = "org.graalvm.wasm", name = "wasm-language", version.ref = "graalvm" }
 guava-bom = { group = "com.google.guava", name = "guava-bom", version.ref = "guava" }
 igdbclient = { group = "ru.pixnews.igdbclient", name = "igdbclient-core", version.ref = "igdbclient" }
 igdbclient-okhttp = { group = "ru.pixnews.igdbclient", name = "igdbclient-okhttp", version.ref = "igdbclient" }
@@ -204,6 +211,9 @@ pixnews-anvil-viewmodel-inject = { group = "ru.pixnews.anvil.codegen", name = "v
 pixnews-anvil-workmanager-generator = { group = "ru.pixnews.anvil.codegen", name = "workmanager-generator", version.ref = "pixnews-anvil-codegen" }
 pixnews-anvil-workmanager-inject = { group = "ru.pixnews.anvil.codegen", name = "workmanager-inject", version.ref = "pixnews-anvil-codegen" }
 pixnews-debuglayout = { group = "ru.pixnews.debuglayout", name = "core", version.ref = "debuglayout" }
+pixnews-sqlite-open-helper-main = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-open-helper", version.ref = "wasm-sqlite-open-helper" }
+pixnews-sqlite-open-helper-graal = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-embedder-graalvm", version.ref = "wasm-sqlite-open-helper" }
+pixnews-sqlite-open-helper-wasm = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-wasm", version.ref = "wasm-sqlite-open-helper" }
 radiography = { group = "com.squareup.radiography", name = "radiography", version.ref = "radiography" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 wire-runtime-jvm = { group = "com.squareup.wire", name = "wire-runtime-jvm", version.ref = "wire" }

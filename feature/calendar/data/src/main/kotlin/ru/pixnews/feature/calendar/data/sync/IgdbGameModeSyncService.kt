@@ -20,7 +20,6 @@ import ru.pixnews.feature.calendar.data.sync.policy.SyncPolicy
 import ru.pixnews.feature.calendar.data.sync.policy.SyncRequiredResult
 import ru.pixnews.feature.calendar.data.sync.policy.isSyncRequired
 import ru.pixnews.foundation.database.PixnewsDatabase
-import ru.pixnews.foundation.database.entity.mode.GameModeEntity
 import ru.pixnews.foundation.database.entity.mode.GameModeNameEntity
 import ru.pixnews.foundation.database.model.LanguageCodeWrapper
 import ru.pixnews.foundation.di.base.scopes.AppScope
@@ -130,8 +129,7 @@ public class IgdbGameModeSyncService(
             return@withTransaction
         }
         for (mode in modes) {
-            val gameModeEntity = GameModeEntity(slug = mode.igdbSlug)
-            val id = gameModeDao.insertOrGetId(gameModeEntity)
+            val id = gameModeDao.insertOrGetId(mode.igdbSlug)
             if (id != -1L) {
                 val nameEntity = GameModeNameEntity(
                     gameModeId = id,

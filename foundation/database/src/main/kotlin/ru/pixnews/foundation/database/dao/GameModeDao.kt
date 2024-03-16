@@ -6,15 +6,14 @@
 package ru.pixnews.foundation.database.dao
 
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import ru.pixnews.foundation.database.entity.mode.GameModeEntity
 
 @Dao
 public abstract class GameModeDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    public abstract suspend fun insertSilent(gameMode: GameModeEntity): Long
+    @Query("INSERT OR IGNORE INTO `gameMode`(`slug`) VALUES(:slug)")
+    public abstract suspend fun insertSlug(slug: String): Long
 
     @Query("SELECT * FROM `gameMode` WHERE `id` = :id")
     public abstract suspend fun getById(id: Long): GameModeEntity?
@@ -25,12 +24,13 @@ public abstract class GameModeDao {
     @Query("SELECT `id` FROM `gameMode` WHERE `slug` = :slug")
     public abstract suspend fun getIdBySlug(slug: String): Long?
 
-    public suspend fun insertOrGetId(
-        gameMode: GameModeEntity,
+    @Transaction
+    public open suspend fun insertOrGetId(
+        slug: String,
     ): Long {
-        val id = insertSilent(gameMode)
+        val id = insertSlug(slug)
         return if (id == -1L) {
-            getIdBySlug(gameMode.slug) ?: -1
+            getIdBySlug(slug) ?: -1
         } else {
             id
         }

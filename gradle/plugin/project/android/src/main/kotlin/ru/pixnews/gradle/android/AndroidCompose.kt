@@ -45,7 +45,7 @@ internal fun Project.configureCompose(
                 )
                 freeCompilerArgs.addAll(
                     "-P",
-                    "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.9.22",
+                    "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.9.23",
                 )
             }
         }

@@ -9,5 +9,16 @@ plugins {
 group = "ru.pixnews.gradle.settings"
 
 dependencies {
-    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.16.1")
+    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.16.2")
+}
+
+// Workaround for https://github.com/gradle/gradle/issues/26020
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$embeddedKotlinVersion")
+    }
 }

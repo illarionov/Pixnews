@@ -36,4 +36,7 @@ dependencies {
     testImplementation(projects.library.test)
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.androidx.paging.testing)
+    testImplementation(libs.pixnews.sqlite.open.helper.graal)
+    testImplementation(libs.pixnews.sqlite.open.helper.main)
+    testImplementation(libs.pixnews.sqlite.open.helper.wasm)
 }

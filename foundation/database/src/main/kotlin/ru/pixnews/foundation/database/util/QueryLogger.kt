@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
 import co.touchlab.kermit.Logger
 import java.util.concurrent.Executor
 
-internal class QueryLogger(
+public class QueryLogger(
     logger: Logger,
 ) : RoomDatabase.QueryCallback {
     private val logger = logger.withTag("Pixnews SQL")
@@ -25,7 +25,7 @@ internal class QueryLogger(
         logger.d(msg)
     }
 
-    internal companion object {
-        fun createLoggerExecutor(): Executor = Executor { command -> command.run() }
+    public companion object {
+        public fun createLoggerExecutor(): Executor = Executor { command -> command.run() }
     }
 }

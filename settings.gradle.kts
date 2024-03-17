@@ -10,6 +10,27 @@ plugins {
     id("ru.pixnews.gradle.settings.root")
 }
 
+// Workaround for https://github.com/gradle/gradle/issues/26020
+buildscript {
+    repositories {
+        mavenCentral()
+        google()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.4.0-alpha13")
+        classpath("com.squareup.anvil:gradle-plugin:2.5.0-beta04")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.9")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.23")
+        classpath("com.google.devtools.ksp:symbol-processing-gradle-plugin:1.9.23-1.0.19")
+        classpath("com.squareup.wire:wire-gradle-plugin:4.9.7")
+        classpath("com.github.ben-manes:gradle-versions-plugin:0.51.0")
+        classpath("androidx.room:androidx.room.gradle.plugin:2.6.1")
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:6.25.0")
+        classpath("com.saveourtool.diktat:diktat-gradle-plugin:2.0.0")
+        classpath("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.5")
+    }
+}
+
 rootProject.name = "Pixnews"
 rootProject.buildFileName = "pixnews.gradle.kts"
 

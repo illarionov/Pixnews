@@ -81,7 +81,7 @@ import androidx.compose.ui.unit.LayoutDirection
  * @param contentFadeTransitionSpec The transition spec to use when fading the content
  * on/off screen. The boolean parameter defined for the transition is [visible].
  */
-@Suppress("LongMethod", "MaxLineLength")
+@Suppress("LongMethod", "MaxLineLength", "ModifierComposed")
 public fun Modifier.placeholder(
     visible: Boolean,
     color: Color = Color.Unspecified,

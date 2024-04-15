@@ -68,8 +68,8 @@ fun RepositoryHandler.pixnewsMaven(): Unit = exclusiveContent {
     filter {
         includeGroup("io.github.simonschiller.prefiller")
         includeGroup("io.github.simonschiller")
+        includeGroup("ru.pixnews.anvil.codegen")
         includeGroup("ru.pixnews.debuglayout")
-        includeGroupByRegex("""ru\.pixnews\.anvil\..+""")
     }
 }
 

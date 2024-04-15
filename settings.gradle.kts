@@ -18,11 +18,11 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:8.5.0-alpha05")
-        classpath("com.squareup.anvil:gradle-plugin:2.5.0-beta04")
+        classpath("com.squareup.anvil:gradle-plugin:2.5.0-beta05")
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.9")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.23")
         classpath("com.google.devtools.ksp:symbol-processing-gradle-plugin:1.9.23-1.0.20")
-        classpath("com.squareup.wire:wire-gradle-plugin:4.9.7")
+        classpath("com.squareup.wire:wire-gradle-plugin:4.9.9")
         classpath("com.github.ben-manes:gradle-versions-plugin:0.51.0")
         classpath("androidx.room:androidx.room.gradle.plugin:2.6.1")
         classpath("com.diffplug.spotless:spotless-plugin-gradle:6.25.0")

@@ -46,6 +46,7 @@
          <trusted-key id="20723A6399BC060154283B37CFAE163B64AC9189" group="^org[.]jetbrains($|([.].*))" regex="true"/>
          <trusted-key id="24D04176586361FDA94EE0315F7786DF73E61F56" group="com.google.devtools.ksp"/>
          <trusted-key id="2DB4F1EF0FA761ECC4EA935C86FDC7E2A11262CB" group="commons-codec"/>
+         <trusted-key id="3051D45031E13516A6E8FAFF280D66A55F5316C5" group="org.bitbucket.b_c" name="jose4j"/>
          <trusted-key id="314FE82E5A4C5377BCA2EDEC5208812E1E4A6DB0">
             <trusting group="com.gradle" name="gradle-enterprise-gradle-plugin"/>
             <trusting group="org.gradle" name="github-dependency-graph-gradle-plugin"/>
@@ -127,11 +128,16 @@
          <trusted-key id="A5F483CD733A4EBAEA378B2AE88979FB9B30ACF2">
             <trusting group="androidx.activity"/>
             <trusting group="androidx.annotation"/>
+            <trusting group="androidx.appcompat"/>
+            <trusting group="androidx.benchmark"/>
+            <trusting group="androidx.concurrent"/>
             <trusting group="androidx.core"/>
             <trusting group="androidx.datastore"/>
             <trusting group="androidx.fragment"/>
+            <trusting group="androidx.lifecycle"/>
             <trusting group="androidx.paging"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
+            <trusting group="^androidx[.]test($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="A6D6C97108B8585F91B158748671A8DF71296252" group="^com[.]squareup($|([.].*))" regex="true"/>
          <trusted-key id="A7892505CF1A58076453E52D7999BEFBA1039E8B" group="net.bytebuddy"/>

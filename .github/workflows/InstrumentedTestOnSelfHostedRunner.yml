@@ -1,16 +1,6 @@
 name: Instrumented tests on self-hosted runner
 
 on:
-  pull_request:
-    paths-ignore:
-      - '**/*.md'
-    branches:
-      - main
-  push:
-    paths-ignore:
-      - '**/*.md'
-    branches:
-      - main
   workflow_dispatch:
 
 concurrency:

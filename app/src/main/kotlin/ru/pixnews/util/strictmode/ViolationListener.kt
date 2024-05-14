@@ -72,7 +72,10 @@ internal class ViolationListener(
     ) {
         if (violation.shouldSkip()) {
             if (logAllowListViolation) {
-                logger.e { "Skipping $type violation `$violation: ${violation.message}`" }
+                logger.e {
+                    "Skipping $type violation `$violation: message: ${violation.message}`, " +
+                            "stracktrace: ${violation.stackTraceToString()}"
+                }
             }
             return
         }

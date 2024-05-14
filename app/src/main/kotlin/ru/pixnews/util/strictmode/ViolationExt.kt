@@ -30,6 +30,13 @@ internal val isTypefaceFullFlipFontViolation: Violation.() -> Boolean = {
 }
 
 @SuppressLint("NewApi")
+internal val isFontRequestViolation: Violation.() -> Boolean = {
+    this is DiskReadViolation && this.stackTrace.any {
+        it.className == "androidx.core.provider.FontRequestWorker" && it.fileName == "FontRequestWorker.java"
+    }
+}
+
+@SuppressLint("NewApi")
 internal val isProfileSizeOfAppViolation: Violation.() -> Boolean = {
     this is DiskReadViolation && this.stackTrace.any {
         it.fileName == "ActivityThread.java" && it.methodName == "getProfileSizeOfApp"
@@ -45,4 +52,14 @@ internal val isUntaggedSocketViolation: Violation.() -> Boolean = {
 @SuppressLint("NewApi")
 internal val isInstanceCountViolation: Violation.() -> Boolean = {
     this is InstanceCountViolation
+}
+
+/**
+ * Difficult to diagnose violation in GMS
+ */
+@SuppressLint("NewApi")
+internal val isGmsDiskReadViolation: Violation.() -> Boolean = {
+    (this is DiskReadViolation) && this.stackTrace.any {
+        it.fileName?.contains(":com.google.android.gms") ?: false
+    }
 }

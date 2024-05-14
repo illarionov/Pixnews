@@ -28,7 +28,7 @@ internal fun Project.configureCompose(
     }
 
     dependencies {
-        val composeBom = platform(versionCatalog.findLibrary("androidx.compose.bom").orElseThrow())
+        val composeBom = platform(versionCatalog.findLibrary("chrisbanes.compose.bom").orElseThrow())
         add("implementation", composeBom)
     }
 

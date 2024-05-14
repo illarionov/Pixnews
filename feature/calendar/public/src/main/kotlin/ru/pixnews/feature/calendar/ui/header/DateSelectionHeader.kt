@@ -28,7 +28,7 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -143,7 +143,7 @@ internal fun WeekDaysRow(
             }
             CompositionLocalProvider(
                 LocalTextStyle provides textStyle,
-                LocalMinimumInteractiveComponentEnforcement provides false,
+                LocalMinimumInteractiveComponentSize provides 42.dp,
             ) {
                 Surface(
                     contentColor = contentColor,

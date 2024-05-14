@@ -89,7 +89,7 @@ fun configureAndroidTestDependencies() {
         add("androidTestImplementation", project(":foundation:instrumented-test"))
         add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
         if (pixnews.compose.get()) {
-            val composeBom = platform(versionCatalog.findLibrary("androidx.compose.bom").orElseThrow())
+            val composeBom = platform(versionCatalog.findLibrary("chrisbanes.compose.bom").orElseThrow())
             add("androidTestImplementation", composeBom)
         }
     }

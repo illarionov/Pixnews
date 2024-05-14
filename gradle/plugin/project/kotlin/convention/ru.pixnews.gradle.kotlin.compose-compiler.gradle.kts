@@ -70,7 +70,7 @@ fun createComposeRuntimeCompileClasspath(): FileCollection {
     dependencies {
         add(
             compileClasspathAarConfiguration.name,
-            platform(versionCatalog.findLibrary("androidx-compose-bom").get()),
+            platform(versionCatalog.findLibrary("chrisbanes-compose-bom").get()),
         )
         add(compileClasspathAarConfiguration.name, versionCatalog.findLibrary("androidx-compose-runtime").get())
 

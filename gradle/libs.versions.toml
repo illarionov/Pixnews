@@ -23,7 +23,7 @@ androidx-appcompat = "1.7.0-beta01"
 androidx-arch-core = "2.2.0"
 androidx-benchmark = "1.2.4"
 androidx-collection = "1.4.0"
-androidx-compose-bom = "2024.05.00"
+chrisbanes-compose-bom = "2024.05.00-alpha01"
 androidx-compose-compiler = "1.5.13"
 androidx-compose-material3 = "1.2.1"
 androidx-compose-runtime-tracing = "1.0.0-beta01"
@@ -93,7 +93,6 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "androidx-annotation" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }
 androidx-benchmark-macro = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "androidx-benchmark" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidx-compose-bom" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "androidx-compose-material3" }
 androidx-compose-material3-windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class" }
@@ -145,6 +144,7 @@ arrow-bom = { group = "io.arrow-kt", name = "arrow-stack", version.ref = "arrow"
 arrow-core = { group = "io.arrow-kt", name = "arrow-core" }
 assertk = { group = "com.willowtreeapps.assertk", name = "assertk-jvm", version.ref = "assertk" }
 asm-bom = { group = "org.ow2.asm", name = "asm-bom", version.ref = "asm" }
+chrisbanes-compose-bom = { group = "dev.chrisbanes.compose", name = "compose-bom", version.ref = "chrisbanes-compose-bom" }
 coil-base = { group = "io.coil-kt", name = "coil-base" }
 coil-bom = { group = "io.coil-kt", name = "coil-bom", version.ref = "coil" }
 coil-compose-base = { group = "io.coil-kt", name = "coil-compose-base" }
@@ -229,7 +229,7 @@ wire-plugin = { group = "com.squareup.wire", name = "wire-gradle-plugin", versio
 [bundles]
 coil = ["coil-compose-base"]
 boms = [
-    "androidx-compose-bom",
+    "chrisbanes-compose-bom",
     "arrow-bom",
     "asm-bom",
     "coil-bom",

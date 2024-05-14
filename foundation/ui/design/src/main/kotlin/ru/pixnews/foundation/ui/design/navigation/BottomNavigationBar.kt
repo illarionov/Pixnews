@@ -7,18 +7,18 @@ package ru.pixnews.foundation.ui.design.navigation
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
-import androidx.compose.material.ripple.RippleTheme
+import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.RippleConfiguration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,7 +28,7 @@ public fun PixnewsBottomNavigationBar(
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {
-    CompositionLocalProvider(LocalRippleTheme provides NavigationBarItemRippleTheme) {
+    CompositionLocalProvider(LocalRippleConfiguration provides BottomNavigationBarDefaults.rippleConfiguration()) {
         NavigationBar(
             modifier = modifier,
             content = content,
@@ -66,26 +66,25 @@ public fun RowScope.PixnewsBottomNavigationBarItem(
 }
 
 public object BottomNavigationBarDefaults {
-    @Composable
-    public fun indicatorColor(): Color = MaterialTheme.colorScheme.secondaryContainer
-
-    @Composable
-    public fun selectedIconColor(): Color = MaterialTheme.colorScheme.onSecondaryContainer
-
-    @Composable
-    public fun rippleDefaultColor(): Color = MaterialTheme.colorScheme.secondary
-}
-
-@Immutable
-private object NavigationBarItemRippleTheme : RippleTheme {
-    @Composable
-    override fun defaultColor(): Color = BottomNavigationBarDefaults.rippleDefaultColor()
-
-    @Composable
-    override fun rippleAlpha(): RippleAlpha = RippleAlpha(
+    private val rippleAlpha = RippleAlpha(
         draggedAlpha = 0.16f,
         focusedAlpha = 0.12f,
         hoveredAlpha = 0.08f,
         pressedAlpha = 0.12f,
+    )
+
+    @Composable
+    @ReadOnlyComposable
+    public fun indicatorColor(): Color = MaterialTheme.colorScheme.secondaryContainer
+
+    @Composable
+    @ReadOnlyComposable
+    public fun selectedIconColor(): Color = MaterialTheme.colorScheme.onSecondaryContainer
+
+    @Composable
+    @ReadOnlyComposable
+    public fun rippleConfiguration(): RippleConfiguration = RippleConfiguration(
+        color = MaterialTheme.colorScheme.secondary,
+        rippleAlpha = rippleAlpha,
     )
 }

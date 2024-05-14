@@ -82,7 +82,6 @@ private fun SearchBoxPreview() {
     MaterialTheme {
         Surface(
             color = MaterialTheme.colorScheme.background,
-            modifier = Modifier.fillMaxSize(),
         ) {
             SearchBox(onSearch = {}, defaultSearchQuery = "Tetris")
         }

@@ -17,6 +17,8 @@ import ru.pixnews.anvil.codegen.initializer.inject.ContributesInitializer
 import ru.pixnews.foundation.initializers.Initializer
 import ru.pixnews.inject.DebugStrictModeInitializerModule
 import ru.pixnews.util.strictmode.ViolationPolicy.FAIL
+import ru.pixnews.util.strictmode.isFontRequestViolation
+import ru.pixnews.util.strictmode.isGmsDiskReadViolation
 import ru.pixnews.util.strictmode.isInstanceCountViolation
 import ru.pixnews.util.strictmode.isInstrumentationDexMakerViolation
 import ru.pixnews.util.strictmode.isProfileSizeOfAppViolation
@@ -71,11 +73,13 @@ class TestStrictModeInitializer @Inject constructor(logger: Logger) : Initialize
 
     private companion object {
         val ALLOWLIST = listOf(
+            isFontRequestViolation,
+            isGmsDiskReadViolation,
+            isInstanceCountViolation,
             isInstrumentationDexMakerViolation,
             isProfileSizeOfAppViolation,
             isTypefaceFullFlipFontViolation,
             isUntaggedSocketViolation,
-            isInstanceCountViolation,
         )
     }
 }

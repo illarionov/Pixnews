@@ -41,6 +41,7 @@
          <trusted-key id="187366A3FFE6BF8F94B9136A9987B20C8F6A3064" group="com.google.protobuf"/>
          <trusted-key id="19BEAB2D799C020F17C69126B16698A4ADF4D638" group="org.checkerframework"/>
          <trusted-key id="1D2C7EF8ADA0F794B58C7C63436902AF59EDF60E" group="dev.equo.ide" name="solstice"/>
+         <trusted-key id="1D63A77F7270FE07D46B3EB514D68971286170CB" group="io.github.charlietap.chasm"/>
          <trusted-key id="1DE48A38424721249780C6A8C7DFF5A8DBC5381C" group="io.arrow-kt"/>
          <trusted-key id="1F47744C9B6E14F2049C2857F1F111AF65925306" group="io.github.classgraph"/>
          <trusted-key id="20723A6399BC060154283B37CFAE163B64AC9189" group="^org[.]jetbrains($|([.].*))" regex="true"/>
@@ -171,6 +172,7 @@
          <trusted-key id="F254B35617DC255D9344BCFA873A8E86B4372146" group="org.codehaus.mojo" name="animal-sniffer-annotations"/>
          <trusted-key id="F32AF916B428B465924FD322EC18C9AA545D8960" group="io.nlopez.compose.rules"/>
          <trusted-key id="FA7929F83AD44C4590F6CC6815C71C0A4E0B8EDD" group="net.java.dev.jna"/>
+         <trusted-key id="FC22B1D003762F7336CE946C1C300EDE197A9487" group="com.dylibso.chicory"/>
          <trusted-key id="FF6E2C001948C5F2F38B0CC385911F425EC61B51">
             <trusting group="junit"/>
             <trusting group="org.apiguardian" name="apiguardian-api"/>
@@ -466,6 +468,11 @@
       <component group="com.intellij" name="annotations" version="12.0">
          <artifact name="annotations-12.0.jar">
             <pgp value="FAABC3738B1F58DA2D776FA2EB380DC13C39F675"/>
+         </artifact>
+      </component>
+      <component group="com.michael-bull.kotlin-result" name="kotlin-result-jvm" version="2.0.0">
+         <artifact name="kotlin-result-jvm-2.0.0.jar">
+            <pgp value="7D90CFFEC86BA5513FE48B9943C2E6B56905B362"/>
          </artifact>
       </component>
       <component group="com.pinterest" name="ktlint" version="0.46.1">

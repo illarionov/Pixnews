@@ -18,7 +18,7 @@ import ru.pixnews.foundation.database.PixnewsDatabase
 import ru.pixnews.foundation.database.util.QueryLogger
 import ru.pixnews.library.test.TestingLoggers
 import ru.pixnews.wasm.sqlite.open.helper.SQLiteDatabaseJournalMode.PERSIST
-import ru.pixnews.wasm.sqlite.open.helper.SQLiteDatabaseSyncMode.OFF
+import ru.pixnews.wasm.sqlite.open.helper.SQLiteDatabaseSyncMode
 import ru.pixnews.wasm.sqlite.open.helper.WasmSqliteOpenHelperFactory
 import ru.pixnews.wasm.sqlite.open.helper.graalvm.GraalvmSqliteEmbedder
 import ru.pixnews.wasm.sqlite.open.helper.path.JvmDatabasePathResolver
@@ -47,7 +47,7 @@ class IgdbGameModeSyncServiceTest {
             pathResolver = JvmDatabasePathResolver(tempDir)
             openParams {
                 journalMode = PERSIST
-                syncMode = OFF
+                syncMode = SQLiteDatabaseSyncMode.OFF
             }
             debug {
                 sqlLog = false

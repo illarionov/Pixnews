@@ -10,7 +10,6 @@ plugins {
 }
 
 pixnews {
-    compose.set(false)
     unitTestEngine.set(ru.pixnews.gradle.project.base.UnitTestEngine.JUNIT5)
 }
 

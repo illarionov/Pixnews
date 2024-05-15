@@ -11,10 +11,6 @@ plugins {
     alias(libs.plugins.prefiller)
 }
 
-pixnews {
-    compose.set(false)
-}
-
 android {
     namespace = "ru.pixnews.foundation.database"
     buildTypes {

@@ -7,10 +7,6 @@ plugins {
     id("ru.pixnews.gradle.project.android.library")
 }
 
-pixnews {
-    compose.set(false)
-}
-
 android {
     namespace = "ru.pixnews.library.android.utils"
 }

@@ -9,8 +9,10 @@ plugins {
 group = "ru.pixnews.gradle"
 
 dependencies {
+    implementation("ru.pixnews.gradle.base:gradle-build-parameters")
     implementation(projects.base)
     implementation(projects.testing)
     implementation(projects.lint)
+    implementation(libs.compose.compiler.plugin)
     implementation(libs.kotlin.jvm.plugin)
 }

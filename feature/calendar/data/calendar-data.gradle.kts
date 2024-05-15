@@ -8,10 +8,6 @@ plugins {
     id("ru.pixnews.gradle.project.testing.graalvm")
 }
 
-pixnews {
-    compose.set(false)
-}
-
 android {
     namespace = "ru.pixnews.feature.calendar.data"
 }

@@ -4,10 +4,7 @@
  */
 plugins {
     id("ru.pixnews.gradle.project.kotlin.library")
-}
-
-pixnews {
-    compose.set(true)
+    id("ru.pixnews.gradle.project.kotlin.compose")
 }
 
 group = "ru.pixnews.library.internationalization"

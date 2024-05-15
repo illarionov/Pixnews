@@ -4,12 +4,9 @@
  */
 plugins {
     id("ru.pixnews.gradle.project.android.library")
+    id("ru.pixnews.gradle.project.kotlin.compose")
     id("ru.pixnews.gradle.project.android.test.compose.screenshot")
     id("ru.pixnews.gradle.project.di.anvil-factories")
-}
-
-pixnews {
-    compose.set(true)
 }
 
 android {

@@ -57,7 +57,7 @@ androidComponents {
     }
     beforeVariants(selector().withBuildType("debug")) { builder ->
         // Debug variant is usually required for Composable functions preview in modules with Compose
-        if (!project.pixnews.compose.get()) {
+        if (!pluginManager.hasPlugin("ru.pixnews.gradle.project.kotlin.compose")) {
             builder.enable = false
         }
     }

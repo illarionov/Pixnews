@@ -14,10 +14,6 @@ plugins {
     id("ru.pixnews.gradle.project.config.igdb")
 }
 
-pixnews {
-    compose.set(true)
-}
-
 android {
     defaultConfig {
         applicationId = "ru.pixnews"

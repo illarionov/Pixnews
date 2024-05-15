@@ -11,8 +11,8 @@ detekt = "1.23.6"
 diktat = "2.0.0"
 detekt-compose-rules = "0.3.21"
 dagger = "2.51.1"
-kotlin = "1.9.24"
-ksp = "1.9.24-1.0.20"
+kotlin = "2.0.0-RC3"
+ksp = "2.0.0-RC3-1.0.20"
 spotless = "6.25.0"
 
 accompanist = "0.35.0-alpha"
@@ -222,6 +222,7 @@ agp-plugin-api = { module = "com.android.tools.build:gradle-api", version.ref = 
 android-compose-screenshot-plugin = { group = "com.android.compose.screenshot", name = "com.android.compose.screenshot.gradle.plugin", version.ref = "android-compose-screenshot" }
 anvil-plugin = { group = "com.squareup.anvil", name = "gradle-plugin", version.ref = "anvil" }
 androidx-room-plugin = { group = "androidx.room", name = "androidx.room.gradle.plugin", version.ref = "androidx-room" }
+compose-compiler-plugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-jvm-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 kotlinx-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 ksp-plugin = { group = "com.google.devtools.ksp", name = "symbol-processing-gradle-plugin", version.ref = "ksp" }

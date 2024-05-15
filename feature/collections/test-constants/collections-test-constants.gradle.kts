@@ -5,7 +5,7 @@
 
 plugins {
     id("ru.pixnews.gradle.project.kotlin.library")
-    id("ru.pixnews.gradle.project.kotlin.compose-compiler")
+    id("ru.pixnews.gradle.project.kotlin.compose")
 }
 
 group = "ru.pixnews.feature.collections.test.constants"

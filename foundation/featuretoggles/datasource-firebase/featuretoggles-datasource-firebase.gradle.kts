@@ -8,10 +8,6 @@ plugins {
     id("ru.pixnews.gradle.project.di.anvil-factories")
 }
 
-pixnews {
-    compose.set(false)
-}
-
 android {
     namespace = "ru.pixnews.foundation.featuretoggles.datasource.firebase"
 }

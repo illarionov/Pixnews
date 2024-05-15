@@ -7,10 +7,6 @@ plugins {
     id("ru.pixnews.gradle.project.kotlin.library")
 }
 
-pixnews {
-    compose.set(false)
-}
-
 group = "ru.pixnews.feature.calendar.data"
 
 dependencies {

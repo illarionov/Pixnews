@@ -39,6 +39,7 @@ includeSubproject("kotlin")
 includeSubproject("lint")
 includeSubproject("protobuf")
 includeSubproject("testing")
+includeSubproject("testing-graalvm")
 
 fun includeSubproject(path: String) {
     include(path)

@@ -5,6 +5,7 @@
 plugins {
     id("ru.pixnews.gradle.android.library")
     id("ru.pixnews.gradle.di.anvil-factories")
+    id("ru.pixnews.gradle.test.graalvm")
 }
 
 pixnews {
@@ -36,4 +37,11 @@ dependencies {
     testImplementation(projects.library.test)
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.androidx.paging.testing)
+    testImplementation(libs.pixnews.sqlite.open.helper.main)
+    testImplementation(libs.pixnews.sqlite.open.helper.graal)
+    testImplementation(libs.pixnews.sqlite.open.helper.chicory)
+    testImplementation(libs.pixnews.sqlite.open.helper.chasm)
+
+    testImplementation(libs.pixnews.sqlite.open.helper.sqlite.mt)
+    testImplementation(libs.pixnews.sqlite.open.helper.sqlite.st)
 }

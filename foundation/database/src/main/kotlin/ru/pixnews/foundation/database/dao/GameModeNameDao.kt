@@ -10,7 +10,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import androidx.room.Update
 import ru.pixnews.foundation.database.entity.mode.GameModeNameEntity
 import ru.pixnews.foundation.database.model.LanguageCodeWrapper
 
@@ -19,11 +18,23 @@ public abstract class GameModeNameDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract suspend fun insertGameModeName(gameModeName: GameModeNameEntity): Long
 
-    @Update(onConflict = OnConflictStrategy.IGNORE)
-    public abstract suspend fun updateGameModeName(gameModeName: GameModeNameEntity)
+    @Query(
+        "UPDATE OR IGNORE `gameModeName` " +
+                "SET name = :name " +
+                "WHERE gameModeId = :gameModeId " +
+                "AND languageCode = :languageCode",
+    )
+    public abstract suspend fun updateGameModeName(
+        gameModeId: Long,
+        languageCode: LanguageCodeWrapper,
+        name: String,
+    )
 
     @Query("SELECT * FROM `gameModeName` WHERE `id` = :id")
     public abstract suspend fun getById(id: Long): GameModeNameEntity?
+
+    @Query("SELECT * FROM `gameModeName` WHERE `id` = :id")
+    public abstract fun getByIdTestBlocking(id: Long): GameModeNameEntity?
 
     @Query(
         "SELECT `gameModeName`.* " +
@@ -61,7 +72,11 @@ public abstract class GameModeNameDao {
     ): Long {
         val old = getByGameIdAndLanguage(gameModeName.gameModeId, gameModeName.languageCode)
         return if (old != null) {
-            updateGameModeName(gameModeName.copy(id = old.id))
+            updateGameModeName(
+                gameModeId = gameModeName.gameModeId,
+                languageCode = gameModeName.languageCode,
+                name = gameModeName.name,
+            )
             old.id
         } else {
             insertGameModeName(gameModeName)

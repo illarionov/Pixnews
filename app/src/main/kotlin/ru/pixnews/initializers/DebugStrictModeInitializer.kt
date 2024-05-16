@@ -13,8 +13,8 @@ import androidx.fragment.app.strictmode.FragmentStrictMode.Policy
 import co.touchlab.kermit.Logger
 import ru.pixnews.foundation.initializers.Initializer
 import ru.pixnews.util.strictmode.ViolationPolicy.LOG
-import ru.pixnews.util.strictmode.isUntaggedSocketViolation
 import ru.pixnews.util.strictmode.setupViolationListener
+import ru.pixnews.util.strictmode.untaggedSocketViolation
 import javax.inject.Inject
 
 @Suppress("MagicNumber")
@@ -40,7 +40,7 @@ class DebugStrictModeInitializer @Inject constructor(logger: Logger) : Initializ
                     logger = logger,
                     policy = LOG,
                     logAllowListViolation = false,
-                    allowList = listOf(isUntaggedSocketViolation),
+                    allowList = listOf(untaggedSocketViolation),
                 )
                 .build(),
         )

@@ -36,6 +36,9 @@ public fun Project.configureCommonUnitTesting(
 public fun Test.configureCommonUnitTestingOptions(
     engine: UnitTestEngine,
 ) {
+    if (this.name.endsWith("ScreenshotTest")) {
+        return
+    }
     when (engine) {
         JUNIT5, KOTEST -> configureCommonJunit5TestOptions()
         else -> Unit

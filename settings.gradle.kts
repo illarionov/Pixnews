@@ -17,6 +17,7 @@ buildscript {
         google()
     }
     dependencies {
+        classpath("com.android.compose.screenshot:com.android.compose.screenshot.gradle.plugin:0.0.1-alpha01")
         classpath("com.android.tools.build:gradle:8.6.0-alpha01")
         classpath("com.squareup.anvil:gradle-plugin:2.5.0-beta09")
         classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.1")

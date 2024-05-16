@@ -30,7 +30,6 @@ public object ImageLoaderHolder {
         return if (LocalInspectionMode.current) FakePreviewImageLoader else imageLoader
     }
 
-    @VisibleForTesting
     public fun overrideImageLoaderInitializer(initializer: () -> ImageLoader) {
         this.imageLoaderInitializer = initializer
     }

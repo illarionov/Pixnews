@@ -23,7 +23,7 @@ internal fun StrictMode.VmPolicy.Builder.setupViolationListener(
     logger: Logger,
     policy: ViolationPolicy = LOG,
     logAllowListViolation: Boolean = false,
-    allowList: List<Violation.() -> Boolean> = emptyList(),
+    allowList: List<IgnoredViolation> = emptyList(),
 ): StrictMode.VmPolicy.Builder = if (VERSION.SDK_INT >= VERSION_CODES.P) {
     val listener = ViolationListener(logger, policy, logAllowListViolation, allowList)
     this.penaltyListener(createThreadExecutor(), listener)
@@ -39,7 +39,7 @@ internal fun StrictMode.ThreadPolicy.Builder.setupViolationListener(
     logger: Logger,
     policy: ViolationPolicy = LOG,
     logAllowListViolation: Boolean = false,
-    allowList: List<Violation.() -> Boolean> = emptyList(),
+    allowList: List<IgnoredViolation> = emptyList(),
 ): StrictMode.ThreadPolicy.Builder = if (VERSION.SDK_INT >= VERSION_CODES.P) {
     val listener = ViolationListener(logger, policy, logAllowListViolation, allowList)
     this.penaltyListener(createThreadExecutor(), listener)
@@ -55,8 +55,8 @@ internal fun StrictMode.ThreadPolicy.Builder.setupViolationListener(
 internal class ViolationListener(
     private val logger: Logger,
     private val policy: ViolationPolicy = LOG,
-    private val logAllowListViolation: Boolean = false,
-    private val allowList: List<Violation.() -> Boolean> = emptyList(),
+    private val logIgnoredViolation: Boolean = false,
+    private val allowList: List<IgnoredViolation> = emptyList(),
 ) : OnVmViolationListener, OnThreadViolationListener {
     override fun onVmViolation(violation: Violation) {
         onViolation("VM", violation)
@@ -70,35 +70,26 @@ internal class ViolationListener(
         type: String,
         violation: Violation,
     ) {
-        if (violation.shouldSkip()) {
-            if (logAllowListViolation) {
+        val ignoredViolation = allowList.find { it.predicate(violation) }
+
+        if (ignoredViolation != null) {
+            if (logIgnoredViolation) {
                 logger.e {
-                    "Skipping $type violation `$violation: message: ${violation.message}`, " +
-                            "stracktrace: ${violation.stackTraceToString()}"
+                    "Skipping ${ignoredViolation.name} ($type/$violation, message: ${violation.message})`"
                 }
             }
-            return
-        }
-        when (policy) {
-            LOG -> logger.e(violation) { "$type violation" }
-            FAIL -> throw StrictModeViolationException(violation)
-            IGNORE -> Unit
+        } else {
+            when (policy) {
+                LOG -> logger.e(violation) { "$type violation" }
+                FAIL -> throw StrictModeViolationException(violation)
+                IGNORE -> Unit
+            }
         }
     }
-
-    private fun Violation.shouldSkip(): Boolean = allowList.any { it() }
 
     companion object {
         fun createThreadExecutor(): Executor = Executor {
             it.run()
         }
     }
-}
-
-class StrictModeViolationException(throwable: Throwable) : RuntimeException(throwable)
-
-enum class ViolationPolicy {
-    IGNORE,
-    LOG,
-    FAIL,
 }

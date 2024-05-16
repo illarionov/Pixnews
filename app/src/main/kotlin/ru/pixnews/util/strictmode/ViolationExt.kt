@@ -10,47 +10,58 @@ import android.os.strictmode.DiskReadViolation
 import android.os.strictmode.DiskWriteViolation
 import android.os.strictmode.InstanceCountViolation
 import android.os.strictmode.UntaggedSocketViolation
-import android.os.strictmode.Violation
 
 /**
  * Disk read/write violations on [androidx.test.runner.MonitoringInstrumentation.specifyDexMakerCacheProperty]
  */
 @SuppressLint("NewApi")
-internal val isInstrumentationDexMakerViolation: Violation.() -> Boolean = {
+val instrumentationDexMakerViolation: IgnoredViolation = IgnoredViolation(
+    "androidx.test.runner.MonitoringInstrumentation#specifyDexMakerCacheProperty Disk Violation",
+) {
     (this is DiskReadViolation || this is DiskWriteViolation) && this.stackTrace.any {
         it.fileName == "MonitoringInstrumentation.java" && it.methodName == "specifyDexMakerCacheProperty"
     }
 }
 
 @SuppressLint("NewApi")
-internal val isTypefaceFullFlipFontViolation: Violation.() -> Boolean = {
+internal val typefaceFullFlipFontViolation: IgnoredViolation = IgnoredViolation(
+    "Typeface.java#{get/set}FullFlipFont Disk Read Violation",
+) {
     this is DiskReadViolation && this.stackTrace.any {
         it.fileName == "Typeface.java" && (it.methodName == "getFullFlipFont" || it.methodName == "setFlipFonts")
     }
 }
 
 @SuppressLint("NewApi")
-internal val isFontRequestViolation: Violation.() -> Boolean = {
+internal val fontRequestViolation: IgnoredViolation = IgnoredViolation(
+    "FontRequestWorker Disk Read Violation",
+) {
     this is DiskReadViolation && this.stackTrace.any {
         it.className == "androidx.core.provider.FontRequestWorker" && it.fileName == "FontRequestWorker.java"
     }
 }
 
 @SuppressLint("NewApi")
-internal val isProfileSizeOfAppViolation: Violation.() -> Boolean = {
+internal val profileSizeOfAppViolation: IgnoredViolation = IgnoredViolation(
+    "ActivityThread.java#getProfileSizeOfApp Disk Read Violation",
+) {
     this is DiskReadViolation && this.stackTrace.any {
         it.fileName == "ActivityThread.java" && it.methodName == "getProfileSizeOfApp"
     }
 }
 
 @SuppressLint("NewApi")
-internal val isUntaggedSocketViolation: Violation.() -> Boolean = {
+internal val untaggedSocketViolation: IgnoredViolation = IgnoredViolation(
+    "Untagged Socket Violation",
+) {
     this is UntaggedSocketViolation
 }
 
 // Class instance limit occasionally triggered in instrumented tests for unknown reasons
 @SuppressLint("NewApi")
-internal val isInstanceCountViolation: Violation.() -> Boolean = {
+internal val instanceCountViolation: IgnoredViolation = IgnoredViolation(
+    "Instance Count Violation",
+) {
     this is InstanceCountViolation
 }
 
@@ -58,7 +69,9 @@ internal val isInstanceCountViolation: Violation.() -> Boolean = {
  * Difficult to diagnose violation in GMS
  */
 @SuppressLint("NewApi")
-internal val isGmsDiskReadViolation: Violation.() -> Boolean = {
+internal val gmsDiskReadViolation: IgnoredViolation = IgnoredViolation(
+    ":com.google.android.gms Disk Read Violation",
+) {
     (this is DiskReadViolation) && this.stackTrace.any {
         it.fileName?.contains(":com.google.android.gms") ?: false
     }

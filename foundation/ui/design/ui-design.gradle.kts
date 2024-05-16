@@ -4,7 +4,7 @@
  */
 plugins {
     id("ru.pixnews.gradle.android.library")
-    id("ru.pixnews.gradle.android.test-paparazzi")
+    id("ru.pixnews.gradle.android.test.compose.screenshot")
     id("ru.pixnews.gradle.di.anvil-factories")
 }
 
@@ -42,5 +42,5 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
 
-    testImplementation(projects.foundation.ui.imageloader.coilTest)
+    screenshotTestImplementation(projects.foundation.ui.imageloader.coilTest)
 }

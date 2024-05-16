@@ -9,6 +9,10 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import coil.ComponentRegistry
 import coil.annotation.ExperimentalCoilApi
 import coil.disk.DiskCache
@@ -24,6 +28,7 @@ import okio.FileSystem
 import okio.Path
 import okio.Path.Companion.toOkioPath
 import ru.pixnews.foundation.ui.imageloader.coil.ImageLoader
+import ru.pixnews.foundation.ui.imageloader.coil.ImageLoaderHolder
 import ru.pixnews.foundation.ui.imageloader.coil.ImageUrlCoilInterceptor
 import ru.pixnews.foundation.ui.imageloader.coil.PrefetchingImageLoader
 import ru.pixnews.foundation.ui.imageloader.coil.tooling.CoilDebugInterceptor
@@ -125,5 +130,19 @@ public class FakeImageLoader private constructor(
 
         @ExperimentalCoilApi
         override fun remove(key: String): Boolean = true
+    }
+
+    public companion object {
+        @Composable
+        public fun setupFakeImageLoader(): FakeImageLoader {
+            val context = LocalContext.current
+            val fakeImageLoader = remember {
+                FakeImageLoader.Builder(context).build()
+            }
+            LaunchedEffect(context) {
+                ImageLoaderHolder.overrideImageLoaderInitializer { fakeImageLoader }
+            }
+            return fakeImageLoader
+        }
     }
 }

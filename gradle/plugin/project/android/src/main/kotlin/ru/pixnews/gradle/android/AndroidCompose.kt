@@ -43,12 +43,20 @@ internal fun Project.configureCompose(
                     "-opt-in=androidx.compose.ui.ExperimentalComposeUiApi",
                     "-opt-in=androidx.compose.ui.text.ExperimentalTextApi",
                 )
-                freeCompilerArgs.addAll(
+            }
+        }
+
+    // afterEvaluate as workaround for compileDebugScreenshotTestKotlin task
+    afterEvaluate {
+        tasks.withType<KotlinCompilationTask<KotlinJvmCompilerOptions>>()
+            .matching { it !is KaptGenerateStubsTask }
+            .configureEach {
+                compilerOptions.freeCompilerArgs.addAll(
                     "-P",
                     "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.9.24",
                 )
             }
-        }
+    }
 
     configureComposeMetrics()
 }

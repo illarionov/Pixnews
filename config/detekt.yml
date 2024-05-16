@@ -145,3 +145,8 @@ formatting:
     active: true
     autoCorrect: true
     useTrailingCommaOnDeclarationSite: true
+
+Compose:
+  # Disabled to use public @Preview functions in screenshot tests
+  PreviewPublic:
+    active: false

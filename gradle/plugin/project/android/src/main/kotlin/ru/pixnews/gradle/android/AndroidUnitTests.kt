@@ -7,6 +7,7 @@ package ru.pixnews.gradle.android
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
+import org.gradle.api.tasks.testing.Test
 import ru.pixnews.gradle.base.UnitTestEngine
 import ru.pixnews.gradle.testing.configureCommonUnitTesting
 import ru.pixnews.gradle.testing.configureCommonUnitTestingOptions
@@ -17,8 +18,8 @@ internal fun Project.configureUnitTesting(
 ) {
     configureCommonUnitTesting(engine)
     commonExtension.testOptions {
-        unitTests.all { testExtension ->
-            testExtension.configureCommonUnitTestingOptions(engine)
+        unitTests.all { testTask: Test ->
+            testTask.configureCommonUnitTestingOptions(engine)
         }
     }
 }

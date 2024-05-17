@@ -6,7 +6,7 @@ plugins {
     id("ru.pixnews.gradle.base.kotlindsl")
 }
 
-group = "ru.pixnews.gradle.config"
+group = "ru.pixnews.gradle"
 
 tasks.withType<Test> {
     useJUnitPlatform()

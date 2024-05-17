@@ -4,10 +4,10 @@
  */
 
 plugins {
-    id("ru.pixnews.gradle.android.library")
-    id("ru.pixnews.gradle.android.room")
-    id("ru.pixnews.gradle.di.anvil-factories")
-    id("ru.pixnews.gradle.protobuf-wire")
+    id("ru.pixnews.gradle.project.android.library")
+    id("ru.pixnews.gradle.project.android.room")
+    id("ru.pixnews.gradle.project.di.anvil-factories")
+    id("ru.pixnews.gradle.project.protobuf-wire")
     alias(libs.plugins.prefiller)
 }
 

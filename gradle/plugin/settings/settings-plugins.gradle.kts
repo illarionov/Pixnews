@@ -6,7 +6,7 @@ plugins {
     id("ru.pixnews.gradle.base.kotlindsl")
 }
 
-group = "ru.pixnews.gradle.settings"
+group = "ru.pixnews.gradle"
 
 dependencies {
     // noinspection UseTomlInstead

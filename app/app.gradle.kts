@@ -6,12 +6,12 @@ import buildparameters.BuildParametersExtension
  */
 
 plugins {
-    id("ru.pixnews.gradle.android.application")
-    id("ru.pixnews.gradle.android.crashlytics")
-    id("ru.pixnews.gradle.android.test-instrumented")
-    id("ru.pixnews.gradle.di.anvil-kapt")
+    id("ru.pixnews.gradle.project.android.application")
+    id("ru.pixnews.gradle.project.android.crashlytics")
+    id("ru.pixnews.gradle.project.android.test-instrumented")
+    id("ru.pixnews.gradle.project.di.anvil-kapt")
     alias(libs.plugins.fbase.options.gradle.plugin)
-    id("ru.pixnews.gradle.config.igdb")
+    id("ru.pixnews.gradle.project.config.igdb")
 }
 
 pixnews {

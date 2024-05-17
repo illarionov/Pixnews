@@ -71,7 +71,7 @@ jobs:
           path: app/build/outputs
 
       - name: Publish test results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: ${{ !cancelled() }}
         with:
           comment_mode: off

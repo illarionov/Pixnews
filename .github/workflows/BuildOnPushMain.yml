@@ -154,7 +154,7 @@ jobs:
         run: rm -f config/pixnews.properties
 
       - name: Publish instrumented test results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: ${{ !cancelled() }}
         with:
           comment_mode: off

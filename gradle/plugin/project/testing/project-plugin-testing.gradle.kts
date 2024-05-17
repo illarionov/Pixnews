@@ -7,7 +7,7 @@ plugins {
     id("ru.pixnews.gradle.base.kotlindsl")
 }
 
-group = "ru.pixnews.gradle.testing"
+group = "ru.pixnews.gradle"
 
 dependencies {
     implementation("ru.pixnews.gradle.base:gradle-build-parameters")

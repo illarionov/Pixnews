@@ -5,3 +5,5 @@
 plugins {
     id("ru.pixnews.gradle.base.kotlindsl") apply false
 }
+
+group = "ru.pixnews.gradle"

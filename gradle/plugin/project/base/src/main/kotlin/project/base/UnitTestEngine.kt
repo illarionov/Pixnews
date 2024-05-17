@@ -1,0 +1,15 @@
+/*
+ * Copyright (c) 2023-2024, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ */
+
+@file:Suppress("PackageDirectoryMismatch")
+
+package ru.pixnews.gradle.project.base
+
+public enum class UnitTestEngine {
+    DISABLE,
+    JUNIT4,
+    JUNIT5,
+    KOTEST,
+}

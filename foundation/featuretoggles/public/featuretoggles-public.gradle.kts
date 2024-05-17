@@ -4,8 +4,8 @@
  */
 
 plugins {
-    id("ru.pixnews.gradle.kotlin.library")
-    id("ru.pixnews.gradle.kotlin.compose-compiler")
+    id("ru.pixnews.gradle.project.kotlin.library")
+    id("ru.pixnews.gradle.project.kotlin.compose-compiler")
     `java-test-fixtures`
 }
 

@@ -4,7 +4,7 @@
  */
 
 plugins {
-    id("ru.pixnews.gradle.kotlin.library")
+    id("ru.pixnews.gradle.project.kotlin.library")
 }
 
 pixnews {

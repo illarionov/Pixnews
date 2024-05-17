@@ -3,9 +3,9 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 plugins {
-    id("ru.pixnews.gradle.lint.detekt")
-    id("ru.pixnews.gradle.lint.diktat")
-    id("ru.pixnews.gradle.lint.spotless")
+    id("ru.pixnews.gradle.project.lint.detekt")
+    id("ru.pixnews.gradle.project.lint.diktat")
+    id("ru.pixnews.gradle.project.lint.spotless")
 }
 
 interface InjectedFileSystemOperations {

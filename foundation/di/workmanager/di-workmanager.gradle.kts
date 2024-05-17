@@ -3,8 +3,8 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 plugins {
-    id("ru.pixnews.gradle.android.library")
-    id("ru.pixnews.gradle.di.anvil-factories")
+    id("ru.pixnews.gradle.project.android.library")
+    id("ru.pixnews.gradle.project.di.anvil-factories")
 }
 
 pixnews {

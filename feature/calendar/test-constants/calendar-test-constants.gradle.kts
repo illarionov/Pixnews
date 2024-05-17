@@ -4,7 +4,7 @@
  */
 
 plugins {
-    id("ru.pixnews.gradle.android.library")
+    id("ru.pixnews.gradle.project.android.library")
     id("kotlin-parcelize")
 }
 

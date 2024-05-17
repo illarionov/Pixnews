@@ -7,7 +7,7 @@ plugins {
     id("ru.pixnews.gradle.base.kotlindsl")
 }
 
-group = "ru.pixnews.gradle.lint"
+group = "ru.pixnews.gradle"
 
 dependencies {
     implementation(projects.base)

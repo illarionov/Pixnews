@@ -6,7 +6,7 @@ plugins {
     id("ru.pixnews.gradle.base.kotlindsl")
 }
 
-group = "ru.pixnews.gradle.protobuf"
+group = "ru.pixnews.gradle"
 
 dependencies {
     implementation(projects.base)

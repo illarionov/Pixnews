@@ -12,7 +12,7 @@ pixnews {
 }
 
 android {
-    namespace = "ru.pixnews.foundation.testing.instrumented"
+    namespace = "ru.pixnews.foundation.instrumented.test"
 
     lint {
         disable += "RemoveWorkManagerInitializer"

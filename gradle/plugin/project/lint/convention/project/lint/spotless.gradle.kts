@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-@file:Suppress("PackageDirectoryMismatch", "SpacingBetweenPackageAndImports")
+@file:Suppress("SpacingBetweenPackageAndImports")
 
 package ru.pixnews.gradle.project.lint
 

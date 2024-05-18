@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-@file:Suppress("PackageDirectoryMismatch", "NULLABLE_PROPERTY_TYPE")
+@file:Suppress("NULLABLE_PROPERTY_TYPE")
 
 package ru.pixnews.gradle.project.android
 

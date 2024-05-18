@@ -3,12 +3,9 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 
-@file:Suppress("PackageDirectoryMismatch")
-
 package ru.pixnews.gradle.project.di
 
 import com.google.devtools.ksp.gradle.KspTaskJvm
-import org.gradle.api.artifacts.VersionCatalog
 import org.jetbrains.kotlin.gradle.tasks.KaptGenerateStubs
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 

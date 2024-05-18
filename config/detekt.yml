@@ -50,8 +50,9 @@ naming:
     ignoreAnnotated: ['Composable', 'ParameterizedTest']
   NoNameShadowing:
     active: false
+  # Temporarily disabled until we figure out how to apply it to the current directory structure
   InvalidPackageDeclaration:
-    active: true
+    active: false
     rootPackage: "ru.pixnews"
     requireRootInDeclaration: false
   TopLevelPropertyNaming:

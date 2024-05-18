@@ -3,7 +3,7 @@ minSdk = "24"
 compileSdk = "34"
 targetSdk = "33"
 
-agp = "8.6.0-alpha01"
+agp = "8.6.0-alpha02"
 android-compose-screenshot = "0.0.1-alpha01"
 anvil = "2.5.0-beta09"
 bmversions = "0.51.0"

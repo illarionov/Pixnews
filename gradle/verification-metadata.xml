@@ -139,6 +139,8 @@
             <trusting group="androidx.fragment"/>
             <trusting group="androidx.lifecycle"/>
             <trusting group="androidx.paging"/>
+            <trusting group="androidx.room"/>
+            <trusting group="androidx.sqlite"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
             <trusting group="^androidx[.]test($|([.].*))" regex="true"/>
          </trusted-key>

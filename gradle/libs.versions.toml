@@ -9,7 +9,7 @@ anvil = "2.5.0-beta09"
 bmversions = "0.51.0"
 detekt = "1.23.6"
 diktat = "2.0.0"
-detekt-compose-rules = "0.3.21"
+detekt-compose-rules = "0.4.1"
 dagger = "2.51.1"
 kotlin = "1.9.24"
 ksp = "1.9.24-1.0.20"
@@ -40,14 +40,15 @@ androidx-navigation-compose = "2.7.7"
 androidx-paging = "3.3.0"
 androidx-paging-compose = "3.3.0"
 androidx-profileinstaller = "1.3.1"
-androidx-room = "2.6.1"
+androidx-room = "2.7.0-alpha02"
 androidx-splashscreen = "1.1.0-rc01"
+androidx-sqlite = "2.5.0-alpha02"
 androidx-startup = "1.2.0-alpha02"
-androidx-test-core = "1.6.0-alpha06"
-androidx-test-espresso = "3.6.0-alpha04"
+androidx-test-core = "1.6.0-beta01"
+androidx-test-espresso = "3.6.0-beta01"
 androidx-test-junit = "1.1.5"
-androidx-test-runner = "1.6.0-alpha07"
-androidx-test-rules = "1.6.0-alpha04"
+androidx-test-runner = "1.6.0-beta01"
+androidx-test-rules = "1.6.0-beta01"
 androidx-test-uiautomator = "2.3.0"
 androidx-tracing = "1.3.0-alpha02"
 androidx-tracing-perfetto = "1.0.0-alpha12"
@@ -68,7 +69,7 @@ kotest = "5.9.0"
 kotest-assertions-arrow = "1.4.0"
 kotlin-compile-testing-fork = "0.4.1"
 kotlinpoet = "1.16.0"
-mockk = "1.13.10"
+mockk = "1.13.11"
 mockwebserver-dsl = "1.0.0"
 okhttp = "4.12.0"
 okio = "3.9.0"
@@ -123,10 +124,13 @@ androidx-paging-common = { group = "androidx.paging", name = "paging-common", ve
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidx-paging-compose" }
 androidx-paging-testing = { group = "androidx.paging", name = "paging-testing", version.ref = "androidx-paging-compose" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "androidx-profileinstaller" }
-androidx-room = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
 androidx-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "androidx-room" }
 androidx-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidx-splashscreen" }
+androidx-sqlite = { group = "androidx.sqlite", name = "sqlite", version.ref = "androidx-sqlite" }
+androidx-sqlite-framework = { group = "androidx.sqlite", name = "sqlite-framework", version.ref = "androidx-sqlite" }
+androidx-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "androidx-sqlite" }
 androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidx-startup" }
 androidx-test-core = { group = "androidx.test", name = "core-ktx", version.ref = "androidx-test-core" }
 androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-test-espresso" }

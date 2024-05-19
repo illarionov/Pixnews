@@ -33,9 +33,6 @@ public abstract class GameModeNameDao {
     @Query("SELECT * FROM `gameModeName` WHERE `id` = :id")
     public abstract suspend fun getById(id: Long): GameModeNameEntity?
 
-    @Query("SELECT * FROM `gameModeName` WHERE `id` = :id")
-    public abstract fun getByIdTestBlocking(id: Long): GameModeNameEntity?
-
     @Query(
         "SELECT `gameModeName`.* " +
                 "FROM `gameModeName` " +

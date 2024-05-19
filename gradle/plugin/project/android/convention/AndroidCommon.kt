@@ -42,9 +42,6 @@ internal fun Project.configureCommonAndroid(
             .configureEach {
                 compilerOptions {
                     jvmTarget.set(JvmTarget.JVM_17)
-                    // There are some plugins incompatible with K2 compiler:
-                    // ComposeCompiler, R8
-                    // languageVersion.set(KOTLIN_2_0)
                     freeCompilerArgs.addAll(
                         "-opt-in=kotlin.RequiresOptIn",
                         "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",

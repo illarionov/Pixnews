@@ -12,6 +12,6 @@ group = "ru.pixnews.gradle"
 dependencies {
     implementation(projects.base)
     implementation(libs.anvil.plugin)
-    implementation(libs.kotlin.jvm.plugin)
+    implementation(libs.kotlin.gradle.plugin)
     implementation(libs.ksp.plugin)
 }

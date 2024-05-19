@@ -12,5 +12,5 @@ dependencies {
     implementation(projects.base)
     implementation(projects.testing)
     implementation(projects.lint)
-    implementation(libs.kotlin.jvm.plugin)
+    implementation(libs.kotlin.gradle.plugin)
 }

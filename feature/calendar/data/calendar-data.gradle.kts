@@ -1,7 +1,8 @@
 /*
- * Copyright (c) 2023, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
+ * Copyright (c) 2023-2024, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
+
 plugins {
     id("ru.pixnews.gradle.project.android.library")
     id("ru.pixnews.gradle.project.di.anvil-factories")
@@ -31,7 +32,6 @@ dependencies {
     api(libs.inject)
     implementation(libs.kermit)
     implementation(libs.kotlinx.collections.immutable)
-    implementation(libs.kotlinx.coroutines.android)
 
     testImplementation(testFixtures(projects.foundation.domainModel))
     testImplementation(projects.library.test)
@@ -41,6 +41,8 @@ dependencies {
     testImplementation(libs.pixnews.sqlite.open.helper.graal)
     testImplementation(libs.pixnews.sqlite.open.helper.chicory)
     testImplementation(libs.pixnews.sqlite.open.helper.chasm)
+    testImplementation(libs.androidx.room.runtime.jvm)
+    testImplementation(libs.androidx.sqlite.bundled.jvm)
 
     testImplementation(libs.pixnews.sqlite.open.helper.sqlite.mt)
     testImplementation(libs.pixnews.sqlite.open.helper.sqlite.st)

@@ -8,6 +8,7 @@ package ru.pixnews.foundation.database.inject
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.annotations.optional.SingleIn
@@ -15,7 +16,9 @@ import dagger.Module
 import dagger.Provides
 import ru.pixnews.foundation.appconfig.AppConfig
 import ru.pixnews.foundation.appconfig.logDatabaseQueries
+import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.database.PixnewsDatabase
+import ru.pixnews.foundation.database.PixnewsDatabase_Impl
 import ru.pixnews.foundation.database.util.QueryLogger
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
 import ru.pixnews.foundation.di.base.scopes.AppScope
@@ -28,15 +31,18 @@ public object DatabaseModule {
     public fun providePixnewsDatabase(
         @ApplicationContext applicationContext: Context,
         appConfig: AppConfig,
+        databaseDispatcher: IoCoroutineDispatcherProvider,
         logger: Logger,
     ): PixnewsDatabase {
-        val builder = Room.databaseBuilder(
-            applicationContext,
-            PixnewsDatabase::class.java,
-            "pixnews",
+        val builder = Room.databaseBuilder<PixnewsDatabase>(
+            context = applicationContext,
+            name = "pixnews",
+            factory = ::PixnewsDatabase_Impl,
         )
             .setJournalMode(WRITE_AHEAD_LOGGING)
             .createFromAsset("pixnews.db")
+            .setDriver(BundledSQLiteDriver())
+            .setQueryCoroutineContext(databaseDispatcher.get())
 
         if (appConfig.logDatabaseQueries()) {
             builder.setQueryCallback(QueryLogger(logger), QueryLogger.createLoggerExecutor())

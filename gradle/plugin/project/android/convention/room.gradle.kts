@@ -37,8 +37,9 @@ extensions.configure<CommonExtension<*, *, *, *, *, *>>("android") {
 
 dependencies {
     add("annotationProcessor", versionCatalog.findLibrary("androidx.room.compiler").get())
-    add("api", versionCatalog.findLibrary("androidx.room").get())
+    add("api", versionCatalog.findLibrary("androidx.room.runtime").get())
     add("ksp", versionCatalog.findLibrary("androidx.room.compiler").get())
+    add("implementation", versionCatalog.findLibrary("androidx.sqlite.bundled").get())
 
     add("testImplementation", versionCatalog.findLibrary("androidx.room.testing").get())
 }

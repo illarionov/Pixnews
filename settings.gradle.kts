@@ -25,7 +25,7 @@ buildscript {
         classpath("com.google.devtools.ksp:symbol-processing-gradle-plugin:1.9.24-1.0.20")
         classpath("com.squareup.wire:wire-gradle-plugin:4.9.9")
         classpath("com.github.ben-manes:gradle-versions-plugin:0.51.0")
-        classpath("androidx.room:androidx.room.gradle.plugin:2.6.1")
+        classpath("androidx.room:androidx.room.gradle.plugin:2.7.0-alpha02")
         classpath("com.diffplug.spotless:spotless-plugin-gradle:6.25.0")
         classpath("com.saveourtool.diktat:diktat-gradle-plugin:2.0.0")
         classpath("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6")

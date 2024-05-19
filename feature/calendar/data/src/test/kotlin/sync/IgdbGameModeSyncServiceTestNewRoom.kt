@@ -7,7 +7,6 @@
 
 package ru.pixnews.feature.calendar.data.sync
 
-import android.content.ContextWrapper
 import androidx.room.Room
 import androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
@@ -21,17 +20,11 @@ import org.junit.jupiter.api.io.TempDir
 import ru.pixnews.foundation.database.PixnewsDatabase
 import ru.pixnews.foundation.database.PixnewsDatabase_Impl
 import ru.pixnews.library.test.TestingLoggers
-import ru.pixnews.wasm.sqlite.open.helper.SQLiteDatabaseJournalMode.PERSIST
-import ru.pixnews.wasm.sqlite.open.helper.SQLiteDatabaseSyncMode
-import ru.pixnews.wasm.sqlite.open.helper.WasmSqliteOpenHelperFactory
-import ru.pixnews.wasm.sqlite.open.helper.graalvm.GraalvmSqliteEmbedder
-import ru.pixnews.wasm.sqlite.open.helper.path.JvmDatabasePathResolver
 import java.io.File
 import co.touchlab.kermit.Logger as KermitLogger
 
-class IgdbGameModeSyncServiceTest {
+class IgdbGameModeSyncServiceTestNewRoom {
     val logger = TestingLoggers.consoleLogger
-    val mockContext = ContextWrapper(null)
 
     @TempDir
     lateinit var tempDir: File
@@ -39,6 +32,7 @@ class IgdbGameModeSyncServiceTest {
 
     @BeforeEach
     fun createDb() {
+        @Suppress("UnusedPrivateProperty")
         val dbLogger = KermitLogger(
             config = object : LoggerConfig by logger.config {
                 override val minSeverity: Severity = Severity.Info
@@ -46,34 +40,14 @@ class IgdbGameModeSyncServiceTest {
             "Sqlite",
         )
 
-        @Suppress("UnusedPrivateProperty")
-        val helperFactory = WasmSqliteOpenHelperFactory(GraalvmSqliteEmbedder) {
-            logger = SqliteLogger(dbLogger)
-            pathResolver = JvmDatabasePathResolver(tempDir)
-            openParams {
-                journalMode = PERSIST
-                syncMode = SQLiteDatabaseSyncMode.OFF
-            }
-            debug {
-                sqlLog = false
-                sqlStatements = false
-                sqlTime = false
-                logSlowQueries = false
-            }
-        }
-
         val dbFile = File(tempDir, "db.sqlite")
 
-        // TODO
         db = Room.databaseBuilder(
             name = dbFile.absolutePath,
             factory = ::PixnewsDatabase_Impl,
         )
             .setJournalMode(WRITE_AHEAD_LOGGING)
             // .createFromAsset("pixnews.db")
-            // .setQueryCallback(QueryLogger(logger), QueryLogger.createLoggerExecutor())
-            // .openHelperFactory(helperFactory)
-            // .allowMainThreadQueries()
             .setDriver(BundledSQLiteDriver())
             .build()
     }
@@ -85,6 +59,7 @@ class IgdbGameModeSyncServiceTest {
 
     @Test
     fun dbTest() = runTest {
+        // TODO
         // val gameMode = db.gameModeNameDao().getById(1)
         // logger.i { "gem mode: $gameMode" }
     }

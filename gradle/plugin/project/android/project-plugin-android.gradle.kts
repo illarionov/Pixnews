@@ -20,7 +20,7 @@ dependencies {
     implementation(libs.android.compose.screenshot.plugin)
     implementation(libs.androidx.room.plugin)
     runtimeOnly(libs.agp.plugin)
-    implementation(libs.kotlin.jvm.plugin)
+    implementation(libs.kotlin.gradle.plugin)
     implementation(libs.ksp.plugin)
     implementation(libs.firebase.crashlitycs.plugin)
 }

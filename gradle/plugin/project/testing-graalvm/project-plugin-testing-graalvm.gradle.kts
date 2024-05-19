@@ -11,5 +11,5 @@ group = "ru.pixnews.gradle"
 dependencies {
     implementation(projects.base)
     implementation(libs.agp.plugin.api)
-    implementation(libs.kotlin.jvm.plugin)
+    implementation(libs.kotlin.gradle.plugin)
 }

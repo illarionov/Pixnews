@@ -44,7 +44,7 @@ public fun PixnewsApp(
 
             BottomNavigationBar(
                 selectedTabFlow = selectedItem,
-                onTabClicked = navigationState::navigateToTopLevelDestination,
+                onClickTab = navigationState::navigateToTopLevelDestination,
             )
         },
         modifier = modifier,

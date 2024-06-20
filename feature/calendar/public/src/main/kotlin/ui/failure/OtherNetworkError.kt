@@ -33,7 +33,7 @@ import ru.pixnews.foundation.ui.theme.PixnewsTheme
 
 @Composable
 internal fun OtherNetworkError(
-    onRefreshClicked: () -> Unit,
+    onClickRefresh: () -> Unit,
     modifier: Modifier = Modifier,
     refreshActive: () -> Boolean = { false },
     paddingValues: PaddingValues = PaddingValues(),
@@ -71,7 +71,7 @@ internal fun OtherNetworkError(
 
         FilledTonalButton(
             contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
-            onClick = onRefreshClicked,
+            onClick = onClickRefresh,
             enabled = !refreshActive(),
         ) {
             Icon(
@@ -94,7 +94,7 @@ private fun FailureOtherErrorPreview() {
         ) {
             OtherNetworkError(
                 refreshActive = { true },
-                onRefreshClicked = { },
+                onClickRefresh = { },
             )
         }
     }

@@ -56,7 +56,7 @@ internal fun CalendarScreen(
         modifier = modifier,
         calendarScreenState = viewModel.viewState,
         upcomingReleases = upcomingReleases,
-        onRefreshRequested = { viewModel.refreshReleaseCalendarList() },
+        onRefreshRequest = { viewModel.refreshReleaseCalendarList() },
     )
 }
 
@@ -64,7 +64,7 @@ internal fun CalendarScreen(
 internal fun CalendarScreen(
     calendarScreenState: StateFlow<CalendarScreenState>,
     upcomingReleases: LazyPagingItems<CalendarListItem>,
-    onRefreshRequested: () -> Unit,
+    onRefreshRequest: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     @SuppressLint("StateFlowValueCalledInComposition")
@@ -81,7 +81,7 @@ internal fun CalendarScreen(
     CalendarScreen(
         state = mergedState.value,
         upcomingReleases = upcomingReleases,
-        onRefreshRequested = onRefreshRequested,
+        onRefreshRequest = onRefreshRequest,
         modifier = modifier,
     )
 }
@@ -90,7 +90,7 @@ internal fun CalendarScreen(
 internal fun CalendarScreen(
     state: CalendarScreenState,
     upcomingReleases: LazyPagingItems<CalendarListItem>,
-    onRefreshRequested: () -> Unit,
+    onRefreshRequest: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -130,7 +130,7 @@ internal fun CalendarScreen(
 
                 is Failure.NoInternet -> NoInternet()
                 is Failure.OtherNetworkError -> OtherNetworkError(
-                    onRefreshClicked = onRefreshRequested,
+                    onClickRefresh = onRefreshRequest,
                     refreshActive = state::isRefreshing,
                 )
             }
@@ -163,7 +163,7 @@ private fun CalendarScreenPreview() {
                 upcomingReleases = flowOf(
                     PreviewFixtures.UpcomingReleases.successPagingData,
                 ).collectAsLazyPagingItems(),
-                onRefreshRequested = {},
+                onRefreshRequest = {},
             )
         }
     }
@@ -178,7 +178,7 @@ private fun CalendarScreenPreviewInitialLoadPlaceholder() {
                 state = InitialLoad,
                 upcomingReleases = flowOf(PreviewFixtures.UpcomingReleases.initialLoadingPagingData)
                     .collectAsLazyPagingItems(),
-                onRefreshRequested = {},
+                onRefreshRequest = {},
             )
         }
     }

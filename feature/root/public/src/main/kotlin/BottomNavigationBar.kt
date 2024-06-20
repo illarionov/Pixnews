@@ -27,7 +27,7 @@ public const val BOTTOM_NAVIGATION_BAR_TEST_TAG: String = "bottom_navigation_bar
 @Composable
 internal fun BottomNavigationBar(
     selectedTabFlow: State<TopLevelDestination?>,
-    onTabClicked: (TopLevelDestination) -> Unit,
+    onClickTab: (TopLevelDestination) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     PixnewsBottomNavigationBar(
@@ -42,7 +42,7 @@ internal fun BottomNavigationBar(
                         selectedTabFlow.value == destination
                     }
                 },
-                onTabClicked = onTabClicked,
+                onClickTab = onClickTab,
             )
         }
     }
@@ -52,14 +52,14 @@ internal fun BottomNavigationBar(
 private fun RowScope.DestinationNavigationBarItem(
     destination: TopLevelDestination,
     isSelected: State<Boolean>,
-    onTabClicked: (TopLevelDestination) -> Unit,
+    onClickTab: (TopLevelDestination) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     PixnewsBottomNavigationBarItem(
         modifier = modifier
             .testTag(destination.testTag),
         selected = isSelected.value,
-        onClick = { onTabClicked(destination) },
+        onClick = { onClickTab(destination) },
         label = {
             Text(
                 text = stringResource(destination.title),

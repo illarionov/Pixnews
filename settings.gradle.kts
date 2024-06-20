@@ -18,15 +18,15 @@ buildscript {
     }
     dependencies {
         classpath("com.android.compose.screenshot:com.android.compose.screenshot.gradle.plugin:0.0.1-alpha01")
-        classpath("com.android.tools.build:gradle:8.6.0-alpha02")
+        classpath("com.android.tools.build:gradle:8.5.0")
         classpath("com.squareup.anvil:gradle-plugin:2.5.0-beta09")
         classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24")
         classpath("com.google.devtools.ksp:symbol-processing-gradle-plugin:1.9.24-1.0.20")
         classpath("com.squareup.wire:wire-gradle-plugin:4.9.9")
         classpath("com.github.ben-manes:gradle-versions-plugin:0.51.0")
-        classpath("androidx.room:androidx.room.gradle.plugin:2.7.0-alpha02")
-        classpath("com.diffplug.spotless:spotless-plugin-gradle:6.25.0")
+        classpath("androidx.room:androidx.room.gradle.plugin:2.7.0-alpha04")
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:7.0.0.BETA1")
         classpath("com.saveourtool.diktat:diktat-gradle-plugin:2.0.0")
         classpath("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6")
     }

@@ -21,11 +21,11 @@ import org.junit.jupiter.api.io.TempDir
 import ru.pixnews.foundation.database.PixnewsDatabase
 import ru.pixnews.foundation.database.PixnewsDatabase_Impl
 import ru.pixnews.library.test.TestingLoggers
-import ru.pixnews.wasm.sqlite.open.helper.SQLiteDatabaseJournalMode.PERSIST
-import ru.pixnews.wasm.sqlite.open.helper.SQLiteDatabaseSyncMode
 import ru.pixnews.wasm.sqlite.open.helper.WasmSqliteOpenHelperFactory
+import ru.pixnews.wasm.sqlite.open.helper.dsl.path.JvmDatabasePathResolver
 import ru.pixnews.wasm.sqlite.open.helper.graalvm.GraalvmSqliteEmbedder
-import ru.pixnews.wasm.sqlite.open.helper.path.JvmDatabasePathResolver
+import ru.pixnews.wasm.sqlite.open.helper.sqlite.common.api.SqliteDatabaseJournalMode.PERSIST
+import ru.pixnews.wasm.sqlite.open.helper.sqlite.common.api.SqliteDatabaseSyncMode
 import java.io.File
 import co.touchlab.kermit.Logger as KermitLogger
 
@@ -52,7 +52,7 @@ class IgdbGameModeSyncServiceTest {
             pathResolver = JvmDatabasePathResolver(tempDir)
             openParams {
                 journalMode = PERSIST
-                syncMode = SQLiteDatabaseSyncMode.OFF
+                syncMode = SqliteDatabaseSyncMode.OFF
             }
             debug {
                 sqlLog = false
@@ -68,6 +68,7 @@ class IgdbGameModeSyncServiceTest {
         db = Room.databaseBuilder(
             name = dbFile.absolutePath,
             factory = ::PixnewsDatabase_Impl,
+            // context = mockContext,
         )
             .setJournalMode(WRITE_AHEAD_LOGGING)
             // .createFromAsset("pixnews.db")

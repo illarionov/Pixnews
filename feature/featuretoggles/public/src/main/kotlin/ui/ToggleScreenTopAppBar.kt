@@ -27,7 +27,7 @@ import ru.pixnews.feature.featuretoggles.R.string
 internal fun ToggleScreenTopAppBar(
     modifier: Modifier = Modifier,
     showResetOverridesButton: Boolean = true,
-    onResetOverridesClicked: () -> Unit = {},
+    onClickResetOverrides: () -> Unit = {},
 ) {
     var showMenu by remember { mutableStateOf(false) }
     CenterAlignedTopAppBar(
@@ -57,7 +57,7 @@ internal fun ToggleScreenTopAppBar(
                         text = { Text(stringResource(string.message_reset_overrides)) },
                         onClick = {
                             showMenu = false
-                            onResetOverridesClicked()
+                            onClickResetOverrides()
                         },
                     )
                 }

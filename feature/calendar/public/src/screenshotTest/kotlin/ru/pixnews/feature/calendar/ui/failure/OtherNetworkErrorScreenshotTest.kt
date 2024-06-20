@@ -21,7 +21,7 @@ class OtherNetworkErrorScreenshotTest {
     ) {
         PixnewsTheme(useDynamicColor = false) {
             OtherNetworkError(
-                onRefreshClicked = { },
+                onClickRefresh = { },
                 refreshActive = { refreshActive },
             )
         }

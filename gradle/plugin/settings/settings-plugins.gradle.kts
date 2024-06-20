@@ -10,7 +10,6 @@ group = "ru.pixnews.gradle"
 
 dependencies {
     // noinspection UseTomlInstead
-    implementation("com.gradle:gradle-enterprise-gradle-plugin:3.17.2")
     implementation("org.gradle.toolchains:foojay-resolver:0.8.0")
 }
 

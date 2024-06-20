@@ -38,9 +38,9 @@ public class FeatureToggleListActivity : BaseActivity() {
             ) {
                 FeatureToggleListScreen(
                     viewStateFlow = viewModel.viewState,
-                    onResetOverridesClicked = { viewModel.resetOverrides() },
-                    onResetExperimentOverrideClicked = { viewModel.resetExperimentOverride(it) },
-                    onExperimentVariantSelected = { experimentKey, variant ->
+                    onClickResetOverrides = { viewModel.resetOverrides() },
+                    onClickResetExperimentOverride = { viewModel.resetExperimentOverride(it) },
+                    onSelectExperimentVariant = { experimentKey, variant ->
                         viewModel.onExperimentVariantSelected(
                             experimentKey,
                             variant,

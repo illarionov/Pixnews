@@ -31,7 +31,7 @@ class BottomNavigationBarScreenshots {
 
             BottomNavigationBar(
                 selectedTabFlow = destination,
-                onTabClicked = {},
+                onClickTab = {},
             )
         }
     }

@@ -59,8 +59,8 @@ internal fun FeatureToggleListPopulated(
     toggles: ImmutableList<FeatureToggleUiModel>,
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(),
-    onResetExperimentOverrideClicked: (ExperimentKey) -> Unit = {},
-    onExperimentVariantSelected: (ExperimentKey, VariantUiModel) -> Unit = { _, _ -> },
+    onClickResetExperimentOverride: (ExperimentKey) -> Unit = {},
+    onSelectExperimentVariant: (ExperimentKey, VariantUiModel) -> Unit = { _, _ -> },
 ) {
     Surface(
         modifier = modifier.fillMaxSize(),
@@ -75,9 +75,9 @@ internal fun FeatureToggleListPopulated(
                 item(key = toggle.key.stringValue, contentType = toggle.type) {
                     ToggleListItem(
                         toggle = toggle,
-                        onResetExperimentOverrideClicked = { onResetExperimentOverrideClicked(toggle.key) },
-                        onExperimentVariantSelected = { variant ->
-                            onExperimentVariantSelected(
+                        onClickResetExperimentOverride = { onClickResetExperimentOverride(toggle.key) },
+                        onSelectExperimentVariant = { variant ->
+                            onSelectExperimentVariant(
                                 toggle.key,
                                 variant,
                             )
@@ -93,8 +93,8 @@ internal fun FeatureToggleListPopulated(
 internal fun ToggleListItem(
     toggle: FeatureToggleUiModel,
     modifier: Modifier = Modifier,
-    onResetExperimentOverrideClicked: () -> Unit = {},
-    onExperimentVariantSelected: (VariantUiModel) -> Unit = {},
+    onClickResetExperimentOverride: () -> Unit = {},
+    onSelectExperimentVariant: (VariantUiModel) -> Unit = {},
 ) {
     Surface(
         modifier = modifier,
@@ -135,8 +135,8 @@ internal fun ToggleListItem(
             )
             GroupSelectionRow(
                 toggle = toggle,
-                onExperimentVariantSelected = onExperimentVariantSelected,
-                onResetExperimentOverrideClicked = onResetExperimentOverrideClicked,
+                onSelectExperimentVariant = onSelectExperimentVariant,
+                onClickResetExperimentOverride = onClickResetExperimentOverride,
             )
         }
     }
@@ -146,8 +146,8 @@ internal fun ToggleListItem(
 private fun GroupSelectionRow(
     toggle: FeatureToggleUiModel,
     modifier: Modifier = Modifier,
-    onExperimentVariantSelected: (VariantUiModel) -> Unit = {},
-    onResetExperimentOverrideClicked: () -> Unit = {},
+    onSelectExperimentVariant: (VariantUiModel) -> Unit = {},
+    onClickResetExperimentOverride: () -> Unit = {},
 ) {
     Row(modifier = modifier) {
         Box(
@@ -161,7 +161,7 @@ private fun GroupSelectionRow(
                     .width(200.dp),
                 selectedKey = toggle.activeVariant.stringValue,
                 variants = toggle.variants,
-                onVariantSelected = onExperimentVariantSelected,
+                onSelectVariant = onSelectExperimentVariant,
             )
         }
         if (toggle.isOverridden) {
@@ -169,7 +169,7 @@ private fun GroupSelectionRow(
                 modifier = Modifier
                     .heightIn(min = 64.dp)
                     .align(Alignment.CenterVertically),
-                onClick = onResetExperimentOverrideClicked,
+                onClick = onClickResetExperimentOverride,
             ) {
                 Icon(
                     imageVector = ActionIcons.Cancel,
@@ -192,7 +192,7 @@ internal fun GroupSelectionDropdown(
     variants: ImmutableSet<VariantUiModel>,
     modifier: Modifier = Modifier,
     defaultExpanded: Boolean = false,
-    onVariantSelected: (VariantUiModel) -> Unit,
+    onSelectVariant: (VariantUiModel) -> Unit,
 ) {
     var expanded: Boolean by remember { mutableStateOf(defaultExpanded) }
     ExposedDropdownMenuBox(
@@ -214,9 +214,9 @@ internal fun GroupSelectionDropdown(
         ) {
             VariantDropdownMenu(
                 variants,
-                onVariantSelected = {
+                onSelectVariant = {
                     expanded = false
-                    onVariantSelected(it)
+                    onSelectVariant(it)
                 },
             )
         }
@@ -226,7 +226,7 @@ internal fun GroupSelectionDropdown(
 @Composable
 private fun ColumnScope.VariantDropdownMenu(
     variants: ImmutableSet<VariantUiModel>,
-    onVariantSelected: (VariantUiModel) -> Unit = {},
+    onSelectVariant: (VariantUiModel) -> Unit = {},
 ) {
     for (variant in variants) {
         DropdownMenuItem(
@@ -251,7 +251,7 @@ private fun ColumnScope.VariantDropdownMenu(
                     )
                 }
             },
-            onClick = { onVariantSelected(variant) },
+            onClick = { onSelectVariant(variant) },
             contentPadding = PaddingValues(
                 horizontal = 16.dp,
                 vertical = 8.dp,

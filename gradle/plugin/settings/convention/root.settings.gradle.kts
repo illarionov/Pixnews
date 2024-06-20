@@ -13,5 +13,4 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention")
     id("ru.pixnews.gradle.settings.common")
     id("ru.pixnews.gradle.settings.repositories")
-    id("ru.pixnews.gradle.settings.gradle-enterprise")
 }

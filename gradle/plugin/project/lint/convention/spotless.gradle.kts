@@ -107,7 +107,7 @@ spotless {
             val licenseHeaderFileStep = LicenseHeaderStep
                 .headerDelimiter(licenseHeaderContentProvider::get, "(<[^!?])")
                 .build()
-            object : FormatterStep by licenseHeaderFileStep {
+            object : AutoCloseable, FormatterStep by licenseHeaderFileStep {
                 override fun format(rawUnix: String, file: File): String? {
                     return if (!rawUnix.contains("<!-- spotless: off -->")) {
                         licenseHeaderFileStep.format(rawUnix, file)
@@ -115,6 +115,8 @@ spotless {
                         rawUnix
                     }
                 }
+
+                override fun close() = Unit
             }
         }
         addStep(deactivatableLicenseStep)

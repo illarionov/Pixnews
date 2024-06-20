@@ -31,16 +31,16 @@ import ru.pixnews.foundation.featuretoggles.ExperimentKey
 @Composable
 internal fun FeatureToggleListScreen(
     viewStateFlow: StateFlow<FeatureTogglesScreenState>,
-    onResetOverridesClicked: () -> Unit = {},
-    onResetExperimentOverrideClicked: (ExperimentKey) -> Unit = {},
-    onExperimentVariantSelected: (ExperimentKey, VariantUiModel) -> Unit = { _, _ -> },
+    onClickResetOverrides: () -> Unit = {},
+    onClickResetExperimentOverride: (ExperimentKey) -> Unit = {},
+    onSelectExperimentVariant: (ExperimentKey, VariantUiModel) -> Unit = { _, _ -> },
 ) {
     val viewState by viewStateFlow.collectAsStateWithLifecycle()
     FeatureToggleListScreen(
         state = viewState,
-        onResetOverridesClicked = onResetOverridesClicked,
-        onResetExperimentOverrideClicked = onResetExperimentOverrideClicked,
-        onExperimentVariantSelected = onExperimentVariantSelected,
+        onClickResetOverrides = onClickResetOverrides,
+        onClickResetExperimentOverride = onClickResetExperimentOverride,
+        onSelectExperimentVariant = onSelectExperimentVariant,
     )
 }
 
@@ -50,9 +50,9 @@ internal fun FeatureToggleListScreen(
 internal fun FeatureToggleListScreen(
     state: FeatureTogglesScreenState,
     modifier: Modifier = Modifier,
-    onResetOverridesClicked: () -> Unit = {},
-    onResetExperimentOverrideClicked: (ExperimentKey) -> Unit = {},
-    onExperimentVariantSelected: (ExperimentKey, VariantUiModel) -> Unit = { _, _ -> },
+    onClickResetOverrides: () -> Unit = {},
+    onClickResetExperimentOverride: (ExperimentKey) -> Unit = {},
+    onSelectExperimentVariant: (ExperimentKey, VariantUiModel) -> Unit = { _, _ -> },
 ) {
     val containerColor = MaterialTheme.colorScheme.surfaceVariant
     val contentColor = contentColorFor(containerColor)
@@ -64,7 +64,7 @@ internal fun FeatureToggleListScreen(
             topBar = {
                 ToggleScreenTopAppBar(
                     showResetOverridesButton = state is Populated,
-                    onResetOverridesClicked = onResetOverridesClicked,
+                    onClickResetOverrides = onClickResetOverrides,
                 )
             },
         ) { paddingValues: PaddingValues ->
@@ -74,8 +74,8 @@ internal fun FeatureToggleListScreen(
                 is Populated -> FeatureToggleListPopulated(
                     toggles = state.toggles,
                     paddingValues = paddingValues,
-                    onResetExperimentOverrideClicked = onResetExperimentOverrideClicked,
-                    onExperimentVariantSelected = onExperimentVariantSelected,
+                    onClickResetExperimentOverride = onClickResetExperimentOverride,
+                    onSelectExperimentVariant = onSelectExperimentVariant,
                 )
             }
         }

@@ -9,5 +9,6 @@
         android:minSdkVersion="26"
         tools:overrideLibrary="ru.pixnews.wasm.sqlite.open.helper,
             ru.pixnews.wasm.sqlite.open.helper.database.path.resolver,
-            ru.pixnews.wasm.sqlite.open.helper.common.cleaner" />
+            ru.pixnews.wasm.sqlite.open.helper.common.cleaner,
+            ru.pixnews.wasm.sqlite.driver" />
 </manifest>

@@ -213,6 +213,7 @@ pixnews-anvil-workmanager-generator = { group = "ru.pixnews.anvil.codegen", name
 pixnews-anvil-workmanager-inject = { group = "ru.pixnews.anvil.codegen", name = "workmanager-inject", version.ref = "pixnews-anvil-codegen" }
 pixnews-debuglayout = { group = "ru.pixnews.debuglayout", name = "core", version.ref = "debuglayout" }
 pixnews-sqlite-open-helper-main = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-open-helper", version.ref = "wasm-sqlite-open-helper" }
+pixnews-sqlite-open-helper-driver = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-driver", version.ref = "wasm-sqlite-open-helper" }
 pixnews-sqlite-open-helper-graal = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-embedder-graalvm", version.ref = "wasm-sqlite-open-helper" }
 pixnews-sqlite-open-helper-chicory = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-embedder-chicory", version.ref = "wasm-sqlite-open-helper" }
 pixnews-sqlite-open-helper-chasm = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-embedder-chasm", version.ref = "wasm-sqlite-open-helper" }

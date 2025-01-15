@@ -6,13 +6,9 @@
 plugins {
     id("ru.pixnews.gradle.project.android.library")
     id("ru.pixnews.gradle.project.android.room")
-    id("ru.pixnews.gradle.project.di.anvil-factories")
+    id("ru.pixnews.gradle.project.di.anvil-ksp")
     id("ru.pixnews.gradle.project.protobuf-wire")
     alias(libs.plugins.prefiller)
-}
-
-pixnews {
-    compose.set(false)
 }
 
 android {

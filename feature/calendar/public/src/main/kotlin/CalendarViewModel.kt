@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2023, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
+ * Copyright (c) 2023-2025, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ * SPDX-License-Identifier: Apache-2.0
  */
 
 package ru.pixnews.feature.calendar
@@ -20,7 +21,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.runningFold
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.datetime.TimeZone
-import ru.pixnews.anvil.codegen.viewmodel.inject.ContributesViewModel
+import ru.pixnews.anvil.ksp.codegen.viewmodel.inject.ContributesViewModel
 import ru.pixnews.feature.calendar.converter.UpcomingGameListConverter.toCalendarListItem
 import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase
 import ru.pixnews.feature.calendar.data.domain.upcoming.ObserveUpcomingReleasesByDateUseCase.UpcomingRelease
@@ -30,6 +31,7 @@ import ru.pixnews.feature.calendar.model.CalendarScreenState
 import ru.pixnews.feature.calendar.model.CalendarScreenStateLoaded
 import ru.pixnews.feature.calendar.model.InitialLoad
 import ru.pixnews.foundation.featuretoggles.FeatureManager
+import javax.inject.Provider
 
 @Suppress("UnusedPrivateMember", "UNUSED_PARAMETER", "KDOC_NO_CONSTRUCTOR_PROPERTY_WITH_COMMENT")
 @ContributesViewModel
@@ -38,7 +40,7 @@ internal class CalendarViewModel(
     // loadReleasesUseCase: LoadReleasesUseCase,
     getUpcomingReleasesByDateUseCase: ObserveUpcomingReleasesByDateUseCase,
     logger: Logger,
-    tzProvider: Function0<@JvmSuppressWildcards TimeZone>,
+    tzProvider: Provider<@JvmSuppressWildcards TimeZone>,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val log = logger.withTag("CalendarViewModel")

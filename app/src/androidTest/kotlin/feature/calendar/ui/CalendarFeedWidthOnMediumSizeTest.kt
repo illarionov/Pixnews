@@ -21,7 +21,7 @@ import com.google.accompanist.testharness.TestHarness
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import ru.pixnews.anvil.codegen.test.inject.ContributesTest
+import ru.pixnews.anvil.ksp.codegen.test.inject.ContributesTest
 import ru.pixnews.feature.calendar.test.element.GameFeedElement
 import ru.pixnews.feature.root.PixnewsRootContent
 import ru.pixnews.foundation.appconfig.AppConfig

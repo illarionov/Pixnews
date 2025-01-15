@@ -9,7 +9,6 @@ import android.content.Context
 import com.squareup.anvil.annotations.MergeComponent
 import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.BindsInstance
-import dagger.Component
 import ru.pixnews.PixnewsApplication
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.foundation.di.base.qualifiers.ApplicationContext
@@ -24,7 +23,7 @@ import ru.pixnews.inject.experiments.ExperimentsComponent
 interface MainPixnewsAppComponent : PixnewsAppComponent {
     fun inject(application: PixnewsApplication)
 
-    @Component.Factory
+    @MergeComponent.Factory
     fun interface Factory {
         fun create(
             @BindsInstance @ApplicationContext context: Context,

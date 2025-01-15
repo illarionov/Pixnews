@@ -1,7 +1,9 @@
 /*
- * Copyright (c) 2023, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
+ * Copyright (c) 2023-2025, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ * SPDX-License-Identifier: Apache-2.0
  */
+
 pluginManagement {
     includeBuild("gradle/plugin/settings")
 }
@@ -17,18 +19,19 @@ buildscript {
         google()
     }
     dependencies {
-        classpath("com.android.compose.screenshot:com.android.compose.screenshot.gradle.plugin:0.0.1-alpha02")
-        classpath("com.android.tools.build:gradle:8.5.1")
-        classpath("com.squareup.anvil:gradle-plugin:2.5.0-beta09")
+        classpath("com.android.compose.screenshot:com.android.compose.screenshot.gradle.plugin:0.0.1-alpha08")
+        classpath("com.android.tools.build:gradle:8.8.0")
+        classpath("dev.zacsweers.anvil:gradle-plugin:0.4.1")
         classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24")
-        classpath("com.google.devtools.ksp:symbol-processing-gradle-plugin:1.9.24-1.0.20")
-        classpath("com.squareup.wire:wire-gradle-plugin:4.9.9")
+        classpath("org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.0.21")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21")
+        classpath("com.google.devtools.ksp:symbol-processing-gradle-plugin:2.0.21-1.0.28")
+        classpath("com.squareup.wire:wire-gradle-plugin:5.2.1")
         classpath("com.github.ben-manes:gradle-versions-plugin:0.51.0")
-        classpath("androidx.room:androidx.room.gradle.plugin:2.7.0-alpha05")
-        classpath("com.diffplug.spotless:spotless-plugin-gradle:7.0.0.BETA1")
+        classpath("androidx.room:androidx.room.gradle.plugin:2.7.0-alpha12")
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:7.0.0")
         classpath("com.saveourtool.diktat:diktat-gradle-plugin:2.0.0")
-        classpath("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6")
+        classpath("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
     }
 }
 

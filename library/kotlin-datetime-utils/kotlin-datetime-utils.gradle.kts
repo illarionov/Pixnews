@@ -11,5 +11,6 @@ group = "ru.pixnews.library.kotlin.datetime.utils"
 
 dependencies {
     implementation(libs.kotlinx.datetime)
+    testFixturesImplementation(libs.kotlinx.datetime)
     testImplementation(libs.junit.jupiter.params)
 }

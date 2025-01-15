@@ -9,8 +9,8 @@ import androidx.annotation.RestrictTo
 import androidx.work.CoroutineWorker
 import com.squareup.anvil.annotations.ContributesSubcomponent
 import com.squareup.anvil.annotations.optional.SingleIn
-import ru.pixnews.anvil.codegen.workmanager.inject.WorkManagerScope
-import ru.pixnews.anvil.codegen.workmanager.inject.wiring.CoroutineWorkerFactory
+import ru.pixnews.anvil.ksp.codegen.workmanager.inject.WorkManagerScope
+import ru.pixnews.anvil.ksp.codegen.workmanager.inject.wiring.CoroutineWorkerFactory
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.scopes.AppScope
 

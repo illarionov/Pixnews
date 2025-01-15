@@ -17,13 +17,12 @@ import ru.pixnews.gradle.project.base.versionCatalog
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("ru.pixnews.gradle.project.kotlin.compose")
     id("ru.pixnews.gradle.base.build-parameters")
     id("ru.pixnews.gradle.project.lint.android-lint")
 }
 
-createPixnewsExtension().apply {
-    compose.convention(true)
-}
+createPixnewsExtension()
 
 extensions.configure<ApplicationExtension>("android") {
     configureCommonAndroid(this)

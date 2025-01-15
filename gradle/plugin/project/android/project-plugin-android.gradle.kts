@@ -13,8 +13,9 @@ dependencies {
 
     implementation(projects.base)
     implementation(projects.di)
-    implementation(projects.testing)
+    implementation(projects.kotlin)
     implementation(projects.lint)
+    implementation(projects.testing)
 
     implementation(libs.agp.plugin.api)
     implementation(libs.android.compose.screenshot.plugin)

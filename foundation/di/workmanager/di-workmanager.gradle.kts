@@ -4,11 +4,7 @@
  */
 plugins {
     id("ru.pixnews.gradle.project.android.library")
-    id("ru.pixnews.gradle.project.di.anvil-factories")
-}
-
-pixnews {
-    compose.set(false)
+    id("ru.pixnews.gradle.project.di.anvil-ksp")
 }
 
 android {

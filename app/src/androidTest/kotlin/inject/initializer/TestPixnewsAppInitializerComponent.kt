@@ -7,7 +7,7 @@ package ru.pixnews.inject.initializer
 
 import com.squareup.anvil.annotations.MergeComponent
 import com.squareup.anvil.annotations.optional.SingleIn
-import ru.pixnews.anvil.codegen.initializer.inject.AppInitializersScope
+import ru.pixnews.anvil.ksp.codegen.initializer.inject.AppInitializersScope
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.inject.MockWebServerHolder
 
@@ -17,7 +17,7 @@ import ru.pixnews.inject.MockWebServerHolder
     dependencies = [PixnewsAppComponent::class, MockWebServerHolder::class],
 )
 interface TestPixnewsAppInitializerComponent : PixnewsAppInitializerComponent {
-    @dagger.Component.Factory
+    @MergeComponent.Factory
     fun interface Factory {
         fun create(
             appComponent: PixnewsAppComponent,

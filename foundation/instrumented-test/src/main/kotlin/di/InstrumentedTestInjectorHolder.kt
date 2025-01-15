@@ -8,7 +8,7 @@ package ru.pixnews.foundation.instrumented.test.di
 import androidx.annotation.RestrictTo
 import androidx.annotation.RestrictTo.Scope.LIBRARY
 import com.squareup.anvil.annotations.ContributesTo
-import ru.pixnews.anvil.codegen.test.inject.wiring.InstrumentedTestInjector
+import ru.pixnews.anvil.ksp.codegen.test.inject.wiring.InstrumentedTestInjector
 import ru.pixnews.foundation.di.base.scopes.AppScope
 
 @ContributesTo(AppScope::class)

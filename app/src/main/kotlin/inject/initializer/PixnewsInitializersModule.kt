@@ -9,7 +9,7 @@ import com.squareup.anvil.annotations.ContributesTo
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.Multibinds
-import ru.pixnews.anvil.codegen.initializer.inject.AppInitializersScope
+import ru.pixnews.anvil.ksp.codegen.initializer.inject.AppInitializersScope
 import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.coroutines.RootCoroutineScope
 import ru.pixnews.foundation.di.base.DaggerSet

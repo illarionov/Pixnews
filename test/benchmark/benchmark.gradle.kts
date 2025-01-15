@@ -5,10 +5,7 @@
 plugins {
     id("ru.pixnews.gradle.project.android.test")
     id("ru.pixnews.gradle.project.android.test-instrumented")
-}
-
-pixnews {
-    compose.set(false)
+    id("ru.pixnews.gradle.project.kotlin.compose")
 }
 
 @Suppress("VariableNaming")

@@ -13,9 +13,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.multibindings.Multibinds
-import ru.pixnews.anvil.codegen.activity.inject.ActivityScope
-import ru.pixnews.anvil.codegen.activity.inject.wiring.ActivityInjector
-import ru.pixnews.anvil.codegen.activity.inject.wiring.DefaultActivityInjector
+import ru.pixnews.anvil.ksp.codegen.activity.inject.ActivityScope
+import ru.pixnews.anvil.ksp.codegen.activity.inject.wiring.ActivityInjector
+import ru.pixnews.anvil.ksp.codegen.activity.inject.wiring.DefaultActivityInjector
 import ru.pixnews.foundation.di.base.DaggerMap
 
 @ContributesTo(ActivityScope::class)

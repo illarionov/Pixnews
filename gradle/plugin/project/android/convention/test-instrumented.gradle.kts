@@ -17,7 +17,6 @@ import com.android.build.gradle.LibraryPlugin
 import com.android.build.gradle.TestPlugin
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-import ru.pixnews.gradle.project.base.pixnews
 import ru.pixnews.gradle.project.base.versionCatalog
 
 /**
@@ -48,7 +47,7 @@ listOf(
                 variant.manifestPlaceholders.put("firebase_crashlytics_collection_enabled", "false")
             }
             finalizeDsl {
-                if (pixnews.compose.get()) {
+                pluginManager.withPlugin("ru.pixnews.gradle.project.kotlin.compose") {
                     configureComposeInstrumentedTestSpecifics()
                 }
             }
@@ -90,15 +89,9 @@ fun configureAndroidTestDependencies() {
     dependencies {
         add("androidTestImplementation", project(":foundation:instrumented-test"))
         add("androidTestRuntimeOnly", versionCatalog.findLibrary("androidx-test-runner").orElseThrow())
-        if (pixnews.compose.get()) {
-            val composeBom = platform(versionCatalog.findLibrary("chrisbanes.compose.bom").orElseThrow())
+        pluginManager.withPlugin("ru.pixnews.gradle.project.kotlin.compose") {
+            val composeBom = platform(versionCatalog.findLibrary("androidx.compose.bom").orElseThrow())
             add("androidTestImplementation", composeBom)
-        }
-    }
-
-    plugins.withId("ru.pixnews.gradle.project.di.anvil-kapt") {
-        dependencies {
-            add("kaptAndroidTest", versionCatalog.findLibrary("dagger.compiler").orElseThrow())
         }
     }
 }

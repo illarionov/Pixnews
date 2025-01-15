@@ -9,7 +9,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import co.touchlab.kermit.Logger
-import ru.pixnews.anvil.codegen.activity.inject.ContributesActivity
+import ru.pixnews.anvil.ksp.codegen.activity.inject.ContributesActivity
 import ru.pixnews.feature.root.PixnewsRootContent
 import ru.pixnews.foundation.analytics.Analytics
 import ru.pixnews.foundation.appconfig.AppConfig

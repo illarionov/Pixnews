@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.squareup.anvil.annotations.ContributesBinding
 import dagger.Reusable
-import ru.pixnews.anvil.codegen.activity.inject.ActivityScope
+import ru.pixnews.anvil.ksp.codegen.activity.inject.ActivityScope
 import javax.inject.Inject
 
 @Reusable

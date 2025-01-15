@@ -4,10 +4,7 @@
  */
 plugins {
     id("ru.pixnews.gradle.project.android.library")
-}
-
-pixnews {
-    compose.set(true)
+    id("ru.pixnews.gradle.project.kotlin.compose")
 }
 
 android {

@@ -3,8 +3,8 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
  */
 plugins {
-    id("ru.pixnews.gradle.project.kotlin.compose-compiler")
     id("ru.pixnews.gradle.project.kotlin.library")
+    id("ru.pixnews.gradle.project.kotlin.compose")
     `java-test-fixtures`
 }
 
@@ -21,4 +21,6 @@ dependencies {
 
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.kotest.property)
+    testFixturesImplementation(libs.androidx.compose.runtime)
+    testFixturesImplementation(platform(libs.androidx.compose.bom))
 }

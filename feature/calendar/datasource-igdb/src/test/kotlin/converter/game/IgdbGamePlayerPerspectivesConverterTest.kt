@@ -5,6 +5,7 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.PlayerPerspective
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.equals.shouldBeEqual
 import org.junit.jupiter.api.Test
@@ -31,7 +32,6 @@ import ru.pixnews.feature.calendar.datasource.igdb.fixtures.playerperspective.te
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.playerperspective.thirdPerson
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.playerperspective.virtualReality
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbPlayerPerspectiveId
-import ru.pixnews.igdbclient.model.PlayerPerspective
 
 class IgdbGamePlayerPerspectivesConverterTest {
     @ParameterizedTest

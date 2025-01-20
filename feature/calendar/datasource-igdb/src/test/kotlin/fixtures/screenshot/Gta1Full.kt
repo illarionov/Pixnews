@@ -5,9 +5,9 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.screenshot
 
+import at.released.igdbclient.model.Game
+import at.released.igdbclient.model.Screenshot
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbScreenshotFixtures
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.Screenshot
 
 internal val IgdbScreenshotFixtures.gta1Full get() = Screenshot(
     id = 46106,

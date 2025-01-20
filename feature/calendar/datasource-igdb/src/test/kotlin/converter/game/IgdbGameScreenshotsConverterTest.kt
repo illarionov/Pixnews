@@ -5,6 +5,8 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.Cover
+import at.released.igdbclient.model.Screenshot
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.nulls.shouldBeNull
@@ -18,8 +20,6 @@ import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbCoverFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbScreenshotFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.cover.immortalsOfAveum
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.screenshot.gta1Full
-import ru.pixnews.igdbclient.model.Cover
-import ru.pixnews.igdbclient.model.Screenshot
 
 class IgdbGameScreenshotsConverterTest {
     @Test

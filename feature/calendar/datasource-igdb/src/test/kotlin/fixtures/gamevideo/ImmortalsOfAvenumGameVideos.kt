@@ -5,9 +5,9 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.gamevideo
 
+import at.released.igdbclient.model.Game
+import at.released.igdbclient.model.GameVideo
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbGameVideoFixtures
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.GameVideo
 
 internal val IgdbGameVideoFixtures.immortalsOfAvenumTeaser
     get() = GameVideo(

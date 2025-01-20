@@ -5,13 +5,13 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.company
 
+import at.released.igdbclient.dsl.field.CompanyLogoFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.model.CompanyLogo
 import ru.pixnews.domain.model.url.ImageUrl
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireFieldInitialized
 import ru.pixnews.feature.calendar.datasource.igdb.model.url.IgdbImageUrl
-import ru.pixnews.igdbclient.dsl.field.CompanyLogoFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.model.CompanyLogo
 
 internal object IgdbCompanyLogoConverter {
     fun getRequiredFields(from: CompanyLogoFieldDsl): List<IgdbRequestField<*>> = with(from) {

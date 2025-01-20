@@ -5,24 +5,24 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.releasedate
 
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.TBD
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYY
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMM
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMMDD
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ1
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ2
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ3
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ4
+import at.released.igdbclient.model.Game
+import at.released.igdbclient.model.Platform
+import at.released.igdbclient.model.RegionRegionEnum.BRAZIL
+import at.released.igdbclient.model.RegionRegionEnum.CHINA
+import at.released.igdbclient.model.RegionRegionEnum.EUROPE
+import at.released.igdbclient.model.RegionRegionEnum.NORTH_AMERICA
+import at.released.igdbclient.model.RegionRegionEnum.WORLDWIDE
+import at.released.igdbclient.model.ReleaseDate
+import at.released.igdbclient.model.ReleaseDateStatus
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbReleaseDateFixtures
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.TBD
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYY
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMM
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMMDD
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ1
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ2
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ3
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ4
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.Platform
-import ru.pixnews.igdbclient.model.RegionRegionEnum.BRAZIL
-import ru.pixnews.igdbclient.model.RegionRegionEnum.CHINA
-import ru.pixnews.igdbclient.model.RegionRegionEnum.EUROPE
-import ru.pixnews.igdbclient.model.RegionRegionEnum.NORTH_AMERICA
-import ru.pixnews.igdbclient.model.RegionRegionEnum.WORLDWIDE
-import ru.pixnews.igdbclient.model.ReleaseDate
-import ru.pixnews.igdbclient.model.ReleaseDateStatus
 import java.time.Instant
 
 internal val IgdbReleaseDateFixtures.gta21Oct1997

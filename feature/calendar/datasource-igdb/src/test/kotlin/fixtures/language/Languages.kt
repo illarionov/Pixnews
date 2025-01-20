@@ -5,8 +5,8 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.language
 
+import at.released.igdbclient.model.Language
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbLanguageFixtures
-import ru.pixnews.igdbclient.model.Language
 import java.time.Instant
 
 internal val IgdbLanguageFixtures.japanese

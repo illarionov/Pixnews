@@ -5,6 +5,7 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.Collection
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import kotlinx.collections.immutable.persistentListOf
@@ -21,9 +22,8 @@ import ru.pixnews.feature.calendar.datasource.igdb.fixtures.collection.finalFant
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameId
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameSeriesSummaryId
 import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
-import ru.pixnews.igdbclient.model.Collection
 import ru.pixnews.library.internationalization.language.LanguageCode
-import ru.pixnews.igdbclient.model.Game as IgdbGame
+import at.released.igdbclient.model.Game as IgdbGame
 
 class IgdbGameSeriesConverterTest {
     @Test

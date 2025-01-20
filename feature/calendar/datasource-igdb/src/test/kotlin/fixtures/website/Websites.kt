@@ -5,10 +5,10 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.website
 
+import at.released.igdbclient.model.Game
+import at.released.igdbclient.model.Website
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_WIKIPEDIA
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbWebsiteFixtures
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.Website
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_WIKIPEDIA
 
 internal val IgdbWebsiteFixtures.gtaWikipedia: Website get() = Website(
     id = 107692,

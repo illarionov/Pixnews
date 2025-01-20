@@ -7,6 +7,13 @@ package ru.pixnews.feature.calendar.datasource.igdb
 
 import arrow.core.Either.Companion.catch
 import arrow.core.flatMap
+import at.released.igdbclient.IgdbClient
+import at.released.igdbclient.IgdbEndpoint
+import at.released.igdbclient.apicalypse.SortOrder.DESC
+import at.released.igdbclient.apicalypse.apicalypseQuery
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.dsl.field.field
+import at.released.igdbclient.model.GameMode
 import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesBinding
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,17 +29,10 @@ import ru.pixnews.feature.calendar.datasource.igdb.converter.game.toGame
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toNetworkResult
 import ru.pixnews.foundation.coroutines.ComputationCoroutineDispatcherProvider
 import ru.pixnews.foundation.di.base.scopes.AppScope
-import ru.pixnews.igdbclient.IgdbClient
-import ru.pixnews.igdbclient.IgdbEndpoint
-import ru.pixnews.igdbclient.apicalypse.SortOrder.DESC
-import ru.pixnews.igdbclient.apicalypse.apicalypseQuery
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.dsl.field.field
-import ru.pixnews.igdbclient.model.GameMode
 import ru.pixnews.library.functional.network.NetworkRequestFailure
 import ru.pixnews.library.functional.network.NetworkResult
 import javax.inject.Inject
-import ru.pixnews.igdbclient.model.Game as IgdbGame
+import at.released.igdbclient.model.Game as IgdbGame
 
 @ContributesBinding(boundType = IgdbDataSource::class, scope = AppScope::class)
 public class DefaultIgdbDataSource(

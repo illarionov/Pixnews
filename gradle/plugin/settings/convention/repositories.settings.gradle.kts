@@ -50,7 +50,7 @@ dependencyResolutionManagement {
 fun RepositoryHandler.sonatypeS01Snapshots(): MavenArtifactRepository = maven {
     url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     mavenContent {
-        includeGroup("ru.pixnews.igdbclient")
+        includeGroup("at.released.igdbclient")
         snapshotsOnly()
     }
 }

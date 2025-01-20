@@ -5,24 +5,24 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.agerating
 
+import at.released.igdbclient.model.AgeRating
+import at.released.igdbclient.model.AgeRatingCategoryEnum.ACB
+import at.released.igdbclient.model.AgeRatingCategoryEnum.CERO
+import at.released.igdbclient.model.AgeRatingCategoryEnum.CLASS_IND
+import at.released.igdbclient.model.AgeRatingCategoryEnum.ESRB
+import at.released.igdbclient.model.AgeRatingCategoryEnum.GRAC
+import at.released.igdbclient.model.AgeRatingCategoryEnum.PEGI
+import at.released.igdbclient.model.AgeRatingCategoryEnum.USK
+import at.released.igdbclient.model.AgeRatingContentDescription
+import at.released.igdbclient.model.AgeRatingRatingEnum.ACB_M
+import at.released.igdbclient.model.AgeRatingRatingEnum.CERO_C
+import at.released.igdbclient.model.AgeRatingRatingEnum.CLASS_IND_FOURTEEN
+import at.released.igdbclient.model.AgeRatingRatingEnum.GRAC_EIGHTEEN
+import at.released.igdbclient.model.AgeRatingRatingEnum.M
+import at.released.igdbclient.model.AgeRatingRatingEnum.SIXTEEN
+import at.released.igdbclient.model.AgeRatingRatingEnum.TWELVE
+import at.released.igdbclient.model.AgeRatingRatingEnum.USK_16
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbAgeRatingFixtures
-import ru.pixnews.igdbclient.model.AgeRating
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.ACB
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.CERO
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.CLASS_IND
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.ESRB
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.GRAC
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.PEGI
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.USK
-import ru.pixnews.igdbclient.model.AgeRatingContentDescription
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.ACB_M
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.CERO_C
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.CLASS_IND_FOURTEEN
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.GRAC_EIGHTEEN
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.M
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.SIXTEEN
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.TWELVE
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.USK_16
 
 internal val IgdbAgeRatingFixtures.esrbM
     get() = AgeRating(

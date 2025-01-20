@@ -5,6 +5,25 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter
 
+import at.released.igdbclient.model.WebsiteCategoryEnum
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_ANDROID
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_CATEGORY_NULL
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_DISCORD
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_EPICGAMES
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_FACEBOOK
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_GOG
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_INSTAGRAM
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_IPAD
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_IPHONE
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_ITCH
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_OFFICIAL
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_REDDIT
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_STEAM
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_TWITCH
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_TWITTER
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_WIKIA
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_WIKIPEDIA
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_YOUTUBE
 import ru.pixnews.domain.model.url.ExternalLinkType
 import ru.pixnews.domain.model.url.ExternalLinkType.APP_STORE
 import ru.pixnews.domain.model.url.ExternalLinkType.DISCORD
@@ -22,25 +41,6 @@ import ru.pixnews.domain.model.url.ExternalLinkType.TWITCH
 import ru.pixnews.domain.model.url.ExternalLinkType.TWITTER
 import ru.pixnews.domain.model.url.ExternalLinkType.WIKIPEDIA
 import ru.pixnews.domain.model.url.ExternalLinkType.YOUTUBE
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_ANDROID
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_CATEGORY_NULL
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_DISCORD
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_EPICGAMES
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_FACEBOOK
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_GOG
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_INSTAGRAM
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_IPAD
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_IPHONE
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_ITCH
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_OFFICIAL
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_REDDIT
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_STEAM
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_TWITCH
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_TWITTER
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_WIKIA
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_WIKIPEDIA
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_YOUTUBE
 
 @Suppress("CyclomaticComplexMethod")
 internal fun WebsiteCategoryEnum.toExternalLinkType(): ExternalLinkType? = when (this) {

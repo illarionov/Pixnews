@@ -32,7 +32,7 @@ import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
 import ru.pixnews.feature.calendar.datasource.igdb.model.url.IgdbImageUrl
 import ru.pixnews.library.internationalization.country.CountryCode
 import ru.pixnews.library.internationalization.language.LanguageCode
-import ru.pixnews.igdbclient.model.Company as IgdbCompany
+import at.released.igdbclient.model.Company as IgdbCompany
 
 class IgdbCompanyConverterTest {
     @ParameterizedTest

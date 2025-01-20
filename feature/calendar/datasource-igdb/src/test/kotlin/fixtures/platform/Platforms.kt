@@ -5,17 +5,17 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.platform
 
+import at.released.igdbclient.model.Platform
+import at.released.igdbclient.model.PlatformCategoryEnum
+import at.released.igdbclient.model.PlatformCategoryEnum.COMPUTER
+import at.released.igdbclient.model.PlatformCategoryEnum.CONSOLE
+import at.released.igdbclient.model.PlatformCategoryEnum.OPERATING_SYSTEM
+import at.released.igdbclient.model.PlatformCategoryEnum.PORTABLE_CONSOLE
+import at.released.igdbclient.model.PlatformFamily
+import at.released.igdbclient.model.PlatformLogo
+import at.released.igdbclient.model.PlatformVersion
+import at.released.igdbclient.model.PlatformWebsite
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbPlatformFixtures
-import ru.pixnews.igdbclient.model.Platform
-import ru.pixnews.igdbclient.model.PlatformCategoryEnum
-import ru.pixnews.igdbclient.model.PlatformCategoryEnum.COMPUTER
-import ru.pixnews.igdbclient.model.PlatformCategoryEnum.CONSOLE
-import ru.pixnews.igdbclient.model.PlatformCategoryEnum.OPERATING_SYSTEM
-import ru.pixnews.igdbclient.model.PlatformCategoryEnum.PORTABLE_CONSOLE
-import ru.pixnews.igdbclient.model.PlatformFamily
-import ru.pixnews.igdbclient.model.PlatformLogo
-import ru.pixnews.igdbclient.model.PlatformVersion
-import ru.pixnews.igdbclient.model.PlatformWebsite
 import java.time.Instant
 
 internal val IgdbPlatformFixtures.linux

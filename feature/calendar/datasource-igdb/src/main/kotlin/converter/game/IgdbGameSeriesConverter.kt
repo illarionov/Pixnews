@@ -5,6 +5,10 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.dsl.field.GameFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.model.Collection
+import at.released.igdbclient.model.Game
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import ru.pixnews.domain.model.game.GameSeriesSummary
@@ -14,10 +18,6 @@ import ru.pixnews.feature.calendar.datasource.igdb.converter.util.errorFieldNotR
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireFieldInitialized
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameSeriesSummaryId
 import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
-import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.model.Collection
-import ru.pixnews.igdbclient.model.Game
 import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal object IgdbGameSeriesConverter : IgdbGameFieldConverter<Ref<GameSeriesSummary>?> {

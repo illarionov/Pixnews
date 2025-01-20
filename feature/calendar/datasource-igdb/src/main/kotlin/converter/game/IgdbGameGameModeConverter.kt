@@ -5,6 +5,11 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.dsl.field.GameFieldDsl
+import at.released.igdbclient.dsl.field.GameModeFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.dsl.field.field
+import at.released.igdbclient.model.Game
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableSet
 import kotlinx.datetime.Instant
@@ -18,12 +23,7 @@ import ru.pixnews.feature.calendar.datasource.igdb.converter.util.errorFieldNotR
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.fieldShouldBeRequestedError
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireFieldInitialized
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameModeId
-import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
-import ru.pixnews.igdbclient.dsl.field.GameModeFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.dsl.field.field
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.GameMode as IgdbGameMode
+import at.released.igdbclient.model.GameMode as IgdbGameMode
 
 internal object IgdbGameGameModeConverter : IgdbGameFieldConverter<ImmutableSet<Ref<GameMode>>> {
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<IgdbGameMode>> = getRequiredFields(

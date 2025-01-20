@@ -5,6 +5,9 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.dsl.field.GameFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.model.Game
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.toImmutableSet
 import ru.pixnews.domain.model.game.PlayerPerspective
@@ -13,10 +16,7 @@ import ru.pixnews.domain.model.util.Ref.FullObject
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.errorFieldNotRequested
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireFieldInitialized
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbPlayerPerspectiveId
-import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.PlayerPerspective as IgdbPlayerPerspective
+import at.released.igdbclient.model.PlayerPerspective as IgdbPlayerPerspective
 
 internal object IgdbGamePlayerPerspectivesConverter : IgdbGameFieldConverter<ImmutableSet<Ref<PlayerPerspective>>> {
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> = listOf(

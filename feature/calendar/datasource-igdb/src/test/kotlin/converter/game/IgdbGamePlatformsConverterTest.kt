@@ -5,6 +5,7 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.Platform
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.equals.shouldBeEqual
 import org.junit.jupiter.api.Test
@@ -30,7 +31,6 @@ import ru.pixnews.feature.calendar.datasource.igdb.fixtures.platform.win
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.platform.xBoxSeriesX
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.platform.xboxOne
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGamePlatformId
-import ru.pixnews.igdbclient.model.Platform
 
 class IgdbGamePlatformsConverterTest {
     @ParameterizedTest

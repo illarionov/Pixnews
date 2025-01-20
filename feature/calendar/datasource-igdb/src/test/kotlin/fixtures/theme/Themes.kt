@@ -5,8 +5,8 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.theme
 
+import at.released.igdbclient.model.Theme
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbThemeFixtures
-import ru.pixnews.igdbclient.model.Theme
 import java.time.Instant
 
 internal val IgdbThemeFixtures.action

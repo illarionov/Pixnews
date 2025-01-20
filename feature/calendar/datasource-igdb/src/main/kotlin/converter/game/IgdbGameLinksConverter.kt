@@ -5,6 +5,9 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.dsl.field.GameFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.model.Game
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import ru.pixnews.domain.model.url.ExternalLink
@@ -13,9 +16,6 @@ import ru.pixnews.domain.model.url.Url
 import ru.pixnews.feature.calendar.datasource.igdb.converter.toExternalLinkType
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.errorFieldNotRequested
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireFieldInitialized
-import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.model.Game
 
 internal object IgdbGameLinksConverter : IgdbGameFieldConverter<ImmutableList<ExternalLink>> {
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> = with(from) {

@@ -5,14 +5,14 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.languagesupport
 
+import at.released.igdbclient.model.Game
+import at.released.igdbclient.model.LanguageSupport
+import at.released.igdbclient.model.LanguageSupportType
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbLanguageFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbLanguageSupportFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.language.english
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.language.japanese
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.language.spanish
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.LanguageSupport
-import ru.pixnews.igdbclient.model.LanguageSupportType
 import java.time.Instant
 
 internal val IgdbLanguageSupportFixtures.japaneseSoundSupport

@@ -5,6 +5,7 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.Theme
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -12,7 +13,6 @@ import ru.pixnews.domain.model.game.GameTag
 import ru.pixnews.feature.calendar.datasource.igdb.converter.game.IgdbGameTagsConverter.convertIgdbThemeToGameTag
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbThemeFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.theme.action
-import ru.pixnews.igdbclient.model.Theme
 
 class IgdbGameTagsConverterTest {
     @Test

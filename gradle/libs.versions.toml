@@ -61,7 +61,7 @@ coil = "2.6.0"
 fbase-gradle-plugin = "0.1"
 firebase-bom = "33.8.0"
 firebase-crashlytics-plugin = "3.0.2"
-igdbclient = "0.5"
+igdbclient = "0.7"
 guava = "31.1-jre"
 graalvm = "24.0.1"
 kermit = "1.2.3"
@@ -167,8 +167,8 @@ firebase-config = { group = "com.google.firebase", name = "firebase-config-ktx" 
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 graalvm-compiler = { group = "org.graalvm.compiler", name = "compiler", version.ref = "graalvm" }
 guava-bom = { group = "com.google.guava", name = "guava-bom", version.ref = "guava" }
-igdbclient = { group = "ru.pixnews.igdbclient", name = "igdbclient-core", version.ref = "igdbclient" }
-igdbclient-okhttp = { group = "ru.pixnews.igdbclient", name = "igdbclient-okhttp", version.ref = "igdbclient" }
+igdbclient = { group = "at.released.igdbclient", name = "igdbclient-core", version.ref = "igdbclient" }
+igdbclient-okhttp = { group = "at.released.igdbclient", name = "igdbclient-okhttp", version.ref = "igdbclient" }
 inject = { group = "javax.inject", name = "javax.inject", version = "1" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit5" }

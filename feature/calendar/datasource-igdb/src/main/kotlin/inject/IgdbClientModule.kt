@@ -5,6 +5,10 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.inject
 
+import at.released.igdbclient.IgdbClient
+import at.released.igdbclient.auth.twitch.InMemoryTwitchTokenStorage
+import at.released.igdbclient.auth.twitch.TwitchTokenPayload
+import at.released.igdbclient.okhttp.IgdbOkhttpEngine
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.Module
@@ -18,10 +22,6 @@ import ru.pixnews.foundation.appconfig.IgdbClientConfig
 import ru.pixnews.foundation.coroutines.IoCoroutineDispatcherProvider
 import ru.pixnews.foundation.di.base.scopes.AppScope
 import ru.pixnews.foundation.network.OkHttpClientProvider
-import ru.pixnews.igdbclient.IgdbClient
-import ru.pixnews.igdbclient.auth.twitch.InMemoryTwitchTokenStorage
-import ru.pixnews.igdbclient.auth.twitch.TwitchTokenPayload
-import ru.pixnews.igdbclient.okhttp.IgdbOkhttpEngine
 import javax.inject.Provider
 import javax.inject.Qualifier
 

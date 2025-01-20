@@ -5,6 +5,14 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.AgeRating
+import at.released.igdbclient.model.AgeRatingCategoryEnum.AGERATING_CATEGORY_NULL
+import at.released.igdbclient.model.AgeRatingCategoryEnum.ESRB
+import at.released.igdbclient.model.AgeRatingCategoryEnum.PEGI
+import at.released.igdbclient.model.AgeRatingRatingEnum.AGERATING_RATING_NULL
+import at.released.igdbclient.model.AgeRatingRatingEnum.M
+import at.released.igdbclient.model.AgeRatingRatingEnum.SIXTEEN
+import at.released.igdbclient.model.Game
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -21,14 +29,6 @@ import ru.pixnews.feature.calendar.datasource.igdb.fixtures.agerating.esrbM
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.agerating.gracEighteen
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.agerating.pegiSixteen
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.agerating.usk16
-import ru.pixnews.igdbclient.model.AgeRating
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.AGERATING_CATEGORY_NULL
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.ESRB
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.PEGI
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.AGERATING_RATING_NULL
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.M
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum.SIXTEEN
-import ru.pixnews.igdbclient.model.Game
 
 class IgdbGameAgeRatingConverterTest {
     @ParameterizedTest

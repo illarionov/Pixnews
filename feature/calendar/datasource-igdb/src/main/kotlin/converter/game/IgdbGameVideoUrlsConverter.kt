@@ -5,15 +5,15 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.dsl.field.GameFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.model.Game
+import at.released.igdbclient.model.GameVideo
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import ru.pixnews.domain.model.url.VideoUrl
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireFieldInitialized
 import ru.pixnews.feature.calendar.datasource.igdb.model.url.IgdbVideoUrl
-import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.GameVideo
 
 internal object IgdbGameVideoUrlsConverter : IgdbGameFieldConverter<ImmutableList<VideoUrl>> {
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> = listOf(from.videos.video_id)

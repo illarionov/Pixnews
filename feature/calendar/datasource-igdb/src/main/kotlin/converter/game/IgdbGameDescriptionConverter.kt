@@ -5,11 +5,11 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.dsl.field.GameFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.model.Game
 import ru.pixnews.domain.model.locale.Localized
 import ru.pixnews.domain.model.util.RichText
-import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.model.Game
 import ru.pixnews.library.internationalization.language.LanguageCode
 
 internal object IgdbGameDescriptionConverter : IgdbGameFieldConverter<Localized<RichText>> {

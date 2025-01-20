@@ -5,15 +5,15 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.company
 
+import at.released.igdbclient.model.CompanyLogo
+import at.released.igdbclient.model.CompanyWebsite
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.TBD
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYY
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_OFFICIAL
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbCompanyFixtures
-import ru.pixnews.igdbclient.model.CompanyLogo
-import ru.pixnews.igdbclient.model.CompanyWebsite
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.TBD
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYY
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_OFFICIAL
 import java.time.Instant
-import ru.pixnews.igdbclient.model.Company as IgdbCompany
-import ru.pixnews.igdbclient.model.Game as IgdbGame
+import at.released.igdbclient.model.Company as IgdbCompany
+import at.released.igdbclient.model.Game as IgdbGame
 
 internal val IgdbCompanyFixtures.larianStudios: IgdbCompany
     get() = IgdbCompany(

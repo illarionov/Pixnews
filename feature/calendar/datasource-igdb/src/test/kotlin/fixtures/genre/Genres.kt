@@ -5,8 +5,8 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.genre
 
+import at.released.igdbclient.model.Genre
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbGenreFixtures
-import ru.pixnews.igdbclient.model.Genre
 import java.time.Instant
 
 internal val IgdbGenreFixtures.shooter get() = Genre(

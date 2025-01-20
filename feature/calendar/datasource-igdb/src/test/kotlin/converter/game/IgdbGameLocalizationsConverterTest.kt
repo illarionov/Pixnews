@@ -5,6 +5,10 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.Game
+import at.released.igdbclient.model.Language
+import at.released.igdbclient.model.LanguageSupport
+import at.released.igdbclient.model.LanguageSupportType
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.equals.shouldBeEqual
 import io.kotest.matchers.nulls.shouldNotBeNull
@@ -19,10 +23,6 @@ import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbLanguageSupportF
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.languagesupport.englishSubtitlesSupport
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.languagesupport.japaneseSoundSupport
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.languagesupport.spanishInterfaceSupport
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.Language
-import ru.pixnews.igdbclient.model.LanguageSupport
-import ru.pixnews.igdbclient.model.LanguageSupportType
 import ru.pixnews.library.internationalization.language.LanguageCode
 
 class IgdbGameLocalizationsConverterTest {

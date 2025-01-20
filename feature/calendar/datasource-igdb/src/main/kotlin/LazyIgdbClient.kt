@@ -5,16 +5,16 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb
 
+import at.released.igdbclient.IgdbClient
+import at.released.igdbclient.IgdbEndpoint
+import at.released.igdbclient.IgdbResult
+import at.released.igdbclient.IgdbWebhookApi
+import at.released.igdbclient.apicalypse.ApicalypseQuery
+import at.released.igdbclient.error.IgdbHttpErrorResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
-import ru.pixnews.igdbclient.IgdbClient
-import ru.pixnews.igdbclient.IgdbEndpoint
-import ru.pixnews.igdbclient.IgdbResult
-import ru.pixnews.igdbclient.IgdbWebhookApi
-import ru.pixnews.igdbclient.apicalypse.ApicalypseQuery
-import ru.pixnews.igdbclient.error.IgdbHttpErrorResponse
 
 internal class LazyIgdbClient(
     private val igdbClientFactory: () -> IgdbClient,

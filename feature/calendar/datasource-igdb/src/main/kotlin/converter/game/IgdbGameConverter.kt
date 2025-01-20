@@ -14,7 +14,7 @@ import ru.pixnews.feature.calendar.datasource.igdb.converter.util.errorFieldNotR
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireFieldInitialized
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameId
 import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
-import ru.pixnews.igdbclient.model.Game as IgdbGame
+import at.released.igdbclient.model.Game as IgdbGame
 
 internal fun IgdbGame.toGameRef(): Ref<Game> = when {
     name.isNotEmpty() -> Ref.FullObject(this.toGame())

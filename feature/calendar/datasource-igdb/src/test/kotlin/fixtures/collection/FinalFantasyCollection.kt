@@ -5,9 +5,9 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.collection
 
+import at.released.igdbclient.model.Collection
+import at.released.igdbclient.model.Game
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbCollectionFixtures
-import ru.pixnews.igdbclient.model.Collection
-import ru.pixnews.igdbclient.model.Game
 import java.time.Instant
 
 internal val IgdbCollectionFixtures.finalFantasyCollection get() = Collection(

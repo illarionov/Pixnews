@@ -5,17 +5,17 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.dsl.field.GameFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.model.Cover
+import at.released.igdbclient.model.Game
+import at.released.igdbclient.model.Screenshot
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import ru.pixnews.domain.model.url.ImageUrl
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireFieldInitialized
 import ru.pixnews.feature.calendar.datasource.igdb.model.url.IgdbImageUrl
-import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.model.Cover
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.Screenshot
 
 internal object IgdbGameScreenshotsConverter : IgdbGameFieldConverter<ImmutableList<ImageUrl>> {
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> = listOf(

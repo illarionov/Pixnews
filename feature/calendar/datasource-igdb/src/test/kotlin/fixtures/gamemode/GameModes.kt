@@ -5,8 +5,8 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.gamemode
 
+import at.released.igdbclient.model.GameMode
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbGameModeFixtures
-import ru.pixnews.igdbclient.model.GameMode
 import java.time.Instant
 
 internal val IgdbGameModeFixtures.singlePlayer get() = GameMode(

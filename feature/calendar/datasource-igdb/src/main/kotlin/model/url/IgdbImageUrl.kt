@@ -5,14 +5,14 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.model.url
 
+import at.released.igdbclient.model.IgdbImageFormat.WEBP
+import at.released.igdbclient.model.IgdbImageSize.H1080P
+import at.released.igdbclient.model.IgdbImageSize.THUMB
+import at.released.igdbclient.util.igdbImageUrl
 import ru.pixnews.domain.model.url.ImageUrl
 import ru.pixnews.domain.model.util.CanvasSize
 import ru.pixnews.domain.model.util.Dimension
 import ru.pixnews.domain.model.util.Dimension.Undefined
-import ru.pixnews.igdbclient.model.IgdbImageFormat.WEBP
-import ru.pixnews.igdbclient.model.IgdbImageSize.H1080P
-import ru.pixnews.igdbclient.model.IgdbImageSize.THUMB
-import ru.pixnews.igdbclient.util.igdbImageUrl
 
 internal data class IgdbImageUrl(
     val igdbImageId: String,

@@ -5,6 +5,7 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.Game
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.equals.shouldBeEqual
 import kotlinx.collections.immutable.persistentSetOf
@@ -34,8 +35,7 @@ import ru.pixnews.feature.calendar.datasource.igdb.fixtures.gamemode.multiplayer
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.gamemode.singlePlayer
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.gamemode.splitScreen
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameModeId
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.GameMode as IgdbGameMode
+import at.released.igdbclient.model.GameMode as IgdbGameMode
 
 class IgdbGameGameModeConverterTest {
     @ParameterizedTest

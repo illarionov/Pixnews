@@ -5,6 +5,9 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.Game
+import at.released.igdbclient.model.Website
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_TWITCH
 import io.kotest.matchers.equals.shouldBeEqual
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -17,9 +20,6 @@ import ru.pixnews.domain.model.url.Url
 import ru.pixnews.feature.calendar.datasource.igdb.converter.game.IgdbGameLinksConverter.convert
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbWebsiteFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.website.gtaWikipedia
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.Website
-import ru.pixnews.igdbclient.model.WebsiteCategoryEnum.WEBSITE_TWITCH
 
 class IgdbGameLinksConverterTest {
     @ParameterizedTest

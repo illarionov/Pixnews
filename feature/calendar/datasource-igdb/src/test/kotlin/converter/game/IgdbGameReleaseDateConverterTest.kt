@@ -5,6 +5,10 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMM
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ3
+import at.released.igdbclient.model.Game
+import at.released.igdbclient.model.ReleaseDate
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.equals.shouldBeEqual
 import org.junit.jupiter.api.Test
@@ -29,10 +33,6 @@ import ru.pixnews.feature.calendar.datasource.igdb.fixtures.releasedate.thief2Ca
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.releasedate.xxComCategory3Q1
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.releasedate.xxComCategory4Q2
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.releasedate.zooTycoonCategory5Q3
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMM
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ3
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.ReleaseDate
 import ru.pixnews.library.internationalization.language.LanguageCode
 import java.time.Instant
 import java.time.Month.JUNE

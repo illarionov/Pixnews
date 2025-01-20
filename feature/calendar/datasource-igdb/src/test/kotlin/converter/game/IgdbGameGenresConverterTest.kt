@@ -5,6 +5,7 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.Genre
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
@@ -12,7 +13,6 @@ import ru.pixnews.domain.model.game.GameGenre
 import ru.pixnews.feature.calendar.datasource.igdb.converter.game.IgdbGameGenresConverter.convertGenreToGameGenre
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbGenreFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.genre.shooter
-import ru.pixnews.igdbclient.model.Genre
 
 class IgdbGameGenresConverterTest {
     @Test

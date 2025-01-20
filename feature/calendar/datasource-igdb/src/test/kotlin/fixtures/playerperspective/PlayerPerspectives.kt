@@ -5,8 +5,8 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.playerperspective
 
+import at.released.igdbclient.model.PlayerPerspective
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbPlayerPerspectiveFixtures
-import ru.pixnews.igdbclient.model.PlayerPerspective
 import java.time.Instant
 
 internal val IgdbPlayerPerspectiveFixtures.firstPerson

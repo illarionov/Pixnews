@@ -5,7 +5,7 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter
 
-import ru.pixnews.igdbclient.IgdbResult
+import at.released.igdbclient.IgdbResult
 import ru.pixnews.library.functional.completeFailure
 import ru.pixnews.library.functional.completeSuccess
 import ru.pixnews.library.functional.network.NetworkRequestFailure

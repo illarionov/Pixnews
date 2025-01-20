@@ -5,6 +5,7 @@
 
 package ru.pixnews.test.assumption
 
+import at.released.igdbclient.IgdbEndpoint
 import com.squareup.wire.Message
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.RecordedRequest
@@ -21,7 +22,6 @@ import ru.auto.mockwebserver.dsl.pathEnd
 import ru.auto.mockwebserver.dsl.post
 import ru.auto.mockwebserver.dsl.route
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
-import ru.pixnews.igdbclient.IgdbEndpoint
 import ru.pixnews.inject.MockWebServerHolder
 import ru.pixnews.test.app.mock.NetworkBehavior
 import ru.pixnews.test.app.mock.igdb.IgdbMockWebServer

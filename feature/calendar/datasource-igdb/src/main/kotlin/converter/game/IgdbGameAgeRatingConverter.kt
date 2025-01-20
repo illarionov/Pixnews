@@ -5,17 +5,17 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.dsl.field.GameFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.model.AgeRatingCategoryEnum.AGERATING_CATEGORY_NULL
+import at.released.igdbclient.model.AgeRatingCategoryEnum.ESRB
+import at.released.igdbclient.model.AgeRatingCategoryEnum.PEGI
+import at.released.igdbclient.model.AgeRatingRatingEnum
+import at.released.igdbclient.model.Game
 import ru.pixnews.domain.model.rating.AgeRating
 import ru.pixnews.domain.model.rating.EsrbRating
 import ru.pixnews.domain.model.rating.PegiRating
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.errorFieldNotRequested
-import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.AGERATING_CATEGORY_NULL
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.ESRB
-import ru.pixnews.igdbclient.model.AgeRatingCategoryEnum.PEGI
-import ru.pixnews.igdbclient.model.AgeRatingRatingEnum
-import ru.pixnews.igdbclient.model.Game
 
 internal object IgdbGameAgeRatingConverter : IgdbGameFieldConverter<AgeRating?> {
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> = listOf(

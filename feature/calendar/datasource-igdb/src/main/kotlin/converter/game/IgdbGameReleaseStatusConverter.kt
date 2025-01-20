@@ -5,19 +5,19 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.dsl.field.GameFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.model.GameStatusEnum
+import at.released.igdbclient.model.GameStatusEnum.ALPHA
+import at.released.igdbclient.model.GameStatusEnum.BETA
+import at.released.igdbclient.model.GameStatusEnum.CANCELLED
+import at.released.igdbclient.model.GameStatusEnum.DELISTED
+import at.released.igdbclient.model.GameStatusEnum.EARLY_ACCESS
+import at.released.igdbclient.model.GameStatusEnum.OFFLINE
+import at.released.igdbclient.model.GameStatusEnum.RELEASED
+import at.released.igdbclient.model.GameStatusEnum.RUMORED
 import ru.pixnews.domain.model.game.GameReleaseStatus
-import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.model.GameStatusEnum
-import ru.pixnews.igdbclient.model.GameStatusEnum.ALPHA
-import ru.pixnews.igdbclient.model.GameStatusEnum.BETA
-import ru.pixnews.igdbclient.model.GameStatusEnum.CANCELLED
-import ru.pixnews.igdbclient.model.GameStatusEnum.DELISTED
-import ru.pixnews.igdbclient.model.GameStatusEnum.EARLY_ACCESS
-import ru.pixnews.igdbclient.model.GameStatusEnum.OFFLINE
-import ru.pixnews.igdbclient.model.GameStatusEnum.RELEASED
-import ru.pixnews.igdbclient.model.GameStatusEnum.RUMORED
-import ru.pixnews.igdbclient.model.Game as IgdbGame
+import at.released.igdbclient.model.Game as IgdbGame
 
 internal object IgdbGameReleaseStatusConverter : IgdbGameFieldConverter<GameReleaseStatus?> {
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> = listOf(from.status)

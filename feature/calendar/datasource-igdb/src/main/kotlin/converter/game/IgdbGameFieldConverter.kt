@@ -5,10 +5,10 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
-import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.dsl.field.field
-import ru.pixnews.igdbclient.model.Game as IgdbGame
+import at.released.igdbclient.dsl.field.GameFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.dsl.field.field
+import at.released.igdbclient.model.Game as IgdbGame
 
 internal interface IgdbGameFieldConverter<out O : Any?> {
     fun getRequiredFields(from: GameFieldDsl = IgdbGame.field): List<IgdbRequestField<*>>

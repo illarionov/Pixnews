@@ -5,6 +5,19 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.company
 
+import at.released.igdbclient.dsl.field.CompanyFieldDsl
+import at.released.igdbclient.dsl.field.CompanyWebsiteFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.model.CompanyWebsite
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.TBD
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYY
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMM
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMMDD
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ1
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ2
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ3
+import at.released.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ4
 import com.squareup.wire.Instant
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
@@ -30,19 +43,6 @@ import ru.pixnews.feature.calendar.datasource.igdb.converter.util.errorFieldNotR
 import ru.pixnews.feature.calendar.datasource.igdb.converter.util.requireFieldInitialized
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbCompanyId
 import ru.pixnews.feature.calendar.datasource.igdb.model.igdbDataSource
-import ru.pixnews.igdbclient.dsl.field.CompanyFieldDsl
-import ru.pixnews.igdbclient.dsl.field.CompanyWebsiteFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.model.CompanyWebsite
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.TBD
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYY
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMM
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYMMMMDD
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ1
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ2
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ3
-import ru.pixnews.igdbclient.model.DateFormatChangeDateCategoryEnum.YYYYQ4
 import ru.pixnews.library.internationalization.country.CountryCode
 import ru.pixnews.library.internationalization.country.fromNumeric3Code
 import ru.pixnews.library.internationalization.language.LanguageCode
@@ -62,13 +62,13 @@ internal object IgdbCompanyConverter {
                 websites.getCompanyWebsiteRequiredFields()
     }
 
-    internal fun convertToCompanyRef(company: ru.pixnews.igdbclient.model.Company): Ref<Company> = when {
+    internal fun convertToCompanyRef(company: at.released.igdbclient.model.Company): Ref<Company> = when {
         company.name.isNotEmpty() -> FullObject(convert(company))
         company.id != 0L -> Id(getIgdbCompanyId(company.id))
         else -> errorFieldNotRequested("company.id")
     }
 
-    fun convert(igdbObject: ru.pixnews.igdbclient.model.Company): Company = with(igdbObject) {
+    fun convert(igdbObject: at.released.igdbclient.model.Company): Company = with(igdbObject) {
         val id = getIgdbCompanyId(requireFieldInitialized("company.id", id))
         val name = requireFieldInitialized("company.name", name)
 

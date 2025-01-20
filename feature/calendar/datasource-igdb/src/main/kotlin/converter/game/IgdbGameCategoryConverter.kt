@@ -5,13 +5,13 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.dsl.field.GameFieldDsl
+import at.released.igdbclient.dsl.field.IgdbRequestField
+import at.released.igdbclient.model.Game
+import at.released.igdbclient.model.GameCategoryEnum
 import ru.pixnews.domain.model.game.GameReleaseCategory
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.feature.calendar.datasource.igdb.model.id.IgdbGameId.Companion.asIgdbGameId
-import ru.pixnews.igdbclient.dsl.field.GameFieldDsl
-import ru.pixnews.igdbclient.dsl.field.IgdbRequestField
-import ru.pixnews.igdbclient.model.Game
-import ru.pixnews.igdbclient.model.GameCategoryEnum
 
 internal object IgdbGameCategoryConverter : IgdbGameFieldConverter<GameReleaseCategory?> {
     override fun getRequiredFields(from: GameFieldDsl): List<IgdbRequestField<*>> = with(from) {

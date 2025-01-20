@@ -5,13 +5,13 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.converter.game
 
+import at.released.igdbclient.model.GameVideo
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import ru.pixnews.feature.calendar.datasource.igdb.converter.game.IgdbGameVideoUrlsConverter.convertGameVideoToVideoUrl
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbGameVideoFixtures
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.gamevideo.immortalsOfAvenumTeaser
-import ru.pixnews.igdbclient.model.GameVideo
 
 class IgdbGameVideoUrlsConverterTest {
     @Test

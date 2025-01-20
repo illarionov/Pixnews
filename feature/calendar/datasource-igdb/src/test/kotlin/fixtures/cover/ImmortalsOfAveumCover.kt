@@ -5,9 +5,9 @@
 
 package ru.pixnews.feature.calendar.datasource.igdb.fixtures.cover
 
+import at.released.igdbclient.model.Cover
+import at.released.igdbclient.model.Game
 import ru.pixnews.feature.calendar.datasource.igdb.fixtures.IgdbCoverFixtures
-import ru.pixnews.igdbclient.model.Cover
-import ru.pixnews.igdbclient.model.Game
 
 internal val IgdbCoverFixtures.immortalsOfAveum get() = Cover(
     id = 297848,

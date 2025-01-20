@@ -15,7 +15,7 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.MainActivity
-import ru.pixnews.anvil.codegen.test.inject.ContributesTest
+import ru.pixnews.anvil.ksp.codegen.test.inject.ContributesTest
 import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.CURRENT_QUARTER
 import ru.pixnews.domain.model.UpcomingReleaseTimeCategory.FEW_DAYS
 import ru.pixnews.domain.model.datetime.Date

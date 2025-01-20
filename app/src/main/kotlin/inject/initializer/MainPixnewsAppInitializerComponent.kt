@@ -7,8 +7,7 @@ package ru.pixnews.inject.initializer
 
 import com.squareup.anvil.annotations.MergeComponent
 import com.squareup.anvil.annotations.optional.SingleIn
-import dagger.Component
-import ru.pixnews.anvil.codegen.initializer.inject.AppInitializersScope
+import ru.pixnews.anvil.ksp.codegen.initializer.inject.AppInitializersScope
 import ru.pixnews.di.root.component.PixnewsAppComponent
 import ru.pixnews.inject.FirebaseModule.FirebaseProviderHolder
 
@@ -21,7 +20,7 @@ import ru.pixnews.inject.FirebaseModule.FirebaseProviderHolder
     dependencies = [PixnewsAppComponent::class, FirebaseProviderHolder::class],
 )
 interface MainPixnewsAppInitializerComponent : PixnewsAppInitializerComponent {
-    @Component.Factory
+    @MergeComponent.Factory
     fun interface Factory {
         fun create(
             appComponent: PixnewsAppComponent,

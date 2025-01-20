@@ -5,11 +5,8 @@
 
 plugins {
     id("ru.pixnews.gradle.project.android.library")
+    id("ru.pixnews.gradle.project.kotlin.compose")
     id("kotlin-parcelize")
-}
-
-pixnews {
-    compose.set(true)
 }
 
 android {

@@ -1,21 +1,18 @@
-import buildparameters.BuildParametersExtension
-
 /*
- * Copyright (c) 2023, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
+ * Copyright (c) 2023-2025, the Pixnews project authors and contributors. Please see the AUTHORS file for details.
  * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ * SPDX-License-Identifier: Apache-2.0
  */
+
+import buildparameters.BuildParametersExtension
 
 plugins {
     id("ru.pixnews.gradle.project.android.application")
     id("ru.pixnews.gradle.project.android.crashlytics")
     id("ru.pixnews.gradle.project.android.test-instrumented")
-    id("ru.pixnews.gradle.project.di.anvil-kapt")
+    id("ru.pixnews.gradle.project.di.dagger-anvil-ksp")
     alias(libs.plugins.fbase.options.gradle.plugin)
     id("ru.pixnews.gradle.project.config.igdb")
-}
-
-pixnews {
-    compose.set(true)
 }
 
 android {

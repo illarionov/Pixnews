@@ -11,7 +11,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.MainActivity
-import ru.pixnews.anvil.codegen.test.inject.ContributesTest
+import ru.pixnews.anvil.ksp.codegen.test.inject.ContributesTest
 import ru.pixnews.feature.navigation.BottomBarElement
 import ru.pixnews.feature.root.TopLevelDestination.CALENDAR
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest

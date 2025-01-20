@@ -9,7 +9,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import co.touchlab.kermit.Logger
-import ru.pixnews.anvil.codegen.activity.inject.ContributesActivity
+import ru.pixnews.anvil.ksp.codegen.activity.inject.ContributesActivity
 import ru.pixnews.di.root.component.PixnewsRootComponentHolder
 import ru.pixnews.feature.featuretoggles.ui.FeatureToggleListScreen
 import ru.pixnews.foundation.appconfig.AppConfig

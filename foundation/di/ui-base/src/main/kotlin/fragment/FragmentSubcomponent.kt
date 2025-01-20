@@ -9,7 +9,7 @@ import androidx.annotation.RestrictTo
 import androidx.fragment.app.Fragment
 import com.squareup.anvil.annotations.ContributesSubcomponent
 import com.squareup.anvil.annotations.optional.SingleIn
-import ru.pixnews.anvil.codegen.activity.inject.ActivityScope
+import ru.pixnews.anvil.ksp.codegen.activity.inject.ActivityScope
 import javax.inject.Provider
 
 @SingleIn(FragmentScope::class)

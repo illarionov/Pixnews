@@ -5,8 +5,8 @@
 
 package ru.pixnews.foundation.ui.experiments
 
-import ru.pixnews.anvil.codegen.experiment.inject.ContributesExperiment
-import ru.pixnews.anvil.codegen.experiment.inject.ContributesExperimentVariantSerializer
+import ru.pixnews.anvil.ksp.codegen.experiment.inject.ContributesExperiment
+import ru.pixnews.anvil.ksp.codegen.experiment.inject.ContributesExperimentVariantSerializer
 import ru.pixnews.foundation.featuretoggles.Experiment
 import ru.pixnews.foundation.featuretoggles.ExperimentKey
 import ru.pixnews.foundation.featuretoggles.ExperimentVariant

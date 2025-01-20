@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import ru.pixnews.anvil.codegen.viewmodel.inject.ContributesViewModel
+import ru.pixnews.anvil.ksp.codegen.viewmodel.inject.ContributesViewModel
 import ru.pixnews.feature.featuretoggles.model.FeatureTogglesScreenState
 import ru.pixnews.feature.featuretoggles.model.PermanentErrorMessage
 import ru.pixnews.feature.featuretoggles.model.VariantUiModel

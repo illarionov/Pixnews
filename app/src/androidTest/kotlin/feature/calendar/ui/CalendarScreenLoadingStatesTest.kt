@@ -17,7 +17,7 @@ import co.touchlab.kermit.Logger
 import org.junit.Rule
 import org.junit.Test
 import ru.pixnews.MainActivity
-import ru.pixnews.anvil.codegen.test.inject.ContributesTest
+import ru.pixnews.anvil.ksp.codegen.test.inject.ContributesTest
 import ru.pixnews.feature.calendar.test.constants.CalendarTestTag
 import ru.pixnews.feature.calendar.test.element.CalendarHeaderElement
 import ru.pixnews.foundation.instrumented.test.base.BaseInstrumentedTest

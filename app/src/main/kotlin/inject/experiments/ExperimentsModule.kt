@@ -10,7 +10,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.multibindings.Multibinds
-import ru.pixnews.anvil.codegen.experiment.inject.ExperimentScope
+import ru.pixnews.anvil.ksp.codegen.experiment.inject.ExperimentScope
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.featuretoggles.Experiment

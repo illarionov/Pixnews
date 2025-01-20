@@ -11,9 +11,6 @@ import org.gradle.api.Project
 import ru.pixnews.gradle.project.base.PixnewsExtension
 
 internal fun PixnewsExtension.applyTo(project: Project, commonExtension: CommonExtension<*, *, *, *, *, *>) {
-    if (compose.get()) {
-        project.configureCompose(commonExtension)
-    }
     if (commonExtension is TestedExtension) {
         project.configureUnitTesting(unitTestEngine.get(), commonExtension)
     }

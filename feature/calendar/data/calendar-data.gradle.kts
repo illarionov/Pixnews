@@ -5,12 +5,8 @@
 
 plugins {
     id("ru.pixnews.gradle.project.android.library")
-    id("ru.pixnews.gradle.project.di.anvil-factories")
+    id("ru.pixnews.gradle.project.di.anvil-ksp")
     id("ru.pixnews.gradle.project.testing.graalvm")
-}
-
-pixnews {
-    compose.set(false)
 }
 
 android {

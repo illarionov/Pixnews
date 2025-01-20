@@ -1,65 +1,65 @@
 [versions]
 minSdk = "24"
-compileSdk = "34"
+compileSdk = "35"
 targetSdk = "33"
 
-agp = "8.5.1"
-android-compose-screenshot = "0.0.1-alpha02"
-anvil = "2.5.0-beta09"
+agp = "8.8.0"
+android-compose-screenshot = "0.0.1-alpha08"
+anvil-ksp = "0.4.1"
 bmversions = "0.51.0"
-detekt = "1.23.6"
+detekt = "1.23.7"
 diktat = "2.0.0"
 detekt-compose-rules = "0.4.4"
-dagger = "2.51.1"
-kotlin = "1.9.24"
-ksp = "1.9.24-1.0.20"
-spotless = "6.25.0"
+dagger = "2.55"
+kotlin = "2.0.21"
+ksp = "2.0.21-1.0.28"
+spotless = "7.0.0"
 
 accompanist = "0.35.0-alpha"
-androidx-activity = "1.9.0"
-androidx-annotation = "1.8.0"
+androidx-activity = "1.10.0"
+androidx-annotation = "1.9.1"
 androidx-annotation-experimental = "1.4.0"
 androidx-appcompat = "1.7.0"
 androidx-arch-core = "2.2.0"
-androidx-benchmark = "1.2.4"
+androidx-benchmark = "1.3.3"
 androidx-collection = "1.4.0"
-chrisbanes-compose-bom = "2024.05.00-alpha03"
 androidx-compose-compiler = "1.5.14"
-androidx-compose-material3 = "1.2.1"
-androidx-compose-runtime-tracing = "1.0.0-beta01"
+androidx-compose-material3 = "1.3.1"
+androidx-compose-runtime-tracing = "1.7.6"
 androidx-constraintlayout = "2.1.4"
-androidx-core = "1.13.1"
-androidx-datastore = "1.1.1"
-android-desugar-jdk-libs = "2.0.4"
+androidx-compose-bom = "2025.01.00"
+androidx-core = "1.15.0"
+androidx-datastore = "1.1.2"
+android-desugar-jdk-libs = "2.1.4"
 androidx-emoji2 = "1.4.0"
-androidx-fragment = "1.8.1"
-androidx-lifecycle = "2.8.3"
-androidx-lifecycle-runtime-compose = "2.8.3"
+androidx-fragment = "1.8.5"
+androidx-lifecycle = "2.8.7"
+androidx-lifecycle-runtime-compose = "2.8.7"
 androidx-navigation = "2.7.7"
-androidx-navigation-compose = "2.7.7"
-androidx-paging = "3.3.0"
-androidx-paging-compose = "3.3.0"
-androidx-profileinstaller = "1.3.1"
-androidx-room = "2.7.0-alpha05"
+androidx-navigation-compose = "2.8.5"
+androidx-paging = "3.3.5"
+androidx-paging-compose = "3.3.5"
+androidx-profileinstaller = "1.4.1"
+androidx-room = "2.7.0-alpha12"
 androidx-splashscreen = "1.1.0-rc01"
-androidx-sqlite = "2.5.0-alpha05"
-androidx-startup = "1.2.0-alpha02"
+androidx-sqlite = "2.5.0-alpha12"
+androidx-startup = "1.2.0"
 androidx-test-core = "1.6.1"
 androidx-test-espresso = "3.6.1"
 androidx-test-junit = "1.2.1"
-androidx-test-runner = "1.6.1`"
+androidx-test-runner = "1.6.2"
 androidx-test-rules = "1.6.1"
 androidx-test-uiautomator = "2.3.0"
 androidx-tracing = "1.3.0-alpha02"
 androidx-tracing-perfetto = "1.0.0-alpha12"
-androidx-workmanager = "2.9.0"
+androidx-workmanager = "2.10.0"
 arrow = "1.2.4"
 assertk = "0.28.1"
 debuglayout = "0.1"
-asm = "9.6"
+asm = "9.7.1"
 coil = "2.6.0"
 fbase-gradle-plugin = "0.1"
-firebase-bom = "33.1.2"
+firebase-bom = "33.7.0"
 firebase-crashlytics-plugin = "3.0.2"
 igdbclient = "0.5"
 guava = "31.1-jre"
@@ -67,27 +67,27 @@ graalvm = "24.0.1"
 kermit = "1.2.3"
 kotest = "5.9.1"
 kotest-assertions-arrow = "1.4.0"
-kotlin-compile-testing-fork = "0.5.1"
-kotlinpoet = "1.18.0"
-mockk = "1.13.11"
+kotlin-compile-testing-fork = "0.7.0"
+kotlinpoet = "2.0.0"
+mockk = "1.13.14"
 mockwebserver-dsl = "1.0.0"
 okhttp = "4.12.0"
-okio = "3.9.0"
-pixnews-anvil-codegen = "0.5"
+okio = "3.10.2"
+pixnews-anvil-ksp-codegen = "0.1"
 prefiller = "1.6.0-SNAPSHOT"
 retrofit = "2.9.0"
 radiography = "2.6"
 turbine = "1.1.0"
 wasm-sqlite-open-helper = "0.1-alpha04"
-wasm-sqlite-open-helper-sqlite = "0.1-alpha05"
+wasm-sqlite-open-helper-sqlite = "0.3"
 
 junit4 = "4.13.2"
-junit5 = "5.10.3"
-kotlinx-coroutines = "1.8.1"
+junit5 = "5.11.4"
+kotlinx-coroutines = "1.10.1"
 kotlinx-collections-immutable = "0.3.7"
-kotlinx-dateime = "0.6.0"
-kotlinx-serialization = "1.7.1"
-wire = "4.9.9"
+kotlinx-dateime = "0.6.1"
+kotlinx-serialization = "1.8.0"
+wire = "5.2.1"
 
 [libraries]
 androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidx-activity" }
@@ -151,7 +151,7 @@ arrow-bom = { group = "io.arrow-kt", name = "arrow-stack", version.ref = "arrow"
 arrow-core = { group = "io.arrow-kt", name = "arrow-core" }
 assertk = { group = "com.willowtreeapps.assertk", name = "assertk-jvm", version.ref = "assertk" }
 asm-bom = { group = "org.ow2.asm", name = "asm-bom", version.ref = "asm" }
-chrisbanes-compose-bom = { group = "dev.chrisbanes.compose", name = "compose-bom", version.ref = "chrisbanes-compose-bom" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidx-compose-bom" }
 coil-base = { group = "io.coil-kt", name = "coil-base" }
 coil-bom = { group = "io.coil-kt", name = "coil-bom", version.ref = "coil" }
 coil-compose-base = { group = "io.coil-kt", name = "coil-compose-base" }
@@ -199,18 +199,18 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor" }
 okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver" }
 okio = { group = "com.squareup.okio", name = "okio", version.ref = "okio" }
-pixnews-anvil-activity-generator = { group = "ru.pixnews.anvil.codegen", name = "activity-generator", version.ref = "pixnews-anvil-codegen" }
-pixnews-anvil-activity-inject = { group = "ru.pixnews.anvil.codegen", name = "activity-inject", version.ref = "pixnews-anvil-codegen" }
-pixnews-anvil-experiment-generator = { group = "ru.pixnews.anvil.codegen", name = "experiment-generator", version.ref = "pixnews-anvil-codegen" }
-pixnews-anvil-experiment-inject = { group = "ru.pixnews.anvil.codegen", name = "experiment-inject", version.ref = "pixnews-anvil-codegen" }
-pixnews-anvil-initializer-generator = { group = "ru.pixnews.anvil.codegen", name = "initializer-generator", version.ref = "pixnews-anvil-codegen" }
-pixnews-anvil-initializer-inject = { group = "ru.pixnews.anvil.codegen", name = "initializer-inject", version.ref = "pixnews-anvil-codegen" }
-pixnews-anvil-test-generator = { group = "ru.pixnews.anvil.codegen", name = "test-generator", version.ref = "pixnews-anvil-codegen" }
-pixnews-anvil-test-inject = { group = "ru.pixnews.anvil.codegen", name = "test-inject", version.ref = "pixnews-anvil-codegen" }
-pixnews-anvil-viewmodel-generator = { group = "ru.pixnews.anvil.codegen", name = "viewmodel-generator", version.ref = "pixnews-anvil-codegen" }
-pixnews-anvil-viewmodel-inject = { group = "ru.pixnews.anvil.codegen", name = "viewmodel-inject", version.ref = "pixnews-anvil-codegen" }
-pixnews-anvil-workmanager-generator = { group = "ru.pixnews.anvil.codegen", name = "workmanager-generator", version.ref = "pixnews-anvil-codegen" }
-pixnews-anvil-workmanager-inject = { group = "ru.pixnews.anvil.codegen", name = "workmanager-inject", version.ref = "pixnews-anvil-codegen" }
+pixnews-anvil-activity-generator = { group = "ru.pixnews.anvil.ksp.codegen", name = "activity-generator", version.ref = "pixnews-anvil-ksp-codegen" }
+pixnews-anvil-activity-inject = { group = "ru.pixnews.anvil.ksp.codegen", name = "activity-inject", version.ref = "pixnews-anvil-ksp-codegen" }
+pixnews-anvil-experiment-generator = { group = "ru.pixnews.anvil.ksp.codegen", name = "experiment-generator", version.ref = "pixnews-anvil-ksp-codegen" }
+pixnews-anvil-experiment-inject = { group = "ru.pixnews.anvil.ksp.codegen", name = "experiment-inject", version.ref = "pixnews-anvil-ksp-codegen" }
+pixnews-anvil-initializer-generator = { group = "ru.pixnews.anvil.ksp.codegen", name = "initializer-generator", version.ref = "pixnews-anvil-ksp-codegen" }
+pixnews-anvil-initializer-inject = { group = "ru.pixnews.anvil.ksp.codegen", name = "initializer-inject", version.ref = "pixnews-anvil-ksp-codegen" }
+pixnews-anvil-test-generator = { group = "ru.pixnews.anvil.ksp.codegen", name = "test-generator", version.ref = "pixnews-anvil-ksp-codegen" }
+pixnews-anvil-test-inject = { group = "ru.pixnews.anvil.ksp.codegen", name = "test-inject", version.ref = "pixnews-anvil-ksp-codegen" }
+pixnews-anvil-viewmodel-generator = { group = "ru.pixnews.anvil.ksp.codegen", name = "viewmodel-generator", version.ref = "pixnews-anvil-ksp-codegen" }
+pixnews-anvil-viewmodel-inject = { group = "ru.pixnews.anvil.ksp.codegen", name = "viewmodel-inject", version.ref = "pixnews-anvil-ksp-codegen" }
+pixnews-anvil-workmanager-generator = { group = "ru.pixnews.anvil.ksp.codegen", name = "workmanager-generator", version.ref = "pixnews-anvil-ksp-codegen" }
+pixnews-anvil-workmanager-inject = { group = "ru.pixnews.anvil.ksp.codegen", name = "workmanager-inject", version.ref = "pixnews-anvil-ksp-codegen" }
 pixnews-debuglayout = { group = "ru.pixnews.debuglayout", name = "core", version.ref = "debuglayout" }
 pixnews-sqlite-open-helper-main = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-open-helper", version.ref = "wasm-sqlite-open-helper" }
 pixnews-sqlite-open-helper-driver = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-driver", version.ref = "wasm-sqlite-open-helper" }
@@ -228,9 +228,10 @@ wire-schema = { group = "com.squareup.wire", name = "wire-schema", version.ref =
 agp-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 agp-plugin-api = { module = "com.android.tools.build:gradle-api", version.ref = "agp" }
 android-compose-screenshot-plugin = { group = "com.android.compose.screenshot", name = "com.android.compose.screenshot.gradle.plugin", version.ref = "android-compose-screenshot" }
-anvil-plugin = { group = "com.squareup.anvil", name = "gradle-plugin", version.ref = "anvil" }
+anvil-ksp-plugin = { group = "dev.zacsweers.anvil", name = "gradle-plugin", version.ref = "anvil-ksp" }
 androidx-room-plugin = { group = "androidx.room", name = "androidx.room.gradle.plugin", version.ref = "androidx-room" }
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+compose-compiler-plugin = { group = "org.jetbrains.kotlin", name = "compose-compiler-gradle-plugin", version.ref = "kotlin" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 kotlinx-serialization-plugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 ksp-plugin = { group = "com.google.devtools.ksp", name = "symbol-processing-gradle-plugin", version.ref = "ksp" }
 detekt-plugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
@@ -244,7 +245,7 @@ wire-plugin = { group = "com.squareup.wire", name = "wire-gradle-plugin", versio
 [bundles]
 coil = ["coil-compose-base"]
 boms = [
-    "chrisbanes-compose-bom",
+    "androidx-compose-bom",
     "arrow-bom",
     "asm-bom",
     "coil-bom",

@@ -6,7 +6,7 @@
 package ru.pixnews.initializers
 
 import co.touchlab.kermit.Logger
-import ru.pixnews.anvil.codegen.initializer.inject.ContributesInitializer
+import ru.pixnews.anvil.ksp.codegen.initializer.inject.ContributesInitializer
 import ru.pixnews.foundation.initializers.Initializer
 
 @ContributesInitializer

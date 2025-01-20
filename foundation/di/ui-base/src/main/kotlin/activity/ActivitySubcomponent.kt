@@ -11,8 +11,8 @@ import com.squareup.anvil.annotations.ContributesSubcomponent
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.annotations.optional.SingleIn
 import dagger.BindsInstance
-import ru.pixnews.anvil.codegen.activity.inject.ActivityScope
-import ru.pixnews.anvil.codegen.activity.inject.wiring.ActivityInjector
+import ru.pixnews.anvil.ksp.codegen.activity.inject.ActivityScope
+import ru.pixnews.anvil.ksp.codegen.activity.inject.wiring.ActivityInjector
 import ru.pixnews.foundation.di.base.scopes.AppScope
 
 @SingleIn(ActivityScope::class)

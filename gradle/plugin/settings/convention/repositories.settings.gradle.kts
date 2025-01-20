@@ -10,6 +10,7 @@ package ru.pixnews.gradle.settings
  */
 pluginManagement {
     repositories {
+        mavenLocal()
         googleExclusiveContent()
         mavenCentral()
         gradlePluginPortal()
@@ -37,6 +38,7 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
+        mavenLocal()
         googleExclusiveContent()
         mavenCentral()
         sonatypeSnapshots()
@@ -65,12 +67,14 @@ fun RepositoryHandler.pixnewsMaven(): Unit = exclusiveContent {
     forRepository {
         maven {
             url = uri("https://maven.pixnews.ru")
+            mavenContent {
+                includeGroup("ru.pixnews.anvil.ksp.codegen")
+            }
         }
     }
     filter {
         includeGroup("io.github.simonschiller.prefiller")
         includeGroup("io.github.simonschiller")
-        includeGroup("ru.pixnews.anvil.codegen")
         includeGroup("ru.pixnews.debuglayout")
         includeGroup("ru.pixnews.wasm-sqlite-open-helper")
     }

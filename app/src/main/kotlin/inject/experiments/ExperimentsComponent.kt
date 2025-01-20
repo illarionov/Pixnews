@@ -7,7 +7,7 @@ package ru.pixnews.inject.experiments
 
 import com.squareup.anvil.annotations.MergeComponent
 import com.squareup.anvil.annotations.optional.SingleIn
-import ru.pixnews.anvil.codegen.experiment.inject.ExperimentScope
+import ru.pixnews.anvil.ksp.codegen.experiment.inject.ExperimentScope
 import ru.pixnews.foundation.di.base.DaggerMap
 import ru.pixnews.foundation.di.base.DaggerSet
 import ru.pixnews.foundation.featuretoggles.Experiment

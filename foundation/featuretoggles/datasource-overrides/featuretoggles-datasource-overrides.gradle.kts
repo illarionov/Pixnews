@@ -5,12 +5,11 @@
 
 plugins {
     id("ru.pixnews.gradle.project.android.library")
-    id("ru.pixnews.gradle.project.di.anvil-factories")
+    id("ru.pixnews.gradle.project.di.anvil-ksp")
     id("ru.pixnews.gradle.project.protobuf-wire")
 }
 
 pixnews {
-    compose.set(false)
     unitTestEngine.set(ru.pixnews.gradle.project.base.UnitTestEngine.JUNIT5)
 }
 

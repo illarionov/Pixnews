@@ -36,10 +36,10 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
+import at.released.debuglayout.DebugLayout.Companion.debugLayout
+import at.released.debuglayout.mediumLaptopScreen12Columns
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.flow.flowOf
-import ru.pixnews.debuglayout.DebugLayout.Companion.debugLayout
-import ru.pixnews.debuglayout.mediumLaptopScreen12Columns
 import ru.pixnews.domain.model.id.GameId
 import ru.pixnews.feature.calendar.PreviewFixtures
 import ru.pixnews.feature.calendar.PreviewFixtures.UpcomingReleases

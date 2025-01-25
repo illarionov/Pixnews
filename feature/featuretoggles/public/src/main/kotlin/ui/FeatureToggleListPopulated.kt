@@ -192,7 +192,7 @@ internal fun GroupSelectionDropdown(
     variants: ImmutableSet<VariantUiModel>,
     modifier: Modifier = Modifier,
     defaultExpanded: Boolean = false,
-    onSelectVariant: (VariantUiModel) -> Unit,
+    onSelectVariant: (VariantUiModel) -> Unit = {},
 ) {
     var expanded: Boolean by remember { mutableStateOf(defaultExpanded) }
     ExposedDropdownMenuBox(

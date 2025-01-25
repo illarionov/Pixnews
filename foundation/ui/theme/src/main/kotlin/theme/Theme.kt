@@ -93,7 +93,7 @@ public fun PixnewsTheme(
     },
     useDarkTheme: Boolean = isSystemInDarkTheme(),
     useDynamicColor: Boolean = true,
-    content: @Composable() () -> Unit,
+    content: @Composable () -> Unit,
 ) {
     val context = LocalContext.current
     val dynamicColor = useDynamicColor && (appConfig.sdkInt >= Build.VERSION_CODES.S)

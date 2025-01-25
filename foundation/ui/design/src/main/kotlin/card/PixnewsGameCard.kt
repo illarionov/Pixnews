@@ -41,16 +41,16 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import at.released.debuglayout.DebugLayout.Companion.debugLayout
+import at.released.debuglayout.rowcolumn.DebugRowsArrangement
+import at.released.debuglayout.rowcolumn.RowsColumnsCount
+import at.released.debuglayout.ruler.DebugRulerVerticalZeroPoint
+import at.released.debuglayout.ruler.DebugRulerVerticalZeroPoint.Alignment.TOP
+import at.released.debuglayout.ruler.rulerDp
 import coil.request.ImageRequest
 import coil.size.Scale.FILL
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.persistentSetOf
-import ru.pixnews.debuglayout.DebugLayout.Companion.debugLayout
-import ru.pixnews.debuglayout.rowcolumn.DebugRowsArrangement
-import ru.pixnews.debuglayout.rowcolumn.RowsColumnsCount
-import ru.pixnews.debuglayout.ruler.DebugRulerVerticalZeroPoint
-import ru.pixnews.debuglayout.ruler.DebugRulerVerticalZeroPoint.Alignment.TOP
-import ru.pixnews.debuglayout.ruler.rulerDp
 import ru.pixnews.domain.model.datetime.Date
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform
@@ -347,6 +347,7 @@ private fun CalendarGameListCardPreviewTitleReleaseDate() {
     }
 }
 
+@Composable
 private fun Modifier.gameCardDebugLayout(): Modifier = debugLayout {
     rows(
         arrangement = DebugRowsArrangement.Top(

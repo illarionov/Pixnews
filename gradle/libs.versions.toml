@@ -9,7 +9,7 @@ anvil-ksp = "0.4.1"
 bmversions = "0.51.0"
 detekt = "1.23.7"
 diktat = "2.0.0"
-detekt-compose-rules = "0.4.4"
+detekt-compose-rules = "0.4.22"
 dagger = "2.55"
 kotlin = "2.1.0"
 ksp = "2.1.0-1.0.29"
@@ -55,7 +55,7 @@ androidx-tracing-perfetto = "1.0.0-alpha12"
 androidx-workmanager = "2.10.0"
 arrow = "1.2.4"
 assertk = "0.28.1"
-debuglayout = "0.1"
+debuglayout = "0.2"
 asm = "9.7.1"
 coil = "2.6.0"
 fbase-gradle-plugin = "0.1"
@@ -211,7 +211,7 @@ pixnews-anvil-viewmodel-generator = { group = "ru.pixnews.anvil.ksp.codegen", na
 pixnews-anvil-viewmodel-inject = { group = "ru.pixnews.anvil.ksp.codegen", name = "viewmodel-inject", version.ref = "pixnews-anvil-ksp-codegen" }
 pixnews-anvil-workmanager-generator = { group = "ru.pixnews.anvil.ksp.codegen", name = "workmanager-generator", version.ref = "pixnews-anvil-ksp-codegen" }
 pixnews-anvil-workmanager-inject = { group = "ru.pixnews.anvil.ksp.codegen", name = "workmanager-inject", version.ref = "pixnews-anvil-ksp-codegen" }
-pixnews-debuglayout = { group = "ru.pixnews.debuglayout", name = "core", version.ref = "debuglayout" }
+pixnews-debuglayout = { group = "at.released.debuglayout", name = "core", version.ref = "debuglayout" }
 pixnews-sqlite-open-helper-main = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-open-helper", version.ref = "wasm-sqlite-open-helper" }
 pixnews-sqlite-open-helper-driver = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-driver", version.ref = "wasm-sqlite-open-helper" }
 pixnews-sqlite-open-helper-graal = { group = "ru.pixnews.wasm-sqlite-open-helper", name = "sqlite-embedder-graalvm", version.ref = "wasm-sqlite-open-helper" }

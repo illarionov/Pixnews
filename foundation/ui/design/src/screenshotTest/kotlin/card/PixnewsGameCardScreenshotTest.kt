@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import at.released.debuglayout.DebugLayout.Companion.debugLayout
 import kotlinx.collections.immutable.ImmutableSet
 import kotlinx.collections.immutable.persistentSetOf
-import ru.pixnews.debuglayout.DebugLayout.Companion.debugLayout
 import ru.pixnews.domain.model.game.GameFixtures
 import ru.pixnews.domain.model.game.GamePlatform
 import ru.pixnews.domain.model.game.game.hytale
@@ -97,6 +97,7 @@ class PixnewsGameCardScreenshotTest {
     }
 
     private companion object {
+        @Composable
         private fun Modifier.gameCardDebugLayout(): Modifier = debugLayout {
             grid(size = 8.dp)
         }

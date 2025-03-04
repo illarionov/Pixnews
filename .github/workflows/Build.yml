@@ -52,7 +52,7 @@ jobs:
         run: echo "$PIXNEWS_CONFIG" | base64 -d | zstd -d  -o config/pixnews.properties
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Assemble debug build, run tests
         run: >
@@ -129,7 +129,7 @@ jobs:
         run: dprint check
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Unpack pixnews.properties
         env:

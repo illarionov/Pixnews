@@ -9,7 +9,6 @@ import android.content.res.Resources
 import android.icu.text.SimpleDateFormat
 import android.icu.util.TimeZone
 import android.text.format.DateFormat
-import arrow.core.andThen
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.toJavaLocalDate
@@ -44,9 +43,8 @@ public class UpcomingReleaseDateLocalization(
      * * **Example:** December 2025
      * * **Example:** Декабрь 2025
      */
-    private val yearMonthFormatter: (LocalDate) -> String by lazy(NONE) {
-        val formatter = createBestDateSystemFormatter(YEAR_MONTH_SKELETON, locale)
-        formatter andThen ::cleanupYear
+    private val yearMonthFormatter: (LocalDate) -> String = { date: LocalDate ->
+        cleanupYear(createBestDateSystemFormatter(YEAR_MONTH_SKELETON, locale)(date))
     }
 
     /**
@@ -55,9 +53,8 @@ public class UpcomingReleaseDateLocalization(
      * * **Example:** 2nd quarter, 2025
      * * **Example:** 2 квартал, 2025
      */
-    private val quarterFormatter by lazy(NONE) {
-        val formatter = createBestDateSystemFormatter(QUARTER_YEAR_SKELETON, locale)
-        formatter andThen ::cleanupYear
+    private val quarterFormatter: (LocalDate) -> String = { date: LocalDate ->
+        cleanupYear(createBestDateSystemFormatter(QUARTER_YEAR_SKELETON, locale)(date))
     }
 
     /**

@@ -9,6 +9,7 @@ import androidx.room.TypeConverter
 import ru.pixnews.domain.model.url.ExternalLinkType
 import ru.pixnews.domain.model.url.ExternalLinkType.APP_STORE
 import ru.pixnews.domain.model.url.ExternalLinkType.BATTLE_NET
+import ru.pixnews.domain.model.url.ExternalLinkType.BLUESKY
 import ru.pixnews.domain.model.url.ExternalLinkType.DISCORD
 import ru.pixnews.domain.model.url.ExternalLinkType.EPICGAMES_STORE
 import ru.pixnews.domain.model.url.ExternalLinkType.FACEBOOK
@@ -63,6 +64,7 @@ internal object ExternalLinkTypeConverter {
         YOUTUBE -> 23
         WIKIPEDIA -> 24
         OTHER -> 25
+        BLUESKY -> 26
         null -> null
     }
 
@@ -93,6 +95,7 @@ internal object ExternalLinkTypeConverter {
         23 -> YOUTUBE
         24 -> WIKIPEDIA
         25 -> OTHER
+        26 -> BLUESKY
         null -> null
         else -> errorUnknownValue(value, ExternalLinkType::class)
     }

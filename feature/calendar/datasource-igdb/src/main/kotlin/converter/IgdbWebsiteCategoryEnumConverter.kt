@@ -7,6 +7,7 @@ package ru.pixnews.feature.calendar.datasource.igdb.converter
 
 import at.released.igdbclient.model.WebsiteCategoryEnum
 import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_ANDROID
+import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_BLUESKY
 import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_CATEGORY_NULL
 import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_DISCORD
 import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_EPICGAMES
@@ -26,6 +27,7 @@ import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_WIKIPEDIA
 import at.released.igdbclient.model.WebsiteCategoryEnum.WEBSITE_YOUTUBE
 import ru.pixnews.domain.model.url.ExternalLinkType
 import ru.pixnews.domain.model.url.ExternalLinkType.APP_STORE
+import ru.pixnews.domain.model.url.ExternalLinkType.BLUESKY
 import ru.pixnews.domain.model.url.ExternalLinkType.DISCORD
 import ru.pixnews.domain.model.url.ExternalLinkType.EPICGAMES_STORE
 import ru.pixnews.domain.model.url.ExternalLinkType.FACEBOOK
@@ -62,4 +64,5 @@ internal fun WebsiteCategoryEnum.toExternalLinkType(): ExternalLinkType? = when 
     WEBSITE_EPICGAMES -> EPICGAMES_STORE
     WEBSITE_GOG -> GOG
     WEBSITE_DISCORD -> DISCORD
+    WEBSITE_BLUESKY -> BLUESKY
 }

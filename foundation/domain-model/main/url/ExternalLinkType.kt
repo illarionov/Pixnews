@@ -9,6 +9,7 @@ public enum class ExternalLinkType {
     OFFICIAL,
     APP_STORE,
     BATTLE_NET,
+    BLUESKY,
     DISCORD,
     EPICGAMES_STORE,
     FACEBOOK,

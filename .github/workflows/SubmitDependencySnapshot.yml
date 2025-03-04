@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Retrieve dependency graph artifact and submit
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           dependency-graph: download-and-submit

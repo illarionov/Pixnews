@@ -14,6 +14,5 @@ dependencies {
     implementation(libs.agp.plugin.api)
     runtimeOnly(libs.agp.plugin)
     implementation(libs.detekt.plugin)
-    implementation(libs.diktat.plugin)
     implementation(libs.spotless.plugin)
 }

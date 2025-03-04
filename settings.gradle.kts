@@ -31,7 +31,6 @@ buildscript {
         classpath("com.github.ben-manes:gradle-versions-plugin:0.51.0")
         classpath("androidx.room:androidx.room.gradle.plugin:2.7.0-alpha13")
         classpath("com.diffplug.spotless:spotless-plugin-gradle:7.0.2")
-        classpath("com.saveourtool.diktat:diktat-gradle-plugin:2.0.0")
         classpath("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8")
     }
 }

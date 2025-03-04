@@ -25,7 +25,7 @@ fun AndroidComponentsExtension<*, *, *>.registerIgdbOptionsTask() {
     val igdbOptionsProvider = providers.of(LocalIgdbOptionsValueSource::class) {
         parameters {
             configFilePath.set(
-                rootProject.layout.projectDirectory.file(
+                layout.settingsDirectory.file(
                     providers.provider { extensions.getByType<BuildParametersExtension>().config },
                 ),
             )

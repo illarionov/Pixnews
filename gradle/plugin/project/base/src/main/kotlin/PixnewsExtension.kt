@@ -28,7 +28,7 @@ public fun Project.createPixnewsExtension(): PixnewsExtension {
     return extensions.create<PixnewsExtension>("pixnews").apply {
         this.configFile.convention(
             provider {
-                project.rootProject.layout.projectDirectory.file("config/pixnews.properties")
+                project.layout.settingsDirectory.file("config/pixnews.properties")
             },
         )
     }

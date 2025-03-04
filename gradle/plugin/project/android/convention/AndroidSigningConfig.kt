@@ -22,7 +22,7 @@ internal fun Project.configureSigning(
         if (config.useReleaseKeystore) {
             config.signingConfig?.let { signConfig ->
                 create("release") {
-                    storeFile = rootProject.file(signConfig.storeFile)
+                    storeFile = layout.settingsDirectory.file(signConfig.storeFile).asFile
                     keyAlias = signConfig.keyAlias
                     storePassword = signConfig.storePassword
                     keyPassword = signConfig.keyPassword
@@ -33,7 +33,7 @@ internal fun Project.configureSigning(
 }
 
 internal fun Project.configureDebugSigningConfig(config: SigningConfig) = with(config) {
-    storeFile = rootProject.file("config/signing/debug.jks")
+    storeFile = layout.settingsDirectory.file("config/signing/debug.jks").asFile
     storePassword = "android"
     keyAlias = "androiddebugkey"
     keyPassword = "android"

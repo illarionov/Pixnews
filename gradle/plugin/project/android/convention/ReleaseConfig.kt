@@ -54,9 +54,8 @@ internal class ReleaseConfig private constructor(
         ): ReleaseConfig {
             val signingParameters = project.buildParameters.signing
             val keystorePropertiesFilePath = signingParameters.release_keystore_properties_file
-            val layout = project.rootProject.layout
             return ReleaseConfig(
-                propertiesFile = layout.projectDirectory.file(keystorePropertiesFilePath),
+                propertiesFile = project.layout.settingsDirectory.file(keystorePropertiesFilePath),
                 buildParameters = signingParameters,
                 providers = project.providers,
             )

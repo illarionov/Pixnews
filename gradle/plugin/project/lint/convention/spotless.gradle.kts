@@ -28,7 +28,7 @@ spotless {
 
         importOrder("", "javax", "java", "\\#")
 
-        indentWithSpaces()
+        leadingTabsToSpaces()
         removeUnusedImports()
         trimTrailingWhitespace()
         endWithNewline()
@@ -38,7 +38,7 @@ spotless {
         importOrder("", "javax", "java", "\\#")
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"))
 
-        indentWithSpaces()
+        leadingTabsToSpaces()
         trimTrailingWhitespace()
         endWithNewline()
     }
@@ -46,7 +46,7 @@ spotless {
         target(rootDir.filter { it.name.endsWith(".gradle") })
         licenseHeaderFile(configRootDir.file("copyright/copyright.kt"), "(^(?![\\/ ]\\*).*$)")
 
-        indentWithSpaces()
+        leadingTabsToSpaces()
         trimTrailingWhitespace()
         endWithNewline()
     }

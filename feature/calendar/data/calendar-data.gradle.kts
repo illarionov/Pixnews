@@ -34,6 +34,7 @@ dependencies {
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.androidx.paging.testing)
     testImplementation(libs.androidx.sqlite)
+    testImplementation(libs.chicory.runtime)
     testImplementation(libs.pixnews.sqlite.open.helper.driver)
     testImplementation(libs.pixnews.sqlite.open.helper.graal)
     testImplementation(libs.pixnews.sqlite.open.helper.chicory)
@@ -43,4 +44,5 @@ dependencies {
 
     testImplementation(libs.pixnews.sqlite.open.helper.sqlite.mt)
     testImplementation(libs.pixnews.sqlite.open.helper.sqlite.st)
+    testImplementation(libs.pixnews.sqlite.open.helper.sqlite.aot)
 }

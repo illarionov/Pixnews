@@ -10,7 +10,7 @@ plugins {
 group = "ru.pixnews.library.test"
 
 dependencies {
-    api(libs.junit.jupiter.api)
+    api(libs.junit.jupiter)
     api(libs.kermit.jvm)
     api(libs.kotlinx.coroutines.test)
     api(libs.okhttp.logging.interceptor)

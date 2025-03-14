@@ -42,16 +42,7 @@ dependencyResolutionManagement {
         googleExclusiveContent()
         mavenCentral()
         sonatypeSnapshots()
-        sonatypeS01Snapshots()
         pixnewsMaven()
-    }
-}
-
-fun RepositoryHandler.sonatypeS01Snapshots(): MavenArtifactRepository = maven {
-    url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-    mavenContent {
-        includeGroup("at.released.igdbclient")
-        snapshotsOnly()
     }
 }
 
@@ -75,7 +66,8 @@ fun RepositoryHandler.pixnewsMaven(): Unit = exclusiveContent {
     filter {
         includeGroup("io.github.simonschiller.prefiller")
         includeGroup("io.github.simonschiller")
-        includeGroup("ru.pixnews.wasm-sqlite-open-helper")
+        includeGroup("at.released.wasm-sqlite-driver")
+        includeGroup("at.released.wasm-sqlite-open-helper")
     }
 }
 

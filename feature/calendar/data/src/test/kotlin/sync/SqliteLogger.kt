@@ -6,12 +6,12 @@
 package ru.pixnews.feature.calendar.data.sync
 
 import co.touchlab.kermit.Logger
-import ru.pixnews.wasm.sqlite.open.helper.common.api.Logger as WasmHelperLogger
+import at.released.weh.common.api.Logger as WasmLogger
 
 @Suppress("IDENTIFIER_LENGTH")
 internal class SqliteLogger(
     private val kermitLogger: Logger,
-) : WasmHelperLogger {
+) : WasmLogger {
     override fun a(throwable: Throwable?, message: () -> String) {
         if (throwable != null) {
             kermitLogger.a(throwable, message)
@@ -60,7 +60,7 @@ internal class SqliteLogger(
         }
     }
 
-    override fun withTag(tag: String): WasmHelperLogger {
+    override fun withTag(tag: String): WasmLogger {
         return SqliteLogger(kermitLogger.withTag(tag))
     }
 }

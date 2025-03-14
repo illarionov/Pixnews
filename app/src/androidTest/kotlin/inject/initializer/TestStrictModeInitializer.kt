@@ -5,6 +5,7 @@
 
 package ru.pixnews.inject.initializer
 
+import android.os.Build
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy.Builder
 import android.os.StrictMode.VmPolicy
@@ -36,6 +37,11 @@ class TestStrictModeInitializer @Inject constructor(logger: Logger) : Initialize
         StrictMode.setThreadPolicy(
             Builder()
                 .detectAll()
+                .apply {
+                    if (Build.VERSION.SDK_INT >= 34) {
+                        permitExplicitGc()
+                    }
+                }
                 .setupViolationListener(
                     logger = logger,
                     policy = FAIL,

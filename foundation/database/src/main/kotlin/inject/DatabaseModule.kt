@@ -8,7 +8,6 @@ package ru.pixnews.foundation.database.inject
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import co.touchlab.kermit.Logger
 import com.squareup.anvil.annotations.ContributesTo
 import com.squareup.anvil.annotations.optional.SingleIn
@@ -41,7 +40,7 @@ public object DatabaseModule {
         )
             .setJournalMode(WRITE_AHEAD_LOGGING)
             .createFromAsset("pixnews.db")
-            .setDriver(BundledSQLiteDriver())
+            // .setDriver(BundledSQLiteDriver()) TODO
             .setQueryCoroutineContext(databaseDispatcher.get())
 
         if (appConfig.logDatabaseQueries()) {

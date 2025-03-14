@@ -40,6 +40,7 @@
             <trusting group="androidx.fragment"/>
             <trusting group="androidx.navigation"/>
             <trusting group="androidx.paging"/>
+            <trusting group="androidx.room"/>
             <trusting group="androidx.sqlite"/>
             <trusting group="com.google.firebase"/>
             <trusting group="^androidx[.]compose($|([.].*))" regex="true"/>
@@ -47,6 +48,7 @@
          </trusted-key>
          <trusted-key id="120D6F34E627ED3A772EBBFE55C7E5E701832382" group="org.snakeyaml" name="snakeyaml-engine"/>
          <trusted-key id="19BEAB2D799C020F17C69126B16698A4ADF4D638" group="org.checkerframework"/>
+         <trusted-key id="1A55F091AD28C07F831FA44D7905DE25C78AD456" group="com.google.protobuf"/>
          <trusted-key id="1D63A77F7270FE07D46B3EB514D68971286170CB" group="io.github.charlietap.chasm"/>
          <trusted-key id="1DE48A38424721249780C6A8C7DFF5A8DBC5381C" group="io.arrow-kt"/>
          <trusted-key id="20723A6399BC060154283B37CFAE163B64AC9189" group="^org[.]jetbrains($|([.].*))" regex="true"/>
@@ -71,6 +73,7 @@
             <trusting group="com.gradle"/>
             <trusting group="org.gradle"/>
          </trusted-key>
+         <trusted-key id="7D90CFFEC86BA5513FE48B9943C2E6B56905B362" group="com.michael-bull.kotlin-result"/>
          <trusted-key id="7E22D50A7EBD9D2CD269B2D4056ACA74D46000BF" group="io.netty"/>
          <trusted-key id="837B2CBB1D966C80643A2D6527F164F945828C4C" group="^com[.]willowtreeapps($|([.].*))" regex="true"/>
          <trusted-key id="8461EFA0E74ABAE010DE66994EB27DB2A3B88B8B">
@@ -87,6 +90,7 @@
          <trusted-key id="8AB4B1AB3F0067ED73E00F0062C98BA8FCF62075">
             <trusting group="at.released.debuglayout"/>
             <trusting group="at.released.igdbclient"/>
+            <trusting group="^at[.]released($|([.].*))" regex="true"/>
             <trusting group="^ru[.]pixnews($|([.].*))" regex="true"/>
          </trusted-key>
          <trusted-key id="90EE19787A7BCF6FD37A1E9180C08B1C29100955" group="com.squareup" name="javawriter"/>

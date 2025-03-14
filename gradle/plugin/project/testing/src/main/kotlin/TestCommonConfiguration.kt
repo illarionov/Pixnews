@@ -87,7 +87,7 @@ private fun Project.configureCommonJunit5Dependencies() {
             add("testImplementation", platform(versionCatalog.findLibrary(it).orElseThrow()))
         }
         listOf(
-            "junit-jupiter-api",
+            "junit-jupiter",
             "kotest-assertions-core",
             "kotest-extensions-arrow",
             "kotlinx-coroutines-test",
@@ -95,5 +95,6 @@ private fun Project.configureCommonJunit5Dependencies() {
             .forEach {
                 add("testImplementation", it)
             }
+        add("testRuntimeOnly", versionCatalog.findLibrary("junit-platform-launcher").orElseThrow())
     }
 }

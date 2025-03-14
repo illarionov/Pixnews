@@ -10,6 +10,9 @@ package ru.pixnews.feature.calendar.data.sync
 import android.content.ContextWrapper
 import androidx.room.Room
 import androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING
+import at.released.wasm.sqlite.driver.WasmSQLiteDriver
+import at.released.wasm.sqlite.open.helper.Locale
+import at.released.wasm.sqlite.open.helper.graalvm.GraalvmSqliteEmbedder
 import co.touchlab.kermit.LoggerConfig
 import co.touchlab.kermit.Severity
 import kotlinx.coroutines.CloseableCoroutineDispatcher
@@ -22,9 +25,6 @@ import ru.pixnews.foundation.database.PixnewsDatabase
 import ru.pixnews.foundation.database.PixnewsDatabase_Impl
 import ru.pixnews.library.test.MainCoroutineExtension
 import ru.pixnews.library.test.TestingLoggers
-import ru.pixnews.wasm.sqlite.driver.WasmSQLiteDriver
-import ru.pixnews.wasm.sqlite.open.helper.common.api.Locale
-import ru.pixnews.wasm.sqlite.open.helper.graalvm.GraalvmSqliteEmbedder
 import java.io.File
 import java.util.concurrent.Executors
 import co.touchlab.kermit.Logger as KermitLogger
@@ -55,9 +55,6 @@ class IgdbGameModeSyncServiceTestNewRoom {
             logger = SqliteLogger(dbLogger)
             openParams {
                 locale = Locale("ru_RU")
-            }
-            debug {
-                logSqlTime = true
             }
         }
 

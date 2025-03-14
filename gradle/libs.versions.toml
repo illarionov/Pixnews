@@ -7,6 +7,7 @@ agp = "8.8.2"
 android-compose-screenshot = "0.0.1-alpha09"
 anvil-ksp = "0.4.1"
 bmversions = "0.51.0"
+chicory = "1.1.1"
 detekt = "1.23.8"
 detekt-compose-rules = "0.4.22"
 dagger = "2.55"
@@ -158,6 +159,7 @@ coil-gif = { group = "io.coil-kt", name = "coil-gif" }
 coil-svg = { group = "io.coil-kt", name = "coil-svg" }
 coil-test = { group = "io.coil-kt", name = "coil-test", version.ref = "coil" }
 coil-video = { group = "io.coil-kt", name = "coil-video" }
+chicory-runtime = { group = "com.dylibso.chicory", name = "runtime", version.ref = "chicory" }
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
@@ -219,6 +221,7 @@ pixnews-sqlite-open-helper-chicory = { group = "at.released.wasm-sqlite-driver",
 pixnews-sqlite-open-helper-chasm = { group = "at.released.wasm-sqlite-driver", name = "sqlite-embedder-chasm", version.ref = "wasm-sqlite-open-helper" }
 pixnews-sqlite-open-helper-sqlite-mt = { group = "at.released.wasm-sqlite-driver", name = "sqlite-android-wasm-emscripten-icu-mt-pthread-349", version.ref = "wasm-sqlite-open-helper-sqlite" }
 pixnews-sqlite-open-helper-sqlite-st = { group = "at.released.wasm-sqlite-driver", name = "sqlite-android-wasm-emscripten-icu-349", version.ref = "wasm-sqlite-open-helper-sqlite" }
+pixnews-sqlite-open-helper-sqlite-aot = { group = "at.released.wasm-sqlite-driver", name = "sqlite-android-wasm-emscripten-icu-aot-349", version.ref = "wasm-sqlite-open-helper-sqlite" }
 radiography = { group = "com.squareup.radiography", name = "radiography", version.ref = "radiography" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 wire-runtime-jvm = { group = "com.squareup.wire", name = "wire-runtime-jvm", version.ref = "wire" }

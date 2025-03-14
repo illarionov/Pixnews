@@ -10,14 +10,15 @@ package ru.pixnews.feature.calendar.data.sync
 import android.content.ContextWrapper
 import androidx.room.Room
 import androidx.room.RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING
+import at.released.wasm.sqlite.binary.aot.SqliteAndroidWasmEmscriptenIcuAot349
+import at.released.wasm.sqlite.binary.aot.SqliteAndroidWasmEmscriptenIcuAot349Machine
 import at.released.wasm.sqlite.driver.WasmSQLiteDriver
 import at.released.wasm.sqlite.open.helper.Locale
-import at.released.wasm.sqlite.open.helper.graalvm.GraalvmSqliteEmbedder
+import at.released.wasm.sqlite.open.helper.chicory.ChicorySqliteEmbedder
 import co.touchlab.kermit.LoggerConfig
 import co.touchlab.kermit.Severity
 import kotlinx.coroutines.CloseableCoroutineDispatcher
-import kotlinx.coroutines.asCoroutineDispatcher
-import org.junit.jupiter.api.Disabled
+import kotlinx.coroutines.newSingleThreadContext
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 import org.junit.jupiter.api.io.TempDir
@@ -26,13 +27,13 @@ import ru.pixnews.foundation.database.PixnewsDatabase_Impl
 import ru.pixnews.library.test.MainCoroutineExtension
 import ru.pixnews.library.test.TestingLoggers
 import java.io.File
-import java.util.concurrent.Executors
 import co.touchlab.kermit.Logger as KermitLogger
 
-@Disabled("TODO: fix")
 class IgdbGameModeSyncServiceTestNewRoom {
     val logger = TestingLoggers.consoleLogger
-    val mockContext = ContextWrapper(null)
+    val mockContext = object : ContextWrapper(null) {
+        override fun getDatabasePath(name: String?): File = File(name!!)
+    }
 
     @JvmField
     @RegisterExtension
@@ -51,18 +52,23 @@ class IgdbGameModeSyncServiceTestNewRoom {
             "WasmSqlite",
         )
         val dbFile = File(tempDir, "db.sqlite")
-        val driver = WasmSQLiteDriver(GraalvmSqliteEmbedder) {
+        val driver = WasmSQLiteDriver(ChicorySqliteEmbedder) {
             logger = SqliteLogger(dbLogger)
             openParams {
                 locale = Locale("ru_RU")
             }
+            embedder {
+                sqlite3Binary = SqliteAndroidWasmEmscriptenIcuAot349
+                machineFactory = ::SqliteAndroidWasmEmscriptenIcuAot349Machine
+            }
         }
 
         // or newSingleThreadContext("RoomDatabase")
-        queryCoroutineContext = Executors.newScheduledThreadPool(
-            1,
-            driver.runtime.managedThreadFactory,
-        ).asCoroutineDispatcher()
+//        queryCoroutineContext = Executors.newScheduledThreadPool(
+//            1,
+//            driver.runtime.managedThreadFactory,
+//        ).asCoroutineDispatcher()
+        queryCoroutineContext = newSingleThreadContext("RoomDatabase")
 
         db = Room.databaseBuilder(
             name = dbFile.absolutePath,

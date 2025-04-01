@@ -6,7 +6,6 @@
 plugins {
     id("ru.pixnews.gradle.project.android.library")
     id("ru.pixnews.gradle.project.di.anvil-ksp")
-    id("ru.pixnews.gradle.project.testing.graalvm")
 }
 
 android {

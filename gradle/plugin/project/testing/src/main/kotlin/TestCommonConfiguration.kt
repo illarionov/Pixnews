@@ -65,9 +65,6 @@ private fun Test.configureCommonJunit5TestOptions() {
 
 private fun Project.configureCommonJunit5() {
     configureCommonJunit5Dependencies()
-    dependencies {
-        add("testRuntimeOnly", versionCatalog.findLibrary("junit-jupiter-engine").orElseThrow())
-    }
 }
 
 private fun Project.configureCommonKotest() {

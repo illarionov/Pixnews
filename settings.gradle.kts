@@ -26,9 +26,9 @@ buildscript {
         classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.3")
         classpath("org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.1.20")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.10")
-        classpath("com.google.devtools.ksp:symbol-processing-gradle-plugin:2.1.20-1.0.32")
+        classpath("com.google.devtools.ksp:symbol-processing-gradle-plugin:2.1.20-2.0.1")
         classpath("com.squareup.wire:wire-gradle-plugin:5.3.1")
-        classpath("com.diffplug.spotless:spotless-plugin-gradle:7.0.2")
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:7.0.3")
         classpath("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8")
     }
 }

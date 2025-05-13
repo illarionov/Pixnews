@@ -67,12 +67,12 @@ fun configureTestManagedDevices(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     commonExtension.testOptions.managedDevices {
-        val pixel5api33 = devices.maybeCreate<ManagedVirtualDevice>("pixel5api33").apply {
+        val pixel5api33 = allDevices.maybeCreate<ManagedVirtualDevice>("pixel5api33").apply {
             device = "Pixel 5"
             apiLevel = 33
             systemImageSource = "google"
         }
-        val pixel2api30 = devices.maybeCreate<ManagedVirtualDevice>("pixel2api30").apply {
+        val pixel2api30 = allDevices.maybeCreate<ManagedVirtualDevice>("pixel2api30").apply {
             device = "Pixel 2"
             apiLevel = 30
             systemImageSource = "aosp-atd"

@@ -71,7 +71,7 @@ jobs:
           rm -f config/pixnews.properties
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: build-outputs
           path: app/build/outputs
@@ -86,7 +86,7 @@ jobs:
           | xargs -0 tar -c -I 'zstd -19 -T0' -f test-reports.tar.zst
 
       - name: Upload test results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: ${{ !cancelled() }}
         with:
           name: test-reports
@@ -172,7 +172,7 @@ jobs:
 
       - name: Upload test reports
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: instrumented-test-reports
           path: instrumented-tests.tar.zst
